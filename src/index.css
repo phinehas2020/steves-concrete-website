@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+/* ========================================
+   CONCRETE WORKS LLC - DESIGN SYSTEM
+   ======================================== */
+
+/* --- Custom Properties (CSS Variables) --- */
+:root {
+  /* Primary - Warm Charcoal/Slate (Concrete Tones) */
+  --color-primary-50: #fafaf9;
+  --color-primary-100: #f5f5f4;
+  --color-primary-200: #e7e5e4;
+  --color-primary-300: #d6d3d1;
+  --color-primary-400: #a8a29e;
+  --color-primary-500: #78716c;
+  --color-primary-600: #57534e;
+  --color-primary-700: #44403c;
+  --color-primary-800: #292524;
+  --color-primary-900: #1c1917;
+  --color-primary-950: #0c0a09;
+
+  /* Accent - Warm Amber/Terracotta */
+  --color-accent-400: #fb923c;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+  --color-accent-700: #c2410c;
+
+  /* Background & Surface */
+  --color-bg: #fafaf9;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+
+  /* Text Colors */
+  --color-text-primary: #1c1917;
+  --color-text-secondary: #57534e;
+  --color-text-muted: #78716c;
+  --color-text-inverse: #fafaf9;
+
+  /* Border */
+  --color-border: #e7e5e4;
+  --color-border-strong: #d6d3d1;
+
+  /* Shadows - Tailwind defaults */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+
+  /* Spacing Scale */
+  --space-section: 6rem;
+  --space-container: 1.5rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 200ms ease-out;
+}
+
+/* --- Tailwind Theme Extension --- */
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+  
+  --color-stone-50: #fafaf9;
+  --color-stone-100: #f5f5f4;
+  --color-stone-200: #e7e5e4;
+  --color-stone-300: #d6d3d1;
+  --color-stone-400: #a8a29e;
+  --color-stone-500: #78716c;
+  --color-stone-600: #57534e;
+  --color-stone-700: #44403c;
+  --color-stone-800: #292524;
+  --color-stone-900: #1c1917;
+  --color-stone-950: #0c0a09;
+
+  --color-accent-400: #fb923c;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+  --color-accent-700: #c2410c;
+}
+
+/* --- Base Styles --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* --- Typography Utilities --- */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* --- Focus States --- */
+:focus-visible {
+  outline: 2px solid var(--color-accent-500);
+  outline-offset: 2px;
+}
+
+/* --- Selection --- */
+::selection {
+  background-color: var(--color-accent-500);
+  color: white;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* --- Container Utility --- */
+.container-main {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--space-container);
+}
+
+@media (min-width: 768px) {
+  .container-main {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-main {
+    padding-inline: 3rem;
+  }
+}
+
+/* --- Section Spacing --- */
+.section-padding {
+  padding-block: 4rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-block: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-block: 6rem;
+  }
+}
