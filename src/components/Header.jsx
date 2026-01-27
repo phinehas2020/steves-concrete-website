@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { cn } from '../lib/utils'
 import { Menu, X, Phone } from 'lucide-react'
+import logoImage from '../assets/images/logo.png'
 
 const navLinks = [
     { label: 'Home', href: '#home' },
@@ -20,17 +21,11 @@ export function Header() {
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Logo */}
                     <a href="#home" className="flex items-center gap-3 flex-shrink-0">
-                        <div className="size-10 bg-stone-900 rounded-lg flex items-center justify-center">
-                            <div className="size-6 bg-accent-500 rounded-sm" />
-                        </div>
-                        <div className="hidden sm:block">
-                            <span className="font-display font-bold text-lg text-stone-900 leading-tight block">
-                                Concrete Works
-                            </span>
-                            <span className="text-xs text-stone-500 leading-tight">
-                                Waco, Texas
-                            </span>
-                        </div>
+                        <img
+                            src={logoImage}
+                            alt="Concrete Works LLC"
+                            className="h-12 md:h-14 w-auto"
+                        />
                     </a>
 
                     {/* Desktop Navigation */}

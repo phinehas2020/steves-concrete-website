@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin } from 'lucide-react'
+import logoImage from '../assets/images/logo.png'
 
 const navLinks = [
     { label: 'Home', href: '#home' },
@@ -18,18 +19,12 @@ export function Footer() {
                 <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
                     {/* Brand */}
                     <div className="lg:col-span-1">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="size-10 bg-stone-800 rounded-lg flex items-center justify-center">
-                                <div className="size-6 bg-accent-500 rounded-sm" />
-                            </div>
-                            <div>
-                                <span className="font-display font-bold text-lg text-white leading-tight block">
-                                    Concrete Works
-                                </span>
-                                <span className="text-sm text-stone-400 leading-tight">
-                                    LLC of Waco
-                                </span>
-                            </div>
+                        <div className="mb-4">
+                            <img
+                                src={logoImage}
+                                alt="Concrete Works LLC"
+                                className="h-16 w-auto"
+                            />
                         </div>
                         <p className="text-pretty text-stone-400 text-sm leading-relaxed">
                             Serving Central Texas with quality concrete work since 2005.
