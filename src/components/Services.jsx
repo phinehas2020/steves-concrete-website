@@ -4,32 +4,32 @@ const services = [
     {
         icon: Palette,
         title: 'Decorative Concrete',
-        description: 'Custom stamped patterns, exposed aggregate, and colored concrete to enhance your property\'s curb appeal.',
+        description: 'Decorative concrete includes stamped patterns, exposed aggregate, and integral coloring. These finishes cost 20-40% less than natural stone while matching its appearance.',
     },
     {
         icon: Home,
         title: 'Driveways & Patios',
-        description: 'Durable, professionally finished surfaces built to withstand Texas weather and heavy use.',
+        description: 'A concrete driveway in Central Texas typically lasts 25-30 years with proper installation. We use 4,000 PSI concrete with fiber reinforcement for maximum durability.',
     },
     {
         icon: Layers,
         title: 'Stamped Concrete',
-        description: 'Replicate the look of stone, brick, or tile at a fraction of the cost with our stamped finishes.',
+        description: 'Stamped concrete replicates stone, brick, or tile at 30-50% lower cost. Popular patterns include ashlar slate, cobblestone, and European fan for driveways and patios.',
     },
     {
         icon: Building2,
         title: 'Commercial Projects',
-        description: 'Large-scale concrete work for businesses, parking lots, and industrial applications.',
+        description: 'Commercial concrete projects include parking lots, warehouse floors, and loading docks. We handle pours from 1,000 to 50,000+ square feet.',
     },
     {
         icon: Wrench,
         title: 'Concrete Repair',
-        description: 'Fix cracks, spalling, and damage to extend the life of your existing concrete surfaces.',
+        description: 'Concrete repair addresses cracks, spalling, and surface damage. Early repair prevents water infiltration that causes further deterioration in Texas freeze-thaw cycles.',
     },
     {
         icon: Truck,
         title: 'Foundations',
-        description: 'Solid foundation work for residential and commercial structures built to code.',
+        description: 'Foundation work for residential and commercial structures follows Texas building codes. We provide slab-on-grade, pier and beam, and post-tension foundation installation.',
     },
 ]
 

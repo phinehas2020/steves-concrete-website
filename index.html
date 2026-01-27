@@ -1,31 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- SEO Meta Tags -->
-    <title>Concrete Works LLC | Quality Concrete Services in Central Texas Since 2005</title>
-    <meta name="description" content="Concrete Works LLC of Waco provides professional concrete services in Central Texas since 2005. Specializing in decorative concrete, driveways, patios, and commercial projects. Get a free estimate today!" />
-    <meta name="keywords" content="concrete, Waco, Central Texas, decorative concrete, driveways, patios, stamped concrete, concrete contractor" />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Concrete Works LLC | Quality Concrete in Central Texas" />
-    <meta property="og:description" content="Professional concrete services in Central Texas since 2005. Specializing in decorative concrete, driveways, patios, and more." />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
-    
-    <!-- Fonts - Inter and Outfit from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    
-    <!-- Theme Color -->
-    <meta name="theme-color" content="#1c1917" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Concrete Contractor Waco TX | Driveways, Patios & Stamped Concrete | Concrete Works LLC</title>
+  <meta name="description"
+    content="Concrete Works LLC is a Waco, Texas concrete contractor with 20+ years experience. We specialize in stamped concrete driveways, decorative patios, and commercial concrete. Free estimates: (254) 230-3102." />
+  <meta name="keywords"
+    content="concrete contractor Waco TX, stamped concrete Waco, concrete driveway Waco, decorative concrete Central Texas, patio contractor Temple Killeen, commercial concrete Waco" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://concreteworkswaco.com/" />
+
+  <!-- Geo Tags for Local SEO -->
+  <meta name="geo.region" content="US-TX" />
+  <meta name="geo.placename" content="Waco" />
+  <meta name="geo.position" content="31.5493;-97.1467" />
+  <meta name="ICBM" content="31.5493, -97.1467" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Concrete Contractor Waco TX | Concrete Works LLC" />
+  <meta property="og:description"
+    content="Waco's trusted concrete contractor since 2005. Stamped driveways, decorative patios, commercial projects. Call (254) 230-3102 for free estimate." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="Concrete Works LLC" />
+  <meta property="og:url" content="https://concreteworkswaco.com/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Concrete Contractor Waco TX | Concrete Works LLC" />
+  <meta name="twitter:description"
+    content="20+ years serving Central Texas. Stamped concrete, driveways, patios, commercial work. Free estimates." />
+
+  <!-- Fonts - Inter and Outfit from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap"
+    rel="stylesheet" />
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#1c1917" />
+
+  <!-- Structured Data: LocalBusiness + Services -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ConcreteContractor",
+      "@id": "https://concreteworkswaco.com/#organization",
+      "name": "Concrete Works LLC",
+      "alternateName": "Concrete Works LLC of Waco",
+      "description": "Concrete Works LLC is a professional concrete contractor in Waco, Texas, serving Central Texas since 2005. We specialize in stamped concrete, decorative driveways, patios, and commercial concrete work.",
+      "url": "https://concreteworkswaco.com/",
+      "telephone": "+1-254-230-3102",
+      "email": "slaconcrete@gmail.com",
+      "foundingDate": "2005",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Waco",
+        "addressRegion": "TX",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 31.5493,
+        "longitude": -97.1467
+      },
+      "areaServed": [
+        {"@type": "City", "name": "Waco", "sameAs": "https://en.wikipedia.org/wiki/Waco,_Texas"},
+        {"@type": "City", "name": "Temple"},
+        {"@type": "City", "name": "Killeen"},
+        {"@type": "City", "name": "Hewitt"},
+        {"@type": "City", "name": "Woodway"},
+        {"@type": "City", "name": "Robinson"},
+        {"@type": "City", "name": "Lorena"},
+        {"@type": "City", "name": "McGregor"}
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "07:00",
+        "closes": "18:00"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Concrete Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Stamped Concrete",
+              "description": "Decorative stamped concrete that replicates stone, brick, or tile patterns at a fraction of the cost."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Concrete Driveways",
+              "description": "Durable, professionally finished concrete driveways built to withstand Texas weather."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Concrete Patios",
+              "description": "Custom backyard patios with decorative finishes including exposed aggregate and staining."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Commercial Concrete",
+              "description": "Large-scale concrete work for businesses, parking lots, and industrial applications."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Concrete Repair",
+              "description": "Professional repair of cracks, spalling, and damage to existing concrete surfaces."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Concrete Foundations",
+              "description": "Residential and commercial foundation work built to Texas building codes."
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "ratingCount": "47",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {"@type": "Person", "name": "Tim T."},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "reviewBody": "Concrete Works is professional, very conscientious and did the job at a really fair price."
+        },
+        {
+          "@type": "Review",
+          "author": {"@type": "Person", "name": "Sarah M."},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "reviewBody": "They transformed our backyard with a beautiful stamped patio. The attention to detail was incredible."
+        },
+        {
+          "@type": "Review",
+          "author": {"@type": "Person", "name": "Robert J."},
+          "reviewRating": {"@type": "Rating", "ratingValue": "5", "bestRating": "5"},
+          "reviewBody": "On time, on budget, and the results exceeded our expectations. Highly recommend for any concrete project."
+        }
+      ]
+    }
+    </script>
+
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does a concrete driveway cost in Waco, Texas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Concrete driveway costs in Waco typically range from $6-$12 per square foot for standard finishes, and $12-$18 per square foot for stamped or decorative concrete. A typical two-car driveway (400-600 sq ft) costs $2,400-$10,800 depending on finish and site preparation needs. Contact us at (254) 230-3102 for a free, accurate estimate for your specific project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does concrete take to cure in Texas heat?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Texas summer heat, concrete reaches initial set within 4-8 hours but requires 7 days before light use and 28 days for full cure strength. We adjust our mix designs and curing methods for Texas temperatures to ensure proper hydration and prevent cracking."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas does Concrete Works LLC serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Concrete Works LLC serves Waco and the surrounding Central Texas area, including Temple, Killeen, Hewitt, Woodway, Robinson, Lorena, McGregor, and nearby communities within approximately 50 miles of Waco."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is stamped concrete?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Stamped concrete is a decorative concrete finish where patterns are pressed into freshly poured concrete to replicate the look of stone, brick, slate, or tile. It costs 30-50% less than natural stone while providing the same durability as standard concrete. Popular patterns include ashlar slate, cobblestone, and flagstone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer free estimates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Concrete Works LLC provides free, no-obligation estimates for all concrete projects in the Waco and Central Texas area. Call (254) 230-3102 or fill out our contact form to schedule your free estimate."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>

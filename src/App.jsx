@@ -4,6 +4,7 @@ import { Services } from './components/Services'
 import { Values } from './components/Values'
 import { Gallery } from './components/Gallery'
 import { Testimonials } from './components/Testimonials'
+import { FAQ } from './components/FAQ'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 
@@ -17,6 +18,7 @@ function App() {
         <Values />
         <Gallery />
         <Testimonials />
+        <FAQ />
         <Contact />
       </main>
       <Footer />
@@ -25,3 +27,4 @@ function App() {
 }
 
 export default App
+

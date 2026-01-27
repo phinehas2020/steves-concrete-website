@@ -43,14 +43,13 @@ export function Hero() {
 
                     {/* Headline */}
                     <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-balance leading-tight mb-6">
-                        Quality Concrete
-                        <span className="block text-accent-400">Built to Last</span>
+                        Waco's Trusted
+                        <span className="block text-accent-400">Concrete Contractor</span>
                     </h1>
 
                     {/* Subheadline */}
                     <p className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed">
-                        From decorative driveways to commercial foundations, we bring
-                        20+ years of experience to every project in the Waco area.
+                        Concrete Works LLC has completed 500+ projects across Central Texas since 2005. We specialize in stamped driveways, decorative patios, and commercial concrete.
                     </p>
 
                     {/* CTAs */}
