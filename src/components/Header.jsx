@@ -16,15 +16,15 @@ export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200 safe-top">
             <div className="container-main">
                 <div className="flex items-center justify-between h-16 md:h-20">
-                    {/* Logo */}
-                    <a href="#home" className="flex items-center gap-3 flex-shrink-0">
+                    {/* Logo - smaller on mobile with strict size constraints */}
+                    <a href="#home" className="flex items-center gap-3 flex-shrink-0 overflow-hidden">
                         <img
                             src={logoImage}
                             alt="Concrete Works LLC"
-                            className="h-12 md:h-14 w-auto"
+                            className="h-10 sm:h-12 md:h-14 lg:h-16 max-h-12 sm:max-h-14 md:max-h-16 lg:max-h-18 w-auto object-contain rounded-lg"
                         />
                     </a>
 

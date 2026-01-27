@@ -14,16 +14,16 @@ export function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="bg-stone-900 text-stone-300">
+        <footer className="bg-stone-900 text-stone-300 safe-bottom">
             <div className="container-main section-padding">
-                <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-8 sm:gap-12 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                     {/* Brand */}
-                    <div className="lg:col-span-1">
+                    <div className="col-span-2 lg:col-span-1">
                         <div className="mb-4">
                             <img
                                 src={logoImage}
                                 alt="Concrete Works LLC"
-                                className="h-16 w-auto"
+                                className="h-20 w-auto rounded-lg"
                             />
                         </div>
                         <p className="text-pretty text-stone-400 text-sm leading-relaxed">

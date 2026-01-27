@@ -101,26 +101,28 @@ export function Gallery() {
                     </p>
                 </div>
 
-                {/* Filter Tabs */}
-                <div className="flex flex-wrap justify-center gap-2 mb-10">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            onClick={() => setActiveCategory(category)}
-                            className={cn(
-                                'px-5 py-2.5 rounded-full font-medium transition-colors duration-150 min-h-[44px]',
-                                activeCategory === category
-                                    ? 'bg-stone-900 text-white'
-                                    : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
-                            )}
-                        >
-                            {category}
-                        </button>
-                    ))}
+                {/* Filter Tabs - Horizontal scroll on mobile */}
+                <div className="-mx-4 px-4 sm:mx-0 sm:px-0 mb-8 sm:mb-10">
+                    <div className="flex sm:flex-wrap sm:justify-center gap-2 overflow-x-auto sm:overflow-visible scroll-hide-bar pb-2 sm:pb-0">
+                        {categories.map((category) => (
+                            <button
+                                key={category}
+                                onClick={() => setActiveCategory(category)}
+                                className={cn(
+                                    'px-4 sm:px-5 py-2.5 rounded-full font-medium transition-colors duration-150 whitespace-nowrap flex-shrink-0',
+                                    activeCategory === category
+                                        ? 'bg-stone-900 text-white'
+                                        : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                                )}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
-                {/* Projects Grid */}
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {/* Projects Grid - Responsive with better aspect ratio on mobile */}
+                <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                     {filteredProjects.map((project) => (
                         <article
                             key={project.id}

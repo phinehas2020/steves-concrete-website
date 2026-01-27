@@ -31,18 +31,18 @@ export function Hero() {
             {/* Accent Line */}
             <div className="absolute bottom-0 left-0 right-0 h-2 bg-accent-500" />
 
-            <div className="container-main relative z-10 py-16 md:py-24">
+            <div className="container-main relative z-10 py-20 sm:py-24 md:py-28">
                 <div className="max-w-3xl">
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-stone-800 rounded-full mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-stone-800 rounded-full mb-4 sm:mb-6">
                         <span className="size-2 bg-accent-500 rounded-full" />
-                        <span className="text-sm font-medium text-stone-300">
+                        <span className="text-xs sm:text-sm font-medium text-stone-300">
                             Serving Central Texas Since 2005
                         </span>
                     </div>
 
-                    {/* Headline */}
-                    <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white text-balance leading-tight mb-6">
+                    {/* Headline - Fluid Typography */}
+                    <h1 className="font-display font-bold text-white text-balance leading-tight mb-6" style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4.5rem)' }}>
                         Waco's Trusted
                         <span className="block text-accent-400">Concrete Contractor</span>
                     </h1>
@@ -70,20 +70,20 @@ export function Hero() {
                         </a>
                     </div>
 
-                    {/* Trust Indicators */}
-                    <div className="mt-12 pt-8 border-t border-stone-700">
-                        <div className="flex flex-wrap gap-8 md:gap-12">
-                            <div>
-                                <div className="font-display font-bold text-3xl text-white">20+</div>
-                                <div className="text-sm text-stone-400">Years Experience</div>
+                    {/* Trust Indicators - Mobile optimized grid */}
+                    <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-stone-700">
+                        <div className="grid grid-cols-3 gap-4 sm:gap-8 md:gap-12">
+                            <div className="text-center sm:text-left">
+                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">20+</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Years Experience</div>
                             </div>
-                            <div>
-                                <div className="font-display font-bold text-3xl text-white">500+</div>
-                                <div className="text-sm text-stone-400">Projects Completed</div>
+                            <div className="text-center sm:text-left">
+                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">500+</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Projects Completed</div>
                             </div>
-                            <div>
-                                <div className="font-display font-bold text-3xl text-white">100%</div>
-                                <div className="text-sm text-stone-400">Customer Satisfaction</div>
+                            <div className="text-center sm:text-left">
+                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">100%</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Customer Satisfaction</div>
                             </div>
                         </div>
                     </div>

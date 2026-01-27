@@ -31,7 +31,7 @@ export function Contact() {
     return (
         <section id="contact" className="section-padding bg-white">
             <div className="container-main">
-                <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+                <div className="grid gap-8 lg:gap-16 lg:grid-cols-2">
                     {/* Left Column - Info */}
                     <div>
                         <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
@@ -111,7 +111,7 @@ export function Contact() {
                     </div>
 
                     {/* Right Column - Form */}
-                    <div className="bg-stone-50 rounded-2xl p-6 md:p-8 lg:p-10">
+                    <div className="bg-stone-50 rounded-2xl p-5 sm:p-6 md:p-8 lg:p-10">
                         {formState === 'success' ? (
                             <div className="flex flex-col items-center justify-center text-center h-full min-h-[400px]">
                                 <div className="size-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
@@ -139,7 +139,7 @@ export function Contact() {
                                     Request a Free Estimate
                                 </h3>
 
-                                <div className="grid gap-5 sm:grid-cols-2">
+                                <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
                                     <div>
                                         <label htmlFor="name" className="block text-sm font-medium text-stone-700 mb-1.5">
                                             Your Name *

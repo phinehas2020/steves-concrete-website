@@ -39,8 +39,8 @@ export function Testimonials() {
                     </p>
                 </div>
 
-                {/* Testimonials Grid */}
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {/* Testimonials Grid - Mobile stacking */}
+                <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {testimonials.map((testimonial, index) => (
                         <div
                             key={index}

@@ -36,8 +36,8 @@ export function Values() {
                     </p>
                 </div>
 
-                {/* Values Grid */}
-                <div className="grid gap-8 md:grid-cols-3">
+                {/* Values Grid - Stack on mobile */}
+                <div className="grid gap-8 sm:gap-10 md:grid-cols-3">
                     {values.map((value, index) => (
                         <div key={value.title} className="text-center">
                             <div className="inline-flex items-center justify-center size-16 bg-stone-800 rounded-2xl mb-6">
