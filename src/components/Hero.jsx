@@ -1,4 +1,5 @@
 import { ArrowRight, Phone } from 'lucide-react'
+import heroImage from '../assets/images/hero.png'
 
 export function Hero() {
     return (
@@ -9,7 +10,7 @@ export function Hero() {
             {/* Background Image */}
             <div className="absolute inset-0">
                 <img
-                    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop"
+                    src={heroImage}
                     alt=""
                     className="w-full h-full object-cover"
                     aria-hidden="true"

@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import { cn } from '../lib/utils'
 
+// Import gallery images
+import stampedDrivewayImg from '../assets/images/gallery-stamped-driveway.png'
+import patioAggregateImg from '../assets/images/gallery-patio-aggregate.png'
+import commercialParkingImg from '../assets/images/gallery-commercial-parking.png'
+import flagstonePatioImg from '../assets/images/gallery-flagstone-patio.png'
+import circularDrivewayImg from '../assets/images/gallery-circular-driveway.png'
+import poolDeckImg from '../assets/images/gallery-pool-deck.png'
+
 const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial']
 
 const projects = [
@@ -9,42 +17,42 @@ const projects = [
         title: 'Modern Stamped Driveway',
         category: 'Driveways',
         description: 'Custom ashlar slate pattern with charcoal color',
-        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop',
+        image: stampedDrivewayImg,
     },
     {
         id: 2,
         title: 'Backyard Patio Extension',
         category: 'Patios',
         description: 'Exposed aggregate with decorative border',
-        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
+        image: patioAggregateImg,
     },
     {
         id: 3,
         title: 'Commercial Parking Lot',
         category: 'Commercial',
         description: 'Large-scale pour for retail complex',
-        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
+        image: commercialParkingImg,
     },
     {
         id: 4,
         title: 'Flagstone Pattern Patio',
         category: 'Stamped',
         description: 'Natural flagstone stamped design',
-        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
+        image: flagstonePatioImg,
     },
     {
         id: 5,
         title: 'Circular Driveway',
         category: 'Driveways',
         description: 'Curved driveway with brick inlay border',
-        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
+        image: circularDrivewayImg,
     },
     {
         id: 6,
         title: 'Pool Deck',
         category: 'Patios',
         description: 'Cool deck finish for poolside comfort',
-        image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop',
+        image: poolDeckImg,
     },
 ]
 
