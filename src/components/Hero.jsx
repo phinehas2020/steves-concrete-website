@@ -6,8 +6,19 @@ export function Hero() {
             id="home"
             className="relative min-h-dvh flex items-center pt-20 overflow-hidden bg-stone-900"
         >
+            {/* Background Image */}
+            <div className="absolute inset-0">
+                <img
+                    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=1080&fit=crop"
+                    alt=""
+                    className="w-full h-full object-cover"
+                    aria-hidden="true"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/95 to-stone-900/70" />
+            </div>
+
             {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 opacity-5">
                 <div
                     className="absolute inset-0"
                     style={{

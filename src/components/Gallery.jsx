@@ -9,67 +9,54 @@ const projects = [
         title: 'Modern Stamped Driveway',
         category: 'Driveways',
         description: 'Custom ashlar slate pattern with charcoal color',
-        image: 'driveway-1',
+        image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop',
     },
     {
         id: 2,
         title: 'Backyard Patio Extension',
         category: 'Patios',
         description: 'Exposed aggregate with decorative border',
-        image: 'patio-1',
+        image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
     },
     {
         id: 3,
         title: 'Commercial Parking Lot',
         category: 'Commercial',
         description: 'Large-scale pour for retail complex',
-        image: 'commercial-1',
+        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
     },
     {
         id: 4,
         title: 'Flagstone Pattern Patio',
         category: 'Stamped',
         description: 'Natural flagstone stamped design',
-        image: 'stamped-1',
+        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
     },
     {
         id: 5,
         title: 'Circular Driveway',
         category: 'Driveways',
         description: 'Curved driveway with brick inlay border',
-        image: 'driveway-2',
+        image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
     },
     {
         id: 6,
         title: 'Pool Deck',
         category: 'Patios',
         description: 'Cool deck finish for poolside comfort',
-        image: 'patio-2',
+        image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop',
     },
 ]
 
-// Placeholder image component - generates a concrete-themed pattern
+// Project image component - displays actual project photos
 function ProjectImage({ project }) {
-    const colors = {
-        Driveways: 'from-stone-400 to-stone-600',
-        Patios: 'from-stone-300 to-stone-500',
-        Stamped: 'from-amber-200 to-stone-400',
-        Commercial: 'from-stone-500 to-stone-700',
-    }
-
     return (
-        <div
-            className={cn(
-                'absolute inset-0 bg-gradient-to-br',
-                colors[project.category] || 'from-stone-400 to-stone-600'
-            )}
-        >
-            {/* Texture overlay */}
-            <div
-                className="absolute inset-0 opacity-30"
-                style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                }}
+        <div className="absolute inset-0">
+            <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover"
+                loading="lazy"
             />
             {/* Category label */}
             <div className="absolute bottom-4 left-4">
