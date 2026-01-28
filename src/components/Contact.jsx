@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { motion } from 'motion/react'
 import { Phone, Mail, MapPin, Send, CheckCircle } from 'lucide-react'
 import { cn } from '../lib/utils'
+import { fadeInUp, fadeInLeft, fadeInRight, viewportConfig } from '../lib/animations'
 
 export function Contact() {
     const [formState, setFormState] = useState('idle') // idle, submitting, success, error
@@ -16,12 +18,31 @@ export function Contact() {
         e.preventDefault()
         setFormState('submitting')
 
-        // Simulate form submission
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        setFormState('success')
+        try {
+            const response = await fetch('/api/lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    ...formData,
+                    pageUrl: window.location.href,
+                    source: 'website',
+                }),
+            })
+
+            if (!response.ok) {
+                throw new Error('Request failed')
+            }
+
+            setFormState('success')
+        } catch {
+            setFormState('error')
+        }
     }
 
     const handleChange = (e) => {
+        if (formState === 'error') {
+            setFormState('idle')
+        }
         setFormData((prev) => ({
             ...prev,
             [e.target.name]: e.target.value,
@@ -33,7 +54,12 @@ export function Contact() {
             <div className="container-main">
                 <div className="grid gap-8 lg:gap-16 lg:grid-cols-2">
                     {/* Left Column - Info */}
-                    <div>
+                    <motion.div
+                        variants={fadeInLeft}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                    >
                         <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
                             Contact Us
                         </span>
@@ -108,10 +134,16 @@ export function Contact() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Right Column - Form */}
-                    <div className="bg-stone-50 rounded-2xl p-5 sm:p-6 md:p-8 lg:p-10">
+                    <motion.div
+                        className="bg-stone-50 rounded-2xl p-5 sm:p-6 md:p-8 lg:p-10"
+                        variants={fadeInRight}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                    >
                         {formState === 'success' ? (
                             <div className="flex flex-col items-center justify-center text-center h-full min-h-[400px]">
                                 <div className="size-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
@@ -227,6 +259,12 @@ export function Contact() {
                                     />
                                 </div>
 
+                                {formState === 'error' && (
+                                    <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-4 py-3">
+                                        Something went wrong. Please call us at (254) 230-3102 or try again.
+                                    </div>
+                                )}
+
                                 <button
                                     type="submit"
                                     disabled={formState === 'submitting'}
@@ -252,7 +290,7 @@ export function Contact() {
                                 </p>
                             </form>
                         )}
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

@@ -8,13 +8,14 @@ const navLinks = [
     { label: 'About', href: '#about' },
     { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
+    { label: 'Blog', href: '/blog' },
 ]
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="bg-stone-900 text-stone-300 safe-bottom">
+        <footer className="bg-stone-900 text-stone-300 safe-bottom texture-grain-dark relative">
             <div className="container-main section-padding">
                 <div className="grid gap-8 sm:gap-12 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                     {/* Brand */}
