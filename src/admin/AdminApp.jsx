@@ -6,6 +6,7 @@ import { AdminLeads } from './AdminLeads'
 import { AdminStats } from './AdminStats'
 import { AdminBlog } from './AdminBlog'
 import { AdminUsers } from './AdminUsers'
+import { useSeo, SITE_URL } from '../lib/seo'
 
 const navItems = [
   { label: 'Stats', path: '' },
@@ -15,6 +16,14 @@ const navItems = [
 ]
 
 export function AdminApp() {
+  useSeo({
+    title: 'Admin Dashboard | Concrete Works LLC',
+    description: 'Concrete Works LLC admin dashboard.',
+    robots: 'noindex, nofollow',
+    canonical: `${SITE_URL}/admin`,
+    url: `${SITE_URL}/admin`,
+  })
+
   const [session, setSession] = useState(null)
   const [authChecked, setAuthChecked] = useState(false)
   const [adminProfile, setAdminProfile] = useState(null)
@@ -140,8 +149,8 @@ export function AdminApp() {
       </header>
 
       <main className="container-main py-8">
-        <div className="grid gap-6 lg:grid-cols-[220px_1fr]">
-          <nav className="bg-white border border-stone-200 rounded-xl p-4 h-fit">
+        <div className="grid gap-6 lg:grid-cols-[220px_1fr] items-stretch">
+          <nav className="bg-white border border-stone-200 rounded-xl p-4 self-stretch h-full">
             <ul className="space-y-2">
               {navItems.map((item) => (
                 <li key={item.label}>
