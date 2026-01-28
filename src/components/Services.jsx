@@ -115,8 +115,14 @@ export function Services() {
                     ))}
                 </motion.div>
 
-                {/* Desktop "And more" toggle */}
-                <div className="hidden md:flex justify-center mt-8">
+                {/* Desktop actions */}
+                <motion.div
+                    className="hidden md:flex items-center justify-center gap-4 mt-10 flex-wrap"
+                    variants={fadeInUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportConfig}
+                >
                     <button
                         type="button"
                         onClick={() => setShowAll((prev) => !prev)}
@@ -125,16 +131,6 @@ export function Services() {
                     >
                         {showAll ? 'Show fewer services' : 'And more'}
                     </button>
-                </div>
-
-                {/* Desktop CTA */}
-                <motion.div
-                    className="hidden md:block text-center mt-12"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportConfig}
-                >
                     <motion.a
                         href="#contact"
                         className="inline-flex items-center justify-center px-8 py-4 bg-stone-900 text-white font-semibold rounded-lg hover:bg-stone-800 transition-colors duration-150 min-h-[52px]"
