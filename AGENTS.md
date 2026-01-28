@@ -2,7 +2,7 @@
 
 Last updated: 2026-01-28
 
-## What’s done
+## What's done
 
 ### Lead capture + email notifications
 - Contact form now posts to `/api/lead` (Vercel serverless).
@@ -57,12 +57,28 @@ Current Vercel envs already set:
 3) Check your inbox and click the magic link.
 
 If login fails:
-- Ensure Supabase Auth “Email” provider is enabled.
+- Ensure Supabase Auth "Email" provider is enabled.
 - Add redirect URL in Supabase Auth settings:  
   `https://<your-domain>/admin`
+
+
+## Branches
+
+### `design-refresh` 
+Exploration branch with authentic local feel:
+- **Values** → "Our Story + Process" section with Steve's narrative, black clay soil context, 4-phase process breakdown, subtle Waco skyline
+- **Gallery** → Real project specs (sqft, mix PSI, completion date), specific locations, brief stories per project
+- **Services** → Descriptions mention Central Texas soil/heat challenges, specific neighborhoods
+- **Contact** → "What happens next" timeline (4hr response → call → site visit → estimate), emergency repair note
+- **Hero** → Reduced animation, heavier/slower motion, mentions "McLennan County" and "black clay soil"
+- **Testimonials** → Added project types, stats row at bottom, cleaner cards without bounce
+- **FAQ** → Honest answers about cracking (soil movement), realistic warranty language
+- **Footer** → "Built on black clay soil" tagline, hours section, local texture element
+
+Compare with `main` to see which direction you prefer.
 
 
 ## Notes / local changes
 - Supabase CLI created `supabase/config.toml` and a migration in `supabase/migrations/`.
 - Vercel CLI added `.vercel/` (ignored by git).
-- There are unrelated local changes in `index.html`, `FAQ.jsx`, `Gallery.jsx`, `Hero.jsx`, `Testimonials.jsx`, `public/og-image.jpg` that weren’t committed.
+- There are unrelated local changes in `index.html`, `FAQ.jsx`, `Gallery.jsx`, `Hero.jsx`, `Testimonials.jsx`, `public/og-image.jpg` that weren't committed.
