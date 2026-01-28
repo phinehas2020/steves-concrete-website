@@ -6,11 +6,11 @@ export function BlogHeader() {
     <header className="bg-white/95 backdrop-blur-sm border-b border-stone-200 safe-top">
       <div className="container-main">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <a href="/" className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-3 flex-shrink-0 overflow-hidden">
             <img
               src={logoImage}
               alt="Concrete Works LLC"
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain rounded-lg"
+              className="h-10 sm:h-12 md:h-14 lg:h-16 max-h-12 sm:max-h-14 md:max-h-16 lg:max-h-18 w-auto object-contain rounded-lg"
             />
             <span className="font-display font-semibold text-stone-900 hidden sm:block">
               Concrete Works LLC
