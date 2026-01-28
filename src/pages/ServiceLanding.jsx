@@ -2,11 +2,13 @@ import { InteriorHeader } from '../components/InteriorHeader'
 import { Footer } from '../components/Footer'
 import { Contact } from '../components/Contact'
 import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
+import { locationLinks } from '../data/locationPages'
 
 export function ServiceLanding({ page }) {
   const { slug, title, heroTitle, heroSubtitle, intro, benefits, process, finishes } = page
 
   const description = `${title} in Waco and Central Texas. Free estimates from Concrete Works LLC.`
+  const serviceAreaText = locationLinks.map((location) => location.city).join(', ')
 
   useSeo({
     title: `${title} | Concrete Works LLC`,
@@ -128,37 +130,19 @@ export function ServiceLanding({ page }) {
                   Service areas
                 </h3>
                 <p className="text-stone-600 text-pretty mb-6">
-                  We provide {title.toLowerCase()} across Waco, Temple, Killeen, Hewitt, and surrounding Central Texas communities.
+                  We provide {title.toLowerCase()} across {serviceAreaText} and surrounding Central Texas communities.
                 </p>
                 <div className="flex flex-col gap-3">
-                  <a
-                    href="/waco-tx-concrete-contractor"
-                    className="flex items-center justify-between px-4 py-3 bg-white border border-stone-200 rounded-lg hover:border-stone-300"
-                  >
-                    <span className="font-semibold text-stone-800">Waco</span>
-                    <span className="text-sm text-stone-500">View location</span>
-                  </a>
-                  <a
-                    href="/temple-tx-concrete-contractor"
-                    className="flex items-center justify-between px-4 py-3 bg-white border border-stone-200 rounded-lg hover:border-stone-300"
-                  >
-                    <span className="font-semibold text-stone-800">Temple</span>
-                    <span className="text-sm text-stone-500">View location</span>
-                  </a>
-                  <a
-                    href="/killeen-tx-concrete-contractor"
-                    className="flex items-center justify-between px-4 py-3 bg-white border border-stone-200 rounded-lg hover:border-stone-300"
-                  >
-                    <span className="font-semibold text-stone-800">Killeen</span>
-                    <span className="text-sm text-stone-500">View location</span>
-                  </a>
-                  <a
-                    href="/hewitt-tx-concrete-contractor"
-                    className="flex items-center justify-between px-4 py-3 bg-white border border-stone-200 rounded-lg hover:border-stone-300"
-                  >
-                    <span className="font-semibold text-stone-800">Hewitt</span>
-                    <span className="text-sm text-stone-500">View location</span>
-                  </a>
+                  {locationLinks.map((location) => (
+                    <a
+                      key={location.slug}
+                      href={`/${location.slug}`}
+                      className="flex items-center justify-between px-4 py-3 bg-white border border-stone-200 rounded-lg hover:border-stone-300"
+                    >
+                      <span className="font-semibold text-stone-800">{location.city}</span>
+                      <span className="text-sm text-stone-500">View location</span>
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>

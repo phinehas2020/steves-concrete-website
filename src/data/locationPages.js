@@ -145,4 +145,106 @@ export const locationPages = [
       },
     ],
   },
+  {
+    slug: 'woodway-tx-concrete-contractor',
+    city: 'Woodway',
+    heroTitle: 'Concrete Contractor in Woodway, TX',
+    heroSubtitle:
+      'Driveways, patios, stamped finishes, and concrete repairs for Woodway properties.',
+    intro:
+      'Concrete Works LLC serves Woodway homeowners and businesses with clean prep, crisp finishing, and long-term durability on every pour.',
+    highlights: baseHighlights,
+    services: baseServices,
+    nearbyAreas: ['Waco', 'Hewitt', 'Robinson', 'Beverly Hills', 'China Spring', 'Lorena'],
+    projects: baseProjects('Woodway'),
+    faq: [
+      {
+        question: 'Do you install stamped concrete in Woodway?',
+        answer: 'Yes. We offer stamped patterns and color blends for patios, walkways, and driveways.',
+      },
+      {
+        question: 'Can you replace an older driveway in Woodway?',
+        answer:
+          'We remove and replace aging slabs with proper base prep and joint planning for durability.',
+      },
+    ],
+  },
+  {
+    slug: 'robinson-tx-concrete-contractor',
+    city: 'Robinson',
+    heroTitle: 'Concrete Contractor in Robinson, TX',
+    heroSubtitle:
+      'Concrete driveways, patios, and repairs tailored to Robinson homes and light commercial sites.',
+    intro:
+      'We help Robinson property owners add curb appeal with smooth finishes, clean edges, and solid drainage planning.',
+    highlights: baseHighlights,
+    services: baseServices,
+    nearbyAreas: ['Waco', 'Hewitt', 'Woodway', 'Lorena', 'Bruceville-Eddy', 'Bellmead'],
+    projects: baseProjects('Robinson'),
+    faq: [
+      {
+        question: 'Do you offer free estimates in Robinson?',
+        answer: 'Yes. We provide free on-site estimates for Robinson projects.',
+      },
+      {
+        question: 'Can you handle small concrete pads in Robinson?',
+        answer:
+          'Absolutely. We take on walkways, pads, and smaller pours alongside larger installs.',
+      },
+    ],
+  },
+  {
+    slug: 'lorena-tx-concrete-contractor',
+    city: 'Lorena',
+    heroTitle: 'Concrete Contractor in Lorena, TX',
+    heroSubtitle:
+      'Stamped concrete, patios, driveways, and repairs for Lorena homes and properties.',
+    intro:
+      'Lorena homeowners trust us for detailed prep, smooth finishes, and long-lasting concrete work that fits the property.',
+    highlights: baseHighlights,
+    services: baseServices,
+    nearbyAreas: ['Waco', 'Hewitt', 'Robinson', 'Woodway', 'Golinda', 'McGregor'],
+    projects: baseProjects('Lorena'),
+    faq: [
+      {
+        question: 'What finishes are available in Lorena?',
+        answer:
+          'We offer broom, exposed aggregate, and stamped finishes with multiple color options.',
+      },
+      {
+        question: 'How far out are you scheduling Lorena projects?',
+        answer:
+          'Timing depends on scope and season, but we provide fast estimate scheduling and clear start dates.',
+      },
+    ],
+  },
+  {
+    slug: 'mcgregor-tx-concrete-contractor',
+    city: 'McGregor',
+    heroTitle: 'Concrete Contractor in McGregor, TX',
+    heroSubtitle:
+      'Concrete driveways, patios, and commercial slabs for McGregor properties.',
+    intro:
+      'Concrete Works LLC delivers dependable concrete installs in McGregor with careful grading, reinforcement, and clean finishing.',
+    highlights: baseHighlights,
+    services: baseServices,
+    nearbyAreas: ['Waco', 'Moody', 'Gatesville', 'Woodway', 'Lorena', 'Oglesby'],
+    projects: baseProjects('McGregor'),
+    faq: [
+      {
+        question: 'Do you work on commercial concrete in McGregor?',
+        answer: 'Yes. We handle pads, parking areas, and light commercial pours.',
+      },
+      {
+        question: 'Can you match stamped concrete colors in McGregor?',
+        answer:
+          'We can blend colors and release agents to match stone or brick tones that fit your exterior.',
+      },
+    ],
+  },
 ]
+
+export const locationLinks = locationPages.map((page) => ({
+  slug: page.slug,
+  city: page.city,
+}))

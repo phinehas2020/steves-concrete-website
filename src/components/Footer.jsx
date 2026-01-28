@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin } from 'lucide-react'
 import logoImage from '../assets/images/logo.png'
+import { locationLinks } from '../data/locationPages'
 
 const navLinks = [
     { label: 'Home', href: '#home' },
@@ -90,27 +91,14 @@ export function Footer() {
                     {/* Service Areas */}
                     <div>
                         <h3 className="font-display font-semibold text-white mb-4">Service Areas</h3>
-                        <ul className="space-y-2 text-stone-400">
-                            <li>
-                                <a href="/waco-tx-concrete-contractor" className="hover:text-white transition-colors">
-                                    Waco
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/temple-tx-concrete-contractor" className="hover:text-white transition-colors">
-                                    Temple
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/killeen-tx-concrete-contractor" className="hover:text-white transition-colors">
-                                    Killeen
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/hewitt-tx-concrete-contractor" className="hover:text-white transition-colors">
-                                    Hewitt
-                                </a>
-                            </li>
+                        <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-stone-400">
+                            {locationLinks.map((location) => (
+                                <li key={location.slug}>
+                                    <a href={`/${location.slug}`} className="hover:text-white transition-colors">
+                                        {location.city}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 

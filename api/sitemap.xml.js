@@ -7,6 +7,10 @@ const LOCATION_PAGES = [
   'temple-tx-concrete-contractor',
   'killeen-tx-concrete-contractor',
   'hewitt-tx-concrete-contractor',
+  'woodway-tx-concrete-contractor',
+  'robinson-tx-concrete-contractor',
+  'lorena-tx-concrete-contractor',
+  'mcgregor-tx-concrete-contractor',
 ]
 const SERVICE_PAGES = [
   'services/concrete-driveways',

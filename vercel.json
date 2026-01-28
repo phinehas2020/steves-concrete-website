@@ -16,6 +16,10 @@
     { "source": "/waco-tx-concrete-contractor", "destination": "/index.html" },
     { "source": "/temple-tx-concrete-contractor", "destination": "/index.html" },
     { "source": "/killeen-tx-concrete-contractor", "destination": "/index.html" },
-    { "source": "/hewitt-tx-concrete-contractor", "destination": "/index.html" }
+    { "source": "/hewitt-tx-concrete-contractor", "destination": "/index.html" },
+    { "source": "/woodway-tx-concrete-contractor", "destination": "/index.html" },
+    { "source": "/robinson-tx-concrete-contractor", "destination": "/index.html" },
+    { "source": "/lorena-tx-concrete-contractor", "destination": "/index.html" },
+    { "source": "/mcgregor-tx-concrete-contractor", "destination": "/index.html" }
   ]
 }
