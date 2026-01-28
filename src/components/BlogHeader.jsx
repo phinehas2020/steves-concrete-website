@@ -1,7 +1,7 @@
 import logoImage from '../assets/images/logo.png'
 import { Phone } from 'lucide-react'
 
-export function BlogHeader() {
+export function BlogHeader({ onRequestEstimate }) {
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-stone-200 safe-top">
       <div className="container-main">
@@ -18,12 +18,22 @@ export function BlogHeader() {
           </a>
 
           <div className="flex items-center gap-3 sm:gap-4">
-            <a
-              href="/#contact"
-              className="inline-flex items-center justify-center px-4 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[44px]"
-            >
-              Free Estimate
-            </a>
+            {onRequestEstimate ? (
+              <button
+                type="button"
+                onClick={onRequestEstimate}
+                className="inline-flex items-center justify-center px-4 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[44px]"
+              >
+                Free Estimate
+              </button>
+            ) : (
+              <a
+                href="/#contact"
+                className="inline-flex items-center justify-center px-4 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[44px]"
+              >
+                Free Estimate
+              </a>
+            )}
             <a
               href="tel:254-230-3102"
               className="hidden sm:flex items-center gap-2 text-stone-700 hover:text-accent-600 font-medium transition-colors"

@@ -3,11 +3,13 @@ import { supabase } from '../lib/supabase'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { BlogHeader } from '../components/BlogHeader'
 import { BlogFooter } from '../components/BlogFooter'
+import { ContactModal } from '../components/ContactModal'
 
 export function BlogIndex() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     let isMounted = true
@@ -42,7 +44,7 @@ export function BlogIndex() {
 
   return (
     <div className="min-h-dvh flex flex-col bg-white">
-      <BlogHeader />
+      <BlogHeader onRequestEstimate={() => setContactOpen(true)} />
       <main className="flex-1">
         <section className="bg-stone-50 border-b border-stone-200">
           <div className="container-main py-16 md:py-20">
@@ -68,13 +70,14 @@ export function BlogIndex() {
                 <p className="text-stone-600 text-pretty mb-5">
                   Tell us about your project and we’ll respond fast with next steps.
                 </p>
-                <a
-                  href="/#contact"
+                <button
+                  type="button"
+                  onClick={() => setContactOpen(true)}
                   className="inline-flex items-center gap-2 text-white bg-accent-500 hover:bg-accent-600 font-semibold px-4 py-3 rounded-lg transition-colors"
                 >
                   Request Estimate
                   <ArrowRight className="size-4" aria-hidden="true" />
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -195,6 +198,7 @@ export function BlogIndex() {
         </section>
       </main>
       <BlogFooter />
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} source="blog" />
     </div>
   )
 }

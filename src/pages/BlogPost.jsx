@@ -4,12 +4,14 @@ import { marked } from 'marked'
 import { supabase } from '../lib/supabase'
 import { BlogHeader } from '../components/BlogHeader'
 import { BlogFooter } from '../components/BlogFooter'
+import { ContactModal } from '../components/ContactModal'
 
 export function BlogPost() {
   const { slug } = useParams()
   const [post, setPost] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     let isMounted = true
@@ -54,7 +56,7 @@ export function BlogPost() {
 
   return (
     <div className="min-h-dvh flex flex-col bg-white">
-      <BlogHeader />
+      <BlogHeader onRequestEstimate={() => setContactOpen(true)} />
       <main className="flex-1">
         <section className="bg-stone-50 border-b border-stone-200">
           <div className="container-main py-10">
@@ -109,12 +111,13 @@ export function BlogPost() {
                   dangerouslySetInnerHTML={{ __html: contentHtml }}
                 />
                 <div className="mt-10 border-t border-stone-200 pt-6">
-                  <a
-                    href="/#contact"
+                  <button
+                    type="button"
+                    onClick={() => setContactOpen(true)}
                     className="inline-flex items-center gap-2 text-accent-600 font-semibold hover:text-accent-700"
                   >
                     Need a quote? Request a free estimate
-                  </a>
+                  </button>
                 </div>
               </article>
             )}
@@ -122,6 +125,7 @@ export function BlogPost() {
         </section>
       </main>
       <BlogFooter />
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} source="blog" />
     </div>
   )
 }
