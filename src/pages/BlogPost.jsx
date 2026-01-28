@@ -56,14 +56,18 @@ export function BlogPost() {
     <div className="min-h-dvh flex flex-col bg-white">
       <BlogHeader />
       <main className="flex-1">
-        <section className="section-padding">
-          <div className="container-main max-w-3xl">
+        <section className="bg-stone-50 border-b border-stone-200">
+          <div className="container-main py-10">
             <a href="/blog" className="text-sm text-accent-600 font-semibold hover:text-accent-700">
               ← Back to Blog
             </a>
+          </div>
+        </section>
 
+        <section className="section-padding">
+          <div className="container-main max-w-3xl">
             {loading && (
-              <div className="mt-6 space-y-4">
+              <div className="space-y-4">
                 <div className="h-10 bg-stone-100 rounded w-3/4" />
                 <div className="h-4 bg-stone-100 rounded w-1/3" />
                 <div className="h-64 bg-stone-100 rounded" />
@@ -73,18 +77,18 @@ export function BlogPost() {
             )}
 
             {error && (
-              <div className="mt-6 bg-stone-50 border border-stone-200 text-stone-600 rounded-lg px-4 py-6">
+              <div className="bg-stone-50 border border-stone-200 text-stone-600 rounded-lg px-4 py-6">
                 {error}
               </div>
             )}
 
             {!loading && post && (
-              <article className="mt-6">
+              <article>
                 {post.cover_image_url && (
                   <img
                     src={post.cover_image_url}
                     alt=""
-                    className="w-full h-64 sm:h-80 object-cover rounded-xl mb-6"
+                    className="w-full h-64 sm:h-80 object-cover rounded-2xl mb-8"
                   />
                 )}
                 <p className="text-xs uppercase tracking-wide text-stone-500 mb-3">
@@ -104,6 +108,14 @@ export function BlogPost() {
                   className="blog-content"
                   dangerouslySetInnerHTML={{ __html: contentHtml }}
                 />
+                <div className="mt-10 border-t border-stone-200 pt-6">
+                  <a
+                    href="/#contact"
+                    className="inline-flex items-center gap-2 text-accent-600 font-semibold hover:text-accent-700"
+                  >
+                    Need a quote? Request a free estimate
+                  </a>
+                </div>
               </article>
             )}
           </div>

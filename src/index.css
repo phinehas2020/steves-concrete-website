@@ -217,9 +217,25 @@ body {
   text-wrap: balance;
 }
 
+.blog-content h2 {
+  font-size: var(--text-2xl);
+}
+
+.blog-content h3 {
+  font-size: var(--text-xl);
+}
+
+.blog-content h4 {
+  font-size: var(--text-lg);
+}
+
 .blog-content p {
   margin: 0 0 1.25rem;
   text-wrap: pretty;
+}
+
+.blog-content strong {
+  color: var(--color-text-primary);
 }
 
 .blog-content ul,
@@ -243,6 +259,26 @@ body {
   padding-left: 1rem;
   color: var(--color-text-muted);
   margin: 1.5rem 0;
+}
+
+.blog-content hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+.blog-content code {
+  background: var(--color-primary-100);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  font-size: 0.95em;
+}
+
+.blog-content pre code {
+  display: block;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
 }
 
 .blog-content img {
