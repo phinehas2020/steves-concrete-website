@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '../lib/utils'
-import { fadeInUp, staggerContainer, staggerItem, viewportConfig, galleryCardHover } from '../lib/animations'
+import { fadeInUp, viewportConfig } from '../lib/animations'
+import { Calendar, Ruler, MapPin } from 'lucide-react'
 
 // Import gallery images
 import stampedDrivewayImg from '../assets/images/gallery-stamped-driveway.png'
@@ -16,46 +17,58 @@ const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial']
 const projects = [
     {
         id: 1,
-        title: 'Modern Stamped Driveway',
+        title: 'Ashlar Slate Driveway',
         category: 'Driveways',
-        description: 'Custom ashlar slate pattern with charcoal color',
+        location: 'Woodway, TX',
+        description: 'Charcoal-colored ashlar slate pattern with custom border. Homeowner wanted the look of natural stone without the maintenance.',
         image: stampedDrivewayImg,
-        featured: true, // First item will be larger
+        specs: { sqft: 680, mix: '4,000 PSI', date: 'Oct 2024' },
+        featured: true,
     },
     {
         id: 2,
-        title: 'Backyard Patio Extension',
+        title: 'Exposed Aggregate Patio',
         category: 'Patios',
-        description: 'Exposed aggregate with decorative border',
+        location: 'Hewitt, TX',
+        description: 'Backyard extension with river rock exposed finish. Designed to match existing landscaping and provide slip resistance.',
         image: patioAggregateImg,
+        specs: { sqft: 420, mix: '4,500 PSI', date: 'Sep 2024' },
     },
     {
         id: 3,
-        title: 'Commercial Parking Lot',
+        title: 'Retail Parking Lot',
         category: 'Commercial',
-        description: 'Large-scale pour for retail complex',
+        location: 'Waco, TX',
+        description: '15,000 sq ft pour for a retail complex off Loop 340. Included proper drainage grading and ADA-compliant markings.',
         image: commercialParkingImg,
+        specs: { sqft: 15200, mix: '5,000 PSI', date: 'Aug 2024' },
     },
     {
         id: 4,
         title: 'Flagstone Pattern Patio',
         category: 'Stamped',
-        description: 'Natural flagstone stamped design',
+        location: 'Lorena, TX',
+        description: 'Random flagstone stamp with earth-tone color hardener. Client hosts outdoor gatherings — needed durability and aesthetics.',
         image: flagstonePatioImg,
+        specs: { sqft: 540, mix: '4,000 PSI', date: 'Jul 2024' },
     },
     {
         id: 5,
         title: 'Circular Driveway',
         category: 'Driveways',
-        description: 'Curved driveway with brick inlay border',
+        location: 'Temple, TX',
+        description: 'Curved entry with brick-pattern inlay border. Challenging grade required additional excavation for proper water runoff.',
         image: circularDrivewayImg,
+        specs: { sqft: 890, mix: '4,000 PSI', date: 'Jun 2024' },
     },
     {
         id: 6,
-        title: 'Pool Deck',
+        title: 'Pool Deck Resurface',
         category: 'Patios',
-        description: 'Cool deck finish for poolside comfort',
+        location: 'McGregor, TX',
+        description: 'Kool Deck overlay on existing concrete. Texas sun means pool decks need to stay cool under bare feet.',
         image: poolDeckImg,
+        specs: { sqft: 380, mix: 'Overlay', date: 'May 2024' },
     },
 ]
 
@@ -66,15 +79,11 @@ function ProjectImage({ project }) {
             <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
             />
-            {/* Category label */}
-            <div className="absolute bottom-4 left-4">
-                <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-stone-800 text-xs font-semibold rounded-full shadow-sm">
-                    {project.category}
-                </span>
-            </div>
+            {/* Subtle vignette */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
         </div>
     )
 }
@@ -92,21 +101,21 @@ export function Gallery() {
             <div className="container-main">
                 {/* Section Header */}
                 <motion.div
-                    className="text-center max-w-2xl mx-auto mb-10"
+                    className="max-w-2xl mb-10"
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
                     viewport={viewportConfig}
                 >
                     <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                        Our Work
+                        Recent Work
                     </span>
                     <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-stone-900 text-balance mb-4">
-                        Project Gallery
+                        Projects Across Central Texas
                     </h2>
                     <p className="text-lg text-stone-600 text-pretty">
-                        Browse our recent projects to see the quality and craftsmanship
-                        we bring to every job.
+                        Real jobs, real specs, real results. Every pour has its own challenges — 
+                        black clay soil, summer heat, drainage grades. Here's how we handle them.
                     </p>
                 </motion.div>
 
@@ -118,29 +127,27 @@ export function Gallery() {
                     whileInView="visible"
                     viewport={viewportConfig}
                 >
-                    <div className="flex sm:flex-wrap sm:justify-center gap-2 overflow-x-auto sm:overflow-visible scroll-hide-bar pb-2 sm:pb-0">
+                    <div className="flex sm:flex-wrap gap-2 overflow-x-auto sm:overflow-visible scroll-hide-bar pb-2 sm:pb-0">
                         {categories.map((category) => (
-                            <motion.button
+                            <button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
                                 className={cn(
-                                    'px-4 sm:px-5 py-2.5 rounded-full font-medium transition-colors duration-150 whitespace-nowrap flex-shrink-0',
+                                    'px-4 sm:px-5 py-2.5 rounded-full font-medium transition-all duration-200 whitespace-nowrap flex-shrink-0',
                                     activeCategory === category
                                         ? 'bg-stone-900 text-white'
                                         : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
                                 )}
-                                whileHover={{ scale: 1.03 }}
-                                whileTap={{ scale: 0.97 }}
                             >
                                 {category}
-                            </motion.button>
+                            </button>
                         ))}
                     </div>
                 </motion.div>
 
-                {/* Projects Grid - Masonry-style with AnimatePresence */}
+                {/* Projects Grid */}
                 <motion.div
-                    className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                    className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                     layout
                 >
                     <AnimatePresence mode="popLayout">
@@ -149,54 +156,55 @@ export function Gallery() {
                                 key={project.id}
                                 className={cn(
                                     "group relative rounded-xl overflow-hidden bg-stone-100 cursor-pointer",
-                                    // Featured item (first) spans 2 columns on desktop
                                     index === 0 && activeCategory === 'All'
                                         ? "lg:col-span-2 aspect-[16/9]"
                                         : "aspect-[4/3]"
                                 )}
                                 layout
-                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                                animate={{ opacity: 1, scale: 1, y: 0 }}
-                                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: 20 }}
                                 transition={{
                                     duration: 0.4,
                                     ease: [0.25, 0.46, 0.45, 0.94],
                                     delay: index * 0.05
                                 }}
-                                whileHover={{
-                                    y: -8,
-                                    boxShadow: '0 25px 50px -12px rgb(0 0 0 / 0.25)',
-                                    transition: { duration: 0.3 }
-                                }}
                             >
                                 <ProjectImage project={project} />
 
-                                {/* Hover Overlay with slide-up animation */}
-                                <motion.div
-                                    className="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-stone-900/40 to-transparent"
-                                    initial={{ opacity: 0 }}
-                                    whileHover={{ opacity: 1 }}
-                                    transition={{ duration: 0.3 }}
-                                >
-                                    <div className="absolute inset-0 flex flex-col justify-end p-6">
-                                        <motion.h3
-                                            className="font-display font-semibold text-xl text-white mb-1"
-                                            initial={{ y: 20, opacity: 0 }}
-                                            whileHover={{ y: 0, opacity: 1 }}
-                                            transition={{ duration: 0.3, delay: 0.05 }}
-                                        >
-                                            {project.title}
-                                        </motion.h3>
-                                        <motion.p
-                                            className="text-stone-300 text-sm"
-                                            initial={{ y: 20, opacity: 0 }}
-                                            whileHover={{ y: 0, opacity: 1 }}
-                                            transition={{ duration: 0.3, delay: 0.1 }}
-                                        >
-                                            {project.description}
-                                        </motion.p>
+                                {/* Always-visible overlay with basic info */}
+                                <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="px-2.5 py-1 bg-white/90 backdrop-blur-sm text-stone-800 text-xs font-semibold rounded-full">
+                                            {project.category}
+                                        </span>
+                                        <span className="flex items-center gap-1 text-xs text-white/80">
+                                            <MapPin className="size-3" />
+                                            {project.location}
+                                        </span>
                                     </div>
-                                </motion.div>
+                                    
+                                    <h3 className="font-display font-semibold text-lg sm:text-xl text-white mb-1">
+                                        {project.title}
+                                    </h3>
+                                    
+                                    {/* Specs row */}
+                                    <div className="flex items-center gap-4 text-xs text-white/70 mb-3">
+                                        <span className="flex items-center gap-1">
+                                            <Ruler className="size-3" />
+                                            {project.specs.sqft.toLocaleString()} sq ft
+                                        </span>
+                                        <span className="flex items-center gap-1">
+                                            <Calendar className="size-3" />
+                                            {project.specs.date}
+                                        </span>
+                                    </div>
+
+                                    {/* Description - visible on hover/larger screens */}
+                                    <p className="text-sm text-white/80 leading-relaxed hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        {project.description}
+                                    </p>
+                                </div>
                             </motion.article>
                         ))}
                     </AnimatePresence>
@@ -204,26 +212,25 @@ export function Gallery() {
 
                 {/* CTA */}
                 <motion.div
-                    className="text-center mt-12"
+                    className="mt-12 pt-8 border-t border-stone-200"
                     variants={fadeInUp}
                     initial="hidden"
                     whileInView="visible"
                     viewport={viewportConfig}
                 >
-                    <p className="text-stone-600 mb-4">
-                        Want to see more examples? Follow us on social media for our latest projects.
-                    </p>
-                    <motion.a
-                        href="#contact"
-                        className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
-                        whileHover={{ scale: 1.03, y: -2 }}
-                        whileTap={{ scale: 0.98 }}
-                    >
-                        Start Your Project
-                    </motion.a>
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                        <p className="text-stone-600">
+                            Have a project in mind? We typically respond within 4 hours.
+                        </p>
+                        <a
+                            href="#contact"
+                            className="inline-flex items-center justify-center px-6 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150"
+                        >
+                            Discuss Your Project
+                        </a>
+                    </div>
                 </motion.div>
             </div>
         </section>
     )
 }
-
