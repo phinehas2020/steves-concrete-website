@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabase'
 import { BlogHeader } from '../components/BlogHeader'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
+import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
 
 export function BlogPost() {
   const { slug } = useParams()
@@ -43,11 +44,67 @@ export function BlogPost() {
     }
   }, [slug])
 
-  useEffect(() => {
-    if (post?.title) {
-      document.title = `${post.title} | Concrete Works LLC`
+  const seo = useMemo(() => {
+    const notFound = Boolean(error)
+    const fallback = {
+      title: notFound
+        ? 'Post Not Found | Concrete Works LLC'
+        : 'Concrete Tips & Project Ideas | Concrete Works LLC',
+      description: notFound
+        ? 'This post could not be found.'
+        : 'Concrete tips, maintenance checklists, and design inspiration for Waco and Central Texas concrete projects.',
+      canonical: `${SITE_URL}/blog/${slug}`,
+      url: `${SITE_URL}/blog/${slug}`,
+      image: DEFAULT_IMAGE,
+      imageAlt: 'Concrete Works LLC blog',
+      type: 'article',
+      robots: notFound ? 'noindex, nofollow' : 'index, follow',
     }
-  }, [post])
+
+    if (!post) return fallback
+
+    const publishedAt = post.published_at || null
+    const updatedAt = post.updated_at || post.published_at || null
+    const description = post.excerpt || fallback.description
+    const image = post.cover_image_url || DEFAULT_IMAGE
+
+    return {
+      ...fallback,
+      title: `${post.title} | Concrete Works LLC`,
+      description,
+      image,
+      imageAlt: post.title,
+      publishedTime: publishedAt,
+      modifiedTime: updatedAt,
+      jsonLd: {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description,
+        image: [image],
+        datePublished: publishedAt,
+        dateModified: updatedAt,
+        author: {
+          '@type': 'Organization',
+          name: 'Concrete Works LLC',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Concrete Works LLC',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${SITE_URL}/logo.png`,
+          },
+        },
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': `${SITE_URL}/blog/${post.slug}`,
+        },
+      },
+    }
+  }, [post, slug, error])
+
+  useSeo(seo)
 
   const contentHtml = useMemo(() => {
     if (!post?.content) return ''
@@ -89,7 +146,7 @@ export function BlogPost() {
                 {post.cover_image_url && (
                   <img
                     src={post.cover_image_url}
-                    alt=""
+                    alt={post.title}
                     className="w-full h-64 sm:h-80 object-cover rounded-2xl mb-8"
                   />
                 )}

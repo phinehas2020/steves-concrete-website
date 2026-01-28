@@ -7,8 +7,11 @@ import { Testimonials } from './components/Testimonials'
 import { FAQ } from './components/FAQ'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
+import { useSeo } from './lib/seo'
 
 function App() {
+  useSeo()
+
   return (
     <div className="min-h-dvh flex flex-col">
       <Header />

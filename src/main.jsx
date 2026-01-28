@@ -7,6 +7,10 @@ import { AdminApp } from './admin/AdminApp'
 import { BlogIndex } from './pages/BlogIndex'
 import { BlogPost } from './pages/BlogPost'
 import { NotFound } from './pages/NotFound'
+import { LocationLanding } from './pages/LocationLanding'
+import { ServiceLanding } from './pages/ServiceLanding'
+import { locationPages } from './data/locationPages'
+import { servicePages } from './data/servicePages'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,6 +20,20 @@ createRoot(document.getElementById('root')).render(
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/admin/*" element={<AdminApp />} />
+        {locationPages.map((page) => (
+          <Route
+            key={page.slug}
+            path={`/${page.slug}`}
+            element={<LocationLanding page={page} />}
+          />
+        ))}
+        {servicePages.map((page) => (
+          <Route
+            key={page.slug}
+            path={`/services/${page.slug}`}
+            element={<ServiceLanding page={page} />}
+          />
+        ))}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

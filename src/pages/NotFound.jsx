@@ -1,4 +1,14 @@
+import { useSeo, SITE_URL } from '../lib/seo'
+
 export function NotFound() {
+  useSeo({
+    title: 'Page Not Found | Concrete Works LLC',
+    description: 'This page could not be found.',
+    robots: 'noindex, nofollow',
+    canonical: `${SITE_URL}/404`,
+    url: `${SITE_URL}/404`,
+  })
+
   return (
     <div className="min-h-dvh flex flex-col items-center justify-center bg-stone-50 px-4 text-center">
       <h1 className="font-display font-bold text-3xl text-stone-900 mb-3">

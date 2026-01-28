@@ -1,15 +1,54 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { BlogHeader } from '../components/BlogHeader'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
+import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
 
 export function BlogIndex() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [contactOpen, setContactOpen] = useState(false)
+
+  const seo = useMemo(() => {
+    const description =
+      'Concrete tips, maintenance checklists, and design inspiration for Waco and Central Texas concrete projects.'
+
+    const listItems = posts
+      .filter((post) => post?.slug && post?.title)
+      .map((post, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `${SITE_URL}/blog/${post.slug}`,
+        name: post.title,
+      }))
+
+    const jsonLd =
+      listItems.length > 0
+        ? {
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Concrete Works LLC Blog',
+            description,
+            itemListElement: listItems,
+          }
+        : null
+
+    return {
+      title: 'Concrete Tips & Project Ideas | Concrete Works LLC',
+      description,
+      canonical: `${SITE_URL}/blog`,
+      url: `${SITE_URL}/blog`,
+      image: DEFAULT_IMAGE,
+      imageAlt: 'Concrete Works LLC blog updates and project ideas',
+      type: 'website',
+      jsonLd,
+    }
+  }, [posts])
+
+  useSeo(seo)
 
   useEffect(() => {
     let isMounted = true
@@ -116,7 +155,7 @@ export function BlogIndex() {
                   {featured?.cover_image_url ? (
                     <img
                       src={featured.cover_image_url}
-                      alt=""
+                      alt={featured?.title || 'Featured concrete project advice'}
                       className="w-full h-full min-h-[240px] object-cover"
                       loading="lazy"
                     />
@@ -159,7 +198,7 @@ export function BlogIndex() {
                         {post.cover_image_url ? (
                           <img
                             src={post.cover_image_url}
-                            alt=""
+                            alt={post.title}
                             className="w-full h-48 object-cover"
                             loading="lazy"
                           />

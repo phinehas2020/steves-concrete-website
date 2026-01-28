@@ -17,7 +17,7 @@ export function Footer() {
     return (
         <footer className="bg-stone-900 text-stone-300 safe-bottom texture-grain-dark relative">
             <div className="container-main section-padding">
-                <div className="grid gap-8 sm:gap-12 grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-8 sm:gap-12 grid-cols-2 md:grid-cols-2 lg:grid-cols-5">
                     {/* Brand */}
                     <div className="col-span-2 lg:col-span-1">
                         <div className="mb-4">
@@ -54,11 +54,63 @@ export function Footer() {
                     <div>
                         <h3 className="font-display font-semibold text-white mb-4">Services</h3>
                         <ul className="space-y-2 text-stone-400">
-                            <li>Decorative Concrete</li>
-                            <li>Driveways & Patios</li>
-                            <li>Stamped Concrete</li>
-                            <li>Commercial Projects</li>
-                            <li>Concrete Repair</li>
+                            <li>
+                                <a href="/services/concrete-driveways" className="hover:text-white transition-colors">
+                                    Concrete Driveways
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/services/concrete-patios" className="hover:text-white transition-colors">
+                                    Concrete Patios
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/services/stamped-concrete" className="hover:text-white transition-colors">
+                                    Stamped Concrete
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/services/commercial-concrete" className="hover:text-white transition-colors">
+                                    Commercial Concrete
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/services/concrete-repair" className="hover:text-white transition-colors">
+                                    Concrete Repair
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/services/concrete-foundations" className="hover:text-white transition-colors">
+                                    Concrete Foundations
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Service Areas */}
+                    <div>
+                        <h3 className="font-display font-semibold text-white mb-4">Service Areas</h3>
+                        <ul className="space-y-2 text-stone-400">
+                            <li>
+                                <a href="/waco-tx-concrete-contractor" className="hover:text-white transition-colors">
+                                    Waco
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/temple-tx-concrete-contractor" className="hover:text-white transition-colors">
+                                    Temple
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/killeen-tx-concrete-contractor" className="hover:text-white transition-colors">
+                                    Killeen
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/hewitt-tx-concrete-contractor" className="hover:text-white transition-colors">
+                                    Hewitt
+                                </a>
+                            </li>
                         </ul>
                     </div>
 

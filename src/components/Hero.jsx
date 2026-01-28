@@ -50,9 +50,11 @@ export function Hero() {
             <div className="absolute inset-0">
                 <img
                     src={heroImage}
-                    alt=""
+                    alt="Stamped concrete driveway project in Waco, Texas"
                     className="w-full h-full object-cover"
-                    aria-hidden="true"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/95 to-stone-900/70" />
             </div>
@@ -162,4 +164,3 @@ export function Hero() {
         </section>
     )
 }
-
