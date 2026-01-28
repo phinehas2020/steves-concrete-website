@@ -1,4 +1,6 @@
+import { motion } from 'motion/react'
 import { Quote, Star } from 'lucide-react'
+import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from '../lib/animations'
 
 const testimonials = [
     {
@@ -23,10 +25,16 @@ const testimonials = [
 
 export function Testimonials() {
     return (
-        <section id="about" className="section-padding bg-stone-50">
+        <section id="about" className="section-padding bg-stone-50 texture-grain-light">
             <div className="container-main">
                 {/* Section Header */}
-                <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                <motion.div
+                    className="text-center max-w-2xl mx-auto mb-12 md:mb-16"
+                    variants={fadeInUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportConfig}
+                >
                     <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
                         Testimonials
                     </span>
@@ -37,23 +45,42 @@ export function Testimonials() {
                         Don't just take our word for it—hear from homeowners and businesses
                         across Central Texas.
                     </p>
-                </div>
+                </motion.div>
 
-                {/* Testimonials Grid - Mobile stacking */}
-                <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {/* Testimonials Grid - Staggered Animation */}
+                <motion.div
+                    className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportConfig}
+                >
                     {testimonials.map((testimonial, index) => (
-                        <div
+                        <motion.div
                             key={index}
                             className="p-6 md:p-8 bg-white rounded-xl shadow-sm"
+                            variants={staggerItem}
+                            whileHover={{
+                                y: -4,
+                                boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+                                transition: { duration: 0.2 }
+                            }}
                         >
                             {/* Stars */}
                             <div className="flex gap-1 mb-4">
                                 {[...Array(testimonial.rating)].map((_, i) => (
-                                    <Star
+                                    <motion.div
                                         key={i}
-                                        className="size-5 fill-accent-500 text-accent-500"
-                                        aria-hidden="true"
-                                    />
+                                        initial={{ opacity: 0, scale: 0 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        transition={{ delay: 0.3 + i * 0.1, duration: 0.3 }}
+                                        viewport={{ once: true }}
+                                    >
+                                        <Star
+                                            className="size-5 fill-accent-500 text-accent-500"
+                                            aria-hidden="true"
+                                        />
+                                    </motion.div>
                                 ))}
                             </div>
 
@@ -84,10 +111,11 @@ export function Testimonials() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
         </section>
     )
 }
+

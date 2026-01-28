@@ -1,11 +1,50 @@
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView, useMotionValue, useTransform, animate } from 'motion/react'
 import { ArrowRight, Phone } from 'lucide-react'
 import heroImage from '../assets/images/hero.png'
+import { heroStagger, staggerItem, viewportEager } from '../lib/animations'
+
+// Animated counter component
+function AnimatedStat({ value, suffix = '', label }) {
+    const ref = useRef(null)
+    const isInView = useInView(ref, { once: true, amount: 0.5 })
+    const count = useMotionValue(0)
+    const rounded = useTransform(count, (latest) => Math.round(latest))
+    const [displayValue, setDisplayValue] = useState(0)
+
+    useEffect(() => {
+        if (isInView) {
+            const controls = animate(count, value, {
+                duration: 2,
+                ease: [0.25, 0.46, 0.45, 0.94]
+            })
+
+            const unsubscribe = rounded.on('change', (latest) => {
+                setDisplayValue(latest)
+            })
+
+            return () => {
+                controls.stop()
+                unsubscribe()
+            }
+        }
+    }, [isInView, value, count, rounded])
+
+    return (
+        <div ref={ref} className="text-center sm:text-left">
+            <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">
+                {displayValue}{suffix}
+            </div>
+            <div className="text-xs sm:text-sm text-stone-400">{label}</div>
+        </div>
+    )
+}
 
 export function Hero() {
     return (
         <section
             id="home"
-            className="relative min-h-dvh flex items-center pt-20 overflow-hidden bg-stone-900"
+            className="relative min-h-dvh flex items-center pt-20 overflow-hidden bg-stone-900 texture-grain-dark"
         >
             {/* Background Image */}
             <div className="absolute inset-0">
@@ -28,67 +67,99 @@ export function Hero() {
                 />
             </div>
 
+            {/* Gradient Mesh Overlay for depth */}
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    background: `
+                        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(251, 146, 60, 0.08), transparent 70%),
+                        radial-gradient(ellipse 60% 60% at 80% 20%, rgba(251, 146, 60, 0.05), transparent 60%)
+                    `
+                }}
+            />
+
             {/* Accent Line */}
             <div className="absolute bottom-0 left-0 right-0 h-2 bg-accent-500" />
 
             <div className="container-main relative z-10 py-20 sm:py-24 md:py-28">
-                <div className="max-w-3xl">
+                <motion.div
+                    className="max-w-3xl"
+                    variants={heroStagger}
+                    initial="hidden"
+                    animate="visible"
+                >
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-stone-800 rounded-full mb-4 sm:mb-6">
-                        <span className="size-2 bg-accent-500 rounded-full" />
+                    <motion.div
+                        className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-stone-800/80 backdrop-blur-sm rounded-full mb-4 sm:mb-6"
+                        variants={staggerItem}
+                    >
+                        <motion.span
+                            className="size-2 bg-accent-500 rounded-full"
+                            animate={{ scale: [1, 1.2, 1] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                        />
                         <span className="text-xs sm:text-sm font-medium text-stone-300">
                             Serving Central Texas Since 2005
                         </span>
-                    </div>
+                    </motion.div>
 
                     {/* Headline - Fluid Typography */}
-                    <h1 className="font-display font-bold text-white text-balance leading-tight mb-6" style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4.5rem)' }}>
+                    <motion.h1
+                        className="font-display font-bold text-white text-balance leading-tight mb-6"
+                        style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4.5rem)' }}
+                        variants={staggerItem}
+                    >
                         Waco's Trusted
                         <span className="block text-accent-400">Concrete Contractor</span>
-                    </h1>
+                    </motion.h1>
 
                     {/* Subheadline */}
-                    <p className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed">
+                    <motion.p
+                        className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed"
+                        variants={staggerItem}
+                    >
                         Concrete Works LLC has completed 500+ projects across Central Texas since 2005. We specialize in stamped driveways, decorative patios, and commercial concrete.
-                    </p>
+                    </motion.p>
 
                     {/* CTAs */}
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        <a
+                    <motion.div
+                        className="flex flex-col sm:flex-row gap-4"
+                        variants={staggerItem}
+                    >
+                        <motion.a
                             href="#contact"
                             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px] text-lg"
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
                         >
                             Get Free Estimate
                             <ArrowRight className="size-5" aria-hidden="true" />
-                        </a>
-                        <a
+                        </motion.a>
+                        <motion.a
                             href="tel:254-230-3102"
                             className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-stone-600 text-white font-semibold rounded-lg hover:bg-stone-800 hover:border-stone-500 transition-colors duration-150 min-h-[52px] text-lg"
+                            whileHover={{ scale: 1.02, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
                         >
                             <Phone className="size-5" aria-hidden="true" />
                             (254) 230-3102
-                        </a>
-                    </div>
+                        </motion.a>
+                    </motion.div>
 
-                    {/* Trust Indicators - Mobile optimized grid */}
-                    <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-stone-700">
+                    {/* Trust Indicators - Animated Count Up */}
+                    <motion.div
+                        className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-stone-700"
+                        variants={staggerItem}
+                    >
                         <div className="grid grid-cols-3 gap-4 sm:gap-8 md:gap-12">
-                            <div className="text-center sm:text-left">
-                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">20+</div>
-                                <div className="text-xs sm:text-sm text-stone-400">Years Experience</div>
-                            </div>
-                            <div className="text-center sm:text-left">
-                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">500+</div>
-                                <div className="text-xs sm:text-sm text-stone-400">Projects Completed</div>
-                            </div>
-                            <div className="text-center sm:text-left">
-                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">100%</div>
-                                <div className="text-xs sm:text-sm text-stone-400">Customer Satisfaction</div>
-                            </div>
+                            <AnimatedStat value={20} suffix="+" label="Years Experience" />
+                            <AnimatedStat value={500} suffix="+" label="Projects Completed" />
+                            <AnimatedStat value={100} suffix="%" label="Customer Satisfaction" />
                         </div>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
         </section>
     )
 }
+

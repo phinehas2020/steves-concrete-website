@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { Layers, Palette, Home, Building2, Wrench, Truck } from 'lucide-react'
 import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from '../lib/animations'
@@ -36,6 +37,9 @@ const services = [
 ]
 
 export function Services() {
+    const [showAll, setShowAll] = useState(false)
+    const visibleServices = showAll ? services : services.slice(0, 3)
+
     return (
         <section id="services" className="section-padding bg-white texture-grain-light">
             <div className="container-main">
@@ -82,7 +86,7 @@ export function Services() {
                     whileInView="visible"
                     viewport={viewportConfig}
                 >
-                    {services.map((service) => (
+                    {visibleServices.map((service) => (
                         <motion.div
                             key={service.title}
                             className="group p-6 md:p-8 bg-stone-50 rounded-xl cursor-pointer"
@@ -110,6 +114,18 @@ export function Services() {
                         </motion.div>
                     ))}
                 </motion.div>
+
+                {/* Desktop "And more" toggle */}
+                <div className="hidden md:flex justify-center mt-8">
+                    <button
+                        type="button"
+                        onClick={() => setShowAll((prev) => !prev)}
+                        className="inline-flex items-center justify-center px-6 py-3 border-2 border-stone-300 text-stone-700 font-semibold rounded-lg hover:border-stone-400 hover:text-stone-900 transition-colors duration-150 min-h-[48px]"
+                        aria-expanded={showAll}
+                    >
+                        {showAll ? 'Show fewer services' : 'And more'}
+                    </button>
+                </div>
 
                 {/* Desktop CTA */}
                 <motion.div

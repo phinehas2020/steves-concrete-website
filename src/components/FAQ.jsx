@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '../lib/utils'
+import { fadeInUp, staggerContainer, staggerItem, viewportConfig } from '../lib/animations'
 
 const faqs = [
     {
@@ -31,7 +33,10 @@ const faqs = [
 
 function FAQItem({ question, answer, isOpen, onClick }) {
     return (
-        <div className="border-b border-stone-200 last:border-b-0">
+        <motion.div
+            className="border-b border-stone-200 last:border-b-0"
+            initial={false}
+        >
             <button
                 onClick={onClick}
                 className="w-full py-5 flex items-center justify-between text-left min-h-[60px] group"
@@ -40,25 +45,32 @@ function FAQItem({ question, answer, isOpen, onClick }) {
                 <span className="font-display font-semibold text-lg text-stone-900 pr-4 group-hover:text-accent-600 transition-colors">
                     {question}
                 </span>
-                <ChevronDown
-                    className={cn(
-                        'size-5 text-stone-400 flex-shrink-0 transition-transform duration-200',
-                        isOpen && 'rotate-180'
-                    )}
-                    aria-hidden="true"
-                />
+                <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                >
+                    <ChevronDown
+                        className="size-5 text-stone-400 flex-shrink-0"
+                        aria-hidden="true"
+                    />
+                </motion.div>
             </button>
-            <div
-                className={cn(
-                    'overflow-hidden transition-all duration-200',
-                    isOpen ? 'max-h-96 pb-5' : 'max-h-0'
+            <AnimatePresence initial={false}>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        className="overflow-hidden"
+                    >
+                        <p className="text-stone-600 leading-relaxed text-pretty pb-5">
+                            {answer}
+                        </p>
+                    </motion.div>
                 )}
-            >
-                <p className="text-stone-600 leading-relaxed text-pretty">
-                    {answer}
-                </p>
-            </div>
-        </div>
+            </AnimatePresence>
+        </motion.div>
     )
 }
 
@@ -66,11 +78,17 @@ export function FAQ() {
     const [openIndex, setOpenIndex] = useState(0)
 
     return (
-        <section id="faq" className="section-padding bg-stone-50">
+        <section id="faq" className="section-padding bg-stone-50 texture-grain-light">
             <div className="container-main">
                 <div className="max-w-3xl mx-auto">
                     {/* Section Header */}
-                    <div className="text-center mb-10">
+                    <motion.div
+                        className="text-center mb-10"
+                        variants={fadeInUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                    >
                         <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
                             Common Questions
                         </span>
@@ -80,10 +98,16 @@ export function FAQ() {
                         <p className="text-lg text-stone-600 text-pretty">
                             Get answers to common questions about concrete work in Central Texas.
                         </p>
-                    </div>
+                    </motion.div>
 
                     {/* FAQ List */}
-                    <div className="bg-white rounded-xl shadow-sm p-6 md:p-8">
+                    <motion.div
+                        className="bg-white rounded-xl shadow-sm p-6 md:p-8"
+                        variants={fadeInUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                    >
                         {faqs.map((faq, index) => (
                             <FAQItem
                                 key={index}
@@ -93,22 +117,31 @@ export function FAQ() {
                                 onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
                             />
                         ))}
-                    </div>
+                    </motion.div>
 
                     {/* CTA */}
-                    <div className="text-center mt-10">
+                    <motion.div
+                        className="text-center mt-10"
+                        variants={fadeInUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                    >
                         <p className="text-stone-600 mb-4">
                             Have a question we didn't answer?
                         </p>
-                        <a
+                        <motion.a
                             href="#contact"
                             className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
+                            whileHover={{ scale: 1.03, y: -2 }}
+                            whileTap={{ scale: 0.98 }}
                         >
                             Contact Us
-                        </a>
-                    </div>
+                        </motion.a>
+                    </motion.div>
                 </div>
             </div>
         </section>
     )
 }
+
