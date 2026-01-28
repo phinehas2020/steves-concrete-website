@@ -91,6 +91,7 @@ export function Services() {
                             key={service.title}
                             className="group p-6 md:p-8 bg-stone-50 rounded-xl cursor-pointer"
                             variants={staggerItem}
+                            animate={showAll ? 'visible' : undefined}
                             whileHover={{
                                 y: -6,
                                 backgroundColor: '#f5f5f4',
