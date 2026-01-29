@@ -28,8 +28,8 @@ const testimonials = [
 
 export function Testimonials() {
     return (
-        <section id="about" className="section-padding bg-white">
-            <div className="container-main">
+        <section id="about" className="section-padding bg-white texture-grain-light relative">
+            <div className="container-main relative z-10">
                 {/* Section Header */}
                 <motion.div
                     className="max-w-2xl mb-10 md:mb-14"

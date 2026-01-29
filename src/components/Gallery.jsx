@@ -97,8 +97,8 @@ export function Gallery() {
             : projects.filter((p) => p.category === activeCategory)
 
     return (
-        <section id="gallery" className="section-padding bg-white">
-            <div className="container-main">
+        <section id="gallery" className="section-padding bg-stone-50 texture-concrete relative">
+            <div className="container-main relative z-10">
                 {/* Section Header */}
                 <motion.div
                     className="max-w-2xl mb-10"
@@ -155,7 +155,7 @@ export function Gallery() {
                             <motion.article
                                 key={project.id}
                                 className={cn(
-                                    "group relative rounded-xl overflow-hidden bg-stone-100 cursor-pointer",
+                                    "group relative rounded-xl overflow-hidden bg-white shadow-sm cursor-pointer",
                                     index === 0 && activeCategory === 'All'
                                         ? "lg:col-span-2 aspect-[16/9]"
                                         : "aspect-[4/3]"
