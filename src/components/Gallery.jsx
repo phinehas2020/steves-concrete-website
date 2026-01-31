@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { Calendar, Ruler, MapPin, ArrowUpRight } from 'lucide-react'
@@ -120,10 +121,17 @@ export function Gallery() {
                         <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-stone-900 text-balance mb-6">
                             Recent <span className="text-stone-400">Pours</span>
                         </h2>
-                        <p className="text-xl text-stone-600 text-pretty font-light leading-relaxed">
+                        <p className="text-xl text-stone-600 text-pretty font-light leading-relaxed mb-6">
                             Every project is a testament to our commitment to durability.
                             From expansive commercial slabs to intricate stamped patios.
                         </p>
+                        <Link
+                            to="/jobs"
+                            className="inline-flex items-center gap-2 text-accent-600 font-semibold hover:text-accent-700 transition-colors"
+                        >
+                            See All Projects
+                            <ArrowUpRight className="size-4" />
+                        </Link>
                     </motion.div>
 
                     {/* Filter Tabs - Refined design */}

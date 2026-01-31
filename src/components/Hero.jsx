@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useMotionValue, useTransform, animate } from 'motion/react'
 import { ArrowRight, Phone } from 'lucide-react'
-import heroImage from '../assets/images/hero.png'
+import heroImage from '../assets/images/hero.jpeg'
 import { heroStagger, staggerItem, viewportEager } from '../lib/animations'
 
 // Animated counter component
@@ -56,7 +56,7 @@ export function Hero() {
                     fetchPriority="high"
                     decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-stone-900 via-stone-900/95 to-stone-900/70" />
+                <div className="absolute inset-0 bg-gradient-to-r from-stone-900/75 via-stone-900/70 to-stone-900/55" />
             </div>
 
             {/* Background Pattern */}

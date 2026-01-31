@@ -9,6 +9,8 @@ import { BlogPost } from './pages/BlogPost'
 import { NotFound } from './pages/NotFound'
 import { LocationLanding } from './pages/LocationLanding'
 import { ServiceLanding } from './pages/ServiceLanding'
+import { JobsIndex } from './pages/JobsIndex'
+import { JobDetail } from './pages/JobDetail'
 import { locationPages } from './data/locationPages'
 import { servicePages } from './data/servicePages'
 
@@ -19,6 +21,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/jobs" element={<JobsIndex />} />
+        <Route path="/jobs/:slug" element={<JobDetail />} />
         <Route path="/admin/*" element={<AdminApp />} />
         {locationPages.map((page) => (
           <Route
