@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { Trash2, Plus, Upload, X, ArrowUp, ArrowDown } from 'lucide-react'
+import { Trash2, Plus, Upload, X, ArrowUp, ArrowDown, CheckSquare, Square } from 'lucide-react'
 
 const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial', 'Residential']
 
@@ -32,6 +32,7 @@ export function AdminJobs() {
   const [message, setMessage] = useState('')
   const [filterCategory, setFilterCategory] = useState('All')
   const [uploadingImages, setUploadingImages] = useState(false)
+  const [selectedImages, setSelectedImages] = useState(new Set())
 
   const isEditing = useMemo(() => Boolean(editingId), [editingId])
 
@@ -74,6 +75,7 @@ export function AdminJobs() {
     setEditingId(null)
     setFormData(emptyJob)
     setMessage('')
+    setSelectedImages(new Set())
   }
 
   const startEdit = (job) => {
@@ -90,6 +92,7 @@ export function AdminJobs() {
       display_order: job.display_order || 0,
     })
     setMessage('')
+    setSelectedImages(new Set())
   }
 
   const handleChange = (field, value) => {
@@ -225,6 +228,57 @@ export function AdminJobs() {
       setMessage(`Error uploading images: ${error.message}`)
     } finally {
       setUploadingImages(false)
+    }
+  }
+
+  const toggleImageSelection = (imageId) => {
+    setSelectedImages((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(imageId)) {
+        newSet.delete(imageId)
+      } else {
+        newSet.add(imageId)
+      }
+      return newSet
+    })
+  }
+
+  const selectAllImages = (jobId) => {
+    const currentJob = jobs.find((j) => j.id === jobId)
+    if (!currentJob) return
+
+    const allImageIds = currentJob.images.map((img) => img.id)
+    setSelectedImages(new Set(allImageIds))
+  }
+
+  const clearSelection = () => {
+    setSelectedImages(new Set())
+  }
+
+  const deleteSelectedImages = async (jobId) => {
+    if (selectedImages.size === 0) return
+
+    const count = selectedImages.size
+    if (!confirm(`Are you sure you want to delete ${count} image${count > 1 ? 's' : ''}?`)) {
+      return
+    }
+
+    try {
+      const imageIds = Array.from(selectedImages)
+      const { error } = await supabase
+        .from('job_images')
+        .delete()
+        .in('id', imageIds)
+
+      if (error) throw error
+
+      setSelectedImages(new Set())
+      await fetchJobs()
+      setMessage(`Successfully deleted ${count} image${count > 1 ? 's' : ''}!`)
+      setTimeout(() => setMessage(''), 2000)
+    } catch (error) {
+      console.error('Error deleting images:', error)
+      setMessage(`Error deleting images: ${error.message}`)
     }
   }
 
@@ -433,62 +487,130 @@ export function AdminJobs() {
             <div className="border-t border-stone-200 pt-4 mt-4">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-stone-900">Images</h3>
-                <label className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-700 rounded-lg cursor-pointer hover:bg-stone-200 transition-colors">
-                  <Upload className="size-4" />
-                  Upload Images
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    onChange={(e) => handleImageUpload(editingId, e.target.files)}
-                    className="hidden"
-                    disabled={uploadingImages}
-                  />
-                </label>
+                <div className="flex items-center gap-2">
+                  {selectedImages.size > 0 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => deleteSelectedImages(editingId)}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                      >
+                        <Trash2 className="size-4" />
+                        Delete Selected ({selectedImages.size})
+                      </button>
+                      <button
+                        type="button"
+                        onClick={clearSelection}
+                        className="px-4 py-2 bg-stone-200 text-stone-700 rounded-lg hover:bg-stone-300 transition-colors"
+                      >
+                        Clear
+                      </button>
+                    </>
+                  )}
+                  {selectedImages.size === 0 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => selectAllImages(editingId)}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-700 rounded-lg hover:bg-stone-200 transition-colors"
+                      >
+                        <CheckSquare className="size-4" />
+                        Select All
+                      </button>
+                      <label className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-700 rounded-lg cursor-pointer hover:bg-stone-200 transition-colors">
+                        <Upload className="size-4" />
+                        Upload Images
+                        <input
+                          type="file"
+                          multiple
+                          accept="image/*"
+                          onChange={(e) => handleImageUpload(editingId, e.target.files)}
+                          className="hidden"
+                          disabled={uploadingImages}
+                        />
+                      </label>
+                    </>
+                  )}
+                </div>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {jobs
                   .find((j) => j.id === editingId)
-                  ?.images?.map((image, index, images) => (
-                    <div key={image.id} className="relative group">
-                      <img
-                        src={image.image_url}
-                        alt={image.alt_text || 'Job image'}
-                        className="w-full aspect-square object-cover rounded-lg border border-stone-200"
-                        onError={(e) => {
-                          e.target.src = '/src/assets/images/gallery-driveway-custom.jpeg'
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => moveImage(image.id, editingId, 'up')}
-                          disabled={index === 0}
-                          className="p-2 bg-white/90 rounded hover:bg-white transition-colors disabled:opacity-50"
-                          title="Move up"
+                  ?.images?.map((image, index, images) => {
+                    const isSelected = selectedImages.has(image.id)
+                    return (
+                      <div
+                        key={image.id}
+                        className={`relative group cursor-pointer ${
+                          isSelected ? 'ring-2 ring-accent-500 ring-offset-2' : ''
+                        }`}
+                      >
+                        <div
+                          className="absolute top-2 left-2 z-10 p-1 bg-white rounded shadow-lg"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            toggleImageSelection(image.id)
+                          }}
                         >
-                          <ArrowUp className="size-4" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => moveImage(image.id, editingId, 'down')}
-                          disabled={index === images.length - 1}
-                          className="p-2 bg-white/90 rounded hover:bg-white transition-colors disabled:opacity-50"
-                          title="Move down"
-                        >
-                          <ArrowDown className="size-4" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => deleteImage(image.id, editingId)}
-                          className="p-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-                          title="Delete"
-                        >
-                          <Trash2 className="size-4" />
-                        </button>
+                          {isSelected ? (
+                            <CheckSquare className="size-5 text-accent-500" />
+                          ) : (
+                            <Square className="size-5 text-stone-400" />
+                          )}
+                        </div>
+                        <img
+                          src={image.image_url}
+                          alt={image.alt_text || 'Job image'}
+                          className={`w-full aspect-square object-cover rounded-lg border-2 ${
+                            isSelected ? 'border-accent-500' : 'border-stone-200'
+                          }`}
+                          onClick={() => toggleImageSelection(image.id)}
+                          onError={(e) => {
+                            e.target.src = '/src/assets/images/gallery-driveway-custom.jpeg'
+                          }}
+                        />
+                        {!isSelected && (
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                moveImage(image.id, editingId, 'up')
+                              }}
+                              disabled={index === 0}
+                              className="p-2 bg-white/90 rounded hover:bg-white transition-colors disabled:opacity-50"
+                              title="Move up"
+                            >
+                              <ArrowUp className="size-4" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                moveImage(image.id, editingId, 'down')
+                              }}
+                              disabled={index === images.length - 1}
+                              className="p-2 bg-white/90 rounded hover:bg-white transition-colors disabled:opacity-50"
+                              title="Move down"
+                            >
+                              <ArrowDown className="size-4" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                deleteImage(image.id, editingId)
+                              }}
+                              className="p-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+                              title="Delete"
+                            >
+                              <Trash2 className="size-4" />
+                            </button>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
               </div>
             </div>
           )}
