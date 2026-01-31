@@ -1,7 +1,7 @@
 // Jobs data - now fetches from Supabase
 import { supabase } from '../lib/supabase'
 
-export const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial']
+export const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial', 'Residential']
 
 // Fetch jobs from Supabase
 export async function fetchJobs() {

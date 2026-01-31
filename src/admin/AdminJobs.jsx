@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Trash2, Plus, Upload, X, ArrowUp, ArrowDown } from 'lucide-react'
 
-const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial']
+const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial', 'Residential']
 
 const emptyJob = {
   title: '',

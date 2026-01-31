@@ -18,7 +18,7 @@ import drivewayCustomImg from '../assets/images/gallery-driveway-custom.jpeg'
 import patioCustomImg from '../assets/images/gallery-patio-custom.jpeg'
 import parkingCustomImg from '../assets/images/gallery-parking-custom.jpeg'
 
-const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial']
+const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial', 'Residential']
 
 const projects = [
     {
