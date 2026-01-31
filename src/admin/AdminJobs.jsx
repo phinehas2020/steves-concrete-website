@@ -32,6 +32,7 @@ export function AdminJobs() {
   const [message, setMessage] = useState('')
   const [filterCategory, setFilterCategory] = useState('All')
   const [uploadingImages, setUploadingImages] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
   const [selectedImages, setSelectedImages] = useState(new Set())
   const [isCreating, setIsCreating] = useState(false)
 
@@ -115,6 +116,12 @@ export function AdminJobs() {
 
   const saveJob = async (event) => {
     event.preventDefault()
+    
+    if (uploadingImages) {
+      setMessage('Please wait for image uploads to complete before saving.')
+      return
+    }
+    
     setMessage('')
 
     if (!formData.title || !formData.slug) {
@@ -193,6 +200,7 @@ export function AdminJobs() {
 
   const handleImageUpload = async (jobId, files) => {
     setUploadingImages(true)
+    setUploadProgress(0)
     try {
       const { data: existingImages } = await supabase
         .from('job_images')
@@ -203,17 +211,14 @@ export function AdminJobs() {
 
       let nextOrder = existingImages && existingImages.length > 0 ? existingImages[0].image_order + 1 : 0
 
-      const uploadPromises = Array.from(files).map(async (file) => {
-        // Create a file path
+      const fileArray = Array.from(files)
+      const totalFiles = fileArray.length
+
+      // Upload files one by one to track progress
+      for (let i = 0; i < fileArray.length; i++) {
+        const file = fileArray[i]
         const fileName = `${jobId}/${Date.now()}-${file.name}`
         const filePath = `jobs/${fileName}`
-
-        // Upload to Supabase Storage (if you have storage set up)
-        // For now, we'll use a public URL approach
-        // You'll need to set up Supabase Storage bucket 'jobs' and configure it
-        
-        // For now, we'll store the file path and you can upload files manually
-        // or set up storage later
         const imageUrl = `/jobs/${fileName}`
 
         const { error } = await supabase.from('job_images').insert({
@@ -224,15 +229,21 @@ export function AdminJobs() {
         })
 
         if (error) throw error
-      })
 
-      await Promise.all(uploadPromises)
+        // Update progress
+        setUploadProgress(Math.round(((i + 1) / totalFiles) * 100))
+      }
+
       await fetchJobs()
       setMessage('Images uploaded successfully!')
-      setTimeout(() => setMessage(''), 2000)
+      setTimeout(() => {
+        setMessage('')
+        setUploadProgress(0)
+      }, 2000)
     } catch (error) {
       console.error('Error uploading images:', error)
       setMessage(`Error uploading images: ${error.message}`)
+      setUploadProgress(0)
     } finally {
       setUploadingImages(false)
     }
@@ -365,7 +376,8 @@ export function AdminJobs() {
         <button
           type="button"
           onClick={startNew}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors"
+          disabled={uploadingImages}
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <Plus className="size-4" />
           New Job
@@ -500,7 +512,8 @@ export function AdminJobs() {
                       <button
                         type="button"
                         onClick={() => deleteSelectedImages(editingId)}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                        disabled={uploadingImages}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <Trash2 className="size-4" />
                         Delete Selected ({selectedImages.size})
@@ -508,7 +521,8 @@ export function AdminJobs() {
                       <button
                         type="button"
                         onClick={clearSelection}
-                        className="px-4 py-2 bg-stone-200 text-stone-700 rounded-lg hover:bg-stone-300 transition-colors"
+                        disabled={uploadingImages}
+                        className="px-4 py-2 bg-stone-200 text-stone-700 rounded-lg hover:bg-stone-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Clear
                       </button>
@@ -519,12 +533,15 @@ export function AdminJobs() {
                       <button
                         type="button"
                         onClick={() => selectAllImages(editingId)}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-700 rounded-lg hover:bg-stone-200 transition-colors"
+                        disabled={uploadingImages}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-700 rounded-lg hover:bg-stone-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <CheckSquare className="size-4" />
                         Select All
                       </button>
-                      <label className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-700 rounded-lg cursor-pointer hover:bg-stone-200 transition-colors">
+                      <label className={`inline-flex items-center gap-2 px-4 py-2 bg-stone-100 text-stone-700 rounded-lg transition-colors ${
+                        uploadingImages ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-stone-200'
+                      }`}>
                         <Upload className="size-4" />
                         Upload Images
                         <input
@@ -540,6 +557,23 @@ export function AdminJobs() {
                   )}
                 </div>
               </div>
+              
+              {/* Upload Progress Bar */}
+              {uploadingImages && (
+                <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium text-blue-900">Uploading images...</span>
+                    <span className="text-sm font-bold text-blue-900">{uploadProgress}%</span>
+                  </div>
+                  <div className="w-full bg-blue-200 rounded-full h-2.5">
+                    <div
+                      className="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
+                      style={{ width: `${uploadProgress}%` }}
+                    />
+                  </div>
+                  <p className="text-xs text-blue-700 mt-2">Please wait while images are being uploaded. Do not navigate away.</p>
+                </div>
+              )}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {jobs
                   .find((j) => j.id === editingId)
@@ -625,20 +659,28 @@ export function AdminJobs() {
           <div className="flex gap-3">
             <button
               type="submit"
-              className="px-6 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors"
+              disabled={uploadingImages}
+              className="px-6 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isEditing ? 'Update Job' : 'Create Job'}
+              {uploadingImages ? 'Uploading...' : isEditing ? 'Update Job' : 'Create Job'}
             </button>
             <button
               type="button"
               onClick={() => {
+                if (uploadingImages) {
+                  if (!confirm('Images are still uploading. Are you sure you want to cancel? Uploads will be lost.')) {
+                    return
+                  }
+                }
                 setEditingId(null)
                 setIsCreating(false)
                 setFormData(emptyJob)
                 setMessage('')
                 setSelectedImages(new Set())
+                setUploadProgress(0)
               }}
-              className="px-6 py-2 bg-stone-200 text-stone-700 font-semibold rounded-lg hover:bg-stone-300 transition-colors"
+              disabled={uploadingImages}
+              className="px-6 py-2 bg-stone-200 text-stone-700 font-semibold rounded-lg hover:bg-stone-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
@@ -697,14 +739,16 @@ export function AdminJobs() {
                         <button
                           type="button"
                           onClick={() => startEdit(job)}
-                          className="text-sm text-accent-600 hover:text-accent-700 font-medium"
+                          disabled={uploadingImages}
+                          className="text-sm text-accent-600 hover:text-accent-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Edit
                         </button>
                         <button
                           type="button"
                           onClick={() => deleteJob(job.id)}
-                          className="text-sm text-red-600 hover:text-red-700 font-medium"
+                          disabled={uploadingImages}
+                          className="text-sm text-red-600 hover:text-red-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Delete
                         </button>
