@@ -80,16 +80,17 @@ const projects = [
 // Project image component - displays actual project photos
 function ProjectImage({ project }) {
     return (
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-stone-900">
             <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105"
                 loading="lazy"
             />
             {/* Multi-layered overlay for depth and legibility */}
             <div className="absolute inset-0 bg-stone-950/20 group-hover:bg-stone-950/40 transition-colors duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent opacity-90" />
+            {/* Strong bottom gradient to fade image into dark smoothly */}
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/60 via-30% to-transparent" />
         </div>
     )
 }
@@ -160,7 +161,7 @@ export function Gallery() {
                             <motion.article
                                 key={project.id}
                                 className={cn(
-                                    "group relative rounded-2xl overflow-hidden bg-stone-900 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500",
+                                    "group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500",
                                     index === 0 && activeCategory === 'All'
                                         ? "lg:col-span-2 lg:row-span-2 aspect-[16/10] lg:aspect-auto lg:min-h-[500px]"
                                         : "aspect-[4/5]"
