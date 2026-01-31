@@ -1,99 +1,29 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
-import { Calendar, Ruler, MapPin, ArrowUpRight } from 'lucide-react'
-
-// Import gallery images
-import stampedDrivewayImg from '../assets/images/gallery-stamped-driveway.png'
-import patioAggregateImg from '../assets/images/gallery-patio-aggregate.png'
-import commercialParkingImg from '../assets/images/gallery-commercial-parking.png'
-import flagstonePatioImg from '../assets/images/gallery-flagstone-patio.png'
-import circularDrivewayImg from '../assets/images/gallery-circular-driveway.png'
-import poolDeckImg from '../assets/images/gallery-pool-deck.png'
-
-// New user-provided images
-import drivewayCustomImg from '../assets/images/gallery-driveway-custom.jpeg'
-import patioCustomImg from '../assets/images/gallery-patio-custom.jpeg'
-import parkingCustomImg from '../assets/images/gallery-parking-custom.jpeg'
+import { MapPin, ArrowUpRight } from 'lucide-react'
+import { fetchJobs } from '../data/jobs'
+import { handleImageError } from '../lib/utils'
 
 const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial', 'Residential']
 
-const projects = [
-    {
-        id: 1,
-        title: 'Custom Concrete Driveway',
-        slug: 'custom-concrete-driveway',
-        category: 'Driveways',
-        location: 'Woodway, TX',
-        description: 'High-quality custom concrete driveway designed for durability and curb appeal. A perfect blend of functionality and modern aesthetics.',
-        image: drivewayCustomImg,
-        specs: { sqft: 680, mix: '4,000 PSI', date: 'Oct 2024' },
-        featured: true,
-    },
-    {
-        id: 2,
-        title: 'Exposed Aggregate Patio',
-        slug: 'exposed-aggregate-patio',
-        category: 'Patios',
-        location: 'Hewitt, TX',
-        description: 'Backyard extension with river rock exposed finish. Designed to match existing landscaping and provide slip resistance.',
-        image: patioCustomImg,
-        specs: { sqft: 420, mix: '4,500 PSI', date: 'Sep 2024' },
-    },
-    {
-        id: 3,
-        title: 'Retail Parking Lot',
-        slug: 'retail-parking-lot',
-        category: 'Commercial',
-        location: 'Waco, TX',
-        description: '15,000 sq ft pour for a retail complex off Loop 340. Included proper drainage grading and ADA-compliant markings.',
-        image: parkingCustomImg,
-        specs: { sqft: 15200, mix: '5,000 PSI', date: 'Aug 2024' },
-    },
-    {
-        id: 4,
-        title: 'Flagstone Pattern Patio',
-        slug: 'flagstone-pattern-patio',
-        category: 'Stamped',
-        location: 'Lorena, TX',
-        description: 'Random flagstone stamp with earth-tone color hardener. Client hosts outdoor gatherings — needed durability and aesthetics.',
-        image: flagstonePatioImg,
-        specs: { sqft: 540, mix: '4,000 PSI', date: 'Jul 2024' },
-    },
-    {
-        id: 5,
-        title: 'Circular Driveway',
-        slug: 'circular-driveway',
-        category: 'Driveways',
-        location: 'Temple, TX',
-        description: 'Curved entry with brick-pattern inlay border. Challenging grade required additional excavation for proper water runoff.',
-        image: circularDrivewayImg,
-        specs: { sqft: 890, mix: '4,000 PSI', date: 'Jun 2024' },
-    },
-    {
-        id: 6,
-        title: 'Pool Deck Resurface',
-        slug: 'pool-deck-resurface',
-        category: 'Patios',
-        location: 'McGregor, TX',
-        description: 'Kool Deck overlay on existing concrete. Texas sun means pool decks need to stay cool under bare feet.',
-        image: poolDeckImg,
-        specs: { sqft: 380, mix: 'Overlay', date: 'May 2024' },
-    },
-]
-
 // Project image component - displays actual project photos
-function ProjectImage({ project }) {
+function ProjectImage({ job }) {
+    const mainImage = job.images && job.images.length > 0 
+        ? job.images[0] 
+        : '/src/assets/images/gallery-driveway-custom.jpeg'
+    
     return (
         <div className="absolute inset-0 z-0 overflow-hidden">
             <img
-                src={project.image}
-                alt={project.title}
+                src={mainImage}
+                alt={job.title}
                 className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 loading="lazy"
+                onError={handleImageError}
             />
             {/* Gradient overlay for text readability - smooth gradual fade */}
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/50 via-black/30 to-transparent group-hover:from-black/95 group-hover:via-black/65 group-hover:via-black/40 group-hover:to-transparent transition-all duration-500" />
@@ -103,11 +33,35 @@ function ProjectImage({ project }) {
 
 export function Gallery() {
     const [activeCategory, setActiveCategory] = useState('All')
+    const [jobs, setJobs] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
+
+    useEffect(() => {
+        async function loadJobs() {
+            try {
+                setError(null)
+                const jobsData = await fetchJobs()
+                // Filter to only show featured jobs, limit to 3
+                const featuredJobs = jobsData
+                    .filter((job) => job.featured)
+                    .slice(0, 3)
+                setJobs(featuredJobs)
+            } catch (err) {
+                console.error('Error loading featured jobs:', err)
+                setError('Failed to load featured projects.')
+                setJobs([])
+            } finally {
+                setLoading(false)
+            }
+        }
+        loadJobs()
+    }, [])
 
     const filteredProjects =
         activeCategory === 'All'
-            ? projects
-            : projects.filter((p) => p.category === activeCategory)
+            ? jobs
+            : jobs.filter((job) => job.category === activeCategory)
 
     return (
         <section id="gallery" className="section-padding bg-white texture-concrete relative">
@@ -165,82 +119,91 @@ export function Gallery() {
                 </div>
 
                 {/* Projects Grid */}
-                <motion.div
-                    className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-                    layout
-                >
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project, index) => (
-                            <motion.article
-                                key={project.id}
-                                className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
-                                style={{ position: 'relative' }}
-                                layout
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.95 }}
-                                transition={{
-                                    duration: 0.5,
-                                    ease: [0.25, 0.46, 0.45, 0.94],
-                                    delay: index * 0.05
-                                }}
-                            >
-                                <Link 
-                                    to={`/jobs/${project.slug}`}
-                                    className="absolute inset-0 z-20"
-                                    aria-label={`View ${project.title}`}
+                {loading ? (
+                    <div className="text-center py-12 text-stone-500">Loading featured projects...</div>
+                ) : error ? (
+                    <div className="text-center py-12">
+                        <p className="text-red-600 mb-4">{error}</p>
+                        <button
+                            onClick={() => window.location.reload()}
+                            className="px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors"
+                        >
+                            Retry
+                        </button>
+                    </div>
+                ) : filteredProjects.length === 0 ? (
+                    <div className="text-center py-12 text-stone-500">
+                        No featured projects yet. Check back soon!
+                    </div>
+                ) : (
+                    <motion.div
+                        className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                        layout
+                    >
+                        <AnimatePresence mode="popLayout">
+                            {filteredProjects.map((job, index) => (
+                                <motion.article
+                                    key={job.id}
+                                    className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
+                                    style={{ position: 'relative' }}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    transition={{
+                                        duration: 0.5,
+                                        ease: [0.25, 0.46, 0.45, 0.94],
+                                        delay: index * 0.05
+                                    }}
                                 >
-                                    <span className="sr-only">View {project.title}</span>
-                                </Link>
-                                <ProjectImage project={project} />
+                                    <Link 
+                                        to={`/jobs/${job.slug}`}
+                                        className="absolute inset-0 z-20"
+                                        aria-label={`View ${job.title}`}
+                                    >
+                                        <span className="sr-only">View {job.title}</span>
+                                    </Link>
+                                    <ProjectImage job={job} />
 
-                                {/* Content Overlay */}
-                                <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 sm:p-8">
-                                    <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                        <div className="flex items-center gap-3 mb-3">
-                                            <span className="px-3 py-1 bg-accent-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
-                                                {project.category}
-                                            </span>
-                                            <span className="flex items-center gap-1.5 text-xs font-medium text-white/90">
-                                                <MapPin className="size-3.5 text-accent-400" />
-                                                {project.location}
-                                            </span>
-                                        </div>
-
-                                        <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mb-3">
-                                            {project.title}
-                                        </h3>
-
-                                        {/* Expandable details on hover */}
-                                        <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
-                                            <p className="text-sm text-stone-300 leading-relaxed mb-6 font-light line-clamp-2">
-                                                {project.description}
-                                            </p>
-
-                                            <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-6">
-                                                <span className="flex items-center gap-2">
-                                                    <Ruler className="size-4 text-accent-500" />
-                                                    {project.specs.sqft.toLocaleString()} SQ FT
+                                    {/* Content Overlay */}
+                                    <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 sm:p-8">
+                                        <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                            <div className="flex items-center gap-3 mb-3">
+                                                <span className="px-3 py-1 bg-accent-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
+                                                    {job.category}
                                                 </span>
-                                                <span className="flex items-center gap-2">
-                                                    <Calendar className="size-4 text-accent-500" />
-                                                    {project.specs.date}
+                                                <span className="flex items-center gap-1.5 text-xs font-medium text-white/90">
+                                                    <MapPin className="size-3.5 text-accent-400" />
+                                                    {job.location}
                                                 </span>
                                             </div>
-                                        </div>
 
-                                        <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-2">
-                                            <span className="text-xs font-bold text-white uppercase tracking-widest">View Project</span>
-                                            <div className="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-accent-500 transition-colors duration-300">
-                                                <ArrowUpRight className="size-5" />
+                                            <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mb-3">
+                                                {job.title}
+                                            </h3>
+
+                                            {/* Expandable details on hover */}
+                                            {job.description && (
+                                                <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
+                                                    <p className="text-sm text-stone-300 leading-relaxed mb-6 font-light line-clamp-2">
+                                                        {job.description}
+                                                    </p>
+                                                </div>
+                                            )}
+
+                                            <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-2">
+                                                <span className="text-xs font-bold text-white uppercase tracking-widest">View Project</span>
+                                                <div className="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-accent-500 transition-colors duration-300">
+                                                    <ArrowUpRight className="size-5" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </motion.article>
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
+                                </motion.article>
+                            ))}
+                        </AnimatePresence>
+                    </motion.div>
+                )}
 
                 {/* CTA Box - Modern Industrial Design */}
                 <motion.div
