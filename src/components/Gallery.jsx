@@ -162,8 +162,8 @@ export function Gallery() {
                                 className={cn(
                                     "group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500",
                                     index === 0 && activeCategory === 'All'
-                                        ? "lg:col-span-2 lg:row-span-2 aspect-[16/10] lg:aspect-[16/12]"
-                                        : "aspect-[4/5]"
+                                        ? "lg:col-span-2 aspect-[16/10] lg:aspect-[16/9]"
+                                        : "aspect-[4/3]"
                                 )}
                                 layout
                                 initial={{ opacity: 0, scale: 0.95 }}
