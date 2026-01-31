@@ -233,18 +233,55 @@ export function AdminJobs() {
       // Upload files one by one to track progress
       for (let i = 0; i < fileArray.length; i++) {
         const file = fileArray[i]
-        const fileName = `${jobId}/${Date.now()}-${file.name}`
+        
+        // Create a unique filename
+        const timestamp = Date.now()
+        const randomStr = Math.random().toString(36).substring(2, 9)
+        const fileExt = file.name.split('.').pop()
+        const fileName = `${jobId}/${timestamp}-${randomStr}.${fileExt}`
         const filePath = `jobs/${fileName}`
-        const imageUrl = `/jobs/${fileName}`
 
-        const { error } = await supabase.from('job_images').insert({
-          job_id: jobId,
-          image_url: imageUrl,
-          image_order: nextOrder++,
-          alt_text: file.name,
-        })
+        // Upload file to Supabase Storage
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('jobs')
+          .upload(filePath, file, {
+            cacheControl: '3600',
+            upsert: false
+          })
 
-        if (error) throw error
+        if (uploadError) {
+          // If bucket doesn't exist, try creating it or use public folder fallback
+          console.error('Storage upload error:', uploadError)
+          
+          // Fallback: use public URL path (requires manual file upload to public/jobs/)
+          const imageUrl = `/jobs/${fileName}`
+          
+          const { error: insertError } = await supabase.from('job_images').insert({
+            job_id: jobId,
+            image_url: imageUrl,
+            image_order: nextOrder++,
+            alt_text: file.name,
+          })
+
+          if (insertError) throw insertError
+        } else {
+          // Get public URL from Supabase Storage
+          const { data: urlData } = supabase.storage
+            .from('jobs')
+            .getPublicUrl(filePath)
+
+          const imageUrl = urlData.publicUrl
+
+          // Insert image record with public URL
+          const { error: insertError } = await supabase.from('job_images').insert({
+            job_id: jobId,
+            image_url: imageUrl,
+            image_order: nextOrder++,
+            alt_text: file.name,
+          })
+
+          if (insertError) throw insertError
+        }
 
         // Update progress
         setUploadProgress(Math.round(((i + 1) / totalFiles) * 100))
