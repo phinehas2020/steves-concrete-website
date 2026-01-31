@@ -42,10 +42,10 @@ export function Gallery() {
             try {
                 setError(null)
                 const jobsData = await fetchJobs()
-                // Filter to only show featured jobs, limit to 3
+                // Filter to only show featured jobs, limit to 6
                 const featuredJobs = jobsData
                     .filter((job) => job.featured)
-                    .slice(0, 3)
+                    .slice(0, 6)
                 setJobs(featuredJobs)
             } catch (err) {
                 console.error('Error loading featured jobs:', err)
