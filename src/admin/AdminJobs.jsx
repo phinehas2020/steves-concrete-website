@@ -250,37 +250,29 @@ export function AdminJobs() {
           })
 
         if (uploadError) {
-          // If bucket doesn't exist, try creating it or use public folder fallback
           console.error('Storage upload error:', uploadError)
-          
-          // Fallback: use public URL path (requires manual file upload to public/jobs/)
-          const imageUrl = `/jobs/${fileName}`
-          
-          const { error: insertError } = await supabase.from('job_images').insert({
-            job_id: jobId,
-            image_url: imageUrl,
-            image_order: nextOrder++,
-            alt_text: file.name,
-          })
+          throw new Error(`Failed to upload ${file.name}: ${uploadError.message}`)
+        }
 
-          if (insertError) throw insertError
-        } else {
-          // Get public URL from Supabase Storage
-          const { data: urlData } = supabase.storage
-            .from('jobs')
-            .getPublicUrl(filePath)
+        // Get public URL from Supabase Storage
+        const { data: urlData } = supabase.storage
+          .from('jobs')
+          .getPublicUrl(filePath)
 
-          const imageUrl = urlData.publicUrl
+        const imageUrl = urlData.publicUrl
 
-          // Insert image record with public URL
-          const { error: insertError } = await supabase.from('job_images').insert({
-            job_id: jobId,
-            image_url: imageUrl,
-            image_order: nextOrder++,
-            alt_text: file.name,
-          })
+        // Insert image record with public URL
+        const { error: insertError } = await supabase.from('job_images').insert({
+          job_id: jobId,
+          image_url: imageUrl,
+          image_order: nextOrder++,
+          alt_text: file.name,
+        })
 
-          if (insertError) throw insertError
+        if (insertError) {
+          // If insert fails, try to clean up the uploaded file
+          await supabase.storage.from('jobs').remove([filePath])
+          throw insertError
         }
 
         // Update progress
