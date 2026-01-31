@@ -6,7 +6,7 @@ import logoImage from '../assets/images/logo.png'
 const navLinks = [
     { label: 'Home', href: '/#home' },
     { label: 'Services', href: '/#services' },
-    { label: 'Gallery', href: '/#gallery' },
+    { label: 'Gallery', href: '/jobs' },
     { label: 'About', href: '/#about' },
     { label: 'FAQ', href: '/#faq' },
     { label: 'Contact', href: '/#contact' },

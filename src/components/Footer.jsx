@@ -5,7 +5,7 @@ import { locationLinks } from '../data/locationPages'
 const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/#services' },
-    { label: 'Gallery', href: '/#gallery' },
+    { label: 'Gallery', href: '/jobs' },
     { label: 'About', href: '/#about' },
     { label: 'FAQ', href: '/#faq' },
     { label: 'Contact', href: '/#contact' },

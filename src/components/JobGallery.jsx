@@ -12,11 +12,12 @@ function ProjectImage({ job }) {
   const mainImage = job.images[0] || '/src/assets/images/gallery-driveway-custom.jpeg'
   
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
+    <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
       <img
         src={mainImage}
         alt={job.title}
         className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         loading="lazy"
         onError={handleImageError}
       />
@@ -133,7 +134,7 @@ export function JobGallery() {
               {filteredJobs.map((job, index) => (
               <motion.article
                 key={job.id}
-                className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
+                className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
                 layout
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
