@@ -24,6 +24,7 @@ const projects = [
     {
         id: 1,
         title: 'Custom Concrete Driveway',
+        slug: 'custom-concrete-driveway',
         category: 'Driveways',
         location: 'Woodway, TX',
         description: 'High-quality custom concrete driveway designed for durability and curb appeal. A perfect blend of functionality and modern aesthetics.',
@@ -34,6 +35,7 @@ const projects = [
     {
         id: 2,
         title: 'Exposed Aggregate Patio',
+        slug: 'exposed-aggregate-patio',
         category: 'Patios',
         location: 'Hewitt, TX',
         description: 'Backyard extension with river rock exposed finish. Designed to match existing landscaping and provide slip resistance.',
@@ -43,6 +45,7 @@ const projects = [
     {
         id: 3,
         title: 'Retail Parking Lot',
+        slug: 'retail-parking-lot',
         category: 'Commercial',
         location: 'Waco, TX',
         description: '15,000 sq ft pour for a retail complex off Loop 340. Included proper drainage grading and ADA-compliant markings.',
@@ -52,6 +55,7 @@ const projects = [
     {
         id: 4,
         title: 'Flagstone Pattern Patio',
+        slug: 'flagstone-pattern-patio',
         category: 'Stamped',
         location: 'Lorena, TX',
         description: 'Random flagstone stamp with earth-tone color hardener. Client hosts outdoor gatherings — needed durability and aesthetics.',
@@ -61,6 +65,7 @@ const projects = [
     {
         id: 5,
         title: 'Circular Driveway',
+        slug: 'circular-driveway',
         category: 'Driveways',
         location: 'Temple, TX',
         description: 'Curved entry with brick-pattern inlay border. Challenging grade required additional excavation for proper water runoff.',
@@ -70,6 +75,7 @@ const projects = [
     {
         id: 6,
         title: 'Pool Deck Resurface',
+        slug: 'pool-deck-resurface',
         category: 'Patios',
         location: 'McGregor, TX',
         description: 'Kool Deck overlay on existing concrete. Texas sun means pool decks need to stay cool under bare feet.',
@@ -179,6 +185,13 @@ export function Gallery() {
                                     delay: index * 0.05
                                 }}
                             >
+                                <Link 
+                                    to={`/jobs/${project.slug}`}
+                                    className="absolute inset-0 z-20"
+                                    aria-label={`View ${project.title}`}
+                                >
+                                    <span className="sr-only">View {project.title}</span>
+                                </Link>
                                 <ProjectImage project={project} />
 
                                 {/* Content Overlay */}
