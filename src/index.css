@@ -306,6 +306,11 @@ span a {
   padding-block: 0.25rem;
 }
 
+/* Header bar should be tighter than global touch targets */
+.header-bar a {
+  min-height: auto;
+}
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
 

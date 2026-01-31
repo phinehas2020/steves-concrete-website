@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { marked } from 'marked'
 import { supabase } from '../lib/supabase'
-import { BlogHeader } from '../components/BlogHeader'
+import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
 import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
@@ -113,8 +113,8 @@ export function BlogPost() {
 
   return (
     <div className="min-h-dvh flex flex-col bg-white">
-      <BlogHeader onRequestEstimate={() => setContactOpen(true)} />
-      <main className="flex-1">
+      <Header transparent={false} />
+      <main className="flex-1 pt-20 sm:pt-24">
         <section className="bg-stone-50 border-b border-stone-200">
           <div className="container-main py-10">
             <a href="/blog" className="text-sm text-accent-600 font-semibold hover:text-accent-700">

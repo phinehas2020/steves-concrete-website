@@ -25,7 +25,8 @@ export function Header() {
                         <img
                             src={logoImage}
                             alt="Concrete Works LLC"
-                            className="h-10 sm:h-12 md:h-14 lg:h-16 max-h-12 sm:max-h-14 md:max-h-16 lg:max-h-18 w-auto object-contain rounded-lg"
+                            className="h-8 md:h-10 w-auto object-contain rounded-lg max-h-[40px]"
+                            style={{ height: '40px', width: 'auto' }}
                         />
                     </a>
 

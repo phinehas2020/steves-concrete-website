@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
-import { Calendar, Ruler, MapPin } from 'lucide-react'
+import { Calendar, Ruler, MapPin, ArrowUpRight } from 'lucide-react'
 
 // Import gallery images
 import stampedDrivewayImg from '../assets/images/gallery-stamped-driveway.png'
@@ -12,16 +12,21 @@ import flagstonePatioImg from '../assets/images/gallery-flagstone-patio.png'
 import circularDrivewayImg from '../assets/images/gallery-circular-driveway.png'
 import poolDeckImg from '../assets/images/gallery-pool-deck.png'
 
+// New user-provided images
+import drivewayCustomImg from '../assets/images/gallery-driveway-custom.jpeg'
+import patioCustomImg from '../assets/images/gallery-patio-custom.jpeg'
+import parkingCustomImg from '../assets/images/gallery-parking-custom.jpeg'
+
 const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial']
 
 const projects = [
     {
         id: 1,
-        title: 'Ashlar Slate Driveway',
+        title: 'Custom Concrete Driveway',
         category: 'Driveways',
         location: 'Woodway, TX',
-        description: 'Charcoal-colored ashlar slate pattern with custom border. Homeowner wanted the look of natural stone without the maintenance.',
-        image: stampedDrivewayImg,
+        description: 'High-quality custom concrete driveway designed for durability and curb appeal. A perfect blend of functionality and modern aesthetics.',
+        image: drivewayCustomImg,
         specs: { sqft: 680, mix: '4,000 PSI', date: 'Oct 2024' },
         featured: true,
     },
@@ -31,7 +36,7 @@ const projects = [
         category: 'Patios',
         location: 'Hewitt, TX',
         description: 'Backyard extension with river rock exposed finish. Designed to match existing landscaping and provide slip resistance.',
-        image: patioAggregateImg,
+        image: patioCustomImg,
         specs: { sqft: 420, mix: '4,500 PSI', date: 'Sep 2024' },
     },
     {
@@ -40,7 +45,7 @@ const projects = [
         category: 'Commercial',
         location: 'Waco, TX',
         description: '15,000 sq ft pour for a retail complex off Loop 340. Included proper drainage grading and ADA-compliant markings.',
-        image: commercialParkingImg,
+        image: parkingCustomImg,
         specs: { sqft: 15200, mix: '5,000 PSI', date: 'Aug 2024' },
     },
     {
@@ -75,15 +80,16 @@ const projects = [
 // Project image component - displays actual project photos
 function ProjectImage({ project }) {
     return (
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 z-0">
             <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 loading="lazy"
             />
-            {/* Subtle vignette */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+            {/* Multi-layered overlay for depth and legibility */}
+            <div className="absolute inset-0 bg-stone-950/20 group-hover:bg-stone-950/40 transition-colors duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent opacity-90" />
         </div>
     )
 }
@@ -97,57 +103,56 @@ export function Gallery() {
             : projects.filter((p) => p.category === activeCategory)
 
     return (
-        <section id="gallery" className="section-padding bg-stone-50 texture-concrete relative">
+        <section id="gallery" className="section-padding bg-white texture-concrete relative">
             <div className="container-main relative z-10">
                 {/* Section Header */}
-                <motion.div
-                    className="max-w-2xl mb-10"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportConfig}
-                >
-                    <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                        Recent Work
-                    </span>
-                    <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-stone-900 text-balance mb-4">
-                        Projects Across Central Texas
-                    </h2>
-                    <p className="text-lg text-stone-600 text-pretty">
-                        Real jobs, real specs, real results. Every pour has its own challenges — 
-                        black clay soil, summer heat, drainage grades. Here's how we handle them.
-                    </p>
-                </motion.div>
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+                    <motion.div
+                        className="max-w-2xl"
+                        variants={fadeInUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={viewportConfig}
+                    >
+                        <span className="inline-block text-accent-600 font-bold text-xs uppercase tracking-[0.2em] mb-4">
+                            Portfolio
+                        </span>
+                        <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-stone-900 text-balance mb-6">
+                            Recent <span className="text-stone-400">Pours</span>
+                        </h2>
+                        <p className="text-xl text-stone-600 text-pretty font-light leading-relaxed">
+                            Every project is a testament to our commitment to durability.
+                            From expansive commercial slabs to intricate stamped patios.
+                        </p>
+                    </motion.div>
 
-                {/* Filter Tabs - Horizontal scroll on mobile */}
-                <motion.div
-                    className="-mx-4 px-4 sm:mx-0 sm:px-0 mb-8 sm:mb-10"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportConfig}
-                >
-                    <div className="flex sm:flex-wrap gap-2 overflow-x-auto sm:overflow-visible scroll-hide-bar pb-2 sm:pb-0">
+                    {/* Filter Tabs - Refined design */}
+                    <motion.div
+                        className="flex flex-wrap gap-2"
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                    >
                         {categories.map((category) => (
                             <button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
                                 className={cn(
-                                    'px-4 sm:px-5 py-2.5 rounded-full font-medium transition-all duration-200 whitespace-nowrap flex-shrink-0',
+                                    'px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 border',
                                     activeCategory === category
-                                        ? 'bg-stone-900 text-white'
-                                        : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+                                        ? 'bg-stone-900 text-white border-stone-900 shadow-lg shadow-stone-900/20'
+                                        : 'bg-white text-stone-500 border-stone-200 hover:border-stone-400 hover:text-stone-900'
                                 )}
                             >
                                 {category}
                             </button>
                         ))}
-                    </div>
-                </motion.div>
+                    </motion.div>
+                </div>
 
                 {/* Projects Grid */}
                 <motion.div
-                    className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                    className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
                     layout
                 >
                     <AnimatePresence mode="popLayout">
@@ -155,78 +160,94 @@ export function Gallery() {
                             <motion.article
                                 key={project.id}
                                 className={cn(
-                                    "group relative rounded-xl overflow-hidden bg-white shadow-sm cursor-pointer",
+                                    "group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500",
                                     index === 0 && activeCategory === 'All'
-                                        ? "lg:col-span-2 aspect-[16/9]"
-                                        : "aspect-[4/3]"
+                                        ? "lg:col-span-2 lg:row-span-2 aspect-[16/10] lg:aspect-[16/12]"
+                                        : "aspect-[4/5]"
                                 )}
                                 layout
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
                                 transition={{
-                                    duration: 0.4,
+                                    duration: 0.5,
                                     ease: [0.25, 0.46, 0.45, 0.94],
                                     delay: index * 0.05
                                 }}
                             >
                                 <ProjectImage project={project} />
 
-                                {/* Always-visible overlay with basic info */}
-                                <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <span className="px-2.5 py-1 bg-white/90 backdrop-blur-sm text-stone-800 text-xs font-semibold rounded-full">
-                                            {project.category}
-                                        </span>
-                                        <span className="flex items-center gap-1 text-xs text-white/80">
-                                            <MapPin className="size-3" />
-                                            {project.location}
-                                        </span>
-                                    </div>
-                                    
-                                    <h3 className="font-display font-semibold text-lg sm:text-xl text-white mb-1">
-                                        {project.title}
-                                    </h3>
-                                    
-                                    {/* Specs row */}
-                                    <div className="flex items-center gap-4 text-xs text-white/70 mb-3">
-                                        <span className="flex items-center gap-1">
-                                            <Ruler className="size-3" />
-                                            {project.specs.sqft.toLocaleString()} sq ft
-                                        </span>
-                                        <span className="flex items-center gap-1">
-                                            <Calendar className="size-3" />
-                                            {project.specs.date}
-                                        </span>
-                                    </div>
+                                {/* Content Overlay */}
+                                <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 sm:p-8">
+                                    <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <span className="px-3 py-1 bg-accent-500 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
+                                                {project.category}
+                                            </span>
+                                            <span className="flex items-center gap-1.5 text-xs font-medium text-white/90">
+                                                <MapPin className="size-3.5 text-accent-400" />
+                                                {project.location}
+                                            </span>
+                                        </div>
 
-                                    {/* Description - visible on hover/larger screens */}
-                                    <p className="text-sm text-white/80 leading-relaxed hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        {project.description}
-                                    </p>
+                                        <h3 className="font-display font-bold text-2xl sm:text-3xl text-white mb-3">
+                                            {project.title}
+                                        </h3>
+
+                                        {/* Expandable details on hover */}
+                                        <div className="h-0 opacity-0 group-hover:h-auto group-hover:opacity-100 transition-all duration-500 overflow-hidden">
+                                            <p className="text-sm text-stone-300 leading-relaxed mb-6 font-light line-clamp-2">
+                                                {project.description}
+                                            </p>
+
+                                            <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-stone-400 mb-6">
+                                                <span className="flex items-center gap-2">
+                                                    <Ruler className="size-4 text-accent-500" />
+                                                    {project.specs.sqft.toLocaleString()} SQ FT
+                                                </span>
+                                                <span className="flex items-center gap-2">
+                                                    <Calendar className="size-4 text-accent-500" />
+                                                    {project.specs.date}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center justify-between pt-4 border-t border-white/10 mt-2">
+                                            <span className="text-xs font-bold text-white uppercase tracking-widest">View Project</span>
+                                            <div className="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-accent-500 transition-colors duration-300">
+                                                <ArrowUpRight className="size-5" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </motion.article>
                         ))}
                     </AnimatePresence>
                 </motion.div>
 
-                {/* CTA */}
+                {/* CTA Box - Modern Industrial Design */}
                 <motion.div
-                    className="mt-12 pt-8 border-t border-stone-200"
-                    variants={fadeInUp}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={viewportConfig}
+                    className="mt-20 p-8 sm:p-12 bg-stone-950 rounded-[2rem] relative overflow-hidden group"
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
                 >
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-                        <p className="text-stone-600">
-                            Have a project in mind? We typically respond within 4 hours.
-                        </p>
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-accent-500/20 blur-[100px] rounded-full -mr-48 -mt-48 group-hover:bg-accent-500/30 transition-colors duration-700" />
+
+                    <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+                        <div className="max-w-xl text-center lg:text-left">
+                            <h3 className="font-display font-bold text-3xl sm:text-4xl text-white mb-4">
+                                Ready to build something that lasts?
+                            </h3>
+                            <p className="text-stone-400 text-lg font-light">
+                                We're currently booking for next month. Secure your spot in the schedule today.
+                            </p>
+                        </div>
                         <a
                             href="#contact"
-                            className="inline-flex items-center justify-center px-6 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150"
+                            className="inline-flex items-center justify-center px-10 py-5 bg-accent-500 text-white font-bold rounded-xl hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-500/20 whitespace-nowrap"
                         >
-                            Discuss Your Project
+                            Start Your Estimate
                         </a>
                     </div>
                 </motion.div>
@@ -234,3 +255,4 @@ export function Gallery() {
         </section>
     )
 }
+

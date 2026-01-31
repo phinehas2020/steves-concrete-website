@@ -1,4 +1,4 @@
-import { InteriorHeader } from '../components/InteriorHeader'
+import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { Contact } from '../components/Contact'
 import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
@@ -47,8 +47,8 @@ export function LocationLanding({ page }) {
 
   return (
     <div className="min-h-dvh flex flex-col bg-white">
-      <InteriorHeader />
-      <main className="flex-1">
+      <Header transparent={false} />
+      <main className="flex-1 pt-20 sm:pt-24">
         <section className="relative overflow-hidden bg-stone-900 texture-grain-dark">
           <div className="container-main py-16 sm:py-20 md:py-24">
             <div className="max-w-3xl">

@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import { Send, CheckCircle } from 'lucide-react'
+import { Send, CheckCircle, Loader2 } from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '../lib/utils'
+import { Button } from './Button'
 
 export function ContactForm({
   className,
@@ -55,154 +57,177 @@ export function ContactForm({
 
   return (
     <div className={className}>
-      {formState === 'success' ? (
-        <div className="flex flex-col items-center justify-center text-center h-full min-h-[320px]">
-          <div className="size-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
-            <CheckCircle className="size-8 text-green-600" aria-hidden="true" />
-          </div>
-          <h3 className="font-display font-bold text-2xl text-stone-900 mb-2">
-            Message Sent!
-          </h3>
-          <p className="text-stone-600 mb-6">
-            Thanks for reaching out. We&apos;ll get back to you within 24 hours.
-          </p>
-          <button
-            onClick={() => {
-              setFormState('idle')
-              setFormData({ name: '', email: '', phone: '', service: '', message: '' })
-            }}
-            className="text-accent-600 font-semibold hover:text-accent-700"
+      <AnimatePresence mode="wait">
+        {formState === 'success' ? (
+          <motion.div 
+            key="success"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex flex-col items-center justify-center text-center py-12"
           >
-            Send another message
-          </button>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {showTitle && (
-            <h3 className="font-display font-bold text-2xl text-stone-900 mb-6">
-              Request a Free Estimate
+            <div className="size-20 bg-accent-500/10 rounded-full flex items-center justify-center mb-6 border border-accent-500/20">
+              <CheckCircle className="size-10 text-accent-500" aria-hidden="true" />
+            </div>
+            <h3 className="font-display font-bold text-3xl text-stone-900 mb-4 tracking-tight">
+              Ready to Pour!
             </h3>
-          )}
-
-          <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-stone-700 mb-1.5">
-                Your Name *
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-shadow"
-                placeholder="John Smith"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-stone-700 mb-1.5">
-                Phone Number *
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                required
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-shadow"
-                placeholder="(254) 555-0123"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1.5">
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-shadow"
-              placeholder="john@example.com"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="service" className="block text-sm font-medium text-stone-700 mb-1.5">
-              Service Interested In
-            </label>
-            <select
-              id="service"
-              name="service"
-              value={formData.service}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-shadow appearance-none"
+            <p className="text-stone-600 mb-8 max-w-sm text-lg leading-relaxed font-light">
+              We&apos;ve received your project details. Steve will personally review this and reach out shortly.
+            </p>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setFormState('idle')
+                setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+              }}
             >
-              <option value="">Select a service...</option>
-              <option value="driveway">Driveway</option>
-              <option value="patio">Patio</option>
-              <option value="stamped">Stamped Concrete</option>
-              <option value="decorative">Decorative Concrete</option>
-              <option value="commercial">Commercial Project</option>
-              <option value="repair">Concrete Repair</option>
-              <option value="foundation">Foundation</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-1.5">
-              Project Details *
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              required
-              rows={4}
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-shadow resize-none"
-              placeholder="Tell us about your project..."
-            />
-          </div>
-
-          {formState === 'error' && (
-            <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-lg px-4 py-3">
-              Something went wrong. Please call us at (254) 230-3102 or try again.
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={formState === 'submitting'}
-            className={cn(
-              'w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg transition-colors duration-150 min-h-[52px]',
-              formState === 'submitting'
-                ? 'opacity-70 cursor-not-allowed'
-                : 'hover:bg-accent-600'
-            )}
+              Send Another Request
+            </Button>
+          </motion.div>
+        ) : (
+          <motion.form 
+            key="form"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onSubmit={handleSubmit} 
+            className="space-y-6"
           >
-            {formState === 'submitting' ? (
-              'Sending...'
-            ) : (
-              <>
-                Send Message
-                <Send className="size-5" aria-hidden="true" />
-              </>
+            {showTitle && (
+              <div className="mb-8">
+                <h3 className="font-display font-black text-3xl text-stone-900 mb-2 tracking-tight">
+                  Request an Estimate
+                </h3>
+                <div className="h-1 w-12 bg-accent-500 rounded-full" />
+              </div>
             )}
-          </button>
 
-          <p className="text-xs text-stone-500 text-center">
-            We respect your privacy and will never share your information.
-          </p>
-        </form>
-      )}
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-[10px] font-bold uppercase tracking-widest text-stone-500 block ml-1">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-5 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all outline-none text-stone-900"
+                  placeholder="John Smith"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="phone" className="text-[10px] font-bold uppercase tracking-widest text-stone-500 block ml-1">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-full px-5 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all outline-none text-stone-900"
+                  placeholder="(254) 555-0123"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-[10px] font-bold uppercase tracking-widest text-stone-500 block ml-1">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full px-5 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all outline-none text-stone-900"
+                placeholder="john@example.com"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="service" className="text-[10px] font-bold uppercase tracking-widest text-stone-500 block ml-1">
+                Project Type
+              </label>
+              <div className="relative">
+                <select
+                  id="service"
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  className="w-full px-5 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all outline-none text-stone-900 appearance-none"
+                >
+                  <option value="">Select a service...</option>
+                  <option value="driveway">Driveway Install/Replacement</option>
+                  <option value="patio">Custom Patio</option>
+                  <option value="stamped">Stamped & Decorative</option>
+                  <option value="commercial">Commercial Slabs</option>
+                  <option value="repair">Concrete Repair</option>
+                  <option value="other">Other Project</option>
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="message" className="text-[10px] font-bold uppercase tracking-widest text-stone-500 block ml-1">
+                Project Details
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                rows={4}
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full px-5 py-4 bg-stone-50 border border-stone-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all outline-none text-stone-900 resize-none"
+                placeholder="Tell us about the size and scope of your project..."
+              />
+            </div>
+
+            {formState === 'error' && (
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-5 py-4 font-medium"
+              >
+                Something went wrong. Please call us directly at (254) 230-3102.
+              </motion.div>
+            )}
+
+            <Button
+              type="submit"
+              disabled={formState === 'submitting'}
+              className="w-full py-5 rounded-xl shadow-xl shadow-accent-500/20 group"
+            >
+              {formState === 'submitting' ? (
+                <>
+                  <Loader2 className="size-5 animate-spin" />
+                  <span>Sending Request...</span>
+                </>
+              ) : (
+                <>
+                  <span>Send Estimate Request</span>
+                  <Send className="size-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true" />
+                </>
+              )}
+            </Button>
+
+            <p className="text-[10px] text-stone-500 text-center font-bold uppercase tracking-widest">
+              Direct: (254) 230-3102 • Licensed & Insured
+            </p>
+          </motion.form>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
+

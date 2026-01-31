@@ -1,4 +1,4 @@
-import { InteriorHeader } from '../components/InteriorHeader'
+import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { Contact } from '../components/Contact'
 import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
@@ -37,8 +37,8 @@ export function ServiceLanding({ page }) {
 
   return (
     <div className="min-h-dvh flex flex-col bg-white">
-      <InteriorHeader />
-      <main className="flex-1">
+      <Header transparent={false} />
+      <main className="flex-1 pt-20 sm:pt-24">
         <section className="bg-white">
           <div className="container-main py-14 sm:py-18 md:py-20">
             <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
