@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase'
 export function AdminLogin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loginMethod, setLoginMethod] = useState('password') // 'password' or 'magic'
   const [status, setStatus] = useState('idle')
   const [message, setMessage] = useState('')
 
@@ -12,22 +13,44 @@ export function AdminLogin() {
     setStatus('loading')
     setMessage('')
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-    
-    console.log('Auth response:', { data, error })
+    if (loginMethod === 'password') {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+      
+      console.log('Auth response:', { data, error })
 
-    if (error) {
-      setStatus('error')
-      console.error('Login error:', error)
-      setMessage(error.message || 'Invalid email or password.')
-      return
+      if (error) {
+        setStatus('error')
+        console.error('Login error:', error)
+        setMessage(error.message || 'Invalid email or password.')
+        return
+      }
+
+      // Success - redirect handled by AdminApp
+      window.location.href = '/admin'
+    } else {
+      // Magic link login
+      const { data, error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/admin`,
+        },
+      })
+      
+      console.log('Auth response:', { data, error })
+
+      if (error) {
+        setStatus('error')
+        console.error('Login error:', error)
+        setMessage(error.message || 'Unable to send login link. Please try again.')
+        return
+      }
+
+      setStatus('sent')
+      setMessage('Check your inbox for a secure login link.')
     }
-
-    // Success - redirect handled by AdminApp
-    window.location.href = '/admin'
   }
 
   return (
@@ -37,7 +60,9 @@ export function AdminLogin() {
           Admin Login
         </h1>
         <p className="text-stone-600 text-pretty mb-6">
-          Enter your email and password to sign in.
+          {loginMethod === 'password' 
+            ? 'Enter your email and password to sign in.'
+            : 'Enter your email and we'll send a secure login link.'}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -56,19 +81,52 @@ export function AdminLogin() {
             />
           </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-stone-700 mb-1.5">
+          {loginMethod === 'password' && (
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-stone-700 mb-1.5">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                required
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-shadow"
+                placeholder="Enter password"
+              />
+            </div>
+          )}
+
+          <div className="flex items-center gap-4 text-sm">
+            <button
+              type="button"
+              onClick={() => {
+                setLoginMethod('password')
+                setMessage('')
+              }}
+              className={`px-3 py-1.5 rounded ${
+                loginMethod === 'password'
+                  ? 'bg-accent-500 text-white'
+                  : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+              } transition-colors`}
+            >
               Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              required
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              className="w-full px-4 py-3 bg-white border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent transition-shadow"
-              placeholder="Enter password"
-            />
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setLoginMethod('magic')
+                setMessage('')
+              }}
+              className={`px-3 py-1.5 rounded ${
+                loginMethod === 'magic'
+                  ? 'bg-accent-500 text-white'
+                  : 'bg-stone-100 text-stone-600 hover:bg-stone-200'
+              } transition-colors`}
+            >
+              Magic Link
+            </button>
           </div>
 
           <button
@@ -76,7 +134,9 @@ export function AdminLogin() {
             disabled={status === 'loading'}
             className="w-full inline-flex items-center justify-center px-4 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[48px]"
           >
-            {status === 'loading' ? 'Logging in…' : 'Log In'}
+            {status === 'loading' 
+              ? (loginMethod === 'password' ? 'Logging in…' : 'Sending…')
+              : (loginMethod === 'password' ? 'Log In' : 'Send Login Link')}
           </button>
 
           {message && (
