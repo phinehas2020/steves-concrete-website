@@ -1,0 +1,10 @@
+# MCP Configuration
+# Add this to your Cursor MCP settings
+
+{
+  "mcpServers": {
+    "supabase-custom": {
+      "url": "https://db.phinehasadams.com/mcp"
+    }
+  }
+}
