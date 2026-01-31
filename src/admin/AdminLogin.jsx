@@ -34,9 +34,14 @@ export function AdminLogin() {
         return
       }
 
-      // Success - redirect handled by AdminApp
+      // Success - wait a moment for session to persist, then reload
       console.log('Login successful!', data.user?.email)
-      window.location.href = '/admin'
+      console.log('Session data:', data.session)
+      
+      // Wait for session to be saved, then reload
+      setTimeout(() => {
+        window.location.reload()
+      }, 500)
     } else {
       // Magic link login
       const { data, error } = await supabase.auth.signInWithOtp({

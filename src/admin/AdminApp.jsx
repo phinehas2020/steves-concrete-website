@@ -35,13 +35,18 @@ export function AdminApp() {
   useEffect(() => {
     let isMounted = true
 
-    supabase.auth.getSession().then(({ data }) => {
+    // Check for existing session
+    supabase.auth.getSession().then(({ data, error }) => {
       if (!isMounted) return
+      console.log('Session check:', { session: data.session, error })
       setSession(data.session)
       setAuthChecked(true)
     })
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
+    // Listen for auth state changes
+    const { data: listener } = supabase.auth.onAuthStateChange((event, newSession) => {
+      console.log('Auth state changed:', event, newSession?.user?.email)
+      if (!isMounted) return
       setSession(newSession)
       setAuthChecked(true)
     })
