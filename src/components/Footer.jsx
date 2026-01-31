@@ -51,7 +51,7 @@ export function Footer() {
                                 Get a Quote
                             </a>
                             <a href="tel:254-230-3102" className="px-6 py-2 bg-accent-500 rounded-lg text-sm font-bold text-white hover:bg-accent-600 transition-colors">
-                                Call Steve
+                                Call Stephen
                             </a>
                         </div>
                     </div>
@@ -108,7 +108,7 @@ export function Footer() {
                                     <div className="size-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-accent-500/20 group-hover:text-accent-400 transition-all">
                                         <Mail className="size-4" />
                                     </div>
-                                    <span className="text-sm font-bold">Email Steve</span>
+                                    <span className="text-sm font-bold">Email Stephen</span>
                                 </a>
                             </li>
                             <li className="flex items-center gap-4 text-stone-400 group">

@@ -72,7 +72,7 @@ export function ContactForm({
               Ready to Pour!
             </h3>
             <p className="text-stone-600 mb-8 max-w-sm text-lg leading-relaxed font-light">
-              We&apos;ve received your project details. Steve will personally review this and reach out shortly.
+              We&apos;ve received your project details. Stephen will personally review this and reach out shortly.
             </p>
             <Button
               variant="outline"

@@ -129,7 +129,7 @@ export function FAQ() {
                             Have a specific question?
                         </h3>
                         <p className="text-stone-400 mb-6">
-                            Every project is different. Call Steve directly for honest advice about your situation.
+                            Every project is different. Call Stephen directly for honest advice about your situation.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a

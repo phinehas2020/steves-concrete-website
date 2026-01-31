@@ -97,7 +97,7 @@ export function Values() {
                         </h2>
                         <div className="space-y-6 text-stone-400 text-lg leading-relaxed font-light">
                             <p>
-                                Steve started Concrete Works after seeing too many driveways crack within five years 
+                                Stephen started Concrete Works after seeing too many driveways crack within five years 
                                 around Waco. The problem wasn't the concrete — it was the preparation. McLennan County's 
                                 notorious black clay expands when wet and shrinks when dry, heaving anything built on it 
                                 if you don't account for it.
@@ -112,10 +112,10 @@ export function Values() {
                         {/* Founder Quote */}
                         <div className="mt-10 pl-6 border-l-2 border-accent-500/30">
                             <p className="text-stone-300 italic text-lg mb-2">
-                                "We don't just pour concrete; we build the foundation for your life's best moments."
+                                "If it cracks in five years, I didn't do my job. That's how I see it."
                             </p>
                             <p className="text-accent-400 text-sm font-bold uppercase tracking-widest">
-                                — Steve Adams, Owner
+                                — Stephen Alexander, Owner
                             </p>
                         </div>
                     </motion.div>

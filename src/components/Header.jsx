@@ -4,12 +4,12 @@ import { Menu, X, Phone } from 'lucide-react'
 import logoImage from '../assets/images/logo.png'
 
 const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'Services', href: '#services' },
-    { label: 'Gallery', href: '#gallery' },
-    { label: 'About', href: '#about' },
-    { label: 'FAQ', href: '#faq' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Home', href: '/#home' },
+    { label: 'Services', href: '/#services' },
+    { label: 'Gallery', href: '/#gallery' },
+    { label: 'About', href: '/#about' },
+    { label: 'FAQ', href: '/#faq' },
+    { label: 'Contact', href: '/#contact' },
     { label: 'Blog', href: '/blog' },
 ]
 
@@ -21,7 +21,7 @@ export function Header() {
             <div className="container-main">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Logo */}
-                    <a href="#home" className="flex items-center flex-shrink-0">
+                    <a href="/#home" className="flex items-center flex-shrink-0">
                         <img
                             src={logoImage}
                             alt="Concrete Works LLC"
@@ -52,7 +52,7 @@ export function Header() {
                             <span>(254) 230-3102</span>
                         </a>
                         <a
-                            href="#contact"
+                            href="/#contact"
                             className="inline-flex items-center justify-center px-5 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150"
                         >
                             Free Estimate
@@ -106,7 +106,7 @@ export function Header() {
                             <span>(254) 230-3102</span>
                         </a>
                         <a
-                            href="#contact"
+                            href="/#contact"
                             onClick={() => setIsMenuOpen(false)}
                             className="block w-full text-center py-3 px-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors"
                         >

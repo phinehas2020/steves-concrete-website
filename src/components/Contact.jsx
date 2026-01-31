@@ -5,7 +5,7 @@ import { ContactForm } from './ContactForm'
 
 const whatToExpect = [
     'Response within 4 hours during business hours',
-    'Steve will call to discuss your project',
+    'Stephen will call to discuss your project',
     'Free on-site assessment and measurements',
     'Detailed written estimate within 48 hours',
 ]
