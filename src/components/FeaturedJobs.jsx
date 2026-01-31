@@ -31,11 +31,19 @@ function ProjectImage({ job }) {
 
 export function FeaturedJobs() {
   const [featuredJobs, setFeaturedJobs] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function loadJobs() {
-      const jobs = await fetchJobs()
-      setFeaturedJobs(jobs.filter((job) => job.featured).slice(0, 3))
+      try {
+        const jobs = await fetchJobs()
+        setFeaturedJobs(jobs.filter((job) => job.featured).slice(0, 3))
+      } catch (err) {
+        console.error('Error loading featured jobs:', err)
+        setFeaturedJobs([])
+      } finally {
+        setLoading(false)
+      }
     }
     loadJobs()
   }, [])
@@ -71,14 +79,21 @@ export function FeaturedJobs() {
         </motion.div>
 
         {/* Projects Grid - Show 3-4 */}
-        <motion.div
-          className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-        >
-          {featuredJobs.slice(0, 3).map((job, index) => (
+        {loading ? (
+          <div className="text-center py-12 text-stone-500">Loading featured projects...</div>
+        ) : featuredJobs.length === 0 ? (
+          <div className="text-center py-12 text-stone-500">
+            No featured projects yet. Check back soon!
+          </div>
+        ) : (
+          <motion.div
+            className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportConfig}
+          >
+            {featuredJobs.slice(0, 3).map((job, index) => (
             <motion.article
               key={job.id}
               className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
@@ -123,8 +138,9 @@ export function FeaturedJobs() {
                 </div>
               </div>
             </motion.article>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        )}
       </div>
     </section>
   )

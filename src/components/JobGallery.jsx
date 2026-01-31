@@ -30,12 +30,21 @@ export function JobGallery() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     async function loadJobs() {
-      const jobsData = await fetchJobs()
-      setJobs(jobsData)
-      setLoading(false)
+      try {
+        setError(null)
+        const jobsData = await fetchJobs()
+        setJobs(jobsData || [])
+      } catch (err) {
+        console.error('Error loading jobs:', err)
+        setError('Failed to load jobs. Please try again later.')
+        setJobs([])
+      } finally {
+        setLoading(false)
+      }
     }
     loadJobs()
   }, [])
@@ -96,6 +105,25 @@ export function JobGallery() {
         {/* Projects Grid */}
         {loading ? (
           <div className="text-center py-12 text-stone-500">Loading jobs...</div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-red-600 mb-4">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors"
+            >
+              Retry
+            </button>
+          </div>
+        ) : filteredJobs.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-stone-500 mb-4">No jobs found.</p>
+            <p className="text-sm text-stone-400">
+              {activeCategory === 'All'
+                ? 'Jobs will appear here once they are added through the admin dashboard.'
+                : `No jobs found in the ${activeCategory} category.`}
+            </p>
+          </div>
         ) : (
           <motion.div
             className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"

@@ -5,34 +5,48 @@ export const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial'
 
 // Fetch jobs from Supabase
 export async function fetchJobs() {
-  const { data: jobsData, error } = await supabase
-    .from('jobs')
-    .select('*')
-    .order('display_order', { ascending: true })
-    .order('date', { ascending: false })
+  try {
+    const { data: jobsData, error } = await supabase
+      .from('jobs')
+      .select('*')
+      .order('display_order', { ascending: true })
+      .order('date', { ascending: false })
 
-  if (error) {
-    console.error('Error fetching jobs:', error)
-    return []
+    if (error) {
+      console.error('Error fetching jobs:', error)
+      throw error
+    }
+
+    if (!jobsData || jobsData.length === 0) {
+      console.log('No jobs found in database')
+      return []
+    }
+
+    // Fetch images for each job
+    const jobsWithImages = await Promise.all(
+      jobsData.map(async (job) => {
+        const { data: images, error: imagesError } = await supabase
+          .from('job_images')
+          .select('*')
+          .eq('job_id', job.id)
+          .order('image_order', { ascending: true })
+
+        if (imagesError) {
+          console.error(`Error fetching images for job ${job.id}:`, imagesError)
+        }
+
+        return {
+          ...job,
+          images: (images || []).map((img) => img.image_url),
+        }
+      })
+    )
+
+    return jobsWithImages
+  } catch (error) {
+    console.error('Error in fetchJobs:', error)
+    throw error
   }
-
-  // Fetch images for each job
-  const jobsWithImages = await Promise.all(
-    (jobsData || []).map(async (job) => {
-      const { data: images } = await supabase
-        .from('job_images')
-        .select('*')
-        .eq('job_id', job.id)
-        .order('image_order', { ascending: true })
-
-      return {
-        ...job,
-        images: (images || []).map((img) => img.image_url),
-      }
-    })
-  )
-
-  return jobsWithImages
 }
 
 // For backward compatibility, export a jobs array that will be populated

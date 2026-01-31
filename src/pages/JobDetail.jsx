@@ -12,15 +12,23 @@ export function JobDetail() {
   const [job, setJob] = useState(null)
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
     async function loadJobs() {
-      const jobsData = await fetchJobs()
-      setJobs(jobsData)
-      const foundJob = jobsData.find((j) => j.slug === slug)
-      setJob(foundJob)
-      setLoading(false)
+      try {
+        setError(null)
+        const jobsData = await fetchJobs()
+        setJobs(jobsData || [])
+        const foundJob = jobsData.find((j) => j.slug === slug)
+        setJob(foundJob)
+      } catch (err) {
+        console.error('Error loading job:', err)
+        setError('Failed to load job. Please try again later.')
+      } finally {
+        setLoading(false)
+      }
     }
     loadJobs()
   }, [slug])
@@ -35,6 +43,23 @@ export function JobDetail() {
         <Header />
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center text-stone-500">Loading...</div>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-dvh flex flex-col">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-red-600 mb-4">{error}</p>
+            <Link to="/jobs" className="text-accent-600 hover:text-accent-700">
+              Back to Jobs
+            </Link>
+          </div>
         </main>
         <Footer />
       </div>
