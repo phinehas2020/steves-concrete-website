@@ -20,22 +20,22 @@ export function Header() {
         <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200 safe-top">
             <div className="container-main">
                 <div className="flex items-center justify-between h-16 md:h-20">
-                    {/* Logo - smaller on mobile with strict size constraints */}
+                    {/* Logo */}
                     <a href="#home" className="flex items-center flex-shrink-0">
                         <img
                             src={logoImage}
                             alt="Concrete Works LLC"
-                            className="h-10 w-auto object-contain"
+                            className="h-12 max-h-12 w-auto object-contain"
                         />
                     </a>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+                    <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
                         {navLinks.map((link) => (
                             <a
                                 key={link.href}
                                 href={link.href}
-                                className="text-stone-600 hover:text-stone-900 font-medium transition-colors duration-150"
+                                className="py-2 text-stone-600 hover:text-stone-900 font-medium transition-colors duration-150"
                             >
                                 {link.label}
                             </a>

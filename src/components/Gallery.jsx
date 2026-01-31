@@ -80,17 +80,16 @@ const projects = [
 // Project image component - displays actual project photos
 function ProjectImage({ project }) {
     return (
-        <div className="absolute inset-0 z-0 bg-stone-900">
+        <div className="absolute inset-0 z-0 overflow-hidden">
             <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover object-top transition-transform duration-1000 group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 loading="lazy"
             />
-            {/* Multi-layered overlay for depth and legibility */}
-            <div className="absolute inset-0 bg-stone-950/20 group-hover:bg-stone-950/40 transition-colors duration-500" />
-            {/* Strong bottom gradient to fade image into dark smoothly */}
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/60 via-30% to-transparent" />
+            {/* Gradient overlay for text readability - smooth gradual fade */}
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/50 via-black/30 to-transparent group-hover:from-black/95 group-hover:via-black/65 group-hover:via-black/40 group-hover:to-transparent transition-all duration-500" />
         </div>
     )
 }
@@ -160,12 +159,8 @@ export function Gallery() {
                         {filteredProjects.map((project, index) => (
                             <motion.article
                                 key={project.id}
-                                className={cn(
-                                    "group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500",
-                                    index === 0 && activeCategory === 'All'
-                                        ? "lg:col-span-2 lg:row-span-2 aspect-[16/10] lg:aspect-auto lg:min-h-[500px]"
-                                        : "aspect-[4/5]"
-                                )}
+                                className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
+                                style={{ position: 'relative' }}
                                 layout
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}

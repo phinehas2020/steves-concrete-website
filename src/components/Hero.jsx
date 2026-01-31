@@ -83,7 +83,7 @@ export function Hero() {
             {/* Accent Line */}
             <div className="absolute bottom-0 left-0 right-0 h-2 bg-accent-500" />
 
-            <div className="container-main relative z-10 py-20 sm:py-24 md:py-28">
+            <div className="container-main relative z-10 py-20 sm:py-24 md:py-6">
                 <motion.div
                     className="max-w-3xl"
                     variants={heroStagger}
