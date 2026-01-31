@@ -33,8 +33,10 @@ export function AdminJobs() {
   const [filterCategory, setFilterCategory] = useState('All')
   const [uploadingImages, setUploadingImages] = useState(false)
   const [selectedImages, setSelectedImages] = useState(new Set())
+  const [isCreating, setIsCreating] = useState(false)
 
   const isEditing = useMemo(() => Boolean(editingId), [editingId])
+  const showForm = isEditing || isCreating
 
   const fetchJobs = async () => {
     setLoading(true)
@@ -73,6 +75,7 @@ export function AdminJobs() {
 
   const startNew = () => {
     setEditingId(null)
+    setIsCreating(true)
     setFormData(emptyJob)
     setMessage('')
     setSelectedImages(new Set())
@@ -80,6 +83,7 @@ export function AdminJobs() {
 
   const startEdit = (job) => {
     setEditingId(job.id)
+    setIsCreating(false)
     setFormData({
       title: job.title || '',
       slug: job.slug || '',
@@ -156,8 +160,11 @@ export function AdminJobs() {
 
       await fetchJobs()
       setTimeout(() => {
-        startNew()
+        setEditingId(null)
+        setIsCreating(false)
+        setFormData(emptyJob)
         setMessage('')
+        setSelectedImages(new Set())
       }, 2000)
     } catch (error) {
       console.error('Error saving job:', error)
@@ -395,7 +402,7 @@ export function AdminJobs() {
       )}
 
       {/* Form */}
-      {isEditing && (
+      {showForm && (
         <form onSubmit={saveJob} className="bg-white border border-stone-200 rounded-xl p-6 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -624,7 +631,13 @@ export function AdminJobs() {
             </button>
             <button
               type="button"
-              onClick={startNew}
+              onClick={() => {
+                setEditingId(null)
+                setIsCreating(false)
+                setFormData(emptyJob)
+                setMessage('')
+                setSelectedImages(new Set())
+              }}
               className="px-6 py-2 bg-stone-200 text-stone-700 font-semibold rounded-lg hover:bg-stone-300 transition-colors"
             >
               Cancel
