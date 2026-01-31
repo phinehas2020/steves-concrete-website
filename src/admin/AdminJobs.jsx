@@ -74,6 +74,22 @@ export function AdminJobs() {
     fetchJobs()
   }, [])
 
+  // Prevent navigation during uploads
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (uploadingImages) {
+        e.preventDefault()
+        e.returnValue = 'Images are still uploading. Are you sure you want to leave?'
+        return e.returnValue
+      }
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [uploadingImages])
+
   const startNew = () => {
     setEditingId(null)
     setIsCreating(true)
