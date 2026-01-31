@@ -14,21 +14,28 @@ export function AdminLogin() {
     setMessage('')
 
     if (loginMethod === 'password') {
+      console.log('Attempting password login for:', email)
+      console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL)
+      
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
       
       console.log('Auth response:', { data, error })
+      console.log('Full error details:', error ? JSON.stringify(error, null, 2) : 'No error')
 
       if (error) {
         setStatus('error')
         console.error('Login error:', error)
+        console.error('Error code:', error.status)
+        console.error('Error message:', error.message)
         setMessage(error.message || 'Invalid email or password.')
         return
       }
 
       // Success - redirect handled by AdminApp
+      console.log('Login successful!', data.user?.email)
       window.location.href = '/admin'
     } else {
       // Magic link login

@@ -8,9 +8,12 @@ let supabaseClient
 if (supabaseUrl && supabaseAnonKey) {
   // Log connection details for debugging
   console.log('Connecting to Supabase:', supabaseUrl)
+  console.log('Anon key present:', !!supabaseAnonKey)
   supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
-      persistSession: false
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
     }
   })
 } else {
