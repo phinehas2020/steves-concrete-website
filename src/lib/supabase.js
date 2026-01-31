@@ -6,7 +6,13 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 let supabaseClient
 
 if (supabaseUrl && supabaseAnonKey) {
-  supabaseClient = createClient(supabaseUrl, supabaseAnonKey)
+  // Log connection details for debugging
+  console.log('Connecting to Supabase:', supabaseUrl)
+  supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      persistSession: false
+    }
+  })
 } else {
   // Avoid throwing in build/dev; surface a clear error in runtime usage.
   // eslint-disable-next-line no-console

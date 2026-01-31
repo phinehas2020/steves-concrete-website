@@ -14,6 +14,12 @@ export async function fetchJobs() {
 
     if (error) {
       console.error('Error fetching jobs:', error)
+      console.error('Error details:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint
+      })
       throw error
     }
 
