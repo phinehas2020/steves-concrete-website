@@ -51,7 +51,8 @@ export function Hero() {
                 <img
                     src={heroImage}
                     alt="Stamped concrete driveway project in Waco, Texas"
-                    className="w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    style={{ minHeight: '100vh', minWidth: '100%' }}
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
@@ -120,7 +121,8 @@ export function Hero() {
                         className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed"
                         variants={staggerItem}
                     >
-                        Concrete Works LLC has completed 500+ projects across Central Texas since 2005. We specialize in stamped driveways, decorative patios, and commercial concrete.
+                        <span className="sm:hidden">500+ projects across Central Texas. Stamped driveways, decorative patios, and commercial concrete.</span>
+                        <span className="hidden sm:inline">Concrete Works LLC has completed 500+ projects across Central Texas since 2005. We specialize in stamped driveways, decorative patios, and commercial concrete.</span>
                     </motion.p>
 
                     {/* CTAs */}

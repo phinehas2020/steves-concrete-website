@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import {
     Truck,
@@ -24,9 +24,20 @@ const iconMap = {
 
 export function Services() {
     const [showAll, setShowAll] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
 
-    const visibleServices = showAll ? servicePages : servicePages.slice(0, 3)
-    const hasMore = servicePages.length > 3
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768) // md breakpoint
+        }
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
+    const initialCount = isMobile ? 1 : 3
+    const visibleServices = showAll ? servicePages : servicePages.slice(0, initialCount)
+    const hasMore = servicePages.length > initialCount
 
     return (
         <section id="services" className="section-padding bg-white texture-grain-light">

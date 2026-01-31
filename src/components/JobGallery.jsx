@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
@@ -32,6 +32,12 @@ export function JobGallery() {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768
+    }
+    return false
+  })
 
   useEffect(() => {
     async function loadJobs() {
@@ -50,10 +56,22 @@ export function JobGallery() {
     loadJobs()
   }, [])
 
+  useLayoutEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768) // md breakpoint
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const filteredJobs =
     activeCategory === 'All'
       ? jobs
       : jobs.filter((job) => job.category === activeCategory)
+
+  // Limit to 2 cards on mobile - slice the array directly
+  const displayJobs = isMobile ? filteredJobs.slice(0, 2) : filteredJobs
 
   return (
     <section id="gallery" className="section-padding bg-white texture-concrete relative">
@@ -116,7 +134,7 @@ export function JobGallery() {
               Retry
             </button>
           </div>
-        ) : filteredJobs.length === 0 ? (
+        ) : displayJobs.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-stone-500 mb-4">No jobs found.</p>
             <p className="text-sm text-stone-400">
@@ -131,7 +149,7 @@ export function JobGallery() {
             layout
           >
             <AnimatePresence mode="popLayout">
-              {filteredJobs.map((job, index) => (
+              {displayJobs.map((job, index) => (
               <motion.article
                 key={job.id}
                 className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
