@@ -15,9 +15,23 @@ const oldSupabaseUrl = process.env.OLD_SUPABASE_URL || 'https://cszvzklhxavqvnkg
 const oldSupabaseKey = process.env.OLD_SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
 
 // New Supabase (your custom server)
-// IMPORTANT: Update these with your actual new Supabase credentials
+// IMPORTANT: Must use SERVICE_ROLE_KEY (not anon key) to bypass RLS for migration
 const newSupabaseUrl = process.env.NEW_SUPABASE_URL || process.env.VITE_SUPABASE_URL || 'https://db.phinehasadams.com'
-const newSupabaseKey = process.env.NEW_SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY
+const newSupabaseKey = process.env.NEW_SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
+
+// Validate that we're using service_role (not anon key)
+if (newSupabaseKey) {
+  try {
+    const payload = JSON.parse(Buffer.from(newSupabaseKey.split('.')[1], 'base64').toString())
+    if (payload.role !== 'service_role') {
+      console.error('❌ ERROR: You must use the SERVICE_ROLE_KEY (not anon key) for migration!')
+      console.error('   Get it from: Supabase Dashboard → Settings → API → service_role key')
+      process.exit(1)
+    }
+  } catch (e) {
+    // If we can't parse, assume it's fine and let Supabase handle it
+  }
+}
 
 if (!oldSupabaseUrl || !oldSupabaseKey) {
   console.error('Missing old Supabase credentials')
