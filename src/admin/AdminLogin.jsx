@@ -74,7 +74,7 @@ export function AdminLogin() {
         <p className="text-stone-600 text-pretty mb-6">
           {loginMethod === 'password' 
             ? 'Enter your email and password to sign in.'
-            : 'Enter your email and we'll send a secure login link.'}
+            : "Enter your email and we'll send a secure login link."}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
