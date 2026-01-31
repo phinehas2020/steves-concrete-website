@@ -1,5 +1,12 @@
 // Script to migrate all data from old Supabase to new Supabase instance
 // Run this after updating environment variables
+//
+// Usage:
+//   OLD_SUPABASE_URL=https://old.supabase.co \
+//   OLD_SUPABASE_SERVICE_ROLE_KEY=old-key \
+//   NEW_SUPABASE_URL=https://db.phinehasadams.com \
+//   NEW_SUPABASE_SERVICE_ROLE_KEY=new-key \
+//   node migrate-to-new-supabase.js
 
 import { createClient } from '@supabase/supabase-js'
 
