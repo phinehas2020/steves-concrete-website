@@ -21,12 +21,11 @@ export function Header() {
             <div className="container-main">
                 <div className="flex items-center justify-between h-16 md:h-20">
                     {/* Logo - smaller on mobile with strict size constraints */}
-                    <a href="#home" className="flex items-center gap-3 flex-shrink-0 overflow-hidden">
+                    <a href="#home" className="flex items-center flex-shrink-0">
                         <img
                             src={logoImage}
                             alt="Concrete Works LLC"
-                            className="h-8 md:h-10 w-auto object-contain rounded-lg max-h-[40px]"
-                            style={{ height: '40px', width: 'auto' }}
+                            className="h-10 w-auto object-contain"
                         />
                     </a>
 
@@ -54,7 +53,7 @@ export function Header() {
                         </a>
                         <a
                             href="#contact"
-                            className="inline-flex items-center justify-center px-5 py-2.5 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[44px]"
+                            className="inline-flex items-center justify-center px-5 py-2 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150"
                         >
                             Free Estimate
                         </a>
