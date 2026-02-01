@@ -117,6 +117,25 @@ export function AdminBlog({ currentUserEmail }) {
     fetchPosts()
   }
 
+  const deletePost = async (postId) => {
+    if (!confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+      return
+    }
+
+    const { error } = await supabase.from('blog_posts').delete().eq('id', postId)
+
+    if (error) {
+      setMessage('Unable to delete post.')
+      return
+    }
+
+    setMessage('Post deleted.')
+    if (editingId === postId) {
+      startNew()
+    }
+    fetchPosts()
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -147,20 +166,35 @@ export function AdminBlog({ currentUserEmail }) {
 
           <div className="space-y-3">
             {posts.map((post) => (
-              <button
+              <div
                 key={post.id}
-                type="button"
-                onClick={() => startEdit(post)}
-                className="w-full text-left border border-stone-200 rounded-lg p-3 hover:border-stone-300 transition-colors"
+                className="flex items-center gap-2 border border-stone-200 rounded-lg p-3 hover:border-stone-300 transition-colors"
               >
-                <div className="flex items-center justify-between gap-2">
-                  <p className="font-semibold text-stone-900">{post.title}</p>
-                  <span className="text-xs uppercase tracking-wide text-stone-500">
-                    {post.status}
-                  </span>
-                </div>
-                <p className="text-xs text-stone-500 mt-1">{post.slug}</p>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => startEdit(post)}
+                  className="flex-1 text-left"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="font-semibold text-stone-900">{post.title}</p>
+                    <span className="text-xs uppercase tracking-wide text-stone-500">
+                      {post.status}
+                    </span>
+                  </div>
+                  <p className="text-xs text-stone-500 mt-1">{post.slug}</p>
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    deletePost(post.id)
+                  }}
+                  className="text-red-600 hover:text-red-700 text-sm font-semibold px-2 py-1"
+                  title="Delete post"
+                >
+                  Delete
+                </button>
+              </div>
             ))}
           </div>
         </div>
@@ -271,13 +305,22 @@ export function AdminBlog({ currentUserEmail }) {
                     : 'Save Draft'}
               </button>
               {isEditing && (
-                <button
-                  type="button"
-                  onClick={startNew}
-                  className="text-sm font-semibold text-stone-600 hover:text-stone-900"
-                >
-                  Cancel
-                </button>
+                <>
+                  <button
+                    type="button"
+                    onClick={startNew}
+                    className="text-sm font-semibold text-stone-600 hover:text-stone-900"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => deletePost(editingId)}
+                    className="text-sm font-semibold text-red-600 hover:text-red-700"
+                  >
+                    Delete
+                  </button>
+                </>
               )}
             </div>
           </form>
