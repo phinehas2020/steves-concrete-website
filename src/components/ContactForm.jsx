@@ -35,12 +35,21 @@ export function ContactForm({
       })
 
       if (!response.ok) {
-        throw new Error('Request failed')
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+        console.error('Lead submission failed:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        })
+        throw new Error(errorData.error || 'Request failed')
       }
 
+      const result = await response.json()
+      console.log('Lead submitted successfully:', result)
       setFormState('success')
       if (onSuccess) onSuccess()
-    } catch {
+    } catch (error) {
+      console.error('Error submitting lead:', error)
       setFormState('error')
     }
   }
