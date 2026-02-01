@@ -19,12 +19,12 @@ function App() {
         <div className="order-2 md:order-none">
           <Services />
         </div>
+        <div className="order-3 md:order-none">
+          <Gallery />
+        </div>
         {/* Values - Hidden on mobile to reduce scroll to Gallery */}
         <div className="hidden md:block md:order-none">
           <Values />
-        </div>
-        <div className="order-3 md:order-none">
-          <Gallery />
         </div>
         <div className="order-5 md:order-none">
           <Testimonials />
