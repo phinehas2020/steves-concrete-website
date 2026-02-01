@@ -100,19 +100,27 @@ export default async function handler(req, res) {
     return
   }
 
-  if (process.env.RESEND_API_KEY && leadsTo && leadsFrom) {
+  // Send email notification via Resend
+  if (process.env.RESEND_API_KEY && leadsTo) {
     const resend = new Resend(process.env.RESEND_API_KEY)
     try {
+      // Use LEADS_EMAIL_FROM if set, otherwise use Resend's default
+      const fromEmail = leadsFrom || 'onboarding@resend.dev'
+      
       await resend.emails.send({
-        from: leadsFrom,
+        from: fromEmail,
         to: leadsTo.split(',').map((email) => email.trim()),
-        subject: `New estimate request — ${lead.name}`,
+        subject: `New Estimate Request — ${lead.name}`,
         text: toText(lead),
         html: toHtml(lead),
       })
-    } catch {
-      // Email failures should not block lead capture
+      console.log('Email sent successfully to:', leadsTo)
+    } catch (error) {
+      // Log error but don't block lead capture
+      console.error('Failed to send email notification:', error)
     }
+  } else {
+    console.warn('Email notification skipped - missing RESEND_API_KEY or LEADS_EMAIL_TO')
   }
 
   res.status(200).json({ ok: true })
