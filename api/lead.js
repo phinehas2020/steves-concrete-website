@@ -69,6 +69,11 @@ export default async function handler(req, res) {
   }
 
   if (!supabaseUrl || !supabaseServiceRoleKey) {
+    console.error('Missing Supabase config:', {
+      hasUrl: !!supabaseUrl,
+      hasServiceRoleKey: !!supabaseServiceRoleKey,
+      url: supabaseUrl
+    })
     res.status(500).json({ error: 'Supabase server config missing' })
     return
   }
@@ -93,12 +98,21 @@ export default async function handler(req, res) {
   }
 
   const supabase = createClient(supabaseUrl, supabaseServiceRoleKey)
-  const { error } = await supabase.from('leads').insert(lead)
+  const { data, error } = await supabase.from('leads').insert(lead).select()
 
   if (error) {
-    res.status(500).json({ error: 'Failed to save lead' })
+    console.error('Failed to save lead to Supabase:', error)
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint
+    })
+    res.status(500).json({ error: 'Failed to save lead', details: error.message })
     return
   }
+  
+  console.log('Lead saved successfully:', data?.[0]?.id)
 
   // Send email notification via Resend
   if (process.env.RESEND_API_KEY && leadsTo) {
