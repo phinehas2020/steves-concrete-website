@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { Phone, Mail } from 'lucide-react'
+import { Phone, Mail, Trash2 } from 'lucide-react'
 
 const statusOptions = ['new', 'contacted', 'scheduled', 'won', 'lost']
 
@@ -53,6 +53,24 @@ export function AdminLeads() {
     setLeads((prev) =>
       prev.map((lead) => (lead.id === id ? { ...lead, status } : lead))
     )
+  }
+
+  const deleteLead = async (id) => {
+    if (!confirm('Are you sure you want to delete this lead? This action cannot be undone.')) {
+      return
+    }
+
+    const { error: deleteError } = await supabase
+      .from('leads')
+      .delete()
+      .eq('id', id)
+
+    if (deleteError) {
+      setError('Unable to delete lead.')
+      return
+    }
+
+    setLeads((prev) => prev.filter((lead) => lead.id !== id))
   }
 
   return (
@@ -151,6 +169,14 @@ export function AdminLeads() {
                       </option>
                     ))}
                   </select>
+                  <button
+                    onClick={() => deleteLead(lead.id)}
+                    className="inline-flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 border border-red-200 rounded-lg transition-colors"
+                    title="Delete lead"
+                  >
+                    <Trash2 className="size-4" aria-hidden="true" />
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
