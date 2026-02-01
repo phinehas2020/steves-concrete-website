@@ -1,7 +1,7 @@
 /* eslint-env node */
 import { createClient } from '@supabase/supabase-js'
 
-const SITE_URL = 'https://concreteworkswaco.com'
+const SITE_URL = 'https://concretewaco.com'
 const LOCATION_PAGES = [
   'waco-tx-concrete-contractor',
   'temple-tx-concrete-contractor',

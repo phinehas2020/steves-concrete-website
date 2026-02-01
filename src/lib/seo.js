@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-const SITE_URL = 'https://concreteworkswaco.com'
+const SITE_URL = 'https://concretewaco.com'
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 
 const DEFAULT_SEO = {

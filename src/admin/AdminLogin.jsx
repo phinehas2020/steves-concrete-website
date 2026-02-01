@@ -43,7 +43,7 @@ export function AdminLogin() {
         window.location.reload()
       }, 500)
     } else {
-      // Magic link login
+      // Magic link login - use current origin so it works with any domain (Vercel URL or custom domain)
       const { data, error } = await supabase.auth.signInWithOtp({
         email,
         options: {
