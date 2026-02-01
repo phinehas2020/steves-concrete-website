@@ -7,12 +7,14 @@ import { AdminStats } from './AdminStats'
 import { AdminBlog } from './AdminBlog'
 import { AdminUsers } from './AdminUsers'
 import { AdminJobs } from './AdminJobs'
+import { AdminHero } from './AdminHero'
 import { useSeo, SITE_URL } from '../lib/seo'
 
 const navItems = [
   { label: 'Stats', path: '' },
   { label: 'Leads', path: 'leads' },
   { label: 'Jobs', path: 'jobs' },
+  { label: 'Hero Images', path: 'hero' },
   { label: 'Blog', path: 'blog' },
   { label: 'Admins', path: 'admins' },
 ]
@@ -185,6 +187,7 @@ export function AdminApp() {
               <Route path="/" element={<AdminStats />} />
               <Route path="leads" element={<AdminLeads />} />
               <Route path="jobs" element={<AdminJobs />} />
+              <Route path="hero" element={<AdminHero />} />
               <Route path="blog" element={<AdminBlog currentUserEmail={session.user.email} />} />
               <Route
                 path="admins"
