@@ -1,6 +1,9 @@
 import { useEffect } from 'react'
 
 const SITE_URL = 'https://concretewaco.com'
+const SITE_NAME = 'Concrete Works LLC'
+const LOCALE = 'en_US'
+const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 
 const DEFAULT_SEO = {
@@ -14,6 +17,45 @@ const DEFAULT_SEO = {
   robots: 'index, follow',
   twitterCard: 'summary_large_image',
   url: SITE_URL + '/',
+  siteName: SITE_NAME,
+  locale: LOCALE,
+}
+
+function buildBreadcrumbs(items = []) {
+  if (!Array.isArray(items) || items.length === 0) return null
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  }
+}
+
+function buildFaqPage(faqItems = []) {
+  if (!Array.isArray(faqItems) || faqItems.length === 0) return null
+  return {
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+}
+
+function buildJsonLdGraph(...nodes) {
+  const graph = nodes.flat().filter(Boolean)
+  if (graph.length === 0) return null
+  return {
+    '@context': 'https://schema.org',
+    '@graph': graph,
+  }
 }
 
 function upsertMeta({ name, property, content }) {
@@ -73,6 +115,8 @@ export function setSeo(overrides = {}) {
   upsertMeta({ property: 'og:title', content: meta.title })
   upsertMeta({ property: 'og:description', content: meta.description })
   upsertMeta({ property: 'og:type', content: meta.type })
+  upsertMeta({ property: 'og:site_name', content: meta.siteName })
+  upsertMeta({ property: 'og:locale', content: meta.locale })
   upsertMeta({ property: 'og:url', content: resolvedUrl })
   upsertMeta({ property: 'og:image', content: meta.image })
   upsertMeta({ property: 'og:image:alt', content: meta.imageAlt })
@@ -97,4 +141,14 @@ export function useSeo(overrides) {
   }, [overrides])
 }
 
-export { DEFAULT_SEO, SITE_URL, DEFAULT_IMAGE }
+export {
+  DEFAULT_SEO,
+  SITE_URL,
+  SITE_NAME,
+  LOCALE,
+  ORGANIZATION_ID,
+  DEFAULT_IMAGE,
+  buildBreadcrumbs,
+  buildFaqPage,
+  buildJsonLdGraph,
+}

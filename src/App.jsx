@@ -7,7 +7,13 @@ import { Testimonials } from './components/Testimonials'
 import { FAQ } from './components/FAQ'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
+import { useSeo, buildFaqPage, buildJsonLdGraph } from './lib/seo'
+import { FAQ_ITEMS } from './data/faqs'
 function App() {
+  const faqJsonLd = buildFaqPage(FAQ_ITEMS)
+  useSeo({
+    jsonLd: buildJsonLdGraph(faqJsonLd),
+  })
 
   return (
     <div className="min-h-dvh flex flex-col">

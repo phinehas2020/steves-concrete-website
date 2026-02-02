@@ -4,7 +4,13 @@ import { ArrowRight, Sparkles } from 'lucide-react'
 import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
-import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
+import {
+  useSeo,
+  SITE_URL,
+  DEFAULT_IMAGE,
+  buildBreadcrumbs,
+  buildJsonLdGraph,
+} from '../lib/seo'
 
 export function BlogIndex() {
   const [posts, setPosts] = useState([])
@@ -25,16 +31,22 @@ export function BlogIndex() {
         name: post.title,
       }))
 
-    const jsonLd =
+    const itemListJsonLd =
       listItems.length > 0
         ? {
-            '@context': 'https://schema.org',
             '@type': 'ItemList',
             name: 'Concrete Works LLC Blog',
             description,
             itemListElement: listItems,
           }
         : null
+
+    const breadcrumbsJsonLd = buildBreadcrumbs([
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: 'Blog', url: `${SITE_URL}/blog` },
+    ])
+
+    const jsonLd = buildJsonLdGraph(itemListJsonLd, breadcrumbsJsonLd)
 
     return {
       title: 'Concrete Tips & Project Ideas | Concrete Works LLC',

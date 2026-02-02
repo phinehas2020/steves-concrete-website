@@ -1,7 +1,14 @@
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { Contact } from '../components/Contact'
-import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
+import {
+  useSeo,
+  SITE_URL,
+  DEFAULT_IMAGE,
+  ORGANIZATION_ID,
+  buildBreadcrumbs,
+  buildJsonLdGraph,
+} from '../lib/seo'
 import { locationLinks } from '../data/locationPages'
 
 export function ServiceLanding({ page }) {
@@ -9,6 +16,26 @@ export function ServiceLanding({ page }) {
 
   const description = `${title} in Waco and Central Texas. Free estimates from Concrete Works LLC.`
   const serviceAreaText = locationLinks.map((location) => location.city).join(', ')
+
+  const serviceJsonLd = {
+    '@type': 'Service',
+    '@id': `${SITE_URL}/services/${slug}#service`,
+    name: title,
+    serviceType: title,
+    areaServed: {
+      '@type': 'AdministrativeArea',
+      name: 'Central Texas',
+    },
+    provider: {
+      '@id': ORGANIZATION_ID,
+    },
+  }
+
+  const breadcrumbsJsonLd = buildBreadcrumbs([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Services', url: `${SITE_URL}/#services` },
+    { name: title, url: `${SITE_URL}/services/${slug}` },
+  ])
 
   useSeo({
     title: `${title} | Concrete Works LLC`,
@@ -18,21 +45,7 @@ export function ServiceLanding({ page }) {
     image: DEFAULT_IMAGE,
     imageAlt: `${title} in Central Texas`,
     type: 'website',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'Service',
-      serviceType: title,
-      areaServed: {
-        '@type': 'AdministrativeArea',
-        name: 'Central Texas',
-      },
-      provider: {
-        '@type': 'LocalBusiness',
-        name: 'Concrete Works LLC',
-        url: SITE_URL,
-        telephone: '+1-254-230-3102',
-      },
-    },
+    jsonLd: buildJsonLdGraph(serviceJsonLd, breadcrumbsJsonLd),
   })
 
   return (

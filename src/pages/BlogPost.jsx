@@ -5,7 +5,14 @@ import { supabase } from '../lib/supabase'
 import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
-import { useSeo, SITE_URL, DEFAULT_IMAGE } from '../lib/seo'
+import {
+  useSeo,
+  SITE_URL,
+  DEFAULT_IMAGE,
+  ORGANIZATION_ID,
+  buildBreadcrumbs,
+  buildJsonLdGraph,
+} from '../lib/seo'
 
 export function BlogPost() {
   const { slug } = useParams()
@@ -68,6 +75,41 @@ export function BlogPost() {
     const description = post.excerpt || fallback.description
     const image = post.cover_image_url || DEFAULT_IMAGE
 
+    const blogPostingJsonLd = post
+      ? {
+          '@type': 'BlogPosting',
+          headline: post.title,
+          description,
+          image: [image],
+          datePublished: publishedAt,
+          dateModified: updatedAt,
+          author: {
+            '@type': 'Organization',
+            '@id': ORGANIZATION_ID,
+            name: 'Concrete Works LLC',
+          },
+          publisher: {
+            '@type': 'Organization',
+            '@id': ORGANIZATION_ID,
+            name: 'Concrete Works LLC',
+            logo: {
+              '@type': 'ImageObject',
+              url: `${SITE_URL}/logo.png`,
+            },
+          },
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `${SITE_URL}/blog/${post.slug}`,
+          },
+        }
+      : null
+
+    const breadcrumbsJsonLd = buildBreadcrumbs([
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: 'Blog', url: `${SITE_URL}/blog` },
+      { name: post?.title || 'Post', url: `${SITE_URL}/blog/${slug}` },
+    ])
+
     return {
       ...fallback,
       title: `${post.title} | Concrete Works LLC`,
@@ -76,31 +118,7 @@ export function BlogPost() {
       imageAlt: post.title,
       publishedTime: publishedAt,
       modifiedTime: updatedAt,
-      jsonLd: {
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: post.title,
-        description,
-        image: [image],
-        datePublished: publishedAt,
-        dateModified: updatedAt,
-        author: {
-          '@type': 'Organization',
-          name: 'Concrete Works LLC',
-        },
-        publisher: {
-          '@type': 'Organization',
-          name: 'Concrete Works LLC',
-          logo: {
-            '@type': 'ImageObject',
-            url: `${SITE_URL}/logo.png`,
-          },
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': `${SITE_URL}/blog/${post.slug}`,
-        },
-      },
+      jsonLd: buildJsonLdGraph(blogPostingJsonLd, breadcrumbsJsonLd),
     }
   }, [post, slug, error])
 

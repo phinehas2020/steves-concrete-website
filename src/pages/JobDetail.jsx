@@ -5,7 +5,14 @@ import { handleImageError } from '../lib/utils'
 import { fetchJobs } from '../data/jobs'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import {
+  useSeo,
+  SITE_URL,
+  DEFAULT_IMAGE,
+  buildBreadcrumbs,
+  buildJsonLdGraph,
+} from '../lib/seo'
 
 export function JobDetail() {
   const { slug } = useParams()
@@ -36,6 +43,52 @@ export function JobDetail() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [slug])
+
+  const seo = useMemo(() => {
+    const notFound = !loading && (!job || error)
+    const resolvedSlug = job?.slug || slug || ''
+    const breadcrumbsJsonLd = buildBreadcrumbs([
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: 'Project Gallery', url: `${SITE_URL}/jobs` },
+      {
+        name: job?.title || 'Project',
+        url: `${SITE_URL}/jobs/${resolvedSlug}`,
+      },
+    ])
+
+    const fallback = {
+      title: notFound
+        ? 'Project Not Found | Concrete Works LLC'
+        : 'Concrete Project | Concrete Works LLC',
+      description: notFound
+        ? 'This project could not be found.'
+        : 'Concrete project details from Concrete Works LLC in Central Texas.',
+      canonical: `${SITE_URL}/jobs/${resolvedSlug}`,
+      url: `${SITE_URL}/jobs/${resolvedSlug}`,
+      image: DEFAULT_IMAGE,
+      imageAlt: 'Concrete Works LLC project gallery',
+      type: 'article',
+      robots: notFound ? 'noindex, nofollow' : 'index, follow',
+      jsonLd: buildJsonLdGraph(breadcrumbsJsonLd),
+    }
+
+    if (!job) return fallback
+
+    const image = job.images && job.images.length > 0 ? job.images[0] : DEFAULT_IMAGE
+    const description =
+      job.description ||
+      `${job.title} concrete project in ${job.location || 'Central Texas'}.`
+
+    return {
+      ...fallback,
+      title: `${job.title} | Concrete Works LLC`,
+      description,
+      image,
+      imageAlt: job.title,
+    }
+  }, [job, slug, loading, error])
+
+  useSeo(seo)
 
   if (loading) {
     return (
