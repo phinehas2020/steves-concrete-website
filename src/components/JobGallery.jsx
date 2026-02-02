@@ -88,9 +88,9 @@ export function JobGallery() {
             <span className="inline-block text-accent-600 font-bold text-xs uppercase tracking-[0.2em] mb-4">
               Portfolio
             </span>
-            <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-stone-900 text-balance mb-6">
+            <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-stone-900 text-balance mb-6">
               Recent <span className="text-stone-400">Pours</span>
-            </h2>
+            </h1>
             <p className="text-xl text-stone-600 text-pretty font-light leading-relaxed">
               Every project is a testament to our commitment to durability.
               From expansive commercial slabs to intricate stamped patios.

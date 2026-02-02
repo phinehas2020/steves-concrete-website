@@ -56,6 +56,11 @@ export default async function handler(req, res) {
       changefreq: 'weekly',
       priority: '0.7',
     },
+    {
+      loc: `${SITE_URL}/jobs`,
+      changefreq: 'weekly',
+      priority: '0.7',
+    },
   ]
 
   LOCATION_PAGES.forEach((slug) => {
@@ -89,6 +94,24 @@ export default async function handler(req, res) {
           const lastmod = formatDate(post.updated_at || post.published_at)
           urls.push({
             loc: `${SITE_URL}/blog/${post.slug}`,
+            lastmod,
+            changefreq: 'monthly',
+            priority: '0.6',
+          })
+        })
+      }
+
+      const { data: jobs } = await supabase
+        .from('jobs')
+        .select('slug, updated_at, date')
+        .order('updated_at', { ascending: false })
+
+      if (Array.isArray(jobs)) {
+        jobs.forEach((job) => {
+          if (!job?.slug) return
+          const lastmod = formatDate(job.updated_at || job.date)
+          urls.push({
+            loc: `${SITE_URL}/jobs/${job.slug}`,
             lastmod,
             changefreq: 'monthly',
             priority: '0.6',
