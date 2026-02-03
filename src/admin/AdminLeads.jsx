@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Phone, Mail, Trash2 } from 'lucide-react'
+import { LinkPreview } from '../components/LinkPreview'
 
 const statusOptions = ['new', 'contacted', 'scheduled', 'won', 'lost']
 
@@ -133,9 +134,9 @@ export function AdminLeads() {
                       ? new Date(lead.created_at).toLocaleString()
                       : ''}
                   </p>
-                  <p className="text-stone-600 text-pretty mt-3">
-                    {lead.message}
-                  </p>
+                  <div className="text-stone-600 text-pretty mt-3">
+                    <LinkPreview text={lead.message} />
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-3 min-w-[220px]">
