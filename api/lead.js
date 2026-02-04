@@ -114,8 +114,32 @@ export default async function handler(req, res) {
   
   console.log('Lead saved successfully:', data?.[0]?.id)
 
+  // Get email recipients from database, with fallback to env var
+  let emailRecipients = []
+  
+  // Try to fetch from database first
+  try {
+    const { data: dbRecipients, error: dbError } = await supabase
+      .from('email_recipients')
+      .select('email')
+      .eq('active', true)
+    
+    if (!dbError && dbRecipients && dbRecipients.length > 0) {
+      emailRecipients = dbRecipients.map((r) => r.email)
+      console.log('Found email recipients in database:', emailRecipients.length)
+    }
+  } catch (dbError) {
+    console.warn('Could not fetch email recipients from database:', dbError)
+  }
+  
+  // Fallback to env var if no database recipients found
+  if (emailRecipients.length === 0 && leadsTo) {
+    emailRecipients = leadsTo.split(',').map((email) => email.trim()).filter(Boolean)
+    console.log('Using email recipients from env var:', emailRecipients.length)
+  }
+
   // Send email notification via Resend
-  if (process.env.RESEND_API_KEY && leadsTo) {
+  if (process.env.RESEND_API_KEY && emailRecipients.length > 0) {
     const resend = new Resend(process.env.RESEND_API_KEY)
     try {
       // Use LEADS_EMAIL_FROM if set, otherwise use Resend's default
@@ -123,18 +147,22 @@ export default async function handler(req, res) {
       
       await resend.emails.send({
         from: fromEmail,
-        to: leadsTo.split(',').map((email) => email.trim()),
+        to: emailRecipients,
         subject: `New Estimate Request — ${lead.name}`,
         text: toText(lead),
         html: toHtml(lead),
       })
-      console.log('Email sent successfully to:', leadsTo)
+      console.log('Email sent successfully to:', emailRecipients.join(', '))
     } catch (error) {
       // Log error but don't block lead capture
       console.error('Failed to send email notification:', error)
     }
   } else {
-    console.warn('Email notification skipped - missing RESEND_API_KEY or LEADS_EMAIL_TO')
+    if (!process.env.RESEND_API_KEY) {
+      console.warn('Email notification skipped - missing RESEND_API_KEY')
+    } else if (emailRecipients.length === 0) {
+      console.warn('Email notification skipped - no email recipients configured')
+    }
   }
 
   res.status(200).json({ ok: true })
