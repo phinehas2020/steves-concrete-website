@@ -8,6 +8,7 @@ import { AdminBlog } from './AdminBlog'
 import { AdminUsers } from './AdminUsers'
 import { AdminJobs } from './AdminJobs'
 import { AdminHero } from './AdminHero'
+import { AdminEmailRecipients } from './AdminEmailRecipients'
 import { useSeo, SITE_URL } from '../lib/seo'
 
 const navItems = [
@@ -16,6 +17,7 @@ const navItems = [
   { label: 'Jobs', path: 'jobs' },
   { label: 'Hero Images', path: 'hero' },
   { label: 'Blog', path: 'blog' },
+  { label: 'Email Recipients', path: 'email-recipients' },
   { label: 'Admins', path: 'admins' },
 ]
 
@@ -185,10 +187,19 @@ export function AdminApp() {
           <div className="space-y-6">
             <Routes>
               <Route path="/" element={<AdminStats />} />
-              <Route path="leads" element={<AdminLeads />} />
+              <Route
+                path="leads"
+                element={
+                  <AdminLeads
+                    accessToken={session?.access_token}
+                    currentUserEmail={session?.user?.email}
+                  />
+                }
+              />
               <Route path="jobs" element={<AdminJobs />} />
               <Route path="hero" element={<AdminHero />} />
               <Route path="blog" element={<AdminBlog currentUserEmail={session.user.email} />} />
+              <Route path="email-recipients" element={<AdminEmailRecipients />} />
               <Route
                 path="admins"
                 element={<AdminUsers canManage={adminProfile?.role === 'super_admin'} />}
