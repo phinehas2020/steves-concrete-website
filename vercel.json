@@ -13,6 +13,7 @@
     { "source": "/admin/:path*", "destination": "/index.html" },
     { "source": "/blog/:path*", "destination": "/index.html" },
     { "source": "/jobs/:path*", "destination": "/index.html" },
+    { "source": "/guides/:path*", "destination": "/index.html" },
     { "source": "/services/:path*", "destination": "/index.html" },
     { "source": "/waco-tx-concrete-contractor", "destination": "/index.html" },
     { "source": "/temple-tx-concrete-contractor", "destination": "/index.html" },
