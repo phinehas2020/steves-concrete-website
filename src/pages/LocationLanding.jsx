@@ -171,6 +171,18 @@ export function LocationLanding({ page }) {
                       {project.title}
                     </h3>
                     <p className="text-sm text-stone-600 text-pretty">{project.description}</p>
+                    {project.stats && (
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {project.stats.map((stat) => (
+                          <span
+                            key={`${project.title}-${stat.label}`}
+                            className="px-3 py-1 bg-stone-100 text-stone-700 rounded-full text-xs font-medium"
+                          >
+                            {stat.label}: {stat.value}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </article>
               ))}

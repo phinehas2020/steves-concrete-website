@@ -11,8 +11,11 @@ import { LocationLanding } from './pages/LocationLanding'
 import { ServiceLanding } from './pages/ServiceLanding'
 import { JobsIndex } from './pages/JobsIndex'
 import { JobDetail } from './pages/JobDetail'
+import { GuidesIndex } from './pages/GuidesIndex'
+import { GuideLanding } from './pages/GuideLanding'
 import { locationPages } from './data/locationPages'
 import { servicePages } from './data/servicePages'
+import { guidePages } from './data/guides'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,6 +26,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/jobs" element={<JobsIndex />} />
         <Route path="/jobs/:slug" element={<JobDetail />} />
+        <Route path="/guides" element={<GuidesIndex />} />
         <Route path="/admin/*" element={<AdminApp />} />
         {locationPages.map((page) => (
           <Route
@@ -36,6 +40,13 @@ createRoot(document.getElementById('root')).render(
             key={page.slug}
             path={`/services/${page.slug}`}
             element={<ServiceLanding page={page} />}
+          />
+        ))}
+        {guidePages.map((page) => (
+          <Route
+            key={page.slug}
+            path={`/guides/${page.slug}`}
+            element={<GuideLanding page={page} />}
           />
         ))}
         <Route path="*" element={<NotFound />} />

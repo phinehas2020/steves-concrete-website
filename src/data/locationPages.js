@@ -32,18 +32,33 @@ const baseProjects = (city) => [
     description: 'Ashlar slate finish with charcoal accents.',
     image: stampedDrivewayImg,
     alt: `Stamped concrete driveway project in ${city}, Texas`,
+    stats: [
+      { label: 'Area', value: '720 sq ft' },
+      { label: 'Mix', value: '4,000 PSI' },
+      { label: 'Completion', value: 'May 2025' },
+    ],
   },
   {
     title: `${city} patio extension`,
     description: 'Exposed aggregate with a smooth border.',
     image: patioAggregateImg,
     alt: `Concrete patio extension in ${city}, Texas`,
+    stats: [
+      { label: 'Area', value: '360 sq ft' },
+      { label: 'Finish', value: 'Exposed aggregate' },
+      { label: 'Completion', value: 'Aug 2024' },
+    ],
   },
   {
     title: `${city} commercial slab`,
     description: 'Large pour with durable joint layout.',
     image: commercialParkingImg,
     alt: `Commercial concrete project near ${city}, Texas`,
+    stats: [
+      { label: 'Area', value: '2,400 sq ft' },
+      { label: 'Use', value: 'Light industrial' },
+      { label: 'Completion', value: 'Nov 2024' },
+    ],
   },
 ]
 

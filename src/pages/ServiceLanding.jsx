@@ -6,31 +6,54 @@ import {
   SITE_URL,
   DEFAULT_IMAGE,
   ORGANIZATION_ID,
+  buildFaqPage,
   buildBreadcrumbs,
   buildJsonLdGraph,
 } from '../lib/seo'
 import { locationLinks } from '../data/locationPages'
 
 export function ServiceLanding({ page }) {
-  const { slug, title, heroTitle, heroSubtitle, intro, benefits, process, finishes } = page
+  const {
+    slug,
+    title,
+    heroTitle,
+    heroSubtitle,
+    intro,
+    benefits,
+    process,
+    finishes,
+    seoTitle,
+    seoDescription,
+    localNotes = [],
+    costFactors = [],
+    timeline,
+    faq = [],
+    pricingGuide,
+  } = page
 
-  const description = `${title} in Waco and Central Texas. Free estimates from Concrete Works LLC.`
+  const resolvedTitle = seoTitle || `${title} in Waco, TX | Concrete Works LLC`
+  const description =
+    seoDescription ||
+    `${title} in Waco, TX and Central Texas. Free estimates from Concrete Works LLC.`
   const serviceAreaText = locationLinks.map((location) => location.city).join(', ')
+  const areaServed = locationLinks.map((location) => ({
+    '@type': 'City',
+    name: location.city,
+    addressRegion: 'TX',
+  }))
 
   const serviceJsonLd = {
     '@type': 'Service',
     '@id': `${SITE_URL}/services/${slug}#service`,
     name: title,
     serviceType: title,
-    areaServed: {
-      '@type': 'AdministrativeArea',
-      name: 'Central Texas',
-    },
+    areaServed,
     provider: {
       '@id': ORGANIZATION_ID,
     },
   }
 
+  const faqJsonLd = buildFaqPage(faq)
   const breadcrumbsJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `${SITE_URL}/` },
     { name: 'Services', url: `${SITE_URL}/#services` },
@@ -38,14 +61,14 @@ export function ServiceLanding({ page }) {
   ])
 
   useSeo({
-    title: `${title} | Concrete Works LLC`,
+    title: resolvedTitle,
     description,
     canonical: `${SITE_URL}/services/${slug}`,
     url: `${SITE_URL}/services/${slug}`,
     image: DEFAULT_IMAGE,
     imageAlt: `${title} in Central Texas`,
     type: 'website',
-    jsonLd: buildJsonLdGraph(serviceJsonLd, breadcrumbsJsonLd),
+    jsonLd: buildJsonLdGraph(serviceJsonLd, faqJsonLd, breadcrumbsJsonLd),
   })
 
   return (
@@ -114,6 +137,91 @@ export function ServiceLanding({ page }) {
           </div>
         </section>
 
+        {localNotes.length > 0 && (
+          <section className="section-padding bg-white">
+            <div className="container-main">
+              <div className="text-center max-w-2xl mx-auto mb-10">
+                <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                  Local considerations
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                  Built for Waco conditions
+                </h2>
+                <p className="text-lg text-stone-600 text-pretty">
+                  Planning details that keep {title.toLowerCase()} looking sharp and performing for years.
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-3">
+                {localNotes.map((note) => (
+                  <div key={note.title} className="bg-stone-50 border border-stone-200 rounded-2xl p-6">
+                    <h3 className="font-display font-semibold text-xl text-stone-900 mb-2">
+                      {note.title}
+                    </h3>
+                    <p className="text-stone-600 text-pretty">{note.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {(costFactors.length > 0 || timeline) && (
+          <section className="section-padding bg-stone-50">
+            <div className="container-main">
+              <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+                <div>
+                  <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                    Cost factors
+                  </span>
+                  <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                    What affects {title.toLowerCase()} pricing
+                  </h2>
+                  <p className="text-lg text-stone-600 text-pretty mb-6">
+                    Every site is different. We explain options clearly so your estimate matches your goals.
+                  </p>
+                  <ul className="space-y-3 text-stone-700">
+                    {costFactors.map((factor) => (
+                      <li key={factor} className="flex items-start gap-3">
+                        <span className="mt-2 size-2 rounded-full bg-accent-500" />
+                        <span>{factor}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
+                  <h3 className="font-display font-semibold text-2xl text-stone-900 mb-3">
+                    Typical timeline
+                  </h3>
+                  <p className="text-stone-600 text-pretty">
+                    {timeline}
+                  </p>
+                </div>
+              </div>
+              {pricingGuide && (
+                <div className="mt-10 bg-white border border-stone-200 rounded-2xl p-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 shadow-sm">
+                  <div>
+                    <p className="text-sm uppercase tracking-wide text-accent-600 font-semibold mb-2">
+                      Pricing guide
+                    </p>
+                    <h3 className="font-display font-semibold text-2xl text-stone-900 mb-2">
+                      {pricingGuide.title}
+                    </h3>
+                    <p className="text-stone-600 text-pretty">
+                      {pricingGuide.description}
+                    </p>
+                  </div>
+                  <a
+                    href={pricingGuide.href}
+                    className="inline-flex items-center justify-center px-6 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors"
+                  >
+                    View pricing guide
+                  </a>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
+
         <section className="section-padding bg-white">
           <div className="container-main">
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
@@ -161,6 +269,34 @@ export function ServiceLanding({ page }) {
             </div>
           </div>
         </section>
+
+        {faq.length > 0 && (
+          <section className="section-padding bg-stone-50">
+            <div className="container-main max-w-3xl">
+              <div className="text-center mb-10">
+                <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                  FAQs
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                  {title} questions
+                </h2>
+                <p className="text-lg text-stone-600 text-pretty">
+                  Quick answers for common {title.toLowerCase()} questions.
+                </p>
+              </div>
+              <div className="space-y-4">
+                {faq.map((item) => (
+                  <div key={item.question} className="bg-white border border-stone-200 rounded-xl p-6">
+                    <h3 className="font-display font-semibold text-lg text-stone-900 mb-2">
+                      {item.question}
+                    </h3>
+                    <p className="text-stone-600 text-pretty">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <Contact />
       </main>

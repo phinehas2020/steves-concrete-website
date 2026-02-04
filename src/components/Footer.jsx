@@ -8,6 +8,7 @@ const navLinks = [
     { label: 'Gallery', href: '/jobs' },
     { label: 'About', href: '/#about' },
     { label: 'FAQ', href: '/#faq' },
+    { label: 'Pricing', href: '/guides' },
     { label: 'Contact', href: '/#contact' },
     { label: 'Blog', href: '/blog' },
 ]
@@ -25,7 +26,7 @@ export function Footer() {
             </div>
 
             <div className="container-main section-padding relative z-10">
-                <div className="grid gap-12 lg:grid-cols-5">
+                <div className="grid gap-12 lg:grid-cols-6">
                     {/* Brand */}
                     <div className="col-span-full lg:col-span-2">
                         <div className="flex items-center gap-4 mb-6">
@@ -82,6 +83,23 @@ export function Footer() {
                             <li><a href="/services/stamped-concrete" className="hover:text-white transition-colors">Stone Patterns</a></li>
                             <li><a href="/services/commercial-concrete" className="hover:text-white transition-colors">Commercial Slabs</a></li>
                             <li><a href="/services/concrete-repair" className="hover:text-white transition-colors">Repair & Resurface</a></li>
+                        </ul>
+                    </div>
+
+                    {/* Service Areas */}
+                    <div>
+                        <h3 className="font-display font-bold text-white uppercase tracking-widest text-xs mb-6">Service Areas</h3>
+                        <ul className="space-y-3 text-stone-500 text-sm font-medium">
+                            {locationLinks.slice(0, 6).map((location) => (
+                                <li key={location.slug}>
+                                    <a
+                                        href={`/${location.slug}`}
+                                        className="hover:text-white transition-colors"
+                                    >
+                                        {location.city}
+                                    </a>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
