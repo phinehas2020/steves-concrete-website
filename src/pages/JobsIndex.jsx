@@ -16,9 +16,9 @@ export function JobsIndex() {
   ])
 
   useSeo({
-    title: 'Concrete Project Gallery | Concrete Works LLC',
+    title: 'Concrete Projects Waco TX | Gallery | Concrete Works LLC',
     description:
-      'View recent concrete driveways, patios, stamped finishes, and commercial projects across Waco and Central Texas.',
+      'Driveways, patios, stamped concrete & commercial projects in Waco. Free estimate: (254) 230-3102.',
     canonical: `${SITE_URL}/jobs`,
     url: `${SITE_URL}/jobs`,
     image: DEFAULT_IMAGE,

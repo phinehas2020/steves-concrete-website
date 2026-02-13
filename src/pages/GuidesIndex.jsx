@@ -11,9 +11,9 @@ export function GuidesIndex() {
   ])
 
   useSeo({
-    title: 'Concrete Pricing Guides in Waco, TX | Concrete Works LLC',
+    title: 'Concrete Cost Guide Waco TX | Driveway, Patio, Stamped',
     description:
-      'Local pricing guides for concrete driveways, patios, and stamped concrete in Waco, TX. Built from real project experience.',
+      'Concrete driveway, patio & stamped concrete cost guides for Waco. Free estimate: (254) 230-3102.',
     canonical: `${SITE_URL}/guides`,
     url: `${SITE_URL}/guides`,
     image: DEFAULT_IMAGE,

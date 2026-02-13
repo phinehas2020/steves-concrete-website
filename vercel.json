@@ -3,25 +3,102 @@
     {
       "source": "/admin/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
       ]
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/api/sitemap.xml" },
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/admin/:path*", "destination": "/index.html" },
-    { "source": "/blog/:path*", "destination": "/index.html" },
-    { "source": "/jobs/:path*", "destination": "/index.html" },
-    { "source": "/guides/:path*", "destination": "/index.html" },
-    { "source": "/services/:path*", "destination": "/index.html" },
-    { "source": "/waco-tx-concrete-contractor", "destination": "/index.html" },
-    { "source": "/temple-tx-concrete-contractor", "destination": "/index.html" },
-    { "source": "/killeen-tx-concrete-contractor", "destination": "/index.html" },
-    { "source": "/hewitt-tx-concrete-contractor", "destination": "/index.html" },
-    { "source": "/woodway-tx-concrete-contractor", "destination": "/index.html" },
-    { "source": "/robinson-tx-concrete-contractor", "destination": "/index.html" },
-    { "source": "/lorena-tx-concrete-contractor", "destination": "/index.html" },
-    { "source": "/mcgregor-tx-concrete-contractor", "destination": "/index.html" }
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap.xml"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/jobs",
+      "destination": "/jobs/index.html"
+    },
+    {
+      "source": "/guides",
+      "destination": "/guides/index.html"
+    },
+    {
+      "source": "/blog/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/jobs/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/guides/:path*",
+      "destination": "/guides/:path*/index.html"
+    },
+    {
+      "source": "/services/:path*",
+      "destination": "/services/:path*/index.html"
+    },
+    {
+      "source": "/waco-tx-concrete-contractor",
+      "destination": "/waco-tx-concrete-contractor/index.html"
+    },
+    {
+      "source": "/temple-tx-concrete-contractor",
+      "destination": "/temple-tx-concrete-contractor/index.html"
+    },
+    {
+      "source": "/killeen-tx-concrete-contractor",
+      "destination": "/killeen-tx-concrete-contractor/index.html"
+    },
+    {
+      "source": "/hewitt-tx-concrete-contractor",
+      "destination": "/hewitt-tx-concrete-contractor/index.html"
+    },
+    {
+      "source": "/woodway-tx-concrete-contractor",
+      "destination": "/woodway-tx-concrete-contractor/index.html"
+    },
+    {
+      "source": "/robinson-tx-concrete-contractor",
+      "destination": "/robinson-tx-concrete-contractor/index.html"
+    },
+    {
+      "source": "/lorena-tx-concrete-contractor",
+      "destination": "/lorena-tx-concrete-contractor/index.html"
+    },
+    {
+      "source": "/mcgregor-tx-concrete-contractor",
+      "destination": "/mcgregor-tx-concrete-contractor/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://www.concretewaco.com/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "concretewaco.com"
+        }
+      ]
+    }
   ]
 }

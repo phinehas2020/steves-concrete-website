@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 
-const SITE_URL = 'https://concretewaco.com'
+const SITE_URL = 'https://www.concretewaco.com'
 const SITE_NAME = 'Concrete Works LLC'
 const LOCALE = 'en_US'
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 
 const DEFAULT_SEO = {
-  title: 'Concrete Contractor Waco TX | Driveways, Patios & Stamped Concrete | Concrete Works LLC',
+  title: 'Concrete Contractor Waco TX | Free Estimates (254) 230-3102 | 20+ Years',
   description:
-    'Concrete Works LLC is a Waco, Texas concrete contractor with 20+ years experience. We specialize in stamped concrete driveways, decorative patios, and commercial concrete. Free estimates: (254) 230-3102.',
+    'Top-rated concrete contractor in Waco, TX. Driveways, patios, stamped concrete & foundations. Licensed & insured. Free estimate today: (254) 230-3102.',
   canonical: SITE_URL + '/',
   image: DEFAULT_IMAGE,
   imageAlt: "Concrete Works LLC - Waco's Trusted Concrete Contractor",

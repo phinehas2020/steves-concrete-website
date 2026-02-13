@@ -7,6 +7,7 @@ import {
     Building2,
     Hammer,
     Layout,
+    Shield,
     ArrowRight,
     ChevronDown
 } from 'lucide-react'
@@ -20,6 +21,10 @@ const iconMap = {
     'commercial-concrete': Building2,
     'concrete-repair': Hammer,
     'concrete-foundations': Layout,
+    'concrete-slabs': Layout,
+    'stained-concrete': Palette,
+    'concrete-sealing': Shield,
+    'concrete-leveling': Hammer,
 }
 
 export function Services() {

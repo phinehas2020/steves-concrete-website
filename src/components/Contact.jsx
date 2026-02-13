@@ -91,6 +91,20 @@ export function Contact() {
                                     </div>
                                 </div>
                             </div>
+
+                            {/* Embedded Google Map */}
+                            <div className="rounded-xl overflow-hidden border border-stone-200 shadow-sm">
+                                <iframe
+                                    title="Concrete Works LLC service area - Waco, TX"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d212964.283721818!2d-97.158368!3d31.502073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864f83f4616e7423%3A0x6d37e0b28e7a8e0b!2sWaco%2C%20TX%2C%20USA!5e0!3m2!1sen!2sus"
+                                    width="100%"
+                                    height="250"
+                                    style={{ border: 0 }}
+                                    allowFullScreen=""
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                />
+                            </div>
                         </div>
 
                         {/* Hours */}

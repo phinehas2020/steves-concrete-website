@@ -31,10 +31,10 @@ export function ServiceLanding({ page }) {
     pricingGuide,
   } = page
 
-  const resolvedTitle = seoTitle || `${title} in Waco, TX | Concrete Works LLC`
+  const resolvedTitle = seoTitle || `${title} Waco TX | Free Estimate (254) 230-3102`
   const description =
     seoDescription ||
-    `${title} in Waco, TX and Central Texas. Free estimates from Concrete Works LLC.`
+    `${title} in Waco, TX. Licensed & insured. Free estimate: (254) 230-3102.`
   const serviceAreaText = locationLinks.map((location) => location.city).join(', ')
   const areaServed = locationLinks.map((location) => ({
     '@type': 'City',

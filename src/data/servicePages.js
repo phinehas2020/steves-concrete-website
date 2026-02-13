@@ -26,9 +26,9 @@ export const servicePages = [
     heroTitle: 'Concrete Driveways in Waco, TX',
     heroSubtitle:
       'New installs, replacements, and extensions built for daily traffic and long-term durability.',
-    seoTitle: 'Concrete Driveway Waco TX | Concrete Works LLC',
+    seoTitle: 'Concrete Driveway Waco TX | Free Estimate (254) 230-3102',
     seoDescription:
-      'Concrete driveway installation and replacement in Waco, TX. Built for Central Texas soil with proper base prep, drainage, and clean finishing. Free estimates.',
+      'Concrete driveway install & replacement in Waco. Built for Central Texas soil. Free estimate: (254) 230-3102.',
     intro:
       'A well-built driveway adds curb appeal and reduces maintenance for years. We design slope, drainage, and joint placement to protect your driveway through Central Texas summers.',
     benefits: baseBenefits,
@@ -64,6 +64,11 @@ export const servicePages = [
       'Most driveway projects take 2-3 days on site, then 7 days before vehicle traffic (full cure at 28 days).',
     faq: [
       {
+        question: 'How much does a concrete driveway cost in Waco?',
+        answer:
+          'Standard driveways typically run $6–12 per square foot; stamped or decorative finishes run $12–18 per square foot. A typical two-car driveway (600 sq ft) often lands between $3,600 and $10,800. See our concrete driveway cost guide or call (254) 230-3102 for a free site-specific estimate.',
+      },
+      {
         question: 'How thick is a residential concrete driveway?',
         answer:
           'Most residential driveways are poured 4-5 inches thick with reinforcement where needed.',
@@ -86,9 +91,9 @@ export const servicePages = [
     heroTitle: 'Concrete Patios in Waco, TX',
     heroSubtitle:
       'Gathering spaces designed for shade structures, outdoor kitchens, and easy maintenance.',
-    seoTitle: 'Concrete Patio Waco TX | Concrete Works LLC',
+    seoTitle: 'Concrete Patio Waco TX | Free Estimate (254) 230-3102',
     seoDescription:
-      'Concrete patios in Waco, TX with decorative finishes and durable base prep. Designed for Central Texas heat and outdoor living. Free estimates.',
+      'Concrete patios in Waco with stamped, stained & exposed aggregate finishes. Free estimate: (254) 230-3102.',
     intro:
       'From cozy seating pads to large entertaining spaces, we pour patios that complement your home and landscape while staying cool underfoot.',
     benefits: baseBenefits,
@@ -123,6 +128,11 @@ export const servicePages = [
       'Most patios take 1-2 days on site, then 2-3 days before light foot traffic.',
     faq: [
       {
+        question: 'How much does a concrete patio cost in Waco?',
+        answer:
+          'Standard patios typically run $6–12 per square foot; stamped or stained finishes run $12–18 per square foot. See our patio cost guide or call (254) 230-3102 for a free estimate.',
+      },
+      {
         question: 'Can you do stamped concrete patios in Waco?',
         answer:
           'Yes. We offer multiple stamp patterns and color blends for patio upgrades.',
@@ -145,9 +155,9 @@ export const servicePages = [
     heroTitle: 'Stamped Concrete in Waco, TX',
     heroSubtitle:
       'Decorative patterns and color blends for driveways, patios, and walkways.',
-    seoTitle: 'Stamped Concrete Waco TX | Concrete Works LLC',
+    seoTitle: 'Stamped Concrete Waco TX | Free Estimate (254) 230-3102',
     seoDescription:
-      'Stamped concrete in Waco, TX for patios, driveways, and walkways. Custom patterns, color blends, and sealed protection. Free estimates.',
+      'Stamped concrete driveways & patios in Waco. Stone, brick & slate patterns. Free estimate: (254) 230-3102.',
     intro:
       'Stamped concrete delivers the look of stone, slate, or brick without the maintenance. We plan joint placement and release patterns to keep the surface consistent.',
     benefits: [
@@ -186,6 +196,11 @@ export const servicePages = [
       'Stamped concrete usually takes 2-3 days on site plus 7 days before vehicle traffic.',
     faq: [
       {
+        question: 'How much does stamped concrete cost in Waco?',
+        answer:
+          'Stamped concrete typically runs $12–18 per square foot depending on pattern, color blends, and site prep. See our stamped concrete cost guide or call (254) 230-3102 for a free estimate.',
+      },
+      {
         question: 'How often should stamped concrete be sealed?',
         answer:
           'Most stamped concrete is resealed every 2-3 years depending on sun exposure and wear.',
@@ -208,9 +223,9 @@ export const servicePages = [
     heroTitle: 'Commercial Concrete in Waco, TX',
     heroSubtitle:
       'Slabs, pads, and site concrete for offices, retail, and light industrial spaces.',
-    seoTitle: 'Commercial Concrete Waco TX | Concrete Works LLC',
+    seoTitle: 'Commercial Concrete Waco TX | Free Estimate (254) 230-3102',
     seoDescription:
-      'Commercial concrete in Waco, TX for slabs, pads, and site work. Built for schedules, specs, and long-term durability. Free estimates.',
+      'Commercial concrete slabs & pads in Waco. Free estimate: (254) 230-3102.',
     intro:
       'We coordinate with builders, property managers, and business owners to keep concrete timelines on track and sites clean.',
     benefits: [
@@ -244,6 +259,11 @@ export const servicePages = [
       'Commercial slabs typically pour in 1 day once forms and rebar are ready.',
     faq: [
       {
+        question: 'How much do commercial concrete slabs cost in Waco?',
+        answer:
+          'Commercial slab pricing depends on thickness, reinforcement, and finish. Typical ranges run $6–14 per square foot. Call (254) 230-3102 for a free estimate tailored to your project.',
+      },
+      {
         question: 'Do you handle commercial pads and sidewalks?',
         answer:
           'Yes. We pour pads, walkways, and site concrete for light commercial projects.',
@@ -266,9 +286,9 @@ export const servicePages = [
     heroTitle: 'Concrete Repair in Waco, TX',
     heroSubtitle:
       'Crack repair, spall fixes, and surface refreshes to extend the life of your concrete.',
-    seoTitle: 'Concrete Repair Waco TX | Concrete Works LLC',
+    seoTitle: 'Concrete Repair Waco TX | Free Estimate (254) 230-3102',
     seoDescription:
-      'Concrete repair in Waco, TX including crack repair, resurfacing, and patching. We diagnose the cause before recommending fixes. Free estimates.',
+      'Concrete repair, crack fix & resurfacing in Waco. Free estimate: (254) 230-3102.',
     intro:
       'We evaluate the cause of cracking or surface damage before recommending patching, resurfacing, or replacement.',
     benefits: [
@@ -302,6 +322,11 @@ export const servicePages = [
       'Most repairs take 1 day on site with light use after 24-48 hours.',
     faq: [
       {
+        question: 'How much does concrete repair cost in Waco?',
+        answer:
+          'Repair costs vary by size and cause. Simple crack repairs often start around $200–500; resurfacing runs $3–7 per square foot. Call (254) 230-3102 for a free assessment and quote.',
+      },
+      {
         question: 'When should concrete be repaired vs replaced?',
         answer:
           'We recommend replacement only when slabs have severe movement or widespread failure.',
@@ -324,9 +349,9 @@ export const servicePages = [
     heroTitle: 'Concrete Foundations in Waco, TX',
     heroSubtitle:
       'Slab-on-grade and structural concrete for residential and light commercial builds.',
-    seoTitle: 'Concrete Foundation Waco TX | Concrete Works LLC',
+    seoTitle: 'Concrete Foundation Waco TX | Free Estimate (254) 230-3102',
     seoDescription:
-      'Concrete foundations and slab work in Waco, TX. Reinforced slabs built to local requirements for homes and light commercial builds. Free estimates.',
+      'Concrete foundations & slabs in Waco. Reinforced for Central Texas soil. Free estimate: (254) 230-3102.',
     intro:
       'We follow local building requirements and reinforce slabs for long-term structural stability.',
     benefits: [
@@ -360,6 +385,11 @@ export const servicePages = [
       'Foundation pours are typically completed in 1 day once forms and steel are ready.',
     faq: [
       {
+        question: 'How much does a concrete foundation or slab cost in Waco?',
+        answer:
+          'Foundation and slab pricing depends on size, thickness, and reinforcement. Residential slabs often run $5–10 per square foot. Call (254) 230-3102 for a free estimate.',
+      },
+      {
         question: 'Do you pour slabs for additions or shops?',
         answer:
           'Yes. We handle slabs for home additions, detached garages, and workshops.',
@@ -373,6 +403,264 @@ export const servicePages = [
         question: 'Can you coordinate with inspections?',
         answer:
           'Yes. We plan schedules around required inspections and next-trade timelines.',
+      },
+    ],
+  },
+  {
+    slug: 'concrete-slabs',
+    title: 'Concrete Slabs',
+    heroTitle: 'Concrete Slabs in Waco, TX',
+    heroSubtitle:
+      'Garage slabs, shop floors, equipment pads, and utility pads built for longevity.',
+    seoTitle: 'Concrete Slab Waco TX | Garage & Shop Slabs (254) 230-3102',
+    seoDescription:
+      'Concrete slabs for garages, shops & pads in Waco. Proper base, reinforcement, and PSI for your project. Free estimate: (254) 230-3102.',
+    intro:
+      'We pour slabs for garages, workshops, equipment pads, and utility pads. Each project gets the right thickness, reinforcement, and finish for its use.',
+    benefits: [
+      'Correct thickness and PSI for your application',
+      'Reinforcement planned for soil and load',
+      'Clean finish ready for flooring or equipment',
+    ],
+    process: baseProcess,
+    finishes: ['Broom finish', 'Smooth trowel', 'Light salt finish', 'Slip-resistant'],
+    localNotes: [
+      {
+        title: 'McLennan County soil',
+        description: 'We plan base depth and reinforcement for black clay expansion.',
+      },
+      {
+        title: 'Load-specific design',
+        description: 'Garage and shop slabs are sized for vehicle and equipment weight.',
+      },
+      {
+        title: 'Moisture control',
+        description: 'Vapor barriers and joint placement reduce moisture issues.',
+      },
+    ],
+    costFactors: [
+      'Square footage and thickness',
+      'PSI and reinforcement requirements',
+      'Base prep and vapor barrier',
+      'Finish type and access',
+    ],
+    timeline:
+      'Most slab pours take 1 day on site; cure time before heavy use depends on thickness and mix.',
+    faq: [
+      {
+        question: 'How much does a concrete slab cost in Waco?',
+        answer:
+          'Residential slabs typically run $5–10 per square foot depending on thickness, reinforcement, and site prep. Call (254) 230-3102 for a free estimate.',
+      },
+      {
+        question: 'What PSI do garage slabs need?',
+        answer:
+          'Most residential garage slabs use 3000–4000 PSI. We choose mix based on your use and soil conditions.',
+      },
+      {
+        question: 'Do you pour slabs for detached garages?',
+        answer:
+          'Yes. We handle slabs for garages, workshops, and outbuildings throughout Central Texas.',
+      },
+    ],
+  },
+  {
+    slug: 'stained-concrete',
+    title: 'Stained Concrete',
+    heroTitle: 'Stained Concrete in Waco, TX',
+    heroSubtitle:
+      'Acid and water-based stains for new and existing concrete — patios, walkways, and floors.',
+    seoTitle: 'Stained Concrete Waco TX | Acid & Water-Based (254) 230-3102',
+    seoDescription:
+      'Stained concrete patios & floors in Waco. Acid & water-based options. Free estimate: (254) 230-3102.',
+    intro:
+      'Stained concrete adds color and depth without the cost of stone or tile. We offer acid-based and water-based stains for new pours and existing surfaces.',
+    benefits: [
+      'Rich, varied color that ages well',
+      'Works on new and existing concrete',
+      'Sealed for UV and stain resistance',
+    ],
+    process: baseProcess,
+    finishes: ['Acid stain', 'Water-based stain', 'Multiple color washes', 'Decorative overlays'],
+    localNotes: [
+      {
+        title: 'Heat-safe application',
+        description: 'We schedule staining when conditions support proper curing and color development.',
+      },
+      {
+        title: 'Surface preparation',
+        description: 'Existing concrete is cleaned and prepared so stain adheres properly.',
+      },
+      {
+        title: 'Sealing for longevity',
+        description: 'Sealer protects color from UV fade and makes cleanup easy.',
+      },
+    ],
+    costFactors: [
+      'Surface condition and prep needs',
+      'Stain type and color complexity',
+      'Sealer choice and coverage',
+      'Square footage and access',
+    ],
+    timeline:
+      'Staining usually takes 1–2 days on site; curing and sealing add a few days before use.',
+    faq: [
+      {
+        question: 'How much does stained concrete cost in Waco?',
+        answer:
+          'Stained concrete typically runs $5–12 per square foot depending on prep, stain type, and sealing. Call (254) 230-3102 for a free estimate.',
+      },
+      {
+        question: 'Acid vs water-based stain — which is better?',
+        answer:
+          'Acid stains produce rich, varied tones that react with the concrete. Water-based stains offer more color control and are easier to apply. We can discuss which fits your project.',
+      },
+      {
+        question: 'Can you stain existing concrete?',
+        answer:
+          'Yes. We evaluate surface condition, clean and prep, then apply stain. Results vary with concrete age and condition.',
+      },
+    ],
+  },
+  {
+    slug: 'concrete-sealing',
+    title: 'Concrete Sealing',
+    heroTitle: 'Concrete Sealing in Waco, TX',
+    heroSubtitle:
+      'Protect driveways, patios, and stamped concrete from stains, UV, and moisture.',
+    seoTitle: 'Concrete Sealing Waco TX | Driveway & Patio Sealer (254) 230-3102',
+    seoDescription:
+      'Concrete sealing in Waco. Protect driveways, patios & stamped concrete. Free estimate: (254) 230-3102.',
+    intro:
+      'Sealing extends the life and look of concrete. We apply penetrating and topical sealers to new and existing surfaces.',
+    benefits: [
+      'Reduces staining and moisture absorption',
+      'Slows UV fade on colored or stamped concrete',
+      'Easier cleaning and maintenance',
+    ],
+    process: [
+      {
+        title: 'Surface evaluation',
+        description: 'We check condition, previous sealers, and surface type.',
+      },
+      {
+        title: 'Cleaning + prep',
+        description: 'Surfaces are cleaned and dried before sealing.',
+      },
+      {
+        title: 'Sealer application',
+        description: 'Penetrating or topical sealer applied for even coverage.',
+      },
+    ],
+    finishes: ['Penetrating sealer', 'Acrylic topical', 'Wet-look sealer', 'Slip-resistant options'],
+    localNotes: [
+      {
+        title: 'Texas sun protection',
+        description: 'UV-resistant sealers help colored and stamped concrete hold its look.',
+      },
+      {
+        title: 'Resealing schedule',
+        description: 'Most outdoor concrete needs resealing every 2–3 years in Central Texas.',
+      },
+      {
+        title: 'Stamped concrete care',
+        description: 'Sealed stamped concrete lasts longer and stays easier to clean.',
+      },
+    ],
+    costFactors: [
+      'Square footage',
+      'Surface condition and prep',
+      'Sealer type and number of coats',
+      'Access and obstacles',
+    ],
+    timeline:
+      'Sealing typically takes 1 day; surfaces need 24–48 hours to cure before use.',
+    faq: [
+      {
+        question: 'How much does concrete sealing cost in Waco?',
+        answer:
+          'Sealing typically runs $1–4 per square foot depending on surface type, prep, and sealer choice. Call (254) 230-3102 for a free estimate.',
+      },
+      {
+        question: 'How often should I reseal my driveway?',
+        answer:
+          'Most driveways benefit from resealing every 2–3 years. High-traffic or heavy sun exposure may need more frequent resealing.',
+      },
+      {
+        question: 'Can you seal stamped concrete?',
+        answer:
+          'Yes. We seal stamped concrete to protect color and make maintenance easier.',
+      },
+    ],
+  },
+  {
+    slug: 'concrete-leveling',
+    title: 'Concrete Leveling',
+    heroTitle: 'Concrete Leveling in Waco, TX',
+    heroSubtitle:
+      'Mudjacking and poly leveling to raise sunken slabs and restore flat surfaces.',
+    seoTitle: 'Concrete Leveling Waco TX | Mudjacking & Polyjacking (254) 230-3102',
+    seoDescription:
+      'Concrete leveling in Waco. Raise sunken driveways & sidewalks. Mudjacking & poly foam. Free estimate: (254) 230-3102.',
+    intro:
+      'Sunken driveways and sidewalks are often caused by soil settlement. We evaluate the cause and offer mudjacking or poly foam leveling when appropriate.',
+    benefits: [
+      'Restore flat surfaces without full replacement',
+      'Quick turnaround and minimal disruption',
+      'Address trip hazards and drainage',
+    ],
+    process: [
+      {
+        title: 'Inspection',
+        description: 'We check the slab and underlying soil to recommend the best approach.',
+      },
+      {
+        title: 'Drill and inject',
+        description: 'Holes are drilled and grout or poly foam is injected under the slab.',
+      },
+      {
+        title: 'Patch and finish',
+        description: 'Holes are patched and the surface is left ready for use.',
+      },
+    ],
+    finishes: ['Mudjacking (cement grout)', 'Polyurethane foam leveling', 'Surface patch blend'],
+    localNotes: [
+      {
+        title: 'Black clay settlement',
+        description: 'Central Texas soil movement often causes slabs to settle. We assess whether leveling or replacement is best.',
+      },
+      {
+        title: 'When leveling works',
+        description: 'Leveling is ideal when slabs have settled but not cracked severely.',
+      },
+      {
+        title: 'Drainage improvement',
+        description: 'Leveling can restore slope and improve water runoff.',
+      },
+    ],
+    costFactors: [
+      'Square footage and number of slabs',
+      'Settlement depth and access',
+      'Method (mudjacking vs poly)',
+      'Underlying cause and soil condition',
+    ],
+    timeline:
+      'Most leveling projects take 1 day; surfaces are usable within 24–48 hours.',
+    faq: [
+      {
+        question: 'How much does concrete leveling cost in Waco?',
+        answer:
+          'Leveling typically runs $3–8 per square foot depending on method and depth. Call (254) 230-3102 for a free assessment and quote.',
+      },
+      {
+        question: 'Mudjacking vs poly leveling — which is better?',
+        answer:
+          'Mudjacking uses cement grout and is cost-effective. Poly foam is lighter, cures faster, and works in tighter spaces. We recommend based on your situation.',
+      },
+      {
+        question: 'Can you level a sunken driveway?',
+        answer:
+          'Yes. We evaluate settlement and drainage, then recommend leveling or replacement. Many sunken driveways can be raised successfully.',
       },
     ],
   },

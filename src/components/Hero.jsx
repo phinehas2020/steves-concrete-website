@@ -182,14 +182,17 @@ export function Hero() {
                         </span>
                     </motion.div>
 
-                    {/* Headline - Fluid Typography */}
+                    {/* Headline - GSC keyword-aligned: concrete contractor waco tx */}
                     <motion.h1
                         className="font-display font-bold text-white text-balance leading-tight mb-6"
                         style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4.5rem)' }}
                         variants={staggerItem}
                     >
-                        Waco's Trusted
-                        <span className="block text-accent-400">Concrete Contractor</span>
+                        Concrete Contractor
+                        <span className="block text-accent-400">Waco TX</span>
+                        <span className="block text-lg sm:text-xl font-medium text-stone-400 mt-2">
+                            Licensed &amp; Insured · 20+ Years
+                        </span>
                     </motion.h1>
 
                     {/* Subheadline */}

@@ -25,7 +25,7 @@ export function LocationLanding({ page }) {
     faq,
   } = page
 
-  const description = `${city} concrete contractor for driveways, patios, stamped concrete, and commercial work. Free estimates from Concrete Works LLC.`
+  const description = `${city} concrete contractor. Driveways, patios, stamped concrete, foundations. Free estimate: (254) 230-3102.`
 
   const serviceJsonLd = {
     '@type': 'Service',
@@ -49,7 +49,7 @@ export function LocationLanding({ page }) {
   ])
 
   useSeo({
-    title: `${heroTitle} | Concrete Works LLC`,
+    title: `${heroTitle} | Free Estimate (254) 230-3102`,
     description,
     canonical: `${SITE_URL}/${slug}`,
     url: `${SITE_URL}/${slug}`,

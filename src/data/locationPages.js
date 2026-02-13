@@ -66,9 +66,9 @@ export const locationPages = [
   {
     slug: 'waco-tx-concrete-contractor',
     city: 'Waco',
-    heroTitle: 'Concrete Contractor in Waco, TX',
+    heroTitle: 'Concrete Contractor Waco TX',
     heroSubtitle:
-      'Stamped concrete, driveways, patios, and commercial slabs built to last in Waco and nearby communities.',
+      'Driveways, patios, stamped concrete, and foundations. Free estimate: (254) 230-3102.',
     intro:
       'Concrete Works LLC partners with Waco homeowners, builders, and businesses for reliable concrete installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
     highlights: baseHighlights,

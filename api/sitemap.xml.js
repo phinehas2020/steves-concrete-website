@@ -1,7 +1,7 @@
 /* eslint-env node */
 import { createClient } from '@supabase/supabase-js'
 
-const SITE_URL = 'https://concretewaco.com'
+const SITE_URL = 'https://www.concretewaco.com'
 const LOCATION_PAGES = [
   'waco-tx-concrete-contractor',
   'temple-tx-concrete-contractor',
@@ -19,6 +19,15 @@ const SERVICE_PAGES = [
   'services/commercial-concrete',
   'services/concrete-repair',
   'services/concrete-foundations',
+  'services/concrete-slabs',
+  'services/stained-concrete',
+  'services/concrete-sealing',
+  'services/concrete-leveling',
+]
+const GUIDE_PAGES = [
+  'guides/concrete-driveway-cost-waco-tx',
+  'guides/stamped-concrete-cost-waco-tx',
+  'guides/concrete-patio-cost-waco-tx',
 ]
 
 function formatDate(value) {
@@ -76,6 +85,14 @@ export default async function handler(req, res) {
       loc: `${SITE_URL}/${slug}`,
       changefreq: 'monthly',
       priority: '0.65',
+    })
+  })
+
+  GUIDE_PAGES.forEach((slug) => {
+    urls.push({
+      loc: `${SITE_URL}/${slug}`,
+      changefreq: 'monthly',
+      priority: '0.68',
     })
   })
 

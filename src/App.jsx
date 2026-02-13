@@ -1,6 +1,7 @@
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Services } from './components/Services'
+import { CostQuickAnswers } from './components/CostQuickAnswers'
 import { Values } from './components/Values'
 import { Gallery } from './components/Gallery'
 import { Testimonials } from './components/Testimonials'
@@ -26,20 +27,23 @@ function App() {
           <Services />
         </div>
         <div className="order-3 md:order-none">
+          <CostQuickAnswers />
+        </div>
+        <div className="order-4 md:order-none">
           <Gallery />
         </div>
         {/* Values - Hidden on mobile to reduce scroll to Gallery */}
         <div className="hidden md:block md:order-none">
           <Values />
         </div>
-        <div className="order-5 md:order-none">
+        <div className="order-6 md:order-none">
           <Testimonials />
         </div>
-        <div className="order-6 md:order-none">
+        <div className="order-7 md:order-none">
           <FAQ />
         </div>
         {/* Move Contact earlier on mobile for faster conversions */}
-        <div className="order-4 md:order-none">
+        <div className="order-5 md:order-none">
           <Contact />
         </div>
       </main>
