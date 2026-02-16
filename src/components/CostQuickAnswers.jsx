@@ -41,7 +41,7 @@ export function CostQuickAnswers() {
               Quick Answers
             </span>
             <h2 className="font-display font-bold text-2xl sm:text-3xl text-stone-900">
-              How much does concrete cost in Waco?
+              Waco concrete contractor pricing: quick answers
             </h2>
           </div>
           <a

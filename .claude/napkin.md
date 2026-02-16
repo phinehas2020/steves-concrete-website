@@ -117,3 +117,91 @@
 - Sitemap misses `/guides` and currently outputs no `/jobs/:slug` URLs even though public jobs with slugs exist.
 - `/admin` (no trailing slash) is missing `X-Robots-Tag`; `/admin/` and nested admin paths include it.
 - Mobile homepage performance bottleneck is image payload + unused JS (Lighthouse perf 0.61, LCP 7.6s).
+
+## 2026-02-16 — Live competitor audit for "Waco Concrete Contractor"
+
+### Context
+- User asked for extensive research on why these domains outrank ours:
+  - gonzalezconcreteconstruction.com
+  - wacoconcrete.net
+  - wacoconcretecontractor.com
+- Goal: diagnosis + execution plan.
+
+### What worked
+- Pulled live on-page signals (title/description/canonical/h1/json-ld), robots/sitemaps, and content depth from raw HTML.
+- Confirmed query-level data via GSC MCP `detect_quick_wins` for `sc-domain:concretewaco.com`.
+- Verified technical behavior with direct HTTP checks (canonical redirects + 404 behavior).
+
+### Mistakes / corrections
+- Firecrawl MCP search/scrape failed repeatedly; pivoted to direct web search + curl-based audit.
+- Attempted Bing/DDG SERP scraping, but anti-bot challenge blocked reliable parsing; used available web SERP evidence + direct domain analysis.
+
+### Critical findings
+1. **Raw HTML content gap (highest impact):** `www.concretewaco.com` pages expose metadata + hidden H1, but almost no crawlable body copy/links in source. Home and key SEO routes show ~12-18 words in raw HTML, while competitors expose hundreds to thousands.
+2. **Soft-404 issue persists:** unknown routes on `www.concretewaco.com` return `200` + homepage title instead of `404`.
+3. **GSC duplication/canonical split indicators:** quick-wins output shows both `http://concretewaco.com/` and `https://concretewaco.com/` page variants for similar queries, with different average positions.
+4. **CTR and click-through weakness:** multiple high-intent queries have impressions with `0` clicks in GSC output.
+
+### Evidence snapshot
+- Homepage raw text words:
+  - `https://www.concretewaco.com/` => 18
+  - `https://wacoconcretecontractor.com/` => 1839
+  - `https://www.gonzalezconcreteconstruction.com` => 711
+  - `https://www.wacoconcrete.net/index.html` => 5372
+- Homepage source links in raw HTML:
+  - `https://www.concretewaco.com/` => 0 `<a>` tags found in source
+- Unknown route behavior:
+  - `https://www.concretewaco.com/does-not-exist` => HTTP 200 (homepage title)
+
+### Next implementation target
+- Move from metadata-only prerender to true prerender/SSR for homepage + location + service + guide pages so Google receives crawlable body copy and internal links in initial HTML.
+- Fix unknown route handling to return real 404 status.
+- Consolidate canonical signals and monitor GSC for one canonical URL variant per query/page.
+
+## 2026-02-16 — Implemented Phases 1, 2, 3 (SEO recovery)
+
+### Context
+- User asked to execute all three phases from competitive SEO plan.
+
+### What was implemented
+1. **True source-visible prerender content**
+   - Replaced metadata-only prerender approach in `scripts/prerender-routes.mjs`.
+   - New prerender now injects real route body HTML into `#root` for:
+     - Homepage
+     - All service routes
+     - All location routes
+     - Guide index + guide detail routes
+     - Blog index + jobs index fallback content
+   - Content includes visible H1/H2s, FAQs, internal links, action links, and local-intent copy.
+
+2. **Soft-404 mitigation / routing hygiene**
+   - Removed catch-all rewrite from `vercel.json` (`/(.*) -> /index.html`) to avoid unknown-path homepage 200 behavior.
+   - Added explicit noindex header for `/admin` (without trailing slash) in addition to `/admin/(.*)`.
+
+3. **On-page relevance + internal linking upgrades in React pages**
+   - Updated homepage messaging for local-intent language:
+     - `src/components/Hero.jsx`
+     - `src/components/Services.jsx`
+     - `src/components/CostQuickAnswers.jsx`
+   - Added cross-link clusters:
+     - `src/pages/ServiceLanding.jsx` now links to related services + pricing guides.
+     - `src/pages/LocationLanding.jsx` now links to pricing guides.
+     - `src/pages/GuidesIndex.jsx` now links to services + city pages.
+
+### Validation
+- `npm run build` succeeded after changes.
+- Source-visible content checks on built HTML:
+  - `dist/index.html`: 981 words, 24 links, 1 H1
+  - `dist/services/concrete-driveways/index.html`: 660 words, 18 links, 1 H1
+  - `dist/waco-tx-concrete-contractor/index.html`: 437 words, 13 links, 1 H1
+  - `dist/guides/concrete-driveway-cost-waco-tx/index.html`: 403 words, 5 links, 1 H1
+
+### Mistakes / notes
+- `npm run lint` fails due many pre-existing repository-wide lint issues not introduced in this pass.
+- Firecrawl MCP tools were unavailable earlier in session; local/direct validation path used.
+
+### Next operational step
+- Deploy to Vercel and re-validate production responses for:
+  - unknown URL => HTTP 404
+  - raw HTML word count + links on priority routes
+  - GSC recrawl/reindex for homepage + top services + top locations + guides

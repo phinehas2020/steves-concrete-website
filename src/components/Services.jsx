@@ -73,8 +73,8 @@ export function Services() {
                         className="text-lg text-stone-600 text-pretty"
                     >
                         From residential driveways to commercial slabs, we bring 20+ years of
-                        experience to every pour. We don't just pour concrete; we build
-                        foundations for your home and business.
+                        Waco-area concrete experience to every pour. We plan for Central Texas
+                        soil movement, drainage, and heat so your slab performs long after install.
                     </motion.p>
                 </div>
 

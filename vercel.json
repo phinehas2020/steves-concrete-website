@@ -1,6 +1,15 @@
 {
   "headers": [
     {
+      "source": "/admin",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
       "source": "/admin/(.*)",
       "headers": [
         {
@@ -82,10 +91,6 @@
     {
       "source": "/mcgregor-tx-concrete-contractor",
       "destination": "/mcgregor-tx-concrete-contractor/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ],
   "redirects": [

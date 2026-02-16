@@ -178,7 +178,7 @@ export function Hero() {
                             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                         />
                         <span className="text-xs sm:text-sm font-medium text-stone-300">
-                            Serving Central Texas Since 2005
+                            Serving Waco, Temple & McLennan County Since 2005
                         </span>
                     </motion.div>
 
@@ -200,8 +200,8 @@ export function Hero() {
                         className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed"
                         variants={staggerItem}
                     >
-                        <span className="sm:hidden">500+ projects across Central Texas. Stamped driveways, decorative patios, and commercial concrete.</span>
-                        <span className="hidden sm:inline">Concrete Works LLC has completed 500+ projects across Central Texas since 2005. We specialize in stamped driveways, decorative patios, and commercial concrete.</span>
+                        <span className="sm:hidden">500+ projects across Central Texas. Built for black clay soil, heat, and long-term durability.</span>
+                        <span className="hidden sm:inline">Concrete Works LLC has completed 500+ projects across Central Texas since 2005. We build stamped driveways, decorative patios, and commercial concrete engineered for black clay soil movement and Texas heat cycles.</span>
                     </motion.p>
 
                     {/* CTAs */}

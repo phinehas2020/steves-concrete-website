@@ -2,6 +2,8 @@ import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { Contact } from '../components/Contact'
 import { guidePages } from '../data/guides'
+import { servicePages } from '../data/servicePages'
+import { locationLinks } from '../data/locationPages'
 import { useSeo, SITE_URL, DEFAULT_IMAGE, buildBreadcrumbs, buildJsonLdGraph } from '../lib/seo'
 
 export function GuidesIndex() {
@@ -80,6 +82,47 @@ export function GuidesIndex() {
                   </a>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-padding bg-stone-50">
+          <div className="container-main">
+            <div className="grid gap-10 lg:grid-cols-2">
+              <div className="bg-white border border-stone-200 rounded-2xl p-6">
+                <h2 className="font-display font-semibold text-2xl text-stone-900 mb-4">
+                  Related concrete services
+                </h2>
+                <div className="space-y-3">
+                  {servicePages.slice(0, 6).map((service) => (
+                    <a
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className="flex items-center justify-between px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg hover:border-stone-300"
+                    >
+                      <span className="font-semibold text-stone-800">{service.title}</span>
+                      <span className="text-sm text-stone-500">View service</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-white border border-stone-200 rounded-2xl p-6">
+                <h2 className="font-display font-semibold text-2xl text-stone-900 mb-4">
+                  City pages
+                </h2>
+                <div className="space-y-3">
+                  {locationLinks.map((location) => (
+                    <a
+                      key={location.slug}
+                      href={`/${location.slug}`}
+                      className="flex items-center justify-between px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg hover:border-stone-300"
+                    >
+                      <span className="font-semibold text-stone-800">{location.city}</span>
+                      <span className="text-sm text-stone-500">View location</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

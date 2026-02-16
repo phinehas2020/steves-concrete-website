@@ -11,6 +11,8 @@ import {
   buildJsonLdGraph,
 } from '../lib/seo'
 import { locationLinks } from '../data/locationPages'
+import { servicePages } from '../data/servicePages'
+import { guideLinks } from '../data/guides'
 
 export function ServiceLanding({ page }) {
   const {
@@ -36,6 +38,10 @@ export function ServiceLanding({ page }) {
     seoDescription ||
     `${title} in Waco, TX. Licensed & insured. Free estimate: (254) 230-3102.`
   const serviceAreaText = locationLinks.map((location) => location.city).join(', ')
+  const relatedServices = servicePages
+    .filter((service) => service.slug !== slug)
+    .slice(0, 4)
+  const relatedGuides = guideLinks.slice(0, 3)
   const areaServed = locationLinks.map((location) => ({
     '@type': 'City',
     name: location.city,
@@ -262,6 +268,58 @@ export function ServiceLanding({ page }) {
                     >
                       <span className="font-semibold text-stone-800">{location.city}</span>
                       <span className="text-sm text-stone-500">View location</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-padding bg-stone-50">
+          <div className="container-main">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                Related Links
+              </span>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                Plan your project with related services and guides
+              </h2>
+              <p className="text-lg text-stone-600 text-pretty">
+                Compare service options, local pricing guides, and nearby coverage before scheduling your estimate.
+              </p>
+            </div>
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="bg-white border border-stone-200 rounded-2xl p-6">
+                <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
+                  Related services
+                </h3>
+                <div className="space-y-3">
+                  {relatedServices.map((service) => (
+                    <a
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className="flex items-center justify-between px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg hover:border-stone-300"
+                    >
+                      <span className="font-semibold text-stone-800">{service.title}</span>
+                      <span className="text-sm text-stone-500">View service</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-white border border-stone-200 rounded-2xl p-6">
+                <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
+                  Pricing guides
+                </h3>
+                <div className="space-y-3">
+                  {relatedGuides.map((guide) => (
+                    <a
+                      key={guide.href}
+                      href={guide.href}
+                      className="flex items-center justify-between px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg hover:border-stone-300"
+                    >
+                      <span className="font-semibold text-stone-800">{guide.label}</span>
+                      <span className="text-sm text-stone-500">Read guide</span>
                     </a>
                   ))}
                 </div>

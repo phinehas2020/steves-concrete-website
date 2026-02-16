@@ -10,6 +10,7 @@ import {
   buildFaqPage,
   buildJsonLdGraph,
 } from '../lib/seo'
+import { guideLinks } from '../data/guides'
 
 export function LocationLanding({ page }) {
   const {
@@ -236,6 +237,34 @@ export function LocationLanding({ page }) {
                   </a>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-padding bg-stone-50">
+          <div className="container-main">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                Pricing Resources
+              </span>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                Concrete pricing guides for {city} projects
+              </h2>
+              <p className="text-lg text-stone-600 text-pretty">
+                Use these local cost guides to compare options before your estimate.
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {guideLinks.map((guide) => (
+                <a
+                  key={guide.href}
+                  href={guide.href}
+                  className="flex items-center justify-between gap-3 px-4 py-4 bg-white rounded-lg border border-stone-200 hover:border-stone-300 hover:bg-stone-100 transition-colors"
+                >
+                  <span className="font-semibold text-stone-800">{guide.label}</span>
+                  <span className="text-sm text-stone-500">Open</span>
+                </a>
+              ))}
             </div>
           </div>
         </section>
