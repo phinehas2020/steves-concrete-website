@@ -12,6 +12,7 @@ const navLinks = [
     { label: 'Contact', href: '/#contact' },
     { label: 'Blog', href: '/blog' },
     { label: 'Privacy Policy', href: '/privacy-policy' },
+    { label: 'Terms and Conditions', href: '/terms-and-conditions' },
 ]
 
 export function Footer() {
@@ -154,6 +155,12 @@ export function Footer() {
                             className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700 hover:text-white"
                         >
                             Privacy
+                        </a>
+                        <a
+                            href="/terms-and-conditions"
+                            className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700 hover:text-white"
+                        >
+                            Terms
                         </a>
                     </div>
                 </div>

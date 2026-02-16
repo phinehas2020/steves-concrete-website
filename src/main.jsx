@@ -6,6 +6,7 @@ import App from './App.jsx'
 import { AdminApp } from './admin/AdminApp'
 import { BlogIndex } from './pages/BlogIndex'
 import { BlogPost } from './pages/BlogPost'
+import { TermsAndConditions } from './pages/TermsAndConditions'
 import { NotFound } from './pages/NotFound'
 import { PrivacyPolicy } from './pages/PrivacyPolicy'
 import { LocationLanding } from './pages/LocationLanding'
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/guides" element={<GuidesIndex />} />
         <Route path="/admin/*" element={<AdminApp />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         {locationPages.map((page) => (
           <Route
             key={page.slug}

@@ -114,6 +114,14 @@ const staticRoutes = [
     h1: 'Privacy Policy',
     renderContent: renderPrivacyPolicyContent,
   },
+  {
+    path: '/terms-and-conditions',
+    title: 'Terms and Conditions | Concrete Works LLC',
+    description:
+      'Review the terms for estimates, scheduling, communication, and service scope for Concrete Works LLC.',
+    h1: 'Terms and Conditions',
+    renderContent: renderTermsAndConditionsContent,
+  },
 ]
 
 const serviceLinks = servicePageData.map((service) => ({
@@ -585,6 +593,81 @@ function renderPrivacyPolicyContent() {
           'Lead records are retained only for legitimate business follow-up and operations.',
           'You may request correction, access, or deletion by contacting us directly.',
           'This policy is updated as our systems evolve to stay accurate.',
+        ],
+      },
+    ],
+  })
+}
+
+function renderTermsAndConditionsContent() {
+  return renderPage({
+    eyebrow: 'Legal',
+    title: 'Terms and Conditions',
+    subtitle: 'Service terms for clients and prospective clients of Concrete Works LLC.',
+    introParagraphs: [
+      'By using this site or contacting our team, you agree to the terms described on this page.',
+      'These terms clarify expectations before work starts, including estimates, scheduling, and communication.',
+    ],
+    sections: [
+      {
+        title: 'Acceptance of Terms',
+        bullets: [
+          'You agree to these terms when submitting an estimate request or using our services.',
+          'If you do not agree, please contact us instead of submitting project details.',
+        ],
+      },
+      {
+        title: 'Estimates and Scope',
+        bullets: [
+          'Quoted pricing is based on the information provided and visible site conditions at the time of estimate.',
+          'Project scope, mix, finish, and timeline are confirmed in writing before final scheduling.',
+          'Hidden issues found during the job may change scope and pricing.',
+        ],
+      },
+      {
+        title: 'Client Responsibilities',
+        bullets: [
+          'Provide clear property access and accurate measurements.',
+          'Inform us of site constraints, utility conflicts, and drainage concerns.',
+          'Protect nearby surfaces and coordinate pets, vehicles, and occupied areas during active work.',
+        ],
+      },
+      {
+        title: 'Scheduling and Weather',
+        bullets: [
+          'Weather, permitting, and material availability may change planned delivery windows.',
+          'We will promptly communicate delays and suggest practical alternatives.',
+        ],
+      },
+      {
+        title: 'Communication and SMS',
+        bullets: [
+          'You agree to receive email or text updates connected to your estimate or service request.',
+          'Message frequency is based on project need, with standard carrier messaging rates and limits.',
+          'If you reply STOP to any business text, we will stop non-essential outbound messages.',
+        ],
+      },
+      {
+        title: 'Liability and Limits',
+        bullets: [
+          'We are properly insured for business operations.',
+          'Long-term concrete performance depends on soil movement, load patterns, and ongoing maintenance practices.',
+          'All workmanship concerns should be reported promptly so we can review the issue in context.',
+        ],
+      },
+      {
+        title: 'Dispute Process',
+        bullets: [
+          'Contact us first with any concern so we can resolve it quickly.',
+          'If unresolved, disputes may proceed under Texas law and in the courts of McLennan County.',
+          'You should keep communication records and photos for review.',
+        ],
+      },
+      {
+        title: 'Updates',
+        bullets: [
+          'We may update these terms from time to time.',
+          'Updated terms apply after the posting date shown on this page.',
         ],
       },
     ],

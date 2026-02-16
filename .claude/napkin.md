@@ -54,6 +54,18 @@
 4. Added prerender metadata support in `scripts/prerender-routes.mjs`.
 5. Added `/privacy-policy` to sitemap output in `api/sitemap.xml.js`.
 
+## 2026-02-16 — Terms and Conditions page
+
+### Context
+- User requested a Terms and Conditions URL for the site.
+
+### What was done
+1. Added `src/pages/TermsAndConditions.jsx` with structured sections, SEO metadata, and shared layout.
+2. Added route `/terms-and-conditions` in `src/main.jsx`.
+3. Added Terms links in `src/components/Header.jsx` and `src/components/Footer.jsx`.
+4. Added prerender route metadata and content in `scripts/prerender-routes.mjs`.
+5. Added `/terms-and-conditions` to sitemap output in `api/sitemap.xml.js`.
+
 ## 2026-02-13 — Competitor-beating plan implemented
 
 ### Context

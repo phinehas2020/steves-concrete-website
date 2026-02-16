@@ -75,6 +75,11 @@ export default async function handler(req, res) {
       changefreq: 'yearly',
       priority: '0.4',
     },
+    {
+      loc: `${SITE_URL}/terms-and-conditions`,
+      changefreq: 'yearly',
+      priority: '0.4',
+    },
   ]
 
   LOCATION_PAGES.forEach((slug) => {
