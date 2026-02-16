@@ -106,6 +106,14 @@ const staticRoutes = [
     h1: 'Concrete Pricing Guides in Waco, TX',
     renderContent: renderGuidesIndexContent,
   },
+  {
+    path: '/privacy-policy',
+    title: 'Privacy Policy | Concrete Works LLC',
+    description:
+      'Read how Concrete Works LLC collects, uses, and protects personal information submitted through website lead forms and communications.',
+    h1: 'Privacy Policy',
+    renderContent: renderPrivacyPolicyContent,
+  },
 ]
 
 const serviceLinks = servicePageData.map((service) => ({
@@ -521,6 +529,63 @@ function renderGuidesIndexContent() {
       {
         title: 'Services these guides support',
         links: serviceLinks,
+      },
+    ],
+  })
+}
+
+function renderPrivacyPolicyContent() {
+  return renderPage({
+    eyebrow: 'Privacy',
+    title: 'Privacy Policy',
+    subtitle:
+      'Concrete Works LLC values clear and practical privacy practices for leads and communication.',
+    introParagraphs: [
+      'Our goal is straightforward: only collect what helps us communicate and deliver projects safely and effectively.',
+      'By submitting a request on our site, you are allowing us to process your contact details for estimates and project follow-up.',
+    ],
+    sections: [
+      {
+        title: 'Information We Collect',
+        bullets: [
+          'Name, phone number, email, project service, and message details from our contact form.',
+          'IP address, user agent, and submitted page metadata for lead validation and support.',
+          'Communication details you provide directly during calls or text follow-up.',
+        ],
+      },
+      {
+        title: 'How We Use Your Information',
+        bullets: [
+          'To process and prioritize incoming leads.',
+          'To respond with estimate follow-up and scheduling communication.',
+          'To send internal email and SMS notifications to our team.',
+          'To improve lead workflow and client response quality.',
+        ],
+      },
+      {
+        title: 'Communications',
+        bullets: [
+          'If SMS is used, messaging may include lead details necessary for internal team follow-up.',
+          'You can opt out of non-essential follow-up messaging at any time by replying STOP or contacting us.',
+          'We do not sell lead data to advertising networks or unrelated third parties.',
+        ],
+      },
+      {
+        title: 'Third-Party Services',
+        bullets: [
+          'Supabase: lead storage and admin dashboard authentication.',
+          'Vercel: hosting and serverless API execution.',
+          'Twilio: SMS delivery.',
+          'Resend: outbound email notifications.',
+        ],
+      },
+      {
+        title: 'Data Retention and Your Requests',
+        bullets: [
+          'Lead records are retained only for legitimate business follow-up and operations.',
+          'You may request correction, access, or deletion by contacting us directly.',
+          'This policy is updated as our systems evolve to stay accurate.',
+        ],
       },
     ],
   })

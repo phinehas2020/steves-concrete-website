@@ -41,6 +41,19 @@
    - Returns success/failed counts.
 2. Added `sendAllLeadSms` in `src/admin/AdminLeads.jsx` and a new “Send SMS (N)” button in the leads controls.
 3. Added broadcast status states/messages on the leads page for success/error of bulk sends.
+
+## 2026-02-16 — Privacy Policy page
+
+### Context
+- User requested a public privacy policy page for the site.
+
+### What was done
+1. Added `src/pages/PrivacyPolicy.jsx` with full structured policy sections and SEO metadata.
+2. Added route `/privacy-policy` in `src/main.jsx`.
+3. Linked the page in Header and Footer navigation.
+4. Added prerender metadata support in `scripts/prerender-routes.mjs`.
+5. Added `/privacy-policy` to sitemap output in `api/sitemap.xml.js`.
+
 ## 2026-02-13 — Competitor-beating plan implemented
 
 ### Context

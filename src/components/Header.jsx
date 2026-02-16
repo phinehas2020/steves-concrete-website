@@ -12,6 +12,7 @@ const navLinks = [
     { label: 'Pricing', href: '/guides' },
     { label: 'Contact', href: '/#contact' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Privacy Policy', href: '/privacy-policy' },
 ]
 
 export function Header() {

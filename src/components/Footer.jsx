@@ -11,6 +11,7 @@ const navLinks = [
     { label: 'Pricing', href: '/guides' },
     { label: 'Contact', href: '/#contact' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Privacy Policy', href: '/privacy-policy' },
 ]
 
 export function Footer() {
@@ -148,6 +149,12 @@ export function Footer() {
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Licensed</span>
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Insured</span>
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Local</span>
+                        <a
+                            href="/privacy-policy"
+                            className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700 hover:text-white"
+                        >
+                            Privacy
+                        </a>
                     </div>
                 </div>
             </div>

@@ -70,6 +70,11 @@ export default async function handler(req, res) {
       changefreq: 'weekly',
       priority: '0.7',
     },
+    {
+      loc: `${SITE_URL}/privacy-policy`,
+      changefreq: 'yearly',
+      priority: '0.4',
+    },
   ]
 
   LOCATION_PAGES.forEach((slug) => {

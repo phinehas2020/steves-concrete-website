@@ -7,6 +7,7 @@ import { AdminApp } from './admin/AdminApp'
 import { BlogIndex } from './pages/BlogIndex'
 import { BlogPost } from './pages/BlogPost'
 import { NotFound } from './pages/NotFound'
+import { PrivacyPolicy } from './pages/PrivacyPolicy'
 import { LocationLanding } from './pages/LocationLanding'
 import { ServiceLanding } from './pages/ServiceLanding'
 import { JobsIndex } from './pages/JobsIndex'
@@ -28,6 +29,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/jobs/:slug" element={<JobDetail />} />
         <Route path="/guides" element={<GuidesIndex />} />
         <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         {locationPages.map((page) => (
           <Route
             key={page.slug}
