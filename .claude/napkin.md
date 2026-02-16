@@ -1,5 +1,23 @@
 # Napkin
 
+## 2026-02-16 — n8n blog publishing endpoint
+
+### Context
+- User requested publishing blog posts from n8n with title, content, image handling, and selecting header/cover image.
+
+### What was done
+1. Added `api/blog-post.js`:
+   - API key auth via `N8N_BLOG_API_KEY` (or `BLOG_API_KEY` fallback).
+   - Accepts `title` + `content`/`text`, optional `slug/status/excerpt/publishedAt`.
+   - Handles `images` as URLs, base64 blobs, or data URLs.
+   - Auto-selects header image via `headerImageUrl`, `headerImageIndex`, `isHeader`, or first image fallback.
+   - Upserts into `blog_posts` by slug and returns saved post metadata.
+2. Added `docs/n8n-blog-post-api.md` with n8n payload examples and response format.
+3. Added `.env.example` entries for `N8N_BLOG_API_KEY` and `BLOG_IMAGES_BUCKET`.
+
+### Notes
+- Existing unrelated edits in `.env.example` and `api/lead.js` were from separate Twilio/SMS tasks and were left intact.
+
 ## 2026-02-16 — Twilio SMS lead alerts
 
 ### Context
