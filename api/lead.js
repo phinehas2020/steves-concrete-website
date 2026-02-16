@@ -6,6 +6,10 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
 const leadsTo = process.env.LEADS_EMAIL_TO
 const leadsFrom = process.env.LEADS_EMAIL_FROM
+const leadsSmsTo = process.env.LEADS_SMS_TO
+const twilioFrom = process.env.LEADS_SMS_FROM
+const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID
+const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN
 const siteName = process.env.LEADS_SITE_NAME || 'Concrete Works LLC'
 
 function getIp(req) {
@@ -60,6 +64,75 @@ function toHtml(lead) {
       </table>
     </div>
   `
+}
+
+function normalizePhoneList(rawPhones) {
+  if (!rawPhones || typeof rawPhones !== 'string') return []
+  return rawPhones
+    .split(',')
+    .map((phone) => phone.trim())
+    .filter((phone) => phone.length > 0)
+}
+
+function buildSmsBody(lead) {
+  return [
+    `New website lead (${siteName})`,
+    `Name: ${lead.name || '-'}`,
+    `Phone: ${lead.phone || '-'}`,
+    `Email: ${lead.email || '-'}`,
+    `Service: ${lead.service || '-'}`,
+    `Message: ${lead.message || '-'}`,
+  ].join('\n')
+}
+
+async function sendSmsNotifications(lead, recipients) {
+  if (!twilioAccountSid || !twilioAuthToken || !twilioFrom || recipients.length === 0) {
+    if (!twilioAccountSid || !twilioAuthToken) {
+      console.warn('SMS notification skipped - missing Twilio credentials')
+    } else if (!twilioFrom) {
+      console.warn('SMS notification skipped - missing LEADS_SMS_FROM')
+    } else if (recipients.length === 0) {
+      console.warn('SMS notification skipped - no LEADS_SMS_TO configured')
+    }
+    return
+  }
+
+  const basicAuth = Buffer.from(`${twilioAccountSid}:${twilioAuthToken}`).toString('base64')
+  const body = buildSmsBody(lead)
+  const endpoint = `https://api.twilio.com/2010-04-01/Accounts/${twilioAccountSid}/Messages.json`
+  const sendTasks = recipients.map(async (to) => {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${basicAuth}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        From: twilioFrom,
+        To: to,
+        Body: body,
+      }),
+    })
+
+    if (!response.ok) {
+      const responseText = await response.text()
+      throw new Error(`Twilio API error (${response.status}): ${responseText}`)
+    }
+    return to
+  })
+
+  const results = await Promise.allSettled(sendTasks)
+  const failures = results.filter((result) => result.status === 'rejected')
+  const successCount = results.length - failures.length
+
+  if (successCount > 0) {
+    console.log(`SMS notification sent successfully to ${successCount} recipient(s)`)
+  }
+  if (failures.length > 0) {
+    failures.forEach((failure, index) => {
+      console.error(`Failed to send SMS notification #${index + 1}:`, failure.reason)
+    })
+  }
 }
 
 export default async function handler(req, res) {
@@ -164,6 +237,10 @@ export default async function handler(req, res) {
       console.warn('Email notification skipped - no email recipients configured')
     }
   }
+
+  // Send SMS notification via Twilio
+  const smsRecipients = normalizePhoneList(leadsSmsTo)
+  await sendSmsNotifications(lead, smsRecipients)
 
   res.status(200).json({ ok: true })
 }

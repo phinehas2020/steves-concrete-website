@@ -70,6 +70,14 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
   const [expandedLeadId, setExpandedLeadId] = useState(null)
   const [replyDrafts, setReplyDrafts] = useState({})
   const [replyStatus, setReplyStatus] = useState({})
+  const [smsBroadcast, setSmsBroadcast] = useState({
+    state: 'idle',
+    total: 0,
+    sent: 0,
+    failed: 0,
+    missing: 0,
+    error: '',
+  })
 
   const dateFormatter = useMemo(
     () =>
@@ -311,6 +319,87 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
     }
   }
 
+  const sendAllLeadSms = async () => {
+    const visibleLeadIds = filteredLeads.map((lead) => lead.id)
+
+    if (visibleLeadIds.length === 0) {
+      setSmsBroadcast({
+        state: 'error',
+        total: 0,
+        sent: 0,
+        failed: 0,
+        missing: 0,
+        error: 'No visible leads to send.',
+      })
+      return
+    }
+
+    if (!accessToken) {
+      setSmsBroadcast({
+        state: 'error',
+        total: 0,
+        sent: 0,
+        failed: 0,
+        missing: 0,
+        error: 'Missing admin session.',
+      })
+      return
+    }
+
+    const confirmed = window.confirm(
+      `Send SMS notifications for all ${visibleLeadIds.length} visible leads?`
+    )
+    if (!confirmed) {
+      return
+    }
+
+    setSmsBroadcast({
+      state: 'sending',
+      total: visibleLeadIds.length,
+      sent: 0,
+      failed: 0,
+      missing: 0,
+      error: '',
+    })
+
+    try {
+      const response = await fetch('/api/lead-sms-bulk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ leadIds: visibleLeadIds }),
+      })
+
+      const data = await response
+        .json()
+        .catch(() => ({ error: 'Failed to send SMS notifications.' }))
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send SMS notifications.')
+      }
+
+      setSmsBroadcast({
+        state: 'success',
+        total: data.totalLeadsFound || data.totalLeadsRequested || visibleLeadIds.length,
+        sent: data.sentCount || 0,
+        failed: data.failedCount || 0,
+        missing: data.missingLeadCount || 0,
+        error: '',
+      })
+    } catch (sendError) {
+      setSmsBroadcast({
+        state: 'error',
+        total: visibleLeadIds.length,
+        sent: 0,
+        failed: 0,
+        missing: 0,
+        error: sendError.message || 'Failed to send SMS notifications.',
+      })
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4">
@@ -367,11 +456,20 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
           >
             <option value="all">All</option>
             {statusOptions.map((status) => (
-              <option key={status} value={status}>
-                {formatLabel(status)}
-              </option>
-            ))}
+            <option key={status} value={status}>
+              {formatLabel(status)}
+            </option>
+          ))}
           </select>
+          <button
+            type="button"
+            onClick={sendAllLeadSms}
+            disabled={loading || smsBroadcast.state === 'sending' || filteredLeads.length === 0}
+            className="inline-flex items-center gap-2 px-3 py-2 bg-accent-500 text-white rounded-lg text-sm font-medium hover:bg-accent-600 disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            <Send className={`size-4 ${smsBroadcast.state === 'sending' ? 'animate-spin' : ''}`} />
+            {smsBroadcast.state === 'sending' ? 'Sending…' : `Send SMS (${filteredLeads.length})`}
+          </button>
           <button
             type="button"
             onClick={fetchLeads}
@@ -387,6 +485,19 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
       {error && (
         <div className="bg-red-50 border border-red-100 text-red-600 rounded-lg px-4 py-3">
           {error}
+        </div>
+      )}
+
+      {smsBroadcast.state === 'success' && (
+        <div className="bg-emerald-50 border border-emerald-100 text-emerald-700 rounded-lg px-4 py-3">
+          SMS send complete: {smsBroadcast.sent} sent, {smsBroadcast.failed} failed.
+          {smsBroadcast.missing > 0 && ` ${smsBroadcast.missing} leads were missing from the requested set.`}
+        </div>
+      )}
+
+      {smsBroadcast.state === 'error' && (
+        <div className="bg-red-50 border border-red-100 text-red-600 rounded-lg px-4 py-3">
+          {smsBroadcast.error}
         </div>
       )}
 

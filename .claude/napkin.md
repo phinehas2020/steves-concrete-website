@@ -1,5 +1,28 @@
 # Napkin
 
+## 2026-02-16 — Twilio SMS lead alerts
+
+### Context
+- User requested adding SMS lead alerts via Twilio for new submissions.
+
+### What was done
+1. Updated `api/lead.js` to send a non-blocking Twilio SMS notification after a lead is saved.
+2. Implemented helper logic to parse `LEADS_SMS_TO`, build lead SMS text, and handle per-recipient Twilio API failures without breaking lead capture.
+3. Added SMS/Twilio env vars to `.env.example`: `LEADS_SMS_TO`, `LEADS_SMS_FROM`, `TWILIO_ACCOUNT_SID`, and `TWILIO_AUTH_TOKEN`.
+
+## 2026-02-16 — Admin bulk SMS resend button
+
+### Context
+- User requested a button in Admin leads page to trigger SMS notifications for existing leads already in Supabase.
+
+### What was done
+1. Added `api/lead-sms-bulk.js` with admin-protected POST flow:
+   - Validates session from admin token.
+   - Loads target lead IDs from request body.
+   - Sends Twilio SMS for each lead to configured recipient numbers (`LEADS_SMS_TO`).
+   - Returns success/failed counts.
+2. Added `sendAllLeadSms` in `src/admin/AdminLeads.jsx` and a new “Send SMS (N)” button in the leads controls.
+3. Added broadcast status states/messages on the leads page for success/error of bulk sends.
 ## 2026-02-13 — Competitor-beating plan implemented
 
 ### Context
