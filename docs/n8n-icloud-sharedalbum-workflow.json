@@ -1,0 +1,347 @@
+{
+  "name": "iCloud Shared Album -> Blog (Hardcoded, No Fetch)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 10
+            }
+          ]
+        }
+      },
+      "id": "trg-10m-1",
+      "name": "Every 10 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const albumUrl = 'https://www.icloud.com/sharedalbum/#B1m5oqs3qHsDmRm';\n\nconst token = (() => {\n  const raw = String(albumUrl || '').trim();\n  if (!raw) throw new Error('Missing album URL');\n  if (raw.includes('#')) return raw.split('#').pop().trim();\n  return raw;\n})();\n\nif (!token) {\n  throw new Error('Could not parse iCloud shared album token');\n}\n\n// Pinned host from iCloud 330 redirect response\nconst baseUrl = `https://p110-sharedstreams.icloud.com/${token}/sharedstreams/`;\n\nreturn [{ json: { token, baseUrl } }];\n"
+      },
+      "id": "code-prepare-base-1",
+      "name": "Prepare iCloud Base",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$json.baseUrl + \"webstream\"}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "n8n-icloud-blog-sync"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"streamCtag\": null}",
+        "options": {}
+      },
+      "id": "http-webstream-1",
+      "name": "Fetch Webstream",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const parseDate = (value) => {\n  const t = Date.parse(String(value || ''));\n  return Number.isNaN(t) ? 0 : t;\n};\n\nconst shortText = (value, max = 160) => {\n  const clean = String(value || '').replace(/\\s+/g, ' ').trim();\n  if (clean.length <= max) return clean;\n  return `${clean.slice(0, max - 3).trim()}...`;\n};\n\nconst normalize = (value) =>\n  String(value || '')\n    .toLowerCase()\n    .replace(/[^a-z0-9]/g, '');\n\nconst hashKey = (input) => {\n  let h = 2166136261;\n  const text = String(input || '');\n  for (let i = 0; i < text.length; i += 1) {\n    h ^= text.charCodeAt(i);\n    h = Math.imul(h, 16777619);\n  }\n  return (h >>> 0).toString(36);\n};\n\nconst photos = Array.isArray($json.photos) ? $json.photos : [];\nif (!photos.length) {\n  return [];\n}\n\nphotos.sort((a, b) => {\n  const aTs = parseDate(a.batchDateCreated || a.dateCreated);\n  const bTs = parseDate(b.batchDateCreated || b.dateCreated);\n  return aTs - bTs;\n});\n\nconst batches = [];\nlet currentBatch = null;\n\nfor (const photo of photos) {\n  const caption = String(photo.caption || '').trim();\n\n  if (caption) {\n    if (currentBatch && currentBatch.photos.length) {\n      batches.push(currentBatch);\n    }\n\n    currentBatch = {\n      caption,\n      photos: [photo],\n    };\n  } else if (currentBatch) {\n    currentBatch.photos.push(photo);\n  }\n}\n\nif (currentBatch && currentBatch.photos.length) {\n  batches.push(currentBatch);\n}\n\nif (!batches.length) {\n  return [];\n}\n\nconst newestBatch = batches[batches.length - 1];\n\nconst guidSeen = new Set();\nconst photoGuids = [];\nfor (const p of newestBatch.photos) {\n  const guid = String(p.photoGuid || '').trim();\n  const nGuid = normalize(guid);\n  if (!nGuid || guidSeen.has(nGuid)) continue;\n  guidSeen.add(nGuid);\n  photoGuids.push(guid);\n}\n\nif (!photoGuids.length) {\n  return [];\n}\n\nconst stableGuids = [...guidSeen].sort();\nconst batchKey = hashKey(stableGuids.join('|'));\n\nconst state = $getWorkflowStaticData('global');\nstate.processedBatchKeys = state.processedBatchKeys || {};\nif (state.processedBatchKeys[batchKey]) {\n  return [];\n}\n\nconst lines = String(newestBatch.caption || '')\n  .split('\\n')\n  .map((line) => line.trim())\n  .filter(Boolean);\n\nconst createdAt = newestBatch.photos[0]?.batchDateCreated || newestBatch.photos[0]?.dateCreated || new Date().toISOString();\nconst createdDate = createdAt.slice(0, 10);\nconst title = shortText(lines[0] || `Project Update ${createdDate}`, 95);\n\nreturn [\n  {\n    json: {\n      baseUrl: $('Prepare iCloud Base').first().json.baseUrl,\n      photoGuids,\n      batchKey,\n      comment: newestBatch.caption || '',\n      title,\n      excerpt: shortText(lines.join(' '), 170),\n      detailText: lines.slice(1).join('\\n\\n') || 'New photo batch from the field.',\n      createdDate,\n    },\n  },\n];\n"
+      },
+      "id": "code-build-batch-1",
+      "name": "Build Newest Batch",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        860,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const meta = $json;\nconst raw = String(meta.comment || meta.detailText || '').trim().replace(/\\s+/g, ' ');\nconst smallUpdate = raw\n  ? `Quick field update: ${raw.slice(0, 260)}${raw.length > 260 ? '...' : ''}`\n  : 'Quick field update: New project photo batch uploaded from the job site.';\n\nreturn [{ json: { ...meta, smallUpdate } }];\n"
+      },
+      "id": "code-generate-update-1",
+      "name": "Generate Small Update",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1080,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'Bearer ' + $env.OPENAI_API_KEY }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"model\": \"gpt-5-nano-2025-08-07\", \"temperature\": 0.45, \"messages\": [ { \"role\": \"system\", \"content\": \"Write a small blog post from the perspective of the business owner: practical, humble, and no-nonsense. It should sound like a real construction worker, grounded and honest, not an Instagram or LinkedIn post. Avoid marketing fluff, hype, emojis, and hashtags.\" }, { \"role\": \"user\", \"content\": \"Write a small blog post from the perspective of the business owner. Very down to earth and real It's a construction worker, not a Instagram or LinkedIn post.\\nTitle: \" + $json.title + \"\\nField comment: \" + $json.comment + \"\\nProject details: \" + $json.detailText + \"\\nSmall update: \" + $json.smallUpdate + \"\\nRules: no corporate marketing tone.\" } ] } }",
+        "options": {}
+      },
+      "id": "http-openai-paragraph-1",
+      "name": "Generate AI Paragraph",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const meta = $('Generate Small Update').first().json;\nconst ai = $json || {};\n\nconst textFromArray = (value) => {\n  if (!Array.isArray(value)) return '';\n  return value\n    .map((part) => {\n      if (typeof part === 'string') return part;\n      if (part?.type === 'text' && typeof part?.text === 'string') return part.text;\n      if (typeof part?.value === 'string') return part.value;\n      return '';\n    })\n    .join(' ')\n    .trim();\n};\n\nlet paragraph = '';\n\nif (typeof ai.output_text === 'string' && ai.output_text.trim()) {\n  paragraph = ai.output_text.trim();\n}\n\nif (!paragraph && Array.isArray(ai.output)) {\n  const outputs = ai.output\n    .map((o) => textFromArray(o?.content))\n    .filter(Boolean)\n    .join(' ')\n    .trim();\n  if (outputs) paragraph = outputs;\n}\n\nif (!paragraph && Array.isArray(ai.choices) && ai.choices.length) {\n  const choice = ai.choices[0];\n  if (typeof choice?.message?.content === 'string' && choice.message.content.trim()) {\n    paragraph = choice.message.content.trim();\n  } else {\n    paragraph = textFromArray(choice?.message?.content);\n  }\n}\n\nif (!paragraph) {\n  paragraph = meta.smallUpdate || meta.detailText || '';\n}\n\nparagraph = paragraph.replace(/\\s+/g, ' ').trim();\n\nreturn [{ json: { ...meta, aiParagraph: paragraph } }];\n"
+      },
+      "id": "code-apply-ai-paragraph-1",
+      "name": "Apply AI Paragraph",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1440,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{$json.baseUrl + \"webasseturls\"}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "n8n-icloud-blog-sync"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"photoGuids\": $json.photoGuids } }}",
+        "options": {}
+      },
+      "id": "http-assets-1",
+      "name": "Fetch Asset URLs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1660,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const slugify = (value) =>\n  String(value || '')\n    .toLowerCase()\n    .trim()\n    .replace(/[^a-z0-9]+/g, '-')\n    .replace(/(^-|-$)+/g, '') || 'project-update';\n\nconst normalize = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');\nconst meta = $('Apply AI Paragraph').first().json;\n\nconst lowResPattern = /(thumb|thumbnail|small|preview|low|medium|screen|mobile|tiny|sq[_-]?)/i;\nconst highResPattern = /(orig|original|master|full|large|high|max)/i;\nconst videoPattern = /\\.(mp4|mov|m4v|avi|wmv|hevc)(?:$|[?#])/i;\n\nconst isPlainObject = (v) => Boolean(v && typeof v === 'object' && !Array.isArray(v));\n\nconst collectItemMapFromObject = (obj) => {\n  if (!isPlainObject(obj)) return null;\n\n  const directCandidates = [\n    obj.items,\n    obj.results?.items,\n    obj.data?.items,\n    obj.payload?.items,\n    obj.assetUrls,\n    obj.webasseturls,\n  ];\n\n  for (const candidate of directCandidates) {\n    if (isPlainObject(candidate) && Object.keys(candidate).length) return candidate;\n  }\n\n  // Response sometimes has url fields directly under each guid key.\n  const values = Object.values(obj);\n  if (\n    values.length &&\n    values.some(\n      (v) => isPlainObject(v) && (v.url || v.url_path || v.url_location || v.urlPath || v.urlLocation || v.url_expiry),\n    )\n  ) {\n    return obj;\n  }\n\n  // Sometimes items is an array of url records.\n  if (Array.isArray(obj.items) && obj.items.length) {\n    const mapped = {};\n    obj.items.forEach((row, idx) => {\n      const key = row?.photoGuid || row?.guid || row?.id || `item_${idx}`;\n      mapped[key] = row;\n    });\n    return mapped;\n  }\n\n  // Some providers return bare arrays.\n  if (Array.isArray(obj.results) && obj.results.length) {\n    const mapped = {};\n    obj.results.forEach((row, idx) => {\n      const key = row?.photoGuid || row?.guid || row?.id || `result_${idx}`;\n      mapped[key] = row;\n    });\n    return mapped;\n  }\n\n  return null;\n};\n\nconst allInputObjects = $input\n  .all()\n  .map((it) => it.json)\n  .filter(Boolean)\n  .map((it) => it.body ?? it);\n\nconst mergedItems = {};\nfor (const obj of allInputObjects) {\n  const map = collectItemMapFromObject(obj);\n  if (!map) continue;\n  for (const [k, v] of Object.entries(map)) {\n    mergedItems[k] = v;\n  }\n}\n\nconst entries = Object.entries(mergedItems).map(([k, v], idx) => ({\n  key: k,\n  nkey: normalize(k),\n  item: v,\n  idx,\n}));\n\nif (!entries.length) {\n  throw new Error('No image records found from iCloud asset URL response.');\n}\n\nconst buildUrl = (item) => {\n  const direct = String(item?.url || '').trim();\n  if (direct) return direct;\n\n  const loc = String(item?.url_location || item?.urlLocation || '').trim();\n  const path = String(item?.url_path || item?.urlPath || '').trim();\n  if (!loc || !path) return null;\n  const host = /^https?:\\/\\//i.test(loc) ? loc : `https://${loc}`;\n  return `${host}${path}`;\n};\n\nconst isLikelyImage = (url) => !videoPattern.test(String(url || ''));\n\nconst canonicalUrl = (url) =>\n  String(url || '')\n    .toLowerCase()\n    .replace(/[?#].*$/, '')\n    .replace(/([\\/_-])(thumb|thumbnail|small|preview|low|medium|med|screen|mobile|tiny|orig|original|full|master|large|high|max)(?=([\\/_\\.-]|$))/g, '$1')\n    .replace(/([_-])\\d{3,5}x\\d{3,5}(?=\\.)/g, '')\n    .replace(/([_-])\\d{3,5}(?=\\.)/g, '')\n    .replace(/\\/+/g, '/');\n\nconst qualityScore = (url) => {\n  const u = String(url || '');\n  let score = Math.round(u.length / 8);\n  if (highResPattern.test(u)) score += 1200;\n  if (lowResPattern.test(u)) score -= 1800;\n\n  const dim = u.match(/(\\d{3,5})[xX](\\d{3,5})/);\n  if (dim) {\n    const w = Number(dim[1]);\n    const h = Number(dim[2]);\n    score += Math.round((w * h) / 12000);\n  }\n\n  const singleNums = [...u.matchAll(/(?:^|[^0-9])(\\d{3,5})(?:[^0-9]|$)/g)]\n    .map((m) => Number(m[1]))\n    .filter((n) => n >= 300 && n <= 12000);\n  if (singleNums.length) score += Math.max(...singleNums) / 3;\n\n  return score;\n};\n\nconst findMatchesForGuid = (guid) => {\n  const ng = normalize(guid);\n  if (!ng) return [];\n  return entries.filter((entry) => {\n    if (entry.nkey === ng) return true;\n    if (entry.nkey.includes(ng) || ng.includes(entry.nkey)) return true;\n    const pathNorm = normalize(entry.item?.url_path || entry.item?.urlPath || entry.item?.url || '');\n    return Boolean(pathNorm && (pathNorm.includes(ng) || ng.includes(pathNorm)));\n  });\n};\n\nconst pickBestCandidates = (candidates) => {\n  if (!candidates.length) return [];\n\n  const hasLikelyHigh = candidates.some((c) => !c.isLow || c.isHigh);\n  const filtered = hasLikelyHigh\n    ? candidates.filter((c) => !c.isLow || c.isHigh)\n    : candidates;\n\n  const bestByCanonical = new Map();\n  for (const candidate of filtered) {\n    const key = canonicalUrl(candidate.url);\n    const prev = bestByCanonical.get(key);\n    if (!prev || candidate.score > prev.score) {\n      bestByCanonical.set(key, candidate);\n    }\n  }\n\n  return Array.from(bestByCanonical.values()).sort((a, b) => {\n    if (b.score !== a.score) return b.score - a.score;\n    return a.entryIndex - b.entryIndex;\n  });\n};\n\nconst selected = [];\nconst sourceGuids = Array.isArray(meta.photoGuids) ? meta.photoGuids : [];\n\nfor (let i = 0; i < sourceGuids.length; i += 1) {\n  const guid = sourceGuids[i];\n  const matches = findMatchesForGuid(guid);\n\n  const candidates = matches\n    .map((match) => {\n      const url = buildUrl(match.item);\n      if (!url || !isLikelyImage(url)) return null;\n      return {\n        guidOrder: i,\n        entryIndex: match.idx,\n        url,\n        score: qualityScore(url),\n        isLow: lowResPattern.test(url),\n        isHigh: highResPattern.test(url),\n      };\n    })\n    .filter(Boolean);\n\n  const bestForGuid = pickBestCandidates(candidates);\n  if (bestForGuid[0]) selected.push(bestForGuid[0]);\n}\n\nif (!selected.length) {\n  const fallback = pickBestCandidates(\n    entries\n      .map((entry) => {\n        const url = buildUrl(entry.item);\n        if (!url || !isLikelyImage(url)) return null;\n        return {\n          guidOrder: sourceGuids.length,\n          entryIndex: entry.idx,\n          url,\n          score: qualityScore(url),\n          isLow: lowResPattern.test(url),\n          isHigh: highResPattern.test(url),\n        };\n      })\n      .filter(Boolean),\n  );\n\n  if (!fallback.length) {\n    const sampleKey = entries[0]?.key || 'none';\n    const sampleItem = entries[0]?.item || {};\n    throw new Error(\n      `No image URLs built. items=${entries.length}; sampleKey=${sampleKey}; sampleItemKeys=${Object.keys(sampleItem).join(',')}`,\n    );\n  }\n\n  const fallbackLimit = Math.min(3, fallback.length);\n  selected.push(...fallback.slice(0, fallbackLimit));\n}\n\nconst bestOverall = new Map();\nfor (const candidate of selected) {\n  const key = canonicalUrl(candidate.url);\n  const prev = bestOverall.get(key);\n  if (!prev || candidate.score > prev.score) {\n    bestOverall.set(key, candidate);\n  }\n}\n\nconst images = Array.from(bestOverall.values())\n  .sort((a, b) => {\n    if (a.guidOrder !== b.guidOrder) return a.guidOrder - b.guidOrder;\n    return a.entryIndex - b.entryIndex;\n  })\n  .map((candidate, i) => ({\n    url: candidate.url,\n    alt: `${meta.title} - Photo ${i + 1}`,\n    isHeader: i === 0,\n  }));\n\nif (!images.length) throw new Error('No image URLs remained after quality filtering');\n\nconst bodyImageMarkdown = images\n  .slice(1)\n  .map((img) => `![${img.alt}](${img.url})`)\n  .join('\\n\\n');\n\nconst aiParagraph = String(meta.aiParagraph || '').trim();\nconst detailText = String(meta.detailText || '').trim();\nconst contentParts = [];\n\nif (aiParagraph) contentParts.push(aiParagraph);\nif (detailText) contentParts.push(detailText);\ncontentParts.push(`Photos in this batch: ${images.length}`);\nif (bodyImageMarkdown) contentParts.push(bodyImageMarkdown);\n\nconst titleSlug = slugify(meta.title);\nconst keySuffix = slugify(meta.batchKey).slice(0, 8) || 'batch';\n\nconst payload = {\n  title: meta.title,\n  slug: `${titleSlug}-${keySuffix}`,\n  excerpt: meta.excerpt,\n  content: contentParts.join('\\n\\n'),\n  status: 'published',\n  images,\n  headerImageIndex: 0,\n  insertImagesInContent: false,\n  upsert: true,\n  authorEmail: 'n8n@automation',\n};\n\nreturn [{ json: { payload, batchKey: meta.batchKey } }];\n"
+      },
+      "id": "code-build-payload-1",
+      "name": "Build Blog Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.concretewaco.com/api/blog-post",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 95a1166eacf030345f82b8f806d2b5b9b97f661e85c9785a36d4fb023c2441e0"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{$json.payload}}",
+        "options": {}
+      },
+      "id": "http-publish-1",
+      "name": "Publish Blog Post",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2100,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const state = $getWorkflowStaticData('global');\nstate.processedBatchKeys = state.processedBatchKeys || {};\n\nconst batchKey = $('Build Blog Payload').first().json.batchKey;\nstate.processedBatchKeys[batchKey] = new Date().toISOString();\n\nreturn [{ json: { ok: true, batchKey, publishResult: $json } }];"
+      },
+      "id": "code-mark-done-1",
+      "name": "Mark Batch Processed",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2320,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Every 10 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Prepare iCloud Base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare iCloud Base": {
+      "main": [
+        [
+          {
+            "node": "Fetch Webstream",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Webstream": {
+      "main": [
+        [
+          {
+            "node": "Build Newest Batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Newest Batch": {
+      "main": [
+        [
+          {
+            "node": "Generate Small Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Small Update": {
+      "main": [
+        [
+          {
+            "node": "Generate AI Paragraph",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Asset URLs": {
+      "main": [
+        [
+          {
+            "node": "Build Blog Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Blog Payload": {
+      "main": [
+        [
+          {
+            "node": "Publish Blog Post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publish Blog Post": {
+      "main": [
+        [
+          {
+            "node": "Mark Batch Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate AI Paragraph": {
+      "main": [
+        [
+          {
+            "node": "Apply AI Paragraph",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply AI Paragraph": {
+      "main": [
+        [
+          {
+            "node": "Fetch Asset URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}
