@@ -126,7 +126,81 @@ export function BlogPost() {
 
   const contentHtml = useMemo(() => {
     if (!post?.content) return ''
-    return marked.parse(post.content)
+    const parsedHtml = marked.parse(post.content)
+
+    if (typeof DOMParser === 'undefined') {
+      return parsedHtml
+    }
+
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(`<div>${parsedHtml}</div>`, 'text/html')
+    const container = doc.body.firstElementChild
+
+    if (!container) {
+      return parsedHtml
+    }
+
+    const isImageOnlyParagraph = (node) =>
+      node?.nodeType === 1 &&
+      node.tagName === 'P' &&
+      node.children.length === 1 &&
+      node.firstElementChild.tagName === 'IMG'
+
+    const childNodes = Array.from(container.childNodes)
+    const normalizedNodes = []
+    let index = 0
+
+    while (index < childNodes.length) {
+      const currentNode = childNodes[index]
+
+      if (isImageOnlyParagraph(currentNode)) {
+        const imageRows = []
+        while (index < childNodes.length && isImageOnlyParagraph(childNodes[index])) {
+          imageRows.push(childNodes[index])
+          index += 1
+        }
+
+        if (imageRows.length > 1) {
+          const grid = doc.createElement('div')
+          grid.className = 'blog-content-image-grid'
+
+          imageRows.forEach((imageParagraph) => {
+            const image = imageParagraph.querySelector('img')
+            if (image) {
+              image.classList.add('blog-content-image')
+              grid.appendChild(image)
+            }
+          })
+
+          normalizedNodes.push(grid)
+          continue
+        }
+
+        const image = imageRows[0].querySelector('img')
+        if (image) {
+          image.classList.add('blog-content-image')
+        }
+        normalizedNodes.push(imageRows[0])
+        continue
+      }
+
+      if (currentNode.nodeType === 1) {
+        const currentImages = currentNode.querySelectorAll('img')
+        currentImages.forEach((image) => {
+          image.classList.add('blog-content-image')
+        })
+      }
+
+      normalizedNodes.push(currentNode)
+      index += 1
+    }
+
+    container.innerHTML = ''
+    normalizedNodes.forEach((node) => {
+      container.appendChild(node)
+    })
+
+    return container.innerHTML
   }, [post])
 
   return (

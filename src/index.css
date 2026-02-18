@@ -295,9 +295,24 @@ body {
   border-radius: 0.5rem;
 }
 
-.blog-content img {
+.blog-content .blog-content-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
   border-radius: var(--radius-lg);
   margin: 1.5rem 0;
+}
+
+.blog-content .blog-content-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.blog-content .blog-content-image-grid .blog-content-image {
+  margin: 0;
 }
 
 /* --- Touch Target Enhancement --- */
