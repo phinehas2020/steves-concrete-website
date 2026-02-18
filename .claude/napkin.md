@@ -377,3 +377,46 @@
 
 ### Pattern note
 - For full-bleed hero cards on mobile Safari, treat the image like a background layer: absolute fill + explicit cover dimensions.
+
+## 2026-02-18 — n8n iCloud workflow quality + AI paragraph update
+
+### User preferences
+- When iterating on n8n workflow, apply edits directly in repo files (`docs/n8n-icloud-sharedalbum-workflow.json`) instead of pasting giant JSON in chat.
+- Keep a full copy-paste-ready JSON artifact in the repo.
+
+### What changed
+1. Added OpenAI paragraph generation step in workflow JSON via `Generate AI Paragraph` (HTTP request) + `Apply AI Paragraph` code node.
+2. Updated slug generation to track the title (`<title-slug>-<batchkey>`), so slug aligns with post title.
+3. Tightened image quality filtering:
+   - dedupe GUIDs before asset fetch,
+   - request larger derivative width,
+   - filter likely low-res variants when higher-quality alternatives exist,
+   - keep one best image per canonical asset key.
+4. Synced markdown doc JSON block from the canonical JSON file.
+
+### Pattern notes
+- For iCloud `webasseturls`, matching by GUID can fail noisily if key/path formats vary; keep diagnostic error details that include sample keys.
+- Maintaining the `.json` file as source of truth and regenerating the markdown code block prevents drift.
+
+## 2026-02-18 — OpenAI Responses API fix for image-aware prompting
+
+### What changed
+1. Confirmed from OpenAI API docs that Responses endpoint is `POST /v1/responses` and supports vision inputs via `input` items with `type: input_text` + `type: input_image` and `image_url`.
+2. Kept model for this workflow as `gpt-5-mini-2025-08-07`.
+3. Fixed `Build Blog Payload` regression introduced during refactor: removed accidental chained `.all().all()` and now reads `$('Fetch Asset URLs').all()` once.
+
+### Validation
+- Verified `docs/n8n-icloud-sharedalbum-workflow.json` parses with `JSON.parse` successfully after edits.
+
+## 2026-02-18 — iCloud webasseturls reliability regression
+
+### Mistake
+- Adding `derivatives` width hints to `webasseturls` request body caused empty `items` in this environment (`items=0`), which broke image URL building.
+
+### Fix
+- Reverted `Fetch Asset URLs` request body to the known-good payload:
+  - `{ "photoGuids": $json.photoGuids }`
+- Hardened `Build Blog Payload` to parse multiple response shapes (nested items maps, top-level guid maps, and array-shaped items) before failing.
+
+### Rule
+- Prefer minimal request body for iCloud shared album endpoints unless a specific variant is proven in this target environment.
