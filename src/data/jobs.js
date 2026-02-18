@@ -1,7 +1,27 @@
 // Jobs data - now fetches from Supabase
 import { supabase } from '../lib/supabase'
 
-export const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial', 'Residential']
+export const DEFAULT_JOB_CATEGORIES = [
+  'Driveways',
+  'Patios',
+  'Stamped',
+  'Commercial',
+  'Residential',
+  'Sidewalk Concrete Paving',
+  'Parking Lot Repairs',
+  'Retaining Walls',
+  'Shop Foundations'
+]
+
+export function buildCategoryOptions(jobs = []) {
+  const mergedCategories = [...DEFAULT_JOB_CATEGORIES]
+  jobs.forEach((job) => {
+    if (job?.category && !mergedCategories.includes(job.category)) {
+      mergedCategories.push(job.category)
+    }
+  })
+  return ['All', ...mergedCategories]
+}
 
 // Fetch jobs from Supabase
 export async function fetchJobs() {

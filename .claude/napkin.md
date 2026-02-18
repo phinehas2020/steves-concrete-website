@@ -1,5 +1,20 @@
 # Napkin
 
+## 2026-02-18 — n8n iCloud workflow documented in repo
+
+### Context
+- User requested the complete hardcoded n8n JSON to be committed into the repository.
+
+### What was done
+1. Added `docs/n8n-icloud-sharedalbum-workflow.md` with full import JSON.
+2. JSON includes:
+   - 10-minute schedule
+   - iCloud shared album batch parsing by caption boundaries
+   - small update generation from batch comment
+   - image dedupe/scoring for low/high variants
+   - publish to `/api/blog-post`
+   - persistent processed batch-key tracking to prevent reposts.
+
 ## 2026-02-16 — n8n blog publishing endpoint
 
 ### Context
@@ -324,3 +339,41 @@
    - Updated `public.job_images.alt_text` for image ordering under the same jobs.
 2. Confirmed migration landed with Supabase MCP as version `20260218001431` for name `20260218110000_update_project_titles`.
 3. Added a persistent note to this napkin.
+
+## 2026-02-18 — Supabase-driven project category filters
+
+### Context
+- User asked for these gallery categories: `Sidewalk Concrete Paving`, `Parking Lot Repairs`, `Retaining Walls`, `Shop Foundations`, and explicitly asked to use Supabase MCP.
+
+### What was done
+1. Updated `public.jobs.category` for four existing slugs so category labels match the requested names.
+2. Updated UI filter chips to derive categories from Supabase job data rather than hardcoded arrays:
+   - `src/components/Gallery.jsx`
+   - `src/components/JobGallery.jsx`
+3. Updated admin job category options/filtering to include requested labels and merge in live categories from existing jobs:
+   - `src/admin/AdminJobs.jsx`
+
+### Pattern note
+- Keep portfolio category filters data-driven from Supabase to avoid future code edits whenever category labels change.
+
+## 2026-02-18 — Keep full category chip set visible
+
+### User Preference
+- Show all category chips together, including:
+  - `Driveways`, `Patios`, `Stamped`, `Commercial`, `Residential`
+  - `Sidewalk Concrete Paving`, `Parking Lot Repairs`, `Retaining Walls`, `Shop Foundations`
+
+### Pattern note
+- Do not rely only on currently used DB categories for chip visibility; keep a stable default category list and merge in any new DB categories.
+
+## 2026-02-18 — Job detail hero image fill lock
+
+### Context
+- User reported the top project hero image on job detail still left empty space on mobile.
+
+### What was done
+1. Updated hero image in `src/pages/JobDetail.jsx` to absolute fill (`absolute inset-0`) instead of normal flow.
+2. Added explicit inline cover sizing (`width: 100%`, `height: 100%`, `objectFit: cover`) for robust mobile rendering.
+
+### Pattern note
+- For full-bleed hero cards on mobile Safari, treat the image like a background layer: absolute fill + explicit cover dimensions.

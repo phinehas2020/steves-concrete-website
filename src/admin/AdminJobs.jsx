@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Trash2, Plus, Upload, X, ArrowUp, ArrowDown, CheckSquare, Square } from 'lucide-react'
-
-const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial', 'Residential']
+import { DEFAULT_JOB_CATEGORIES } from '../data/jobs'
 
 const emptyJob = {
   title: '',
@@ -38,6 +37,16 @@ export function AdminJobs() {
 
   const isEditing = useMemo(() => Boolean(editingId), [editingId])
   const showForm = isEditing || isCreating
+  const categoryOptions = useMemo(() => {
+    const mergedCategories = [...DEFAULT_JOB_CATEGORIES]
+    jobs.forEach((job) => {
+      if (job.category && !mergedCategories.includes(job.category)) {
+        mergedCategories.push(job.category)
+      }
+    })
+    return mergedCategories
+  }, [jobs])
+  const filterCategories = useMemo(() => ['All', ...categoryOptions], [categoryOptions])
 
   const fetchJobs = async () => {
     setLoading(true)
@@ -74,6 +83,12 @@ export function AdminJobs() {
     fetchJobs()
   }, [])
 
+  useEffect(() => {
+    if (filterCategory !== 'All' && !filterCategories.includes(filterCategory)) {
+      setFilterCategory('All')
+    }
+  }, [filterCategory, filterCategories])
+
   // Prevent navigation during uploads
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -104,7 +119,7 @@ export function AdminJobs() {
     setFormData({
       title: job.title || '',
       slug: job.slug || '',
-      category: job.category || 'Commercial',
+      category: job.category || categoryOptions[0] || 'Commercial',
       location: job.location || 'Waco, TX',
       date: job.date || new Date().toISOString().split('T')[0],
       date_formatted: job.date_formatted || '',
@@ -431,7 +446,7 @@ export function AdminJobs() {
 
       {/* Filter */}
       <div className="flex gap-2 flex-wrap">
-        {categories.map((cat) => (
+        {filterCategories.map((cat) => (
           <button
             key={cat}
             type="button"
@@ -489,7 +504,7 @@ export function AdminJobs() {
                 onChange={(e) => handleChange('category', e.target.value)}
                 className="w-full px-3 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500"
               >
-                {categories.filter((c) => c !== 'All').map((cat) => (
+                {categoryOptions.map((cat) => (
                   <option key={cat} value={cat}>
                     {cat}
                   </option>

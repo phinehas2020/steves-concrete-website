@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { MapPin, ArrowUpRight } from 'lucide-react'
-import { fetchJobs } from '../data/jobs'
+import { buildCategoryOptions, fetchJobs } from '../data/jobs'
 import { handleImageError } from '../lib/utils'
-
-const categories = ['All', 'Driveways', 'Patios', 'Stamped', 'Commercial', 'Residential']
 
 // Project image component - displays actual project photos
 function ProjectImage({ job }) {
@@ -58,6 +56,16 @@ export function Gallery() {
         loadJobs()
     }, [])
 
+    const categoryOptions = useMemo(() => {
+        return buildCategoryOptions(jobs)
+    }, [jobs])
+
+    useEffect(() => {
+        if (activeCategory !== 'All' && !categoryOptions.includes(activeCategory)) {
+            setActiveCategory('All')
+        }
+    }, [activeCategory, categoryOptions])
+
     const filteredProjects =
         activeCategory === 'All'
             ? jobs
@@ -101,7 +109,7 @@ export function Gallery() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        {categories.map((category) => (
+                        {categoryOptions.map((category) => (
                             <button
                                 key={category}
                                 onClick={() => setActiveCategory(category)}
@@ -235,4 +243,3 @@ export function Gallery() {
         </section>
     )
 }
-
