@@ -407,6 +407,7 @@
 
 ### Validation
 - Verified `docs/n8n-icloud-sharedalbum-workflow.json` parses with `JSON.parse` successfully after edits.
+- `gpt-5-mini` rejects `temperature`, so removed `temperature` from the Responses request body in `Prepare AI Prompt Payload`.
 
 ## 2026-02-18 — iCloud webasseturls reliability regression
 
