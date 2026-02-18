@@ -113,7 +113,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "={{ 'Bearer ' + 'sk-proj-REDACTED' }}"
+              "value": "={{ 'Bearer ' + $env.OPENAI_API_KEY }}"
             },
             {
               "name": "Content-Type",
@@ -201,7 +201,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer 95a1166eacf030345f82b8f806d2b5b9b97f661e85c9785a36d4fb023c2441e0"
+              "value": "={{ 'Bearer ' + $env.BLOG_POST_API_TOKEN }}"
             },
             {
               "name": "Content-Type",
