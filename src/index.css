@@ -409,7 +409,8 @@ span a {
 }
 
 /* --- Image Responsiveness --- */
-img {
+/* Use :where() so utility classes (e.g. h-full) can override this baseline. */
+:where(img) {
   max-width: 100%;
   height: auto;
 }

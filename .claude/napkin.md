@@ -271,3 +271,56 @@
   - unknown URL => HTTP 404
   - raw HTML word count + links on priority routes
   - GSC recrawl/reindex for homepage + top services + top locations + guides
+
+## 2026-02-18 — Portfolio title specificity preference
+
+### User Preferences
+- Use clear, real-world project titles in portfolio/jobs (e.g., `Sidewalk Concrete Paving`, `Parking Lot Repairs`, `Retaining Walls`, `Shop Foundations`) instead of vague or generic construction labels.
+
+### Patterns That Work
+- Update `public.jobs.title` (and matching `description`/`job_images.alt_text`) via a forward migration so production and local environments stay aligned.
+
+## 2026-02-18 — Mobile related-project image fill fix
+
+### Context
+- User reported that images in the Job Detail "Related Projects" cards were not filling the full card on mobile.
+
+### What was done
+1. Updated related project card image in `src/pages/JobDetail.jsx` to use absolute positioning (`absolute inset-0`) inside the card.
+2. Added inline style (`width: 100%`, `height: 100%`, `objectFit: cover`) on that image for robust full-card fill behavior.
+3. Added explicit z-index layering for gradient and text overlays to preserve readability.
+
+### Pattern note
+- For card images that must fully fill an aspect-ratio container on mobile Safari, use absolute fill + explicit 100% dimensions/object-fit instead of relying on flow layout image sizing.
+
+## 2026-02-18 — Mobile related-project card image not filling
+
+### Context
+- User reported Related Projects card image leaving a large empty/gray area on mobile.
+
+### Root cause
+- Global rule `img { height: auto; }` in `src/index.css` had the same specificity as Tailwind utility classes like `h-full`.
+- Because the global rule appears later in the stylesheet, it overrode `h-full`, so card images could not stretch to fill the aspect-ratio container.
+
+### Fix
+- Changed the baseline selector to `:where(img)` so utility classes keep priority.
+- Kept `max-width: 100%` + `height: auto` baseline for normal content images.
+
+### Rule to remember
+- Use low-specificity global resets (`:where(...)`) when utility classes must be able to override them.
+
+## 2026-02-18 — Portfolio title migration applied
+
+### Context
+- User asked to run `20260218110000_update_project_titles.sql` and record it.
+
+### What was done
+1. Ran migration SQL via MCP to refresh featured portfolio/project data:
+   - Updated `public.jobs.title` and `public.jobs.description` for four slugs:
+     - `2025-01-27-commercial-concrete-barrier`
+     - `2024-04-06-concrete-slab-finishing`
+     - `2024-03-27-concrete-formwork`
+     - `2024-02-13-foundation-excavation`
+   - Updated `public.job_images.alt_text` for image ordering under the same jobs.
+2. Confirmed migration landed with Supabase MCP as version `20260218001431` for name `20260218110000_update_project_titles`.
+3. Added a persistent note to this napkin.
