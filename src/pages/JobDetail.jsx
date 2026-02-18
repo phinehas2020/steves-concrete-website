@@ -308,12 +308,13 @@ export function JobDetail() {
                     <img
                       src={relatedJob.images[0]}
                       alt={relatedJob.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       loading="lazy"
                       onError={handleImageError}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                    <div className="absolute inset-0 flex flex-col justify-end p-6">
+                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
                       <span className="text-xs font-bold text-accent-400 uppercase tracking-widest mb-2">
                         {relatedJob.category}
                       </span>
