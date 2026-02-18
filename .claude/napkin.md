@@ -421,3 +421,14 @@
 
 ### Rule
 - Prefer minimal request body for iCloud shared album endpoints unless a specific variant is proven in this target environment.
+
+## 2026-02-18 — Tone tightening for workflow posts
+
+### Context
+- User asked for less “AI-like” output: no time references, no long dashes, and no crew-thought style language.
+
+### What changed
+1. Updated `Prepare AI Prompt Payload` prompt instructions to explicitly forbid date/time language and internal reasoning phrases for the `gpt-5-mini-2025-08-07` Response payload.
+2. Tightened `Generate Small Update` cleaning to remove common temporal markers and default fallback text to `New photo batch from the field.` when source is sparse.
+3. Added stronger cleaning in `Apply AI Paragraph` for forbidden phrase patterns (`I think`, `we thought`, `we figured`, `we decided`, etc.), long dashes, and double-dash separators.
+4. Corrected a malformed prompt concatenation that had introduced `+\\n` in the generated JSON source string.
