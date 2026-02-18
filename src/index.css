@@ -208,6 +208,20 @@ body {
   line-height: 1.8;
 }
 
+.blog-post-hero {
+  width: min(100%, 82vw);
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.blog-post-hero-image {
+  width: 100%;
+  height: clamp(14rem, 28vw, 22rem);
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-2xl);
+}
+
 .blog-content h2,
 .blog-content h3,
 .blog-content h4 {

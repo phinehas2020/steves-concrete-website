@@ -142,7 +142,7 @@ export function BlogPost() {
         </section>
 
         <section className="section-padding">
-          <div className="container-main max-w-3xl">
+          <div className="container-main">
             {loading && (
               <div className="space-y-4">
                 <div className="h-10 bg-stone-100 rounded w-3/4" />
@@ -162,29 +162,34 @@ export function BlogPost() {
             {!loading && post && (
               <article>
                 {post.cover_image_url && (
-                  <img
-                    src={post.cover_image_url}
-                    alt={post.title}
-                    className="w-full h-64 sm:h-80 object-cover rounded-2xl mb-8"
-                  />
+                  <figure className="blog-post-hero mb-8">
+                    <img
+                      src={post.cover_image_url}
+                      alt={post.title}
+                      loading="eager"
+                      className="blog-post-hero-image"
+                    />
+                  </figure>
                 )}
-                <p className="text-xs uppercase tracking-wide text-stone-500 mb-3">
-                  {post.published_at
-                    ? new Date(post.published_at).toLocaleDateString()
-                    : 'Draft'}
-                </p>
-                <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-stone-900 text-balance mb-6">
-                  {post.title}
-                </h1>
-                {post.excerpt && (
-                  <p className="text-lg text-stone-600 text-pretty mb-8">
-                    {post.excerpt}
+                <div className="max-w-3xl mx-auto">
+                  <p className="text-xs uppercase tracking-wide text-stone-500 mb-3">
+                    {post.published_at
+                      ? new Date(post.published_at).toLocaleDateString()
+                      : 'Draft'}
                   </p>
-                )}
-                <div
-                  className="blog-content"
-                  dangerouslySetInnerHTML={{ __html: contentHtml }}
-                />
+                  <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-stone-900 text-balance mb-6">
+                    {post.title}
+                  </h1>
+                  {post.excerpt && (
+                    <p className="text-lg text-stone-600 text-pretty mb-8">
+                      {post.excerpt}
+                    </p>
+                  )}
+                  <div
+                    className="blog-content"
+                    dangerouslySetInnerHTML={{ __html: contentHtml }}
+                  />
+                </div>
                 <div className="mt-10 border-t border-stone-200 pt-6">
                   <button
                     type="button"
