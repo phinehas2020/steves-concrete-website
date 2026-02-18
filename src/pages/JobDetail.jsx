@@ -157,7 +157,8 @@ export function JobDetail() {
           <img
             src={currentImage}
             alt={job.title}
-            className="w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             loading="eager"
             onError={handleImageError}
           />
