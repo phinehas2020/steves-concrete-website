@@ -3,6 +3,9 @@ import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+const openAiApiKey = process.env.OPENAI_API_KEY
+const OPENAI_RESPONSES_URL = 'https://api.openai.com/v1/responses'
+const OPENAI_MODEL = 'gpt-5-mini-2025-08-07'
 const VALID_STATUSES = new Set(['draft', 'published'])
 
 function normalizeBody(body) {
@@ -84,18 +87,202 @@ function buildTitle(photos, requestedTitle) {
   return `Project Update ${dateLabel}`
 }
 
-function buildGeneratedContent({ photos, title, prompt }) {
-  const normalizedPrompt = toTrimmedString(prompt)
-  const introLine = normalizedPrompt
-    ? `${normalizedPrompt.replace(/\s+/g, ' ')}`
-    : 'New field photo update from Concrete Works LLC.'
-
-  const details = photos
-    .map((photo, index) => {
-      const caption = shortText(photo.source_caption || photo.alt_text || `Photo ${index + 1}`, 140)
-      return `- Photo ${index + 1}: ${caption}`
+function textFromArray(value) {
+  if (!Array.isArray(value)) return ''
+  return value
+    .map((part) => {
+      if (typeof part === 'string') return part
+      if ((part?.type === 'text' || part?.type === 'output_text') && typeof part?.text === 'string') {
+        return part.text
+      }
+      if (typeof part?.value === 'string') return part.value
+      return ''
     })
-    .join('\n')
+    .join(' ')
+    .trim()
+}
+
+function extractResponseText(responseBody) {
+  if (!responseBody || typeof responseBody !== 'object') return ''
+
+  if (typeof responseBody.output_text === 'string' && responseBody.output_text.trim()) {
+    return responseBody.output_text.trim()
+  }
+
+  if (Array.isArray(responseBody.output)) {
+    const outputText = responseBody.output
+      .map((item) => textFromArray(item?.content))
+      .filter(Boolean)
+      .join(' ')
+      .trim()
+
+    if (outputText) return outputText
+  }
+
+  if (Array.isArray(responseBody.choices) && responseBody.choices.length > 0) {
+    const first = responseBody.choices[0]
+    if (typeof first?.message?.content === 'string' && first.message.content.trim()) {
+      return first.message.content.trim()
+    }
+    const choiceText = textFromArray(first?.message?.content)
+    if (choiceText) return choiceText
+  }
+
+  return ''
+}
+
+function sanitizeAiParagraph(value) {
+  const bannedClauses = [
+    /\b(?:i\s+)?think\b[^.!?;]*[.!?;]?/gi,
+    /\bwe\s+thought\b[^.!?;]*[.!?;]?/gi,
+    /\bwe\s+figured\b[^.!?;]*[.!?;]?/gi,
+    /\bwe\s+decided\b[^.!?;]*[.!?;]?/gi,
+    /\bit\s+felt\b[^.!?;]*[.!?;]?/gi,
+    /\blooks\s+like\b/gi,
+  ]
+
+  let paragraph = String(value || '')
+    .replace(/\s+/g, ' ')
+    .replace(/[—–]/g, '-')
+    .replace(/\s*--+\s*/g, ' ')
+    .replace(/#+\s*/g, '')
+    .trim()
+
+  for (const pattern of bannedClauses) {
+    paragraph = paragraph.replace(pattern, '')
+  }
+
+  paragraph = paragraph.replace(/\s+/g, ' ').trim()
+  if (!paragraph) return ''
+
+  if (!/[.!?]$/.test(paragraph)) {
+    paragraph = `${paragraph}.`
+  }
+
+  return paragraph
+}
+
+function buildFallbackParagraph({ title, prompt, photo }) {
+  const promptText = toTrimmedString(prompt)
+  const photoText = toTrimmedString(photo?.source_caption || photo?.alt_text)
+  const locationText = /waco|central texas|mclennan/i.test(`${title} ${photoText}`)
+    ? ''
+    : ' for Waco and Central Texas homeowners'
+
+  const opening = promptText || `Concrete project update${locationText}`
+  const detail = photoText || 'fresh field photos from a recent pour and finish'
+
+  return `${opening}: ${detail}. We focus on prep, proper mix, and a clean finish so the slab looks good and holds up in Texas heat.`
+}
+
+async function requestSeoParagraph({ title, prompt, photo, includeImage }) {
+  if (!openAiApiKey) {
+    throw new Error('OPENAI_API_KEY is missing. Add it in Vercel project env vars.')
+  }
+
+  const promptParts = [
+    'Write exactly one paragraph (90-130 words).',
+    'Voice: down-to-earth, practical, and honest.',
+    'Goal: local SEO without sounding salesy or robotic.',
+    'Naturally include terms only where they fit: concrete contractor Waco TX, concrete driveway, concrete patio, concrete repair, free estimate.',
+    'No bullet points, no hashtags, no emojis, no all-caps, no long dashes.',
+    'Mention what is visible in the photo and quality of the concrete work.',
+    `Title: ${title}`,
+  ]
+
+  const promptText = toTrimmedString(prompt)
+  if (promptText) {
+    promptParts.push(`Extra context: ${promptText}`)
+  }
+
+  const photoContext = toTrimmedString(photo?.source_caption || photo?.alt_text)
+  if (photoContext) {
+    promptParts.push(`Photo details: ${photoContext}`)
+  }
+
+  const content = [
+    {
+      type: 'input_text',
+      text: promptParts.join('\n'),
+    },
+  ]
+
+  if (includeImage && toTrimmedString(photo?.image_url)) {
+    content.push({
+      type: 'input_image',
+      image_url: photo.image_url,
+      detail: 'auto',
+    })
+  }
+
+  const response = await fetch(OPENAI_RESPONSES_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${openAiApiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: OPENAI_MODEL,
+      input: [
+        {
+          role: 'user',
+          content,
+        },
+      ],
+    }),
+  })
+
+  const responseText = await response.text()
+  let responseBody = {}
+  try {
+    responseBody = responseText ? JSON.parse(responseText) : {}
+  } catch {
+    throw new Error(`OpenAI request failed (${response.status}): invalid JSON response`)
+  }
+
+  if (!response.ok) {
+    const errMessage =
+      toTrimmedString(responseBody?.error?.message) ||
+      `OpenAI request failed (${response.status})`
+    throw new Error(errMessage)
+  }
+
+  const paragraph = sanitizeAiParagraph(extractResponseText(responseBody))
+  if (!paragraph) {
+    throw new Error('OpenAI returned an empty paragraph.')
+  }
+
+  return {
+    paragraph,
+    responseId: toTrimmedString(responseBody?.id) || null,
+  }
+}
+
+async function generateSeoParagraphWithPhoto({ title, prompt, photo }) {
+  try {
+    return await requestSeoParagraph({
+      title,
+      prompt,
+      photo,
+      includeImage: true,
+    })
+  } catch (error) {
+    // Signed image URLs can expire; retry once without image but keep the same model.
+    const message = String(error?.message || '')
+    if (/image|url|download|fetch|invalid_image/i.test(message)) {
+      return requestSeoParagraph({
+        title,
+        prompt,
+        photo,
+        includeImage: false,
+      })
+    }
+    throw error
+  }
+}
+
+function buildGeneratedContent({ photos, title, introParagraph }) {
+  const introLine = toTrimmedString(introParagraph) || `Concrete project update: ${title}.`
 
   const markdownImages = photos
     .map((photo, index) => {
@@ -104,20 +291,8 @@ function buildGeneratedContent({ photos, title, prompt }) {
     })
     .join('\n\n')
 
-  const sections = [
-    introLine,
-    `Photos included: ${photos.length}.`,
-  ]
-
-  if (details) {
-    sections.push('## Photo Notes')
-    sections.push(details)
-  }
-
-  if (markdownImages) {
-    sections.push('## Project Photos')
-    sections.push(markdownImages)
-  }
+  const sections = [introLine]
+  if (markdownImages) sections.push(markdownImages)
 
   return sections.join('\n\n').trim()
 }
@@ -235,10 +410,34 @@ export default async function handler(req, res) {
 
     const title = buildTitle(orderedPhotos, body.title)
     const slug = await createUniqueSlug(supabase, title, body.slug)
+    const primaryPhoto = orderedPhotos[0]
+
+    const useAiParagraph = toBoolean(body.useAiParagraph ?? body.use_ai_paragraph, true)
+    let aiMeta = { enabled: false, model: null, responseId: null }
+    let introParagraph = buildFallbackParagraph({
+      title,
+      prompt: body.prompt,
+      photo: primaryPhoto,
+    })
+
+    if (useAiParagraph) {
+      const aiResult = await generateSeoParagraphWithPhoto({
+        title,
+        prompt: body.prompt,
+        photo: primaryPhoto,
+      })
+      introParagraph = aiResult.paragraph
+      aiMeta = {
+        enabled: true,
+        model: OPENAI_MODEL,
+        responseId: aiResult.responseId,
+      }
+    }
+
     const content = buildGeneratedContent({
       photos: orderedPhotos,
       title,
-      prompt: body.prompt,
+      introParagraph,
     })
     const excerpt = toTrimmedString(body.excerpt) || buildExcerpt(content)
     const coverImageUrl = orderedPhotos[0]?.image_url || null
@@ -287,9 +486,15 @@ export default async function handler(req, res) {
       post: savedPost,
       photosUsed: orderedPhotos.length,
       missingPhotoIds: requestedPhotoIds.filter((id) => !photoMap.has(id)),
+      ai: aiMeta,
     })
   } catch (error) {
-    const statusCode = /token|authorized|auth/i.test(error.message || '') ? 401 : 400
+    const message = error.message || ''
+    const statusCode = /token|authorized|auth/i.test(message)
+      ? 401
+      : /openai|model|api key|responses/i.test(message)
+        ? 500
+        : 400
     res.status(statusCode).json({ error: error.message || 'Failed to generate post from photos' })
   }
 }

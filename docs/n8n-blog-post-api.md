@@ -150,6 +150,8 @@ Body example:
 
 - `POST /api/blog-generate-post`
 - Auth: `Authorization: Bearer <admin-supabase-access-token>`
+- Requires `OPENAI_API_KEY` in Vercel env.
+- Uses model `gpt-5-mini-2025-08-07` and sends the first selected photo URL as image input.
 
 Body example:
 

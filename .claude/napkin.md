@@ -470,3 +470,6 @@
 - Updated `docs/n8n-icloud-sharedalbum-workflow.json` Build Blog Payload to pass `sourceGuid`, `sourceAssetKey`, and album metadata so `/api/blog-post` can dedupe/link photos reliably.
 - Applied Supabase migration `20260220170000_blog_photo_library` via MCP; migration version recorded as `20260220170536` and verified new tables exist in `public`.
 - Set Vercel envs via CLI for all environments (Production/Preview/Development): `ICLOUD_SHARED_ALBUM_URL`, `ICLOUD_SHARED_ALBUM_BASE_URL`, `ICLOUD_SHARED_ALBUM_HOST`.
+- iCloud `webasseturls` keys are checksum IDs (not photo GUIDs) for this album; sync matcher must map via `photo.derivatives[*].checksum` or imports will return 0 rows.
+- Added sync guardrails: process only recent album photos (`ICLOUD_SYNC_MAX_PHOTOS`, default 120) and persist last sync errors to `blog_photo_albums.last_sync_error` for faster production debugging.
+- Blog post generation from selected photos now uses OpenAI Responses (`gpt-5-mini-2025-08-07`) with first selected image as `input_image`; keep fallback text path for resilience if model response parsing is sparse.
