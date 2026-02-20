@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const MAX_GUIDS_PER_REQUEST = 150
+const MAX_SYNC_PHOTOS = Number.parseInt(process.env.ICLOUD_SYNC_MAX_PHOTOS || '120', 10)
 const VALID_STATUSES = new Set(['draft', 'published'])
 
 function normalizeBody(body) {
@@ -290,6 +291,13 @@ function buildDedupeKeyFromGuidOrUrl({ normalizedGuid, imageUrl }) {
   return `url:${canonicalUrl(imageUrl)}`
 }
 
+function parsePhotoTimestamp(photo) {
+  const raw = photo?.batchDateCreated || photo?.dateCreated || ''
+  const ts = Date.parse(String(raw))
+  if (Number.isNaN(ts)) return 0
+  return ts
+}
+
 function buildPostContent({ detailText, photos }) {
   const bodyImageMarkdown = photos
     .slice(1)
@@ -459,6 +467,8 @@ export default async function handler(req, res) {
     auth: { persistSession: false },
   })
 
+  let albumIdForError = null
+
   try {
     const adminUser = await requireAdminUser(req, supabase)
     const body = normalizeBody(req.body)
@@ -501,6 +511,8 @@ export default async function handler(req, res) {
         autoPublish: toBoolean(body.autoPublish ?? body.auto_publish, false),
       })
     }
+
+    albumIdForError = albumRecord?.id || null
 
     const token = parseAlbumToken(body.albumToken || body.album_token || albumRecord.source_token || albumRecord.source_url)
     if (!token) {
@@ -571,10 +583,15 @@ export default async function handler(req, res) {
       return
     }
 
+    const maxSyncPhotos = Number.isFinite(MAX_SYNC_PHOTOS) && MAX_SYNC_PHOTOS > 0 ? MAX_SYNC_PHOTOS : 120
+    const guidRecordsForSync = [...guidRecords]
+      .sort((a, b) => parsePhotoTimestamp(b.source) - parsePhotoTimestamp(a.source))
+      .slice(0, maxSyncPhotos)
+
     const assetMap = {}
 
-    for (let index = 0; index < guidRecords.length; index += MAX_GUIDS_PER_REQUEST) {
-      const chunk = guidRecords.slice(index, index + MAX_GUIDS_PER_REQUEST).map((item) => item.guid)
+    for (let index = 0; index < guidRecordsForSync.length; index += MAX_GUIDS_PER_REQUEST) {
+      const chunk = guidRecordsForSync.slice(index, index + MAX_GUIDS_PER_REQUEST).map((item) => item.guid)
       const assetPayload = await fetchIcloudJson(`${baseUrl}webasseturls`, {
         photoGuids: chunk,
       })
@@ -603,7 +620,7 @@ export default async function handler(req, res) {
 
     const bestByGuid = new Map()
 
-    for (const record of guidRecords) {
+    for (const record of guidRecordsForSync) {
       const matches = entries.filter((entry) => {
         if (record.derivativeChecksums.includes(entry.normalizedKey)) return true
         if (entry.normalizedKey === record.normalizedGuid) return true
@@ -664,8 +681,8 @@ export default async function handler(req, res) {
 
     const photoRows = []
 
-    for (let index = 0; index < guidRecords.length; index += 1) {
-      const record = guidRecords[index]
+    for (let index = 0; index < guidRecordsForSync.length; index += 1) {
+      const record = guidRecordsForSync[index]
       const match = bestByGuid.get(record.normalizedGuid)
       if (!match) continue
 
@@ -750,7 +767,7 @@ export default async function handler(req, res) {
       return
     }
 
-    const dedupeKeys = photoRows.map((row) => row.dedupe_key)
+    const dedupeKeys = [...new Set(photoRows.map((row) => row.dedupe_key))]
     const { data: existingRows, error: existingRowsError } = await supabase
       .from('blog_photos')
       .select('dedupe_key')
@@ -826,6 +843,7 @@ export default async function handler(req, res) {
         source_url: albumRecord.source_url,
       },
       totalPhotosSeen: photos.length,
+      photosRequestedForSync: guidRecordsForSync.length,
       photosWithAssetUrls: photoRows.length,
       imported: importedCount,
       updated: updatedCount,
@@ -833,6 +851,22 @@ export default async function handler(req, res) {
       generatedPost,
     })
   } catch (error) {
+    console.error('blog-album-sync error:', error)
+    if (albumIdForError) {
+      try {
+        await supabase
+          .from('blog_photo_albums')
+          .update({
+            last_synced_at: new Date().toISOString(),
+            last_sync_status: 'error',
+            last_sync_error: (error?.message || 'Unknown sync error').slice(0, 500),
+          })
+          .eq('id', albumIdForError)
+      } catch (albumUpdateError) {
+        console.error('Failed to write album sync error state:', albumUpdateError)
+      }
+    }
+
     const message = error?.message || 'Failed to sync album'
     const isAuthError = /auth|authorized|token/i.test(message)
     res.status(isAuthError ? 401 : 400).json({ error: message })

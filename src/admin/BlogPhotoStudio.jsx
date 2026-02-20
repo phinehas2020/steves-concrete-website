@@ -29,6 +29,16 @@ function previewCaption(photo) {
   return `${text.slice(0, 87).trim()}...`
 }
 
+async function readApiPayload(response) {
+  const text = await response.text()
+  if (!text) return {}
+  try {
+    return JSON.parse(text)
+  } catch {
+    return { error: text.slice(0, 300) }
+  }
+}
+
 export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   const [albums, setAlbums] = useState([])
   const [photos, setPhotos] = useState([])
@@ -181,9 +191,9 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
         body: JSON.stringify(body),
       })
 
-      const payload = await response.json()
+      const payload = await readApiPayload(response)
       if (!response.ok) {
-        setMessage(payload.error || 'Album sync failed.')
+        setMessage(payload.error || `Album sync failed (${response.status}).`)
         return
       }
 
@@ -256,9 +266,9 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
         }),
       })
 
-      const payload = await response.json()
+      const payload = await readApiPayload(response)
       if (!response.ok) {
-        setMessage(payload.error || 'Unable to create post from photos.')
+        setMessage(payload.error || `Unable to create post from photos (${response.status}).`)
         return
       }
 
