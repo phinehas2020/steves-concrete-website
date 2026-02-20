@@ -32,8 +32,33 @@ function parseAlbumToken(value) {
   return ''
 }
 
+function isGenericPhotoLabel(value) {
+  const text = toTrimmedString(value)
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+
+  if (!text) return true
+
+  return (
+    /^project photo(?:\s+#?\d+)?$/.test(text) ||
+    /^photo(?:\s+#?\d+)?$/.test(text) ||
+    /^image(?:\s+#?\d+)?$/.test(text) ||
+    /^(?:img|dsc|pic)[_\s-]?\d+$/.test(text)
+  )
+}
+
 function previewCaption(photo) {
-  const text = toTrimmedString(photo?.source_caption || photo?.alt_text || '')
+  const sourceCaption = toTrimmedString(photo?.source_caption || '')
+  const altText = toTrimmedString(photo?.alt_text || '')
+  const preferred =
+    sourceCaption && !isGenericPhotoLabel(sourceCaption)
+      ? sourceCaption
+      : altText && !isGenericPhotoLabel(altText)
+        ? altText
+        : ''
+
+  const text = toTrimmedString(preferred)
   if (!text) return 'No caption yet.'
   if (text.length <= 90) return text
   return `${text.slice(0, 87).trim()}...`

@@ -81,13 +81,81 @@ function shortText(value, max = 120) {
   return `${clean.slice(0, max - 3).trim()}...`
 }
 
-function buildTitle(photos, requestedTitle) {
+function isGenericPhotoLabel(value) {
+  const text = toTrimmedString(value)
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+
+  if (!text) return true
+
+  return (
+    /^project photo(?:\s+#?\d+)?$/.test(text) ||
+    /^photo(?:\s+#?\d+)?$/.test(text) ||
+    /^image(?:\s+#?\d+)?$/.test(text) ||
+    /^(?:img|dsc|pic)[_\s-]?\d+$/.test(text)
+  )
+}
+
+function getMeaningfulPhotoText(photo) {
+  const sourceCaption = firstLine(photo?.source_caption || '')
+  if (sourceCaption && !isGenericPhotoLabel(sourceCaption)) {
+    return sourceCaption
+  }
+
+  const altText = firstLine(photo?.alt_text || '')
+  if (altText && !isGenericPhotoLabel(altText)) {
+    return altText
+  }
+
+  return ''
+}
+
+function chooseLeadPhoto(photos) {
+  return photos.find((photo) => getMeaningfulPhotoText(photo)) || photos[0] || null
+}
+
+function prioritizePhotosByLead(photos, leadPhoto) {
+  if (!leadPhoto?.id) return photos
+  const prioritized = [leadPhoto]
+  for (const photo of photos) {
+    if (photo.id !== leadPhoto.id) {
+      prioritized.push(photo)
+    }
+  }
+  return prioritized
+}
+
+function collectPhotoComments(photos, maxCount = 4) {
+  const seen = new Set()
+  const comments = []
+
+  for (const photo of photos) {
+    const text = getMeaningfulPhotoText(photo)
+    if (!text) continue
+
+    const normalized = text.toLowerCase()
+    if (seen.has(normalized)) continue
+
+    seen.add(normalized)
+    comments.push(text)
+
+    if (comments.length >= maxCount) break
+  }
+
+  return comments
+}
+
+function buildTitle(photos, requestedTitle, leadPhoto) {
   const provided = toTrimmedString(requestedTitle)
   if (provided) return provided
 
-  const captionFromPhoto = photos
-    .map((photo) => firstLine(photo.source_caption || photo.alt_text || ''))
-    .find(Boolean)
+  const titleCandidates = [leadPhoto, ...photos]
+    .filter(Boolean)
+    .map((photo) => getMeaningfulPhotoText(photo))
+    .filter(Boolean)
+
+  const captionFromPhoto = titleCandidates[0] || ''
 
   if (captionFromPhoto) {
     return shortText(captionFromPhoto, 95)
@@ -174,7 +242,9 @@ function sanitizeAiParagraph(value) {
 
 function buildFallbackParagraph({ title, prompt, photo }) {
   const promptText = toTrimmedString(prompt)
-  const photoText = toTrimmedString(photo?.source_caption || photo?.alt_text)
+  const photoText =
+    getMeaningfulPhotoText(photo) ||
+    toTrimmedString(photo?.source_caption || photo?.alt_text)
   const locationText = /waco|central texas|mclennan/i.test(`${title} ${photoText}`)
     ? ''
     : ' for Waco and Central Texas homeowners'
@@ -223,7 +293,14 @@ async function resolveBlogSystemPrompt(supabase, overridePrompt) {
   }
 }
 
-async function requestSeoParagraph({ title, prompt, photo, includeImage, systemPrompt }) {
+async function requestSeoParagraph({
+  title,
+  prompt,
+  photo,
+  includeImage,
+  systemPrompt,
+  photoComments = [],
+}) {
   if (!openAiApiKey) {
     throw new Error('OPENAI_API_KEY is missing. Add it in Vercel project env vars.')
   }
@@ -240,9 +317,20 @@ async function requestSeoParagraph({ title, prompt, photo, includeImage, systemP
     promptParts.push(`Extra context: ${promptText}`)
   }
 
-  const photoContext = toTrimmedString(photo?.source_caption || photo?.alt_text)
+  const photoContext =
+    getMeaningfulPhotoText(photo) ||
+    toTrimmedString(photo?.source_caption || photo?.alt_text)
   if (photoContext) {
     promptParts.push(`Photo details: ${photoContext}`)
+  }
+
+  const cleanedComments = Array.isArray(photoComments)
+    ? photoComments
+      .map((value) => toTrimmedString(value))
+      .filter(Boolean)
+    : []
+  if (cleanedComments.length) {
+    promptParts.push(`Selected photo comments: ${cleanedComments.join(' | ')}`)
   }
 
   const content = [
@@ -304,7 +392,13 @@ async function requestSeoParagraph({ title, prompt, photo, includeImage, systemP
   }
 }
 
-async function generateSeoParagraphWithPhoto({ title, prompt, photo, systemPrompt }) {
+async function generateSeoParagraphWithPhoto({
+  title,
+  prompt,
+  photo,
+  systemPrompt,
+  photoComments,
+}) {
   try {
     return await requestSeoParagraph({
       title,
@@ -312,6 +406,7 @@ async function generateSeoParagraphWithPhoto({ title, prompt, photo, systemPromp
       photo,
       includeImage: true,
       systemPrompt,
+      photoComments,
     })
   } catch (error) {
     // Signed image URLs can expire; retry once without image but keep the same model.
@@ -323,6 +418,7 @@ async function generateSeoParagraphWithPhoto({ title, prompt, photo, systemPromp
         photo,
         includeImage: false,
         systemPrompt,
+        photoComments,
       })
     }
     throw error
@@ -334,7 +430,13 @@ function buildGeneratedContent({ photos, title, introParagraph }) {
 
   const markdownImages = photos
     .map((photo, index) => {
-      const alt = shortText(photo.alt_text || photo.source_caption || `${title} - Photo ${index + 1}`, 80)
+      const alt = shortText(
+        getMeaningfulPhotoText(photo) ||
+        photo.alt_text ||
+        photo.source_caption ||
+        `${title} photo ${index + 1}`,
+        80
+      )
       return `![${alt}](${photo.image_url})`
     })
     .join('\n\n')
@@ -456,9 +558,12 @@ export default async function handler(req, res) {
       return
     }
 
-    const title = buildTitle(orderedPhotos, body.title)
+    const leadPhoto = chooseLeadPhoto(orderedPhotos)
+    const prioritizedPhotos = prioritizePhotosByLead(orderedPhotos, leadPhoto)
+    const title = buildTitle(prioritizedPhotos, body.title, leadPhoto)
     const slug = await createUniqueSlug(supabase, title, body.slug)
-    const primaryPhoto = orderedPhotos[0]
+    const primaryPhoto = leadPhoto || prioritizedPhotos[0]
+    const photoComments = collectPhotoComments(prioritizedPhotos)
 
     const useAiParagraph = toBoolean(body.useAiParagraph ?? body.use_ai_paragraph, true)
     let aiMeta = { enabled: false, model: null, responseId: null, systemPromptSource: null }
@@ -478,6 +583,7 @@ export default async function handler(req, res) {
         prompt: body.prompt,
         photo: primaryPhoto,
         systemPrompt,
+        photoComments,
       })
       introParagraph = aiResult.paragraph
       aiMeta = {
@@ -489,12 +595,12 @@ export default async function handler(req, res) {
     }
 
     const content = buildGeneratedContent({
-      photos: orderedPhotos,
+      photos: prioritizedPhotos,
       title,
       introParagraph,
     })
     const excerpt = toTrimmedString(body.excerpt) || buildExcerpt(content)
-    const coverImageUrl = orderedPhotos[0]?.image_url || null
+    const coverImageUrl = prioritizedPhotos[0]?.image_url || null
 
     const payload = {
       title,
@@ -519,7 +625,7 @@ export default async function handler(req, res) {
       return
     }
 
-    const linkRows = orderedPhotos.map((photo, index) => ({
+    const linkRows = prioritizedPhotos.map((photo, index) => ({
       post_id: savedPost.id,
       photo_id: photo.id,
       image_order: index,
@@ -538,7 +644,9 @@ export default async function handler(req, res) {
     res.status(200).json({
       ok: true,
       post: savedPost,
-      photosUsed: orderedPhotos.length,
+      photosUsed: prioritizedPhotos.length,
+      leadPhotoId: prioritizedPhotos[0]?.id || null,
+      photoCommentsUsed: photoComments.length,
       missingPhotoIds: requestedPhotoIds.filter((id) => !photoMap.has(id)),
       ai: aiMeta,
     })
