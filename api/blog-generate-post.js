@@ -7,6 +7,16 @@ const openAiApiKey = process.env.OPENAI_API_KEY
 const OPENAI_RESPONSES_URL = 'https://api.openai.com/v1/responses'
 const OPENAI_MODEL = 'gpt-5-mini-2025-08-07'
 const VALID_STATUSES = new Set(['draft', 'published'])
+const BLOG_AI_PROMPT_KEY = 'blog_photo_post'
+const DEFAULT_BLOG_SYSTEM_PROMPT = [
+  'You write short blog intro paragraphs for a concrete contractor in Waco, Texas.',
+  'Return exactly one paragraph between 90 and 130 words.',
+  'Tone: practical, honest, and down-to-earth.',
+  'Use local SEO naturally where it fits, including some of: concrete contractor Waco TX, concrete driveway, concrete patio, concrete repair, free estimate.',
+  'Mention visible concrete work details and craftsmanship quality.',
+  'Do not use bullet points, hashtags, emojis, all caps, or long dashes.',
+  'Do not invent facts. Output only the paragraph.',
+].join('\n')
 
 function normalizeBody(body) {
   if (!body) return {}
@@ -175,18 +185,53 @@ function buildFallbackParagraph({ title, prompt, photo }) {
   return `${opening}: ${detail}. We focus on prep, proper mix, and a clean finish so the slab looks good and holds up in Texas heat.`
 }
 
-async function requestSeoParagraph({ title, prompt, photo, includeImage }) {
+async function loadStoredBlogSystemPrompt(supabase) {
+  const { data, error } = await supabase
+    .from('blog_ai_prompt_settings')
+    .select('system_prompt')
+    .eq('key', BLOG_AI_PROMPT_KEY)
+    .maybeSingle()
+
+  if (error) {
+    console.error('Failed to load blog AI prompt setting:', error)
+    return ''
+  }
+
+  return toTrimmedString(data?.system_prompt)
+}
+
+async function resolveBlogSystemPrompt(supabase, overridePrompt) {
+  const override = toTrimmedString(overridePrompt)
+  if (override) {
+    return {
+      systemPrompt: override,
+      source: 'request',
+    }
+  }
+
+  const storedPrompt = await loadStoredBlogSystemPrompt(supabase)
+  if (storedPrompt) {
+    return {
+      systemPrompt: storedPrompt,
+      source: 'database',
+    }
+  }
+
+  return {
+    systemPrompt: DEFAULT_BLOG_SYSTEM_PROMPT,
+    source: 'default',
+  }
+}
+
+async function requestSeoParagraph({ title, prompt, photo, includeImage, systemPrompt }) {
   if (!openAiApiKey) {
     throw new Error('OPENAI_API_KEY is missing. Add it in Vercel project env vars.')
   }
 
   const promptParts = [
-    'Write exactly one paragraph (90-130 words).',
-    'Voice: down-to-earth, practical, and honest.',
-    'Goal: local SEO without sounding salesy or robotic.',
-    'Naturally include terms only where they fit: concrete contractor Waco TX, concrete driveway, concrete patio, concrete repair, free estimate.',
-    'No bullet points, no hashtags, no emojis, no all-caps, no long dashes.',
-    'Mention what is visible in the photo and quality of the concrete work.',
+    'Create one SEO-friendly blog paragraph from this project update.',
+    'Use only what is supported by the title, photo details, and optional context.',
+    'Return only the paragraph with no extra labels or markdown.',
     `Title: ${title}`,
   ]
 
@@ -223,6 +268,7 @@ async function requestSeoParagraph({ title, prompt, photo, includeImage }) {
     },
     body: JSON.stringify({
       model: OPENAI_MODEL,
+      instructions: toTrimmedString(systemPrompt) || DEFAULT_BLOG_SYSTEM_PROMPT,
       input: [
         {
           role: 'user',
@@ -258,13 +304,14 @@ async function requestSeoParagraph({ title, prompt, photo, includeImage }) {
   }
 }
 
-async function generateSeoParagraphWithPhoto({ title, prompt, photo }) {
+async function generateSeoParagraphWithPhoto({ title, prompt, photo, systemPrompt }) {
   try {
     return await requestSeoParagraph({
       title,
       prompt,
       photo,
       includeImage: true,
+      systemPrompt,
     })
   } catch (error) {
     // Signed image URLs can expire; retry once without image but keep the same model.
@@ -275,6 +322,7 @@ async function generateSeoParagraphWithPhoto({ title, prompt, photo }) {
         prompt,
         photo,
         includeImage: false,
+        systemPrompt,
       })
     }
     throw error
@@ -413,7 +461,7 @@ export default async function handler(req, res) {
     const primaryPhoto = orderedPhotos[0]
 
     const useAiParagraph = toBoolean(body.useAiParagraph ?? body.use_ai_paragraph, true)
-    let aiMeta = { enabled: false, model: null, responseId: null }
+    let aiMeta = { enabled: false, model: null, responseId: null, systemPromptSource: null }
     let introParagraph = buildFallbackParagraph({
       title,
       prompt: body.prompt,
@@ -421,16 +469,22 @@ export default async function handler(req, res) {
     })
 
     if (useAiParagraph) {
+      const { systemPrompt, source: systemPromptSource } = await resolveBlogSystemPrompt(
+        supabase,
+        body.systemPrompt ?? body.system_prompt
+      )
       const aiResult = await generateSeoParagraphWithPhoto({
         title,
         prompt: body.prompt,
         photo: primaryPhoto,
+        systemPrompt,
       })
       introParagraph = aiResult.paragraph
       aiMeta = {
         enabled: true,
         model: OPENAI_MODEL,
         responseId: aiResult.responseId,
+        systemPromptSource,
       }
     }
 

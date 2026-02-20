@@ -6,6 +6,16 @@ const emptyAlbumForm = {
   name: '',
   url: '',
 }
+const BLOG_AI_PROMPT_KEY = 'blog_photo_post'
+const DEFAULT_BLOG_SYSTEM_PROMPT = [
+  'You write short blog intro paragraphs for a concrete contractor in Waco, Texas.',
+  'Return exactly one paragraph between 90 and 130 words.',
+  'Tone: practical, honest, and down-to-earth.',
+  'Use local SEO naturally where it fits, including some of: concrete contractor Waco TX, concrete driveway, concrete patio, concrete repair, free estimate.',
+  'Mention visible concrete work details and craftsmanship quality.',
+  'Do not use bullet points, hashtags, emojis, all caps, or long dashes.',
+  'Do not invent facts. Output only the paragraph.',
+].join('\n')
 
 function toTrimmedString(value) {
   if (typeof value !== 'string') return ''
@@ -44,11 +54,16 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   const [photos, setPhotos] = useState([])
   const [loadingAlbums, setLoadingAlbums] = useState(true)
   const [loadingPhotos, setLoadingPhotos] = useState(true)
+  const [loadingPrompt, setLoadingPrompt] = useState(true)
   const [albumForm, setAlbumForm] = useState(emptyAlbumForm)
   const [selectedAlbumId, setSelectedAlbumId] = useState('')
   const [selectedPhotos, setSelectedPhotos] = useState(new Set())
+  const [systemPrompt, setSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
+  const [savedSystemPrompt, setSavedSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
   const [syncing, setSyncing] = useState(false)
   const [generating, setGenerating] = useState(false)
+  const [savingPrompt, setSavingPrompt] = useState(false)
+  const [promptMessage, setPromptMessage] = useState('')
   const [message, setMessage] = useState('')
 
   const albumsById = useMemo(
@@ -97,10 +112,69 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     setLoadingPhotos(false)
   }
 
+  const loadSystemPrompt = async () => {
+    setLoadingPrompt(true)
+    const { data, error } = await supabase
+      .from('blog_ai_prompt_settings')
+      .select('system_prompt')
+      .eq('key', BLOG_AI_PROMPT_KEY)
+      .maybeSingle()
+
+    if (error) {
+      setPromptMessage(`Unable to load AI prompt: ${error.message}`)
+      setLoadingPrompt(false)
+      return
+    }
+
+    const promptText = toTrimmedString(data?.system_prompt) || DEFAULT_BLOG_SYSTEM_PROMPT
+    setSystemPrompt(promptText)
+    setSavedSystemPrompt(promptText)
+    setLoadingPrompt(false)
+  }
+
   useEffect(() => {
     loadAlbums()
     loadPhotos()
+    loadSystemPrompt()
   }, [])
+
+  const saveSystemPrompt = async () => {
+    setPromptMessage('')
+
+    const promptText = toTrimmedString(systemPrompt)
+    if (!promptText) {
+      setPromptMessage('System prompt cannot be empty.')
+      return
+    }
+
+    setSavingPrompt(true)
+    const { error } = await supabase
+      .from('blog_ai_prompt_settings')
+      .upsert(
+        {
+          key: BLOG_AI_PROMPT_KEY,
+          label: 'Blog Photo Post Paragraph',
+          system_prompt: promptText,
+        },
+        { onConflict: 'key' }
+      )
+
+    if (error) {
+      setPromptMessage(`Unable to save AI prompt: ${error.message}`)
+      setSavingPrompt(false)
+      return
+    }
+
+    setSystemPrompt(promptText)
+    setSavedSystemPrompt(promptText)
+    setPromptMessage('AI system prompt saved.')
+    setSavingPrompt(false)
+  }
+
+  const resetPromptToDefault = () => {
+    setSystemPrompt(DEFAULT_BLOG_SYSTEM_PROMPT)
+    setPromptMessage('Default prompt loaded. Save to make it active.')
+  }
 
   const onSelectAlbum = (albumId) => {
     setSelectedAlbumId(albumId)
@@ -251,6 +325,12 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
       return
     }
 
+    const promptText = toTrimmedString(systemPrompt)
+    if (!promptText) {
+      setMessage('System prompt cannot be empty.')
+      return
+    }
+
     setGenerating(true)
 
     try {
@@ -263,6 +343,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
         body: JSON.stringify({
           status,
           photoIds: Array.from(selectedPhotos),
+          systemPrompt: promptText,
         }),
       })
 
@@ -284,6 +365,8 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
       setGenerating(false)
     }
   }
+
+  const hasPromptChanges = toTrimmedString(systemPrompt) !== toTrimmedString(savedSystemPrompt)
 
   return (
     <div className="bg-white border border-stone-200 rounded-xl p-4 sm:p-6 space-y-6">
@@ -361,6 +444,46 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
               <WandSparkles className="size-4" />
               Sync + Auto Post
             </button>
+          </div>
+
+          <div className="bg-stone-50 border border-stone-200 rounded-lg p-3 space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <label className="block text-sm font-medium text-stone-700">AI System Prompt</label>
+              <span className="text-xs text-stone-500">
+                {hasPromptChanges ? 'Unsaved changes' : 'Saved'}
+              </span>
+            </div>
+            <textarea
+              value={systemPrompt}
+              onChange={(event) => {
+                setSystemPrompt(event.target.value)
+                setPromptMessage('')
+              }}
+              className="w-full px-3 py-2 border border-stone-200 rounded-lg bg-white text-sm resize-y min-h-[180px]"
+              placeholder="System prompt for generating blog post intro text."
+              disabled={loadingPrompt || savingPrompt}
+            />
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={saveSystemPrompt}
+                disabled={loadingPrompt || savingPrompt || !hasPromptChanges}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-stone-900 text-white rounded-lg hover:bg-black transition-colors disabled:opacity-50"
+              >
+                {savingPrompt ? 'Saving...' : 'Save Prompt'}
+              </button>
+              <button
+                type="button"
+                onClick={resetPromptToDefault}
+                disabled={loadingPrompt || savingPrompt}
+                className="px-3 py-1.5 text-sm bg-white border border-stone-200 rounded-lg hover:bg-stone-100 disabled:opacity-50"
+              >
+                Reset to Default
+              </button>
+            </div>
+            {promptMessage && (
+              <p className="text-xs text-stone-600">{promptMessage}</p>
+            )}
           </div>
         </div>
 
