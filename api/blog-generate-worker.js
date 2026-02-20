@@ -1,6 +1,6 @@
 /* global process */
 import { createClient } from '@supabase/supabase-js'
-import { generateBlogPostFromPhotoSelection } from './blog-generate-post.js'
+import { generateBlogPostFromPhotoSelection, generateJobListingFromPhotoSelection } from './blog-generate-post.js'
 
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -61,7 +61,7 @@ async function listQueuedJobs(supabase, requestedJobId) {
   if (requestedJobId) {
     const { data, error } = await supabase
       .from('blog_post_generation_jobs')
-      .select('id, requested_by_email, target_post_status, photo_ids, request_payload, system_prompt, attempts')
+      .select('id, requested_by_email, target_type, target_post_status, target_job_category, photo_ids, request_payload, system_prompt, attempts')
       .eq('id', requestedJobId)
       .eq('status', 'queued')
       .maybeSingle()
@@ -75,7 +75,7 @@ async function listQueuedJobs(supabase, requestedJobId) {
 
   const { data, error } = await supabase
     .from('blog_post_generation_jobs')
-    .select('id, requested_by_email, target_post_status, photo_ids, request_payload, system_prompt, attempts')
+    .select('id, requested_by_email, target_type, target_post_status, target_job_category, photo_ids, request_payload, system_prompt, attempts')
     .eq('status', 'queued')
     .order('created_at', { ascending: true })
     .limit(resolveBatchSize())
@@ -102,7 +102,7 @@ async function claimJob(supabase, candidate) {
     })
     .eq('id', candidate.id)
     .eq('status', 'queued')
-    .select('id, requested_by_email, target_post_status, photo_ids, request_payload, system_prompt')
+    .select('id, requested_by_email, target_type, target_post_status, target_job_category, photo_ids, request_payload, system_prompt')
     .maybeSingle()
 
   if (error) {
@@ -113,13 +113,21 @@ async function claimJob(supabase, candidate) {
 }
 
 async function markJobCompleted(supabase, job, result) {
+  const targetType = toTrimmedString(job?.target_type) || 'blog_post'
+  const resultPostId = targetType === 'blog_post' ? result?.post?.id || null : null
+  const resultPostSlug = targetType === 'blog_post' ? result?.post?.slug || null : null
+  const resultJobId = targetType === 'job_listing' ? result?.job?.id || null : null
+  const resultJobSlug = targetType === 'job_listing' ? result?.job?.slug || null : null
+
   const { error } = await supabase
     .from('blog_post_generation_jobs')
     .update({
       status: 'completed',
       completed_at: new Date().toISOString(),
-      result_post_id: result?.post?.id || null,
-      result_post_slug: result?.post?.slug || null,
+      result_post_id: resultPostId,
+      result_post_slug: resultPostSlug,
+      result_job_id: resultJobId,
+      result_job_slug: resultJobSlug,
       error_message: null,
       locked_at: null,
       locked_by: null,
@@ -157,17 +165,29 @@ async function processClaimedJob(supabase, job) {
     ...requestPayload,
     photoIds: Array.isArray(job.photo_ids) ? job.photo_ids : [],
     status: toTrimmedString(job.target_post_status) || 'draft',
+    targetType: toTrimmedString(job.target_type) || 'blog_post',
+    jobCategory: toTrimmedString(job.target_job_category || requestPayload.category),
   }
 
   if (toTrimmedString(job.system_prompt) && !toTrimmedString(body.systemPrompt)) {
     body.systemPrompt = job.system_prompt
   }
 
-  const result = await generateBlogPostFromPhotoSelection({
-    supabase,
-    adminEmail: toTrimmedString(job.requested_by_email),
-    body,
-  })
+  const targetType = toTrimmedString(job.target_type) || 'blog_post'
+  let result
+  if (targetType === 'job_listing') {
+    result = await generateJobListingFromPhotoSelection({
+      supabase,
+      adminEmail: toTrimmedString(job.requested_by_email),
+      body,
+    })
+  } else {
+    result = await generateBlogPostFromPhotoSelection({
+      supabase,
+      adminEmail: toTrimmedString(job.requested_by_email),
+      body,
+    })
+  }
 
   await markJobCompleted(supabase, job, result)
   return result

@@ -8,6 +8,14 @@ const OPENAI_RESPONSES_URL = 'https://api.openai.com/v1/responses'
 const OPENAI_MODEL = 'gpt-5-mini-2025-08-07'
 const VALID_STATUSES = new Set(['draft', 'published'])
 const BLOG_AI_PROMPT_KEY = 'blog_photo_post'
+const DEFAULT_JOB_LISTING_SYSTEM_PROMPT = [
+  'You write short job listing copy for a concrete contractor in Waco, Texas.',
+  'Return valid JSON only: {"title":"...","description":"..."}.',
+  'Title: 6-14 words, plain language, no quotes.',
+  'Description: one short paragraph of 1-2 sentences, practical and down-to-earth.',
+  'Do not invent facts. Use only provided context and visible photo details.',
+  'No hashtags, no emojis, no bullet points, no markdown.',
+].join('\n')
 const DEFAULT_BLOG_SYSTEM_PROMPT = [
   'You write short blog intro paragraphs for a concrete contractor in Waco, Texas.',
   'Return exactly one paragraph between 90 and 130 words.',
@@ -153,6 +161,56 @@ function collectPhotoComments(photos, maxCount = 4) {
   }
 
   return comments
+}
+
+function buildDateFormatted(dateInput) {
+  const date = new Date(String(dateInput || ''))
+  if (Number.isNaN(date.getTime())) {
+    return new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+  }
+  return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+}
+
+function normalizePhotoIdsFromBody(body) {
+  const rawPhotoIds = Array.isArray(body.photoIds)
+    ? body.photoIds
+    : Array.isArray(body.photo_ids)
+      ? body.photo_ids
+      : []
+
+  return rawPhotoIds
+    .map((id) => toTrimmedString(id))
+    .filter(Boolean)
+}
+
+async function loadSelectedPhotosForGeneration(supabase, requestedPhotoIds) {
+  const { data: photos, error: photosError } = await supabase
+    .from('blog_photos')
+    .select('id, image_url, alt_text, source_caption, source_taken_at, source_batch_key')
+    .in('id', requestedPhotoIds)
+
+  if (photosError) {
+    throw createHttpError('Failed to load selected photos', 500, photosError.message)
+  }
+
+  const photoMap = new Map((photos || []).map((photo) => [photo.id, photo]))
+  const orderedPhotos = requestedPhotoIds.map((id) => photoMap.get(id)).filter(Boolean)
+
+  if (orderedPhotos.length === 0) {
+    throw createHttpError('No valid photos found for selected IDs.', 404)
+  }
+
+  const leadPhoto = chooseLeadPhoto(orderedPhotos)
+  const prioritizedPhotos = prioritizePhotosByLead(orderedPhotos, leadPhoto)
+  const photoComments = collectPhotoComments(prioritizedPhotos)
+
+  return {
+    photoMap,
+    orderedPhotos,
+    leadPhoto,
+    prioritizedPhotos,
+    photoComments,
+  }
 }
 
 function buildTitle(photos, requestedTitle, leadPhoto) {
@@ -434,6 +492,179 @@ async function generateSeoParagraphWithPhoto({
   }
 }
 
+function parseStructuredJson(text) {
+  const value = toTrimmedString(text)
+  if (!value) return null
+
+  try {
+    return JSON.parse(value)
+  } catch {
+    const match = value.match(/\{[\s\S]*\}/)
+    if (!match) return null
+    try {
+      return JSON.parse(match[0])
+    } catch {
+      return null
+    }
+  }
+}
+
+function sanitizeJobTitle(value, fallback = '') {
+  const cleaned = toTrimmedString(value)
+    .replace(/[*#`"]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+  if (!cleaned) return fallback
+  return shortText(cleaned, 95)
+}
+
+function sanitizeJobDescription(value, fallback = '') {
+  let cleaned = String(value || '')
+    .replace(/[*#`]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  if (!cleaned) return fallback
+  if (cleaned.length > 300) {
+    cleaned = `${cleaned.slice(0, 297).trim()}...`
+  }
+  if (!/[.!?]$/.test(cleaned)) {
+    cleaned = `${cleaned}.`
+  }
+  return cleaned
+}
+
+function buildFallbackJobCopy({ leadPhoto, comments, category, location }) {
+  const primaryText = getMeaningfulPhotoText(leadPhoto) || comments[0] || ''
+  const fallbackTitle = primaryText
+    ? shortText(primaryText, 95)
+    : `${category} Concrete Project in ${location}`
+
+  const detailText = comments.length
+    ? comments.join(' ')
+    : 'Concrete project photos from the latest field update.'
+
+  const fallbackDescription = sanitizeJobDescription(
+    `${detailText} Built with careful prep, clean form work, and durable finish details for long-term performance.`,
+    `Concrete project update in ${location}.`
+  )
+
+  return {
+    title: fallbackTitle,
+    description: fallbackDescription,
+  }
+}
+
+async function requestJobListingCopy({
+  leadPhoto,
+  comments,
+  category,
+  location,
+  includeImage,
+}) {
+  if (!openAiApiKey) {
+    throw new Error('OPENAI_API_KEY is missing. Add it in Vercel project env vars.')
+  }
+
+  const promptParts = [
+    'Create short copy for a job listing from selected concrete project photos.',
+    'Return valid JSON only with keys "title" and "description".',
+    `Category: ${category}`,
+    `Location: ${location}`,
+  ]
+
+  const leadText = getMeaningfulPhotoText(leadPhoto) || ''
+  if (leadText) {
+    promptParts.push(`Lead photo comment: ${leadText}`)
+  }
+  if (comments.length) {
+    promptParts.push(`Other photo comments: ${comments.join(' | ')}`)
+  }
+
+  const content = [
+    {
+      type: 'input_text',
+      text: promptParts.join('\n'),
+    },
+  ]
+
+  if (includeImage && toTrimmedString(leadPhoto?.image_url)) {
+    content.push({
+      type: 'input_image',
+      image_url: leadPhoto.image_url,
+      detail: 'auto',
+    })
+  }
+
+  const response = await fetch(OPENAI_RESPONSES_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${openAiApiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: OPENAI_MODEL,
+      instructions: DEFAULT_JOB_LISTING_SYSTEM_PROMPT,
+      input: [
+        {
+          role: 'user',
+          content,
+        },
+      ],
+    }),
+  })
+
+  const responseText = await response.text()
+  let responseBody = {}
+  try {
+    responseBody = responseText ? JSON.parse(responseText) : {}
+  } catch {
+    throw new Error(`OpenAI request failed (${response.status}): invalid JSON response`)
+  }
+
+  if (!response.ok) {
+    const errMessage =
+      toTrimmedString(responseBody?.error?.message) ||
+      `OpenAI request failed (${response.status})`
+    throw new Error(errMessage)
+  }
+
+  const output = parseStructuredJson(extractResponseText(responseBody))
+  if (!output || typeof output !== 'object') {
+    throw new Error('OpenAI did not return valid JSON for job copy.')
+  }
+
+  return {
+    title: toTrimmedString(output.title),
+    description: toTrimmedString(output.description),
+    responseId: toTrimmedString(responseBody?.id) || null,
+  }
+}
+
+async function generateJobListingCopyWithPhoto({ leadPhoto, comments, category, location }) {
+  try {
+    return await requestJobListingCopy({
+      leadPhoto,
+      comments,
+      category,
+      location,
+      includeImage: true,
+    })
+  } catch (error) {
+    const message = String(error?.message || '')
+    if (/image|url|download|fetch|invalid_image/i.test(message)) {
+      return requestJobListingCopy({
+        leadPhoto,
+        comments,
+        category,
+        location,
+        includeImage: false,
+      })
+    }
+    throw error
+  }
+}
+
 function buildGeneratedContent({ photos, title, introParagraph }) {
   const introLine = toTrimmedString(introParagraph) || `Concrete project update: ${title}.`
 
@@ -508,17 +739,48 @@ async function createUniqueSlug(supabase, title, preferredSlug) {
   return `${base}-${Date.now().toString(36)}`
 }
 
+async function createUniqueJobSlug(supabase, title, preferredSlug) {
+  const base = toTrimmedString(preferredSlug) || slugify(title) || 'concrete-project'
+
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const candidate = attempt === 0 ? base : `${base}-${attempt + 1}`
+
+    const { data: existing, error } = await supabase
+      .from('jobs')
+      .select('id')
+      .eq('slug', candidate)
+      .maybeSingle()
+
+    if (error) {
+      throw new Error(`Unable to check job slug availability: ${error.message}`)
+    }
+
+    if (!existing) {
+      return candidate
+    }
+  }
+
+  return `${base}-${Date.now().toString(36)}`
+}
+
+async function getNextJobDisplayOrder(supabase) {
+  const { data, error } = await supabase
+    .from('jobs')
+    .select('display_order')
+    .order('display_order', { ascending: false })
+    .limit(1)
+
+  if (error) {
+    throw new Error(`Unable to determine next job display order: ${error.message}`)
+  }
+
+  if (!Array.isArray(data) || data.length === 0) return 0
+  return Number(data[0]?.display_order || 0) + 1
+}
+
 export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail, body }) {
   const normalizedBody = normalizeBody(body)
-  const rawPhotoIds = Array.isArray(normalizedBody.photoIds)
-    ? normalizedBody.photoIds
-    : Array.isArray(normalizedBody.photo_ids)
-      ? normalizedBody.photo_ids
-      : []
-
-  const requestedPhotoIds = rawPhotoIds
-    .map((id) => toTrimmedString(id))
-    .filter(Boolean)
+  const requestedPhotoIds = normalizePhotoIdsFromBody(normalizedBody)
 
   if (requestedPhotoIds.length === 0) {
     throw createHttpError('photoIds is required.', 400)
@@ -531,28 +793,16 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
       ? statusInput
       : 'draft'
 
-  const { data: photos, error: photosError } = await supabase
-    .from('blog_photos')
-    .select('id, image_url, alt_text, source_caption, source_taken_at, source_batch_key')
-    .in('id', requestedPhotoIds)
+  const {
+    photoMap,
+    leadPhoto,
+    prioritizedPhotos,
+    photoComments,
+  } = await loadSelectedPhotosForGeneration(supabase, requestedPhotoIds)
 
-  if (photosError) {
-    throw createHttpError('Failed to load selected photos', 500, photosError.message)
-  }
-
-  const photoMap = new Map((photos || []).map((photo) => [photo.id, photo]))
-  const orderedPhotos = requestedPhotoIds.map((id) => photoMap.get(id)).filter(Boolean)
-
-  if (orderedPhotos.length === 0) {
-    throw createHttpError('No valid photos found for selected IDs.', 404)
-  }
-
-  const leadPhoto = chooseLeadPhoto(orderedPhotos)
-  const prioritizedPhotos = prioritizePhotosByLead(orderedPhotos, leadPhoto)
   const title = buildTitle(prioritizedPhotos, normalizedBody.title, leadPhoto)
   const slug = await createUniqueSlug(supabase, title, normalizedBody.slug)
   const primaryPhoto = leadPhoto || prioritizedPhotos[0]
-  const photoComments = collectPhotoComments(prioritizedPhotos)
 
   const useAiParagraph = toBoolean(normalizedBody.useAiParagraph ?? normalizedBody.use_ai_paragraph, true)
   let aiMeta = { enabled: false, model: null, responseId: null, systemPromptSource: null }
@@ -630,6 +880,136 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
 
   return {
     post: savedPost,
+    photosUsed: prioritizedPhotos.length,
+    leadPhotoId: prioritizedPhotos[0]?.id || null,
+    photoCommentsUsed: photoComments.length,
+    missingPhotoIds: requestedPhotoIds.filter((id) => !photoMap.has(id)),
+    ai: aiMeta,
+  }
+}
+
+export async function generateJobListingFromPhotoSelection({ supabase, body }) {
+  const normalizedBody = normalizeBody(body)
+  const requestedPhotoIds = normalizePhotoIdsFromBody(normalizedBody)
+
+  if (requestedPhotoIds.length === 0) {
+    throw createHttpError('photoIds is required.', 400)
+  }
+
+  const {
+    photoMap,
+    leadPhoto,
+    prioritizedPhotos,
+    photoComments,
+  } = await loadSelectedPhotosForGeneration(supabase, requestedPhotoIds)
+
+  const category = toTrimmedString(
+    normalizedBody.jobCategory || normalizedBody.job_category || normalizedBody.category
+  ) || 'Commercial'
+  const location = toTrimmedString(
+    normalizedBody.jobLocation || normalizedBody.job_location || normalizedBody.location
+  ) || 'Waco, TX'
+  const featured = toBoolean(normalizedBody.featured, false)
+
+  const fallbackCopy = buildFallbackJobCopy({
+    leadPhoto,
+    comments: photoComments,
+    category,
+    location,
+  })
+
+  const providedTitle = toTrimmedString(normalizedBody.title)
+  const providedDescription = toTrimmedString(normalizedBody.description || normalizedBody.prompt)
+  const useAiJobCopy = toBoolean(
+    normalizedBody.useAiJobCopy ?? normalizedBody.use_ai_job_copy ?? normalizedBody.useAiParagraph,
+    true
+  )
+
+  let aiMeta = { enabled: false, model: null, responseId: null }
+  let aiCopy = { title: '', description: '' }
+
+  if (useAiJobCopy && (!providedTitle || !providedDescription)) {
+    try {
+      const aiResult = await generateJobListingCopyWithPhoto({
+        leadPhoto,
+        comments: photoComments,
+        category,
+        location,
+      })
+      aiCopy = {
+        title: toTrimmedString(aiResult.title),
+        description: toTrimmedString(aiResult.description),
+      }
+      aiMeta = {
+        enabled: true,
+        model: OPENAI_MODEL,
+        responseId: aiResult.responseId,
+      }
+    } catch {
+      aiMeta = {
+        enabled: false,
+        model: OPENAI_MODEL,
+        responseId: null,
+      }
+    }
+  }
+
+  const title = sanitizeJobTitle(providedTitle || aiCopy.title, fallbackCopy.title)
+  const description = sanitizeJobDescription(
+    providedDescription || aiCopy.description,
+    fallbackCopy.description
+  )
+
+  const slug = await createUniqueJobSlug(supabase, title, normalizedBody.slug)
+  const dateInput = toTrimmedString(normalizedBody.date) || new Date().toISOString().slice(0, 10)
+  const parsedDate = new Date(dateInput)
+  const safeDate = Number.isNaN(parsedDate.getTime())
+    ? new Date().toISOString().slice(0, 10)
+    : parsedDate.toISOString().slice(0, 10)
+  const dateFormatted = toTrimmedString(normalizedBody.date_formatted) || buildDateFormatted(safeDate)
+
+  const parsedDisplayOrder = Number(normalizedBody.display_order)
+  const displayOrder = Number.isFinite(parsedDisplayOrder)
+    ? parsedDisplayOrder
+    : await getNextJobDisplayOrder(supabase)
+
+  const payload = {
+    title,
+    slug,
+    category,
+    location,
+    date: safeDate,
+    date_formatted: dateFormatted,
+    description,
+    featured,
+    display_order: displayOrder,
+  }
+
+  const { data: savedJob, error: saveError } = await supabase
+    .from('jobs')
+    .insert(payload)
+    .select('id, title, slug, category, location, date, date_formatted, featured, display_order')
+    .single()
+
+  if (saveError) {
+    throw createHttpError('Failed to save generated job listing', 500, saveError.message)
+  }
+
+  const imageRows = prioritizedPhotos.map((photo, index) => ({
+    job_id: savedJob.id,
+    image_url: photo.image_url,
+    image_order: index,
+    alt_text: shortText(getMeaningfulPhotoText(photo) || photo.alt_text || `${title} photo ${index + 1}`, 100),
+  }))
+
+  const { error: imageError } = await supabase.from('job_images').insert(imageRows)
+
+  if (imageError) {
+    throw createHttpError('Job saved but adding job images failed', 500, imageError.message)
+  }
+
+  return {
+    job: savedJob,
     photosUsed: prioritizedPhotos.length,
     leadPhotoId: prioritizedPhotos[0]?.id || null,
     photoCommentsUsed: photoComments.length,

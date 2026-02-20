@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const VALID_STATUSES = new Set(['draft', 'published'])
+const VALID_TARGET_TYPES = new Set(['blog_post', 'job_listing'])
 
 function normalizeBody(body) {
   if (!body) return {}
@@ -83,6 +84,17 @@ function normalizePhotoIds(body) {
     .filter(Boolean)
 }
 
+function normalizeTargetType(value) {
+  const raw = toTrimmedString(value).toLowerCase()
+  if (raw === 'job' || raw === 'job_listing' || raw === 'joblisting') {
+    return 'job_listing'
+  }
+  if (raw === 'blog' || raw === 'blog_post' || raw === 'blogpost') {
+    return 'blog_post'
+  }
+  return 'blog_post'
+}
+
 async function triggerWorkerKickoff(baseUrl, jobId) {
   const workerSecret = toTrimmedString(process.env.CRON_SECRET)
   const headers = {
@@ -132,6 +144,13 @@ export default async function handler(req, res) {
         ? statusInput
         : 'draft'
 
+    const targetType = normalizeTargetType(body.targetType ?? body.target_type)
+    if (!VALID_TARGET_TYPES.has(targetType)) {
+      res.status(400).json({ error: 'Invalid target type.' })
+      return
+    }
+    const targetJobCategory = toTrimmedString(body.jobCategory || body.job_category) || null
+
     const systemPrompt = toTrimmedString(body.systemPrompt ?? body.system_prompt) || null
     const requestPayload = {
       title: toTrimmedString(body.title) || null,
@@ -139,6 +158,9 @@ export default async function handler(req, res) {
       prompt: toTrimmedString(body.prompt) || null,
       excerpt: toTrimmedString(body.excerpt) || null,
       useAiParagraph: toBoolean(body.useAiParagraph ?? body.use_ai_paragraph, true),
+      useAiJobCopy: toBoolean(body.useAiJobCopy ?? body.use_ai_job_copy, true),
+      category: targetJobCategory,
+      location: toTrimmedString(body.location || body.jobLocation || body.job_location) || null,
     }
 
     if (systemPrompt) {
@@ -151,11 +173,13 @@ export default async function handler(req, res) {
         requested_by_email: adminUser.email,
         status: 'queued',
         target_post_status: targetStatus,
+        target_type: targetType,
+        target_job_category: targetJobCategory,
         photo_ids: photoIds,
         request_payload: requestPayload,
         system_prompt: systemPrompt,
       })
-      .select('id, status, target_post_status, photo_ids, created_at, requested_by_email')
+      .select('id, status, target_type, target_post_status, target_job_category, photo_ids, created_at, requested_by_email')
       .single()
 
     if (insertError) {
@@ -172,7 +196,10 @@ export default async function handler(req, res) {
     res.status(202).json({
       ok: true,
       job,
-      message: 'Blog generation queued. It will continue even if you leave this page.',
+      message:
+        targetType === 'job_listing'
+          ? 'Job listing generation queued. It will continue even if you leave this page.'
+          : 'Blog generation queued. It will continue even if you leave this page.',
     })
   } catch (error) {
     const message = error.message || ''

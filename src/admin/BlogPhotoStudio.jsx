@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CheckSquare, ImagePlus, RefreshCw, Square, WandSparkles } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { DEFAULT_JOB_CATEGORIES } from '../data/jobs'
 
 const emptyAlbumForm = {
   name: '',
@@ -98,6 +99,8 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   const [albumForm, setAlbumForm] = useState(emptyAlbumForm)
   const [selectedAlbumId, setSelectedAlbumId] = useState('')
   const [selectedPhotos, setSelectedPhotos] = useState(new Set())
+  const [targetType, setTargetType] = useState('blog_post')
+  const [jobCategory, setJobCategory] = useState(DEFAULT_JOB_CATEGORIES[0] || 'Commercial')
   const [recentJobs, setRecentJobs] = useState([])
   const [systemPrompt, setSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
   const [savedSystemPrompt, setSavedSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
@@ -177,7 +180,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     setLoadingJobs(true)
     const { data, error } = await supabase
       .from('blog_post_generation_jobs')
-      .select('id, status, target_post_status, created_at, completed_at, result_post_slug, error_message')
+      .select('id, status, target_type, target_post_status, target_job_category, created_at, completed_at, result_post_slug, result_job_slug, error_message')
       .order('created_at', { ascending: false })
       .limit(8)
 
@@ -398,7 +401,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     }
 
     const promptText = toTrimmedString(systemPrompt)
-    if (!promptText) {
+    if (targetType === 'blog_post' && !promptText) {
       setMessage('System prompt cannot be empty.')
       return
     }
@@ -414,8 +417,10 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
         },
         body: JSON.stringify({
           status,
+          targetType,
+          jobCategory: targetType === 'job_listing' ? jobCategory : null,
           photoIds: Array.from(selectedPhotos),
-          systemPrompt: promptText,
+          systemPrompt: targetType === 'blog_post' ? promptText : null,
         }),
       })
 
@@ -520,7 +525,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
 
           <div className="bg-stone-50 border border-stone-200 rounded-lg p-3 space-y-2">
             <div className="flex items-center justify-between gap-2">
-              <label className="block text-sm font-medium text-stone-700">AI System Prompt</label>
+              <label className="block text-sm font-medium text-stone-700">Blog AI System Prompt</label>
               <span className="text-xs text-stone-500">
                 {hasPromptChanges ? 'Unsaved changes' : 'Saved'}
               </span>
@@ -583,24 +588,68 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
             </span>
           </div>
 
+          <div className="grid gap-2 sm:grid-cols-2 mb-3">
+            <div>
+              <label className="block text-xs font-medium text-stone-600 mb-1">Create As</label>
+              <select
+                value={targetType}
+                onChange={(event) => setTargetType(event.target.value)}
+                className="w-full px-3 py-2 text-sm bg-white border border-stone-200 rounded-lg"
+              >
+                <option value="blog_post">Blog Post</option>
+                <option value="job_listing">Permanent Job Listing</option>
+              </select>
+            </div>
+            {targetType === 'job_listing' && (
+              <div>
+                <label className="block text-xs font-medium text-stone-600 mb-1">Job Category</label>
+                <select
+                  value={jobCategory}
+                  onChange={(event) => setJobCategory(event.target.value)}
+                  className="w-full px-3 py-2 text-sm bg-white border border-stone-200 rounded-lg"
+                >
+                  {DEFAULT_JOB_CATEGORIES.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+
           <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={() => createPostFromSelection('draft')}
-              disabled={selectedPhotos.size === 0 || generating}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors disabled:opacity-50"
-            >
-              <WandSparkles className="size-4" />
-              Queue Draft from Selected
-            </button>
-            <button
-              type="button"
-              onClick={() => createPostFromSelection('published')}
-              disabled={selectedPhotos.size === 0 || generating}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-lg hover:bg-black transition-colors disabled:opacity-50"
-            >
-              Queue Publish from Selected
-            </button>
+            {targetType === 'job_listing' ? (
+              <button
+                type="button"
+                onClick={() => createPostFromSelection('published')}
+                disabled={selectedPhotos.size === 0 || generating}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-lg hover:bg-black transition-colors disabled:opacity-50"
+              >
+                <WandSparkles className="size-4" />
+                Queue Job Listing from Selected
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={() => createPostFromSelection('draft')}
+                  disabled={selectedPhotos.size === 0 || generating}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors disabled:opacity-50"
+                >
+                  <WandSparkles className="size-4" />
+                  Queue Draft Blog from Selected
+                </button>
+                <button
+                  type="button"
+                  onClick={() => createPostFromSelection('published')}
+                  disabled={selectedPhotos.size === 0 || generating}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-lg hover:bg-black transition-colors disabled:opacity-50"
+                >
+                  Queue Publish Blog from Selected
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -614,9 +663,9 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
       <div className="bg-stone-50 border border-stone-200 rounded-lg p-4 space-y-3">
         <div className="flex items-center justify-between gap-2">
           <div>
-            <h4 className="font-medium text-stone-900">Background Publish Jobs</h4>
+            <h4 className="font-medium text-stone-900">Background Generation Jobs</h4>
             <p className="text-xs text-stone-500">
-              Jobs keep running on the server even if you close this page.
+              Blog posts and permanent job listings keep running on the server even if you close this page.
             </p>
           </div>
           <button
@@ -642,9 +691,15 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
                 <div className="min-w-0">
                   <p className="text-xs text-stone-600 break-all">Job {job.id}</p>
                   <p className="text-xs text-stone-500 mt-0.5">
-                    {job.target_post_status === 'published' ? 'Publish' : 'Draft'} ·{' '}
+                    {job.target_type === 'job_listing'
+                      ? `Job Listing${job.target_job_category ? ` (${job.target_job_category})` : ''}`
+                      : job.target_post_status === 'published'
+                        ? 'Publish Blog'
+                        : 'Draft Blog'}{' '}
+                    ·{' '}
                     {new Date(job.created_at).toLocaleString()}
                     {job.result_post_slug ? ` · ${job.result_post_slug}` : ''}
+                    {job.result_job_slug ? ` · ${job.result_job_slug}` : ''}
                   </p>
                   {toTrimmedString(job.error_message) && (
                     <p className="text-xs text-red-600 mt-1">{job.error_message}</p>
