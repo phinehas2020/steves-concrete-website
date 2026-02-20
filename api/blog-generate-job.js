@@ -34,7 +34,8 @@ function toBoolean(value, defaultValue = false) {
 
 function buildSiteBaseUrl(req) {
   const host = toTrimmedString(req.headers['x-forwarded-host'] || req.headers.host)
-  const protocol = toTrimmedString(req.headers['x-forwarded-proto']) || 'https'
+  const forwardedProtocol = toTrimmedString(req.headers['x-forwarded-proto'])
+  const protocol = forwardedProtocol || (/localhost|127\.0\.0\.1/.test(host) ? 'http' : 'https')
   if (host) return `${protocol}://${host}`
   if (toTrimmedString(process.env.VERCEL_URL)) {
     return `https://${process.env.VERCEL_URL}`
