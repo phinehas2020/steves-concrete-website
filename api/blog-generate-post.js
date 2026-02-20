@@ -18,6 +18,15 @@ const DEFAULT_BLOG_SYSTEM_PROMPT = [
   'Do not invent facts. Output only the paragraph.',
 ].join('\n')
 
+function createHttpError(message, statusCode, details) {
+  const error = new Error(message)
+  error.statusCode = statusCode
+  if (details) {
+    error.details = details
+  }
+  return error
+}
+
 function normalizeBody(body) {
   if (!body) return {}
   if (typeof body === 'string') {
@@ -499,6 +508,136 @@ async function createUniqueSlug(supabase, title, preferredSlug) {
   return `${base}-${Date.now().toString(36)}`
 }
 
+export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail, body }) {
+  const normalizedBody = normalizeBody(body)
+  const rawPhotoIds = Array.isArray(normalizedBody.photoIds)
+    ? normalizedBody.photoIds
+    : Array.isArray(normalizedBody.photo_ids)
+      ? normalizedBody.photo_ids
+      : []
+
+  const requestedPhotoIds = rawPhotoIds
+    .map((id) => toTrimmedString(id))
+    .filter(Boolean)
+
+  if (requestedPhotoIds.length === 0) {
+    throw createHttpError('photoIds is required.', 400)
+  }
+
+  const statusInput = toTrimmedString(normalizedBody.status || '').toLowerCase()
+  const status = toBoolean(normalizedBody.publish, false)
+    ? 'published'
+    : VALID_STATUSES.has(statusInput)
+      ? statusInput
+      : 'draft'
+
+  const { data: photos, error: photosError } = await supabase
+    .from('blog_photos')
+    .select('id, image_url, alt_text, source_caption, source_taken_at, source_batch_key')
+    .in('id', requestedPhotoIds)
+
+  if (photosError) {
+    throw createHttpError('Failed to load selected photos', 500, photosError.message)
+  }
+
+  const photoMap = new Map((photos || []).map((photo) => [photo.id, photo]))
+  const orderedPhotos = requestedPhotoIds.map((id) => photoMap.get(id)).filter(Boolean)
+
+  if (orderedPhotos.length === 0) {
+    throw createHttpError('No valid photos found for selected IDs.', 404)
+  }
+
+  const leadPhoto = chooseLeadPhoto(orderedPhotos)
+  const prioritizedPhotos = prioritizePhotosByLead(orderedPhotos, leadPhoto)
+  const title = buildTitle(prioritizedPhotos, normalizedBody.title, leadPhoto)
+  const slug = await createUniqueSlug(supabase, title, normalizedBody.slug)
+  const primaryPhoto = leadPhoto || prioritizedPhotos[0]
+  const photoComments = collectPhotoComments(prioritizedPhotos)
+
+  const useAiParagraph = toBoolean(normalizedBody.useAiParagraph ?? normalizedBody.use_ai_paragraph, true)
+  let aiMeta = { enabled: false, model: null, responseId: null, systemPromptSource: null }
+  let introParagraph = buildFallbackParagraph({
+    title,
+    prompt: normalizedBody.prompt,
+    photo: primaryPhoto,
+  })
+
+  if (useAiParagraph) {
+    const { systemPrompt, source: systemPromptSource } = await resolveBlogSystemPrompt(
+      supabase,
+      normalizedBody.systemPrompt ?? normalizedBody.system_prompt
+    )
+    const aiResult = await generateSeoParagraphWithPhoto({
+      title,
+      prompt: normalizedBody.prompt,
+      photo: primaryPhoto,
+      systemPrompt,
+      photoComments,
+    })
+    introParagraph = aiResult.paragraph
+    aiMeta = {
+      enabled: true,
+      model: OPENAI_MODEL,
+      responseId: aiResult.responseId,
+      systemPromptSource,
+    }
+  }
+
+  const content = buildGeneratedContent({
+    photos: prioritizedPhotos,
+    title,
+    introParagraph,
+  })
+  const excerpt = toTrimmedString(normalizedBody.excerpt) || buildExcerpt(content)
+  const coverImageUrl = prioritizedPhotos[0]?.image_url || null
+
+  const payload = {
+    title,
+    slug,
+    excerpt,
+    content,
+    status,
+    cover_image_url: coverImageUrl,
+    author_email: toTrimmedString(adminEmail) || null,
+    published_at: status === 'published' ? new Date().toISOString() : null,
+    updated_at: new Date().toISOString(),
+  }
+
+  const { data: savedPost, error: saveError } = await supabase
+    .from('blog_posts')
+    .insert(payload)
+    .select('id, title, slug, status, cover_image_url, published_at, updated_at')
+    .single()
+
+  if (saveError) {
+    throw createHttpError('Failed to save generated blog post', 500, saveError.message)
+  }
+
+  const linkRows = prioritizedPhotos.map((photo, index) => ({
+    post_id: savedPost.id,
+    photo_id: photo.id,
+    image_order: index,
+    is_cover: index === 0,
+    caption: photo.source_caption || null,
+    alt_text: photo.alt_text || null,
+  }))
+
+  const { error: linkError } = await supabase.from('blog_post_photos').insert(linkRows)
+
+  if (linkError) {
+    throw createHttpError('Post saved but linking photos failed', 500, linkError.message)
+  }
+
+  return {
+    post: savedPost,
+    photosUsed: prioritizedPhotos.length,
+    leadPhotoId: prioritizedPhotos[0]?.id || null,
+    photoCommentsUsed: photoComments.length,
+    missingPhotoIds: requestedPhotoIds.filter((id) => !photoMap.has(id)),
+    ai: aiMeta,
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' })
@@ -516,147 +655,29 @@ export default async function handler(req, res) {
 
   try {
     const adminUser = await requireAdminUser(req, supabase)
-    const body = normalizeBody(req.body)
-
-    const rawPhotoIds = Array.isArray(body.photoIds)
-      ? body.photoIds
-      : Array.isArray(body.photo_ids)
-        ? body.photo_ids
-        : []
-
-    const requestedPhotoIds = rawPhotoIds
-      .map((id) => toTrimmedString(id))
-      .filter(Boolean)
-
-    if (requestedPhotoIds.length === 0) {
-      res.status(400).json({ error: 'photoIds is required.' })
-      return
-    }
-
-    const statusInput = toTrimmedString(body.status || '').toLowerCase()
-    const status = toBoolean(body.publish, false)
-      ? 'published'
-      : VALID_STATUSES.has(statusInput)
-        ? statusInput
-        : 'draft'
-
-    const { data: photos, error: photosError } = await supabase
-      .from('blog_photos')
-      .select('id, image_url, alt_text, source_caption, source_taken_at, source_batch_key')
-      .in('id', requestedPhotoIds)
-
-    if (photosError) {
-      res.status(500).json({ error: 'Failed to load selected photos', details: photosError.message })
-      return
-    }
-
-    const photoMap = new Map((photos || []).map((photo) => [photo.id, photo]))
-    const orderedPhotos = requestedPhotoIds.map((id) => photoMap.get(id)).filter(Boolean)
-
-    if (orderedPhotos.length === 0) {
-      res.status(404).json({ error: 'No valid photos found for selected IDs.' })
-      return
-    }
-
-    const leadPhoto = chooseLeadPhoto(orderedPhotos)
-    const prioritizedPhotos = prioritizePhotosByLead(orderedPhotos, leadPhoto)
-    const title = buildTitle(prioritizedPhotos, body.title, leadPhoto)
-    const slug = await createUniqueSlug(supabase, title, body.slug)
-    const primaryPhoto = leadPhoto || prioritizedPhotos[0]
-    const photoComments = collectPhotoComments(prioritizedPhotos)
-
-    const useAiParagraph = toBoolean(body.useAiParagraph ?? body.use_ai_paragraph, true)
-    let aiMeta = { enabled: false, model: null, responseId: null, systemPromptSource: null }
-    let introParagraph = buildFallbackParagraph({
-      title,
-      prompt: body.prompt,
-      photo: primaryPhoto,
+    const result = await generateBlogPostFromPhotoSelection({
+      supabase,
+      adminEmail: adminUser.email,
+      body: req.body,
     })
-
-    if (useAiParagraph) {
-      const { systemPrompt, source: systemPromptSource } = await resolveBlogSystemPrompt(
-        supabase,
-        body.systemPrompt ?? body.system_prompt
-      )
-      const aiResult = await generateSeoParagraphWithPhoto({
-        title,
-        prompt: body.prompt,
-        photo: primaryPhoto,
-        systemPrompt,
-        photoComments,
-      })
-      introParagraph = aiResult.paragraph
-      aiMeta = {
-        enabled: true,
-        model: OPENAI_MODEL,
-        responseId: aiResult.responseId,
-        systemPromptSource,
-      }
-    }
-
-    const content = buildGeneratedContent({
-      photos: prioritizedPhotos,
-      title,
-      introParagraph,
-    })
-    const excerpt = toTrimmedString(body.excerpt) || buildExcerpt(content)
-    const coverImageUrl = prioritizedPhotos[0]?.image_url || null
-
-    const payload = {
-      title,
-      slug,
-      excerpt,
-      content,
-      status,
-      cover_image_url: coverImageUrl,
-      author_email: adminUser.email,
-      published_at: status === 'published' ? new Date().toISOString() : null,
-      updated_at: new Date().toISOString(),
-    }
-
-    const { data: savedPost, error: saveError } = await supabase
-      .from('blog_posts')
-      .insert(payload)
-      .select('id, title, slug, status, cover_image_url, published_at, updated_at')
-      .single()
-
-    if (saveError) {
-      res.status(500).json({ error: 'Failed to save generated blog post', details: saveError.message })
-      return
-    }
-
-    const linkRows = prioritizedPhotos.map((photo, index) => ({
-      post_id: savedPost.id,
-      photo_id: photo.id,
-      image_order: index,
-      is_cover: index === 0,
-      caption: photo.source_caption || null,
-      alt_text: photo.alt_text || null,
-    }))
-
-    const { error: linkError } = await supabase.from('blog_post_photos').insert(linkRows)
-
-    if (linkError) {
-      res.status(500).json({ error: 'Post saved but linking photos failed', details: linkError.message })
-      return
-    }
 
     res.status(200).json({
       ok: true,
-      post: savedPost,
-      photosUsed: prioritizedPhotos.length,
-      leadPhotoId: prioritizedPhotos[0]?.id || null,
-      photoCommentsUsed: photoComments.length,
-      missingPhotoIds: requestedPhotoIds.filter((id) => !photoMap.has(id)),
-      ai: aiMeta,
+      ...result,
     })
   } catch (error) {
     const message = error.message || ''
-    const statusCode = /token|authorized|auth/i.test(message)
-      ? 401
-      : /openai|model|api key|responses/i.test(message)
-        ? 500
-        : 400
-    res.status(statusCode).json({ error: error.message || 'Failed to generate post from photos' })
+    const statusCode = Number.isInteger(error.statusCode)
+      ? error.statusCode
+      : /token|authorized|auth/i.test(message)
+        ? 401
+        : /openai|model|api key|responses/i.test(message)
+          ? 500
+          : 400
+    const response = { error: error.message || 'Failed to generate post from photos' }
+    if (error?.details) {
+      response.details = error.details
+    }
+    res.status(statusCode).json(response)
   }
 }

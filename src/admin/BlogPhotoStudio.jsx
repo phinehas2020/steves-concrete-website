@@ -64,6 +64,20 @@ function previewCaption(photo) {
   return `${text.slice(0, 87).trim()}...`
 }
 
+function statusPillClass(status) {
+  const normalized = toTrimmedString(status).toLowerCase()
+  if (normalized === 'completed') return 'bg-emerald-100 text-emerald-700 border-emerald-200'
+  if (normalized === 'failed') return 'bg-red-100 text-red-700 border-red-200'
+  if (normalized === 'processing') return 'bg-amber-100 text-amber-800 border-amber-200'
+  return 'bg-stone-100 text-stone-700 border-stone-200'
+}
+
+function statusLabel(status) {
+  const normalized = toTrimmedString(status).toLowerCase()
+  if (!normalized) return 'Unknown'
+  return `${normalized.slice(0, 1).toUpperCase()}${normalized.slice(1)}`
+}
+
 async function readApiPayload(response) {
   const text = await response.text()
   if (!text) return {}
@@ -80,9 +94,11 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   const [loadingAlbums, setLoadingAlbums] = useState(true)
   const [loadingPhotos, setLoadingPhotos] = useState(true)
   const [loadingPrompt, setLoadingPrompt] = useState(true)
+  const [loadingJobs, setLoadingJobs] = useState(true)
   const [albumForm, setAlbumForm] = useState(emptyAlbumForm)
   const [selectedAlbumId, setSelectedAlbumId] = useState('')
   const [selectedPhotos, setSelectedPhotos] = useState(new Set())
+  const [recentJobs, setRecentJobs] = useState([])
   const [systemPrompt, setSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
   const [savedSystemPrompt, setSavedSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
   const [syncing, setSyncing] = useState(false)
@@ -157,11 +173,42 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     setLoadingPrompt(false)
   }
 
+  const loadRecentJobs = async () => {
+    setLoadingJobs(true)
+    const { data, error } = await supabase
+      .from('blog_post_generation_jobs')
+      .select('id, status, target_post_status, created_at, completed_at, result_post_slug, error_message')
+      .order('created_at', { ascending: false })
+      .limit(8)
+
+    if (error) {
+      setMessage(`Unable to load background jobs: ${error.message}`)
+      setLoadingJobs(false)
+      return
+    }
+
+    setRecentJobs(data || [])
+    setLoadingJobs(false)
+  }
+
   useEffect(() => {
     loadAlbums()
     loadPhotos()
     loadSystemPrompt()
+    loadRecentJobs()
   }, [])
+
+  const pendingJobCount = recentJobs.filter(
+    (job) => job.status === 'queued' || job.status === 'processing'
+  ).length
+
+  useEffect(() => {
+    if (pendingJobCount === 0) return undefined
+    const timer = setInterval(() => {
+      loadRecentJobs()
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [pendingJobCount])
 
   const saveSystemPrompt = async () => {
     setPromptMessage('')
@@ -359,7 +406,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     setGenerating(true)
 
     try {
-      const response = await fetch('/api/blog-generate-post', {
+      const response = await fetch('/api/blog-generate-job', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -374,18 +421,18 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
 
       const payload = await readApiPayload(response)
       if (!response.ok) {
-        setMessage(payload.error || `Unable to create post from photos (${response.status}).`)
+        setMessage(payload.error || `Unable to queue post generation (${response.status}).`)
         return
       }
 
-      setMessage(`Post created: ${payload.post.title}`)
+      setMessage(
+        payload.message ||
+          `Generation queued. Job ${payload?.job?.id || ''} will continue in the background even if you leave this page.`
+      )
       setSelectedPhotos(new Set())
-
-      if (typeof onPostCreated === 'function') {
-        onPostCreated(payload.post)
-      }
+      await loadRecentJobs()
     } catch (error) {
-      setMessage(error.message || 'Unable to create post from photos.')
+      setMessage(error.message || 'Unable to queue post generation.')
     } finally {
       setGenerating(false)
     }
@@ -544,7 +591,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
               className="inline-flex items-center gap-2 px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors disabled:opacity-50"
             >
               <WandSparkles className="size-4" />
-              Create Draft from Selected
+              Queue Draft from Selected
             </button>
             <button
               type="button"
@@ -552,7 +599,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
               disabled={selectedPhotos.size === 0 || generating}
               className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-lg hover:bg-black transition-colors disabled:opacity-50"
             >
-              Publish from Selected
+              Queue Publish from Selected
             </button>
           </div>
         </div>
@@ -563,6 +610,56 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
           {message}
         </div>
       )}
+
+      <div className="bg-stone-50 border border-stone-200 rounded-lg p-4 space-y-3">
+        <div className="flex items-center justify-between gap-2">
+          <div>
+            <h4 className="font-medium text-stone-900">Background Publish Jobs</h4>
+            <p className="text-xs text-stone-500">
+              Jobs keep running on the server even if you close this page.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={loadRecentJobs}
+            className="px-3 py-1.5 text-xs bg-white border border-stone-200 rounded-lg hover:bg-stone-100"
+          >
+            Refresh
+          </button>
+        </div>
+
+        {loadingJobs ? (
+          <p className="text-xs text-stone-500">Loading recent jobs…</p>
+        ) : recentJobs.length === 0 ? (
+          <p className="text-xs text-stone-500">No queued jobs yet.</p>
+        ) : (
+          <div className="space-y-2">
+            {recentJobs.map((job) => (
+              <div
+                key={job.id}
+                className="bg-white border border-stone-200 rounded-lg px-3 py-2 flex items-start justify-between gap-3"
+              >
+                <div className="min-w-0">
+                  <p className="text-xs text-stone-600 break-all">Job {job.id}</p>
+                  <p className="text-xs text-stone-500 mt-0.5">
+                    {job.target_post_status === 'published' ? 'Publish' : 'Draft'} ·{' '}
+                    {new Date(job.created_at).toLocaleString()}
+                    {job.result_post_slug ? ` · ${job.result_post_slug}` : ''}
+                  </p>
+                  {toTrimmedString(job.error_message) && (
+                    <p className="text-xs text-red-600 mt-1">{job.error_message}</p>
+                  )}
+                </div>
+                <span
+                  className={`text-[11px] font-medium border rounded-full px-2 py-0.5 whitespace-nowrap ${statusPillClass(job.status)}`}
+                >
+                  {statusLabel(job.status)}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {loadingPhotos ? (
         <div className="text-sm text-stone-500">Loading photo library…</div>
