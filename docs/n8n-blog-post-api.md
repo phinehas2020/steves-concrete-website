@@ -45,6 +45,18 @@ Optional:
 - `insertImagesInContent` (boolean, append markdown image tags)
 - `useFirstImageAsHeader` (boolean, default `true`)
 - `upsert` (boolean, default `true` by slug)
+- `persistImagesToLibrary` (boolean, default `true`)
+- `linkImagesToPost` (boolean, default `true`)
+- `batchKey` (string) for grouping imported photos in DB
+- `albumName` / `albumSourceUrl` / `albumToken` / `albumBaseUrl` for photo-source tracking
+
+### Image metadata fields (per `images[]` object)
+
+- `sourceGuid` or `photoGuid`
+- `sourceAssetKey`
+- `sourceBatchKey`
+- `sourceCaption`
+- `sourceTakenAt`
 
 ## n8n JSON example (URL images)
 
@@ -107,6 +119,43 @@ Optional:
       "alt": "Optional alt text",
       "uploaded": true
     }
-  ]
+  ],
+  "library": {
+    "albumId": "uuid",
+    "savedPhotoCount": 2,
+    "linkedToPost": true
+  }
+}
+```
+
+## Additional automation endpoints
+
+### 1) Sync iCloud album into DB (and optionally auto-create post)
+
+- `POST /api/blog-album-sync`
+- Auth: `Authorization: Bearer <admin-supabase-access-token>`
+
+Body example:
+
+```json
+{
+  "albumId": "optional-existing-album-id",
+  "albumUrl": "https://www.icloud.com/sharedalbum/#B1m5oqs3qHsDmRm",
+  "autoCreatePost": true,
+  "postStatus": "published"
+}
+```
+
+### 2) Create blog post from selected DB photos
+
+- `POST /api/blog-generate-post`
+- Auth: `Authorization: Bearer <admin-supabase-access-token>`
+
+Body example:
+
+```json
+{
+  "photoIds": ["uuid-1", "uuid-2", "uuid-3"],
+  "status": "draft"
 }
 ```

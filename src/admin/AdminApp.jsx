@@ -198,7 +198,15 @@ export function AdminApp() {
               />
               <Route path="jobs" element={<AdminJobs />} />
               <Route path="hero" element={<AdminHero />} />
-              <Route path="blog" element={<AdminBlog currentUserEmail={session.user.email} />} />
+              <Route
+                path="blog"
+                element={
+                  <AdminBlog
+                    currentUserEmail={session.user.email}
+                    accessToken={session?.access_token}
+                  />
+                }
+              />
               <Route path="email-recipients" element={<AdminEmailRecipients />} />
               <Route
                 path="admins"

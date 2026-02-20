@@ -432,3 +432,41 @@
 2. Tightened `Generate Small Update` cleaning to remove common temporal markers and default fallback text to `New photo batch from the field.` when source is sparse.
 3. Added stronger cleaning in `Apply AI Paragraph` for forbidden phrase patterns (`I think`, `we thought`, `we figured`, `we decided`, etc.), long dashes, and double-dash separators.
 4. Corrected a malformed prompt concatenation that had introduced `+\\n` in the generated JSON source string.
+
+## 2026-02-20 — Blog photo library + album sync foundation
+
+### Context
+- User asked to move blog image handling beyond embedded links and add a built-in workflow to import album photos, auto-generate posts, and manually select photos for post creation.
+
+### What was done
+1. Added migration `supabase/migrations/20260220170000_blog_photo_library.sql`:
+   - New tables: `blog_photo_albums`, `blog_photos`, `blog_post_photos`.
+   - Added indexes, RLS policies, and `blog-images` storage policies for admins/public reads.
+2. Extended `api/blog-post.js`:
+   - Persists incoming `images[]` into `blog_photos` by dedupe key.
+   - Links post image rows via `blog_post_photos`.
+   - Supports album/source metadata fields (`batchKey`, `album*`, per-image source fields).
+3. Added `api/blog-album-sync.js`:
+   - Admin-authenticated album sync from iCloud shared album (`webstream` + `webasseturls`).
+   - Dedupes and stores photos in `blog_photos`.
+   - Optional auto post creation from newest batch.
+4. Added `api/blog-generate-post.js`:
+   - Admin-authenticated generation of draft/published blog posts from selected `blog_photos`.
+5. Added admin UI `src/admin/BlogPhotoStudio.jsx` and wired it into `AdminBlog` + `AdminApp`:
+   - Save/select albums
+   - Sync album
+   - Sync + auto post
+   - Select photos and create draft/publish posts
+6. Updated docs/env:
+   - `docs/n8n-blog-post-api.md`
+   - `.env.example`
+
+### Mistakes / corrections
+- I initially looked for `docs/n8n-icloud-sharedalbum-workflow.md`, but only `.json` exists in this repo now.
+- I first used `/* eslint-env node */` comments for API files, but this repo uses ESLint flat config; switched to `/* global process, Buffer */` style declarations where needed.
+
+### Pattern note
+- For this project, keep n8n compatibility by extending `/api/blog-post` in a backward-compatible way and treating library sync as additive instead of replacing existing workflow assumptions.
+- Updated `docs/n8n-icloud-sharedalbum-workflow.json` Build Blog Payload to pass `sourceGuid`, `sourceAssetKey`, and album metadata so `/api/blog-post` can dedupe/link photos reliably.
+- Applied Supabase migration `20260220170000_blog_photo_library` via MCP; migration version recorded as `20260220170536` and verified new tables exist in `public`.
+- Set Vercel envs via CLI for all environments (Production/Preview/Development): `ICLOUD_SHARED_ALBUM_URL`, `ICLOUD_SHARED_ALBUM_BASE_URL`, `ICLOUD_SHARED_ALBUM_HOST`.

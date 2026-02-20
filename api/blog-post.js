@@ -1,3 +1,4 @@
+/* global process, Buffer */
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.SUPABASE_URL
@@ -113,7 +114,7 @@ function buildExcerpt(markdown, maxLength = 180) {
 }
 
 function escapeMarkdownAlt(value) {
-  return String(value || '').replace(/[\[\]]/g, '')
+  return String(value || '').replaceAll('[', '').replaceAll(']', '')
 }
 
 function parsePublishedAt(value) {
@@ -121,6 +122,162 @@ function parsePublishedAt(value) {
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return null
   return date.toISOString()
+}
+
+function parseAlbumToken(value) {
+  const raw = toTrimmedString(value)
+  if (!raw) return ''
+  if (raw.includes('#')) return raw.split('#').pop().trim()
+  const pathMatch = raw.match(/sharedalbum\/([a-z0-9]+)/i)
+  if (pathMatch?.[1]) return pathMatch[1].trim()
+  if (/^[a-z0-9]+$/i.test(raw)) return raw
+  return ''
+}
+
+function normalizeSourceType(value) {
+  const normalized = toTrimmedString(value).toLowerCase()
+  if (normalized === 'icloud_shared') return normalized
+  if (normalized === 'manual') return normalized
+  return 'manual'
+}
+
+function normalizeUrlForDedupe(value) {
+  const raw = toTrimmedString(value)
+  if (!raw) return ''
+  if (raw.startsWith('/')) {
+    return raw.split(/[?#]/)[0].toLowerCase()
+  }
+
+  try {
+    const parsed = new URL(raw)
+    return `${parsed.hostname}${parsed.pathname}`.toLowerCase()
+  } catch {
+    return raw.split(/[?#]/)[0].toLowerCase()
+  }
+}
+
+function buildPhotoDedupeKey(image, index) {
+  const guid = toTrimmedString(image.sourceGuid).toLowerCase()
+  if (guid) return `guid:${guid}`
+
+  const normalized = normalizeUrlForDedupe(image.url || image.originalUrl)
+  if (normalized) return `url:${normalized}`
+
+  const fallback = `${toTrimmedString(image.alt)}-${index + 1}`.trim()
+  return `fallback:${fallback || `photo-${index + 1}`}`
+}
+
+async function ensurePhotoAlbum(
+  supabase,
+  {
+    albumName,
+    albumSourceType,
+    albumSourceUrl,
+    albumToken,
+    albumBaseUrl,
+  }
+) {
+  const normalizedSourceType = normalizeSourceType(albumSourceType)
+  const resolvedToken = parseAlbumToken(albumToken || albumSourceUrl)
+  const sourceUrl =
+    toTrimmedString(albumSourceUrl) ||
+    (resolvedToken
+      ? `https://www.icloud.com/sharedalbum/#${resolvedToken}`
+      : `manual://blog/${slugify(albumName || 'default') || 'default'}`)
+
+  const payload = {
+    name: toTrimmedString(albumName) || 'Blog Photo Library',
+    source_type: normalizedSourceType,
+    source_url: sourceUrl,
+    source_token: resolvedToken || null,
+    source_base_url: toTrimmedString(albumBaseUrl) || null,
+    active: true,
+  }
+
+  const { data, error } = await supabase
+    .from('blog_photo_albums')
+    .upsert(payload, { onConflict: 'source_type,source_url' })
+    .select('id')
+    .single()
+
+  if (error) {
+    throw new Error(`Failed to save blog photo album: ${error.message}`)
+  }
+
+  return data?.id || null
+}
+
+async function savePhotosToLibrary(
+  supabase,
+  {
+    images,
+    albumId,
+    defaultBatchKey,
+    postTitle,
+  }
+) {
+  if (!Array.isArray(images) || images.length === 0) {
+    return []
+  }
+
+  const rows = images.map((image, index) => ({
+    album_id: albumId || null,
+    dedupe_key: buildPhotoDedupeKey(image, index),
+    source_photo_guid: toTrimmedString(image.sourceGuid) || null,
+    source_asset_key: toTrimmedString(image.sourceAssetKey) || null,
+    source_batch_key: toTrimmedString(image.sourceBatchKey || defaultBatchKey) || null,
+    source_caption: toTrimmedString(image.sourceCaption) || null,
+    source_taken_at: parsePublishedAt(image.sourceTakenAt) || null,
+    image_url: image.url,
+    storage_path: toTrimmedString(image.storagePath) || null,
+    alt_text: toTrimmedString(image.alt) || postTitle || null,
+    metadata: {
+      uploaded: Boolean(image.uploaded),
+      originalUrl: toTrimmedString(image.originalUrl) || null,
+      isHeader: Boolean(image.isHeader),
+    },
+    updated_at: new Date().toISOString(),
+  }))
+
+  const { data, error } = await supabase
+    .from('blog_photos')
+    .upsert(rows, { onConflict: 'dedupe_key' })
+    .select('id, dedupe_key, image_url, alt_text, source_caption')
+
+  if (error) {
+    throw new Error(`Failed to save blog photos: ${error.message}`)
+  }
+
+  const byKey = new Map((data || []).map((row) => [row.dedupe_key, row]))
+  return rows.map((row) => byKey.get(row.dedupe_key)).filter(Boolean)
+}
+
+async function replacePostPhotoLinks(supabase, postId, photos, coverImageUrl) {
+  const { error: deleteError } = await supabase
+    .from('blog_post_photos')
+    .delete()
+    .eq('post_id', postId)
+
+  if (deleteError) {
+    throw new Error(`Failed to refresh post-photo links: ${deleteError.message}`)
+  }
+
+  if (!photos.length) return
+
+  const rows = photos.map((photo, index) => ({
+    post_id: postId,
+    photo_id: photo.id,
+    image_order: index,
+    is_cover: Boolean((coverImageUrl && photo.image_url === coverImageUrl) || (!coverImageUrl && index === 0)),
+    caption: photo.source_caption || null,
+    alt_text: photo.alt_text || null,
+  }))
+
+  const { error: insertError } = await supabase.from('blog_post_photos').insert(rows)
+
+  if (insertError) {
+    throw new Error(`Failed to create post-photo links: ${insertError.message}`)
+  }
 }
 
 async function ensureBucketExists(supabase, bucketName) {
@@ -154,6 +311,11 @@ function parseImageInput(rawInput) {
         fileName: '',
         alt: '',
         isHeader: false,
+        sourceGuid: '',
+        sourceAssetKey: '',
+        sourceBatchKey: '',
+        sourceCaption: '',
+        sourceTakenAt: '',
       }
     }
 
@@ -164,6 +326,11 @@ function parseImageInput(rawInput) {
       fileName: '',
       alt: '',
       isHeader: false,
+      sourceGuid: '',
+      sourceAssetKey: '',
+      sourceBatchKey: '',
+      sourceCaption: '',
+      sourceTakenAt: '',
     }
   }
 
@@ -175,6 +342,11 @@ function parseImageInput(rawInput) {
       fileName: '',
       alt: '',
       isHeader: false,
+      sourceGuid: '',
+      sourceAssetKey: '',
+      sourceBatchKey: '',
+      sourceCaption: '',
+      sourceTakenAt: '',
     }
   }
 
@@ -187,6 +359,18 @@ function parseImageInput(rawInput) {
     fileName: toTrimmedString(rawInput.fileName || rawInput.filename || rawInput.name),
     alt: toTrimmedString(rawInput.alt || rawInput.caption || ''),
     isHeader: toBoolean(rawInput.isHeader ?? rawInput.header, false),
+    sourceGuid: toTrimmedString(rawInput.sourceGuid || rawInput.source_guid || rawInput.photoGuid || rawInput.guid),
+    sourceAssetKey: toTrimmedString(rawInput.sourceAssetKey || rawInput.source_asset_key || rawInput.assetKey || rawInput.asset_key),
+    sourceBatchKey: toTrimmedString(rawInput.sourceBatchKey || rawInput.source_batch_key || rawInput.batchKey || rawInput.batch_key),
+    sourceCaption: toTrimmedString(rawInput.sourceCaption || rawInput.source_caption || rawInput.caption || ''),
+    sourceTakenAt: toTrimmedString(
+      rawInput.sourceTakenAt ||
+        rawInput.source_taken_at ||
+        rawInput.takenAt ||
+        rawInput.taken_at ||
+        rawInput.dateCreated ||
+        rawInput.createdAt
+    ),
   }
 }
 
@@ -202,6 +386,13 @@ async function resolveImage(supabase, imageInput, postSlug, index, bucketName) {
       alt: parsed.alt,
       isHeader: parsed.isHeader,
       uploaded: false,
+      storagePath: '',
+      originalUrl: parsed.url,
+      sourceGuid: parsed.sourceGuid,
+      sourceAssetKey: parsed.sourceAssetKey,
+      sourceBatchKey: parsed.sourceBatchKey,
+      sourceCaption: parsed.sourceCaption,
+      sourceTakenAt: parsed.sourceTakenAt,
     }
   }
 
@@ -245,6 +436,13 @@ async function resolveImage(supabase, imageInput, postSlug, index, bucketName) {
     alt: parsed.alt,
     isHeader: parsed.isHeader,
     uploaded: true,
+    storagePath: filePath,
+    originalUrl: '',
+    sourceGuid: parsed.sourceGuid,
+    sourceAssetKey: parsed.sourceAssetKey,
+    sourceBatchKey: parsed.sourceBatchKey,
+    sourceCaption: parsed.sourceCaption,
+    sourceTakenAt: parsed.sourceTakenAt,
   }
 }
 
@@ -302,6 +500,17 @@ export default async function handler(req, res) {
   const appendImagesToContent = toBoolean(body.insertImagesInContent, false)
   const useFirstImageAsHeader = toBoolean(body.useFirstImageAsHeader, true)
   const headerImageIndex = toInteger(body.headerImageIndex)
+  const persistImagesToLibrary = toBoolean(
+    body.persistImagesToLibrary ?? body.persist_images_to_library,
+    true
+  )
+  const linkImagesToPost = toBoolean(body.linkImagesToPost ?? body.link_images_to_post, true)
+  const defaultBatchKey = toTrimmedString(body.batchKey || body.batch_key)
+  const albumName = toTrimmedString(body.albumName || body.album_name)
+  const albumSourceType = toTrimmedString(body.albumSourceType || body.album_source_type)
+  const albumSourceUrl = toTrimmedString(body.albumSourceUrl || body.album_source_url || body.albumUrl || body.album_url)
+  const albumToken = toTrimmedString(body.albumToken || body.album_token)
+  const albumBaseUrl = toTrimmedString(body.albumBaseUrl || body.album_base_url)
   const explicitHeaderImageUrl = toTrimmedString(
     body.headerImageUrl ||
       body.header_image_url ||
@@ -427,6 +636,41 @@ export default async function handler(req, res) {
       return
     }
 
+    let libraryResult = null
+    if (persistImagesToLibrary && processedImages.length > 0) {
+      try {
+        const albumId = await ensurePhotoAlbum(supabase, {
+          albumName,
+          albumSourceType: albumSourceType || (albumToken || albumSourceUrl ? 'icloud_shared' : 'manual'),
+          albumSourceUrl,
+          albumToken,
+          albumBaseUrl,
+        })
+
+        const savedPhotos = await savePhotosToLibrary(supabase, {
+          images: processedImages,
+          albumId,
+          defaultBatchKey,
+          postTitle: title,
+        })
+
+        if (linkImagesToPost && savedPhotos.length > 0) {
+          await replacePostPhotoLinks(supabase, savedPost.id, savedPhotos, coverImageUrl)
+        }
+
+        libraryResult = {
+          albumId,
+          savedPhotoCount: savedPhotos.length,
+          linkedToPost: linkImagesToPost,
+        }
+      } catch (libraryError) {
+        console.error('Blog post library sync warning:', libraryError)
+        libraryResult = {
+          error: libraryError.message || 'Unable to sync image library',
+        }
+      }
+    }
+
     res.status(200).json({
       ok: true,
       post: savedPost,
@@ -435,6 +679,7 @@ export default async function handler(req, res) {
         alt: image.alt || null,
         uploaded: image.uploaded,
       })),
+      library: libraryResult,
     })
   } catch (error) {
     console.error('Blog post API error:', error)

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { BlogPhotoStudio } from './BlogPhotoStudio'
 
 const emptyPost = {
   title: '',
@@ -20,7 +21,7 @@ function slugify(value) {
     .replace(/(^-|-$)+/g, '')
 }
 
-export function AdminBlog({ currentUserEmail }) {
+export function AdminBlog({ currentUserEmail, accessToken }) {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
   const [formData, setFormData] = useState(emptyPost)
@@ -39,11 +40,15 @@ export function AdminBlog({ currentUserEmail }) {
 
     if (!error) {
       setPosts(data || [])
+      setLoading(false)
+      return data || []
     }
     setLoading(false)
+    return []
   }
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchPosts()
   }, [])
 
@@ -134,6 +139,16 @@ export function AdminBlog({ currentUserEmail }) {
       startNew()
     }
     fetchPosts()
+  }
+
+  const handlePostCreatedFromPhotos = async (newPost) => {
+    const refreshed = await fetchPosts()
+    const matched = refreshed.find(
+      (post) => post.id === newPost?.id || post.slug === newPost?.slug
+    )
+    if (matched) {
+      startEdit(matched)
+    }
   }
 
   return (
@@ -326,6 +341,11 @@ export function AdminBlog({ currentUserEmail }) {
           </form>
         </div>
       </div>
+
+      <BlogPhotoStudio
+        accessToken={accessToken}
+        onPostCreated={handlePostCreatedFromPhotos}
+      />
     </div>
   )
 }
