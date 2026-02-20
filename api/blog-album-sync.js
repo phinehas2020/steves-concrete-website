@@ -276,6 +276,20 @@ function buildBatches(photos) {
   })
 }
 
+function collectDerivativeChecksums(photo) {
+  const derivatives = photo?.derivatives
+  if (!derivatives || typeof derivatives !== 'object') return []
+
+  return Object.values(derivatives)
+    .map((variant) => normalizeForMatch(variant?.checksum || ''))
+    .filter(Boolean)
+}
+
+function buildDedupeKeyFromGuidOrUrl({ normalizedGuid, imageUrl }) {
+  if (normalizedGuid) return `guid:${normalizedGuid}`
+  return `url:${canonicalUrl(imageUrl)}`
+}
+
 function buildPostContent({ detailText, photos }) {
   const bodyImageMarkdown = photos
     .slice(1)
@@ -547,6 +561,7 @@ export default async function handler(req, res) {
       guidRecords.push({
         guid: rawGuid,
         normalizedGuid: normalized,
+        derivativeChecksums: collectDerivativeChecksums(photo),
         source: photo,
       })
     }
@@ -590,6 +605,7 @@ export default async function handler(req, res) {
 
     for (const record of guidRecords) {
       const matches = entries.filter((entry) => {
+        if (record.derivativeChecksums.includes(entry.normalizedKey)) return true
         if (entry.normalizedKey === record.normalizedGuid) return true
         if (entry.normalizedKey.includes(record.normalizedGuid)) return true
         const pathMatch = normalizeForMatch(
@@ -659,7 +675,10 @@ export default async function handler(req, res) {
 
       photoRows.push({
         album_id: albumRecord.id,
-        dedupe_key: `guid:${record.normalizedGuid}`,
+        dedupe_key: buildDedupeKeyFromGuidOrUrl({
+          normalizedGuid: record.normalizedGuid,
+          imageUrl: match.url,
+        }),
         source_photo_guid: record.guid,
         source_asset_key: match.assetKey,
         source_batch_key: batch?.batchKey || null,
@@ -678,7 +697,56 @@ export default async function handler(req, res) {
     }
 
     if (!photoRows.length) {
-      res.status(400).json({ error: 'No usable image URLs were found for the album GUIDs.' })
+      const globalCandidates = entries
+        .map((entry) => {
+          const url = buildUrl(entry.item)
+          if (!url || !isLikelyImage(url)) return null
+
+          return {
+            url,
+            assetKey: entry.key,
+            score: qualityScore(url),
+          }
+        })
+        .filter(Boolean)
+        .sort((a, b) => b.score - a.score)
+
+      const globalByCanonical = new Map()
+      for (const candidate of globalCandidates) {
+        const dedupe = canonicalUrl(candidate.url)
+        if (!globalByCanonical.has(dedupe)) {
+          globalByCanonical.set(dedupe, candidate)
+        }
+      }
+
+      const fallbackRows = [...globalByCanonical.values()].slice(0, 24).map((candidate, index) => ({
+        album_id: albumRecord.id,
+        dedupe_key: buildDedupeKeyFromGuidOrUrl({
+          normalizedGuid: '',
+          imageUrl: candidate.url,
+        }),
+        source_photo_guid: null,
+        source_asset_key: candidate.assetKey,
+        source_batch_key: newestBatch?.batchKey || null,
+        source_caption: newestBatch?.caption || null,
+        source_taken_at: parseDate(newestBatch?.createdAt) || null,
+        image_url: candidate.url,
+        storage_path: null,
+        alt_text: `Project photo ${index + 1}`,
+        metadata: {
+          sourceType: 'icloud_shared',
+          baseUrl,
+          importedBy: 'blog-album-sync-fallback',
+          matchMethod: 'global-fallback',
+        },
+        updated_at: new Date().toISOString(),
+      }))
+
+      photoRows.push(...fallbackRows)
+    }
+
+    if (!photoRows.length) {
+      res.status(400).json({ error: 'No usable image URLs were found for the album.' })
       return
     }
 
