@@ -589,3 +589,4 @@
 - Updated `Select All Visible` logic to respect collapsed state so bulk selection targets only what is currently visible.
 - Posted-bin classification in `BlogPhotoStudio` now filters usage to `blog_posts.status = 'published'` via `blog_post_photos` join so drafts do not prematurely move photos into the bin.
 - Featured blog card in `src/pages/BlogIndex.jsx` can become extremely tall with portrait cover images if height is not constrained; use explicit breakpoint heights + `object-cover` to cap card height.
+- Featured blog card needed a hard cap on the entire row (`lg:max-h-[440px]`) plus an image wrapper with fixed heights; image-only height classes were not sufficient to prevent oversized cards in user view.

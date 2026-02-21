@@ -163,20 +163,22 @@ export function BlogIndex() {
 
             {!loading && !error && posts.length > 0 && (
               <div className="space-y-10">
-                <article className="grid gap-6 lg:grid-cols-[1.2fr_1fr] bg-stone-50 border border-stone-200 rounded-2xl overflow-hidden">
-                  {featured?.cover_image_url ? (
-                    <img
-                      src={featured.cover_image_url}
-                      alt={featured?.title || 'Featured concrete project advice'}
-                      className="w-full h-[280px] sm:h-[340px] md:h-[420px] lg:h-[520px] object-cover"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="h-[280px] sm:h-[340px] md:h-[420px] lg:h-[520px] bg-stone-200 flex items-center justify-center text-stone-500 text-sm">
-                      Featured Article
-                    </div>
-                  )}
-                  <div className="p-6 md:p-8">
+                <article className="grid gap-6 lg:grid-cols-[1.2fr_1fr] bg-stone-50 border border-stone-200 rounded-2xl overflow-hidden lg:max-h-[440px]">
+                  <div className="h-[280px] sm:h-[340px] md:h-[420px] lg:h-[440px] overflow-hidden">
+                    {featured?.cover_image_url ? (
+                      <img
+                        src={featured.cover_image_url}
+                        alt={featured?.title || 'Featured concrete project advice'}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="h-full bg-stone-200 flex items-center justify-center text-stone-500 text-sm">
+                        Featured Article
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6 md:p-8 lg:flex lg:flex-col lg:justify-center">
                     <p className="text-xs uppercase tracking-wide text-stone-500 mb-2">
                       {featured?.published_at
                         ? new Date(featured.published_at).toLocaleDateString()
