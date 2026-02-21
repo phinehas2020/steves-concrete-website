@@ -5,6 +5,8 @@ const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const blogApiKey = process.env.N8N_BLOG_API_KEY || process.env.BLOG_API_KEY
 const blogImageBucket = process.env.BLOG_IMAGES_BUCKET || 'blog-images'
+const mirrorIcloudUrls = toBoolean(process.env.BLOG_MIRROR_ICLOUD_URLS ?? 'true', true)
+const mirrorAllRemoteImages = toBoolean(process.env.BLOG_MIRROR_REMOTE_IMAGES ?? 'false', false)
 
 const MAX_IMAGES = 20
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024
@@ -80,6 +82,10 @@ function parseDataUrl(dataUrl) {
   }
 }
 
+function normalizeMimeType(value) {
+  return toTrimmedString(String(value || '').split(';')[0]).toLowerCase()
+}
+
 function fileExtensionForMime(mimeType) {
   const type = String(mimeType || '').toLowerCase()
   if (type === 'image/jpeg' || type === 'image/jpg') return 'jpg'
@@ -87,6 +93,15 @@ function fileExtensionForMime(mimeType) {
   if (type === 'image/webp') return 'webp'
   if (type === 'image/gif') return 'gif'
   return 'jpg'
+}
+
+function mimeTypeFromUrl(url) {
+  const path = String(url || '').split('?')[0].toLowerCase()
+  if (path.endsWith('.jpg') || path.endsWith('.jpeg')) return 'image/jpeg'
+  if (path.endsWith('.png')) return 'image/png'
+  if (path.endsWith('.webp')) return 'image/webp'
+  if (path.endsWith('.gif')) return 'image/gif'
+  return ''
 }
 
 function sanitizeFileName(value) {
@@ -98,6 +113,16 @@ function sanitizeFileName(value) {
     .replace(/(^-|-$)+/g, '')
 
   return safe || 'image'
+}
+
+function hashKey(input) {
+  let hash = 2166136261
+  const text = String(input || '')
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index)
+    hash = Math.imul(hash, 16777619)
+  }
+  return (hash >>> 0).toString(36)
 }
 
 function buildExcerpt(markdown, maxLength = 180) {
@@ -165,6 +190,78 @@ function buildPhotoDedupeKey(image, index) {
 
   const fallback = `${toTrimmedString(image.alt)}-${index + 1}`.trim()
   return `fallback:${fallback || `photo-${index + 1}`}`
+}
+
+function shouldMirrorRemoteImageUrl(url) {
+  if (!url || url.startsWith('/')) return false
+  if (mirrorAllRemoteImages) return true
+  if (!mirrorIcloudUrls) return false
+
+  try {
+    const hostname = new URL(url).hostname.toLowerCase()
+    return hostname.includes('icloud-content.com') || hostname.includes('sharedstreams.icloud.com')
+  } catch {
+    return false
+  }
+}
+
+async function mirrorRemoteImageToStorage(supabase, {
+  url,
+  mimeType,
+  postSlug,
+  index,
+  bucketName,
+}) {
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'User-Agent': 'website-blog-post-api',
+    },
+  })
+
+  if (!response.ok) {
+    throw new Error(`Failed to download image ${index + 1} (${response.status}).`)
+  }
+
+  const responseMimeType = normalizeMimeType(response.headers.get('content-type'))
+  const resolvedMimeType = normalizeMimeType(mimeType) || responseMimeType || mimeTypeFromUrl(url)
+
+  if (!resolvedMimeType || !ALLOWED_IMAGE_MIME_TYPES.has(resolvedMimeType)) {
+    throw new Error(`Image ${index + 1} has an unsupported mime type.`)
+  }
+
+  const imageBuffer = Buffer.from(await response.arrayBuffer())
+  if (!imageBuffer.length) {
+    throw new Error(`Image ${index + 1} is empty.`)
+  }
+
+  if (imageBuffer.length > MAX_IMAGE_BYTES) {
+    throw new Error(`Image ${index + 1} exceeds ${Math.round(MAX_IMAGE_BYTES / 1024 / 1024)}MB.`)
+  }
+
+  const normalizedRemote = normalizeUrlForDedupe(url)
+  const remoteHash = sanitizeFileName(hashKey(normalizedRemote || url))
+  const extension = fileExtensionForMime(resolvedMimeType)
+  const filePath = `${postSlug}/remote-${index + 1}-${remoteHash}.${extension}`
+
+  const { error: uploadError } = await supabase.storage.from(bucketName).upload(filePath, imageBuffer, {
+    contentType: resolvedMimeType,
+    cacheControl: '31536000',
+    upsert: true,
+  })
+
+  if (uploadError) {
+    throw new Error(`Failed to upload image ${index + 1}: ${uploadError.message}`)
+  }
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from(bucketName).getPublicUrl(filePath)
+
+  return {
+    url: publicUrl,
+    storagePath: filePath,
+  }
 }
 
 async function ensurePhotoAlbum(
@@ -381,6 +478,31 @@ async function resolveImage(supabase, imageInput, postSlug, index, bucketName) {
     if (!isAllowedUrl(parsed.url)) {
       throw new Error(`Image ${index + 1} has an invalid URL.`)
     }
+
+    if (shouldMirrorRemoteImageUrl(parsed.url)) {
+      const mirrored = await mirrorRemoteImageToStorage(supabase, {
+        url: parsed.url,
+        mimeType: parsed.mimeType,
+        postSlug,
+        index,
+        bucketName,
+      })
+
+      return {
+        url: mirrored.url,
+        alt: parsed.alt,
+        isHeader: parsed.isHeader,
+        uploaded: true,
+        storagePath: mirrored.storagePath,
+        originalUrl: parsed.url,
+        sourceGuid: parsed.sourceGuid,
+        sourceAssetKey: parsed.sourceAssetKey,
+        sourceBatchKey: parsed.sourceBatchKey,
+        sourceCaption: parsed.sourceCaption,
+        sourceTakenAt: parsed.sourceTakenAt,
+      }
+    }
+
     return {
       url: parsed.url,
       alt: parsed.alt,
@@ -558,9 +680,8 @@ export default async function handler(req, res) {
 
   try {
     const requiresUpload = rawImages.some((image) => {
-      if (typeof image === 'string') return /^data:image\//i.test(image)
-      if (!image || typeof image !== 'object') return false
-      return Boolean(image.base64 || image.data || image.dataUrl || image.data_url)
+      const parsed = parseImageInput(image)
+      return Boolean(parsed.base64) || shouldMirrorRemoteImageUrl(parsed.url)
     })
 
     if (requiresUpload) {

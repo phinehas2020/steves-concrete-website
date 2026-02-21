@@ -1,4 +1,4 @@
-/* global process */
+/* global process, Buffer */
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.SUPABASE_URL
@@ -6,6 +6,15 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const MAX_GUIDS_PER_REQUEST = 150
 const MAX_SYNC_PHOTOS = Number.parseInt(process.env.ICLOUD_SYNC_MAX_PHOTOS || '120', 10)
 const VALID_STATUSES = new Set(['draft', 'published'])
+const BLOG_IMAGE_BUCKET = process.env.BLOG_IMAGES_BUCKET || 'blog-images'
+const MAX_IMAGE_BYTES = 10 * 1024 * 1024
+const ALLOWED_IMAGE_MIME_TYPES = new Set([
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+])
 
 function normalizeBody(body) {
   if (!body) return {}
@@ -92,6 +101,180 @@ function hashKey(input) {
     hash = Math.imul(hash, 16777619)
   }
   return (hash >>> 0).toString(36)
+}
+
+function sanitizePathSegment(value) {
+  const safe = String(value || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9._-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/(^-|-$)+/g, '')
+  return safe || 'photo'
+}
+
+function normalizeMimeType(value) {
+  return toTrimmedString(String(value || '').split(';')[0]).toLowerCase()
+}
+
+function extensionForMimeType(mimeType) {
+  const normalized = normalizeMimeType(mimeType)
+  if (normalized === 'image/jpeg' || normalized === 'image/jpg') return 'jpg'
+  if (normalized === 'image/png') return 'png'
+  if (normalized === 'image/webp') return 'webp'
+  if (normalized === 'image/gif') return 'gif'
+  return ''
+}
+
+function extensionFromUrl(url) {
+  const cleaned = String(url || '').split('?')[0].toLowerCase()
+  if (cleaned.endsWith('.jpeg') || cleaned.endsWith('.jpg')) return 'jpg'
+  if (cleaned.endsWith('.png')) return 'png'
+  if (cleaned.endsWith('.webp')) return 'webp'
+  if (cleaned.endsWith('.gif')) return 'gif'
+  return 'jpg'
+}
+
+function mimeTypeFromUrl(url) {
+  const ext = extensionFromUrl(url)
+  if (ext === 'jpg') return 'image/jpeg'
+  if (ext === 'png') return 'image/png'
+  if (ext === 'webp') return 'image/webp'
+  if (ext === 'gif') return 'image/gif'
+  return ''
+}
+
+function buildStoragePath({ albumId, dedupeKey, sourceGuid, sourceAssetKey, sourceTakenAt, imageUrl, mimeType }) {
+  const date = toTrimmedString(sourceTakenAt).slice(0, 10) || new Date().toISOString().slice(0, 10)
+  const ext = extensionForMimeType(mimeType) || extensionFromUrl(imageUrl)
+  const guidPart = sanitizePathSegment(sourceGuid || sourceAssetKey || 'asset')
+  const keyHash = sanitizePathSegment(hashKey(dedupeKey))
+  const safeAlbum = sanitizePathSegment(albumId || 'default')
+  return `icloud-sync/${safeAlbum}/${date}/${guidPart}-${keyHash}.${ext}`
+}
+
+function getStoragePublicUrl(supabase, bucketName, filePath) {
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from(bucketName).getPublicUrl(filePath)
+  return publicUrl
+}
+
+async function ensureBucketExists(supabase, bucketName) {
+  const { data: buckets, error: listError } = await supabase.storage.listBuckets()
+  if (listError) {
+    throw new Error(`Unable to verify storage bucket: ${listError.message}`)
+  }
+
+  const exists = (buckets || []).some((bucket) => bucket.name === bucketName)
+  if (exists) return
+
+  const { error: createError } = await supabase.storage.createBucket(bucketName, {
+    public: true,
+    fileSizeLimit: `${MAX_IMAGE_BYTES}`,
+    allowedMimeTypes: Array.from(ALLOWED_IMAGE_MIME_TYPES),
+  })
+
+  if (createError && !/already exists/i.test(createError.message || '')) {
+    throw new Error(`Unable to create storage bucket "${bucketName}": ${createError.message}`)
+  }
+}
+
+async function mirrorRemoteImageToStorage(supabase, row, existingRow, bucketName) {
+  if (toTrimmedString(existingRow?.storage_path)) {
+    const storagePath = toTrimmedString(existingRow.storage_path)
+    return {
+      ...row,
+      image_url: getStoragePublicUrl(supabase, bucketName, storagePath),
+      storage_path: storagePath,
+      mime_type: toTrimmedString(existingRow?.mime_type) || row.mime_type || null,
+      metadata: {
+        ...(row.metadata || {}),
+        mirroredToStorage: true,
+        mirroredFromExisting: true,
+      },
+    }
+  }
+
+  const response = await fetch(row.image_url, {
+    method: 'GET',
+    headers: {
+      'User-Agent': 'website-blog-album-sync',
+    },
+  })
+
+  if (!response.ok) {
+    throw new Error(`Image fetch failed (${response.status}) for asset ${row.source_asset_key || 'unknown'}`)
+  }
+
+  const responseMimeType = normalizeMimeType(response.headers.get('content-type'))
+  const inferredMimeType = responseMimeType || mimeTypeFromUrl(row.image_url)
+  const finalMimeType = ALLOWED_IMAGE_MIME_TYPES.has(inferredMimeType)
+    ? inferredMimeType
+    : ''
+
+  if (!finalMimeType) {
+    throw new Error(`Unsupported image type for asset ${row.source_asset_key || 'unknown'}`)
+  }
+
+  const imageBuffer = Buffer.from(await response.arrayBuffer())
+  if (!imageBuffer.length) {
+    throw new Error(`Image download was empty for asset ${row.source_asset_key || 'unknown'}`)
+  }
+
+  if (imageBuffer.length > MAX_IMAGE_BYTES) {
+    throw new Error(`Image exceeds ${Math.round(MAX_IMAGE_BYTES / 1024 / 1024)}MB for asset ${row.source_asset_key || 'unknown'}`)
+  }
+
+  const storagePath = buildStoragePath({
+    albumId: row.album_id,
+    dedupeKey: row.dedupe_key,
+    sourceGuid: row.source_photo_guid,
+    sourceAssetKey: row.source_asset_key,
+    sourceTakenAt: row.source_taken_at,
+    imageUrl: row.image_url,
+    mimeType: finalMimeType,
+  })
+
+  const { error: uploadError } = await supabase.storage.from(bucketName).upload(storagePath, imageBuffer, {
+    contentType: finalMimeType,
+    cacheControl: '31536000',
+    upsert: true,
+  })
+
+  if (uploadError) {
+    throw new Error(`Storage upload failed for asset ${row.source_asset_key || 'unknown'}: ${uploadError.message}`)
+  }
+
+  return {
+    ...row,
+    image_url: getStoragePublicUrl(supabase, bucketName, storagePath),
+    storage_path: storagePath,
+    mime_type: finalMimeType,
+    metadata: {
+      ...(row.metadata || {}),
+      mirroredToStorage: true,
+      mirroredFromExisting: false,
+      sourceImageUrl: row.image_url,
+    },
+  }
+}
+
+async function mapWithConcurrency(items, limit, mapper) {
+  const results = new Array(items.length)
+  let cursor = 0
+
+  async function worker() {
+    while (cursor < items.length) {
+      const index = cursor
+      cursor += 1
+      results[index] = await mapper(items[index], index)
+    }
+  }
+
+  const workerCount = Math.max(1, Math.min(limit, items.length))
+  await Promise.all(Array.from({ length: workerCount }, () => worker()))
+  return results
 }
 
 function ensureTrailingSlash(value) {
@@ -452,6 +635,116 @@ async function createOrUpdatePostForBatch(supabase, {
   return savedPost
 }
 
+async function repairLinkedBlogPostsAfterPhotoMirror(supabase, savedPhotos, existingByKey) {
+  const changedPhotos = (savedPhotos || [])
+    .map((photo) => {
+      const oldUrl = toTrimmedString(existingByKey.get(photo.dedupe_key)?.image_url)
+      const newUrl = toTrimmedString(photo.image_url)
+      return {
+        id: photo.id,
+        oldUrl,
+        newUrl,
+      }
+    })
+    .filter((row) => row.id && row.oldUrl && row.newUrl && row.oldUrl !== row.newUrl)
+
+  if (!changedPhotos.length) {
+    return {
+      postsUpdated: 0,
+      urlsRewritten: 0,
+    }
+  }
+
+  const changedByPhotoId = new Map(changedPhotos.map((row) => [row.id, row]))
+  const photoIds = changedPhotos.map((row) => row.id)
+
+  const { data: links, error: linksError } = await supabase
+    .from('blog_post_photos')
+    .select('post_id, photo_id, is_cover')
+    .in('photo_id', photoIds)
+
+  if (linksError) {
+    throw new Error(`Failed to load linked blog posts for image repair: ${linksError.message}`)
+  }
+
+  if (!Array.isArray(links) || links.length === 0) {
+    return {
+      postsUpdated: 0,
+      urlsRewritten: 0,
+    }
+  }
+
+  const linksByPostId = new Map()
+  for (const link of links) {
+    const key = link.post_id
+    const existing = linksByPostId.get(key) || []
+    existing.push(link)
+    linksByPostId.set(key, existing)
+  }
+
+  const postIds = [...new Set(links.map((row) => row.post_id))]
+  const { data: posts, error: postsError } = await supabase
+    .from('blog_posts')
+    .select('id, content, cover_image_url')
+    .in('id', postIds)
+
+  if (postsError) {
+    throw new Error(`Failed to load blog posts for image repair: ${postsError.message}`)
+  }
+
+  let postsUpdated = 0
+  let urlsRewritten = 0
+
+  for (const post of posts || []) {
+    const relatedLinks = linksByPostId.get(post.id) || []
+    let nextContent = typeof post.content === 'string' ? post.content : ''
+    let nextCover = toTrimmedString(post.cover_image_url) || null
+    let changed = false
+
+    for (const link of relatedLinks) {
+      const replacement = changedByPhotoId.get(link.photo_id)
+      if (!replacement) continue
+
+      if (nextContent && nextContent.includes(replacement.oldUrl)) {
+        const chunks = nextContent.split(replacement.oldUrl)
+        const replacementCount = Math.max(0, chunks.length - 1)
+        if (replacementCount > 0) {
+          nextContent = chunks.join(replacement.newUrl)
+          urlsRewritten += replacementCount
+          changed = true
+        }
+      }
+
+      if (link.is_cover && nextCover === replacement.oldUrl) {
+        nextCover = replacement.newUrl
+        changed = true
+      }
+    }
+
+    if (!changed) continue
+
+    const { error: updateError } = await supabase
+      .from('blog_posts')
+      .update({
+        content: nextContent,
+        cover_image_url: nextCover,
+        updated_at: new Date().toISOString(),
+      })
+      .eq('id', post.id)
+
+    if (updateError) {
+      throw new Error(`Failed to repair blog post ${post.id}: ${updateError.message}`)
+    }
+
+    postsUpdated += 1
+  }
+
+  return {
+    postsUpdated,
+    urlsRewritten,
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' })
@@ -770,7 +1063,7 @@ export default async function handler(req, res) {
     const dedupeKeys = [...new Set(photoRows.map((row) => row.dedupe_key))]
     const { data: existingRows, error: existingRowsError } = await supabase
       .from('blog_photos')
-      .select('dedupe_key')
+      .select('dedupe_key, image_url, storage_path, mime_type')
       .in('dedupe_key', dedupeKeys)
 
     if (existingRowsError) {
@@ -779,10 +1072,38 @@ export default async function handler(req, res) {
     }
 
     const existingKeySet = new Set((existingRows || []).map((row) => row.dedupe_key))
+    const existingByKey = new Map((existingRows || []).map((row) => [row.dedupe_key, row]))
+
+    await ensureBucketExists(supabase, BLOG_IMAGE_BUCKET)
+
+    const mirrorWarnings = []
+    const rowsForUpsert = await mapWithConcurrency(photoRows, 4, async (row) => {
+      try {
+        return await mirrorRemoteImageToStorage(
+          supabase,
+          row,
+          existingByKey.get(row.dedupe_key),
+          BLOG_IMAGE_BUCKET
+        )
+      } catch (mirrorError) {
+        mirrorWarnings.push({
+          dedupeKey: row.dedupe_key,
+          error: mirrorError.message || 'Unknown mirror error',
+        })
+        return {
+          ...row,
+          metadata: {
+            ...(row.metadata || {}),
+            mirroredToStorage: false,
+            mirrorError: mirrorError.message || 'Unknown mirror error',
+          },
+        }
+      }
+    })
 
     const { data: savedPhotos, error: savePhotosError } = await supabase
       .from('blog_photos')
-      .upsert(photoRows, { onConflict: 'dedupe_key' })
+      .upsert(rowsForUpsert, { onConflict: 'dedupe_key' })
       .select('id, dedupe_key, source_photo_guid, source_batch_key, source_caption, image_url, alt_text, source_taken_at')
 
     if (savePhotosError) {
@@ -791,7 +1112,21 @@ export default async function handler(req, res) {
     }
 
     const importedCount = dedupeKeys.filter((key) => !existingKeySet.has(key)).length
-    const updatedCount = photoRows.length - importedCount
+    const updatedCount = rowsForUpsert.length - importedCount
+    const mirroredCount = rowsForUpsert.filter((row) => toTrimmedString(row.storage_path)).length
+    let postRepairSummary = { postsUpdated: 0, urlsRewritten: 0 }
+    let postRepairWarning = null
+
+    try {
+      postRepairSummary = await repairLinkedBlogPostsAfterPhotoMirror(
+        supabase,
+        savedPhotos || [],
+        existingByKey
+      )
+    } catch (repairError) {
+      postRepairWarning = repairError.message || 'Unable to repair linked blog post image URLs.'
+      console.error('blog-album-sync post repair warning:', repairError)
+    }
 
     await supabase
       .from('blog_photo_albums')
@@ -844,9 +1179,14 @@ export default async function handler(req, res) {
       },
       totalPhotosSeen: photos.length,
       photosRequestedForSync: guidRecordsForSync.length,
-      photosWithAssetUrls: photoRows.length,
+      photosWithAssetUrls: rowsForUpsert.length,
       imported: importedCount,
       updated: updatedCount,
+      mirroredToStorage: mirroredCount,
+      mirrorWarnings: mirrorWarnings.slice(0, 10),
+      repairedPosts: postRepairSummary.postsUpdated,
+      repairedPostImageUrls: postRepairSummary.urlsRewritten,
+      postRepairWarning,
       newestBatchKey: newestBatch?.batchKey || null,
       generatedPost,
     })

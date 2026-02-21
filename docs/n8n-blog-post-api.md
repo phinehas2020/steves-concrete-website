@@ -22,6 +22,8 @@ Set one of these headers in n8n:
 Optional:
 
 - `BLOG_IMAGES_BUCKET` (defaults to `blog-images`)
+- `BLOG_MIRROR_ICLOUD_URLS` (defaults to `true`; mirrors iCloud CDN URLs to Supabase Storage)
+- `BLOG_MIRROR_REMOTE_IMAGES` (defaults to `false`; when `true`, mirrors all remote image URLs to Storage)
 
 ## Required body fields
 
