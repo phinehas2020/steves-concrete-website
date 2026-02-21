@@ -168,11 +168,11 @@ export function BlogIndex() {
                     <img
                       src={featured.cover_image_url}
                       alt={featured?.title || 'Featured concrete project advice'}
-                      className="w-full h-full min-h-[240px] object-cover"
+                      className="w-full h-[280px] sm:h-[340px] md:h-[420px] lg:h-[520px] object-cover"
                       loading="lazy"
                     />
                   ) : (
-                    <div className="min-h-[240px] bg-stone-200 flex items-center justify-center text-stone-500 text-sm">
+                    <div className="h-[280px] sm:h-[340px] md:h-[420px] lg:h-[520px] bg-stone-200 flex items-center justify-center text-stone-500 text-sm">
                       Featured Article
                     </div>
                   )}

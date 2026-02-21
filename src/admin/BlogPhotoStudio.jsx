@@ -92,6 +92,7 @@ async function readApiPayload(response) {
 export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   const [albums, setAlbums] = useState([])
   const [photos, setPhotos] = useState([])
+  const [photoUsageById, setPhotoUsageById] = useState(new Map())
   const [loadingAlbums, setLoadingAlbums] = useState(true)
   const [loadingPhotos, setLoadingPhotos] = useState(true)
   const [loadingPrompt, setLoadingPrompt] = useState(true)
@@ -101,6 +102,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   const [selectedPhotos, setSelectedPhotos] = useState(new Set())
   const [targetType, setTargetType] = useState('blog_post')
   const [jobCategory, setJobCategory] = useState(DEFAULT_JOB_CATEGORIES[0] || 'Commercial')
+  const [showPostedBin, setShowPostedBin] = useState(false)
   const [recentJobs, setRecentJobs] = useState([])
   const [systemPrompt, setSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
   const [savedSystemPrompt, setSavedSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
@@ -119,6 +121,34 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     if (!selectedAlbumId) return photos
     return photos.filter((photo) => photo.album_id === selectedAlbumId)
   }, [photos, selectedAlbumId])
+
+  const usedPhotoIds = useMemo(() => {
+    const used = new Set()
+    photoUsageById.forEach((count, photoId) => {
+      if (count > 0) used.add(photoId)
+    })
+    return used
+  }, [photoUsageById])
+
+  const readyPhotos = useMemo(
+    () => filteredPhotos.filter((photo) => !usedPhotoIds.has(photo.id)),
+    [filteredPhotos, usedPhotoIds]
+  )
+
+  const postedBinPhotos = useMemo(
+    () => filteredPhotos.filter((photo) => usedPhotoIds.has(photo.id)),
+    [filteredPhotos, usedPhotoIds]
+  )
+
+  const visiblePhotos = useMemo(
+    () => (showPostedBin ? [...readyPhotos, ...postedBinPhotos] : readyPhotos),
+    [showPostedBin, readyPhotos, postedBinPhotos]
+  )
+
+  const selectedVisibleCount = useMemo(
+    () => visiblePhotos.filter((photo) => selectedPhotos.has(photo.id)).length,
+    [visiblePhotos, selectedPhotos]
+  )
 
   const loadAlbums = async () => {
     setLoadingAlbums(true)
@@ -152,7 +182,38 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
       return
     }
 
-    setPhotos(data || [])
+    const loadedPhotos = data || []
+    setPhotos(loadedPhotos)
+
+    if (loadedPhotos.length === 0) {
+      setPhotoUsageById(new Map())
+      setLoadingPhotos(false)
+      return
+    }
+
+    const photoIds = loadedPhotos.map((photo) => photo.id).filter(Boolean)
+    const { data: usageRows, error: usageError } = await supabase
+      .from('blog_post_photos')
+      .select('photo_id, blog_posts!inner(status)')
+      .in('photo_id', photoIds)
+      .eq('blog_posts.status', 'published')
+      .limit(5000)
+
+    if (usageError) {
+      setMessage(`Unable to load photo usage: ${usageError.message}`)
+      setPhotoUsageById(new Map())
+      setLoadingPhotos(false)
+      return
+    }
+
+    const usageMap = new Map()
+    ;(usageRows || []).forEach((row) => {
+      const photoId = row?.photo_id
+      if (!photoId) return
+      usageMap.set(photoId, (usageMap.get(photoId) || 0) + 1)
+    })
+
+    setPhotoUsageById(usageMap)
     setLoadingPhotos(false)
   }
 
@@ -254,6 +315,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   const onSelectAlbum = (albumId) => {
     setSelectedAlbumId(albumId)
     setSelectedPhotos(new Set())
+    setShowPostedBin(false)
     setMessage('')
 
     if (!albumId) {
@@ -381,7 +443,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   }
 
   const selectAllVisible = () => {
-    const next = new Set(filteredPhotos.map((photo) => photo.id))
+    const next = new Set(visiblePhotos.map((photo) => photo.id))
     setSelectedPhotos(next)
   }
 
@@ -444,6 +506,58 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   }
 
   const hasPromptChanges = toTrimmedString(systemPrompt) !== toTrimmedString(savedSystemPrompt)
+
+  const renderPhotoCard = (photo) => {
+    const isSelected = selectedPhotos.has(photo.id)
+    const albumName = photo.album_id ? albumsById.get(photo.album_id)?.name : ''
+    const usageCount = photoUsageById.get(photo.id) || 0
+    const isUsed = usageCount > 0
+
+    return (
+      <button
+        key={photo.id}
+        type="button"
+        onClick={() => togglePhotoSelection(photo.id)}
+        className={[
+          'text-left border rounded-lg overflow-hidden transition-colors',
+          isSelected
+            ? 'border-accent-500 ring-2 ring-accent-200'
+            : 'border-stone-200 hover:border-stone-300',
+        ].join(' ')}
+      >
+        <div className="relative">
+          <img
+            src={photo.image_url}
+            alt={photo.alt_text || 'Blog photo'}
+            className="w-full aspect-square object-cover"
+            loading="lazy"
+          />
+          <div className="absolute top-2 left-2 bg-white/90 rounded p-1 shadow-sm">
+            {isSelected ? (
+              <CheckSquare className="size-4 text-accent-600" />
+            ) : (
+              <Square className="size-4 text-stone-500" />
+            )}
+          </div>
+          {isUsed && (
+            <div className="absolute top-2 right-2 bg-black/70 text-white text-[10px] rounded px-1.5 py-0.5">
+              Used {usageCount}x
+            </div>
+          )}
+        </div>
+        <div className="p-2.5 space-y-1">
+          <p className="text-xs font-medium text-stone-700">{previewCaption(photo)}</p>
+          <p className="text-[11px] text-stone-500">
+            {albumName || 'Unsorted'}
+            {photo.source_taken_at
+              ? ` • ${new Date(photo.source_taken_at).toLocaleDateString()}`
+              : ''}
+            {isUsed ? ` • Posted ${usageCount}x` : ''}
+          </p>
+        </div>
+      </button>
+    )
+  }
 
   return (
     <div className="bg-white border border-stone-200 rounded-xl p-4 sm:p-6 space-y-6">
@@ -569,7 +683,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
             <button
               type="button"
               onClick={selectAllVisible}
-              disabled={filteredPhotos.length === 0 || loadingPhotos}
+              disabled={visiblePhotos.length === 0 || loadingPhotos}
               className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-white border border-stone-200 rounded-lg hover:bg-stone-100 disabled:opacity-50"
             >
               <CheckSquare className="size-4" />
@@ -584,7 +698,8 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
               Clear
             </button>
             <span className="text-xs text-stone-500">
-              {selectedPhotos.size} selected / {filteredPhotos.length} visible
+              {selectedVisibleCount} selected visible ({selectedPhotos.size} total) / {visiblePhotos.length} visible
+              {' '}({readyPhotos.length} ready, {postedBinPhotos.length} posted)
             </span>
           </div>
 
@@ -723,50 +838,48 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
           No photos yet. Run a sync to import from your album.
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
-          {filteredPhotos.map((photo) => {
-            const isSelected = selectedPhotos.has(photo.id)
-            const albumName = photo.album_id ? albumsById.get(photo.album_id)?.name : ''
+        <div className="space-y-4">
+          {readyPhotos.length === 0 ? (
+            <div className="text-sm text-stone-500 bg-stone-50 border border-stone-200 rounded-lg p-4">
+              No ready photos in this view. Expand the posted bin to see photos that were already used.
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+              {readyPhotos.map((photo) => renderPhotoCard(photo))}
+            </div>
+          )}
 
-            return (
+          <div className="bg-stone-50 border border-stone-200 rounded-lg p-4 space-y-3">
+            <div className="flex items-center justify-between gap-2">
+              <div>
+                <h5 className="text-sm font-semibold text-stone-900">Posted Bin</h5>
+                <p className="text-xs text-stone-500">
+                  Photos that have already been used in generated posts. Collapsed by default.
+                </p>
+              </div>
               <button
-                key={photo.id}
                 type="button"
-                onClick={() => togglePhotoSelection(photo.id)}
-                className={[
-                  'text-left border rounded-lg overflow-hidden transition-colors',
-                  isSelected
-                    ? 'border-accent-500 ring-2 ring-accent-200'
-                    : 'border-stone-200 hover:border-stone-300',
-                ].join(' ')}
+                onClick={() => setShowPostedBin((prev) => !prev)}
+                className="px-3 py-1.5 text-xs bg-white border border-stone-200 rounded-lg hover:bg-stone-100"
               >
-                <div className="relative">
-                  <img
-                    src={photo.image_url}
-                    alt={photo.alt_text || 'Blog photo'}
-                    className="w-full aspect-square object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-2 left-2 bg-white/90 rounded p-1 shadow-sm">
-                    {isSelected ? (
-                      <CheckSquare className="size-4 text-accent-600" />
-                    ) : (
-                      <Square className="size-4 text-stone-500" />
-                    )}
-                  </div>
-                </div>
-                <div className="p-2.5 space-y-1">
-                  <p className="text-xs font-medium text-stone-700">{previewCaption(photo)}</p>
-                  <p className="text-[11px] text-stone-500">
-                    {albumName || 'Unsorted'}
-                    {photo.source_taken_at
-                      ? ` • ${new Date(photo.source_taken_at).toLocaleDateString()}`
-                      : ''}
-                  </p>
-                </div>
+                {showPostedBin ? `Collapse (${postedBinPhotos.length})` : `Expand (${postedBinPhotos.length})`}
               </button>
-            )
-          })}
+            </div>
+
+            {showPostedBin ? (
+              postedBinPhotos.length === 0 ? (
+                <p className="text-xs text-stone-500">No posted photos yet.</p>
+              ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3">
+                  {postedBinPhotos.map((photo) => renderPhotoCard(photo))}
+                </div>
+              )
+            ) : (
+              <p className="text-xs text-stone-500">
+                Expand to view or select previously used photos.
+              </p>
+            )}
+          </div>
         </div>
       )}
     </div>

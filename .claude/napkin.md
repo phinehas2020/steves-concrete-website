@@ -473,3 +473,119 @@
 - iCloud `webasseturls` keys are checksum IDs (not photo GUIDs) for this album; sync matcher must map via `photo.derivatives[*].checksum` or imports will return 0 rows.
 - Added sync guardrails: process only recent album photos (`ICLOUD_SYNC_MAX_PHOTOS`, default 120) and persist last sync errors to `blog_photo_albums.last_sync_error` for faster production debugging.
 - Blog post generation from selected photos now uses OpenAI Responses (`gpt-5-mini-2025-08-07`) with first selected image as `input_image`; keep fallback text path for resilience if model response parsing is sparse.
+
+## 2026-02-20 — Admin-editable blog AI system prompt (in progress)
+
+### Context
+- User requested making the photo-to-blog AI system prompt editable in Admin so wording can be adjusted later.
+
+### Work in progress
+1. Added migration `20260220193000_blog_ai_prompt_settings.sql` for `blog_ai_prompt_settings` with admin RLS and seeded default prompt key `blog_photo_post`.
+2. Updated `api/blog-generate-post.js` to read system prompt from DB (or request override), pass it as `instructions` to OpenAI Responses, and return prompt-source metadata.
+3. Updated `src/admin/BlogPhotoStudio.jsx` with prompt textarea + save/reset controls and sending current prompt in generate request.
+
+### Completion notes
+- Migration was applied via Supabase MCP (`blog_ai_prompt_settings`) and verified with a select query.
+- Validation passed:
+  - `node --check api/blog-generate-post.js`
+  - `npx eslint src/admin/BlogPhotoStudio.jsx api/blog-generate-post.js`
+  - `npm run build`
+
+## 2026-02-20 — Naming and photo-comment prioritization for AI post generation
+
+### Context
+- User reported generated titles like "Project photo 1/4" and requested using photos with real comments when present.
+
+### What was changed
+1. `api/blog-generate-post.js`
+   - Added generic-label detection (e.g., `Project photo N`, `photo N`, `IMG1234`) so these are ignored for naming.
+   - Added lead-photo selection that prioritizes a selected photo with meaningful comment text.
+   - Reordered selected photos to put the lead/commented photo first, so it becomes cover + primary image context.
+   - Added inclusion of selected photo comments in the AI prompt context.
+   - Title generation now prefers meaningful captions/comments and avoids generic placeholders.
+2. `src/admin/BlogPhotoStudio.jsx`
+   - Photo cards now hide generic placeholders and show "No caption yet." when there is no meaningful caption.
+
+### Validation
+- `node --check api/blog-generate-post.js`
+- `npx eslint api/blog-generate-post.js src/admin/BlogPhotoStudio.jsx`
+- `npm run build`
+
+## 2026-02-20 — Background queue for publish-from-selected photos
+
+### Context
+- User requested that "Publish from Selected" keep running in background even if they leave the site.
+
+### What was changed
+1. Added `blog_post_generation_jobs` table migration with status tracking and admin RLS.
+2. Added `api/blog-generate-job.js` to enqueue a generation job and trigger worker kickoff.
+3. Added `api/blog-generate-worker.js` to process queued jobs server-side and mark complete/failed.
+4. Refactored `api/blog-generate-post.js` to export reusable `generateBlogPostFromPhotoSelection` logic used by worker.
+5. Updated `src/admin/BlogPhotoStudio.jsx`:
+   - Create/Publish buttons now queue background jobs.
+   - Added background jobs panel with status and refresh.
+   - Added polling while queued/processing jobs exist.
+6. Added Vercel cron in `vercel.json` for `/api/blog-generate-worker` every minute.
+
+### Validation
+- `node --check` on updated/new API files.
+- `npx eslint` on updated/new API + admin UI files.
+- `npm run build`.
+- Applied migration via Supabase MCP and verified table exists.
+
+### Follow-up tweak
+- `api/blog-generate-job.js` now chooses `http` for localhost kickoff URL when forwarded protocol is absent, so local queue testing doesn't fail due forced `https`.
+
+## 2026-02-20 — Photo Studio can now generate permanent job listings
+
+### Context
+- User asked to reuse the same selected-photo workflow for either blog posts or permanent job listings, with category selection for job listings and short job copy (not long article text).
+
+### What was changed
+1. Added new migration `20260220203000_blog_generation_jobs_target_types.sql`:
+   - extended `blog_post_generation_jobs` with `target_type`, `target_job_category`, `result_job_id`, `result_job_slug`.
+2. Updated queue API `api/blog-generate-job.js`:
+   - accepts `targetType` (`blog_post` or `job_listing`) and `jobCategory`.
+3. Updated worker `api/blog-generate-worker.js`:
+   - branches processing by target type.
+   - for `job_listing`, calls job generator and stores job result fields.
+4. Extended generation logic in `api/blog-generate-post.js`:
+   - exported `generateJobListingFromPhotoSelection`.
+   - creates `jobs` row + `job_images` from selected photos.
+   - uses short AI title/description JSON response with fallback copy.
+5. Updated `src/admin/BlogPhotoStudio.jsx`:
+   - added "Create As" selector: Blog Post vs Permanent Job Listing.
+   - added job category dropdown when job listing mode is selected.
+   - updated queue buttons and background job status labels for both types.
+
+### Validation
+- `node --check` on API files.
+- `npx eslint` on API + BlogPhotoStudio files.
+- `npm run build`.
+- Applied migration via Supabase MCP and verified new columns exist.
+
+## 2026-02-21 — Blog photo disappearance root cause
+
+### Context
+- User reported blog/photo studio images disappearing after a short time and broken image icons across posts.
+
+### Root cause confirmed
+- `public.blog_photos.image_url` rows were storing temporary iCloud CDN URLs (`cvws.icloud-content.com`) with `storage_path = null`.
+- Those iCloud asset URLs expire, so both admin photo cards and blog markdown embeds eventually break.
+
+### Rule
+- For iCloud-sourced photos, always mirror the file into Supabase Storage (`blog-images`) and persist the stable public URL + `storage_path` in `blog_photos`.
+- Implemented fix in `api/blog-album-sync.js` to mirror each synced iCloud image into `blog-images`, reuse existing `storage_path` when available, and rewrite linked `blog_posts.content` URLs from old iCloud links to new storage URLs.
+- Added iCloud URL mirroring in `api/blog-post.js` so direct URL-based ingestion no longer stores expiring iCloud links by default.
+
+## 2026-02-21 — Blog Photo Studio posted-bin UX
+
+### Context
+- User requested that photos already used in posts be flagged into a posted bin, still visible but collapsed by default.
+
+### What changed
+- Updated `src/admin/BlogPhotoStudio.jsx` to load usage counts from `blog_post_photos` and split the grid into `readyPhotos` and `postedBinPhotos`.
+- Added collapsed-by-default `Posted Bin` section with expand/collapse toggle and per-photo `Used Nx` badges.
+- Updated `Select All Visible` logic to respect collapsed state so bulk selection targets only what is currently visible.
+- Posted-bin classification in `BlogPhotoStudio` now filters usage to `blog_posts.status = 'published'` via `blog_post_photos` join so drafts do not prematurely move photos into the bin.
+- Featured blog card in `src/pages/BlogIndex.jsx` can become extremely tall with portrait cover images if height is not constrained; use explicit breakpoint heights + `object-cover` to cap card height.
