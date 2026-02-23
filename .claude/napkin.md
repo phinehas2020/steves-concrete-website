@@ -1,5 +1,23 @@
 # Napkin
 
+## 2026-02-23 — Homepage blog activity strip added
+
+### Context
+- User asked for homepage to hint at owner activity and make blog posts more visible without major redesign.
+
+### What was done
+1. Added a compact homepage component showing up to 3 latest published blog posts:
+   - `src/components/BlogActivityStrip.jsx`
+2. Wired the component into the main homepage flow in `src/App.jsx`:
+   - Inserted between `CostQuickAnswers` and `Gallery`.
+3. Component behavior:
+   - Loads only latest published posts (title, date, excerpt, cover image).
+   - Shows lightweight loading skeletons and graceful empty/error states.
+   - Provides direct “Go to Blog” CTA to `/blog`.
+
+### Outcome
+- Blog activity is now visible above the fold on the homepage with minimal layout impact.
+
 ## 2026-02-18 — n8n iCloud workflow documented in repo
 
 ### Context
