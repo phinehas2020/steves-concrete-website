@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, CalendarClock, Sparkles } from 'lucide-react'
+import { ArrowRight, CalendarClock } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 function formatDate(value) {
@@ -22,15 +22,16 @@ function BlogCard({ post }) {
       to={`/blog/${post.slug}`}
       className="group rounded-xl border border-stone-200 bg-white hover:border-accent-500 transition-colors"
     >
-      <div className="overflow-hidden rounded-t-xl">
+      <div className="overflow-hidden rounded-t-xl h-48 max-h-48">
         {post.cover_image_url ? (
           <img
             src={post.cover_image_url}
             alt={post.title}
-            className="h-32 w-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
+            className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         ) : (
-          <div className="h-32 bg-stone-100" />
+          <div className="h-full bg-stone-100" />
         )}
       </div>
       <div className="p-4">
@@ -89,10 +90,6 @@ export function BlogActivityStrip() {
       <div className="container-main">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
           <div>
-            <span className="inline-flex items-center gap-2 text-xs text-stone-500 uppercase tracking-wide font-semibold mb-2">
-              <Sparkles className="size-4 text-accent-500" aria-hidden="true" />
-              Owner Activity
-            </span>
             <h2 className="font-display font-bold text-2xl sm:text-3xl text-stone-900 text-balance">
               Recent Blog Updates
             </h2>
@@ -113,7 +110,7 @@ export function BlogActivityStrip() {
           <div className="grid gap-4 md:grid-cols-3">
             {[...Array(3)].map((_, index) => (
               <div key={index} className="rounded-xl border border-stone-200 bg-white p-4">
-                <div className="h-32 bg-stone-100 rounded mb-4" />
+                <div className="h-48 bg-stone-100 rounded mb-4" />
                 <div className="h-4 bg-stone-100 rounded w-1/4 mb-2" />
                 <div className="h-5 bg-stone-100 rounded w-5/6 mb-3" />
                 <div className="h-4 bg-stone-100 rounded w-full" />
