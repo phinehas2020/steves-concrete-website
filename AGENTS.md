@@ -82,3 +82,22 @@ Compare with `main` to see which direction you prefer.
 - Supabase CLI created `supabase/config.toml` and a migration in `supabase/migrations/`.
 - Vercel CLI added `.vercel/` (ignored by git).
 - There are unrelated local changes in `index.html`, `FAQ.jsx`, `Gallery.jsx`, `Hero.jsx`, `Testimonials.jsx`, `public/og-image.jpg` that weren't committed.
+
+
+## Cursor Cloud specific instructions
+
+### Services overview
+
+| Service | Command | Notes |
+|---|---|---|
+| Vite dev server | `npm run dev` | Serves React SPA with HMR on port 5173. This is the main dev entry point. |
+| Lint | `npm run lint` | ESLint 9 with flat config. Pre-existing lint errors exist in codebase (unused vars, `process` in API files). |
+| Build | `npx vite build` | Use `npx vite build` (Vite only) for quick build checks. `npm run build` also runs prerender script which requires network access to Supabase. |
+| Preview | `npm run preview` | Serves production build locally. |
+
+### Key caveats
+
+- **API routes (`/api/*`) are Vercel serverless functions** and do NOT run under `vite dev`. The contact form submission will fail locally — this is expected. To test API routes locally, use `npx vercel dev` (requires Vercel CLI login and linked project).
+- **Supabase is a remote service** at `https://db.phinehasadams.com`. The `.env` file has `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` pre-configured. The `SUPABASE_SERVICE_ROLE_KEY` is empty; it is only needed for server-side API routes.
+- **`npm run build`** runs `vite build && node scripts/prerender-routes.mjs`. The prerender script fetches data from Supabase to generate static HTML for SEO pages. If you only need to verify the build compiles, use `npx vite build` instead.
+- **No automated test suite exists** in this project. Testing is done via lint and manual browser verification.
