@@ -15,9 +15,11 @@ import { JobsIndex } from './pages/JobsIndex'
 import { JobDetail } from './pages/JobDetail'
 import { GuidesIndex } from './pages/GuidesIndex'
 import { GuideLanding } from './pages/GuideLanding'
+import { SportsCourtAreaLanding } from './pages/SportsCourtAreaLanding'
 import { locationPages } from './data/locationPages'
 import { servicePages } from './data/servicePages'
 import { guidePages } from './data/guides'
+import { sportsCourtAreaPages } from './data/sportsCourtAreaPages'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -51,6 +53,13 @@ createRoot(document.getElementById('root')).render(
             key={page.slug}
             path={`/guides/${page.slug}`}
             element={<GuideLanding page={page} />}
+          />
+        ))}
+        {sportsCourtAreaPages.map((page) => (
+          <Route
+            key={page.slug}
+            path={`/sports-court-coating/${page.slug}`}
+            element={<SportsCourtAreaLanding page={page} />}
           />
         ))}
         <Route path="*" element={<NotFound />} />

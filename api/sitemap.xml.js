@@ -1,5 +1,7 @@
 /* eslint-env node */
 import { createClient } from '@supabase/supabase-js'
+import { sportsCourtAreaPages } from '../src/data/sportsCourtAreaPages.js'
+import { servicePages } from '../src/data/servicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const LOCATION_PAGES = [
@@ -13,22 +15,16 @@ const LOCATION_PAGES = [
   'mcgregor-tx-concrete-contractor',
 ]
 const SERVICE_PAGES = [
-  'services/concrete-driveways',
-  'services/concrete-patios',
-  'services/stamped-concrete',
-  'services/commercial-concrete',
-  'services/concrete-repair',
-  'services/concrete-foundations',
-  'services/concrete-slabs',
-  'services/stained-concrete',
-  'services/concrete-sealing',
-  'services/concrete-leveling',
+  ...servicePages.map((service) => `services/${service.slug}`),
 ]
 const GUIDE_PAGES = [
   'guides/concrete-driveway-cost-waco-tx',
   'guides/stamped-concrete-cost-waco-tx',
   'guides/concrete-patio-cost-waco-tx',
 ]
+const SPORTS_COURT_AREA_PAGES = sportsCourtAreaPages.map(
+  (page) => `sports-court-coating/${page.slug}`,
+)
 
 function formatDate(value) {
   if (!value) return null
@@ -103,6 +99,14 @@ export default async function handler(req, res) {
       loc: `${SITE_URL}/${slug}`,
       changefreq: 'monthly',
       priority: '0.68',
+    })
+  })
+
+  SPORTS_COURT_AREA_PAGES.forEach((slug) => {
+    urls.push({
+      loc: `${SITE_URL}/${slug}`,
+      changefreq: 'monthly',
+      priority: '0.64',
     })
   })
 

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { servicePages as servicePageData } from '../src/data/servicePages.js'
 import { guidePages as guidePageData } from '../src/data/guides.js'
+import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
 
 const projectRoot = process.cwd()
@@ -142,6 +143,12 @@ const locationLinks = locationPages.map((location) => ({
   description: location.intro,
 }))
 
+const sportsCourtAreaLinks = sportsCourtAreaPageData.map((area) => ({
+  label: `Sports court coating in ${area.areaName}`,
+  href: `/sports-court-coating/${area.slug}`,
+  description: area.heroSubtitle,
+}))
+
 const routeMeta = [
   {
     path: '/',
@@ -165,6 +172,14 @@ const routeMeta = [
     canonical: `${SITE_URL}/${location.slug}`,
     h1: `${location.city}, TX Concrete Contractor`,
     contentHtml: renderLocationContent(location),
+  })),
+  ...sportsCourtAreaPageData.map((area) => ({
+    path: `/sports-court-coating/${area.slug}`,
+    title: area.seoTitle || `${area.heroTitle} | ${SITE_NAME}`,
+    description: area.seoDescription,
+    canonical: `${SITE_URL}/sports-court-coating/${area.slug}`,
+    h1: area.heroTitle,
+    contentHtml: renderSportsCourtAreaContent(area),
   })),
   ...guidePageData.map((guide) => ({
     path: `/guides/${guide.slug}`,
@@ -343,6 +358,13 @@ function renderHomeContent() {
         links: locationLinks,
       },
       {
+        title: 'Sports court coating target areas',
+        paragraphs: [
+          'We are expanding sports-court resurfacing coverage with location pages for high-demand Texas markets and nearby metro areas.',
+        ],
+        links: sportsCourtAreaLinks,
+      },
+      {
         title: 'Common questions from homeowners and property managers',
         faq: FAQ_ITEMS,
       },
@@ -503,6 +525,69 @@ function renderLocationContent(location) {
       {
         title: `${location.city} concrete FAQs`,
         faq: locationFaq,
+      },
+    ],
+  })
+}
+
+function renderSportsCourtAreaContent(area) {
+  const relatedAreaLinks = sportsCourtAreaLinks
+    .filter((item) => item.href !== `/sports-court-coating/${area.slug}`)
+    .slice(0, 6)
+
+  const serviceBullets = (area.services || []).map(
+    (service) => `${service.title}: ${service.description}`,
+  )
+  const processBullets = (area.process || []).map(
+    (step, index) => `Step ${index + 1}: ${step.title} - ${step.description}`,
+  )
+  const localFocusBullets = (area.localFocus || []).map(
+    (item) => `${item.title}: ${item.description}`,
+  )
+  const nearbyAreaBullets = (area.nearbyAreas || []).map((nearby) => `${nearby}, service coverage available`)
+
+  return renderPage({
+    eyebrow: 'Sports Court Coating Area',
+    title: area.heroTitle,
+    subtitle: area.heroSubtitle,
+    introParagraphs: [
+      area.intro,
+      `Property owners in ${area.areaName} often prioritize traction, line clarity, and coating longevity. Our resurfacing process is structured around those outcomes.`,
+    ],
+    actionLinks: [
+      { href: '/#contact', label: `Request ${area.areaName} quote` },
+      { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
+      { href: '/jobs', label: 'View project gallery' },
+    ],
+    sections: [
+      {
+        title: `Sports court services in ${area.areaName}`,
+        bullets: serviceBullets,
+      },
+      {
+        title: 'How the resurfacing process works',
+        bullets: processBullets,
+        orderedBullets: true,
+      },
+      {
+        title: `${area.areaName} planning considerations`,
+        bullets: localFocusBullets,
+      },
+      {
+        title: `Search trends we are targeting in ${area.areaName}`,
+        bullets: area.targetKeywords || [],
+      },
+      {
+        title: `Nearby communities around ${area.areaName}`,
+        bullets: nearbyAreaBullets,
+      },
+      {
+        title: 'More sports court coating areas',
+        links: relatedAreaLinks,
+      },
+      {
+        title: `${area.areaName} sports-court FAQs`,
+        faq: area.faq || [],
       },
     ],
   })

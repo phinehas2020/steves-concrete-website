@@ -1,10 +1,12 @@
 import { Phone, Mail, MapPin } from 'lucide-react'
 import logoImage from '../assets/images/logo.png'
 import { locationLinks } from '../data/locationPages'
+import { sportsCourtAreaLinks } from '../data/sportsCourtAreaPages'
 
 const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/#services' },
+    { label: 'Sports Courts', href: '/sports-court-coating/texas' },
     { label: 'Gallery', href: '/jobs' },
     { label: 'About', href: '/#about' },
     { label: 'FAQ', href: '/#faq' },
@@ -13,6 +15,16 @@ const navLinks = [
     { label: 'Blog', href: '/blog' },
     { label: 'Privacy Policy', href: '/privacy-policy' },
     { label: 'Terms and Conditions', href: '/terms-and-conditions' },
+]
+
+const serviceQuickLinks = [
+    { label: 'Concrete Contractors', href: '/services/concrete-contractors' },
+    { label: 'Sidewalks & Driveways', href: '/services/sidewalks-driveways' },
+    { label: 'Concrete Driveways', href: '/services/concrete-driveways' },
+    { label: 'Decorative Patios', href: '/services/concrete-patios' },
+    { label: 'Parking Lots', href: '/services/parking-lots' },
+    { label: 'Stamped Concrete', href: '/services/stamped-concrete' },
+    { label: 'Commercial Concrete', href: '/services/commercial-concrete' },
 ]
 
 export function Footer() {
@@ -80,11 +92,14 @@ export function Footer() {
                     <div>
                         <h3 className="font-display font-bold text-white uppercase tracking-widest text-xs mb-6">Specialties</h3>
                         <ul className="space-y-3 text-stone-500 text-sm font-medium">
-                            <li><a href="/services/concrete-driveways" className="hover:text-white transition-colors">Stamped Driveways</a></li>
-                            <li><a href="/services/concrete-patios" className="hover:text-white transition-colors">Decorative Patios</a></li>
-                            <li><a href="/services/stamped-concrete" className="hover:text-white transition-colors">Stone Patterns</a></li>
-                            <li><a href="/services/commercial-concrete" className="hover:text-white transition-colors">Commercial Slabs</a></li>
-                            <li><a href="/services/concrete-repair" className="hover:text-white transition-colors">Repair & Resurface</a></li>
+                            {serviceQuickLinks.map((service) => (
+                                <li key={service.href}>
+                                    <a href={service.href} className="hover:text-white transition-colors">
+                                        {service.label}
+                                    </a>
+                                </li>
+                            ))}
+                            <li><a href="/sports-court-coating/texas" className="hover:text-white transition-colors">Sports Court Coating</a></li>
                         </ul>
                     </div>
 
@@ -103,6 +118,21 @@ export function Footer() {
                                 </li>
                             ))}
                         </ul>
+                        <div className="mt-6 pt-5 border-t border-white/10">
+                            <h4 className="font-display font-bold text-white uppercase tracking-widest text-[10px] mb-3">Sports Court Areas</h4>
+                            <ul className="space-y-2 text-stone-500 text-sm font-medium">
+                                {sportsCourtAreaLinks.map((area) => (
+                                    <li key={area.slug}>
+                                        <a
+                                            href={area.href}
+                                            className="hover:text-white transition-colors"
+                                        >
+                                            {area.areaName}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
 
                     {/* Contact */}

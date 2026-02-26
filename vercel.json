@@ -61,6 +61,10 @@
       "destination": "/services/:path*/index.html"
     },
     {
+      "source": "/sports-court-coating/:path*",
+      "destination": "/sports-court-coating/:path*/index.html"
+    },
+    {
       "source": "/waco-tx-concrete-contractor",
       "destination": "/waco-tx-concrete-contractor/index.html"
     },
