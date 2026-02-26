@@ -195,8 +195,8 @@ export function Hero() {
                         style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4.5rem)' }}
                         variants={staggerItem}
                     >
-                        Concrete Contractor
-                        <span className="block text-accent-400">Waco Texas</span>
+                        Concrete Contractors
+                        <span className="block text-accent-400">in Waco, TX</span>
                         <span className="block text-lg sm:text-xl font-medium text-stone-400 mt-2">
                             Licensed &amp; Insured · 20+ Years
                         </span>
@@ -208,7 +208,12 @@ export function Hero() {
                         variants={staggerItem}
                     >
                         <span className="sm:hidden">500+ projects across Central Texas. Built for black clay soil, heat, and long-term durability.</span>
-                        <span className="hidden sm:inline">Concrete Works LLC has completed 500+ projects across Central Texas since 2005. We build stamped driveways, decorative patios, and commercial concrete engineered for black clay soil movement and Texas heat cycles.</span>
+                        <span className="hidden sm:inline">
+                          Concrete Works LLC has completed 500+ projects in Waco, TX since 2005. We build concrete driveways,
+                          concrete patios, and more for homeowners who want durable results from
+                          concrete contractors Waco TX with experience in black clay soil movement and long Texas heat cycles.
+                          If you are looking for reliable concrete companies Waco TX, we are ready to help.
+                        </span>
                     </motion.p>
 
                     {/* CTAs */}

@@ -11,13 +11,16 @@ import { NotFound } from './pages/NotFound'
 import { PrivacyPolicy } from './pages/PrivacyPolicy'
 import { LocationLanding } from './pages/LocationLanding'
 import { ServiceLanding } from './pages/ServiceLanding'
+import { SeoServiceLanding } from './pages/SeoServiceLanding'
 import { JobsIndex } from './pages/JobsIndex'
 import { JobDetail } from './pages/JobDetail'
 import { GuidesIndex } from './pages/GuidesIndex'
 import { GuideLanding } from './pages/GuideLanding'
 import { SportsCourtAreaLanding } from './pages/SportsCourtAreaLanding'
+import { Reviews } from './pages/Reviews'
 import { locationPages } from './data/locationPages'
 import { servicePages } from './data/servicePages'
+import { seoServicePages } from './data/seoServicePages'
 import { guidePages } from './data/guides'
 import { sportsCourtAreaPages } from './data/sportsCourtAreaPages'
 
@@ -34,11 +37,19 @@ createRoot(document.getElementById('root')).render(
         <Route path="/admin/*" element={<AdminApp />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/reviews" element={<Reviews />} />
         {locationPages.map((page) => (
           <Route
             key={page.slug}
             path={`/${page.slug}`}
             element={<LocationLanding page={page} />}
+          />
+        ))}
+        {seoServicePages.map((page) => (
+          <Route
+            key={page.slug}
+            path={`/${page.slug}`}
+            element={<SeoServiceLanding page={page} />}
           />
         ))}
         {servicePages.map((page) => (

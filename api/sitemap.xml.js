@@ -2,6 +2,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { sportsCourtAreaPages } from '../src/data/sportsCourtAreaPages.js'
 import { servicePages } from '../src/data/servicePages.js'
+import { seoServicePages } from '../src/data/seoServicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const LOCATION_PAGES = [
@@ -17,6 +18,8 @@ const LOCATION_PAGES = [
 const SERVICE_PAGES = [
   ...servicePages.map((service) => `services/${service.slug}`),
 ]
+const SEO_SERVICE_PAGES = seoServicePages.map((service) => service.slug)
+const REVIEW_PAGES = ['reviews']
 const GUIDE_PAGES = [
   'guides/concrete-driveway-cost-waco-tx',
   'guides/stamped-concrete-cost-waco-tx',
@@ -91,6 +94,22 @@ export default async function handler(req, res) {
       loc: `${SITE_URL}/${slug}`,
       changefreq: 'monthly',
       priority: '0.65',
+    })
+  })
+
+  SEO_SERVICE_PAGES.forEach((slug) => {
+    urls.push({
+      loc: `${SITE_URL}/${slug}`,
+      changefreq: 'monthly',
+      priority: '0.72',
+    })
+  })
+
+  REVIEW_PAGES.forEach((slug) => {
+    urls.push({
+      loc: `${SITE_URL}/${slug}`,
+      changefreq: 'monthly',
+      priority: '0.7',
     })
   })
 

@@ -21,6 +21,205 @@ const baseBenefits = [
 
 export const servicePages = [
   {
+    slug: 'concrete-contractors',
+    title: 'Concrete Contractors',
+    heroTitle: 'Concrete Contractors in Waco, TX',
+    heroSubtitle:
+      'One team for residential, decorative, and commercial concrete projects across Waco and nearby communities.',
+    seoTitle: 'Concrete Contractors Waco TX | Concrete Companies Waco TX | Concrete Works LLC',
+    seoDescription:
+      'Need a concrete contractor in Waco TX? We handle concrete driveways, patios, stamped concrete, commercial pours, and repairs. Free estimate: (254) 230-3102.',
+    intro:
+      'Looking for a concrete contractor near me in Waco? We provide full-service concrete installs, replacements, and repairs with clear pricing for each phase of your project.',
+    benefits: baseBenefits,
+    process: baseProcess,
+    finishes: ['Broom finish', 'Stamped patterns', 'Sealed concrete', 'Slip-resistant options'],
+    pricingGuide: {
+      title: 'Concrete contractor pricing in Waco',
+      description: 'How scope, prep, size, and finish choices affect your concrete estimate.',
+      href: '/guides/concrete-driveway-cost-waco-tx',
+    },
+    localNotes: [
+      {
+        title: 'Commercial and residential reach',
+        description: 'We support one-stop concrete work for homes, businesses, and light commercial properties.',
+      },
+      {
+        title: 'Local soil-aware planning',
+        description: 'In McLennan County, black clay movement is a major factor we design around on every project.',
+      },
+      {
+        title: 'Same-day lead response',
+        description: 'Most leads are reviewed quickly so estimates and site visits move forward without delay.',
+      },
+    ],
+    costFactors: [
+      'Project type: driveway, patio, slab, commercial, or repair',
+      'Square footage and shape complexity',
+      'Site access and demolition needs',
+      'Soil condition and drainage requirements',
+      'Finish level, stain options, and sealing schedule',
+    ],
+    timeline:
+      'Most concrete projects are estimated and scheduled through a single in-person consult, then move through prep, pour, and cure milestones.',
+    faq: [
+      {
+        question: 'Do you handle concrete projects for both homes and businesses?',
+        answer:
+          'Yes. We handle concrete work for residences and light commercial properties, including walkways, parking areas, slabs, and decorative upgrades.',
+      },
+      {
+        question: 'What does the first estimate process include?',
+        answer:
+          'We confirm measurements, access, drainage, and base condition, then provide a clear cost range and timeline before scheduling.',
+      },
+      {
+        question: 'Can you handle concrete installation and repair?',
+        answer:
+          'Yes. We offer full-service concrete installs, replacements, and repair packages so most projects stay with one team.',
+      },
+      {
+        question: 'How do you handle heavy summer heat in Waco?',
+        answer:
+          'We plan materials, timing, and curing practices for Central Texas conditions to protect quality and long-term performance.',
+      },
+    ],
+  },
+  {
+    slug: 'sidewalks-driveways',
+    title: 'Sidewalks & Driveways',
+    heroTitle: 'Sidewalks and Driveways in Waco, TX',
+    heroSubtitle:
+      'Safe, level surfaces for sidewalks and driveways with better drainage, control joints, and long-term durability.',
+    seoTitle: 'Sidewalk and Driveway Concrete Waco TX | Concrete Contractor Waco TX',
+    seoDescription:
+      'Concrete sidewalks and driveways in Waco, TX. We build safe-access concrete for sidewalks, sidewalks repair, and driveway replacements with a focus on drainage and crack control.',
+    intro:
+      'We create practical sidewalks and driveways that reduce settling, pooling, and uneven wear. Central Texas soil movement is planned for with base depth, compaction, and reinforcement strategy.',
+    benefits: baseBenefits,
+    process: baseProcess,
+    finishes: ['Broom finish', 'Stamped detail accents', 'Smooth trowel finish', 'Exposed aggregate edges'],
+    pricingGuide: {
+      title: 'Concrete driveway cost in Waco',
+      description: 'Cost ranges for standard and decorative sidewalk-driveway concrete projects.',
+      href: '/guides/concrete-driveway-cost-waco-tx',
+    },
+    localNotes: [
+      {
+        title: 'Safe access planning',
+        description: 'We plan transitions, joint spacing, and slope for dependable pedestrian and vehicle surfaces.',
+      },
+      {
+        title: 'Soil movement handling',
+        description: 'McLennan County clay shifts can affect long-term levelness; prep details are designed around that reality.',
+      },
+      {
+        title: 'Neighborhood-ready cleanups',
+        description: 'Work zones are kept clear so sidewalks and driveways match local neighborhood standards after project completion.',
+      },
+    ],
+    costFactors: [
+      'Sidewalk length and width',
+      'Driveway footprint and truck access',
+      'Existing concrete condition',
+      'Drainage correction and grading',
+      'Finishes and border upgrades',
+    ],
+    timeline:
+      'Walkway-focused jobs often finish in 1-2 days with light use after cure milestones are met.',
+    faq: [
+      {
+        question: 'Do you pour sidewalks from scratch or replace old concrete?',
+        answer:
+          'We offer both new sidewalk installs and full replacement when the old slab no longer performs safely.',
+      },
+      {
+        question: 'Do you match sidewalk and driveway work on one estimate?',
+        answer:
+          'Yes. When practical, we coordinate both scopes together so transitions and finish details stay consistent.',
+      },
+      {
+        question: 'How long does a sidewalk replacement last in Central Texas?',
+        answer:
+          'With proper base prep, drainage, and cure practices, sidewalk surfaces can stay stable for years. We still advise annual checks for sealant and joint movement.',
+      },
+      {
+        question: 'Can you build wheelchair-safe concrete pathways?',
+        answer:
+          'Yes, we can plan accessible widths, transitions, and slopes while balancing local grading and drainage needs.',
+      },
+    ],
+  },
+  {
+    slug: 'parking-lots',
+    title: 'Parking Lots',
+    heroTitle: 'Parking Lot Concrete in Waco, TX',
+    heroSubtitle:
+      'Heavy-use concrete surfaces with reinforced design for safer traffic flow and long-term load performance.',
+    seoTitle: 'Parking Lot Concrete Waco TX | Concrete Contractor Waco TX',
+    seoDescription:
+      'Parking lot construction and repair in Waco, TX. Heavy-duty concrete surfaces for small and mid-size businesses, built for heat and traffic.',
+    intro:
+      'Our parking lot projects are built for traffic, heat, and wear, with base prep, reinforcement, and edge detailing tuned for dependable use.',
+    benefits: [
+      'Heavy-duty surfaces for vehicle and foot traffic',
+      'Reinforced base structure to support high use',
+      'Driveway and loading transition planning',
+    ],
+    process: baseProcess,
+    finishes: ['Broom finish', 'Hard trowel finish', 'Slip-resistant mix options', 'Curb and expansion detailing'],
+    pricingGuide: {
+      title: 'Commercial concrete pricing guidance',
+      description: 'Load zones, parking layout, and finish details that impact parking lot bids.',
+      href: '/guides/concrete-driveway-cost-waco-tx',
+    },
+    localNotes: [
+      {
+        title: 'Traffic-first layout',
+        description: 'We design traffic flow and turning radii to reduce edge chipping and early cracking.',
+      },
+      {
+        title: 'Drainage and grading',
+        description: 'Parking strips and swales are set so water drains correctly and does not pool near pavement edges.',
+      },
+      {
+        title: 'Commercial scheduling',
+        description: 'We coordinate staged execution to reduce disruption and keep operations moving.',
+      },
+    ],
+    costFactors: [
+      'Number of bays, strips, and turning radius requirements',
+      'Concrete thickness and reinforcement spacing',
+      'Grading and storm-water routing',
+      'Curb, paint, and marking scope',
+      'Site access and operating-hour constraints',
+    ],
+    timeline:
+      'Most parking lot projects are completed with clear phase planning across prep, pour, and cure windows for operational safety.',
+    faq: [
+      {
+        question: 'Can you build new parking lots for small businesses?',
+        answer:
+          'Yes. We handle smaller to mid-size parking surfaces and can coordinate with owner schedules and access windows.',
+      },
+      {
+        question: 'Do you offer concrete parking lot repair?',
+        answer:
+          'Yes. We offer patching, resurfacing, and edge repairs where replacement would be too disruptive.',
+      },
+      {
+        question: 'Do you handle parking-lot markings and edging?',
+        answer:
+          'We coordinate layout and preparation so markings and edge details are clean and durable after the slab cures.',
+      },
+      {
+        question: 'How quickly can parking lot work reopen to traffic?',
+        answer:
+          'Traffic limits depend on load type and weather. We provide staged reopen guidance based on cure and safety milestones.',
+      },
+    ],
+  },
+  {
     slug: 'concrete-driveways',
     title: 'Concrete Driveways',
     heroTitle: 'Concrete Driveways in Waco, TX',
@@ -223,7 +422,7 @@ export const servicePages = [
     heroTitle: 'Commercial Concrete in Waco, TX',
     heroSubtitle:
       'Slabs, pads, and site concrete for offices, retail, and light industrial spaces.',
-    seoTitle: 'Commercial Concrete Waco TX | Free Estimate (254) 230-3102',
+    seoTitle: 'Commercial Concrete Contractor Waco TX | Free Estimate (254) 230-3102',
     seoDescription:
       'Commercial concrete slabs & pads in Waco. Free estimate: (254) 230-3102.',
     intro:

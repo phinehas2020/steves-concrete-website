@@ -740,3 +740,139 @@
 - Better page-level title/description alignment for local-service terms.
 - Reduced mismatch between page intent and SERP query phrasing.
 - More opportunities for Waco-area long-tail and nearby-city ranking coverage.
+
+## 2026-02-26 — Semrush position-tracking snapshot review
+
+### Context
+- User provided Semrush Position Tracking PDF for `www.concretewaco.com` (Desktop, Waco, TX, Feb 20–26, 2026) for analysis.
+
+### What worked
+1. Extracted report text with `pdftotext -layout` and verified key metrics/keywords.
+2. Confirmed live canonical/redirect behavior via `curl -I -L` checks:
+   - `http://concretewaco.com` -> `https://concretewaco.com/` -> `https://www.concretewaco.com/` (308 chain)
+   - `https://concretewaco.com` -> `https://www.concretewaco.com/` (308)
+3. Verified homepage canonical and OG URL are aligned to `https://www.concretewaco.com/`.
+
+### Findings to carry forward
+1. Campaign is currently very small (4 tracked keywords), so movement visibility is limited and masked.
+2. Rankings from report:
+   - `concrete contractor waco texas` at position 3
+   - `concrete contractor woodway texas` at position 6
+   - `concrete contractor hewitt texas` at position 12
+   - `concrete contractors near me` not ranking (out of top 100)
+3. Top pages still show split visibility between `http://concretewaco.com/` and `https://www.concretewaco.com/`, likely reflecting historical indexing/cache, not current redirect config.
+4. SERP feature opportunity remains in local pack + PAA; no featured snippet/review/video ownership in tracked terms.
+
+### Mistake / correction
+- Initial sitemap fetch hung without timeout. Re-ran with `curl --max-time 8` and completed successfully.
+
+## 2026-02-26 — Full SEO sprint execution (subagents + code rollout)
+
+### Context
+- User requested immediate end-to-end SEO sprint execution (not planning only), explicitly asking to use subagents.
+
+### What worked
+1. Parallelized execution with three worker subagents and strict file ownership:
+   - Keywords/report assets
+   - Hewitt/Woodway content updates
+   - Location template + schema + SEO utility improvements
+2. Expanded tracked keyword set to 98 unique terms in `reports/semrush-keywords-waco-2026-02-26.csv`.
+3. Strengthened two priority location pages (`hewitt`, `woodway`) with localized, conversion-focused copy and soil/heat relevance.
+4. Added location-page internal-link section and LocalBusiness/Contractor JSON-LD node in `LocationLanding.jsx`.
+5. Improved SEO URL normalization in `src/lib/seo.js` using absolute URL resolution before canonical normalization.
+6. Added additional first-party internal links from homepage hero and full city list in footer.
+7. Aligned static homepage metadata in `index.html` with runtime SEO defaults to reduce messaging inconsistency.
+8. Build verification succeeded after final integration (`npm run build`).
+
+### Caveats / blockers
+- `npm run lint` fails due pre-existing repo-wide lint issues unrelated to this sprint (serverless `process` globals, multiple unused vars, react-hooks set-state-in-effect rules, etc.).
+- External actions (Semrush import, GBP category/URL tuning, Resend sender verification) remain operational tasks outside repo code changes.
+
+### Mistake / correction
+- Initial scope only covered three sprint items; expanded implementation with extra internal-linking + static metadata alignment to better satisfy "do it all now" intent.
+
+## 2026-02-26 — Sports-court CSV geo targeting notes
+
+### Context
+- User shared `Sports-court-coating_clusters_2026-02-26.csv` and asked to build pages for target areas.
+
+### What I learned
+1. CSV is a broad keyword cluster export (1,724 rows, 231 clusters), not a clean city list.
+2. A focused implementation should prioritize geo-intent clusters first, then scale after quality review to avoid thin-page sprawl.
+3. For this repo, adding area pages under a dedicated prefix (e.g., `/sports-court-coating/...`) avoids brittle one-off rewrites and keeps SEO paths maintainable.
+
+### Mistake / correction
+- Initial assumption was that the file would contain a small explicit area list. Correct approach is to extract geo-intent clusters and ship a high-quality subset first.
+
+## 2026-02-26 — Sports-court area pages rollout (Texas-first)
+
+### What was implemented
+1. Added data-driven sports-court area pages in `src/data/sportsCourtAreaPages.js`.
+2. Added new landing template `src/pages/SportsCourtAreaLanding.jsx` and route mapping under `/sports-court-coating/:slug`.
+3. Wired discoverability and SEO plumbing:
+   - Footer links (`src/components/Footer.jsx`)
+   - prerender generation (`scripts/prerender-routes.mjs`)
+   - sitemap entries (`api/sitemap.xml.js`)
+   - Vercel static rewrite (`vercel.json`)
+4. Verified with `npm run build` (success).
+
+### Mistake / correction
+- First `apply_patch` for `Footer.jsx` failed due context mismatch. Re-ran with exact line-context from `nl -ba` and applied cleanly.
+
+### Pattern note
+- For SEO landing expansions in this repo, adding a prefixed path family (`/sports-court-coating/:slug`) is cleaner than extending one-off rewrite entries per slug.
+
+### Follow-up tweak
+- Replaced area keyword chips that were too concrete-generic with sports-court-specific phrasing to keep topical relevance aligned with the new page family.
+
+### User preference update
+- For sports-court geo rollout, user requested removing Houston and San Antonio from active target pages; keep remaining targets focused on approved markets.
+
+## 2026-02-26 — Competitor outrank content sprint (gonzalezconcreteconstruction.com)
+
+### Context
+- User shared a detailed Semrush competitive analysis for `gonzalezconcreteconstruction.com` and requested actionable outranking moves.
+
+### What was implemented
+1. Added new hyper-local service pages in `src/data/servicePages.js` to target high-intent commercial queries:
+   - `concrete-contractors` (`/services/concrete-contractors`)
+   - `sidewalks-driveways` (`/services/sidewalks-driveways`)
+   - `parking-lots` (`/services/parking-lots`)
+2. Updated existing service SEO metadata for stronger local keyword matching:
+   - `commercial-concrete` title now includes `Commercial Concrete Contractor Waco TX`.
+3. Wired new service pages into SEO infrastructure:
+   - Routes already map from `servicePages` data in the SPA.
+   - `scripts/prerender-routes.mjs` now pre-renders these pages from data.
+   - `api/sitemap.xml.js` now derives service URLs from `servicePages` + adds sports-court area URLs.
+4. Improved discoverability and internal linking:
+   - Expanded homepage footer specialty links in `src/components/Footer.jsx`.
+   - Added icon mappings in `src/components/Services.jsx`.
+   - Added new services into default location-page service lists in `src/data/locationPages.js`.
+5. Regenerated route config and static rewrites to support new paths:
+   - Added `/sports-court-coating/:path*` handling in `vercel.json`.
+   - Added sports-court area route mappings and landing page template for `/sports-court-coating/:slug`.
+
+### What was validated
+1. `npm run build` passes.
+2. New prerendered directories exist in `dist/services` and `dist/sports-court-coating`.
+3. Changes are aligned with the current branch intent to beat thin-content local competitors through localized content expansion and better internal linking.
+
+### Caveat
+- Lint remains partially blocked by existing warnings/errors (existing `api/sitemap.xml.js` `process` global + unrelated unused import in `Services.jsx`), unchanged by this sprint.
+
+## Session Log - 2026-02-26
+- Completed SEO implementation steps for Concrete Works website: homepage meta/schema, SEO service route wiring, service card links, reviews page, sitemap, and robots file.
+- Fixed a schema field mismatch where homepage local business service names were pulling undefined values.
+- Added route mappings for new SEO service slugs and added `/reviews` plus navigation updates.
+- Mistake during the edits: service card icon/route mapping was first updated to old service slugs, then corrected to the new Waco service slugs.
+
+
+## 2026-02-26 — PSI data extraction workaround for concretewaco
+
+### Context
+- Direct PageSpeed Insights API calls returned `429 RESOURCE_EXHAUSTED` from this environment.
+
+### What worked
+1. Opened the exact `pagespeed.web.dev/analysis/...` URL in Playwright.
+2. Extracted full Lighthouse payload from `window.__LIGHTHOUSE_MOBILE_JSON__` via `browser_evaluate`.
+3. Used that payload to identify real bottlenecks (image delivery, render-blocking fonts, large initial JS bundle, unsized images).

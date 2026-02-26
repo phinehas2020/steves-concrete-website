@@ -3,8 +3,11 @@ import patioAggregateImg from '../assets/images/gallery-patio-aggregate.png'
 import commercialParkingImg from '../assets/images/gallery-commercial-parking.png'
 
 const baseServices = [
+  { label: 'Concrete Contractors', href: '/services/concrete-contractors' },
+  { label: 'Sidewalks & Driveways', href: '/services/sidewalks-driveways' },
   { label: 'Concrete Driveways', href: '/services/concrete-driveways' },
   { label: 'Concrete Patios', href: '/services/concrete-patios' },
+  { label: 'Parking Lots', href: '/services/parking-lots' },
   { label: 'Stamped Concrete', href: '/services/stamped-concrete' },
   { label: 'Commercial Concrete', href: '/services/commercial-concrete' },
   { label: 'Concrete Repair', href: '/services/concrete-repair' },

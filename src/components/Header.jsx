@@ -12,6 +12,7 @@ const navLinks = [
     { label: 'Pricing', href: '/guides' },
     { label: 'Contact', href: '/#contact' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Reviews', href: '/reviews' },
 ]
 
 export function Header() {
@@ -61,6 +62,14 @@ export function Header() {
                     </div>
 
                     {/* Mobile Menu Button */}
+                    <a
+                        href="tel:254-230-3102"
+                        className="lg:hidden flex items-center gap-2 px-3 py-2 text-sm font-medium text-stone-700 hover:text-accent-600 border border-stone-200 rounded-lg mr-2"
+                        aria-label="Call Concrete Works LLC"
+                    >
+                        <Phone className="size-4" aria-hidden="true" />
+                        <span>(254) 230-3102</span>
+                    </a>
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         className="lg:hidden p-2 -mr-2 text-stone-700 hover:text-stone-900"

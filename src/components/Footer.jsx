@@ -2,6 +2,7 @@ import { Phone, Mail, MapPin } from 'lucide-react'
 import logoImage from '../assets/images/logo.png'
 import { locationLinks } from '../data/locationPages'
 import { sportsCourtAreaLinks } from '../data/sportsCourtAreaPages'
+import { servicePageLinks } from '../data/seoServicePages'
 
 const navLinks = [
     { label: 'Home', href: '/' },
@@ -13,19 +14,15 @@ const navLinks = [
     { label: 'Pricing', href: '/guides' },
     { label: 'Contact', href: '/#contact' },
     { label: 'Blog', href: '/blog' },
+    { label: 'Reviews', href: '/reviews' },
     { label: 'Privacy Policy', href: '/privacy-policy' },
     { label: 'Terms and Conditions', href: '/terms-and-conditions' },
 ]
 
-const serviceQuickLinks = [
-    { label: 'Concrete Contractors', href: '/services/concrete-contractors' },
-    { label: 'Sidewalks & Driveways', href: '/services/sidewalks-driveways' },
-    { label: 'Concrete Driveways', href: '/services/concrete-driveways' },
-    { label: 'Decorative Patios', href: '/services/concrete-patios' },
-    { label: 'Parking Lots', href: '/services/parking-lots' },
-    { label: 'Stamped Concrete', href: '/services/stamped-concrete' },
-    { label: 'Commercial Concrete', href: '/services/commercial-concrete' },
-]
+const serviceQuickLinks = servicePageLinks.map((service) => ({
+    label: service.label.replace(' in Waco, TX', ''),
+    href: `/${service.slug}`,
+}))
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
@@ -90,11 +87,11 @@ export function Footer() {
 
                     {/* Services */}
                     <div>
-                        <h3 className="font-display font-bold text-white uppercase tracking-widest text-xs mb-6">Specialties</h3>
-                        <ul className="space-y-3 text-stone-500 text-sm font-medium">
-                            {serviceQuickLinks.map((service) => (
-                                <li key={service.href}>
-                                    <a href={service.href} className="hover:text-white transition-colors">
+                            <h3 className="font-display font-bold text-white uppercase tracking-widest text-xs mb-6">Specialties</h3>
+                            <ul className="space-y-3 text-stone-500 text-sm font-medium">
+                                {serviceQuickLinks.map((service) => (
+                                    <li key={service.href}>
+                                        <a href={service.href} className="hover:text-white transition-colors">
                                         {service.label}
                                     </a>
                                 </li>
