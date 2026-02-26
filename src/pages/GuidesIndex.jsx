@@ -13,7 +13,7 @@ export function GuidesIndex() {
   ])
 
   useSeo({
-    title: 'Concrete Cost Guide Waco TX | Driveway, Patio, Stamped',
+    title: 'Concrete Cost Guide Waco TX | Driveway, Patio, Stamped Concrete',
     description:
       'Concrete driveway, patio & stamped concrete cost guides for Waco. Free estimate: (254) 230-3102.',
     canonical: `${SITE_URL}/guides`,

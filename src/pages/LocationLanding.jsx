@@ -24,9 +24,12 @@ export function LocationLanding({ page }) {
     nearbyAreas,
     projects,
     faq,
+    seoTitle,
+    seoDescription,
   } = page
 
-  const description = `${city} concrete contractor. Driveways, patios, stamped concrete, foundations. Free estimate: (254) 230-3102.`
+  const resolvedTitle = seoTitle || `${heroTitle} | Free Estimate (254) 230-3102`
+  const description = seoDescription || `${city} concrete contractor. Driveways, patios, stamped concrete, foundations. Free estimate: (254) 230-3102.`
 
   const serviceJsonLd = {
     '@type': 'Service',
@@ -50,7 +53,7 @@ export function LocationLanding({ page }) {
   ])
 
   useSeo({
-    title: `${heroTitle} | Free Estimate (254) 230-3102`,
+    title: resolvedTitle,
     description,
     canonical: `${SITE_URL}/${slug}`,
     url: `${SITE_URL}/${slug}`,

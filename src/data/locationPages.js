@@ -67,8 +67,11 @@ export const locationPages = [
     slug: 'waco-tx-concrete-contractor',
     city: 'Waco',
     heroTitle: 'Concrete Contractor Waco TX',
+    seoTitle: 'Concrete Contractor Waco TX | Driveways, Patios, Stamped Concrete',
     heroSubtitle:
       'Driveways, patios, stamped concrete, and foundations. Free estimate: (254) 230-3102.',
+    seoDescription:
+      'Concrete contractor in Waco, Texas for driveways, patios, stamped concrete, foundations, and repairs. Need a concrete contractor near me in Waco? Call for a fast estimate.',
     intro:
       'Concrete Works LLC partners with Waco homeowners, builders, and businesses for reliable concrete installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
     highlights: baseHighlights,
@@ -90,9 +93,12 @@ export const locationPages = [
   {
     slug: 'temple-tx-concrete-contractor',
     city: 'Temple',
+    seoTitle: 'Concrete Contractor Temple TX | Concrete Contractor Near Me in Central Texas',
     heroTitle: 'Concrete Contractor in Temple, TX',
     heroSubtitle:
       'Driveways, patios, stamped finishes, and commercial pours for Temple homes and businesses.',
+    seoDescription:
+      'Concrete contractor in Temple, TX and nearby communities. Need a concrete contractor near me for driveways, patios, stamped concrete, or repairs? Call for a free estimate.',
     intro:
       'We help Temple property owners upgrade curb appeal with durable concrete work that handles Central Texas heat and soil shifts.',
     highlights: baseHighlights,
@@ -114,9 +120,12 @@ export const locationPages = [
   {
     slug: 'killeen-tx-concrete-contractor',
     city: 'Killeen',
+    seoTitle: 'Concrete Contractor Killeen TX | Waco Area Concrete Contractor',
     heroTitle: 'Concrete Contractor in Killeen, TX',
     heroSubtitle:
       'Concrete driveways, patios, stamped finishes, and repair work across Killeen and surrounding areas.',
+    seoDescription:
+      'Concrete contractor in Killeen, Texas for driveways, patios, stamped concrete, and concrete repair. Serving nearby Waco communities with free estimates.',
     intro:
       'From new driveways to backyard upgrades, we deliver clean concrete lines and dependable performance for Killeen properties.',
     highlights: baseHighlights,
@@ -139,9 +148,12 @@ export const locationPages = [
   {
     slug: 'hewitt-tx-concrete-contractor',
     city: 'Hewitt',
+    seoTitle: 'Concrete Contractor Hewitt TX | Concrete Work for Homes & Businesses',
     heroTitle: 'Concrete Contractor in Hewitt, TX',
     heroSubtitle:
       'Stamped concrete, patios, driveways, and repair work for Hewitt homes and businesses.',
+    seoDescription:
+      'Concrete contractor in Hewitt, Texas for stamped concrete, patios, driveways, and repair work. Serving Hewitt, Waco, and nearby areas with fast estimates.',
     intro:
       'Hewitt homeowners trust us for clean layouts, thoughtful drainage planning, and finishes that keep their curb appeal sharp.',
     highlights: baseHighlights,
@@ -163,9 +175,12 @@ export const locationPages = [
   {
     slug: 'woodway-tx-concrete-contractor',
     city: 'Woodway',
+    seoTitle: 'Concrete Contractor Woodway TX | Waco Area Concrete Contractor',
     heroTitle: 'Concrete Contractor in Woodway, TX',
     heroSubtitle:
       'Driveways, patios, stamped finishes, and concrete repairs for Woodway properties.',
+    seoDescription:
+      'Concrete contractor in Woodway, Texas for driveways, patios, stamped concrete, and concrete repairs. Fast response and free estimates for Woodway-area projects.',
     intro:
       'Concrete Works LLC serves Woodway homeowners and businesses with clean prep, crisp finishing, and long-term durability on every pour.',
     highlights: baseHighlights,
@@ -187,9 +202,12 @@ export const locationPages = [
   {
     slug: 'robinson-tx-concrete-contractor',
     city: 'Robinson',
+    seoTitle: 'Concrete Contractor Robinson TX | Concrete Driveways & Patios',
     heroTitle: 'Concrete Contractor in Robinson, TX',
     heroSubtitle:
       'Concrete driveways, patios, and repairs tailored to Robinson homes and light commercial sites.',
+    seoDescription:
+      'Concrete contractor in Robinson, Texas for concrete driveways, patios, and repair work. Local team, clear pricing, and free estimate support.',
     intro:
       'We help Robinson property owners add curb appeal with smooth finishes, clean edges, and solid drainage planning.',
     highlights: baseHighlights,
@@ -211,9 +229,12 @@ export const locationPages = [
   {
     slug: 'lorena-tx-concrete-contractor',
     city: 'Lorena',
+    seoTitle: 'Concrete Contractor Lorena TX | Concrete Work in Central Texas',
     heroTitle: 'Concrete Contractor in Lorena, TX',
     heroSubtitle:
       'Stamped concrete, patios, driveways, and repairs for Lorena homes and properties.',
+    seoDescription:
+      'Concrete contractor in Lorena, TX for durable driveways, patios, stamped concrete, and concrete repairs. Reliable estimates for Lorena-area concrete work.',
     intro:
       'Lorena homeowners trust us for detailed prep, smooth finishes, and long-lasting concrete work that fits the property.',
     highlights: baseHighlights,
@@ -236,9 +257,12 @@ export const locationPages = [
   {
     slug: 'mcgregor-tx-concrete-contractor',
     city: 'McGregor',
+    seoTitle: 'Concrete Contractor McGregor TX | Concrete Driveways, Patios & Slabs',
     heroTitle: 'Concrete Contractor in McGregor, TX',
     heroSubtitle:
       'Concrete driveways, patios, and commercial slabs for McGregor properties.',
+    seoDescription:
+      'Concrete contractor in McGregor, Texas for driveways, patios, commercial slabs, and repair projects. Get a free, no-obligation estimate from the local team.',
     intro:
       'Concrete Works LLC delivers dependable concrete installs in McGregor with careful grading, reinforcement, and clean finishing.',
     highlights: baseHighlights,

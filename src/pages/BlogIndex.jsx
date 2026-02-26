@@ -20,7 +20,7 @@ export function BlogIndex() {
 
   const seo = useMemo(() => {
     const description =
-      'Concrete tips, maintenance checklists, and design inspiration for Waco and Central Texas concrete projects.'
+      'Concrete tips, maintenance checklists, and design inspiration for Waco, Woodway, Hewitt, Temple, and Central Texas concrete projects.'
 
     const listItems = posts
       .filter((post) => post?.slug && post?.title)
@@ -49,7 +49,7 @@ export function BlogIndex() {
     const jsonLd = buildJsonLdGraph(itemListJsonLd, breadcrumbsJsonLd)
 
     return {
-      title: 'Concrete Tips & Project Ideas | Concrete Works LLC',
+      title: 'Concrete Contractor Waco TX | Concrete Tips & Project Ideas | Concrete Works LLC',
       description,
       canonical: `${SITE_URL}/blog`,
       url: `${SITE_URL}/blog`,

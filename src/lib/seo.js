@@ -7,9 +7,9 @@ const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 
 const DEFAULT_SEO = {
-  title: 'Concrete Contractor Waco TX | Free Estimates (254) 230-3102 | 20+ Years',
+  title: 'Concrete Contractor Waco, Texas | Concrete Driveways, Patios, Repairs | Free Estimate (254) 230-3102',
   description:
-    'Top-rated concrete contractor in Waco, TX. Driveways, patios, stamped concrete & foundations. Licensed & insured. Free estimate today: (254) 230-3102.',
+    'Top-rated concrete contractor in Waco, TX for driveways, patios, stamped concrete, foundations, and repairs. Serving nearby neighborhoods across Central Texas. Free estimate today: (254) 230-3102.',
   canonical: SITE_URL + '/',
   image: DEFAULT_IMAGE,
   imageAlt: "Concrete Works LLC - Waco's Trusted Concrete Contractor",
@@ -19,6 +19,13 @@ const DEFAULT_SEO = {
   url: SITE_URL + '/',
   siteName: SITE_NAME,
   locale: LOCALE,
+}
+
+function normalizeCanonical(url) {
+  const value = String(url || '').trim()
+  if (!value) return `${SITE_URL}/`
+  if (value === SITE_URL || value === `${SITE_URL}/`) return `${SITE_URL}/`
+  return value.endsWith('/') ? value.slice(0, -1) : value
 }
 
 function buildBreadcrumbs(items = []) {
@@ -105,7 +112,8 @@ function upsertJsonLd(id, json) {
 
 export function setSeo(overrides = {}) {
   const meta = { ...DEFAULT_SEO, ...overrides }
-  const resolvedUrl = overrides.url || overrides.canonical || meta.url
+  const canonical = normalizeCanonical(meta.canonical)
+  const resolvedUrl = normalizeCanonical(overrides.url || overrides.canonical || meta.url)
 
   document.title = meta.title
 
@@ -130,7 +138,7 @@ export function setSeo(overrides = {}) {
   upsertMeta({ property: 'article:published_time', content: meta.publishedTime })
   upsertMeta({ property: 'article:modified_time', content: meta.modifiedTime })
 
-  upsertLink('canonical', meta.canonical)
+  upsertLink('canonical', canonical)
 
   upsertJsonLd('page', meta.jsonLd)
 }
