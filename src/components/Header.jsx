@@ -28,11 +28,6 @@ export function Header() {
                             src={logoImage}
                             alt="Concrete Works LLC"
                             className="h-12 max-h-12 w-auto object-contain"
-                            width="264"
-                            height="96"
-                            loading="eager"
-                            fetchPriority="high"
-                            decoding="async"
                         />
                     </a>
 

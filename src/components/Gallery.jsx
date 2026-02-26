@@ -1,22 +1,17 @@
-import { useState, useEffect, useMemo, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'motion/react'
+import { useState, useEffect, useMemo } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
-import { cn, getSupabaseOptimizedImageUrl, handleImageError } from '../lib/utils'
+import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { MapPin, ArrowUpRight } from 'lucide-react'
 import { buildCategoryOptions, fetchJobs } from '../data/jobs'
-import galleryFallbackImage from '../assets/images/gallery-driveway-custom.jpeg'
+import { handleImageError } from '../lib/utils'
 
 // Project image component - displays actual project photos
 function ProjectImage({ job }) {
-    const rawImage = job.images && job.images.length > 0
-        ? job.images[0]
-        : galleryFallbackImage
-    const mainImage = getSupabaseOptimizedImageUrl(rawImage, {
-        width: 960,
-        quality: 68,
-        format: 'webp',
-    })
+    const mainImage = job.images && job.images.length > 0 
+        ? job.images[0] 
+        : '/src/assets/images/gallery-driveway-custom.jpeg'
     
     return (
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -25,11 +20,7 @@ function ProjectImage({ job }) {
                 alt={job.title}
                 className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                width="960"
-                height="1200"
-                sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 92vw"
                 loading="lazy"
-                decoding="async"
                 onError={handleImageError}
             />
             {/* Gradient overlay for text readability - smooth gradual fade */}
@@ -39,47 +30,31 @@ function ProjectImage({ job }) {
 }
 
 export function Gallery() {
-    const sectionRef = useRef(null)
-    const isNearViewport = useInView(sectionRef, { once: true, margin: '320px 0px' })
     const [activeCategory, setActiveCategory] = useState('All')
     const [jobs, setJobs] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
     useEffect(() => {
-        if (!isNearViewport) return
-
-        let isMounted = true
-
         async function loadJobs() {
             try {
-                setLoading(true)
                 setError(null)
                 const jobsData = await fetchJobs()
-                if (!isMounted) return
                 // Filter to only show featured jobs, limit to 6
                 const featuredJobs = jobsData
                     .filter((job) => job.featured)
                     .slice(0, 6)
                 setJobs(featuredJobs)
             } catch (err) {
-                if (!isMounted) return
                 console.error('Error loading featured jobs:', err)
                 setError('Failed to load featured projects.')
                 setJobs([])
             } finally {
-                if (isMounted) {
-                    setLoading(false)
-                }
+                setLoading(false)
             }
         }
-
         loadJobs()
-
-        return () => {
-            isMounted = false
-        }
-    }, [isNearViewport])
+    }, [])
 
     const categoryOptions = useMemo(() => {
         return buildCategoryOptions(jobs)
@@ -97,7 +72,7 @@ export function Gallery() {
             : jobs.filter((job) => job.category === activeCategory)
 
     return (
-        <section id="gallery" ref={sectionRef} className="section-padding bg-white texture-concrete relative">
+        <section id="gallery" className="section-padding bg-white texture-concrete relative">
             <div className="container-main relative z-10">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">

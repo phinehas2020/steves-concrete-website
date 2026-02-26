@@ -1,9 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useInView } from 'motion/react'
 import { ArrowRight, CalendarClock } from 'lucide-react'
 import { supabase } from '../lib/supabase'
-import { buildSupabaseImageSrcSet, getSupabaseOptimizedImageUrl } from '../lib/utils'
 
 function formatDate(value) {
   if (!value) return 'Draft'
@@ -19,32 +17,18 @@ function formatDate(value) {
 }
 
 function BlogCard({ post }) {
-  const coverUrl = post.cover_image_url
-  const optimizedCoverUrl = coverUrl
-    ? getSupabaseOptimizedImageUrl(coverUrl, { width: 720, quality: 68, format: 'webp' })
-    : null
-  const coverSrcSet = coverUrl
-    ? buildSupabaseImageSrcSet(coverUrl, [360, 540, 720, 960], { quality: 68, format: 'webp' })
-    : undefined
-
   return (
     <Link
       to={`/blog/${post.slug}`}
       className="group rounded-xl border border-stone-200 bg-white hover:border-accent-500 transition-colors"
     >
       <div className="overflow-hidden rounded-t-xl h-48 max-h-48">
-        {optimizedCoverUrl ? (
+        {post.cover_image_url ? (
           <img
-            src={optimizedCoverUrl}
-            srcSet={coverSrcSet}
-            sizes="(min-width: 768px) 33vw, 92vw"
+            src={post.cover_image_url}
             alt={post.title}
             className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            width="720"
-            height="480"
-            loading="lazy"
-            decoding="async"
           />
         ) : (
           <div className="h-full bg-stone-100" />
@@ -67,18 +51,12 @@ function BlogCard({ post }) {
 }
 
 export function BlogActivityStrip() {
-  const sectionRef = useRef(null)
-  const isNearViewport = useInView(sectionRef, { once: true, margin: '280px 0px' })
   const [posts, setPosts] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
   useEffect(() => {
-    if (!isNearViewport) return
-
     let isMounted = true
-    setLoading(true)
-    setError('')
 
     const fetchPosts = async () => {
       const { data, error: fetchError } = await supabase
@@ -92,7 +70,6 @@ export function BlogActivityStrip() {
 
       if (fetchError) {
         setError('Blog activity is temporarily unavailable.')
-        setPosts([])
         setLoading(false)
         return
       }
@@ -106,14 +83,10 @@ export function BlogActivityStrip() {
     return () => {
       isMounted = false
     }
-  }, [isNearViewport])
+  }, [])
 
   return (
-    <section
-      id="blog-updates"
-      ref={sectionRef}
-      className="section-padding bg-stone-100 border-t border-stone-200"
-    >
+    <section id="blog-updates" className="section-padding bg-stone-100 border-t border-stone-200">
       <div className="container-main">
         <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
           <div>
