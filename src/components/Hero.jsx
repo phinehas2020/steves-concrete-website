@@ -4,6 +4,7 @@ import { ArrowRight, Phone } from 'lucide-react'
 import heroImage from '../assets/images/hero.jpeg'
 import { heroStagger, staggerItem, viewportEager } from '../lib/animations'
 import { supabase } from '../lib/supabase'
+import { buildSupabaseImageSrcSet, getSupabaseOptimizedImageUrl } from '../lib/utils'
 
 const topLocationLinks = [
     { label: 'Woodway', href: '/woodway-tx-concrete-contractor' },
@@ -49,60 +50,66 @@ function AnimatedStat({ value, suffix = '', label }) {
 }
 
 export function Hero() {
-    const [heroImages, setHeroImages] = useState([])
-    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+    const [currentHeroImage, setCurrentHeroImage] = useState(null)
+    const [heroImageReady, setHeroImageReady] = useState(false)
 
-    // Fetch hero images from Supabase
     useEffect(() => {
-        const fetchHeroImages = async () => {
+        let isMounted = true
+
+        const fetchHeroImage = async () => {
+            const prefersReducedData =
+                typeof navigator !== 'undefined' && navigator.connection?.saveData
+
+            if (prefersReducedData) {
+                setHeroImageReady(true)
+                return
+            }
+
             try {
                 const { data, error } = await supabase
                     .from('hero_images')
-                    .select('*')
+                    .select('id, image_url, alt_text')
                     .eq('active', true)
                     .order('display_order', { ascending: true })
+                    .limit(1)
+
+                if (!isMounted) return
 
                 if (error) {
-                    console.error('Error fetching hero images:', error)
-                    // Fallback to default image
-                    setHeroImages([])
-                } else if (data && data.length > 0) {
-                    setHeroImages(data)
+                    console.error('Error fetching hero image:', error)
+                    setCurrentHeroImage(null)
                 } else {
-                    // No images in database, use default
-                    setHeroImages([])
+                    setCurrentHeroImage((data && data[0]) || null)
                 }
             } catch (error) {
-                console.error('Error fetching hero images:', error)
-                setHeroImages([])
+                if (!isMounted) return
+                console.error('Error fetching hero image:', error)
+                setCurrentHeroImage(null)
+            } finally {
+                if (isMounted) {
+                    setHeroImageReady(true)
+                }
             }
         }
 
-        fetchHeroImages()
+        fetchHeroImage()
+
+        return () => {
+            isMounted = false
+        }
     }, [])
 
-    // Reset index when images change
-    useEffect(() => {
-        setCurrentImageIndex(0)
-    }, [heroImages.length])
-
-    // Rotate through images every 5 seconds
-    useEffect(() => {
-        if (heroImages.length <= 1) return
-
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
-        }, 5000) // Change image every 5 seconds
-
-        return () => clearInterval(interval)
-    }, [heroImages.length])
-
-    // Determine which image to display
-    const currentImage = heroImages.length > 0 
-        ? heroImages[currentImageIndex] 
-        : null
-    const imageSrc = currentImage?.image_url || heroImage
-    const imageAlt = currentImage?.alt_text || "Stamped concrete driveway project in Waco, Texas"
+    const remoteImageUrl = currentHeroImage?.image_url
+    const imageSrc = remoteImageUrl
+        ? getSupabaseOptimizedImageUrl(remoteImageUrl, { width: 1600, quality: 68, format: 'webp' })
+        : heroImage
+    const imageSrcSet = remoteImageUrl
+        ? buildSupabaseImageSrcSet(remoteImageUrl, [480, 768, 1024, 1280, 1600], {
+            quality: 68,
+            format: 'webp',
+        })
+        : undefined
+    const imageAlt = currentHeroImage?.alt_text || "Stamped concrete driveway project in Waco, Texas"
 
     return (
         <section
@@ -111,28 +118,14 @@ export function Hero() {
         >
             {/* Background Image */}
             <div className="absolute inset-0">
-                {heroImages.length > 0 && heroImages.map((img, index) => (
-                    <motion.img
-                        key={img.id}
-                        src={img.image_url}
-                        alt={img.alt_text || "Hero image"}
-                        className="absolute inset-0 w-full h-full object-cover object-center"
-                        style={{ minHeight: '100vh', minWidth: '100%' }}
-                        loading={index === 0 ? "eager" : "lazy"}
-                        fetchPriority={index === 0 ? "high" : "low"}
-                        decoding="async"
-                        initial={{ opacity: 0 }}
-                        animate={{ 
-                            opacity: index === currentImageIndex ? 1 : 0,
-                            scale: index === currentImageIndex ? 1 : 1.05
-                        }}
-                        transition={{ duration: 1.5, ease: 'easeInOut' }}
-                    />
-                ))}
-                {heroImages.length === 0 && (
+                {heroImageReady && (
                     <img
-                        src={heroImage}
+                        src={imageSrc}
+                        srcSet={imageSrcSet}
+                        sizes="100vw"
                         alt={imageAlt}
+                        width="1600"
+                        height="900"
                         className="absolute inset-0 w-full h-full object-cover object-center"
                         style={{ minHeight: '100vh', minWidth: '100%' }}
                         loading="eager"
