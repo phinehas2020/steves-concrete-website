@@ -11,6 +11,7 @@ import {
   buildJsonLdGraph,
 } from '../lib/seo'
 import { guideLinks } from '../data/guides'
+import { locationLinks } from '../data/locationPages'
 
 export function LocationLanding({ page }) {
   const {
@@ -30,6 +31,35 @@ export function LocationLanding({ page }) {
 
   const resolvedTitle = seoTitle || `${heroTitle} | Free Estimate (254) 230-3102`
   const description = seoDescription || `${city} concrete contractor. Driveways, patios, stamped concrete, foundations. Free estimate: (254) 230-3102.`
+  const nearbyCityLinks = [
+    ...nearbyAreas
+      .map((area) => {
+        const match = locationLinks.find(
+          (location) => location.city.toLowerCase() === area.toLowerCase(),
+        )
+        if (!match) return null
+        return {
+          href: `/${match.slug}`,
+          label: `${match.city} concrete contractor`,
+        }
+      })
+      .filter(Boolean),
+    ...locationLinks
+      .filter((location) => location.city.toLowerCase() !== city.toLowerCase())
+      .map((location) => ({
+        href: `/${location.slug}`,
+        label: `${location.city} concrete contractor`,
+      })),
+  ]
+    .filter(
+      (link, index, allLinks) =>
+        allLinks.findIndex((candidate) => candidate.href === link.href) === index,
+    )
+    .slice(0, 4)
+  const relatedServiceLinks = services.slice(0, 4).map((service) => ({
+    href: service.href,
+    label: `${service.label} in ${city}`,
+  }))
 
   const serviceJsonLd = {
     '@type': 'Service',
@@ -42,6 +72,25 @@ export function LocationLanding({ page }) {
       addressRegion: 'TX',
     },
     provider: {
+      '@id': ORGANIZATION_ID,
+    },
+  }
+  const localBusinessJsonLd = {
+    '@type': ['LocalBusiness', 'Contractor'],
+    '@id': `${SITE_URL}/${slug}#local-business`,
+    additionalType: 'https://schema.org/ConcreteContractor',
+    name: `Concrete Works LLC - ${city}`,
+    url: `${SITE_URL}/${slug}`,
+    image: DEFAULT_IMAGE,
+    telephone: '+1-254-230-3102',
+    priceRange: '$$',
+    areaServed: {
+      '@type': 'City',
+      name: city,
+      addressRegion: 'TX',
+      addressCountry: 'US',
+    },
+    parentOrganization: {
       '@id': ORGANIZATION_ID,
     },
   }
@@ -60,7 +109,7 @@ export function LocationLanding({ page }) {
     image: DEFAULT_IMAGE,
     imageAlt: `Concrete work in ${city}, Texas`,
     type: 'website',
-    jsonLd: buildJsonLdGraph(serviceJsonLd, faqJsonLd, breadcrumbsJsonLd),
+    jsonLd: buildJsonLdGraph(serviceJsonLd, localBusinessJsonLd, faqJsonLd, breadcrumbsJsonLd),
   })
 
   return (
@@ -268,6 +317,53 @@ export function LocationLanding({ page }) {
                   <span className="text-sm text-stone-500">Open</span>
                 </a>
               ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-padding bg-white">
+          <div className="container-main">
+            <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
+              <div>
+                <h2 className="font-display font-bold text-2xl sm:text-3xl text-stone-900 text-balance mb-3">
+                  Nearby city concrete pages
+                </h2>
+                <p className="text-stone-600 text-pretty mb-5">
+                  Compare coverage across nearby areas for concrete projects similar to yours.
+                </p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {nearbyCityLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center justify-between gap-3 px-4 py-3 bg-stone-50 rounded-lg border border-stone-200 hover:border-stone-300 hover:bg-stone-100 transition-colors"
+                    >
+                      <span className="font-semibold text-stone-800">{link.label}</span>
+                      <span className="text-sm text-stone-500">View page</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-2xl sm:text-3xl text-stone-900 text-balance mb-3">
+                  Popular services in {city}
+                </h3>
+                <p className="text-stone-600 text-pretty mb-5">
+                  Jump straight to service details, pricing guidance, and FAQs.
+                </p>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {relatedServiceLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center justify-between gap-3 px-4 py-3 bg-stone-50 rounded-lg border border-stone-200 hover:border-stone-300 hover:bg-stone-100 transition-colors"
+                    >
+                      <span className="font-semibold text-stone-800">{link.label}</span>
+                      <span className="text-sm text-stone-500">Learn more</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

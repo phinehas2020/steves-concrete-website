@@ -5,6 +5,13 @@ import heroImage from '../assets/images/hero.jpeg'
 import { heroStagger, staggerItem, viewportEager } from '../lib/animations'
 import { supabase } from '../lib/supabase'
 
+const topLocationLinks = [
+    { label: 'Woodway', href: '/woodway-tx-concrete-contractor' },
+    { label: 'Hewitt', href: '/hewitt-tx-concrete-contractor' },
+    { label: 'Temple', href: '/temple-tx-concrete-contractor' },
+    { label: 'Killeen', href: '/killeen-tx-concrete-contractor' },
+]
+
 // Animated counter component
 function AnimatedStat({ value, suffix = '', label }) {
     const ref = useRef(null)
@@ -189,7 +196,7 @@ export function Hero() {
                         variants={staggerItem}
                     >
                         Concrete Contractor
-                        <span className="block text-accent-400">Waco TX</span>
+                        <span className="block text-accent-400">Waco Texas</span>
                         <span className="block text-lg sm:text-xl font-medium text-stone-400 mt-2">
                             Licensed &amp; Insured · 20+ Years
                         </span>
@@ -227,6 +234,24 @@ export function Hero() {
                             <Phone className="size-5" aria-hidden="true" />
                             (254) 230-3102
                         </motion.a>
+                    </motion.div>
+
+                    <motion.div
+                        className="mt-6 flex flex-wrap items-center gap-2"
+                        variants={staggerItem}
+                    >
+                        <span className="text-xs font-semibold uppercase tracking-wide text-stone-400">
+                            City pages:
+                        </span>
+                        {topLocationLinks.map((link) => (
+                            <a
+                                key={link.href}
+                                href={link.href}
+                                className="inline-flex items-center rounded-full border border-stone-600/80 px-3 py-1.5 text-xs font-semibold text-stone-200 hover:border-stone-400 hover:text-white transition-colors"
+                            >
+                                {link.label}
+                            </a>
+                        ))}
                     </motion.div>
 
                     {/* Trust Indicators - Animated Count Up */}

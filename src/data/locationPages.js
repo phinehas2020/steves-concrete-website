@@ -148,54 +148,88 @@ export const locationPages = [
   {
     slug: 'hewitt-tx-concrete-contractor',
     city: 'Hewitt',
-    seoTitle: 'Concrete Contractor Hewitt TX | Concrete Work for Homes & Businesses',
-    heroTitle: 'Concrete Contractor in Hewitt, TX',
+    seoTitle: 'Concrete Contractor Hewitt Texas | Driveways, Patios, Concrete Repair',
+    heroTitle: 'Concrete Contractor Hewitt Texas',
     heroSubtitle:
-      'Stamped concrete, patios, driveways, and repair work for Hewitt homes and businesses.',
+      'Driveways, patios, stamped concrete, and slab repairs for Hewitt homes. Free on-site estimates with clear start dates.',
     seoDescription:
-      'Concrete contractor in Hewitt, Texas for stamped concrete, patios, driveways, and repair work. Serving Hewitt, Waco, and nearby areas with fast estimates.',
+      'Looking for a concrete contractor Hewitt Texas homeowners trust? We build driveways, patios, stamped concrete, and repairs designed for Central Texas black clay soil and heat expansion.',
     intro:
-      'Hewitt homeowners trust us for clean layouts, thoughtful drainage planning, and finishes that keep their curb appeal sharp.',
-    highlights: baseHighlights,
+      'Concrete Works LLC helps Hewitt homeowners and property managers install concrete that lasts through hot summers and shifting black clay soil. We focus on proper base prep, drainage, and control-joint layout so your project looks sharp and performs long-term.',
+    highlights: [
+      {
+        title: 'Engineered for Hewitt soil conditions',
+        description:
+          'We compact base material and plan joint spacing to reduce stress from Central Texas black clay soil movement.',
+      },
+      {
+        title: 'Residential and light commercial concrete',
+        description:
+          'From driveway replacements to patio extensions and approach repairs, we handle practical concrete upgrades with clean finishes.',
+      },
+      {
+        title: 'Fast communication from estimate to pour',
+        description:
+          'You get a straightforward scope, honest timeline, and dependable follow-through from the first call to final cleanup.',
+      },
+    ],
     services: baseServices,
-    nearbyAreas: ['Woodway', 'Waco', 'Lorena', 'Robinson', 'Woodland Hills', 'Beverly Hills'],
+    nearbyAreas: ['Waco', 'Woodway', 'Robinson', 'Lorena', 'Beverly Hills', 'Woodland Hills'],
     projects: baseProjects('Hewitt'),
     faq: [
       {
-        question: 'What finishes are popular in Hewitt?',
+        question: 'How do you help prevent driveway cracking in Hewitt?',
         answer:
-          'Stamped stone patterns and exposed aggregate are popular for patios and entry walkways in Hewitt neighborhoods.',
+          'No slab is crack-proof in black clay soil, but we lower risk with strong base prep, reinforcement, drainage planning, and control joints sized for heat expansion.',
       },
       {
-        question: 'Do you handle small concrete projects in Hewitt?',
-        answer: 'Yes. We take on small pads, walkways, and repair jobs in addition to larger installs.',
+        question: 'Can I get a quick estimate for a Hewitt patio or driveway?',
+        answer:
+          'Yes. We offer free on-site estimates in Hewitt and can usually schedule a site visit quickly so you can compare options and pricing.',
       },
     ],
   },
   {
     slug: 'woodway-tx-concrete-contractor',
     city: 'Woodway',
-    seoTitle: 'Concrete Contractor Woodway TX | Waco Area Concrete Contractor',
-    heroTitle: 'Concrete Contractor in Woodway, TX',
+    seoTitle: 'Concrete Contractor Woodway Texas | Driveways, Patios, Stamped Concrete',
+    heroTitle: 'Concrete Contractor Woodway Texas',
     heroSubtitle:
-      'Driveways, patios, stamped finishes, and concrete repairs for Woodway properties.',
+      'Concrete driveways, patios, decorative finishes, and repairs for Woodway homes with free local estimates.',
     seoDescription:
-      'Concrete contractor in Woodway, Texas for driveways, patios, stamped concrete, and concrete repairs. Fast response and free estimates for Woodway-area projects.',
+      'Need a concrete contractor Woodway Texas property owners recommend? We install and replace driveways, patios, stamped concrete, and repairs built for Central Texas heat and clay soil movement.',
     intro:
-      'Concrete Works LLC serves Woodway homeowners and businesses with clean prep, crisp finishing, and long-term durability on every pour.',
-    highlights: baseHighlights,
+      'Concrete Works LLC delivers Woodway concrete projects with careful grading, reinforcement, and finishing detail. We account for black clay soil and summer heat expansion so your driveway, patio, or slab holds up and stays attractive.',
+    highlights: [
+      {
+        title: 'Woodway-focused prep and drainage',
+        description:
+          'We shape grade and base layers to move water away from slabs and support better long-term performance.',
+      },
+      {
+        title: 'Decorative and practical concrete options',
+        description:
+          'Choose broom-finish, stamped, or exposed aggregate surfaces that fit your home style and daily use.',
+      },
+      {
+        title: 'Clear bids and dependable scheduling',
+        description:
+          'We keep scopes simple, timelines realistic, and job sites orderly so your project stays low-stress.',
+      },
+    ],
     services: baseServices,
-    nearbyAreas: ['Waco', 'Hewitt', 'Robinson', 'Beverly Hills', 'China Spring', 'Lorena'],
+    nearbyAreas: ['Waco', 'Hewitt', 'China Spring', 'Robinson', 'Lorena', 'Beverly Hills'],
     projects: baseProjects('Woodway'),
     faq: [
       {
-        question: 'Do you install stamped concrete in Woodway?',
-        answer: 'Yes. We offer stamped patterns and color blends for patios, walkways, and driveways.',
+        question: 'Do you replace older driveways in Woodway?',
+        answer:
+          'Yes. We remove failing concrete, rebuild the base, and repour with proper reinforcement and joint layout for better durability.',
       },
       {
-        question: 'Can you replace an older driveway in Woodway?',
+        question: 'Can you install a stamped concrete patio in Woodway?',
         answer:
-          'We remove and replace aging slabs with proper base prep and joint planning for durability.',
+          'Absolutely. We offer stamped patterns and color options, then seal the surface and share maintenance tips to keep it looking clean.',
       },
     ],
   },

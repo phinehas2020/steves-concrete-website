@@ -92,7 +92,7 @@ export function Footer() {
                     <div>
                         <h3 className="font-display font-bold text-white uppercase tracking-widest text-xs mb-6">Service Areas</h3>
                         <ul className="space-y-3 text-stone-500 text-sm font-medium">
-                            {locationLinks.slice(0, 6).map((location) => (
+                            {locationLinks.map((location) => (
                                 <li key={location.slug}>
                                     <a
                                         href={`/${location.slug}`}
