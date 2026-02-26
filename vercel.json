@@ -95,6 +95,36 @@
   ],
   "redirects": [
     {
+      "source": "/wp-sitemap.xml",
+      "destination": "https://www.concretewaco.com/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/wp-sitemap-posts-page-1.xml",
+      "destination": "https://www.concretewaco.com/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "https://www.concretewaco.com/",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "destination": "https://www.concretewaco.com/",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "https://www.concretewaco.com/jobs",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/",
+      "destination": "https://www.concretewaco.com/jobs",
+      "permanent": true
+    },
+    {
       "source": "/(.*)",
       "destination": "https://www.concretewaco.com/$1",
       "permanent": true,

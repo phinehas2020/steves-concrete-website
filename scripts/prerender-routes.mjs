@@ -193,8 +193,11 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;')
 }
 
-function ensureTrailingSlash(url) {
-  return url.endsWith('/') ? url : `${url}/`
+function normalizeCanonical(url) {
+  const value = String(url || '').trim()
+  if (!value) return `${SITE_URL}/`
+  if (value === SITE_URL || value === `${SITE_URL}/`) return `${SITE_URL}/`
+  return value.endsWith('/') ? value.slice(0, -1) : value
 }
 
 function truncateSentence(value, maxLength = 150) {
@@ -877,7 +880,7 @@ function upsertPrerenderContent(html, contentHtml) {
 }
 
 function applyMeta(html, meta) {
-  const canonical = ensureTrailingSlash(meta.canonical || `${SITE_URL}${meta.path === '/' ? '/' : meta.path}`)
+  const canonical = normalizeCanonical(meta.canonical || `${SITE_URL}${meta.path === '/' ? '/' : meta.path}`)
   let updated = html
   updated = upsertTitle(updated, meta.title)
   updated = upsertMetaTag(updated, 'description', meta.description)

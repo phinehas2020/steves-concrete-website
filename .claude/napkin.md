@@ -1,5 +1,58 @@
 # Napkin
 
+## 2026-02-26 — Domain migration toward `wacoconcrete.com`
+
+### Context
+- User switched branding/domain from `concretewaco` to `wacoconcrete`.
+
+### What was done
+1. Updated domain constants and canonical URLs to `https://wacoconcrete.com` in:
+   - `src/lib/seo.js`
+   - `api/sitemap.xml.js`
+   - `scripts/prerender-routes.mjs`
+   - `index.html`
+   - `public/robots.txt`
+2. Updated sitemap/legacy redirect targets and host handling in `vercel.json` to route legacy concretewaco hosts to `https://wacoconcrete.com/...`.
+3. Updated n8n workflow blog-post endpoint in `docs/n8n-icloud-sharedalbum-workflow.json` to target `https://wacoconcrete.com/api/blog-post`.
+
+### Follow-up
+- Did not regenerate prerendered `dist/` output in this pass.
+
+## 2026-02-26 — Rollback to `concretewaco.com` as primary
+
+### Context
+- User decided to keep `concretewaco.com` as the primary domain and avoid redirecting to `wacoconcrete.com`.
+
+### What was done
+1. Restored domain constants and canonical URLs to `https://www.concretewaco.com` in:
+   - `src/lib/seo.js`
+   - `api/sitemap.xml.js`
+   - `scripts/prerender-routes.mjs`
+   - `index.html`
+   - `public/robots.txt`
+2. Reverted `vercel.json` redirect destinations and host rule back to `https://www.concretewaco.com/...` behavior.
+3. Restored n8n publish URL back to `https://www.concretewaco.com/api/blog-post`.
+## 2026-02-25 — GSC noindex report for legacy `/gallery` URL
+
+### Context
+- GSC showed `Excluded by 'noindex' tag` for `http://concretewaco.com/gallery/` in Coverage.
+
+### What was verified
+1. Live crawl path now redirects cleanly:
+   - `http://concretewaco.com/gallery/` -> `https://concretewaco.com/gallery/` -> `https://www.concretewaco.com/gallery/` -> `https://www.concretewaco.com/jobs`
+2. Destination page (`/jobs`) serves `<meta name="robots" content="index, follow">`.
+3. URL Inspection still reflected older crawls:
+   - Legacy gallery URL last crawled `2026-02-15` as noindex/soft-404 state.
+
+### Fix applied
+1. Added permanent redirects in `vercel.json`:
+   - `/wp-sitemap.xml` -> `https://www.concretewaco.com/sitemap.xml`
+   - `/wp-sitemap-posts-page-1.xml` -> `https://www.concretewaco.com/sitemap.xml`
+2. Deployed to production and confirmed old WP sitemap endpoints now resolve to current sitemap on GET.
+
+### Notes
+- HEAD requests to sitemap API route return `405` (expected for this handler); GET works and returns XML.
+
 ## 2026-02-23 — Homepage blog activity strip added
 
 ### Context
@@ -608,3 +661,82 @@
 - Posted-bin classification in `BlogPhotoStudio` now filters usage to `blog_posts.status = 'published'` via `blog_post_photos` join so drafts do not prematurely move photos into the bin.
 - Featured blog card in `src/pages/BlogIndex.jsx` can become extremely tall with portrait cover images if height is not constrained; use explicit breakpoint heights + `object-cover` to cap card height.
 - Featured blog card needed a hard cap on the entire row (`lg:max-h-[440px]`) plus an image wrapper with fixed heights; image-only height classes were not sufficient to prevent oversized cards in user view.
+
+## 2026-02-23 — Blog strip label + image height preference
+
+### User preference
+- Remove the small "Owner Activity" label from the homepage blog strip header.
+- Keep blog strip card photos hard-capped so portrait images never render overly tall cards.
+
+### Pattern note
+- In `src/components/BlogActivityStrip.jsx`, enforce fixed media area with wrapper height (`h-48 max-h-48`) and image inline cover sizing (`width/height: 100%`, `objectFit: cover`) for stable card heights.
+
+## 2026-02-25 — Top-3 ranking diagnostic (GSC + live SERP)
+
+### Context
+- User asked for extensive research on why rankings are around positions 4–6 instead of top 1–3.
+
+### What worked
+1. Used GSC MCP `index_inspect` + `enhanced_search_analytics` on `sc-domain:concretewaco.com` for query/page-level evidence.
+2. Used live Google SERP snapshots (Playwright) with Waco geolocation to confirm local pack and organic competitors.
+3. Used Lighthouse on production homepage to validate current Core Web Vitals/performance constraints.
+
+### Mistakes / corrections
+- Firecrawl search endpoints failed repeatedly; switched to Playwright + direct HTTP checks.
+- One competitor fetch initially failed due TLS handshake; reran with fallback (`-k` and `http`) to complete comparison.
+
+### Critical findings
+1. **Indexation bottleneck on priority URLs:** `https://www.concretewaco.com/blog` and key guide/location URLs are `Discovered - currently not indexed` or `URL is unknown to Google` in URL Inspection, limiting top-3 potential beyond homepage terms.
+2. **Legacy URL/canonical fragmentation still visible in performance:** page-level query data still splits heavily across `http://concretewaco.com/`, `https://concretewaco.com/`, and `https://www.concretewaco.com/` entries.
+3. **Historic `/about/` equity leak:** `https://concretewaco.com/about/` is `Not found (404)` but still has refs/legacy visibility signals in GSC.
+4. **Local pack relevance signals can be stronger:** live SERP shows SLA listing category as **Construction company** and website link as `http://concretewaco.com/`; these should align to concrete-contractor intent and canonical URL.
+5. **Rich result eligibility issue:** URL Inspection reports `Review snippets` error (`Invalid object type for field "<parent_node>"`) on indexed pages.
+6. **Performance headroom remains:** production Lighthouse run showed weak mobile-like performance with LCP ~16.3s and multi-MB hero/gallery image payload.
+
+## 2026-02-25 — Canonical consolidation + legacy redirect pass
+
+### Context
+- User approved execution of technical ranking fixes (canonical alignment, legacy URL handling, schema cleanup).
+
+### What changed
+1. Canonical alignment:
+   - Normalized prerender output canonicals to match runtime style (root keeps trailing slash; subpages canonicalize without trailing slash).
+   - Added runtime canonical normalization in `src/lib/seo.js` so hydrated tags match prerendered tags.
+2. Legacy equity redirects:
+   - Added permanent redirects in `vercel.json` for old ranking URLs:
+     - `/about` and `/about/` -> `/`
+     - `/gallery` and `/gallery/` -> `/jobs`
+3. Structured data cleanup:
+   - Updated homepage org schema from `ConcreteContractor` to `LocalBusiness` + `additionalType`.
+   - Removed `aggregateRating` block from `index.html` to avoid current review-snippet error state.
+
+### Validation
+- `npm run build` succeeded.
+- Verified built canonicals now align on subpages (no trailing slash) and homepage remains canonical root slash.
+- Confirmed `vercel.json` remains valid JSON after redirect additions.
+
+### Mistake / correction
+- A grep command with nested quoting failed (`zsh: unmatched \"`). Retried with simpler quoting and completed the check.
+
+## 2026-02-26 — SEO title/description refresh for tracked local pages
+
+### Context
+- User asked to apply a concrete SEO action plan to current site pages after reviewing GSC keyword data.
+
+### What was updated
+1. Tightened homepage-level SEO defaults in `index.html` and `src/lib/seo.js`:
+   - Emphasized exact phrase variants: `concrete contractor Waco Texas` and nearby-city variations.
+   - Included a clearer service list and free-estimate CTA in title/description tags.
+   - Updated `keywords`, OG, and Twitter descriptions to match the homepage messaging.
+2. Added location-specific SEO fields in `src/data/locationPages.js` for all route pages:
+   - Set `seoTitle` and `seoDescription` for Waco, Temple, Killeen, Hewitt, Woodway, Robinson, Lorena, and McGregor.
+   - Added intent phrases like `concrete contractor ... TX` and local near-me language in the Temple landing description.
+3. Updated `src/pages/LocationLanding.jsx` to consume page-level SEO overrides.
+4. Adjusted blog and guide landing metadata for stronger Waco/area intent:
+   - `src/pages/BlogIndex.jsx`
+   - `src/pages/GuidesIndex.jsx`
+
+### Expected SEO effect
+- Better page-level title/description alignment for local-service terms.
+- Reduced mismatch between page intent and SERP query phrasing.
+- More opportunities for Waco-area long-tail and nearby-city ranking coverage.
