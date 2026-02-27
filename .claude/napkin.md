@@ -876,3 +876,44 @@
 1. Opened the exact `pagespeed.web.dev/analysis/...` URL in Playwright.
 2. Extracted full Lighthouse payload from `window.__LIGHTHOUSE_MOBILE_JSON__` via `browser_evaluate`.
 3. Used that payload to identify real bottlenecks (image delivery, render-blocking fonts, large initial JS bundle, unsized images).
+
+## 2026-02-26 — Mobile perf fixes that directly map to PSI findings
+
+### What worked
+1. Lazy-loaded route modules in `src/main.jsx` to keep admin/blog markdown code out of the homepage bundle.
+2. Deferred below-the-fold data fetching (`Gallery`, `BlogActivityStrip`) using `useInView` so initial load does not trigger jobs/blog requests.
+3. Reduced image transfer by converting Supabase public object URLs to `/storage/v1/render/image/public/...` transformed URLs with width/quality/format params.
+4. Added explicit image dimensions (`width`/`height`) on hero/logo/blog/gallery images to address unsized image diagnostics.
+5. Removed external font stylesheet links from `index.html` to cut render-blocking CSS on first paint.
+
+## 2026-02-27 — Featured service pages for resurfacing + sports courts
+
+### Context
+- User requested two prominent new pages for `concrete resurfacing` and `sports court coating`, and wanted these to be among the first things visitors see.
+
+### What was implemented
+1. Added two new SEO service pages in `src/data/seoServicePages.js`:
+   - `/concrete-resurfacing-waco-tx`
+   - `/sports-court-coating-waco-tx`
+2. Added a new top-of-homepage spotlight section in `src/components/FeaturedServiceSpotlight.jsx` with bold two-card presentation and direct CTAs to both pages.
+3. Wired spotlight into homepage flow directly under hero in `src/App.jsx` so both services are visible early.
+4. Added service icon mappings for the new slugs in `src/components/Services.jsx`.
+5. Verified with `npm run build` (success).
+
+### Pattern note
+- For "prominence" requests in this repo, adding a dedicated section right below hero is more reliable than only adding new cards inside the larger services grid.
+
+### Follow-up refinement (same task)
+- Added direct hero quick-link pills to the two featured service pages (`Hero.jsx`) because a full-height hero can hide below-hero content on first paint.
+
+## 2026-02-27 — Mobile section order regression from mixed `order-*`
+
+### Context
+- Homepage used flex-column ordering to move sections on mobile (`order-1` to `order-10`), but `DirectoryListings` had no order class.
+
+### What happened
+- Unordered flex child defaults to `order: 0`, which placed `DirectoryListings` ahead of explicitly ordered siblings on mobile.
+
+### Fix pattern
+- When any siblings use explicit `order-*`, every sibling in that flex parent should receive an order class (or avoid mixed ordering entirely).
+- Added `order-11 md:order-none` wrapper around `DirectoryListings` in `src/App.jsx`.

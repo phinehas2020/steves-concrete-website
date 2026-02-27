@@ -13,7 +13,7 @@ import {
 import { seoServicePages } from '../data/seoServicePages'
 
 export function SeoServiceLanding({ page }) {
-  const { slug, title, introParagraph, metaTitle, metaDescription, sections, faq = [] } = page
+  const { slug, title, introParagraph, metaTitle, metaDescription, sections, faq = [], heroImage } = page
 
   const relatedServices = seoServicePages
     .filter((service) => service.slug !== slug)
@@ -61,32 +61,45 @@ export function SeoServiceLanding({ page }) {
     <div className="min-h-dvh flex flex-col bg-white">
       <Header transparent={false} />
       <main className="flex-1 pt-20 sm:pt-24">
-        <section className="bg-stone-900 text-white">
+        <section className="bg-stone-900 text-white relative overflow-hidden">
           <div className="container-main py-16 sm:py-20 md:py-24">
-            <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
-                Service Detail
-              </span>
-              <h1 className="mt-5 font-display font-bold text-balance leading-tight" style={{ fontSize: 'clamp(2.4rem, 1.6rem + 3vw, 4rem)' }}>
-                {title}
-              </h1>
-              <p className="mt-5 text-lg text-stone-300 text-pretty max-w-2xl">
-                {introParagraph}
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
-                >
-                  Get Free Estimate
-                </a>
-                <a
-                  href="tel:254-230-3102"
-                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-stone-600 text-white font-semibold rounded-lg hover:bg-stone-800 hover:border-stone-500 transition-colors duration-150 min-h-[52px]"
-                >
-                  Call (254) 230-3102
-                </a>
+            <div className={`grid gap-12 lg:items-center ${heroImage ? 'lg:grid-cols-2' : ''}`}>
+              <div className="max-w-3xl">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
+                  Service Detail
+                </span>
+                <h1 className="mt-5 font-display font-bold text-balance leading-tight" style={{ fontSize: 'clamp(2.4rem, 1.6rem + 3vw, 4rem)' }}>
+                  {title}
+                </h1>
+                <p className="mt-5 text-lg text-stone-300 text-pretty max-w-2xl">
+                  {introParagraph}
+                </p>
+                <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
+                  >
+                    Get Free Estimate
+                  </a>
+                  <a
+                    href="tel:254-230-3102"
+                    className="inline-flex items-center justify-center px-8 py-4 border-2 border-stone-600 text-white font-semibold rounded-lg hover:bg-stone-800 hover:border-stone-500 transition-colors duration-150 min-h-[52px]"
+                  >
+                    Call (254) 230-3102
+                  </a>
+                </div>
               </div>
+
+              {heroImage && (
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                  <img
+                    src={heroImage}
+                    alt={title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl"></div>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -96,9 +109,8 @@ export function SeoServiceLanding({ page }) {
             {sections.map((section, index) => (
               <article
                 key={section.heading}
-                className={`grid gap-4 lg:grid-cols-[1fr_1.2fr] lg:items-start ${
-                  index % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''
-                }`}
+                className={`grid gap-4 lg:grid-cols-[1fr_1.2fr] lg:items-start ${index % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''
+                  }`}
               >
                 <h2 className="font-display font-semibold text-3xl text-stone-900">
                   {section.heading}

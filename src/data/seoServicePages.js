@@ -1,7 +1,11 @@
+import concreteResurfacingImg from '../assets/images/concrete-resurfacing.png';
+import sportsCourtImg from '../assets/images/sports-court-coating.png';
+
 export const seoServicePages = [
   {
     slug: 'concrete-resurfacing-waco-tx',
     title: 'Concrete Resurfacing in Waco, TX',
+    heroImage: concreteResurfacingImg,
     cardSummary:
       'Restore worn concrete with overlays and texture refresh systems designed for Waco heat, UV exposure, and everyday traffic.',
     metaTitle: 'Concrete Resurfacing in Waco, TX | Concrete Works LLC',
@@ -72,6 +76,7 @@ export const seoServicePages = [
   {
     slug: 'sports-court-coating-waco-tx',
     title: 'Sports Court Coating in Waco, TX',
+    heroImage: sportsCourtImg,
     cardSummary:
       'Professional resurfacing and acrylic coating for pickleball, tennis, and basketball courts in Waco with crack prep and precision striping.',
     metaTitle: 'Sports Court Coating in Waco, TX | Concrete Works LLC',
@@ -239,7 +244,7 @@ export const seoServicePages = [
         paragraphs: [
           'We offer broom, stamped, and exposed aggregate textures depending on whether your priority is traction or finish detail. If your patio is used for evening gatherings, we often prioritize anti-slip and stain-control coatings that still look refined.',
           'Color choice, border accents, and sealer type change maintenance needs. We provide a straightforward recommendation so your patio remains both attractive and easy to care for in sun and rain cycles.',
-      ],
+        ],
       },
       {
         heading: 'Patio cost drivers and timeline',
