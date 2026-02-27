@@ -1,6 +1,7 @@
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Services } from './components/Services'
+import { FeaturedServiceSpotlight } from './components/FeaturedServiceSpotlight'
 import { CostQuickAnswers } from './components/CostQuickAnswers'
 import { BlogActivityStrip } from './components/BlogActivityStrip'
 import { Values } from './components/Values'
@@ -163,31 +164,34 @@ function App() {
           <Hero />
         </div>
         <div className="order-2 md:order-none">
-          <Services />
+          <FeaturedServiceSpotlight />
         </div>
         <div className="order-3 md:order-none">
-          <ServiceAreas />
+          <Services />
         </div>
         <div className="order-4 md:order-none">
-          <CostQuickAnswers />
+          <ServiceAreas />
         </div>
         <div className="order-5 md:order-none">
-          <BlogActivityStrip />
+          <CostQuickAnswers />
         </div>
         <div className="order-6 md:order-none">
+          <BlogActivityStrip />
+        </div>
+        <div className="order-7 md:order-none">
           <Gallery />
         </div>
         {/* Values - Hidden on mobile to reduce scroll to Gallery */}
         <div className="hidden md:block md:order-none">
           <Values />
         </div>
-        <div className="order-7 md:order-none">
+        <div className="order-8 md:order-none">
           <Testimonials />
         </div>
-        <div className="order-8 md:order-none">
+        <div className="order-9 md:order-none">
           <FAQ />
         </div>
-        <div className="order-9 md:order-none">
+        <div className="order-10 md:order-none">
           <Contact />
         </div>
         <DirectoryListings />

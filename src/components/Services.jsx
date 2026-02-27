@@ -9,6 +9,8 @@ import {
   Hammer,
   Layout,
   Shield,
+  Layers,
+  Trophy,
   ArrowRight,
   ChevronDown,
 } from 'lucide-react'
@@ -26,6 +28,8 @@ const iconMap = {
   'concrete-foundations-waco-tx': Layout,
   'concrete-parking-lots-waco-tx': Building2,
   'general-contractor-waco-tx': Shield,
+  'concrete-resurfacing-waco-tx': Layers,
+  'sports-court-coating-waco-tx': Trophy,
 }
 
 export function Services() {

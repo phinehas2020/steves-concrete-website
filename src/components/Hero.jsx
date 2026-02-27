@@ -12,6 +12,11 @@ const topLocationLinks = [
     { label: 'Killeen', href: '/killeen-tx-concrete-contractor' },
 ]
 
+const featuredServiceLinks = [
+    { label: 'Concrete Resurfacing', href: '/concrete-resurfacing-waco-tx' },
+    { label: 'Sports Court Coating', href: '/sports-court-coating-waco-tx' },
+]
+
 // Animated counter component
 function AnimatedStat({ value, suffix = '', label }) {
     const ref = useRef(null)
@@ -253,6 +258,24 @@ export function Hero() {
                                 key={link.href}
                                 href={link.href}
                                 className="inline-flex items-center rounded-full border border-stone-600/80 px-3 py-1.5 text-xs font-semibold text-stone-200 hover:border-stone-400 hover:text-white transition-colors"
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                    </motion.div>
+
+                    <motion.div
+                        className="mt-4 flex flex-wrap items-center gap-2"
+                        variants={staggerItem}
+                    >
+                        <span className="text-xs font-semibold uppercase tracking-wide text-stone-400">
+                            Featured services:
+                        </span>
+                        {featuredServiceLinks.map((link) => (
+                            <a
+                                key={link.href}
+                                href={link.href}
+                                className="inline-flex items-center rounded-full border border-accent-500/70 bg-accent-500/15 px-3 py-1.5 text-xs font-semibold text-accent-200 hover:bg-accent-500/30 hover:text-white transition-colors"
                             >
                                 {link.label}
                             </a>

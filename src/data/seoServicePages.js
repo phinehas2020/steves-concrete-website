@@ -1,5 +1,145 @@
 export const seoServicePages = [
   {
+    slug: 'concrete-resurfacing-waco-tx',
+    title: 'Concrete Resurfacing in Waco, TX',
+    cardSummary:
+      'Restore worn concrete with overlays and texture refresh systems designed for Waco heat, UV exposure, and everyday traffic.',
+    metaTitle: 'Concrete Resurfacing in Waco, TX | Concrete Works LLC',
+    metaDescription:
+      'Need concrete resurfacing in Waco, TX? We repair and resurface driveways, patios, and walkways with crack prep, overlays, and decorative finishes.',
+    introParagraph:
+      'Concrete resurfacing in Waco is a smart option when your slab is structurally sound but stained, pitted, or weathered. We inspect existing concrete first, then apply prep and overlay systems that improve appearance, traction, and longevity without a full replacement.',
+    sections: [
+      {
+        heading: 'When resurfacing is better than replacement',
+        paragraphs: [
+          'Not every worn slab needs demolition. If the concrete base is stable and crack movement is limited, resurfacing can deliver a major visual upgrade at a lower cost and with less disruption than full tear-out.',
+          'Our team checks slab integrity, drainage pattern, and edge condition before we recommend an overlay. If the base is compromised, we tell you directly and offer replacement options so you are not paying for a short-lived fix.',
+        ],
+      },
+      {
+        heading: 'Prep determines how long resurfacing lasts',
+        paragraphs: [
+          'Surface prep is the difference between a finish that lasts and one that peels. We clean and profile the slab, repair cracks where appropriate, and address weak zones before any resurfacing material is installed.',
+          'In Waco, where heat cycles and moisture swings are common, preparation and bonding steps matter even more. We use a prep-first process so your resurfaced concrete holds up through seasonal expansion and contraction.',
+        ],
+      },
+      {
+        heading: 'Overlay styles for driveways, patios, and walkways',
+        paragraphs: [
+          'Resurfacing can be practical or decorative depending on your goals. We offer texture options, color refresh systems, and clean border lines that improve curb appeal while preserving daily traction.',
+          'If you want a modern look, we can apply subtle texture with neutral tones. If you want a stronger statement, we can build patterned finishes and color contrast that match your home, hardscape, and outdoor living areas.',
+        ],
+      },
+      {
+        heading: 'Resurfacing costs and project timeline',
+        paragraphs: [
+          'Resurfacing prices depend on slab condition, square footage, crack prep scope, and finish package. We break down each part of the estimate so you can compare options clearly.',
+          'Most resurfacing projects move quickly once prep is complete. Typical jobs include day-one prep and repair, coating application, and a short cure window before normal use resumes.',
+        ],
+      },
+      {
+        heading: 'Maintenance after concrete resurfacing',
+        paragraphs: [
+          'A resurfaced slab performs best with simple maintenance: periodic cleaning, quick stain treatment, and scheduled resealing where applicable.',
+          'We provide care steps based on your finish type and sun exposure so your resurfaced concrete keeps its color and texture for the long term.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'How much does concrete resurfacing cost in Waco, TX?',
+        answer:
+          'Costs vary by condition and finish, but resurfacing is usually less expensive than full replacement. We provide a detailed site-specific estimate after inspection.',
+      },
+      {
+        question: 'Can you resurface a cracked driveway or patio?',
+        answer:
+          'Yes, when cracks are minor and the slab is stable. We evaluate crack type first to determine whether resurfacing or replacement is the safer long-term path.',
+      },
+      {
+        question: 'How long does resurfaced concrete last?',
+        answer:
+          'With proper prep and ongoing maintenance, resurfaced concrete can last for many years. Performance depends on slab condition, traffic, and weather exposure.',
+      },
+      {
+        question: 'Can resurfacing include decorative finishes?',
+        answer:
+          'Yes. We offer decorative texture and color options for homeowners who want a custom look while keeping a durable surface.',
+      },
+    ],
+  },
+  {
+    slug: 'sports-court-coating-waco-tx',
+    title: 'Sports Court Coating in Waco, TX',
+    cardSummary:
+      'Professional resurfacing and acrylic coating for pickleball, tennis, and basketball courts in Waco with crack prep and precision striping.',
+    metaTitle: 'Sports Court Coating in Waco, TX | Concrete Works LLC',
+    metaDescription:
+      'Sports court coating in Waco, TX for pickleball, tennis, and basketball courts. Acrylic resurfacing, crack prep, color coating, and line striping.',
+    introParagraph:
+      'Sports court coating in Waco requires more than fresh paint. We start with crack and surface prep, then install acrylic systems built for traction, color retention, and reliable play in Central Texas heat.',
+    sections: [
+      {
+        heading: 'Court resurfacing built for Texas climate',
+        paragraphs: [
+          'Outdoor courts in Waco take constant UV exposure and fast temperature swings. We use coating systems selected for heat resistance and color stability so your court stays playable and visually sharp.',
+          'Our resurfacing approach protects against early wear by correcting surface defects first. That prep helps coatings bond correctly and reduces peeling in high-use zones.',
+        ],
+      },
+      {
+        heading: 'Pickleball, tennis, and basketball configurations',
+        paragraphs: [
+          'We resurface single-sport and multi-sport courts depending on your property goals. From private residences to HOA and school courts, we adapt line layout and color zones to your preferred format.',
+          'If your court needs a conversion or updated striping plan, we map dimensions before coating so final game lines are clean, clear, and regulation-aware.',
+        ],
+      },
+      {
+        heading: 'Crack repair and substrate prep first',
+        paragraphs: [
+          'Long-lasting court coatings depend on substrate condition. We inspect cracks, low spots, and drainage behavior before applying acrylic layers.',
+          'By correcting problem areas first, we help reduce bounce inconsistency, puddling, and finish failures that can happen when courts are coated too quickly.',
+        ],
+      },
+      {
+        heading: 'Coating process and schedule',
+        paragraphs: [
+          'Most sports court coating projects include cleaning and prep, crack treatment, color coating, then line striping after cure milestones are met.',
+          'Timeline depends on weather and square footage, but many residential projects are completed within a focused multi-day window with clear reopening guidance.',
+        ],
+      },
+      {
+        heading: 'Maintenance planning for longer court life',
+        paragraphs: [
+          'After resurfacing, regular cleaning and periodic inspection help preserve traction and color. We share a simple maintenance routine based on court type and usage.',
+          'If heavy wear or minor cracking appears later, early touch-ups are usually far more cost-effective than waiting for major resurfacing needs.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you coat pickleball courts in Waco, TX?',
+        answer:
+          'Yes. We resurface and coat pickleball courts with texture and line striping tailored for outdoor play.',
+      },
+      {
+        question: 'Can you repaint and stripe an existing basketball court?',
+        answer:
+          'Yes. We handle crack prep, color coating, and accurate game-line striping for basketball courts.',
+      },
+      {
+        question: 'How often should sports courts be resurfaced?',
+        answer:
+          'Many outdoor courts need resurfacing every 4 to 8 years depending on traffic, drainage, and weather exposure.',
+      },
+      {
+        question: 'Do you serve properties outside Waco?',
+        answer:
+          'Yes. We serve Waco and nearby Central Texas communities, and we can confirm service area coverage during your estimate call.',
+      },
+    ],
+  },
+  {
     slug: 'concrete-driveways-waco-tx',
     title: 'Concrete Driveways in Waco, TX',
     cardSummary:
