@@ -104,26 +104,59 @@ export function SeoServiceLanding({ page }) {
           </div>
         </section>
 
-        <section className="section-padding">
-          <div className="container-main space-y-12">
-            {sections.map((section, index) => (
-              <article
-                key={section.heading}
-                className={`grid gap-4 lg:grid-cols-[1fr_1.2fr] lg:items-start ${index % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''
-                  }`}
-              >
-                <h2 className="font-display font-semibold text-3xl text-stone-900">
-                  {section.heading}
-                </h2>
-                <div className="space-y-4 text-stone-600 text-pretty">
-                  {section.paragraphs.map((paragraph) => (
-                    <p key={paragraph} className="leading-relaxed">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </article>
-            ))}
+        <section className="section-padding relative">
+          {/* Subtle background texture */}
+          <div className="absolute inset-0 bg-stone-50/50 -z-10" />
+
+          <div className="container-main max-w-4xl">
+            <div className="mb-12 text-center md:text-left">
+              <span className="inline-block px-3 py-1 mb-4 rounded-full bg-stone-100 text-stone-600 font-semibold text-sm tracking-wide uppercase border border-stone-200">
+                Service Breakdown
+              </span>
+              <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900">
+                What to expect during your project
+              </h2>
+            </div>
+
+            <div className="space-y-8 sm:space-y-12">
+              {sections.map((section, index) => (
+                <article
+                  key={section.heading}
+                  className="relative grid md:grid-cols-[auto_1fr] gap-6 md:gap-10 group"
+                >
+                  {/* Step Connector Line (visible on desktop) */}
+                  {index !== sections.length - 1 && (
+                    <div className="hidden md:block absolute left-[1.375rem] top-14 bottom-[-3rem] w-px bg-stone-200 group-hover:bg-accent-200 transition-colors duration-300" />
+                  )}
+
+                  {/* Number Badge */}
+                  <div className="relative z-10 hidden md:flex shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-white border-2 border-stone-200 text-stone-400 flex items-center justify-center font-display font-bold text-lg group-hover:border-accent-500 group-hover:text-accent-600 transition-all duration-300 shadow-sm mt-1">
+                      {String(index + 1).padStart(2, '0')}
+                    </div>
+                  </div>
+
+                  {/* Content Card */}
+                  <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-100 group-hover:shadow-md group-hover:border-accent-200 transition-all duration-300">
+                    {/* Mobile Number Badge */}
+                    <div className="flex items-center gap-4 mb-4 md:hidden">
+                      <div className="w-10 h-10 rounded-full bg-accent-50 text-accent-600 flex items-center justify-center font-display font-bold text-sm shrink-0 border border-accent-100">
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
+                    </div>
+
+                    <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4 group-hover:text-accent-600 transition-colors duration-200">
+                      {section.heading}
+                    </h3>
+                    <div className="space-y-4 text-stone-600 leading-relaxed text-pretty">
+                      {section.paragraphs.map((paragraph, pIndex) => (
+                        <p key={pIndex}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
