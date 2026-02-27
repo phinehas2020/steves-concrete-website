@@ -275,7 +275,7 @@ export function Hero() {
                             <a
                                 key={link.href}
                                 href={link.href}
-                                className="inline-flex items-center rounded-full border border-accent-500/70 bg-accent-500/15 px-3 py-1.5 text-xs font-semibold text-accent-200 hover:bg-accent-500/30 hover:text-white transition-colors"
+                                className="inline-flex items-center rounded-full border border-white/70 bg-white px-3 py-1.5 text-xs font-bold text-stone-900 shadow-sm hover:border-accent-400 hover:bg-accent-500 hover:text-white transition-colors"
                             >
                                 {link.label}
                             </a>
