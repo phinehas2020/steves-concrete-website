@@ -194,7 +194,9 @@ function App() {
         <div className="order-10 md:order-none">
           <Contact />
         </div>
-        <DirectoryListings />
+        <div className="order-11 md:order-none">
+          <DirectoryListings />
+        </div>
       </main>
       <Footer />
     </div>
