@@ -19,6 +19,7 @@ const RATE_LIMIT_MAX_PER_CONTACT = parsePositiveInt(process.env.LEAD_RATE_LIMIT_
 const DUPLICATE_WINDOW_HOURS = parsePositiveInt(process.env.LEAD_DUPLICATE_WINDOW_HOURS, 24)
 const MIN_FORM_AGE_SECONDS = parsePositiveInt(process.env.LEAD_MIN_FORM_AGE_SECONDS, 3)
 const MAX_URLS_PER_MESSAGE = parsePositiveInt(process.env.LEAD_MAX_URLS_PER_MESSAGE, 2)
+const MIN_MESSAGE_LENGTH = parsePositiveInt(process.env.LEAD_MIN_MESSAGE_LENGTH, 10)
 
 function parsePositiveInt(value, fallback) {
   const parsed = Number.parseInt(value || '', 10)
@@ -169,8 +170,8 @@ function validateLeadInput(lead) {
     return 'Please enter a valid email address'
   }
 
-  if (lead.message.length < 10) {
-    return 'Please add a few more project details'
+  if (lead.message.length < MIN_MESSAGE_LENGTH) {
+    return `Please add at least ${MIN_MESSAGE_LENGTH} characters of project details`
   }
 
   if (countUrls(lead.message) > MAX_URLS_PER_MESSAGE) {
