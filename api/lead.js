@@ -1,17 +1,25 @@
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 
-const supabaseUrl = process.env.SUPABASE_URL
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+function envString(name, fallback = '') {
+  const value = process.env[name]
+  if (typeof value !== 'string') return fallback
+  const trimmed = value.split('\0').join('').trim()
+  return trimmed.length > 0 ? trimmed : fallback
+}
 
-const leadsTo = process.env.LEADS_EMAIL_TO
-const leadsFrom = process.env.LEADS_EMAIL_FROM
-const leadsSmsTo = process.env.LEADS_SMS_TO
-const twilioFrom = process.env.LEADS_SMS_FROM
-const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID
-const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN
-const siteName = process.env.LEADS_SITE_NAME || 'Concrete Works LLC'
-const turnstileSecretKey = process.env.TURNSTILE_SECRET_KEY
+const supabaseUrl = envString('SUPABASE_URL')
+const supabaseServiceRoleKey = envString('SUPABASE_SERVICE_ROLE_KEY')
+
+const resendApiKey = envString('RESEND_API_KEY')
+const leadsTo = envString('LEADS_EMAIL_TO')
+const leadsFrom = envString('LEADS_EMAIL_FROM')
+const leadsSmsTo = envString('LEADS_SMS_TO')
+const twilioFrom = envString('LEADS_SMS_FROM')
+const twilioAccountSid = envString('TWILIO_ACCOUNT_SID')
+const twilioAuthToken = envString('TWILIO_AUTH_TOKEN')
+const siteName = envString('LEADS_SITE_NAME', 'Concrete Works LLC')
+const turnstileSecretKey = envString('TURNSTILE_SECRET_KEY')
 
 const RATE_LIMIT_WINDOW_MINUTES = parsePositiveInt(process.env.LEAD_RATE_LIMIT_WINDOW_MINUTES, 10)
 const RATE_LIMIT_MAX_PER_IP = parsePositiveInt(process.env.LEAD_RATE_LIMIT_MAX_PER_IP, 5)
@@ -28,7 +36,7 @@ function parsePositiveInt(value, fallback) {
 
 function toTrimmedString(value, maxLength = 4000) {
   if (typeof value !== 'string') return ''
-  return value.replace(/\u0000/g, '').trim().slice(0, maxLength)
+  return value.split('\0').join('').trim().slice(0, maxLength)
 }
 
 function countUrls(value) {
@@ -484,8 +492,8 @@ export default async function handler(req, res) {
     console.log('Using email recipients from env var:', emailRecipients.length)
   }
 
-  if (process.env.RESEND_API_KEY && emailRecipients.length > 0) {
-    const resend = new Resend(process.env.RESEND_API_KEY)
+  if (resendApiKey && emailRecipients.length > 0) {
+    const resend = new Resend(resendApiKey)
     try {
       const fromEmail = leadsFrom || 'onboarding@resend.dev'
 
@@ -501,7 +509,7 @@ export default async function handler(req, res) {
       console.error('Failed to send email notification:', emailError)
     }
   } else {
-    if (!process.env.RESEND_API_KEY) {
+    if (!resendApiKey) {
       console.warn('Email notification skipped - missing RESEND_API_KEY')
     } else if (emailRecipients.length === 0) {
       console.warn('Email notification skipped - no email recipients configured')

@@ -1,12 +1,19 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.SUPABASE_URL
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID
-const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN
-const twilioFrom = process.env.LEADS_SMS_FROM
-const leadsSmsTo = process.env.LEADS_SMS_TO
-const siteName = process.env.LEADS_SITE_NAME || 'Concrete Works LLC'
+function envString(name, fallback = '') {
+  const value = process.env[name]
+  if (typeof value !== 'string') return fallback
+  const trimmed = value.split('\0').join('').trim()
+  return trimmed.length > 0 ? trimmed : fallback
+}
+
+const supabaseUrl = envString('SUPABASE_URL')
+const supabaseServiceRoleKey = envString('SUPABASE_SERVICE_ROLE_KEY')
+const twilioAccountSid = envString('TWILIO_ACCOUNT_SID')
+const twilioAuthToken = envString('TWILIO_AUTH_TOKEN')
+const twilioFrom = envString('LEADS_SMS_FROM')
+const leadsSmsTo = envString('LEADS_SMS_TO')
+const siteName = envString('LEADS_SITE_NAME', 'Concrete Works LLC')
 
 function normalizeBody(body) {
   if (!body) return {}

@@ -917,3 +917,57 @@
 ### Fix pattern
 - When any siblings use explicit `order-*`, every sibling in that flex parent should receive an order class (or avoid mixed ordering entirely).
 - Added `order-11 md:order-none` wrapper around `DirectoryListings` in `src/App.jsx`.
+
+## 2026-03-01 — Lead form spam prevention snapshot
+
+### Context
+- User asked what protections currently exist to prevent spam form submissions.
+
+### What was confirmed
+1. `src/components/ContactForm.jsx` submits directly to `/api/lead` with no captcha token, no honeypot field, and no client-side anti-bot challenge.
+2. `api/lead.js` validates only required fields (`name`, `phone`, `message`) plus method check; it has no IP/session rate limiting, no duplicate suppression, and no bot scoring.
+3. The API records `ip` and `user_agent`, which helps post-hoc review, but does not block spam in real time.
+4. Supabase lead insert policy (`20260131150000_add_leads_insert_policy.sql`) allows `anon` insert with `with check (true)`, so inserts are intentionally permissive.
+
+## 2026-03-01 — Spam hardening shipped (DB + API + form)
+
+### What was implemented
+1. Applied Supabase migration (via MCP) to harden lead writes:
+   - Dropped permissive `Allow lead inserts` policy.
+   - Added `Service role can insert leads` policy.
+   - Added indexes on `created_at`, `(ip, created_at)`, `(phone, created_at)`, `(email, created_at)`.
+2. Upgraded `api/lead.js` with anti-spam controls:
+   - Honeypot + minimum form-age silent drops.
+   - Input validation (name/phone/email/message + URL count cap).
+   - Optional Turnstile server verification (`TURNSTILE_SECRET_KEY`).
+   - IP/contact rate limits and recent-duplicate suppression.
+   - HTML escaping in email template fields.
+3. Updated `src/components/ContactForm.jsx`:
+   - Added honeypot field and `formStartedAt` payload.
+   - Added Turnstile widget support (`VITE_TURNSTILE_SITE_KEY`) and token submit/reset behavior.
+4. Added anti-spam env vars to `.env.example`.
+
+### Mistake / correction
+- Tried `node --check` on `.jsx` and hit `ERR_UNKNOWN_FILE_EXTENSION`; use full `npm run build` (or framework-aware tooling) to validate React component changes.
+
+## 2026-03-01 — Turnstile false failures from newline-polluted env vars
+
+### Context
+- Contact form submissions returned `400` with `Bot verification failed. Please try again.`
+- Browser console also showed Cloudflare challenge noise (`/pat/... 401`), which was distracting but not the root cause.
+
+### Root cause
+- Vercel env values were saved with trailing newlines (for example `TURNSTILE_SECRET_KEY="...\\n"`).
+- Frontend already trimmed `VITE_TURNSTILE_SITE_KEY`, but backend used raw `TURNSTILE_SECRET_KEY`, so Turnstile siteverify rejected the secret.
+
+### Fix applied
+1. Added env sanitization (`trim`) in:
+   - `api/lead.js`
+   - `api/lead-reply.js`
+   - `api/lead-sms-bulk.js`
+2. Switched `api/lead.js` to use sanitized `resendApiKey` rather than raw `process.env.RESEND_API_KEY` checks.
+3. Added frontend env trimming in `src/lib/supabase.js` for resilience against whitespace/newline pollution.
+
+### Notes
+- PAT/challenge 401 messages can still appear in console and are often harmless.
+- If issues persist after deploy, verify Turnstile widget domain allowlist and key pair in Cloudflare dashboard.

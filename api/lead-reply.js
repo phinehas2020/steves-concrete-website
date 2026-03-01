@@ -1,11 +1,18 @@
 import { createClient } from '@supabase/supabase-js'
 import { Resend } from 'resend'
 
-const supabaseUrl = process.env.SUPABASE_URL
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-const resendApiKey = process.env.RESEND_API_KEY
-const leadsFrom = process.env.LEADS_EMAIL_FROM
-const siteName = process.env.LEADS_SITE_NAME || 'Concrete Works LLC'
+function envString(name, fallback = '') {
+  const value = process.env[name]
+  if (typeof value !== 'string') return fallback
+  const trimmed = value.split('\0').join('').trim()
+  return trimmed.length > 0 ? trimmed : fallback
+}
+
+const supabaseUrl = envString('SUPABASE_URL')
+const supabaseServiceRoleKey = envString('SUPABASE_SERVICE_ROLE_KEY')
+const resendApiKey = envString('RESEND_API_KEY')
+const leadsFrom = envString('LEADS_EMAIL_FROM')
+const siteName = envString('LEADS_SITE_NAME', 'Concrete Works LLC')
 
 function normalizeBody(body) {
   if (!body) return {}

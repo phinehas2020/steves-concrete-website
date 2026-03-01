@@ -1,7 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+function trimEnvValue(value) {
+  if (typeof value !== 'string') return ''
+  return value.split('\0').join('').trim()
+}
+
+const supabaseUrl = trimEnvValue(import.meta.env.VITE_SUPABASE_URL)
+const supabaseAnonKey = trimEnvValue(import.meta.env.VITE_SUPABASE_ANON_KEY)
 
 let supabaseClient
 
