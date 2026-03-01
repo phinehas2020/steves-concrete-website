@@ -1,5 +1,24 @@
 # Napkin
 
+## 2026-03-01 — Photo Studio daily auto-sync now scans all active albums
+
+### Context
+- User asked to have Photo Studio automatically check for new photos once daily.
+
+### What was done
+1. Refactored `api/blog-album-sync.js` handler to use shared album-sync helper for both manual and cron flows.
+2. Added cron-safe behavior:
+   - GET/cron/manual requests with no explicit `albumId`/`albumUrl` now sync all `active = true` rows in `blog_photo_albums`.
+   - Each album is synced independently so one failure won’t stop the full daily run.
+   - Response aggregates per-album results with `buildCronSyncSummary`.
+3. Kept manual album sync unchanged for admin callers:
+   - Explicit `albumId` or `albumUrl` still syncs a single album.
+   - Missing album selectors still use `ICLOUD_SHARED_ALBUM_URL` fallback behavior.
+4. Kept dedupe behavior so already-seen photos are skipped/updated by `dedupe_key`.
+5. Ran quick verification:
+   - `npx eslint api/blog-album-sync.js`
+   - `node --check api/blog-album-sync.js`
+
 ## 2026-02-26 — Domain migration toward `wacoconcrete.com`
 
 ### Context
@@ -218,6 +237,31 @@
 ### What worked
 - Playwright Google queries gave live SERP and indexation checks (`site:` queries) with location context.
 - Source-level HTML checks across competitor domains revealed clear crawl/index differences.
+
+## 2026-03-01 — New `semrush-api` skill created
+
+### Context
+- User asked to create a reusable Codex skill/tool for using Semrush via API and provided a live API key.
+
+### What was done
+1. Created new skill folder at `/Users/phinehasadams/.codex/skills/semrush-api` using `skill-creator` initializer.
+2. Replaced template `SKILL.md` with task-focused Semrush API workflow instructions and concrete command examples.
+3. Added `scripts/semrush_api.py` CLI tool with:
+   - `report` command for Semrush query-style report calls
+   - `units` command for API balance checks
+   - support for `--param key=value`, JSON/CSV/raw output, `--dry-run`, file output, and optional `--insecure` TLS fallback.
+4. Added `references/semrush-data-api-recipes.md` with common report recipes and endpoint notes.
+5. Added skill-local `.env` with provided `SEMRUSH_API_KEY` and `.gitignore` entry to avoid accidental `.env` commits.
+6. Installed `PyYAML` locally and ran `quick_validate.py` successfully (`Skill is valid!`).
+7. Added `/Users/phinehasadams/.agents/skills/semrush-api` as a symlink to `/Users/phinehasadams/.codex/skills/semrush-api` so both skill registries use one source.
+
+### Mistakes / corrections
+- Mistake: Ran `--dry-run` after the subcommand during smoke test; argparse expects global flags before subcommands.
+  - Correction: Re-ran with `python3 scripts/semrush_api.py --dry-run report ...`.
+- Mistake: `build_request_url()` appended a trailing slash when `units` used a full endpoint URL with empty path, causing `404`.
+  - Correction: Updated URL builder to preserve a full `base_url` as-is when `path` is empty.
+- Mistake: Initially used `type=api_units` on `api.semrush.com`, which returned `query type not found`.
+  - Correction: Switched default units endpoint to `https://www.semrush.com/users/countapiunits.html?key=...`.
 - Sitemap sampling confirmed unique title/canonical coverage gaps on our deployed routes.
 
 ### Mistakes / corrections

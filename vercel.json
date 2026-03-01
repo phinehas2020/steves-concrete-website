@@ -144,6 +144,10 @@
     {
       "path": "/api/blog-generate-worker",
       "schedule": "*/1 * * * *"
+    },
+    {
+      "path": "/api/blog-album-sync",
+      "schedule": "0 3 * * *"
     }
   ]
 }

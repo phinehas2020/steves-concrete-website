@@ -87,6 +87,68 @@ function shortText(value, max = 120) {
   return `${clean.slice(0, max - 3).trim()}...`
 }
 
+function normalizeRequestPayload(req) {
+  const body = normalizeBody(req.body)
+  const payload = { ...(body || {}) }
+  let searchParams = new URLSearchParams()
+
+  try {
+    searchParams = new URL(req.url || '', 'https://localhost').searchParams
+  } catch (error) {
+    console.error('Unable to parse request URL in blog-album-sync:', error)
+  }
+
+  const fieldAliases = [
+    ['albumId', 'album_id'],
+    ['albumUrl', 'album_url'],
+    ['albumName', 'album_name'],
+    ['albumToken', 'album_token'],
+    ['baseUrl', 'base_url'],
+    ['autoCreatePost', 'auto_create_post'],
+    ['createPost', 'create_post'],
+    ['postStatus', 'post_status'],
+    ['autoPublish', 'auto_publish'],
+    ['status'],
+    ['syncAll', 'sync_all'],
+  ]
+
+  for (const [primary, ...aliases] of fieldAliases) {
+    if (payload[primary] !== undefined) continue
+
+    let value = null
+    if (searchParams.has(primary)) {
+      value = searchParams.get(primary)
+    }
+
+    if (value === null) {
+      for (const alias of aliases) {
+        if (searchParams.has(alias)) {
+          value = searchParams.get(alias)
+          break
+        }
+      }
+    }
+
+    if (value !== null) {
+      payload[primary] = value
+    }
+  }
+
+  return payload
+}
+
+function isCronRequest(req) {
+  const cronHeader = toTrimmedString(req.headers['x-vercel-cron']) === '1'
+  const cronSecret = toTrimmedString(process.env.CRON_SECRET)
+  const authToken = toTrimmedString(req.headers.authorization || req.headers['x-api-key'])
+  const token = authToken.replace(/^Bearer\s+/i, '')
+
+  if (cronHeader) return true
+
+  if (!cronSecret) return false
+  return Boolean(token) && token === cronSecret
+}
+
 function parseDate(value) {
   const date = new Date(String(value || ''))
   if (Number.isNaN(date.getTime())) return null
@@ -521,6 +583,17 @@ async function requireAdminUser(req, supabase) {
   return adminUser
 }
 
+async function resolveRequester(req, supabase) {
+  if (isCronRequest(req)) {
+    return {
+      email: 'photo-studio-cron@system.local',
+      role: 'system',
+    }
+  }
+
+  return requireAdminUser(req, supabase)
+}
+
 async function fetchIcloudJson(url, body) {
   const response = await fetch(url, {
     method: 'POST',
@@ -745,82 +818,23 @@ async function repairLinkedBlogPostsAfterPhotoMirror(supabase, savedPhotos, exis
   }
 }
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' })
-    return
-  }
-
-  if (!supabaseUrl || !supabaseServiceRoleKey) {
-    res.status(500).json({ error: 'Supabase server config missing' })
-    return
-  }
-
-  const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
-    auth: { persistSession: false },
-  })
-
-  let albumIdForError = null
+async function syncIcloudAlbumToLibrary({ supabase, actorUser, body, albumRecord }) {
+  const albumIdForError = albumRecord?.id || null
 
   try {
-    const adminUser = await requireAdminUser(req, supabase)
-    const body = normalizeBody(req.body)
-
-    const albumIdInput = toTrimmedString(body.albumId || body.album_id)
-    const defaultAlbumUrl = normalizeSourceUrl(process.env.ICLOUD_SHARED_ALBUM_URL)
-
-    let albumRecord = null
-
-    if (albumIdInput) {
-      const { data: existingAlbum, error: albumError } = await supabase
-        .from('blog_photo_albums')
-        .select('*')
-        .eq('id', albumIdInput)
-        .single()
-
-      if (albumError || !existingAlbum) {
-        res.status(404).json({ error: 'Album not found.' })
-        return
-      }
-
-      albumRecord = existingAlbum
-    } else {
-      const sourceUrl = normalizeSourceUrl(
-        body.albumUrl ||
-          body.album_url ||
-          defaultAlbumUrl
-      )
-
-      if (!sourceUrl) {
-        res.status(400).json({ error: 'albumUrl is required (or set ICLOUD_SHARED_ALBUM_URL).' })
-        return
-      }
-
-      albumRecord = await upsertAlbumRecord(supabase, {
-        name: toTrimmedString(body.albumName || body.album_name) || 'iCloud Blog Album',
-        sourceUrl,
-        sourceToken: toTrimmedString(body.albumToken || body.album_token),
-        sourceBaseUrl: toTrimmedString(body.baseUrl || body.base_url || process.env.ICLOUD_SHARED_ALBUM_BASE_URL),
-        autoPublish: toBoolean(body.autoPublish ?? body.auto_publish, false),
-      })
-    }
-
-    albumIdForError = albumRecord?.id || null
-
-    const token = parseAlbumToken(body.albumToken || body.album_token || albumRecord.source_token || albumRecord.source_url)
+    const token = parseAlbumToken(
+      body.albumToken || body.album_token || albumRecord.source_token || albumRecord.source_url
+    )
     if (!token) {
-      res.status(400).json({ error: 'Could not parse iCloud album token.' })
-      return
+      throw new Error('Could not parse iCloud album token.')
     }
 
     const baseUrl = buildBaseUrl({
       baseUrl: toTrimmedString(body.baseUrl || body.base_url || albumRecord.source_base_url),
       token,
     })
-
     if (!baseUrl) {
-      res.status(400).json({ error: 'Could not build iCloud base URL.' })
-      return
+      throw new Error('Could not build iCloud base URL.')
     }
 
     const webstreamPayload = await fetchIcloudJson(`${baseUrl}webstream`, {
@@ -841,18 +855,26 @@ export default async function handler(req, res) {
         })
         .eq('id', albumRecord.id)
 
-      res.status(200).json({
+      return {
         ok: true,
         album: {
           id: albumRecord.id,
           name: albumRecord.name,
           source_url: albumRecord.source_url,
         },
+        totalPhotosSeen: 0,
+        photosRequestedForSync: 0,
+        photosWithAssetUrls: 0,
         imported: 0,
         updated: 0,
-        totalPhotosSeen: 0,
-      })
-      return
+        mirroredToStorage: 0,
+        mirrorWarnings: [],
+        repairedPosts: 0,
+        repairedPostImageUrls: 0,
+        postRepairWarning: null,
+        newestBatchKey: null,
+        generatedPost: null,
+      }
     }
 
     const guidSeen = new Set()
@@ -872,8 +894,7 @@ export default async function handler(req, res) {
     }
 
     if (!guidRecords.length) {
-      res.status(400).json({ error: 'No photo GUIDs found from iCloud payload.' })
-      return
+      throw new Error('No photo GUIDs found from iCloud payload.')
     }
 
     const maxSyncPhotos = Number.isFinite(MAX_SYNC_PHOTOS) && MAX_SYNC_PHOTOS > 0 ? MAX_SYNC_PHOTOS : 120
@@ -907,8 +928,7 @@ export default async function handler(req, res) {
     }))
 
     if (!entries.length) {
-      res.status(400).json({ error: 'No image asset URLs were returned from iCloud.' })
-      return
+      throw new Error('No image asset URLs were returned from iCloud.')
     }
 
     const bestByGuid = new Map()
@@ -1056,8 +1076,7 @@ export default async function handler(req, res) {
     }
 
     if (!photoRows.length) {
-      res.status(400).json({ error: 'No usable image URLs were found for the album.' })
-      return
+      throw new Error('No usable image URLs were found for the album.')
     }
 
     const dedupeKeys = [...new Set(photoRows.map((row) => row.dedupe_key))]
@@ -1067,8 +1086,7 @@ export default async function handler(req, res) {
       .in('dedupe_key', dedupeKeys)
 
     if (existingRowsError) {
-      res.status(500).json({ error: 'Failed to inspect existing photo rows', details: existingRowsError.message })
-      return
+      throw new Error(`Failed to inspect existing photo rows: ${existingRowsError.message}`)
     }
 
     const existingKeySet = new Set((existingRows || []).map((row) => row.dedupe_key))
@@ -1107,8 +1125,7 @@ export default async function handler(req, res) {
       .select('id, dedupe_key, source_photo_guid, source_batch_key, source_caption, image_url, alt_text, source_taken_at')
 
     if (savePhotosError) {
-      res.status(500).json({ error: 'Failed to save synced photos', details: savePhotosError.message })
-      return
+      throw new Error(`Failed to save synced photos: ${savePhotosError.message}`)
     }
 
     const importedCount = dedupeKeys.filter((key) => !existingKeySet.has(key)).length
@@ -1165,12 +1182,12 @@ export default async function handler(req, res) {
           batch: newestBatch,
           photos: batchPhotos,
           status,
-          authorEmail: adminUser.email,
+          authorEmail: actorUser.email,
         })
       }
     }
 
-    res.status(200).json({
+    return {
       ok: true,
       album: {
         id: albumRecord.id,
@@ -1189,9 +1206,10 @@ export default async function handler(req, res) {
       postRepairWarning,
       newestBatchKey: newestBatch?.batchKey || null,
       generatedPost,
-    })
+    }
   } catch (error) {
-    console.error('blog-album-sync error:', error)
+    console.error('blog-album-sync album error:', error)
+
     if (albumIdForError) {
       try {
         await supabase
@@ -1207,6 +1225,169 @@ export default async function handler(req, res) {
       }
     }
 
+    throw error
+  }
+}
+
+function buildCronSyncSummary(results) {
+  const successful = results.filter((result) => result?.ok)
+  const failed = results.filter((result) => !result?.ok)
+
+  const imported = successful.reduce((sum, result) => sum + Number(result.imported || 0), 0)
+  const updated = successful.reduce((sum, result) => sum + Number(result.updated || 0), 0)
+  const mirroredToStorage = successful.reduce(
+    (sum, result) => sum + Number(result.mirroredToStorage || 0),
+    0
+  )
+  const totalPhotosSeen = successful.reduce((sum, result) => sum + Number(result.totalPhotosSeen || 0), 0)
+  const photosWithAssetUrls = successful.reduce((sum, result) => sum + Number(result.photosWithAssetUrls || 0), 0)
+  const photosRequestedForSync = successful.reduce(
+    (sum, result) => sum + Number(result.photosRequestedForSync || 0),
+    0
+  )
+
+  return {
+    ok: failed.length === 0,
+    mode: 'cron-multi-album',
+    albumsProcessed: results.length,
+    successfulAlbums: successful.length,
+    failedAlbums: failed.length,
+    totalPhotosSeen,
+    photosRequestedForSync,
+    photosWithAssetUrls,
+    imported,
+    updated,
+    mirroredToStorage,
+    results,
+    firstFailure: failed[0]?.error || null,
+  }
+}
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST' && req.method !== 'GET') {
+    res.status(405).json({ error: 'Method not allowed' })
+    return
+  }
+
+  if (!supabaseUrl || !supabaseServiceRoleKey) {
+    res.status(500).json({ error: 'Supabase server config missing' })
+    return
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
+    auth: { persistSession: false },
+  })
+
+  try {
+    const actorUser = await resolveRequester(req, supabase)
+    const body = normalizeRequestPayload(req)
+    const defaultAlbumUrl = normalizeSourceUrl(process.env.ICLOUD_SHARED_ALBUM_URL)
+    const isCron = isCronRequest(req)
+    const requestedSyncAll = toBoolean(body.syncAll ?? body.sync_all, false)
+    const albumIdInput = toTrimmedString(body.albumId || body.album_id)
+    const albumUrlInput = normalizeSourceUrl(body.albumUrl || body.album_url)
+
+    const shouldSyncAll = isCron || requestedSyncAll
+
+    if (shouldSyncAll && !albumIdInput && !albumUrlInput) {
+      const { data: activeAlbums, error: listError } = await supabase
+        .from('blog_photo_albums')
+        .select('*')
+        .eq('active', true)
+        .order('name', { ascending: true })
+
+      if (listError) {
+        throw new Error(`Failed to load active albums: ${listError.message}`)
+      }
+
+      const albumRecords = [...(activeAlbums || [])]
+
+      if (!albumRecords.length) {
+        if (!defaultAlbumUrl) {
+          res.status(400).json({ error: 'No active photo albums configured.' })
+          return
+        }
+
+        albumRecords.push(
+          await upsertAlbumRecord(supabase, {
+            name: 'iCloud Blog Album',
+            sourceUrl: defaultAlbumUrl,
+            sourceToken: toTrimmedString(body.albumToken || body.album_token || defaultAlbumUrl),
+            sourceBaseUrl: toTrimmedString(body.baseUrl || body.base_url || process.env.ICLOUD_SHARED_ALBUM_BASE_URL),
+            autoPublish: toBoolean(body.autoPublish ?? body.auto_publish, false),
+          })
+        )
+      }
+
+      const results = []
+      for (const albumRecord of albumRecords) {
+        try {
+          const result = await syncIcloudAlbumToLibrary({
+            supabase,
+            actorUser,
+            body,
+            albumRecord,
+          })
+          results.push(result)
+        } catch (albumError) {
+          results.push({
+            ok: false,
+            album: {
+              id: albumRecord?.id || null,
+              name: albumRecord?.name || 'iCloud Album',
+              source_url: albumRecord?.source_url || '',
+            },
+            error: albumError?.message || 'Unknown album sync error',
+          })
+        }
+      }
+
+      const summary = buildCronSyncSummary(results)
+      res.status(summary.ok ? 200 : 500).json(summary)
+      return
+    }
+
+    let albumRecord = null
+
+    if (albumIdInput) {
+      const { data: existingAlbum, error: albumError } = await supabase
+        .from('blog_photo_albums')
+        .select('*')
+        .eq('id', albumIdInput)
+        .single()
+
+      if (albumError || !existingAlbum) {
+        res.status(404).json({ error: 'Album not found.' })
+        return
+      }
+
+      albumRecord = existingAlbum
+    } else {
+      const sourceUrl = albumUrlInput || defaultAlbumUrl
+      if (!sourceUrl) {
+        res.status(400).json({ error: 'albumUrl is required (or set ICLOUD_SHARED_ALBUM_URL).' })
+        return
+      }
+
+      albumRecord = await upsertAlbumRecord(supabase, {
+        name: toTrimmedString(body.albumName || body.album_name) || 'iCloud Blog Album',
+        sourceUrl,
+        sourceToken: toTrimmedString(body.albumToken || body.album_token),
+        sourceBaseUrl: toTrimmedString(body.baseUrl || body.base_url || process.env.ICLOUD_SHARED_ALBUM_BASE_URL),
+        autoPublish: toBoolean(body.autoPublish ?? body.auto_publish, false),
+      })
+    }
+
+    const result = await syncIcloudAlbumToLibrary({
+      supabase,
+      actorUser,
+      body,
+      albumRecord,
+    })
+
+    res.status(200).json(result)
+  } catch (error) {
+    console.error('blog-album-sync error:', error)
     const message = error?.message || 'Failed to sync album'
     const isAuthError = /auth|authorized|token/i.test(message)
     res.status(isAuthError ? 401 : 400).json({ error: message })
