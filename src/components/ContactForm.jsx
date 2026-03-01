@@ -51,8 +51,10 @@ export function ContactForm({
   showTitle = true,
   onSuccess,
 }) {
-  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || ''
-  const requiresTurnstile = Boolean(turnstileSiteKey)
+  const turnstileSiteKey = String(import.meta.env.VITE_TURNSTILE_SITE_KEY || '').trim()
+  const hasTurnstileValue = Boolean(turnstileSiteKey)
+  const turnstileKeyLooksValid = /^0x[0-9A-Za-z_-]+$/.test(turnstileSiteKey)
+  const requiresTurnstile = hasTurnstileValue
 
   const [formState, setFormState] = useState('idle') // idle, submitting, success, error
   const [formData, setFormData] = useState({
@@ -65,6 +67,7 @@ export function ContactForm({
   const [honeypot, setHoneypot] = useState('')
   const [turnstileToken, setTurnstileToken] = useState('')
   const [turnstileReady, setTurnstileReady] = useState(!requiresTurnstile)
+  const [turnstileConfigError, setTurnstileConfigError] = useState('')
 
   const formStartedAtRef = useRef(Date.now())
   const turnstileContainerRef = useRef(null)
@@ -72,11 +75,22 @@ export function ContactForm({
 
   useEffect(() => {
     if (!requiresTurnstile) {
+      setTurnstileConfigError('')
       setTurnstileReady(true)
+      if (turnstileWidgetIdRef.current !== null && window.turnstile) {
+        window.turnstile.remove(turnstileWidgetIdRef.current)
+        turnstileWidgetIdRef.current = null
+      }
       return undefined
     }
 
     let cancelled = false
+
+    if (!turnstileKeyLooksValid) {
+      setTurnstileConfigError('Turnstile site key format looks invalid. Please check VITE_TURNSTILE_SITE_KEY for extra characters or spaces.')
+      setTurnstileReady(false)
+      return undefined
+    }
 
     loadTurnstileScript()
       .then((turnstileApi) => {
@@ -89,12 +103,14 @@ export function ContactForm({
           'error-callback': () => setTurnstileToken(''),
         })
 
+        setTurnstileConfigError('')
         setTurnstileReady(true)
       })
       .catch((error) => {
         console.error('Turnstile setup failed:', error)
         if (!cancelled) {
           setTurnstileReady(false)
+          setTurnstileConfigError('Turnstile failed to initialize. Please check your VITE_TURNSTILE_SITE_KEY and try again.')
         }
       })
 
@@ -316,13 +332,16 @@ export function ContactForm({
             </div>
 
             {requiresTurnstile && (
-              <div className="space-y-2">
-                <div ref={turnstileContainerRef} />
-                {!turnstileReady && (
-                  <p className="text-xs text-stone-500">Loading bot verification...</p>
-                )}
-              </div>
-            )}
+                <div className="space-y-2">
+                  <div ref={turnstileContainerRef} />
+                  {turnstileConfigError && (
+                    <p className="text-xs text-red-600">{turnstileConfigError}</p>
+                  )}
+                  {!turnstileReady && (
+                    <p className="text-xs text-stone-500">Loading bot verification...</p>
+                  )}
+                </div>
+              )}
 
             {formState === 'error' && (
               <motion.div
