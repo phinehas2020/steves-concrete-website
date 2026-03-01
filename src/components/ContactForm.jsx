@@ -144,13 +144,7 @@ export function ContactForm({
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
-        console.error('Lead submission failed:', {
-          status: response.status,
-          statusText: response.statusText,
-          error: errorData,
-          turnstileReason: errorData.reason,
-          turnstileErrorCodes: errorData.errorCodes,
-        })
+        console.error('Lead submission failed:', JSON.stringify(errorData, null, 2))
 
         resetTurnstileWidget(turnstileWidgetIdRef, setTurnstileToken)
         throw new Error(errorData.error || 'Request failed')
