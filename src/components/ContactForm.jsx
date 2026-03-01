@@ -1,8 +1,49 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Send, CheckCircle, Loader2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
-import { cn } from '../lib/utils'
 import { Button } from './Button'
+
+const TURNSTILE_SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
+let turnstileScriptPromise
+
+function loadTurnstileScript() {
+  if (typeof window === 'undefined') {
+    return Promise.resolve(null)
+  }
+
+  if (window.turnstile) {
+    return Promise.resolve(window.turnstile)
+  }
+
+  if (!turnstileScriptPromise) {
+    turnstileScriptPromise = new Promise((resolve, reject) => {
+      const existingScript = document.querySelector(`script[src="${TURNSTILE_SCRIPT_SRC}"]`)
+      if (existingScript) {
+        existingScript.addEventListener('load', () => resolve(window.turnstile), { once: true })
+        existingScript.addEventListener('error', () => reject(new Error('Turnstile failed to load')), { once: true })
+        return
+      }
+
+      const script = document.createElement('script')
+      script.src = TURNSTILE_SCRIPT_SRC
+      script.async = true
+      script.defer = true
+      script.onload = () => resolve(window.turnstile)
+      script.onerror = () => reject(new Error('Turnstile failed to load'))
+      document.head.appendChild(script)
+    })
+  }
+
+  return turnstileScriptPromise
+}
+
+function resetTurnstileWidget(widgetIdRef, setToken) {
+  if (typeof window === 'undefined') return
+  if (!window.turnstile || widgetIdRef.current === null) return
+
+  window.turnstile.reset(widgetIdRef.current)
+  setToken('')
+}
 
 export function ContactForm({
   className,
@@ -10,6 +51,9 @@ export function ContactForm({
   showTitle = true,
   onSuccess,
 }) {
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || ''
+  const requiresTurnstile = Boolean(turnstileSiteKey)
+
   const [formState, setFormState] = useState('idle') // idle, submitting, success, error
   const [formData, setFormData] = useState({
     name: '',
@@ -18,6 +62,51 @@ export function ContactForm({
     service: '',
     message: '',
   })
+  const [honeypot, setHoneypot] = useState('')
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const [turnstileReady, setTurnstileReady] = useState(!requiresTurnstile)
+
+  const formStartedAtRef = useRef(Date.now())
+  const turnstileContainerRef = useRef(null)
+  const turnstileWidgetIdRef = useRef(null)
+
+  useEffect(() => {
+    if (!requiresTurnstile) {
+      setTurnstileReady(true)
+      return undefined
+    }
+
+    let cancelled = false
+
+    loadTurnstileScript()
+      .then((turnstileApi) => {
+        if (cancelled || !turnstileApi || !turnstileContainerRef.current) return
+
+        turnstileWidgetIdRef.current = turnstileApi.render(turnstileContainerRef.current, {
+          sitekey: turnstileSiteKey,
+          callback: (token) => setTurnstileToken(token),
+          'expired-callback': () => setTurnstileToken(''),
+          'error-callback': () => setTurnstileToken(''),
+        })
+
+        setTurnstileReady(true)
+      })
+      .catch((error) => {
+        console.error('Turnstile setup failed:', error)
+        if (!cancelled) {
+          setTurnstileReady(false)
+        }
+      })
+
+    return () => {
+      cancelled = true
+
+      if (window.turnstile && turnstileWidgetIdRef.current !== null) {
+        window.turnstile.remove(turnstileWidgetIdRef.current)
+        turnstileWidgetIdRef.current = null
+      }
+    }
+  }, [requiresTurnstile, turnstileSiteKey])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -29,6 +118,9 @@ export function ContactForm({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
+          website: honeypot,
+          turnstileToken,
+          formStartedAt: formStartedAtRef.current,
           pageUrl: window.location.href,
           source,
         }),
@@ -39,8 +131,10 @@ export function ContactForm({
         console.error('Lead submission failed:', {
           status: response.status,
           statusText: response.statusText,
-          error: errorData
+          error: errorData,
         })
+
+        resetTurnstileWidget(turnstileWidgetIdRef, setTurnstileToken)
         throw new Error(errorData.error || 'Request failed')
       }
 
@@ -64,11 +158,14 @@ export function ContactForm({
     }))
   }
 
+  const isSubmitDisabled =
+    formState === 'submitting' || (requiresTurnstile && (!turnstileReady || !turnstileToken))
+
   return (
     <div className={className}>
       <AnimatePresence mode="wait">
         {formState === 'success' ? (
-          <motion.div 
+          <motion.div
             key="success"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -88,20 +185,36 @@ export function ContactForm({
               onClick={() => {
                 setFormState('idle')
                 setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+                setHoneypot('')
+                formStartedAtRef.current = Date.now()
+                resetTurnstileWidget(turnstileWidgetIdRef, setTurnstileToken)
               }}
             >
               Send Another Request
             </Button>
           </motion.div>
         ) : (
-          <motion.form 
+          <motion.form
             key="form"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onSubmit={handleSubmit} 
+            onSubmit={handleSubmit}
             className="space-y-6"
           >
+            <div className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                tabIndex={-1}
+                autoComplete="new-password"
+                value={honeypot}
+                onChange={(event) => setHoneypot(event.target.value)}
+              />
+            </div>
+
             {showTitle && (
               <div className="mb-8">
                 <h3 className="font-display font-black text-3xl text-stone-900 mb-2 tracking-tight">
@@ -202,8 +315,17 @@ export function ContactForm({
               />
             </div>
 
+            {requiresTurnstile && (
+              <div className="space-y-2">
+                <div ref={turnstileContainerRef} />
+                {!turnstileReady && (
+                  <p className="text-xs text-stone-500">Loading bot verification...</p>
+                )}
+              </div>
+            )}
+
             {formState === 'error' && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-5 py-4 font-medium"
@@ -214,7 +336,7 @@ export function ContactForm({
 
             <Button
               type="submit"
-              disabled={formState === 'submitting'}
+              disabled={isSubmitDisabled}
               className="w-full py-5 rounded-xl shadow-xl shadow-accent-500/20 group"
             >
               {formState === 'submitting' ? (
@@ -239,4 +361,3 @@ export function ContactForm({
     </div>
   )
 }
-
