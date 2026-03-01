@@ -148,6 +148,8 @@ export function ContactForm({
           status: response.status,
           statusText: response.statusText,
           error: errorData,
+          turnstileReason: errorData.reason,
+          turnstileErrorCodes: errorData.errorCodes,
         })
 
         resetTurnstileWidget(turnstileWidgetIdRef, setTurnstileToken)

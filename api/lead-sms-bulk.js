@@ -3,7 +3,10 @@ import { createClient } from '@supabase/supabase-js'
 function envString(name, fallback = '') {
   const value = process.env[name]
   if (typeof value !== 'string') return fallback
-  const trimmed = value.split('\0').join('').trim()
+  const trimmed = value
+    .replace(/\\[nrt]/g, '')
+    .replace(/[\0\r\n]/g, '')
+    .trim()
   return trimmed.length > 0 ? trimmed : fallback
 }
 

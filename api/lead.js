@@ -4,7 +4,10 @@ import { Resend } from 'resend'
 function envString(name, fallback = '') {
   const value = process.env[name]
   if (typeof value !== 'string') return fallback
-  const trimmed = value.split('\0').join('').trim()
+  const trimmed = value
+    .replace(/\\[nrt]/g, '')
+    .replace(/[\0\r\n]/g, '')
+    .trim()
   return trimmed.length > 0 ? trimmed : fallback
 }
 
@@ -232,12 +235,14 @@ async function verifyTurnstileToken({ token, ip }) {
     })
 
     const result = await response.json().catch(() => ({}))
+    const errorCodes = Array.isArray(result['error-codes']) ? result['error-codes'] : []
     if (!response.ok || !result.success) {
       console.warn('Turnstile verification failed:', {
         status: response.status,
-        errorCodes: Array.isArray(result['error-codes']) ? result['error-codes'] : [],
+        success: result.success,
+        errorCodes,
       })
-      return { ok: false, reason: 'verification_failed' }
+      return { ok: false, reason: 'verification_failed', errorCodes }
     }
 
     return { ok: true, skipped: false }
@@ -432,7 +437,17 @@ export default async function handler(req, res) {
   const turnstileToken = toTrimmedString(body.turnstileToken || body.turnstile_token, 2048)
   const turnstileCheck = await verifyTurnstileToken({ token: turnstileToken, ip: lead.ip })
   if (!turnstileCheck.ok) {
-    res.status(400).json({ error: 'Bot verification failed. Please try again.' })
+    console.warn('Turnstile check failed:', {
+      reason: turnstileCheck.reason,
+      hasToken: Boolean(turnstileToken),
+      tokenLength: turnstileToken.length,
+      errorCodes: turnstileCheck.errorCodes || [],
+    })
+    res.status(400).json({
+      error: 'Bot verification failed. Please try again.',
+      reason: turnstileCheck.reason,
+      errorCodes: turnstileCheck.errorCodes || [],
+    })
     return
   }
 
