@@ -71,7 +71,7 @@ const localBusiness = {
 }
 
 const GOOGLE_REVIEW_URL =
-  'https://www.google.com/maps/place/SLA+Concrete+Works/@31.5077235,-97.2470014,11z/data=!4m10!1m2!2m1!1sConcrete+Works+LLC,+Waco+TX!3m6!1s0x864f83d5fc2728cf:0x92d8085e5a37fa64!8m2!3d31.6637793!4d-97.1123512!15sChtDb25jcmV0ZSBXb3JrcyBMTEMsIFdhY28gVFhaHCIaY29uY3JldGUgd29ya3MgbGxjIHdhY28gdHiSARRjb25zdHJ1Y3Rpb25fY29tcGFueZoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VObGREYzNTM1IzUlJBQuABAPoBBAgAEEc!16s%2Fg%2F11gf0qs4j0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D'
+  'https://www.google.com/maps/place/SLA+Concrete+Works/@31.6637838,-97.1149261,17z/data=!3m1!4b1!4m6!3m5!1s0x864f83d5fc2728cf:0x92d8085e5a37fa64!8m2!3d31.6637793!4d-97.1123512!16s%2Fg%2F11gf0qs4j0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D'
 
 const aggregateRating = {
   '@type': 'AggregateRating',
