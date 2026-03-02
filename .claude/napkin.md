@@ -1,5 +1,16 @@
 # Napkin
 
+## 2026-03-02 — Google tag (gtag.js) snippet added to base HTML
+
+### Context
+- User asked to add the provided Google Analytics snippet and keep it site-wide.
+
+### What was done
+1. Added the `G-RBM02DY6F6` gtag snippet in `/Users/phinehasadams/Steves website/index.html` within `<head>`.
+
+### Follow-up
+- No follow-up action taken yet; deployment/push remains pending.
+
 ## 2026-03-01 — Photo Studio daily auto-sync now scans all active albums
 
 ### Context
