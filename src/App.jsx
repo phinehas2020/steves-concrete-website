@@ -77,11 +77,11 @@ function ServiceAreas() {
         <div className="max-w-3xl">
           <p className="text-xs uppercase tracking-[0.25em] font-bold text-accent-600 mb-4">Service Areas</p>
           <h2 className="font-display font-black text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-            Waco, TX Concrete Work in Nearby Neighborhoods
+            Waco Concrete Contractors Serving Nearby Neighborhoods
           </h2>
           <p className="text-lg text-stone-600 text-pretty mb-6">
-            From Waco to surrounding communities, we serve local homeowners and businesses across central
-            Texas for concrete projects that last through heat and weather.
+            From Waco to surrounding communities, we serve homeowners and businesses who need
+            contractors in Waco TX for concrete projects that last through heat, rain, and soil movement.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
@@ -145,9 +145,9 @@ function DirectoryListings() {
 
 function App() {
   useSeo({
-    title: 'Concrete Contractors Waco TX | Concrete Works LLC',
+    title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Concrete Works LLC',
     description:
-      'Looking for trusted concrete contractors in Waco, TX? Concrete Works LLC offers driveways, patios, sidewalks, and commercial concrete services. Call for a free estimate!',
+      'Need concrete contractors in Waco TX? Concrete Works LLC provides full concrete services in Waco TX for driveways, patios, sidewalks, slabs, and commercial concrete. Fast free estimates: (254) 230-3102.',
     canonical: `${SITE_URL}/`,
     url: `${SITE_URL}/`,
     type: 'website',

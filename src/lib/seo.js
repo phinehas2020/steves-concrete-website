@@ -7,9 +7,9 @@ const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 
 const DEFAULT_SEO = {
-  title: 'Concrete Contractor Waco TX | Licensed & Insured | 20+ Years | Free Estimate (254) 230-3102',
+  title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Free Estimate (254) 230-3102',
   description:
-    'Concrete Works LLC has completed 500+ projects in Waco, Temple, and McLennan County since 2005. Driveways, patios, stamped and commercial concrete built for black clay soil. Free estimate: (254) 230-3102.',
+    'Concrete Works LLC is one of the trusted concrete contractors in Waco, TX offering full concrete services in Waco TX for driveways, patios, stamped concrete, slabs, and repairs. Free estimates: (254) 230-3102.',
   canonical: SITE_URL + '/',
   image: DEFAULT_IMAGE,
   imageAlt: "Concrete Works LLC - Waco's Trusted Concrete Contractor",

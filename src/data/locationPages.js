@@ -70,21 +70,22 @@ export const locationPages = [
     slug: 'waco-tx-concrete-contractor',
     city: 'Waco',
     heroTitle: 'Concrete Contractor Waco TX',
-    seoTitle: 'Concrete Contractor Waco TX | Driveways, Patios, Stamped Concrete',
+    seoTitle: 'Waco Concrete Contractors | Concrete Companies Waco TX',
     heroSubtitle:
-      'Driveways, patios, stamped concrete, and foundations. Free estimate: (254) 230-3102.',
+      'Looking for contractors in Waco TX for driveways, patios, stamped concrete, or slab work? Free estimate: (254) 230-3102.',
     seoDescription:
-      'Concrete contractor in Waco, Texas for driveways, patios, stamped concrete, foundations, and repairs. Need a concrete contractor near me in Waco? Call for a fast estimate.',
+      'Waco concrete contractors for driveways, patios, stamped concrete, foundations, and repairs. Need concrete companies in Waco TX with fast estimates? Call (254) 230-3102.',
     intro:
-      'Concrete Works LLC partners with Waco homeowners, builders, and businesses for reliable concrete installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
+      'Concrete Works LLC partners with Waco homeowners, builders, and businesses comparing concrete companies Waco TX for reliable installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
     highlights: baseHighlights,
     services: baseServices,
     nearbyAreas: ['Woodway', 'Hewitt', 'Bellmead', 'Robinson', 'China Spring', 'Lorena'],
     projects: baseProjects('Waco'),
     faq: [
       {
-        question: 'Do you offer free estimates in Waco?',
-        answer: 'Yes. We provide free, no-obligation estimates across the Waco area.',
+        question: 'How do I choose between concrete companies in Waco TX?',
+        answer:
+          'Start with base-prep detail, drainage planning, reinforcement, and timeline clarity. We provide those details in writing so you can compare Waco concrete contractors apples-to-apples.',
       },
       {
         question: 'How soon can you start a Waco project?',

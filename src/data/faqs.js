@@ -20,6 +20,11 @@ export const FAQ_ITEMS = [
       'We work within approximately 50 miles of Waco, including Temple, Killeen, Hewitt, Woodway, Robinson, Lorena, McGregor, and surrounding communities in McLennan, Bell, and Coryell counties.',
   },
   {
+    question: 'How do I compare concrete companies in Waco, TX before hiring?',
+    answer:
+      'Ask each company to explain base prep, drainage, joint layout, reinforcement, and cure timing in writing. Reliable concrete contractors in Waco, TX should also show local project examples and a clear estimate scope.',
+  },
+  {
     question: "What's the difference between stamped and regular concrete?",
     answer:
       'Stamped concrete has patterns pressed into the surface while it is still wet — replicating stone, brick, or slate. It costs 30-50% less than natural stone but requires sealing every 2-3 years. Regular broom-finished concrete is more utilitarian, lower cost, and needs less maintenance.',

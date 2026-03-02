@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { motion as Motion } from 'motion/react'
 import { DollarSign, ArrowRight } from 'lucide-react'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 const quickAnswers = [
@@ -29,7 +29,7 @@ export function CostQuickAnswers() {
   return (
     <section className="section-padding bg-stone-50 border-y border-stone-200">
       <div className="container-main">
-        <motion.div
+        <Motion.div
           className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8"
           variants={fadeInUp}
           initial="hidden"
@@ -41,7 +41,7 @@ export function CostQuickAnswers() {
               Quick Answers
             </span>
             <h2 className="font-display font-bold text-2xl sm:text-3xl text-stone-900">
-              Waco concrete contractor pricing: quick answers
+              Waco concrete contractors: quick pricing answers
             </h2>
           </div>
           <a
@@ -51,11 +51,11 @@ export function CostQuickAnswers() {
             View all pricing guides
             <ArrowRight className="size-4" />
           </a>
-        </motion.div>
+        </Motion.div>
 
         <div className="grid gap-4 sm:grid-cols-2">
           {quickAnswers.map((item, index) => (
-            <motion.a
+            <Motion.a
               key={index}
               href={item.href}
               className="flex gap-4 p-4 sm:p-5 bg-white rounded-xl border border-stone-200 hover:border-accent-300 hover:shadow-md transition-all group"
@@ -75,7 +75,7 @@ export function CostQuickAnswers() {
                 <p className="text-sm text-stone-600 mt-1">{item.answer}</p>
               </div>
               <ArrowRight className="size-4 text-stone-400 flex-shrink-0 self-center ml-auto group-hover:text-accent-500 group-hover:translate-x-1 transition-all" />
-            </motion.a>
+            </Motion.a>
           ))}
         </div>
       </div>

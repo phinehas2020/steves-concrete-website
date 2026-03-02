@@ -23,19 +23,19 @@ export const servicePages = [
   {
     slug: 'concrete-contractors',
     title: 'Concrete Contractors',
-    heroTitle: 'Concrete Contractors in Waco, TX',
+    heroTitle: 'Waco Concrete Contractors',
     heroSubtitle:
-      'One team for residential, decorative, and commercial concrete projects across Waco and nearby communities.',
-    seoTitle: 'Concrete Contractors Waco TX | Concrete Companies Waco TX | Concrete Works LLC',
+      'Need contractors in Waco TX for driveways, patios, slab work, or repairs? Our team handles residential and light commercial concrete projects across Waco and nearby communities.',
+    seoTitle: 'Waco Concrete Contractors | Concrete Companies & Services in Waco TX',
     seoDescription:
-      'Need a concrete contractor in Waco TX? We handle concrete driveways, patios, stamped concrete, commercial pours, and repairs. Free estimate: (254) 230-3102.',
+      'Comparing concrete companies Waco TX homeowners trust? We handle driveways, patios, stamped concrete, and commercial pours as full concrete services in Waco TX. Free estimate: (254) 230-3102.',
     intro:
-      'Looking for a concrete contractor near me in Waco? We provide full-service concrete installs, replacements, and repairs with clear pricing for each phase of your project.',
+      'If you are comparing concrete companies Waco TX property owners recommend, we provide full concrete services in Waco TX with clear pricing for each phase of your project.',
     benefits: baseBenefits,
     process: baseProcess,
     finishes: ['Broom finish', 'Stamped patterns', 'Sealed concrete', 'Slip-resistant options'],
     pricingGuide: {
-      title: 'Concrete contractor pricing in Waco',
+      title: 'Waco concrete contractor pricing',
       description: 'How scope, prep, size, and finish choices affect your concrete estimate.',
       href: '/guides/concrete-driveway-cost-waco-tx',
     },
@@ -64,14 +64,14 @@ export const servicePages = [
       'Most concrete projects are estimated and scheduled through a single in-person consult, then move through prep, pour, and cure milestones.',
     faq: [
       {
-        question: 'Do you handle concrete projects for both homes and businesses?',
+        question: 'Are you residential concrete work contractors as well as commercial crews?',
         answer:
-          'Yes. We handle concrete work for residences and light commercial properties, including walkways, parking areas, slabs, and decorative upgrades.',
+          'Yes. We are residential concrete work contractors and also handle light commercial projects, including walkways, parking areas, slabs, and decorative upgrades.',
       },
       {
-        question: 'What does the first estimate process include?',
+        question: 'What should I compare when choosing concrete companies in Waco TX?',
         answer:
-          'We confirm measurements, access, drainage, and base condition, then provide a clear cost range and timeline before scheduling.',
+          'Compare prep scope, drainage planning, control-joint layout, reinforcement, and timeline clarity. We walk through each item during your estimate so scope and price stay transparent.',
       },
       {
         question: 'Can you handle concrete installation and repair?',
@@ -79,7 +79,12 @@ export const servicePages = [
           'Yes. We offer full-service concrete installs, replacements, and repair packages so most projects stay with one team.',
       },
       {
-        question: 'How do you handle heavy summer heat in Waco?',
+        question: 'Do you serve people searching for concrete contractors near me in Waco?',
+        answer:
+          'Yes. We serve Waco and nearby communities and provide quick estimate follow-up for homeowners and businesses looking for concrete contractors near me.',
+      },
+      {
+        question: 'How do you handle heavy summer heat in Waco TX?',
         answer:
           'We plan materials, timing, and curing practices for Central Texas conditions to protect quality and long-term performance.',
       },

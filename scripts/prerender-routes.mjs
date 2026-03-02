@@ -16,9 +16,9 @@ const PHONE_DISPLAY = '(254) 230-3102'
 const PHONE_HREF = 'tel:254-230-3102'
 
 const homeMeta = {
-  title: 'Concrete Contractor Waco TX | Driveways, Patios & Stamped Concrete | Concrete Works LLC',
+  title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Concrete Works LLC',
   description:
-    'Concrete Works LLC is a Waco, Texas concrete contractor with 20+ years experience. We specialize in stamped concrete driveways, decorative patios, and commercial concrete. Free estimates: (254) 230-3102.',
+    'Need concrete contractors in Waco TX? Concrete Works LLC provides full concrete services in Waco TX for driveways, patios, sidewalks, slabs, and commercial concrete. Fast free estimates: (254) 230-3102.',
   canonical: `${SITE_URL}/`,
   h1: 'Concrete Contractor Waco TX',
 }

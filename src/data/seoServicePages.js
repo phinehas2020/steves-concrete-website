@@ -426,14 +426,14 @@ export const seoServicePages = [
   },
   {
     slug: 'residential-concrete-contractor-waco-tx',
-    title: 'Residential Concrete Contractor in Waco, TX',
+    title: 'Residential Concrete Contractors in Waco, TX',
     cardSummary:
-      'Trusted residential concrete contractor in Waco, TX for driveways, patios, repairs, and small commercial-adjacent concrete upgrades.',
-    metaTitle: 'Residential Concrete Contractor in Waco, TX | Concrete Works LLC',
+      'Trusted residential concrete contractors in Waco, TX for driveways, patios, repairs, and home-focused slab upgrades.',
+    metaTitle: 'Residential Concrete Work Contractors in Waco, TX | Concrete Works LLC',
     metaDescription:
-      'Need residential concrete work contractors for a driveway, patio, or repair in Waco? We provide clear home-focused concrete plans, accurate estimates, and reliable schedules.',
+      'Need residential concrete work contractors in Waco, TX? We provide home-focused driveway, patio, slab, and repair plans with clear estimates and reliable schedules.',
     introParagraph:
-      'If you are comparing residential concrete work contractors in Waco, TX, the right fit should feel local, clear, and transparent. We take care of measurements, grading review, and construction details so your project stays practical and within a realistic timeline.',
+      'If you are comparing residential concrete work contractors in Waco, TX, the right fit should feel local, clear, and transparent. We handle measurements, grading review, and construction details so your project stays practical and on a realistic timeline.',
     sections: [
       {
         heading: 'Home-focused planning and communication',
@@ -475,7 +475,12 @@ export const seoServicePages = [
       {
         question: 'Do you handle both small residential pours and large jobs?',
         answer:
-          'Yes. We work with everything from single-driveway projects to larger residential concrete work across Waco and nearby communities.',
+          'Yes. We work with everything from single-driveway projects to larger residential concrete projects across Waco and nearby communities.',
+      },
+      {
+        question: 'Do you offer full residential concrete services in Waco, TX?',
+        answer:
+          'Yes. We provide residential concrete services in Waco, TX for driveways, patios, walkways, repairs, and slab upgrades with one coordinated team.',
       },
       {
         question: 'Are you available for emergency concrete repair after storms?',
@@ -499,14 +504,14 @@ export const seoServicePages = [
     title: 'Concrete Repair in Waco, TX',
     cardSummary:
       'Stabilize, patch, and restore concrete systems with practical repair strategies built for Waco soil movement and heat.',
-    metaTitle: 'Concrete Repair in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Foundation Repair Waco TX | Concrete Repair in Waco, TX | Concrete Works LLC',
     metaDescription:
-      'Concrete repair waco tx for sidewalks, driveways, and slabs. We assess foundation movement, spalling, and joint issues before repair or replacement recommendations.',
+      'Foundation repair Waco TX and concrete repair for sidewalks, driveways, and slabs. We assess settlement, spalling, and joint issues before repair or replacement recommendations.',
     introParagraph:
-      'If your slab or sidewalk has begun cracking, spalling, or settling, concrete repair waco tx starts with a full inspection, not a quick guess. We evaluate movement direction, soil moisture behavior, and nearby water paths before selecting the right repair path.',
+      'If your slab or sidewalk has begun cracking, spalling, or settling, foundation repair Waco TX and concrete repair work starts with a full inspection, not a quick guess. We evaluate movement direction, soil moisture behavior, and nearby water paths before selecting the right repair path.',
     sections: [
       {
-        heading: 'Root-cause inspection before patching',
+        heading: 'Root-cause inspection before patching or slab foundation repair',
         paragraphs: [
           'We first identify whether cracking is cosmetic or structural. That distinction matters because repairs that only fill surface damage can fail if soil and moisture issues remain unresolved.',
           'Our inspection includes joint performance, subgrade movement, and edge separation patterns. This helps us recommend either patching, joint refurbishment, or full replacement.',
@@ -546,6 +551,11 @@ export const seoServicePages = [
         question: 'Can all cracks be repaired or do some need replacement?',
         answer:
           'Some cracks are cosmetic and can be repaired; others indicate deeper movement and may need section replacement.',
+      },
+      {
+        question: 'Do you handle foundation repair in Waco TX for concrete slabs?',
+        answer:
+          'Yes. We handle concrete slab and flatwork foundation-related repair in Waco, including settlement and cracking issues. For major structural underpinning, we can help coordinate specialist evaluation when needed.',
       },
       {
         question: 'How soon can a repaired area be used again?',
@@ -706,14 +716,14 @@ export const seoServicePages = [
   },
   {
     slug: 'concrete-parking-lots-waco-tx',
-    title: 'Concrete Parking Lots in Waco, TX',
+    title: 'Concrete Parking Lot Contractors in Waco, TX',
     cardSummary:
       'Commercial parking lot concrete for heavy traffic with strong edge detailing, safe turning lanes, and durable load planning.',
-    metaTitle: 'Concrete Parking Lots in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Concrete Parking Lot Contractors in Waco, TX | Parking Lot Construction Companies',
     metaDescription:
-      'Need commercial parking lot concrete waco? We build and repair practical parking surfaces in Waco with reinforced base design, joint control, and traffic-safe implementation.',
+      'Need concrete parking lot contractors or parking lot construction companies in Waco? We build and repair commercial parking surfaces with reinforced base design, joint control, and traffic-safe implementation.',
     introParagraph:
-      'If your property needs parking lot concrete that performs daily, commercial parking lot concrete waco requires clear traffic planning and load-aware sectioning. We build in Waco and nearby communities with durable edges, proper slopes, and operational coordination.',
+      'If your property needs parking lot concrete that performs daily, concrete parking lot contractors in Waco should deliver clear traffic planning and load-aware sectioning. We build in Waco and nearby communities with durable edges, proper slopes, and operational coordination.',
     sections: [
       {
         heading: 'Traffic and loading design before concrete',
@@ -756,6 +766,11 @@ export const seoServicePages = [
         question: 'Can you build a parking lot for small to mid-size commercial use?',
         answer:
           'Yes. We serve businesses that need practical parking capacity and reliable load handling.',
+      },
+      {
+        question: 'Are you one of the parking lot construction companies serving Waco businesses?',
+        answer:
+          'Yes. We work with local owners and property managers that need parking lot construction companies focused on durable concrete planning and clear schedules.',
       },
       {
         question: 'How quickly can a lot be reopened after concrete installation?',
