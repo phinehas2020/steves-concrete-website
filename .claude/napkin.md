@@ -1026,3 +1026,89 @@
 ### Notes
 - PAT/challenge 401 messages can still appear in console and are often harmless.
 - If issues persist after deploy, verify Turnstile widget domain allowlist and key pair in Cloudflare dashboard.
+
+## 2026-03-01 — SEMrush keyword gap triage (no-code)
+
+### Context
+- User asked whether untapped non-brand keywords from competitor gap report are worth targeting.
+
+### What I did
+1. Reviewed visible Missing/Weak keyword tables.
+2. Grouped terms into: high-intent local concrete, broader/ambiguous contractor terms, and competitor-branded terms to exclude.
+3. Prepared a priority recommendation focused on non-brand, local transactional terms.
+
+### Notes
+- No repository code changes made in this step.
+
+## 2026-03-01 — Keyword-gap implementation pass (Waco non-brand terms)
+
+### Context
+- User asked to execute keyword-gap optimization immediately based on SEMrush missing/weak terms.
+
+### What was done
+1. Updated homepage/default SEO targeting to prioritize:
+   - `waco concrete contractors`
+   - `concrete companies waco tx`
+   - `contractors in waco tx`
+2. Updated core service hub content (`src/data/servicePages.js`, `concrete-contractors` entry):
+   - stronger keyword-aligned hero/meta/intro copy
+   - new FAQ phrasing for residential/commercial + near-me intent
+3. Updated Waco location page entry (`src/data/locationPages.js`) with non-brand keyword variants in title/description/intro/FAQ.
+4. Added homepage FAQ targeting comparison intent in `src/data/faqs.js`.
+5. Synced static prerender and base HTML metadata (`scripts/prerender-routes.mjs`, `index.html`).
+6. Added execution map report: `reports/seo-keyword-gap-map-2026-03-01.md`.
+
+### Validation
+- `npx eslint src/lib/seo.js src/App.jsx src/data/servicePages.js src/data/locationPages.js src/data/faqs.js src/components/CostQuickAnswers.jsx scripts/prerender-routes.mjs`
+- `npm run build`
+
+### Mistake + fix
+- Lint initially flagged `motion` as unused in `CostQuickAnswers.jsx`.
+- Fixed by aliasing import to `Motion` and updating JSX member usage.
+
+## 2026-03-01 — Zero-rank high-volume keyword follow-up
+
+### Context
+- User flagged that top-volume terms were still ranking `0` in SEMrush comparison.
+
+### What was done
+1. Strengthened SEO-service page targeting for high-volume non-brand terms:
+   - `residential-concrete-contractor-waco-tx`
+   - `concrete-parking-lots-waco-tx`
+   - `concrete-repair-waco-tx` (added foundation-repair relevance for concrete slab/flatwork scope)
+2. Updated core service hub copy to include phrase-level support for `concrete services in Waco TX`.
+3. Updated homepage/default/prerender/base HTML descriptions to include `concrete services in Waco TX`.
+4. Updated keyword map report with a dedicated high-volume zero-rank follow-up section.
+
+### Validation
+- `npx eslint src/data/seoServicePages.js src/data/servicePages.js src/lib/seo.js src/App.jsx scripts/prerender-routes.mjs`
+- `npm run build`
+
+### Notes
+- I tested adding keyword-anchor links in `Hero.jsx` but removed that change to avoid dragging an unrelated pre-existing lint issue into this pass.
+
+## 2026-03-02 — Root-level SEO execution plan requested
+
+### Context
+- User asked for a single `plan.md` that translates a Semrush-driven competitor strategy into an execution roadmap.
+
+### What was done
+1. Added `/Users/phinehasadams/Steves website/plan.md` with a 90-day SEO roadmap.
+2. Included baseline/competitor snapshot, prioritized workstreams, page-level keyword targets, weekly calendar, and KPI reporting cadence.
+3. Aligned recommendations to existing repo architecture by calling out canonical URL/redirect decisions before expanding page inventory.
+
+### Pattern that worked
+- Converting long strategy notes into a plan with explicit timeline + acceptance criteria makes implementation sequencing clearer and easier to track.
+
+## 2026-03-02 — 5xx root cause likely from sitemap import chain
+
+### Context
+- During immediate SEO execution, runtime checks showed `api/sitemap.xml.js` importing `seoServicePages` failed in Node due `.png` imports inside data file.
+
+### What was fixed
+1. Removed asset imports from `src/data/seoServicePages.js` and switched hero image references to static public paths under `/seo-images/...`.
+2. Added image files to `public/seo-images/`.
+3. Verified API handler execution locally returns `200` with valid XML payload.
+
+### Pattern that worked
+- Keep data modules imported by server/API/runtime scripts free of bundler-only asset imports (images/css). Use public URLs for shared data modules.

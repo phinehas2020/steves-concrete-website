@@ -16,7 +16,7 @@ export function SeoServiceLanding({ page }) {
   const { slug, title, introParagraph, metaTitle, metaDescription, sections, faq = [], heroImage } = page
 
   const relatedServices = seoServicePages
-    .filter((service) => service.slug !== slug)
+    .filter((service) => service.slug !== slug && !service.redirectTo)
     .slice(0, 4)
 
   const serviceJsonLd = {

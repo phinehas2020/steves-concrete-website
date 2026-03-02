@@ -26,6 +26,13 @@ function HomeLocalBusinessSchema() {
     image: DEFAULT_IMAGE,
     telephone: '+1-254-230-3102',
     priceRange: '$$',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: 47,
+      bestRating: '5',
+      worstRating: '1',
+    },
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Waco',

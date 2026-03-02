@@ -25,6 +25,19 @@ const LOCATION_PAGES = [
   'lorena-tx-concrete-contractor',
   'mcgregor-tx-concrete-contractor',
 ]
+const NON_CANONICAL_SERVICE_SLUGS = new Set([
+  'concrete-contractors',
+  'concrete-driveways',
+  'concrete-patios',
+  'parking-lots',
+  'concrete-repair',
+  'concrete-leveling',
+])
+const NON_CANONICAL_SEO_SERVICE_SLUGS = new Set([
+  'concrete-parking-lots-waco-tx',
+  'concrete-repair-waco-tx',
+  'general-contractor-waco-tx',
+])
 
 async function readSlugList(relativePath) {
   const fullPath = path.join(process.cwd(), relativePath)
@@ -113,14 +126,18 @@ async function main() {
     readSlugList('src/data/sportsCourtAreaPages.js'),
   ])
 
-  serviceSlugs.forEach((slug) => {
+  serviceSlugs
+    .filter((slug) => !NON_CANONICAL_SERVICE_SLUGS.has(slug))
+    .forEach((slug) => {
     addUrl(routes, `/services/${slug}`, {
       changefreq: 'monthly',
       priority: '0.65',
     })
   })
 
-  seoServiceSlugs.forEach((slug) => {
+  seoServiceSlugs
+    .filter((slug) => !NON_CANONICAL_SEO_SERVICE_SLUGS.has(slug))
+    .forEach((slug) => {
     addUrl(routes, `/${slug}`, {
       changefreq: 'monthly',
       priority: '0.72',

@@ -26,7 +26,7 @@ export const servicePages = [
     heroTitle: 'Waco Concrete Contractors',
     heroSubtitle:
       'Need contractors in Waco TX for driveways, patios, slab work, or repairs? Our team handles residential and light commercial concrete projects across Waco and nearby communities.',
-    seoTitle: 'Waco Concrete Contractors | Concrete Companies & Services in Waco TX',
+    seoTitle: 'Concrete Contractors Waco TX | Concrete Works LLC',
     seoDescription:
       'Comparing concrete companies Waco TX homeowners trust? We handle driveways, patios, stamped concrete, and commercial pours as full concrete services in Waco TX. Free estimate: (254) 230-3102.',
     intro:
@@ -96,7 +96,7 @@ export const servicePages = [
     heroTitle: 'Sidewalks and Driveways in Waco, TX',
     heroSubtitle:
       'Safe, level surfaces for sidewalks and driveways with better drainage, control joints, and long-term durability.',
-    seoTitle: 'Sidewalk and Driveway Concrete Waco TX | Concrete Contractor Waco TX',
+    seoTitle: 'Sidewalk & Driveway Concrete Waco TX | Concrete Works LLC',
     seoDescription:
       'Concrete sidewalks and driveways in Waco, TX. We build safe-access concrete for sidewalks, sidewalks repair, and driveway replacements with a focus on drainage and crack control.',
     intro:
@@ -427,7 +427,7 @@ export const servicePages = [
     heroTitle: 'Commercial Concrete in Waco, TX',
     heroSubtitle:
       'Slabs, pads, and site concrete for offices, retail, and light industrial spaces.',
-    seoTitle: 'Commercial Concrete Contractor Waco TX | Free Estimate (254) 230-3102',
+    seoTitle: 'Commercial Concrete Contractor Waco TX | Concrete Works LLC',
     seoDescription:
       'Commercial concrete slabs & pads in Waco. Free estimate: (254) 230-3102.',
     intro:
@@ -732,7 +732,7 @@ export const servicePages = [
     heroTitle: 'Concrete Sealing in Waco, TX',
     heroSubtitle:
       'Protect driveways, patios, and stamped concrete from stains, UV, and moisture.',
-    seoTitle: 'Concrete Sealing Waco TX | Driveway & Patio Sealer (254) 230-3102',
+    seoTitle: 'Concrete Sealing Waco TX | Concrete Works LLC',
     seoDescription:
       'Concrete sealing in Waco. Protect driveways, patios & stamped concrete. Free estimate: (254) 230-3102.',
     intro:
@@ -803,7 +803,7 @@ export const servicePages = [
     heroTitle: 'Concrete Leveling in Waco, TX',
     heroSubtitle:
       'Mudjacking and poly leveling to raise sunken slabs and restore flat surfaces.',
-    seoTitle: 'Concrete Leveling Waco TX | Mudjacking & Polyjacking (254) 230-3102',
+    seoTitle: 'Concrete Leveling Waco TX | Concrete Works LLC',
     seoDescription:
       'Concrete leveling in Waco. Raise sunken driveways & sidewalks. Mudjacking & poly foam. Free estimate: (254) 230-3102.',
     intro:

@@ -15,10 +15,22 @@ const LOCATION_PAGES = [
   'lorena-tx-concrete-contractor',
   'mcgregor-tx-concrete-contractor',
 ]
+const NON_CANONICAL_SERVICE_SLUGS = new Set([
+  'concrete-contractors',
+  'concrete-driveways',
+  'concrete-patios',
+  'parking-lots',
+  'concrete-repair',
+  'concrete-leveling',
+])
 const SERVICE_PAGES = [
-  ...servicePages.map((service) => `services/${service.slug}`),
+  ...servicePages
+    .filter((service) => !NON_CANONICAL_SERVICE_SLUGS.has(service.slug))
+    .map((service) => `services/${service.slug}`),
 ]
-const SEO_SERVICE_PAGES = seoServicePages.map((service) => service.slug)
+const SEO_SERVICE_PAGES = seoServicePages
+  .filter((service) => !service.redirectTo)
+  .map((service) => service.slug)
 const REVIEW_PAGES = ['reviews']
 const GUIDE_PAGES = [
   'guides/concrete-driveway-cost-waco-tx',

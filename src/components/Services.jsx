@@ -24,17 +24,50 @@ const iconMap = {
   'commercial-concrete-contractor-waco-tx': Building2,
   'residential-concrete-contractor-waco-tx': Home,
   'concrete-repair-waco-tx': Hammer,
+  'foundation-repair-waco-tx': Hammer,
   'stamped-concrete-waco-tx': Palette,
+  'decorative-concrete-waco': Palette,
   'concrete-foundations-waco-tx': Layout,
   'concrete-parking-lots-waco-tx': Building2,
+  'parking-lot-concrete-waco': Building2,
+  'house-leveling-waco-tx': Layout,
+  'retaining-walls-waco-tx': Shield,
+  'hardscaping-waco-tx': Layers,
+  'concrete-deck-contractors': Home,
+  'contractors-in-waco-tx': Shield,
   'general-contractor-waco-tx': Shield,
   'concrete-resurfacing-waco-tx': Layers,
   'sports-court-coating-waco-tx': Trophy,
 }
 
+const servicePriorityOrder = [
+  'foundation-repair-waco-tx',
+  'parking-lot-concrete-waco',
+  'concrete-driveways-waco-tx',
+  'concrete-patios-waco-tx',
+  'house-leveling-waco-tx',
+  'retaining-walls-waco-tx',
+  'decorative-concrete-waco',
+  'hardscaping-waco-tx',
+  'concrete-deck-contractors',
+  'contractors-in-waco-tx',
+]
+
+const servicePriorityMap = Object.fromEntries(
+  servicePriorityOrder.map((slug, index) => [slug, index]),
+)
+
 export function Services() {
   const [showAll, setShowAll] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const activeServices = seoServicePages
+    .filter((service) => !service.redirectTo)
+    .sort((a, b) => {
+      const aPriority = servicePriorityMap[a.slug] ?? Number.MAX_SAFE_INTEGER
+      const bPriority = servicePriorityMap[b.slug] ?? Number.MAX_SAFE_INTEGER
+      if (aPriority !== bPriority) return aPriority - bPriority
+      return a.title.localeCompare(b.title)
+    })
 
   useEffect(() => {
     const checkMobile = () => {
@@ -46,8 +79,8 @@ export function Services() {
   }, [])
 
   const initialCount = isMobile ? 1 : 3
-  const visibleServices = showAll ? seoServicePages : seoServicePages.slice(0, initialCount)
-  const hasMore = seoServicePages.length > initialCount
+  const visibleServices = showAll ? activeServices : activeServices.slice(0, initialCount)
+  const hasMore = activeServices.length > initialCount
 
   return (
     <section id="services" className="section-padding bg-white texture-grain-light">

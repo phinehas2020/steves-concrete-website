@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { servicePages as servicePageData } from '../src/data/servicePages.js'
+import { seoServicePages as seoServicePageData } from '../src/data/seoServicePages.js'
 import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
@@ -14,6 +15,14 @@ const SITE_NAME = 'Concrete Works LLC'
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 const PHONE_DISPLAY = '(254) 230-3102'
 const PHONE_HREF = 'tel:254-230-3102'
+const CANONICAL_SERVICE_OVERRIDES = {
+  'concrete-contractors': '/contractors-in-waco-tx',
+  'concrete-driveways': '/concrete-driveways-waco-tx',
+  'concrete-patios': '/concrete-patios-waco-tx',
+  'parking-lots': '/parking-lot-concrete-waco',
+  'concrete-repair': '/foundation-repair-waco-tx',
+  'concrete-leveling': '/house-leveling-waco-tx',
+}
 
 const homeMeta = {
   title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Concrete Works LLC',
@@ -131,6 +140,14 @@ const serviceLinks = servicePageData.map((service) => ({
   description: service.heroSubtitle,
 }))
 
+const seoServiceLinks = seoServicePageData
+  .filter((service) => !service.redirectTo)
+  .map((service) => ({
+  label: service.title,
+  href: `/${service.slug}`,
+  description: service.cardSummary || service.introParagraph,
+}))
+
 const guideLinks = guidePageData.map((guide) => ({
   label: guide.title,
   href: `/guides/${guide.slug}`,
@@ -155,14 +172,29 @@ const routeMeta = [
     ...homeMeta,
     contentHtml: renderHomeContent(),
   },
-  ...servicePageData.map((service) => ({
-    path: `/services/${service.slug}`,
-    title: service.seoTitle || `${service.title} Waco TX | ${SITE_NAME}`,
-    description:
-      service.seoDescription || `${service.title} in Waco, TX. Free estimate: ${PHONE_DISPLAY}.`,
-    canonical: `${SITE_URL}/services/${service.slug}`,
-    h1: service.heroTitle,
-    contentHtml: renderServiceContent(service),
+  ...servicePageData.map((service) => {
+    const canonicalOverride = CANONICAL_SERVICE_OVERRIDES[service.slug]
+    const canonical = canonicalOverride ? `${SITE_URL}${canonicalOverride}` : `${SITE_URL}/services/${service.slug}`
+    return {
+      path: `/services/${service.slug}`,
+      title: service.seoTitle || `${service.title} Waco TX | ${SITE_NAME}`,
+      description:
+        service.seoDescription || `${service.title} in Waco, TX. Free estimate: ${PHONE_DISPLAY}.`,
+      canonical,
+      robots: canonicalOverride ? 'noindex, follow' : 'index, follow',
+      h1: service.heroTitle,
+      contentHtml: renderServiceContent(service),
+    }
+  }),
+  ...seoServicePageData
+    .filter((service) => !service.redirectTo)
+    .map((service) => ({
+    path: `/${service.slug}`,
+    title: service.metaTitle || `${service.title} | ${SITE_NAME}`,
+    description: service.metaDescription,
+    canonical: `${SITE_URL}/${service.slug}`,
+    h1: service.title,
+    contentHtml: renderSeoServiceContent(service),
   })),
   ...locationPages.map((location) => ({
     path: `/${location.slug}`,
@@ -335,6 +367,13 @@ function renderHomeContent() {
         links: serviceLinks,
       },
       {
+        title: 'Dedicated local service pages',
+        paragraphs: [
+          'These pages target high-intent searches such as foundation repair, house leveling, parking lot concrete, and decorative concrete in Waco.',
+        ],
+        links: seoServiceLinks.slice(0, 12),
+      },
+      {
         title: 'What keeps concrete projects stable in Central Texas',
         bullets: [
           'Compaction and base prep designed for expansion and contraction in McLennan County clay soil.',
@@ -455,6 +494,55 @@ function renderServiceContent(service) {
       },
       {
         title: 'Service locations',
+        links: locationLinks,
+      },
+      {
+        title: `${service.title} FAQs`,
+        faq: service.faq || [],
+      },
+    ],
+  })
+}
+
+function renderSeoServiceContent(service) {
+  const sectionBullets = (service.sections || []).map((section) => {
+    const detail = (section.paragraphs || []).filter(Boolean).join(' ')
+    return `${section.heading}: ${truncateSentence(detail, 190)}`
+  })
+
+  const relatedPages = seoServicePageData
+    .filter((item) => item.slug !== service.slug && !item.redirectTo)
+    .slice(0, 8)
+    .map((item) => ({
+      label: item.title,
+      href: `/${item.slug}`,
+      description: item.cardSummary || item.introParagraph,
+    }))
+
+  return renderPage({
+    eyebrow: 'Service Detail',
+    title: service.title,
+    subtitle: service.cardSummary || service.metaDescription,
+    introParagraphs: [
+      service.introParagraph,
+      `Need local help now? Call ${PHONE_DISPLAY} for a free estimate and a clear project plan.`,
+    ],
+    actionLinks: [
+      { href: '/#contact', label: 'Request estimate' },
+      { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
+      { href: '/jobs', label: 'View recent projects' },
+    ],
+    sections: [
+      {
+        title: `What to expect with ${service.title.toLowerCase()}`,
+        bullets: sectionBullets,
+      },
+      {
+        title: 'Related service pages',
+        links: relatedPages,
+      },
+      {
+        title: 'Waco and nearby service coverage',
         links: locationLinks,
       },
       {

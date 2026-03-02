@@ -14,6 +14,15 @@ import { locationLinks } from '../data/locationPages'
 import { servicePages } from '../data/servicePages'
 import { guideLinks } from '../data/guides'
 
+const CANONICAL_SERVICE_OVERRIDES = {
+  'concrete-contractors': '/contractors-in-waco-tx',
+  'concrete-driveways': '/concrete-driveways-waco-tx',
+  'concrete-patios': '/concrete-patios-waco-tx',
+  'parking-lots': '/parking-lot-concrete-waco',
+  'concrete-repair': '/foundation-repair-waco-tx',
+  'concrete-leveling': '/house-leveling-waco-tx',
+}
+
 export function ServiceLanding({ page }) {
   const {
     slug,
@@ -38,6 +47,9 @@ export function ServiceLanding({ page }) {
     seoDescription ||
     `${title} in Waco, TX. Licensed & insured. Free estimate: (254) 230-3102.`
   const serviceAreaText = locationLinks.map((location) => location.city).join(', ')
+  const canonicalOverride = CANONICAL_SERVICE_OVERRIDES[slug]
+  const canonicalUrl = canonicalOverride ? `${SITE_URL}${canonicalOverride}` : `${SITE_URL}/services/${slug}`
+  const robots = canonicalOverride ? 'noindex, follow' : 'index, follow'
   const relatedServices = servicePages
     .filter((service) => service.slug !== slug)
     .slice(0, 4)
@@ -50,7 +62,7 @@ export function ServiceLanding({ page }) {
 
   const serviceJsonLd = {
     '@type': 'Service',
-    '@id': `${SITE_URL}/services/${slug}#service`,
+    '@id': `${canonicalUrl}#service`,
     name: title,
     serviceType: title,
     areaServed,
@@ -63,14 +75,15 @@ export function ServiceLanding({ page }) {
   const breadcrumbsJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `${SITE_URL}/` },
     { name: 'Services', url: `${SITE_URL}/#services` },
-    { name: title, url: `${SITE_URL}/services/${slug}` },
+    { name: title, url: canonicalUrl },
   ])
 
   useSeo({
     title: resolvedTitle,
     description,
-    canonical: `${SITE_URL}/services/${slug}`,
-    url: `${SITE_URL}/services/${slug}`,
+    canonical: canonicalUrl,
+    url: canonicalUrl,
+    robots,
     image: DEFAULT_IMAGE,
     imageAlt: `${title} in Central Texas`,
     type: 'website',

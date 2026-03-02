@@ -1,11 +1,8 @@
-import concreteResurfacingImg from '../assets/images/concrete-resurfacing.png';
-import sportsCourtImg from '../assets/images/sports-court-coating.png';
-
 export const seoServicePages = [
   {
     slug: 'concrete-resurfacing-waco-tx',
     title: 'Concrete Resurfacing in Waco, TX',
-    heroImage: concreteResurfacingImg,
+    heroImage: '/seo-images/concrete-resurfacing.png',
     cardSummary:
       'Restore worn concrete with overlays and texture refresh systems designed for Waco heat, UV exposure, and everyday traffic.',
     metaTitle: 'Concrete Resurfacing in Waco, TX | Concrete Works LLC',
@@ -76,7 +73,7 @@ export const seoServicePages = [
   {
     slug: 'sports-court-coating-waco-tx',
     title: 'Sports Court Coating in Waco, TX',
-    heroImage: sportsCourtImg,
+    heroImage: '/seo-images/sports-court-coating.png',
     cardSummary:
       'Professional resurfacing and acrylic coating for pickleball, tennis, and basketball courts in Waco with crack prep and precision striping.',
     metaTitle: 'Sports Court Coating in Waco, TX | Concrete Works LLC',
@@ -359,7 +356,7 @@ export const seoServicePages = [
     title: 'Commercial Concrete Contractor in Waco, TX',
     cardSummary:
       'Work with a commercial concrete contractor waco tx for controlled scheduling, traffic-safe workflow, and durable business-ready concrete.',
-    metaTitle: 'Commercial Concrete Contractor in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Commercial Concrete Contractor Waco TX | Concrete Works',
     metaDescription:
       'Need a commercial concrete contractor waco tx for driveways, pads, and site work? We handle commercial concrete projects across Waco and nearby Texas communities.',
     introParagraph:
@@ -429,7 +426,7 @@ export const seoServicePages = [
     title: 'Residential Concrete Contractors in Waco, TX',
     cardSummary:
       'Trusted residential concrete contractors in Waco, TX for driveways, patios, repairs, and home-focused slab upgrades.',
-    metaTitle: 'Residential Concrete Work Contractors in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Residential Concrete Contractors Waco TX | Concrete Works',
     metaDescription:
       'Need residential concrete work contractors in Waco, TX? We provide home-focused driveway, patio, slab, and repair plans with clear estimates and reliable schedules.',
     introParagraph:
@@ -501,10 +498,11 @@ export const seoServicePages = [
   },
   {
     slug: 'concrete-repair-waco-tx',
+    redirectTo: '/foundation-repair-waco-tx',
     title: 'Concrete Repair in Waco, TX',
     cardSummary:
       'Stabilize, patch, and restore concrete systems with practical repair strategies built for Waco soil movement and heat.',
-    metaTitle: 'Foundation Repair Waco TX | Concrete Repair in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Foundation & Concrete Repair Waco TX | Concrete Works',
     metaDescription:
       'Foundation repair Waco TX and concrete repair for sidewalks, driveways, and slabs. We assess settlement, spalling, and joint issues before repair or replacement recommendations.',
     introParagraph:
@@ -716,10 +714,11 @@ export const seoServicePages = [
   },
   {
     slug: 'concrete-parking-lots-waco-tx',
+    redirectTo: '/parking-lot-concrete-waco',
     title: 'Concrete Parking Lot Contractors in Waco, TX',
     cardSummary:
       'Commercial parking lot concrete for heavy traffic with strong edge detailing, safe turning lanes, and durable load planning.',
-    metaTitle: 'Concrete Parking Lot Contractors in Waco, TX | Parking Lot Construction Companies',
+    metaTitle: 'Parking Lot Concrete Contractors Waco TX | Concrete Works',
     metaDescription:
       'Need concrete parking lot contractors or parking lot construction companies in Waco? We build and repair commercial parking surfaces with reinforced base design, joint control, and traffic-safe implementation.',
     introParagraph:
@@ -790,7 +789,512 @@ export const seoServicePages = [
     ],
   },
   {
+    slug: 'parking-lot-concrete-waco',
+    title: 'Parking Lot Concrete in Waco, TX',
+    cardSummary:
+      'Concrete parking lot contractors for retail, office, church, and warehouse properties in Waco and nearby cities.',
+    metaTitle: 'Parking Lot Concrete Waco TX | Concrete Works LLC',
+    metaDescription:
+      'Need parking lot concrete in Waco? We build and repair parking lots with reinforced base prep, drainage planning, and traffic-safe scheduling.',
+    introParagraph:
+      'Property owners searching for parking lot concrete Waco services usually need a crew that can protect business access while delivering long-term slab performance. We stage work around operations and build for daily vehicle traffic.',
+    sections: [
+      {
+        heading: 'Commercial-first lot planning',
+        paragraphs: [
+          'Every lot starts with traffic path planning, turn radius checks, and stall flow. This prevents corner failures and random cracking in high-use zones.',
+          'We align joint spacing and reinforcement around expected traffic loads so the slab performs under repeated use.',
+        ],
+      },
+      {
+        heading: 'Drainage and subgrade prep',
+        paragraphs: [
+          'Parking lots fail early when water is trapped near slab edges. We grade for positive drainage before concrete placement.',
+          'Compaction and thickness targets are set by use case, from lighter retail flow to heavier service traffic.',
+        ],
+      },
+      {
+        heading: 'Business-friendly staging and reopening',
+        paragraphs: [
+          'We can split large parking scopes into phases to reduce disruption. Each phase includes access notes and safe-use guidance.',
+          'After pour, we provide staged reopening windows based on cure timing and weather conditions.',
+        ],
+      },
+      {
+        heading: 'Repair and replacement options',
+        paragraphs: [
+          'If your lot has isolated failures, we can evaluate section repairs before recommending full replacement.',
+          'When replacement is the better long-term move, we provide a clear scope and timeline before demolition begins.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you handle both new lots and parking lot repairs in Waco?',
+        answer:
+          'Yes. We build new lots and also handle section repairs or replacement depending on slab condition and traffic needs.',
+      },
+      {
+        question: 'How long before a parking lot can reopen?',
+        answer:
+          'Reopen timing depends on thickness, weather, and traffic type. We provide staged reopening guidance for each project.',
+      },
+      {
+        question: 'Are you local parking lot contractors in Waco TX?',
+        answer:
+          'Yes. We serve Waco and nearby communities with commercial concrete planning and installation.',
+      },
+      {
+        question: 'Can work be staged to keep business open?',
+        answer:
+          'Yes. We often phase parking lot work to preserve partial access when site layout allows it.',
+      },
+    ],
+  },
+  {
+    slug: 'foundation-repair-waco-tx',
+    title: 'Foundation Repair in Waco, TX',
+    cardSummary:
+      'Foundation and slab repair planning for settlement, cracking, and moisture-related movement in Waco black clay soil.',
+    metaTitle: 'Foundation Repair Waco TX | Concrete Works LLC',
+    metaDescription:
+      'Need foundation repair in Waco TX? We inspect slab movement, cracking, and drainage to recommend practical concrete repair or replacement plans.',
+    introParagraph:
+      'Foundation repair in Waco starts with diagnosis, not guesses. We inspect crack patterns, elevation shifts, and drainage behavior before recommending repairs so you avoid short-lived patches.',
+    sections: [
+      {
+        heading: 'Inspection before repair',
+        paragraphs: [
+          'We review movement patterns, water routes, and slab stress points to find the real cause of damage.',
+          'This process helps determine whether a repair, section replacement, or broader plan is needed.',
+        ],
+      },
+      {
+        heading: 'Common Waco foundation issues',
+        paragraphs: [
+          'Black clay expansion and moisture swings can stress slab edges and create uneven settlement.',
+          'We address drainage and surface water control because these often drive repeat failure.',
+        ],
+      },
+      {
+        heading: 'Repair options and scope clarity',
+        paragraphs: [
+          'Where feasible, we stabilize and repair affected areas with practical sequencing and access planning.',
+          'If replacement is required, we outline the exact scope and timeline before work starts.',
+        ],
+      },
+      {
+        heading: 'Post-repair durability plan',
+        paragraphs: [
+          'After repair, we provide a maintenance checklist to reduce repeat movement risk.',
+          'Early follow-up inspections are recommended when weather extremes increase slab stress.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you offer foundation repair estimates in Waco TX?',
+        answer:
+          'Yes. We provide a site inspection and written recommendation for repair or replacement options.',
+      },
+      {
+        question: 'Can cracked slabs always be repaired?',
+        answer:
+          'Not always. Some cracks are repairable, while others indicate deeper movement that requires replacement or structural review.',
+      },
+      {
+        question: 'How quickly can foundation repairs be scheduled?',
+        answer:
+          'Scheduling depends on scope and weather, but we prioritize projects where movement affects safety or access.',
+      },
+      {
+        question: 'Do you handle drainage-related slab issues?',
+        answer:
+          'Yes. Drainage correction is part of many foundation-related repair plans in Waco.',
+      },
+    ],
+  },
+  {
+    slug: 'house-leveling-waco-tx',
+    title: 'House Leveling in Waco, TX',
+    cardSummary:
+      'House leveling and slab stabilization support in Waco for settlement-related floor and foundation movement.',
+    metaTitle: 'House Leveling Waco TX | Concrete Works LLC',
+    metaDescription:
+      'Need house leveling in Waco TX? We assess slab movement, settlement patterns, and drainage conditions to plan practical leveling solutions.',
+    introParagraph:
+      'House leveling in Waco needs local soil awareness and careful structural planning. We evaluate movement signs, access constraints, and moisture behavior before recommending next steps.',
+    sections: [
+      {
+        heading: 'How leveling assessments work',
+        paragraphs: [
+          'We start with visible movement clues like interior cracks, sloping floors, and sticking doors.',
+          'The goal is to identify movement source and decide whether leveling, repair, or additional structural input is needed.',
+        ],
+      },
+      {
+        heading: 'Waco soil and moisture effects',
+        paragraphs: [
+          'Expansive clay can cause repeated seasonal lift and settlement. That makes drainage planning a key part of leveling.',
+          'We evaluate runoff and grading around the home to reduce repeat stress after corrections.',
+        ],
+      },
+      {
+        heading: 'Leveling scope and sequencing',
+        paragraphs: [
+          'Where leveling is feasible, we map the process to protect utilities and home access.',
+          'We provide a clear step-by-step plan so homeowners understand timing and expectations.',
+        ],
+      },
+      {
+        heading: 'Long-term maintenance after leveling',
+        paragraphs: [
+          'House leveling works best with stable moisture control and periodic follow-up checks.',
+          'We share practical maintenance guidance so small issues are caught early.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'What are early signs that a house may need leveling?',
+        answer:
+          'Common signs include sloping floors, recurring wall cracks, and doors that stop closing normally.',
+      },
+      {
+        question: 'Do you service house leveling projects across Waco?',
+        answer:
+          'Yes. We assess house leveling needs across Waco and surrounding Central Texas areas.',
+      },
+      {
+        question: 'Is drainage part of house leveling planning?',
+        answer:
+          'Yes. Drainage is one of the most important factors in reducing repeat foundation movement.',
+      },
+      {
+        question: 'Can leveling be phased?',
+        answer:
+          'Depending on scope, leveling and supporting repairs can often be sequenced in practical phases.',
+      },
+    ],
+  },
+  {
+    slug: 'retaining-walls-waco-tx',
+    title: 'Retaining Wall Installation in Waco, TX',
+    cardSummary:
+      'Retaining wall installation for slope control, drainage, and landscape stability in Waco properties.',
+    metaTitle: 'Retaining Walls Waco TX | Concrete Works LLC',
+    metaDescription:
+      'Need retaining wall installation in Waco TX? We build concrete retaining walls for slope control, drainage support, and long-term property protection.',
+    introParagraph:
+      'Retaining walls in Waco do more than improve appearance. They manage soil pressure, protect slabs, and improve drainage behavior around patios, driveways, and yard transitions.',
+    sections: [
+      {
+        heading: 'Wall planning and load management',
+        paragraphs: [
+          'We evaluate slope angle, retained height, and runoff paths before selecting wall configuration.',
+          'Proper planning helps prevent wall movement and protects nearby concrete surfaces.',
+        ],
+      },
+      {
+        heading: 'Drainage behind the wall',
+        paragraphs: [
+          'Drainage is critical for retaining wall durability. We include runoff strategies and pressure relief in design planning.',
+          'Without drainage control, hydrostatic pressure can shorten wall life and damage adjacent concrete.',
+        ],
+      },
+      {
+        heading: 'Integration with patios and hardscape',
+        paragraphs: [
+          'Retaining walls can be coordinated with patio expansions, walkway transitions, and seating zones.',
+          'We match layout and finish direction so the wall looks intentional with the surrounding project.',
+        ],
+      },
+      {
+        heading: 'Maintenance and inspection',
+        paragraphs: [
+          'After installation, we recommend periodic checks for drainage performance and movement.',
+          'Early detection of pressure or settlement signs can prevent major repair costs.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you install retaining walls for residential properties in Waco?',
+        answer:
+          'Yes. We build retaining walls for homes and small commercial properties throughout the Waco area.',
+      },
+      {
+        question: 'Can retaining walls help with drainage issues?',
+        answer:
+          'Yes, when wall and drainage systems are designed together as part of one plan.',
+      },
+      {
+        question: 'Do retaining walls pair with patio upgrades?',
+        answer:
+          'Yes. Many retaining wall projects are completed alongside patio and hardscape improvements.',
+      },
+      {
+        question: 'How long do concrete retaining walls last?',
+        answer:
+          'With correct design, drainage, and maintenance, retaining walls can perform for many years.',
+      },
+    ],
+  },
+  {
+    slug: 'decorative-concrete-waco',
+    title: 'Decorative Concrete in Waco, TX',
+    cardSummary:
+      'Decorative concrete patios, driveways, and walkways with stamped, stained, and textured finishes for Waco homes.',
+    metaTitle: 'Decorative Concrete Waco TX | Concrete Works LLC',
+    metaDescription:
+      'Looking for decorative concrete in Waco? We install stamped, stained, and custom-finish concrete for patios, driveways, and walkways.',
+    introParagraph:
+      'Decorative concrete gives Waco property owners design flexibility without sacrificing durability. We help you select finish systems that match use, maintenance goals, and Central Texas weather conditions.',
+    sections: [
+      {
+        heading: 'Choosing the right decorative finish',
+        paragraphs: [
+          'We compare stamped, stained, exposed aggregate, and textured options based on traction and design goals.',
+          'Finish recommendations are matched to sun exposure, traffic level, and maintenance preference.',
+        ],
+      },
+      {
+        heading: 'Pattern and color planning',
+        paragraphs: [
+          'Pattern scale, border treatment, and color tone are planned before pour day to avoid rushed decisions.',
+          'This keeps the final surface cohesive with your home and existing hardscape.',
+        ],
+      },
+      {
+        heading: 'Durability in Texas weather',
+        paragraphs: [
+          'Decorative surfaces need correct prep and curing to handle heat and moisture swings.',
+          'We use process controls that help preserve finish quality over time.',
+        ],
+      },
+      {
+        heading: 'Care and resealing',
+        paragraphs: [
+          'We provide a resealing and cleaning plan for your exact finish type.',
+          'Simple maintenance protects color depth and helps prevent early wear.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you offer decorative concrete patio contractor services in Waco?',
+        answer:
+          'Yes. We build decorative patios and outdoor surfaces with stamped, stained, and textured concrete options.',
+      },
+      {
+        question: 'What is the difference between stamped and stained concrete?',
+        answer:
+          'Stamped concrete adds surface texture and pattern. Stained concrete changes color and tone, often with a smoother texture.',
+      },
+      {
+        question: 'Can decorative concrete be used for driveways?',
+        answer:
+          'Yes. Decorative finishes can be applied to driveways when load and traction requirements are planned correctly.',
+      },
+      {
+        question: 'How often should decorative concrete be sealed?',
+        answer:
+          'Most decorative concrete benefits from resealing every few years depending on traffic and weather exposure.',
+      },
+    ],
+  },
+  {
+    slug: 'hardscaping-waco-tx',
+    title: 'Hardscaping Contractor in Waco, TX',
+    cardSummary:
+      'Hardscaping contractor services in Waco for patios, walkways, retaining walls, and structured outdoor spaces.',
+    metaTitle: 'Hardscaping Waco TX | Concrete Works LLC',
+    metaDescription:
+      'Need a hardscaping contractor in Waco TX? We build concrete patios, walkways, retaining walls, and outdoor living hardscape layouts.',
+    introParagraph:
+      'Hardscaping projects combine structure, drainage, and finish design. We help Waco property owners build cohesive outdoor spaces with concrete patios, walkways, and support features that perform year-round.',
+    sections: [
+      {
+        heading: 'Outdoor layout and flow planning',
+        paragraphs: [
+          'We plan movement between entries, seating zones, and landscape areas before installation starts.',
+          'This reduces awkward transitions and improves both appearance and daily usability.',
+        ],
+      },
+      {
+        heading: 'Hardscape elements we coordinate',
+        paragraphs: [
+          'Common scopes include patios, walkways, retaining walls, and concrete deck zones.',
+          'Projects can be phased to fit budget and property access constraints.',
+        ],
+      },
+      {
+        heading: 'Drainage and grade control',
+        paragraphs: [
+          'Hardscape durability depends on drainage. We shape water flow away from slabs, foundations, and wall edges.',
+          'Grade planning is especially important in Waco clay soil conditions where water movement can shift over seasons.',
+        ],
+      },
+      {
+        heading: 'Long-term maintenance strategy',
+        paragraphs: [
+          'We provide care guidance for sealing, cleaning, and periodic checks across hardscape surfaces.',
+          'Regular maintenance protects investment value and reduces future repair needs.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'What does a hardscaping contractor in Waco usually build?',
+        answer:
+          'Typical hardscaping scopes include patios, walkways, retaining walls, and outdoor concrete living areas.',
+      },
+      {
+        question: 'Can hardscaping be completed in phases?',
+        answer:
+          'Yes. Many projects are planned in phases so budget and schedule stay manageable.',
+      },
+      {
+        question: 'Do you include drainage planning in hardscape projects?',
+        answer:
+          'Yes. Drainage planning is included to protect slabs and prevent pooling around outdoor features.',
+      },
+      {
+        question: 'Do you serve neighborhoods outside central Waco?',
+        answer:
+          'Yes. We serve Waco and nearby communities including Woodway, Hewitt, Robinson, and Temple-area neighborhoods.',
+      },
+    ],
+  },
+  {
+    slug: 'concrete-deck-contractors',
+    title: 'Concrete Deck Contractors in Waco, TX',
+    cardSummary:
+      'Concrete deck contractors for pool decks, patio decks, and elevated outdoor concrete surfaces in Waco.',
+    metaTitle: 'Concrete Deck Contractors | Waco TX',
+    metaDescription:
+      'Need concrete deck contractors in Waco TX? We build pool decks and patio decks with traction-focused finishes and heat-aware design.',
+    introParagraph:
+      'Concrete deck contractors in Waco should balance style, traction, and heat performance. We design pool and patio deck surfaces to stay durable and comfortable through long Central Texas summers.',
+    sections: [
+      {
+        heading: 'Deck use and safety planning',
+        paragraphs: [
+          'We start with how the deck is used: pool traffic, furniture layout, and daily foot patterns.',
+          'This helps us choose texture and finish systems that improve safety and comfort.',
+        ],
+      },
+      {
+        heading: 'Finish systems for pool and patio decks',
+        paragraphs: [
+          'Finish options include broom, textured overlays, and decorative borders depending on project style.',
+          'We prioritize slip resistance and easy maintenance where water exposure is common.',
+        ],
+      },
+      {
+        heading: 'Heat and weather durability',
+        paragraphs: [
+          'Deck pours are planned for Waco heat cycles with curing practices that reduce early stress.',
+          'Joint layout and drainage details are set to limit pooling and edge wear.',
+        ],
+      },
+      {
+        heading: 'Repair and resurfacing support',
+        paragraphs: [
+          'If an older deck is structurally sound, resurfacing may restore appearance without full replacement.',
+          'We inspect condition first and outline the best long-term path for your property.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you build concrete pool decks in Waco?',
+        answer:
+          'Yes. We build and refinish concrete pool decks with traction-focused surfaces and weather-resistant finish options.',
+      },
+      {
+        question: 'What is the best concrete finish for a deck?',
+        answer:
+          'The best finish depends on traffic, water exposure, and style goals. We usually recommend textured surfaces for safer footing.',
+      },
+      {
+        question: 'Can old concrete decks be resurfaced?',
+        answer:
+          'In many cases, yes. We inspect structural condition first before recommending resurfacing.',
+      },
+      {
+        question: 'How long does a deck project usually take?',
+        answer:
+          'Most deck projects include prep and pour phases, then cure milestones before heavy use resumes.',
+      },
+    ],
+  },
+  {
+    slug: 'contractors-in-waco-tx',
+    title: 'Contractors in Waco, TX (Concrete Focus)',
+    cardSummary:
+      'Searching for contractors in Waco TX? Work with a local concrete-first team for driveways, patios, foundations, and repairs.',
+    metaTitle: 'Contractors in Waco TX | Concrete Works LLC',
+    metaDescription:
+      'Looking for contractors in Waco TX? Concrete Works LLC provides concrete driveways, patios, parking lots, and repair services across Waco and nearby cities.',
+    introParagraph:
+      'If you are comparing contractors in Waco TX, concrete scope quality often determines long-term project success. Our team focuses on concrete-first planning with clear pricing and local soil-aware execution.',
+    sections: [
+      {
+        heading: 'Why contractor selection matters',
+        paragraphs: [
+          'A strong contractor plan covers prep, drainage, reinforcement, and realistic scheduling.',
+          'We document scope details early so project expectations stay clear from estimate to closeout.',
+        ],
+      },
+      {
+        heading: 'Concrete services most requested in Waco',
+        paragraphs: [
+          'Top requests include driveways, patios, parking lots, slab repairs, and foundation-related concrete work.',
+          'We support residential and light commercial properties with one coordinated team.',
+        ],
+      },
+      {
+        heading: 'Local execution standards',
+        paragraphs: [
+          'Waco projects need heat-aware curing and clay-soil planning to reduce future cracking risk.',
+          'Our process is built around those conditions so finished work performs longer.',
+        ],
+      },
+      {
+        heading: 'Estimate and scheduling process',
+        paragraphs: [
+          'Most projects begin with a site walk, scope confirmation, and phased schedule.',
+          'You receive clear next steps for prep, pour window, and cure milestones.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you provide free estimates for concrete projects in Waco?',
+        answer:
+          'Yes. We provide no-obligation estimates for residential and light commercial concrete projects.',
+      },
+      {
+        question: 'Are you licensed and insured contractors in Waco TX?',
+        answer:
+          'Yes. We are licensed and insured and provide clear scope documentation before work begins.',
+      },
+      {
+        question: 'Can you handle both small and large concrete jobs?',
+        answer:
+          'Yes. We handle small residential scopes and larger light commercial jobs across the Waco area.',
+      },
+      {
+        question: 'What should I compare when choosing a contractor?',
+        answer:
+          'Compare prep quality, drainage planning, reinforcement details, timeline clarity, and communication process.',
+      },
+    ],
+  },
+  {
     slug: 'general-contractor-waco-tx',
+    redirectTo: '/contractors-in-waco-tx',
     title: 'General Contractor in Waco, TX',
     cardSummary:
       'General contractor waco tx support for concrete-focused builds, with scheduling, coordination, and transparent scope control.',
@@ -861,7 +1365,9 @@ export const seoServicePages = [
   },
 ]
 
-export const servicePageLinks = seoServicePages.map((service) => ({
+export const servicePageLinks = seoServicePages
+  .filter((service) => !service.redirectTo)
+  .map((service) => ({
   label: service.title,
   slug: service.slug,
 }))

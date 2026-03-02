@@ -13,8 +13,8 @@ const topLocationLinks = [
 ]
 
 const featuredServiceLinks = [
-    { label: 'Concrete Resurfacing', href: '/concrete-resurfacing-waco-tx' },
-    { label: 'Sports Court Coating', href: '/sports-court-coating-waco-tx' },
+    { label: 'Foundation Repair', href: '/foundation-repair-waco-tx' },
+    { label: 'Parking Lot Concrete', href: '/parking-lot-concrete-waco' },
 ]
 
 // Animated counter component
