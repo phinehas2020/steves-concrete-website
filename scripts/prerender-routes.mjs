@@ -170,6 +170,48 @@ const sportsCourtAreaLinks = sportsCourtAreaPageData.map((area) => ({
   description: area.heroSubtitle,
 }))
 
+const companyResourceLinks = [
+  {
+    label: 'Customer reviews',
+    href: '/reviews',
+    description: 'Feedback from recent Waco-area clients and project types.',
+  },
+  {
+    label: 'Concrete blog',
+    href: '/blog',
+    description: 'Local concrete planning tips and project updates.',
+  },
+  {
+    label: 'Project gallery',
+    href: '/jobs',
+    description: 'Recent jobs with photos, scope notes, and timeline context.',
+  },
+  {
+    label: 'Privacy policy',
+    href: '/privacy-policy',
+    description: 'How lead information is used and protected.',
+  },
+  {
+    label: 'Terms and conditions',
+    href: '/terms-and-conditions',
+    description: 'Project, communication, and service terms.',
+  },
+]
+
+const featuredSpecialtyServiceLinks = [
+  'retaining-walls-waco-tx',
+  'decorative-concrete-waco',
+  'hardscaping-waco-tx',
+  'concrete-deck-contractors',
+]
+  .map((slug) => seoServicePageData.find((service) => service.slug === slug))
+  .filter(Boolean)
+  .map((service) => ({
+    label: service.title,
+    href: `/${service.slug}`,
+    description: service.cardSummary || service.introParagraph,
+  }))
+
 const routeMeta = [
   {
     path: '/',
@@ -331,11 +373,26 @@ function renderPage({
   introParagraphs = [],
   sections = [],
   actionLinks = [],
+  includeCompanyResourceLinks = true,
 }) {
   const introHtml = introParagraphs
     .filter(Boolean)
     .map((paragraph) => `<p style="margin:0 0 14px;color:#57534e;">${escapeHtml(paragraph)}</p>`)
     .join('')
+
+  const pageSections = includeCompanyResourceLinks
+    ? [
+        ...sections,
+        {
+          title: 'Company pages and customer resources',
+          links: companyResourceLinks,
+        },
+        {
+          title: 'Featured specialty concrete services',
+          links: featuredSpecialtyServiceLinks,
+        },
+      ]
+    : sections
 
   return `<main data-prerender-content="true" style="max-width:980px;margin:0 auto;padding:96px 20px 64px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.65;background:#fafaf9;color:#1c1917;"><p style="margin:0 0 8px;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:#ea580c;font-weight:700;">${escapeHtml(
     eyebrow,
@@ -343,7 +400,7 @@ function renderPage({
     title,
   )}</h1><p style="margin:0 0 16px;color:#44403c;font-size:1.05rem;">${escapeHtml(
     subtitle,
-  )}</p>${introHtml}${renderActionLinks(actionLinks)}${sections.map((section) => renderSection(section)).join('')}</main>`
+  )}</p>${introHtml}${renderActionLinks(actionLinks)}${pageSections.map((section) => renderSection(section)).join('')}</main>`
 }
 
 function renderHomeContent() {
@@ -357,6 +414,7 @@ function renderHomeContent() {
       `When people search for a Waco concrete contractor, they usually need clear pricing, honest timelines, and work that stays level after the first summer. Our process starts with site prep, slope planning, reinforcement, and realistic cure guidance so the finished slab performs for years.` ,
       `Call ${PHONE_DISPLAY} for a free estimate. Most leads get a same-day response and a clear next-step plan for site visit, scope, and scheduling.`,
     ],
+    includeCompanyResourceLinks: false,
     actionLinks: [
       { href: '/#contact', label: 'Request free estimate' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
@@ -379,33 +437,7 @@ function renderHomeContent() {
       },
       {
         title: 'Company pages and customer resources',
-        links: [
-          {
-            label: 'Customer reviews',
-            href: '/reviews',
-            description: 'Feedback from recent Waco-area clients and project types.',
-          },
-          {
-            label: 'Concrete blog',
-            href: '/blog',
-            description: 'Local concrete planning tips and project updates.',
-          },
-          {
-            label: 'Project gallery',
-            href: '/jobs',
-            description: 'Recent jobs with photos, scope notes, and timeline context.',
-          },
-          {
-            label: 'Privacy policy',
-            href: '/privacy-policy',
-            description: 'How lead information is used and protected.',
-          },
-          {
-            label: 'Terms and conditions',
-            href: '/terms-and-conditions',
-            description: 'Project, communication, and service terms.',
-          },
-        ],
+        links: companyResourceLinks,
       },
       {
         title: 'What keeps concrete projects stable in Central Texas',
