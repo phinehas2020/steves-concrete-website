@@ -1201,3 +1201,19 @@
 
 ### Self-correction
 - Initial assumption was that the current live sitemap still emitted dynamic blog slugs. Check live output first before treating Semrush issue table as current state.
+
+### Self-correction (tooling)
+- Tried `python` for quick XML counting, but this environment has no `python` binary. Prefer `node` or shell-native parsing first.
+
+## 2026-03-03 — Remaining orphan pages root cause after crawl rerun
+
+### What was learned
+1. Semrush rerun cleared uncompressed CSS and all errors/warnings, but still showed 8 orphaned sitemap pages.
+2. `/reviews` was in sitemap but not prerendered, so direct production request returned 404.
+3. Home prerender content limited `seoServiceLinks` to first 12 items, which excluded several sitemap URLs (`concrete-deck-contractors`, `decorative-concrete-waco`, `hardscaping-waco-tx`, `retaining-walls-waco-tx`).
+4. JS-disabled crawl relies on prerender HTML links, not hydrated React navigation.
+
+### Fix pattern
+- Keep sitemap URLs aligned with prerendered static routes and direct rewrites.
+- Avoid slicing link collections in prerender home content when sitemap includes all items.
+- Add explicit crawlable links in prerender home for high-level pages (`/blog`, `/reviews`, `/privacy-policy`, `/terms-and-conditions`, `/jobs`).

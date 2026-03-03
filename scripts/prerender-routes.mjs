@@ -113,6 +113,14 @@ const staticRoutes = [
     renderContent: renderGuidesIndexContent,
   },
   {
+    path: '/reviews',
+    title: 'Customer Reviews | Concrete Works LLC',
+    description:
+      'Read recent reviews from Waco-area customers for driveways, patios, stamped concrete, and repair projects.',
+    h1: 'Customer Reviews',
+    renderContent: renderReviewsContent,
+  },
+  {
     path: '/privacy-policy',
     title: 'Privacy Policy | Concrete Works LLC',
     description:
@@ -367,7 +375,37 @@ function renderHomeContent() {
         paragraphs: [
           'These pages target high-intent searches such as foundation repair, house leveling, parking lot concrete, and decorative concrete in Waco.',
         ],
-        links: seoServiceLinks.slice(0, 12),
+        links: seoServiceLinks,
+      },
+      {
+        title: 'Company pages and customer resources',
+        links: [
+          {
+            label: 'Customer reviews',
+            href: '/reviews',
+            description: 'Feedback from recent Waco-area clients and project types.',
+          },
+          {
+            label: 'Concrete blog',
+            href: '/blog',
+            description: 'Local concrete planning tips and project updates.',
+          },
+          {
+            label: 'Project gallery',
+            href: '/jobs',
+            description: 'Recent jobs with photos, scope notes, and timeline context.',
+          },
+          {
+            label: 'Privacy policy',
+            href: '/privacy-policy',
+            description: 'How lead information is used and protected.',
+          },
+          {
+            label: 'Terms and conditions',
+            href: '/terms-and-conditions',
+            description: 'Project, communication, and service terms.',
+          },
+        ],
       },
       {
         title: 'What keeps concrete projects stable in Central Texas',
@@ -711,6 +749,45 @@ function renderGuidesIndexContent() {
       {
         title: 'Services these guides support',
         links: serviceLinks,
+      },
+    ],
+  })
+}
+
+function renderReviewsContent() {
+  return renderPage({
+    eyebrow: 'Testimonials',
+    title: 'Customer Reviews',
+    subtitle:
+      'Recent feedback from homeowners and property managers across Waco and nearby communities.',
+    introParagraphs: [
+      'These reviews cover driveways, patios, decorative concrete, and repair work completed in Central Texas.',
+      `Need a quote for your project? Call ${PHONE_DISPLAY} or request an estimate online.`,
+    ],
+    actionLinks: [
+      { href: '/#contact', label: 'Request estimate' },
+      { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
+      {
+        href: 'https://www.google.com/maps/place/SLA+Concrete+Works/@31.6637838,-97.1149261,17z/data=!3m1!4b1!4m6!3m5!1s0x864f83d5fc2728cf:0x92d8085e5a37fa64!8m2!3d31.6637793!4d-97.1123512!16s%2Fg%2F11gf0qs4j0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D',
+        label: 'Read Google reviews',
+      },
+    ],
+    sections: [
+      {
+        title: 'Related planning resources',
+        links: [
+          { label: 'Concrete blog', href: '/blog', description: 'Project tips and local concrete guidance.' },
+          { label: 'Pricing guides', href: '/guides', description: 'Cost ranges and planning checklists for Waco projects.' },
+          { label: 'Project gallery', href: '/jobs', description: 'Recent concrete jobs and finish examples.' },
+        ],
+      },
+      {
+        title: 'Most reviewed service categories',
+        links: serviceLinks.slice(0, 8),
+      },
+      {
+        title: 'Service locations',
+        links: locationLinks,
       },
     ],
   })

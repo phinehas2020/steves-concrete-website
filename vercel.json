@@ -198,6 +198,10 @@
       "destination": "/guides/index.html"
     },
     {
+      "source": "/reviews",
+      "destination": "/reviews/index.html"
+    },
+    {
       "source": "/blog/:path*",
       "destination": "/index.html"
     },
