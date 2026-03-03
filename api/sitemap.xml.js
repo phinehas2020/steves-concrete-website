@@ -1,5 +1,4 @@
 /* eslint-env node */
-import { createClient } from '@supabase/supabase-js'
 import { sportsCourtAreaPages } from '../src/data/sportsCourtAreaPages.js'
 import {
   SERVICE_CANONICAL_PATH_BY_SLUG,
@@ -28,7 +27,6 @@ const SEO_SERVICE_PAGES = seoServicePages
   .filter((service) => !service.redirectTo)
   .map((service) => service.slug)
 const REVIEW_PAGES = ['reviews']
-const INCLUDE_DYNAMIC_SITEMAP_URLS = process.env.INCLUDE_DYNAMIC_SITEMAP_URLS === 'true'
 const GUIDE_PAGES = [
   'guides/concrete-driveway-cost-waco-tx',
   'guides/stamped-concrete-cost-waco-tx',
@@ -37,13 +35,6 @@ const GUIDE_PAGES = [
 const SPORTS_COURT_AREA_PAGES = sportsCourtAreaPages.map(
   (page) => `sports-court-coating/${page.slug}`,
 )
-
-function formatDate(value) {
-  if (!value) return null
-  const date = new Date(value)
-  if (Number.isNaN(date.getTime())) return null
-  return date.toISOString().split('T')[0]
-}
 
 function toUrlEntry({ loc, lastmod, changefreq, priority }) {
   const parts = [`<loc>${loc}</loc>`]
@@ -58,9 +49,6 @@ export default async function handler(req, res) {
     res.status(405).send('Method not allowed')
     return
   }
-
-  const supabaseUrl = process.env.SUPABASE_URL
-  const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
   const urls = [
     {
@@ -142,50 +130,6 @@ export default async function handler(req, res) {
       priority: '0.64',
     })
   })
-
-  if (INCLUDE_DYNAMIC_SITEMAP_URLS && supabaseUrl && supabaseServiceRoleKey) {
-    try {
-      const supabase = createClient(supabaseUrl, supabaseServiceRoleKey)
-      const { data } = await supabase
-        .from('blog_posts')
-        .select('slug, published_at, updated_at')
-        .eq('status', 'published')
-        .order('published_at', { ascending: false })
-
-      if (Array.isArray(data)) {
-        data.forEach((post) => {
-          if (!post?.slug) return
-          const lastmod = formatDate(post.updated_at || post.published_at)
-          urls.push({
-            loc: `${SITE_URL}/blog/${post.slug}`,
-            lastmod,
-            changefreq: 'monthly',
-            priority: '0.6',
-          })
-        })
-      }
-
-      const { data: jobs } = await supabase
-        .from('jobs')
-        .select('slug, updated_at, date')
-        .order('updated_at', { ascending: false })
-
-      if (Array.isArray(jobs)) {
-        jobs.forEach((job) => {
-          if (!job?.slug) return
-          const lastmod = formatDate(job.updated_at || job.date)
-          urls.push({
-            loc: `${SITE_URL}/jobs/${job.slug}`,
-            lastmod,
-            changefreq: 'monthly',
-            priority: '0.6',
-          })
-        })
-      }
-    } catch {
-      // Fall back to base URLs only.
-    }
-  }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +

@@ -1184,3 +1184,20 @@
 
 ### Notes
 - `npm run lint` currently fails for pre-existing repo-wide issues unrelated to this patch; no lint cleanup performed in this pass.
+
+## 2026-03-03 — Semrush crawl lag vs live sitemap state
+
+### Context
+- Follow-up work to clear Semrush "orphaned pages in sitemaps" and remaining uncompressed CSS finding.
+
+### What was learned
+1. Live `https://www.concretewaco.com/sitemap.xml` already excluded dynamic `/blog/:slug` URLs, but Semrush still reported 23 orphaned blog URLs from a prior crawl snapshot.
+2. The Woodway page made no `fontshare` requests in live network capture; crawl issue rows can lag and keep historical resources briefly.
+
+### Fix pattern
+- Verify live endpoint output before changing code for crawl issues (`curl` sitemap + browser network capture).
+- Keep sitemap static-only for this project to avoid future orphan entries from JS-discovered content.
+- Avoid third-party font stylesheet dependencies when CSP blocks them anyway.
+
+### Self-correction
+- Initial assumption was that the current live sitemap still emitted dynamic blog slugs. Check live output first before treating Semrush issue table as current state.

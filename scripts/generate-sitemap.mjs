@@ -1,11 +1,9 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { createClient } from '@supabase/supabase-js'
 import { SERVICE_CANONICAL_PATH_BY_SLUG } from '../src/data/servicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const OUTPUT_PATH = path.join(process.cwd(), 'public', 'sitemap.xml')
-const INCLUDE_DYNAMIC_SITEMAP_URLS = process.env.INCLUDE_DYNAMIC_SITEMAP_URLS === 'true'
 
 const STATIC_ROUTES = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
@@ -57,13 +55,6 @@ function escapeXml(value) {
     .replaceAll("'", '&#39;')
 }
 
-function normalizeDate(dateValue) {
-  if (!dateValue) return null
-  const parsed = new Date(dateValue)
-  if (Number.isNaN(parsed.getTime())) return null
-  return parsed.toISOString().split('T')[0]
-}
-
 function toEntry({ loc, lastmod, changefreq, priority }) {
   const parts = [`<loc>${escapeXml(loc)}</loc>`]
   if (lastmod) parts.push(`<lastmod>${lastmod}</lastmod>`)
@@ -82,22 +73,6 @@ function addUrl(urls, loc, meta = {}) {
     changefreq: meta.changefreq,
     priority: meta.priority,
   })
-}
-
-async function fetchSupabaseSlugs(client, table, slugField, dateFields = []) {
-  const columns = [slugField, ...dateFields].filter(Boolean).join(', ')
-  const { data } = await client.from(table).select(columns).order('updated_at', { ascending: false })
-  if (!Array.isArray(data)) return []
-  return data
-    .filter((row) => row?.[slugField])
-    .map((row) => ({
-      slug: row[slugField],
-      lastmod: normalizeDate(
-        dateFields
-          .map((field) => row[field])
-          .find((value) => value) || row.updated_at || row.published_at || row.date,
-      ),
-    }))
 }
 
 async function main() {
@@ -152,42 +127,6 @@ async function main() {
       priority: '0.64',
     })
   })
-
-  const supabaseUrl = process.env.SUPABASE_URL
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-  if (INCLUDE_DYNAMIC_SITEMAP_URLS && supabaseUrl && serviceKey) {
-    try {
-      const supabase = createClient(supabaseUrl, serviceKey)
-
-      const [blogRows, jobRows] = await Promise.all([
-        fetchSupabaseSlugs(supabase, 'blog_posts', 'slug', ['updated_at', 'published_at']),
-        fetchSupabaseSlugs(supabase, 'jobs', 'slug', ['updated_at', 'date']),
-      ])
-
-      blogRows
-        .filter((item) => item.slug)
-        .forEach((post) => {
-          addUrl(routes, `/blog/${post.slug}`, {
-            lastmod: post.lastmod,
-            changefreq: 'monthly',
-            priority: '0.6',
-          })
-        })
-
-      jobRows
-        .filter((item) => item.slug)
-        .forEach((job) => {
-          addUrl(routes, `/jobs/${job.slug}`, {
-            lastmod: job.lastmod,
-            changefreq: 'monthly',
-            priority: '0.6',
-          })
-        })
-    } catch {
-      // Supabase keys are optional at build time. Keep static URLs if fetch fails.
-    }
-  }
 
   const entries = Array.from(routes.values())
     .map((entry) => toEntry(entry))

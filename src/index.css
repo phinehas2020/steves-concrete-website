@@ -48,8 +48,8 @@
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 
   /* Typography - Fluid Type Scale using clamp() */
-  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
-  --font-display: 'Outfit', 'Manrope', system-ui, sans-serif;
+  --font-sans: "Segoe UI", "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
+  --font-display: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
 
   /* Fluid typography: min size, preferred (fluid), max size */
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -96,8 +96,8 @@
 
 /* --- Tailwind Theme Extension --- */
 @theme {
-  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
-  --font-display: 'Outfit', 'Manrope', system-ui, sans-serif;
+  --font-sans: "Segoe UI", "Helvetica Neue", Arial, system-ui, -apple-system, sans-serif;
+  --font-display: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
 
   --color-stone-50: #fafaf9;
   --color-stone-100: #f5f5f4;
