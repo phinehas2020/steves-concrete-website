@@ -130,6 +130,9 @@ export function Contact() {
                             <p className="mt-4 pt-4 border-t border-stone-800 text-xs text-stone-400">
                                 Emergency repairs available. Call anytime — if we don't answer, we call back within 4 hours.
                             </p>
+                            <p className="mt-3 text-xs text-stone-400">
+                                You can also review our <a href="/privacy-policy" className="underline hover:text-white transition-colors">Privacy Policy</a> and <a href="/terms-and-conditions" className="underline hover:text-white transition-colors">Terms and Conditions</a> anytime.
+                            </p>
                         </div>
                     </motion.div>
 
