@@ -1,6 +1,10 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
-import { servicePages as servicePageData } from '../src/data/servicePages.js'
+import {
+  servicePages as servicePageData,
+  getCanonicalServicePath,
+  isServicePageCanonicalized,
+} from '../src/data/servicePages.js'
 import { seoServicePages as seoServicePageData } from '../src/data/seoServicePages.js'
 import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
@@ -15,14 +19,6 @@ const SITE_NAME = 'Concrete Works LLC'
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 const PHONE_DISPLAY = '(254) 230-3102'
 const PHONE_HREF = 'tel:254-230-3102'
-const CANONICAL_SERVICE_OVERRIDES = {
-  'concrete-contractors': '/contractors-in-waco-tx',
-  'concrete-driveways': '/concrete-driveways-waco-tx',
-  'concrete-patios': '/concrete-patios-waco-tx',
-  'parking-lots': '/parking-lot-concrete-waco',
-  'concrete-repair': '/foundation-repair-waco-tx',
-  'concrete-leveling': '/house-leveling-waco-tx',
-}
 
 const homeMeta = {
   title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Concrete Works LLC',
@@ -136,7 +132,7 @@ const staticRoutes = [
 
 const serviceLinks = servicePageData.map((service) => ({
   label: service.title,
-  href: `/services/${service.slug}`,
+  href: getCanonicalServicePath(service.slug),
   description: service.heroSubtitle,
 }))
 
@@ -173,15 +169,15 @@ const routeMeta = [
     contentHtml: renderHomeContent(),
   },
   ...servicePageData.map((service) => {
-    const canonicalOverride = CANONICAL_SERVICE_OVERRIDES[service.slug]
-    const canonical = canonicalOverride ? `${SITE_URL}${canonicalOverride}` : `${SITE_URL}/services/${service.slug}`
+    const canonicalPath = getCanonicalServicePath(service.slug)
+    const canonical = `${SITE_URL}${canonicalPath}`
     return {
       path: `/services/${service.slug}`,
       title: service.seoTitle || `${service.title} Waco TX | ${SITE_NAME}`,
       description:
         service.seoDescription || `${service.title} in Waco, TX. Free estimate: ${PHONE_DISPLAY}.`,
       canonical,
-      robots: canonicalOverride ? 'noindex, follow' : 'index, follow',
+      robots: isServicePageCanonicalized(service.slug) ? 'noindex, follow' : 'index, follow',
       h1: service.heroTitle,
       contentHtml: renderServiceContent(service),
     }
@@ -427,7 +423,7 @@ function renderServiceContent(service) {
     .slice(0, 6)
     .map((item) => ({
       label: item.title,
-      href: `/services/${item.slug}`,
+      href: getCanonicalServicePath(item.slug),
       description: item.heroSubtitle,
     }))
 
@@ -977,7 +973,7 @@ function renderNotFoundContent() {
     ],
     actionLinks: [
       { href: '/', label: 'Back to homepage' },
-      { href: '/services/concrete-driveways', label: 'View services' },
+      { href: getCanonicalServicePath('concrete-driveways'), label: 'View services' },
       { href: '/guides', label: 'View pricing guides' },
     ],
   })

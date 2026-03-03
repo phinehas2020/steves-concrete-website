@@ -11,17 +11,12 @@ import {
   buildJsonLdGraph,
 } from '../lib/seo'
 import { locationLinks } from '../data/locationPages'
-import { servicePages } from '../data/servicePages'
+import {
+  servicePages,
+  getCanonicalServicePath,
+  isServicePageCanonicalized,
+} from '../data/servicePages'
 import { guideLinks } from '../data/guides'
-
-const CANONICAL_SERVICE_OVERRIDES = {
-  'concrete-contractors': '/contractors-in-waco-tx',
-  'concrete-driveways': '/concrete-driveways-waco-tx',
-  'concrete-patios': '/concrete-patios-waco-tx',
-  'parking-lots': '/parking-lot-concrete-waco',
-  'concrete-repair': '/foundation-repair-waco-tx',
-  'concrete-leveling': '/house-leveling-waco-tx',
-}
 
 export function ServiceLanding({ page }) {
   const {
@@ -47,9 +42,9 @@ export function ServiceLanding({ page }) {
     seoDescription ||
     `${title} in Waco, TX. Licensed & insured. Free estimate: (254) 230-3102.`
   const serviceAreaText = locationLinks.map((location) => location.city).join(', ')
-  const canonicalOverride = CANONICAL_SERVICE_OVERRIDES[slug]
-  const canonicalUrl = canonicalOverride ? `${SITE_URL}${canonicalOverride}` : `${SITE_URL}/services/${slug}`
-  const robots = canonicalOverride ? 'noindex, follow' : 'index, follow'
+  const canonicalPath = getCanonicalServicePath(slug)
+  const canonicalUrl = `${SITE_URL}${canonicalPath}`
+  const robots = isServicePageCanonicalized(slug) ? 'noindex, follow' : 'index, follow'
   const relatedServices = servicePages
     .filter((service) => service.slug !== slug)
     .slice(0, 4)
@@ -311,7 +306,7 @@ export function ServiceLanding({ page }) {
                   {relatedServices.map((service) => (
                     <a
                       key={service.slug}
-                      href={`/services/${service.slug}`}
+                      href={getCanonicalServicePath(service.slug)}
                       className="flex items-center justify-between px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg hover:border-stone-300"
                     >
                       <span className="font-semibold text-stone-800">{service.title}</span>

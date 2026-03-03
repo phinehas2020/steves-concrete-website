@@ -1,7 +1,10 @@
 /* eslint-env node */
 import { createClient } from '@supabase/supabase-js'
 import { sportsCourtAreaPages } from '../src/data/sportsCourtAreaPages.js'
-import { servicePages } from '../src/data/servicePages.js'
+import {
+  SERVICE_CANONICAL_PATH_BY_SLUG,
+  servicePages,
+} from '../src/data/servicePages.js'
 import { seoServicePages } from '../src/data/seoServicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
@@ -15,14 +18,7 @@ const LOCATION_PAGES = [
   'lorena-tx-concrete-contractor',
   'mcgregor-tx-concrete-contractor',
 ]
-const NON_CANONICAL_SERVICE_SLUGS = new Set([
-  'concrete-contractors',
-  'concrete-driveways',
-  'concrete-patios',
-  'parking-lots',
-  'concrete-repair',
-  'concrete-leveling',
-])
+const NON_CANONICAL_SERVICE_SLUGS = new Set(Object.keys(SERVICE_CANONICAL_PATH_BY_SLUG))
 const SERVICE_PAGES = [
   ...servicePages
     .filter((service) => !NON_CANONICAL_SERVICE_SLUGS.has(service.slug))

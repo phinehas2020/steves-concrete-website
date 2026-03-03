@@ -1,3 +1,5 @@
+import { getCanonicalServicePath } from './servicePages'
+
 export const guidePages = [
   {
     slug: 'concrete-driveway-cost-waco-tx',
@@ -61,9 +63,18 @@ export const guidePages = [
       'List any removal or demolition needed.',
     ],
     relatedServices: [
-      { label: 'Concrete Driveways', href: '/services/concrete-driveways' },
-      { label: 'Stamped Concrete', href: '/services/stamped-concrete' },
-      { label: 'Concrete Repair', href: '/services/concrete-repair' },
+      {
+        label: 'Concrete Driveways',
+        href: getCanonicalServicePath('concrete-driveways'),
+      },
+      {
+        label: 'Stamped Concrete',
+        href: getCanonicalServicePath('stamped-concrete'),
+      },
+      {
+        label: 'Concrete Repair',
+        href: getCanonicalServicePath('concrete-repair'),
+      },
     ],
     faq: [
       {
@@ -144,9 +155,15 @@ export const guidePages = [
       'Plan for resealing every 2-3 years.',
     ],
     relatedServices: [
-      { label: 'Stamped Concrete', href: '/services/stamped-concrete' },
-      { label: 'Concrete Patios', href: '/services/concrete-patios' },
-      { label: 'Concrete Driveways', href: '/services/concrete-driveways' },
+      {
+        label: 'Stamped Concrete',
+        href: getCanonicalServicePath('stamped-concrete'),
+      },
+      { label: 'Concrete Patios', href: getCanonicalServicePath('concrete-patios') },
+      {
+        label: 'Concrete Driveways',
+        href: getCanonicalServicePath('concrete-driveways'),
+      },
     ],
     faq: [
       {
@@ -227,9 +244,9 @@ export const guidePages = [
       'Plan furniture, grills, or structures.',
     ],
     relatedServices: [
-      { label: 'Concrete Patios', href: '/services/concrete-patios' },
-      { label: 'Stamped Concrete', href: '/services/stamped-concrete' },
-      { label: 'Concrete Repair', href: '/services/concrete-repair' },
+      { label: 'Concrete Patios', href: getCanonicalServicePath('concrete-patios') },
+      { label: 'Stamped Concrete', href: getCanonicalServicePath('stamped-concrete') },
+      { label: 'Concrete Repair', href: getCanonicalServicePath('concrete-repair') },
     ],
     faq: [
       {

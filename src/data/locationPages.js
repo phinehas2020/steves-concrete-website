@@ -1,17 +1,18 @@
 import stampedDrivewayImg from '../assets/images/gallery-stamped-driveway.png'
 import patioAggregateImg from '../assets/images/gallery-patio-aggregate.png'
 import commercialParkingImg from '../assets/images/gallery-commercial-parking.png'
+import { getCanonicalServicePath } from './servicePages'
 
 const baseServices = [
-  { label: 'Concrete Contractors', href: '/services/concrete-contractors' },
-  { label: 'Sidewalks & Driveways', href: '/services/sidewalks-driveways' },
-  { label: 'Concrete Driveways', href: '/services/concrete-driveways' },
-  { label: 'Concrete Patios', href: '/services/concrete-patios' },
-  { label: 'Parking Lots', href: '/services/parking-lots' },
-  { label: 'Stamped Concrete', href: '/services/stamped-concrete' },
-  { label: 'Commercial Concrete', href: '/services/commercial-concrete' },
-  { label: 'Concrete Repair', href: '/services/concrete-repair' },
-  { label: 'Concrete Foundations', href: '/services/concrete-foundations' },
+  { label: 'Concrete Contractors', href: getCanonicalServicePath('concrete-contractors') },
+  { label: 'Sidewalks & Driveways', href: getCanonicalServicePath('sidewalks-driveways') },
+  { label: 'Concrete Driveways', href: getCanonicalServicePath('concrete-driveways') },
+  { label: 'Concrete Patios', href: getCanonicalServicePath('concrete-patios') },
+  { label: 'Parking Lots', href: getCanonicalServicePath('parking-lots') },
+  { label: 'Stamped Concrete', href: getCanonicalServicePath('stamped-concrete') },
+  { label: 'Commercial Concrete', href: getCanonicalServicePath('commercial-concrete') },
+  { label: 'Concrete Repair', href: getCanonicalServicePath('concrete-repair') },
+  { label: 'Concrete Foundations', href: getCanonicalServicePath('concrete-foundations') },
 ]
 
 const baseHighlights = [

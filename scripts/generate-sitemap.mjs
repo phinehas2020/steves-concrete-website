@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { createClient } from '@supabase/supabase-js'
+import { SERVICE_CANONICAL_PATH_BY_SLUG } from '../src/data/servicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const OUTPUT_PATH = path.join(process.cwd(), 'public', 'sitemap.xml')
@@ -25,14 +26,7 @@ const LOCATION_PAGES = [
   'lorena-tx-concrete-contractor',
   'mcgregor-tx-concrete-contractor',
 ]
-const NON_CANONICAL_SERVICE_SLUGS = new Set([
-  'concrete-contractors',
-  'concrete-driveways',
-  'concrete-patios',
-  'parking-lots',
-  'concrete-repair',
-  'concrete-leveling',
-])
+const NON_CANONICAL_SERVICE_SLUGS = new Set(Object.keys(SERVICE_CANONICAL_PATH_BY_SLUG))
 const NON_CANONICAL_SEO_SERVICE_SLUGS = new Set([
   'concrete-parking-lots-waco-tx',
   'concrete-repair-waco-tx',

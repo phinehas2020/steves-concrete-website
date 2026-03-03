@@ -251,49 +251,8 @@
     }
   ],
   "redirects": [
-    {
-      "source": "/services/concrete-contractors",
-      "destination": "https://www.concretewaco.com/contractors-in-waco-tx",
-      "permanent": true
-    },
-    {
-      "source": "/services/concrete-driveways",
-      "destination": "https://www.concretewaco.com/concrete-driveways-waco-tx",
-      "permanent": true
-    },
-    {
-      "source": "/services/concrete-patios",
-      "destination": "https://www.concretewaco.com/concrete-patios-waco-tx",
-      "permanent": true
-    },
-    {
-      "source": "/services/parking-lots",
-      "destination": "https://www.concretewaco.com/parking-lot-concrete-waco",
-      "permanent": true
-    },
-    {
-      "source": "/services/concrete-repair",
-      "destination": "https://www.concretewaco.com/foundation-repair-waco-tx",
-      "permanent": true
-    },
-    {
-      "source": "/services/concrete-leveling",
-      "destination": "https://www.concretewaco.com/house-leveling-waco-tx",
-      "permanent": true
-    },
-    {
       "source": "/concrete-parking-lots-waco-tx",
       "destination": "https://www.concretewaco.com/parking-lot-concrete-waco",
-      "permanent": true
-    },
-    {
-      "source": "/concrete-repair-waco-tx",
-      "destination": "https://www.concretewaco.com/foundation-repair-waco-tx",
-      "permanent": true
-    },
-    {
-      "source": "/general-contractor-waco-tx",
-      "destination": "https://www.concretewaco.com/contractors-in-waco-tx",
       "permanent": true
     },
     {

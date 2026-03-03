@@ -1,3 +1,24 @@
+export const SERVICE_CANONICAL_PATH_BY_SLUG = {
+  'concrete-contractors': '/contractors-in-waco-tx',
+  'concrete-driveways': '/concrete-driveways-waco-tx',
+  'concrete-patios': '/concrete-patios-waco-tx',
+  'parking-lots': '/parking-lot-concrete-waco',
+  'concrete-repair': '/foundation-repair-waco-tx',
+  'concrete-leveling': '/house-leveling-waco-tx',
+  'sidewalks-driveways': '/concrete-sidewalks-waco-tx',
+  'stamped-concrete': '/stamped-concrete-waco-tx',
+  'commercial-concrete': '/commercial-concrete-contractor-waco-tx',
+  'concrete-foundations': '/concrete-foundations-waco-tx',
+}
+
+export function getCanonicalServicePath(serviceSlug = '') {
+  return SERVICE_CANONICAL_PATH_BY_SLUG[serviceSlug] || `/services/${serviceSlug}`
+}
+
+export function isServicePageCanonicalized(serviceSlug = '') {
+  return Object.prototype.hasOwnProperty.call(SERVICE_CANONICAL_PATH_BY_SLUG, serviceSlug)
+}
+
 const baseProcess = [
   {
     title: 'Site walk + estimate',
