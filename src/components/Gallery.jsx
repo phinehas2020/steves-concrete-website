@@ -1,38 +1,26 @@
 import { useState, useEffect, useMemo } from 'react'
-import { motion as Motion, AnimatePresence } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { MapPin, ArrowUpRight } from 'lucide-react'
 import { buildCategoryOptions, fetchJobs } from '../data/jobs'
 import { handleImageError } from '../lib/utils'
-import fallbackProjectImage from '../assets/images/gallery-driveway-custom.jpeg'
-import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 
 // Project image component - displays actual project photos
 function ProjectImage({ job }) {
     const mainImage = job.images && job.images.length > 0 
         ? job.images[0] 
-        : fallbackProjectImage
-    const optimizedImage = getOptimizedImageUrl(mainImage, { width: 960, quality: 68, format: 'webp' })
-    const imageSrcSet = getResponsiveImageSrcSet(mainImage, [420, 640, 960, 1280], {
-      quality: 68,
-      format: 'webp',
-    })
+        : '/src/assets/images/gallery-driveway-custom.jpeg'
     
     return (
         <div className="absolute inset-0 z-0 overflow-hidden">
             <img
-                src={optimizedImage}
-                srcSet={imageSrcSet || undefined}
-                sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
+                src={mainImage}
                 alt={job.title}
                 className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                width={960}
-                height={1200}
                 loading="lazy"
-                decoding="async"
                 onError={handleImageError}
             />
             {/* Gradient overlay for text readability - smooth gradual fade */}
@@ -88,7 +76,7 @@ export function Gallery() {
             <div className="container-main relative z-10">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-                    <Motion.div
+                    <motion.div
                         className="max-w-2xl"
                         variants={fadeInUp}
                         initial="hidden"
@@ -112,10 +100,10 @@ export function Gallery() {
                             See All Projects
                             <ArrowUpRight className="size-4" />
                         </Link>
-                    </Motion.div>
+                    </motion.div>
 
                     {/* Filter Tabs - Refined design */}
-                    <Motion.div
+                    <motion.div
                         className="flex flex-wrap gap-2"
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -135,7 +123,7 @@ export function Gallery() {
                                 {category}
                             </button>
                         ))}
-                    </Motion.div>
+                    </motion.div>
                 </div>
 
                 {/* Projects Grid */}
@@ -156,13 +144,13 @@ export function Gallery() {
                         No featured projects yet. Check back soon!
                     </div>
                 ) : (
-                    <Motion.div
+                    <motion.div
                         className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
                         layout
                     >
                         <AnimatePresence mode="popLayout">
                             {filteredProjects.map((job, index) => (
-                                <Motion.article
+                                <motion.article
                                     key={job.id}
                                     className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
                                     style={{ position: 'relative' }}
@@ -219,14 +207,14 @@ export function Gallery() {
                                             </div>
                                         </div>
                                     </div>
-                                </Motion.article>
+                                </motion.article>
                             ))}
                         </AnimatePresence>
-                    </Motion.div>
+                    </motion.div>
                 )}
 
                 {/* CTA Box - Modern Industrial Design */}
-                <Motion.div
+                <motion.div
                     className="mt-20 p-8 sm:p-12 bg-stone-950 rounded-[2rem] relative overflow-hidden group"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -250,7 +238,7 @@ export function Gallery() {
                             Start Your Estimate
                         </a>
                     </div>
-                </Motion.div>
+                </motion.div>
             </div>
         </section>
     )

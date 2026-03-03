@@ -5,7 +5,6 @@ import { supabase } from '../lib/supabase'
 import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
-import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 import {
   useSeo,
   SITE_URL,
@@ -141,23 +140,6 @@ export function BlogPost() {
       return parsedHtml
     }
 
-    const normalizeImage = (imageElement) => {
-      if (!imageElement) return
-      const originalSrc = imageElement.getAttribute('src') || ''
-      if (originalSrc) {
-        imageElement.setAttribute(
-          'src',
-          getOptimizedImageUrl(originalSrc, {
-            width: 1200,
-            quality: 70,
-            format: 'webp',
-          }),
-        )
-      }
-      imageElement.setAttribute('loading', 'lazy')
-      imageElement.setAttribute('decoding', 'async')
-    }
-
     const isImageOnlyParagraph = (node) =>
       node?.nodeType === 1 &&
       node.tagName === 'P' &&
@@ -185,7 +167,6 @@ export function BlogPost() {
           imageRows.forEach((imageParagraph) => {
             const image = imageParagraph.querySelector('img')
             if (image) {
-              normalizeImage(image)
               image.classList.add('blog-content-image')
               grid.appendChild(image)
             }
@@ -197,7 +178,6 @@ export function BlogPost() {
 
         const image = imageRows[0].querySelector('img')
         if (image) {
-          normalizeImage(image)
           image.classList.add('blog-content-image')
         }
         normalizedNodes.push(imageRows[0])
@@ -207,7 +187,6 @@ export function BlogPost() {
       if (currentNode.nodeType === 1) {
         const currentImages = currentNode.querySelectorAll('img')
         currentImages.forEach((image) => {
-          normalizeImage(image)
           image.classList.add('blog-content-image')
         })
       }
@@ -223,20 +202,6 @@ export function BlogPost() {
 
     return container.innerHTML
   }, [post])
-
-  const coverImage = getOptimizedImageUrl(post?.cover_image_url, {
-    width: 1280,
-    quality: 72,
-    format: 'webp',
-  })
-  const coverImageSrcSet = getResponsiveImageSrcSet(
-    post?.cover_image_url,
-    [480, 768, 1024, 1280, 1600],
-    {
-      quality: 72,
-      format: 'webp',
-    },
-  )
 
   return (
     <div className="min-h-dvh flex flex-col bg-white">
@@ -273,15 +238,9 @@ export function BlogPost() {
                 {post.cover_image_url && (
                   <figure className="blog-post-hero mb-8">
                     <img
-                      src={coverImage}
-                      srcSet={coverImageSrcSet || undefined}
-                      sizes="(max-width: 1023px) 100vw, 72rem"
+                      src={post.cover_image_url}
                       alt={post.title}
                       loading="eager"
-                      fetchPriority="high"
-                      decoding="async"
-                      width={1280}
-                      height={720}
                       className="blog-post-hero-image"
                     />
                   </figure>

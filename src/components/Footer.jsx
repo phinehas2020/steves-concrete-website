@@ -46,9 +46,6 @@ export function Footer() {
                                     src={logoImage}
                                     alt="Concrete Works LLC"
                                     className="h-12 w-auto"
-                                    width={96}
-                                    height={48}
-                                    decoding="async"
                                 />
                             </div>
                             <div>

@@ -216,10 +216,7 @@ export function LocationLanding({ page }) {
                       src={project.image}
                       alt={project.alt}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      width={960}
-                      height={720}
                       loading="lazy"
-                      decoding="async"
                     />
                   </div>
                   <div className="p-5">
