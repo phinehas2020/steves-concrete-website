@@ -1,4 +1,4 @@
-import { getCanonicalServicePath } from './servicePages'
+import { getCanonicalServicePath } from './servicePages.js'
 
 export const guidePages = [
   {

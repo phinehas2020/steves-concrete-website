@@ -1,7 +1,7 @@
 import stampedDrivewayImg from '../assets/images/gallery-stamped-driveway.png'
 import patioAggregateImg from '../assets/images/gallery-patio-aggregate.png'
 import commercialParkingImg from '../assets/images/gallery-commercial-parking.png'
-import { getCanonicalServicePath } from './servicePages'
+import { getCanonicalServicePath } from './servicePages.js'
 
 const baseServices = [
   { label: 'Concrete Contractors', href: getCanonicalServicePath('concrete-contractors') },
