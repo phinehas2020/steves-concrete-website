@@ -5,10 +5,16 @@ import './index.css'
 import App from './App.jsx'
 import { NotFound } from './pages/NotFound'
 import { locationPages } from './data/locationPages'
-import { servicePages } from './data/servicePages'
+import { getCanonicalServicePath, isServicePageCanonicalized, servicePages } from './data/servicePages'
 import { seoServicePages } from './data/seoServicePages'
 import { guidePages } from './data/guides'
 import { sportsCourtAreaPages } from './data/sportsCourtAreaPages'
+
+const SEO_SERVICE_PATHS = new Set(
+  seoServicePages
+    .filter((service) => !service.redirectTo)
+    .map((service) => `/${service.slug}`),
+)
 
 const AdminApp = lazy(() => import('./admin/AdminApp').then((m) => ({ default: m.AdminApp })))
 const BlogIndex = lazy(() => import('./pages/BlogIndex').then((m) => ({ default: m.BlogIndex })))
@@ -70,13 +76,43 @@ createRoot(document.getElementById('root')).render(
               element={page.redirectTo ? <Navigate to={page.redirectTo} replace /> : <SeoServiceLanding page={page} />}
             />
           ))}
-          {servicePages.map((page) => (
-            <Route
-              key={page.slug}
-              path={`/services/${page.slug}`}
-              element={<ServiceLanding page={page} />}
-            />
-          ))}
+          {servicePages.flatMap((page) => {
+            const canonicalPath = getCanonicalServicePath(page.slug)
+            const legacyPath = `/services/${page.slug}`
+
+            if (isServicePageCanonicalized(page.slug)) {
+              if (SEO_SERVICE_PATHS.has(canonicalPath)) {
+                return (
+                  <Route
+                    key={`legacy-${page.slug}`}
+                    path={legacyPath}
+                    element={<Navigate to={canonicalPath} replace />}
+                  />
+                )
+              }
+
+              return [
+                <Route
+                  key={page.slug}
+                  path={canonicalPath}
+                  element={<ServiceLanding page={page} />}
+                />,
+                <Route
+                  key={`legacy-${page.slug}`}
+                  path={legacyPath}
+                  element={<Navigate to={canonicalPath} replace />}
+                />,
+              ]
+            }
+
+            return (
+              <Route
+                key={page.slug}
+                path={legacyPath}
+                element={<ServiceLanding page={page} />}
+              />
+            )
+          })}
           {guidePages.map((page) => (
             <Route
               key={page.slug}

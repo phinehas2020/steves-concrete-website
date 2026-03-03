@@ -2,7 +2,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { sportsCourtAreaPages } from '../src/data/sportsCourtAreaPages.js'
 import {
-  SERVICE_CANONICAL_PATH_BY_SLUG,
+  getCanonicalServicePath,
   servicePages,
 } from '../src/data/servicePages.js'
 import { seoServicePages } from '../src/data/seoServicePages.js'
@@ -18,12 +18,7 @@ const LOCATION_PAGES = [
   'lorena-tx-concrete-contractor',
   'mcgregor-tx-concrete-contractor',
 ]
-const NON_CANONICAL_SERVICE_SLUGS = new Set(Object.keys(SERVICE_CANONICAL_PATH_BY_SLUG))
-const SERVICE_PAGES = [
-  ...servicePages
-    .filter((service) => !NON_CANONICAL_SERVICE_SLUGS.has(service.slug))
-    .map((service) => `services/${service.slug}`),
-]
+const SERVICE_PAGES = servicePages.map((service) => getCanonicalServicePath(service.slug))
 const SEO_SERVICE_PAGES = seoServicePages
   .filter((service) => !service.redirectTo)
   .map((service) => service.slug)
@@ -50,6 +45,14 @@ function toUrlEntry({ loc, lastmod, changefreq, priority }) {
   if (changefreq) parts.push(`<changefreq>${changefreq}</changefreq>`)
   if (priority) parts.push(`<priority>${priority}</priority>`)
   return `<url>${parts.join('')}</url>`
+}
+
+function normalizeSitemapUrl(location) {
+  if (location.endsWith('/') && location !== `${SITE_URL}/`) {
+    return location.slice(0, -1)
+  }
+
+  return location
 }
 
 export default async function handler(req, res) {
@@ -181,9 +184,19 @@ export default async function handler(req, res) {
     }
   }
 
+  const uniqueUrls = []
+  const seen = new Set()
+
+  for (const entry of urls) {
+    const normalizedLocation = normalizeSitemapUrl(entry.loc)
+    if (seen.has(normalizedLocation)) continue
+    seen.add(normalizedLocation)
+    uniqueUrls.push({ ...entry, loc: normalizedLocation })
+  }
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
-    urls.map((entry) => toUrlEntry(entry)).join('') +
+    uniqueUrls.map((entry) => toUrlEntry(entry)).join('') +
     `</urlset>`
 
   res.setHeader('Content-Type', 'application/xml')

@@ -10,6 +10,12 @@ import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
 
+const SEO_SERVICE_PATHS = new Set(
+  seoServicePageData
+    .filter((service) => !service.redirectTo)
+    .map((service) => `/${service.slug}`),
+)
+
 const projectRoot = process.cwd()
 const distDir = path.join(projectRoot, 'dist')
 const indexPath = path.join(distDir, 'index.html')
@@ -168,11 +174,19 @@ const routeMeta = [
     ...homeMeta,
     contentHtml: renderHomeContent(),
   },
-  ...servicePageData.map((service) => {
-    const canonicalPath = getCanonicalServicePath(service.slug)
-    const canonical = `${SITE_URL}${canonicalPath}`
-    return {
-      path: `/services/${service.slug}`,
+   ...servicePageData.flatMap((service) => {
+     const canonicalPath = getCanonicalServicePath(service.slug)
+     const canonical = `${SITE_URL}${canonicalPath}`
+     const routePath = isServicePageCanonicalized(service.slug)
+       ? canonicalPath
+       : `/services/${service.slug}`
+
+     if (isServicePageCanonicalized(service.slug) && SEO_SERVICE_PATHS.has(canonicalPath)) {
+       return []
+     }
+
+     return {
+      path: routePath,
       title: service.seoTitle || `${service.title} Waco TX | ${SITE_NAME}`,
       description:
         service.seoDescription || `${service.title} in Waco, TX. Free estimate: ${PHONE_DISPLAY}.`,

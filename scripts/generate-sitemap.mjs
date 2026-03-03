@@ -1,7 +1,8 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { createClient } from '@supabase/supabase-js'
-import { SERVICE_CANONICAL_PATH_BY_SLUG } from '../src/data/servicePages.js'
+import { getCanonicalServicePath } from '../src/data/servicePages.js'
+import { seoServicePages } from '../src/data/seoServicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const OUTPUT_PATH = path.join(process.cwd(), 'public', 'sitemap.xml')
@@ -26,12 +27,9 @@ const LOCATION_PAGES = [
   'lorena-tx-concrete-contractor',
   'mcgregor-tx-concrete-contractor',
 ]
-const NON_CANONICAL_SERVICE_SLUGS = new Set(Object.keys(SERVICE_CANONICAL_PATH_BY_SLUG))
-const NON_CANONICAL_SEO_SERVICE_SLUGS = new Set([
-  'concrete-parking-lots-waco-tx',
-  'concrete-repair-waco-tx',
-  'general-contractor-waco-tx',
-])
+const SEO_SERVICE_PAGES = seoServicePages
+  .filter((service) => !service.redirectTo)
+  .map((service) => service.slug)
 
 async function readSlugList(relativePath) {
   const fullPath = path.join(process.cwd(), relativePath)
@@ -113,25 +111,20 @@ async function main() {
     })
   })
 
-  const [serviceSlugs, seoServiceSlugs, guideSlugs, sportsCourtSlugs] = await Promise.all([
+  const [serviceSlugs, guideSlugs, sportsCourtSlugs] = await Promise.all([
     readSlugList('src/data/servicePages.js'),
-    readSlugList('src/data/seoServicePages.js'),
     readSlugList('src/data/guides.js'),
     readSlugList('src/data/sportsCourtAreaPages.js'),
   ])
 
-  serviceSlugs
-    .filter((slug) => !NON_CANONICAL_SERVICE_SLUGS.has(slug))
-    .forEach((slug) => {
-    addUrl(routes, `/services/${slug}`, {
+  serviceSlugs.forEach((slug) => {
+    addUrl(routes, getCanonicalServicePath(slug), {
       changefreq: 'monthly',
       priority: '0.65',
     })
   })
 
-  seoServiceSlugs
-    .filter((slug) => !NON_CANONICAL_SEO_SERVICE_SLUGS.has(slug))
-    .forEach((slug) => {
+  SEO_SERVICE_PAGES.forEach((slug) => {
     addUrl(routes, `/${slug}`, {
       changefreq: 'monthly',
       priority: '0.72',

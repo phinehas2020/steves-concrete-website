@@ -2,6 +2,7 @@ import { Phone, Mail, MapPin } from 'lucide-react'
 import logoImage from '../assets/images/logo.png'
 import { locationLinks } from '../data/locationPages'
 import { sportsCourtAreaLinks } from '../data/sportsCourtAreaPages'
+import { getCanonicalServicePath, servicePages } from '../data/servicePages'
 import { servicePageLinks } from '../data/seoServicePages'
 
 const navLinks = [
@@ -19,10 +20,26 @@ const navLinks = [
     { label: 'Terms and Conditions', href: '/terms-and-conditions' },
 ]
 
-const serviceQuickLinks = servicePageLinks.map((service) => ({
-    label: service.label.replace(' in Waco, TX', ''),
-    href: `/${service.slug}`,
+const serviceLandingQuickLinks = servicePages.map((service) => ({
+  label: service.title,
+  href: getCanonicalServicePath(service.slug),
 }))
+
+const allServiceQuickLinks = (() => {
+  const seen = new Set()
+  const links = [...servicePageLinks, ...serviceLandingQuickLinks]
+    .map((service) => ({
+      label: service.label ? service.label.replace(' in Waco, TX', '') : service.title,
+      href: service.href || `/${service.slug}`,
+    }))
+    .filter((service) => {
+      if (!service.href || seen.has(service.href)) return false
+      seen.add(service.href)
+      return true
+    })
+
+  return links
+})()
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
@@ -89,7 +106,7 @@ export function Footer() {
                     <div>
                             <h3 className="font-display font-bold text-white uppercase tracking-widest text-xs mb-6">Specialties</h3>
                             <ul className="space-y-3 text-stone-500 text-sm font-medium">
-                                {serviceQuickLinks.map((service) => (
+                                {allServiceQuickLinks.map((service) => (
                                     <li key={service.href}>
                                         <a href={service.href} className="hover:text-white transition-colors">
                                         {service.label}
