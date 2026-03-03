@@ -251,6 +251,7 @@
     }
   ],
   "redirects": [
+    {
       "source": "/concrete-parking-lots-waco-tx",
       "destination": "https://www.concretewaco.com/parking-lot-concrete-waco",
       "permanent": true
