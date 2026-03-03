@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles } from 'lucide-react'
 import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 import {
   useSeo,
   SITE_URL,
@@ -92,6 +93,19 @@ export function BlogIndex() {
   }, [])
 
   const [featured, ...rest] = posts
+  const featuredCoverImage = getOptimizedImageUrl(featured?.cover_image_url, {
+    width: 1200,
+    quality: 70,
+    format: 'webp',
+  })
+  const featuredCoverSrcSet = getResponsiveImageSrcSet(
+    featured?.cover_image_url,
+    [480, 768, 1024, 1200, 1600],
+    {
+      quality: 70,
+      format: 'webp',
+    },
+  )
 
   return (
     <div className="min-h-dvh flex flex-col bg-white">
@@ -167,10 +181,16 @@ export function BlogIndex() {
                   <div className="h-[280px] sm:h-[340px] md:h-[420px] lg:h-[440px] overflow-hidden">
                     {featured?.cover_image_url ? (
                       <img
-                        src={featured.cover_image_url}
+                        src={featuredCoverImage}
+                        srcSet={featuredCoverSrcSet || undefined}
+                        sizes="(max-width: 1023px) 100vw, 60vw"
                         alt={featured?.title || 'Featured concrete project advice'}
                         className="w-full h-full object-cover"
-                        loading="lazy"
+                        width={1200}
+                        height={720}
+                        loading="eager"
+                        fetchPriority="high"
+                        decoding="async"
                       />
                     ) : (
                       <div className="h-full bg-stone-200 flex items-center justify-center text-stone-500 text-sm">
@@ -204,45 +224,66 @@ export function BlogIndex() {
 
                 {rest.length > 0 && (
                   <div className="grid-auto-fit-lg">
-                    {rest.map((post) => (
-                      <article
-                        key={post.id}
-                        className="bg-white border border-stone-200 rounded-xl overflow-hidden hover:border-stone-300 transition-colors"
-                      >
-                        {post.cover_image_url ? (
-                          <img
-                            src={post.cover_image_url}
-                            alt={post.title}
-                            className="w-full h-48 object-cover"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="h-48 bg-stone-100 flex items-center justify-center text-stone-400 text-sm">
-                            Concrete Works LLC
+                    {rest.map((post) => {
+                      const postCoverImage = getOptimizedImageUrl(post.cover_image_url, {
+                        width: 720,
+                        quality: 68,
+                        format: 'webp',
+                      })
+                      const postCoverSrcSet = getResponsiveImageSrcSet(
+                        post.cover_image_url,
+                        [320, 480, 720, 960],
+                        {
+                          quality: 68,
+                          format: 'webp',
+                        },
+                      )
+
+                      return (
+                        <article
+                          key={post.id}
+                          className="bg-white border border-stone-200 rounded-xl overflow-hidden hover:border-stone-300 transition-colors"
+                        >
+                          {post.cover_image_url ? (
+                            <img
+                              src={postCoverImage}
+                              srcSet={postCoverSrcSet || undefined}
+                              sizes="(max-width: 1023px) 100vw, 33vw"
+                              alt={post.title}
+                              className="w-full h-48 object-cover"
+                              width={720}
+                              height={432}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          ) : (
+                            <div className="h-48 bg-stone-100 flex items-center justify-center text-stone-400 text-sm">
+                              Concrete Works LLC
+                            </div>
+                          )}
+                          <div className="p-6">
+                            <p className="text-xs uppercase tracking-wide text-stone-500 mb-2">
+                              {post.published_at
+                                ? new Date(post.published_at).toLocaleDateString()
+                                : 'Draft'}
+                            </p>
+                            <h3 className="font-display font-semibold text-xl text-stone-900 mb-3 text-balance">
+                              {post.title}
+                            </h3>
+                            <p className="text-stone-600 text-pretty mb-4">
+                              {post.excerpt || 'Read the full article.'}
+                            </p>
+                            <a
+                              href={`/blog/${post.slug}`}
+                              className="inline-flex items-center gap-2 text-accent-600 font-semibold hover:text-accent-700"
+                            >
+                              Read article
+                              <ArrowRight className="size-4" aria-hidden="true" />
+                            </a>
                           </div>
-                        )}
-                        <div className="p-6">
-                          <p className="text-xs uppercase tracking-wide text-stone-500 mb-2">
-                            {post.published_at
-                              ? new Date(post.published_at).toLocaleDateString()
-                              : 'Draft'}
-                          </p>
-                          <h3 className="font-display font-semibold text-xl text-stone-900 mb-3 text-balance">
-                            {post.title}
-                          </h3>
-                          <p className="text-stone-600 text-pretty mb-4">
-                            {post.excerpt || 'Read the full article.'}
-                          </p>
-                          <a
-                            href={`/blog/${post.slug}`}
-                            className="inline-flex items-center gap-2 text-accent-600 font-semibold hover:text-accent-700"
-                          >
-                            Read article
-                            <ArrowRight className="size-4" aria-hidden="true" />
-                          </a>
-                        </div>
-                      </article>
-                    ))}
+                        </article>
+                      )
+                    })}
                   </div>
                 )}
               </div>

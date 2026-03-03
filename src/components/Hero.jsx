@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, useInView, useMotionValue, useTransform, animate } from 'motion/react'
+import { motion as Motion, useInView, useMotionValue, useTransform, animate } from 'motion/react'
 import { ArrowRight, Phone } from 'lucide-react'
-import heroImage from '../assets/images/hero.jpeg'
-import { heroStagger, staggerItem, viewportEager } from '../lib/animations'
+import heroImage from '../assets/images/hero.webp'
+import { heroStagger, staggerItem } from '../lib/animations'
 import { supabase } from '../lib/supabase'
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 
 const topLocationLinks = [
     { label: 'Woodway', href: '/woodway-tx-concrete-contractor' },
@@ -55,7 +56,6 @@ function AnimatedStat({ value, suffix = '', label }) {
 
 export function Hero() {
     const [heroImages, setHeroImages] = useState([])
-    const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
     // Fetch hero images from Supabase
     useEffect(() => {
@@ -86,27 +86,18 @@ export function Hero() {
         fetchHeroImages()
     }, [])
 
-    // Reset index when images change
-    useEffect(() => {
-        setCurrentImageIndex(0)
-    }, [heroImages.length])
-
-    // Rotate through images every 5 seconds
-    useEffect(() => {
-        if (heroImages.length <= 1) return
-
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
-        }, 5000) // Change image every 5 seconds
-
-        return () => clearInterval(interval)
-    }, [heroImages.length])
-
     // Determine which image to display
-    const currentImage = heroImages.length > 0 
-        ? heroImages[currentImageIndex] 
-        : null
-    const imageSrc = currentImage?.image_url || heroImage
+    const currentImage = heroImages.length > 0 ? heroImages[0] : null
+    const rawImageSrc = currentImage?.image_url || heroImage
+    const imageSrc = getOptimizedImageUrl(rawImageSrc, {
+        width: 1600,
+        quality: 72,
+        format: 'webp',
+    })
+    const imageSrcSet = getResponsiveImageSrcSet(rawImageSrc, [640, 960, 1280, 1600], {
+        quality: 72,
+        format: 'webp',
+    })
     const imageAlt = currentImage?.alt_text || "Stamped concrete driveway project in Waco, Texas"
 
     return (
@@ -116,35 +107,19 @@ export function Hero() {
         >
             {/* Background Image */}
             <div className="absolute inset-0">
-                {heroImages.length > 0 && heroImages.map((img, index) => (
-                    <motion.img
-                        key={img.id}
-                        src={img.image_url}
-                        alt={img.alt_text || "Hero image"}
-                        className="absolute inset-0 w-full h-full object-cover object-center"
-                        style={{ minHeight: '100vh', minWidth: '100%' }}
-                        loading={index === 0 ? "eager" : "lazy"}
-                        fetchPriority={index === 0 ? "high" : "low"}
-                        decoding="async"
-                        initial={{ opacity: 0 }}
-                        animate={{ 
-                            opacity: index === currentImageIndex ? 1 : 0,
-                            scale: index === currentImageIndex ? 1 : 1.05
-                        }}
-                        transition={{ duration: 1.5, ease: 'easeInOut' }}
-                    />
-                ))}
-                {heroImages.length === 0 && (
-                    <img
-                        src={heroImage}
-                        alt={imageAlt}
-                        className="absolute inset-0 w-full h-full object-cover object-center"
-                        style={{ minHeight: '100vh', minWidth: '100%' }}
-                        loading="eager"
-                        fetchPriority="high"
-                        decoding="async"
-                    />
-                )}
+                <img
+                    src={imageSrc}
+                    srcSet={imageSrcSet || undefined}
+                    sizes="100vw"
+                    alt={imageAlt}
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                    style={{ minHeight: '100vh', minWidth: '100%' }}
+                    width={2430}
+                    height={1536}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                />
                 <div className="absolute inset-0 bg-gradient-to-r from-stone-900/75 via-stone-900/70 to-stone-900/55" />
             </div>
 
@@ -173,18 +148,18 @@ export function Hero() {
             <div className="absolute bottom-0 left-0 right-0 h-2 bg-accent-500" />
 
             <div className="container-main relative z-10 py-20 sm:py-24 md:py-6">
-                <motion.div
+                <Motion.div
                     className="max-w-3xl"
                     variants={heroStagger}
                     initial="hidden"
                     animate="visible"
                 >
                     {/* Badge */}
-                    <motion.div
+                    <Motion.div
                         className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-stone-800/80 backdrop-blur-sm rounded-full mb-4 sm:mb-6"
                         variants={staggerItem}
                     >
-                        <motion.span
+                        <Motion.span
                             className="size-2 bg-accent-500 rounded-full"
                             animate={{ scale: [1, 1.2, 1] }}
                             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
@@ -192,10 +167,10 @@ export function Hero() {
                         <span className="text-xs sm:text-sm font-medium text-stone-300">
                             Serving Waco, Temple & McLennan County Since 2005
                         </span>
-                    </motion.div>
+                    </Motion.div>
 
                     {/* Headline - GSC keyword-aligned: concrete contractor waco tx */}
-                    <motion.h1
+                    <Motion.h1
                         className="font-display font-bold text-white text-balance leading-tight mb-6"
                         style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4.5rem)' }}
                         variants={staggerItem}
@@ -205,10 +180,10 @@ export function Hero() {
                         <span className="block text-lg sm:text-xl font-medium text-stone-400 mt-2">
                             Licensed &amp; Insured · 20+ Years
                         </span>
-                    </motion.h1>
+                    </Motion.h1>
 
                     {/* Subheadline */}
-                    <motion.p
+                    <Motion.p
                         className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed"
                         variants={staggerItem}
                     >
@@ -219,14 +194,14 @@ export function Hero() {
                           concrete contractors Waco TX with experience in black clay soil movement and long Texas heat cycles.
                           If you are looking for reliable concrete companies Waco TX, we are ready to help.
                         </span>
-                    </motion.p>
+                    </Motion.p>
 
                     {/* CTAs */}
-                    <motion.div
+                    <Motion.div
                         className="flex flex-col sm:flex-row gap-4"
                         variants={staggerItem}
                     >
-                        <motion.a
+                        <Motion.a
                             href="#contact"
                             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px] text-lg"
                             whileHover={{ scale: 1.02, y: -2 }}
@@ -234,8 +209,8 @@ export function Hero() {
                         >
                             Get Free Estimate
                             <ArrowRight className="size-5" aria-hidden="true" />
-                        </motion.a>
-                        <motion.a
+                        </Motion.a>
+                        <Motion.a
                             href="tel:254-230-3102"
                             className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-stone-600 text-white font-semibold rounded-lg hover:bg-stone-800 hover:border-stone-500 transition-colors duration-150 min-h-[52px] text-lg"
                             whileHover={{ scale: 1.02, y: -2 }}
@@ -243,10 +218,10 @@ export function Hero() {
                         >
                             <Phone className="size-5" aria-hidden="true" />
                             (254) 230-3102
-                        </motion.a>
-                    </motion.div>
+                        </Motion.a>
+                    </Motion.div>
 
-                    <motion.div
+                    <Motion.div
                         className="mt-6 flex flex-wrap items-center gap-2"
                         variants={staggerItem}
                     >
@@ -262,9 +237,9 @@ export function Hero() {
                                 {link.label}
                             </a>
                         ))}
-                    </motion.div>
+                    </Motion.div>
 
-                    <motion.div
+                    <Motion.div
                         className="mt-4 flex flex-wrap items-center gap-2"
                         variants={staggerItem}
                     >
@@ -280,10 +255,10 @@ export function Hero() {
                                 {link.label}
                             </a>
                         ))}
-                    </motion.div>
+                    </Motion.div>
 
                     {/* Trust Indicators - Animated Count Up */}
-                    <motion.div
+                    <Motion.div
                         className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-stone-700"
                         variants={staggerItem}
                     >
@@ -292,8 +267,8 @@ export function Hero() {
                             <AnimatedStat value={500} suffix="+" label="Projects Completed" />
                             <AnimatedStat value={100} suffix="%" label="Customer Satisfaction" />
                         </div>
-                    </motion.div>
-                </motion.div>
+                    </Motion.div>
+                </Motion.div>
             </div>
         </section>
     )

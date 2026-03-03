@@ -96,6 +96,11 @@ export function SeoServiceLanding({ page }) {
                     src={heroImage}
                     alt={title}
                     className="absolute inset-0 w-full h-full object-cover"
+                    width={1200}
+                    height={900}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl"></div>
                 </div>

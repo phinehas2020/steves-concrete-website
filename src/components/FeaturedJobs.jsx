@@ -1,27 +1,33 @@
-import { motion } from 'motion/react'
+import { motion as Motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { MapPin, ArrowUpRight } from 'lucide-react'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { handleImageError } from '../lib/utils'
 import { fetchJobs } from '../data/jobs'
 import { useEffect, useState } from 'react'
+import fallbackProjectImage from '../assets/images/gallery-driveway-custom.jpeg'
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 
 function ProjectImage({ job }) {
-  const mainImage = job.images[0] || '/src/assets/images/gallery-driveway-custom.jpeg'
-  
-  // Handle image loading errors
-  const handleError = (e) => {
-    // Fallback to a default image if the job image fails to load
-    e.target.src = '/src/assets/images/gallery-driveway-custom.jpeg'
-  }
+  const mainImage = job.images[0] || fallbackProjectImage
+  const optimizedImage = getOptimizedImageUrl(mainImage, { width: 960, quality: 68, format: 'webp' })
+  const imageSrcSet = getResponsiveImageSrcSet(mainImage, [420, 640, 960, 1280], {
+    quality: 68,
+    format: 'webp',
+  })
   
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
       <img
-        src={mainImage}
+        src={optimizedImage}
+        srcSet={imageSrcSet || undefined}
+        sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
         alt={job.title}
         className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+        width={960}
+        height={1200}
         loading="lazy"
+        decoding="async"
         onError={handleImageError}
       />
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/50 via-black/30 to-transparent group-hover:from-black/95 group-hover:via-black/65 group-hover:via-black/40 group-hover:to-transparent transition-all duration-500" />
@@ -52,7 +58,7 @@ export function FeaturedJobs() {
     <section id="gallery" className="section-padding bg-white texture-concrete relative">
       <div className="container-main relative z-10">
         {/* Section Header */}
-        <motion.div
+        <Motion.div
           className="max-w-2xl mb-16"
           variants={fadeInUp}
           initial="hidden"
@@ -76,7 +82,7 @@ export function FeaturedJobs() {
             View All Projects
             <ArrowUpRight className="size-4" />
           </Link>
-        </motion.div>
+        </Motion.div>
 
         {/* Projects Grid - Show 3-4 */}
         {loading ? (
@@ -86,7 +92,7 @@ export function FeaturedJobs() {
             No featured projects yet. Check back soon!
           </div>
         ) : (
-          <motion.div
+          <Motion.div
             className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
             variants={fadeInUp}
             initial="hidden"
@@ -94,7 +100,7 @@ export function FeaturedJobs() {
             viewport={viewportConfig}
           >
             {featuredJobs.slice(0, 3).map((job, index) => (
-            <motion.article
+            <Motion.article
               key={job.id}
               className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
               variants={fadeInUp}
@@ -137,9 +143,9 @@ export function FeaturedJobs() {
                   </div>
                 </div>
               </div>
-            </motion.article>
+            </Motion.article>
             ))}
-          </motion.div>
+          </Motion.div>
         )}
       </div>
     </section>

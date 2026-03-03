@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, CalendarClock } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 
 function formatDate(value) {
   if (!value) return 'Draft'
@@ -17,6 +18,16 @@ function formatDate(value) {
 }
 
 function BlogCard({ post }) {
+  const coverImage = getOptimizedImageUrl(post.cover_image_url, {
+    width: 720,
+    quality: 68,
+    format: 'webp',
+  })
+  const coverImageSrcSet = getResponsiveImageSrcSet(post.cover_image_url, [320, 480, 720, 960], {
+    quality: 68,
+    format: 'webp',
+  })
+
   return (
     <Link
       to={`/blog/${post.slug}`}
@@ -25,10 +36,16 @@ function BlogCard({ post }) {
       <div className="overflow-hidden rounded-t-xl h-48 max-h-48">
         {post.cover_image_url ? (
           <img
-            src={post.cover_image_url}
+            src={coverImage}
+            srcSet={coverImageSrcSet || undefined}
+            sizes="(max-width: 767px) 100vw, 33vw"
             alt={post.title}
             className="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            width={720}
+            height={432}
+            loading="lazy"
+            decoding="async"
           />
         ) : (
           <div className="h-full bg-stone-100" />

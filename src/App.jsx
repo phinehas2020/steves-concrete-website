@@ -1,21 +1,34 @@
+import { lazy, Suspense } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Services } from './components/Services'
 import { FeaturedServiceSpotlight } from './components/FeaturedServiceSpotlight'
-import { CostQuickAnswers } from './components/CostQuickAnswers'
-import { BlogActivityStrip } from './components/BlogActivityStrip'
-import { Values } from './components/Values'
-import { Gallery } from './components/Gallery'
-import { Testimonials } from './components/Testimonials'
-import { FAQ } from './components/FAQ'
-import { Contact } from './components/Contact'
-import { Footer } from './components/Footer'
+import { DeferredSection } from './components/DeferredSection'
 import { useSeo, buildJsonLdGraph, SITE_URL, DEFAULT_IMAGE } from './lib/seo'
 import { servicePageLinks } from './data/seoServicePages'
 import { locationLinks } from './data/locationPages'
 
 const GOOGLE_REVIEW_URL =
   'https://www.google.com/maps/place/SLA+Concrete+Works/@31.6637838,-97.1149261,17z/data=!3m1!4b1!4m6!3m5!1s0x864f83d5fc2728cf:0x92d8085e5a37fa64!8m2!3d31.6637793!4d-97.1123512!16s%2Fg%2F11gf0qs4j0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D'
+
+const CostQuickAnswers = lazy(() =>
+  import('./components/CostQuickAnswers').then((m) => ({ default: m.CostQuickAnswers })),
+)
+const BlogActivityStrip = lazy(() =>
+  import('./components/BlogActivityStrip').then((m) => ({ default: m.BlogActivityStrip })),
+)
+const Values = lazy(() => import('./components/Values').then((m) => ({ default: m.Values })))
+const Gallery = lazy(() => import('./components/Gallery').then((m) => ({ default: m.Gallery })))
+const Testimonials = lazy(() =>
+  import('./components/Testimonials').then((m) => ({ default: m.Testimonials })),
+)
+const FAQ = lazy(() => import('./components/FAQ').then((m) => ({ default: m.FAQ })))
+const Contact = lazy(() => import('./components/Contact').then((m) => ({ default: m.Contact })))
+const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })))
+
+function SectionFallback({ className = 'section-padding bg-white', minHeight = 320 }) {
+  return <div className={className} style={{ minHeight }} aria-hidden="true" />
+}
 
 function HomeLocalBusinessSchema() {
   const cityNames = ['Waco', ...locationLinks.map((location) => location.city)]
@@ -111,7 +124,7 @@ function ServiceAreas() {
 }
 
 function DirectoryListings() {
-const directories = [
+  const directories = [
     { label: 'Google Business Profile', url: GOOGLE_REVIEW_URL },
     { label: 'Bing Places', url: 'https://www.bing.com/business/' },
     { label: 'Yelp', url: 'https://www.yelp.com/biz/signup' },
@@ -183,32 +196,64 @@ function App() {
           <ServiceAreas />
         </div>
         <div className="order-5 md:order-none">
-          <CostQuickAnswers />
+          <DeferredSection rootMargin="420px 0px" minHeight={360}>
+            <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={360} />}>
+              <CostQuickAnswers />
+            </Suspense>
+          </DeferredSection>
         </div>
         <div className="order-6 md:order-none">
-          <BlogActivityStrip />
+          <DeferredSection rootMargin="420px 0px" minHeight={420}>
+            <Suspense fallback={<SectionFallback className="section-padding bg-stone-100" minHeight={420} />}>
+              <BlogActivityStrip />
+            </Suspense>
+          </DeferredSection>
         </div>
         <div className="order-7 md:order-none">
-          <Gallery />
+          <DeferredSection rootMargin="520px 0px" minHeight={900}>
+            <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={900} />}>
+              <Gallery />
+            </Suspense>
+          </DeferredSection>
         </div>
         {/* Values - Hidden on mobile to reduce scroll to Gallery */}
         <div className="hidden md:block md:order-none">
-          <Values />
+          <DeferredSection rootMargin="520px 0px" minHeight={520}>
+            <Suspense fallback={<SectionFallback className="section-padding bg-stone-100" minHeight={520} />}>
+              <Values />
+            </Suspense>
+          </DeferredSection>
         </div>
         <div className="order-8 md:order-none">
-          <Testimonials />
+          <DeferredSection rootMargin="500px 0px" minHeight={680}>
+            <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={680} />}>
+              <Testimonials />
+            </Suspense>
+          </DeferredSection>
         </div>
         <div className="order-9 md:order-none">
-          <FAQ />
+          <DeferredSection rootMargin="520px 0px" minHeight={620}>
+            <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={620} />}>
+              <FAQ />
+            </Suspense>
+          </DeferredSection>
         </div>
         <div className="order-10 md:order-none">
-          <Contact />
+          <DeferredSection rootMargin="560px 0px" minHeight={760}>
+            <Suspense fallback={<SectionFallback className="section-padding bg-stone-950" minHeight={760} />}>
+              <Contact />
+            </Suspense>
+          </DeferredSection>
         </div>
         <div className="order-11 md:order-none">
           <DirectoryListings />
         </div>
       </main>
-      <Footer />
+      <DeferredSection rootMargin="640px 0px" minHeight={680}>
+        <Suspense fallback={<SectionFallback className="section-padding bg-stone-950" minHeight={680} />}>
+          <Footer />
+        </Suspense>
+      </DeferredSection>
     </div>
   )
 }

@@ -23,9 +23,47 @@ export function buildCategoryOptions(jobs = []) {
   return ['All', ...mergedCategories]
 }
 
+function normalizeJobsWithImages(jobs = []) {
+  return jobs.map((job) => {
+    const nestedImages = Array.isArray(job.job_images) ? job.job_images : []
+    const images = nestedImages
+      .slice()
+      .sort((a, b) => (a.image_order ?? 0) - (b.image_order ?? 0))
+      .map((image) => image.image_url)
+      .filter(Boolean)
+
+    const { job_images: _jobImages, ...jobWithoutNestedImages } = job
+    return {
+      ...jobWithoutNestedImages,
+      images,
+    }
+  })
+}
+
 // Fetch jobs from Supabase
 export async function fetchJobs() {
   try {
+    const { data: jobsWithNestedImages, error: nestedError } = await supabase
+      .from('jobs')
+      .select('*, job_images(image_url, image_order)')
+      .order('display_order', { ascending: true })
+      .order('date', { ascending: false })
+
+    if (!nestedError && Array.isArray(jobsWithNestedImages)) {
+      // This is the fast path when FK relationship discovery works in PostgREST.
+      const includesNestedImages =
+        jobsWithNestedImages.length === 0 ||
+        jobsWithNestedImages.some((job) => Array.isArray(job.job_images))
+
+      if (includesNestedImages) {
+        return normalizeJobsWithImages(jobsWithNestedImages)
+      }
+    }
+
+    if (nestedError) {
+      console.warn('Falling back to multi-query jobs fetch:', nestedError.message)
+    }
+
     const { data: jobsData, error } = await supabase
       .from('jobs')
       .select('*')

@@ -1,11 +1,12 @@
 import { useParams, Link } from 'react-router-dom'
-import { motion } from 'motion/react'
+import { motion as Motion } from 'motion/react'
 import { ArrowLeft, MapPin, Calendar } from 'lucide-react'
 import { handleImageError } from '../lib/utils'
 import { fetchJobs } from '../data/jobs'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { useEffect, useMemo, useState } from 'react'
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 import {
   useSeo,
   SITE_URL,
@@ -141,7 +142,16 @@ export function JobDetail() {
     return imagePath
   }
   
-  const currentImage = getImageSrc(job.images[currentImageIndex] || job.images[0])
+  const rawCurrentImage = getImageSrc(job.images[currentImageIndex] || job.images[0])
+  const currentImage = getOptimizedImageUrl(rawCurrentImage, {
+    width: 1600,
+    quality: 72,
+    format: 'webp',
+  })
+  const currentImageSrcSet = getResponsiveImageSrcSet(rawCurrentImage, [640, 960, 1280, 1600], {
+    quality: 72,
+    format: 'webp',
+  })
 
   // Get related jobs (same category, exclude current)
   const relatedJobs = jobs
@@ -156,10 +166,16 @@ export function JobDetail() {
         <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
           <img
             src={currentImage}
+            srcSet={currentImageSrcSet || undefined}
+            sizes="100vw"
             alt={job.title}
             className="absolute inset-0 w-full h-full object-cover object-center"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            width={1600}
+            height={900}
             loading="eager"
+            fetchPriority="high"
+            decoding="async"
             onError={handleImageError}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
@@ -210,7 +226,7 @@ export function JobDetail() {
           <div className="container-main">
             <div className="max-w-4xl">
               {/* Header */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -235,11 +251,11 @@ export function JobDetail() {
                 <p className="text-xl text-stone-600 leading-relaxed font-light">
                   {job.description}
                 </p>
-              </motion.div>
+              </Motion.div>
 
               {/* Image Gallery */}
               {job.images.length > 1 && (
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -247,31 +263,42 @@ export function JobDetail() {
                 >
                   <h2 className="text-2xl font-bold text-stone-900 mb-6">Project Gallery</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {job.images.map((image, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                          currentImageIndex === index
-                            ? 'border-accent-500 ring-2 ring-accent-500/50'
-                            : 'border-transparent hover:border-stone-300'
-                        }`}
-                      >
-                        <img
-                          src={image}
-                          alt={`${job.title} - Image ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          onError={handleImageError}
-                        />
-                      </button>
-                    ))}
+                    {job.images.map((image, index) => {
+                      const thumbnailImage = getOptimizedImageUrl(image, {
+                        width: 360,
+                        quality: 65,
+                        format: 'webp',
+                      })
+
+                      return (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
+                            currentImageIndex === index
+                              ? 'border-accent-500 ring-2 ring-accent-500/50'
+                              : 'border-transparent hover:border-stone-300'
+                          }`}
+                        >
+                          <img
+                            src={thumbnailImage}
+                            alt={`${job.title} - Image ${index + 1}`}
+                            className="w-full h-full object-cover"
+                            width={360}
+                            height={360}
+                            loading="lazy"
+                            decoding="async"
+                            onError={handleImageError}
+                          />
+                        </button>
+                      )
+                    })}
                   </div>
-                </motion.div>
+                </Motion.div>
               )}
 
               {/* CTA */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -289,7 +316,7 @@ export function JobDetail() {
                 >
                   Get Free Estimate
                 </a>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
@@ -300,30 +327,51 @@ export function JobDetail() {
             <div className="container-main">
               <h2 className="text-3xl font-bold text-stone-900 mb-8">Related Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {relatedJobs.map((relatedJob) => (
-                  <Link
-                    key={relatedJob.id}
-                    to={`/jobs/${relatedJob.slug}`}
-                    className="group relative rounded-xl overflow-hidden aspect-[4/5] bg-stone-100"
-                  >
-                    <img
-                      src={relatedJob.images[0]}
-                      alt={relatedJob.title}
-                      className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      loading="lazy"
-                      onError={handleImageError}
-                    />
-                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                    <div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
-                      <span className="text-xs font-bold text-accent-400 uppercase tracking-widest mb-2">
-                        {relatedJob.category}
-                      </span>
-                      <h3 className="text-xl font-bold text-white mb-2">{relatedJob.title}</h3>
-                      <span className="text-sm text-stone-300">{relatedJob.location}</span>
-                    </div>
-                  </Link>
-                ))}
+                {relatedJobs.map((relatedJob) => {
+                  const relatedCover = getOptimizedImageUrl(relatedJob.images[0], {
+                    width: 960,
+                    quality: 68,
+                    format: 'webp',
+                  })
+                  const relatedCoverSrcSet = getResponsiveImageSrcSet(
+                    relatedJob.images[0],
+                    [420, 640, 960, 1280],
+                    {
+                      quality: 68,
+                      format: 'webp',
+                    },
+                  )
+
+                  return (
+                    <Link
+                      key={relatedJob.id}
+                      to={`/jobs/${relatedJob.slug}`}
+                      className="group relative rounded-xl overflow-hidden aspect-[4/5] bg-stone-100"
+                    >
+                      <img
+                        src={relatedCover}
+                        srcSet={relatedCoverSrcSet || undefined}
+                        sizes="(max-width: 767px) 100vw, 33vw"
+                        alt={relatedJob.title}
+                        className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        width={960}
+                        height={1200}
+                        loading="lazy"
+                        decoding="async"
+                        onError={handleImageError}
+                      />
+                      <div className="absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                      <div className="absolute inset-0 z-20 flex flex-col justify-end p-6">
+                        <span className="text-xs font-bold text-accent-400 uppercase tracking-widest mb-2">
+                          {relatedJob.category}
+                        </span>
+                        <h3 className="text-xl font-bold text-white mb-2">{relatedJob.title}</h3>
+                        <span className="text-sm text-stone-300">{relatedJob.location}</span>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
           </section>

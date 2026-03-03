@@ -1,24 +1,36 @@
 import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion as Motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { MapPin, ArrowUpRight } from 'lucide-react'
 import { handleImageError } from '../lib/utils'
 import { buildCategoryOptions, fetchJobs } from '../data/jobs'
+import fallbackProjectImage from '../assets/images/gallery-driveway-custom.jpeg'
+import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 
 // Project image component - displays actual project photos
 function ProjectImage({ job }) {
-  const mainImage = job.images[0] || '/src/assets/images/gallery-driveway-custom.jpeg'
+  const mainImage = job.images[0] || fallbackProjectImage
+  const optimizedImage = getOptimizedImageUrl(mainImage, { width: 960, quality: 68, format: 'webp' })
+  const imageSrcSet = getResponsiveImageSrcSet(mainImage, [420, 640, 960, 1280], {
+    quality: 68,
+    format: 'webp',
+  })
   
   return (
     <div className="absolute inset-0 z-0 overflow-hidden rounded-2xl">
       <img
-        src={mainImage}
+        src={optimizedImage}
+        srcSet={imageSrcSet || undefined}
+        sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
         alt={job.title}
         className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        width={960}
+        height={1200}
         loading="lazy"
+        decoding="async"
         onError={handleImageError}
       />
       {/* Gradient overlay for text readability */}
@@ -88,7 +100,7 @@ export function JobGallery() {
       <div className="container-main relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <motion.div
+          <Motion.div
             className="max-w-2xl"
             variants={fadeInUp}
             initial="hidden"
@@ -105,10 +117,10 @@ export function JobGallery() {
               Every project is a testament to our commitment to durability.
               From expansive commercial slabs to intricate stamped patios.
             </p>
-          </motion.div>
+          </Motion.div>
 
           {/* Filter Tabs */}
-          <motion.div
+          <Motion.div
             className="flex flex-wrap gap-2"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,7 +140,7 @@ export function JobGallery() {
                 {category}
               </button>
             ))}
-          </motion.div>
+          </Motion.div>
         </div>
 
         {/* Projects Grid */}
@@ -154,13 +166,13 @@ export function JobGallery() {
             </p>
           </div>
         ) : (
-          <motion.div
+          <Motion.div
             className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
             layout
           >
             <AnimatePresence mode="popLayout">
               {displayJobs.map((job, index) => (
-              <motion.article
+              <Motion.article
                 key={job.id}
                 className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
                 layout
@@ -211,14 +223,14 @@ export function JobGallery() {
                     </div>
                   </div>
                 </div>
-              </motion.article>
+              </Motion.article>
               ))}
             </AnimatePresence>
-          </motion.div>
+          </Motion.div>
         )}
 
         {/* CTA Box */}
-        <motion.div
+        <Motion.div
           className="mt-20 p-8 sm:p-12 bg-stone-950 rounded-[2rem] relative overflow-hidden group"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -242,7 +254,7 @@ export function JobGallery() {
               Start Your Estimate
             </a>
           </div>
-        </motion.div>
+        </Motion.div>
       </div>
     </section>
   )
