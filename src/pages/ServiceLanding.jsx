@@ -320,6 +320,13 @@ export function ServiceLanding({ page }) {
                   Pricing guides
                 </h3>
                 <div className="space-y-3">
+                  <a
+                    href="/guides"
+                    className="flex items-center justify-between px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg hover:border-stone-300"
+                  >
+                    <span className="font-semibold text-stone-800">All Pricing Guides</span>
+                    <span className="text-sm text-stone-500">View guides</span>
+                  </a>
                   {relatedGuides.map((guide) => (
                     <a
                       key={guide.href}

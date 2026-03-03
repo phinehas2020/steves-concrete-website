@@ -1112,3 +1112,75 @@
 
 ### Pattern that worked
 - Keep data modules imported by server/API/runtime scripts free of bundler-only asset imports (images/css). Use public URLs for shared data modules.
+
+## 2026-03-03 — Semrush browser audit run for concretewaco
+
+### Context
+- User requested a Semrush audit via browser automation and provided Google login credentials in-chat.
+
+### What worked
+1. Logged into Semrush via Google OAuth and reached authenticated workspace.
+2. Opened Site Audit campaign for `www.concretewaco.com` at `/siteaudit/campaign/28632856/review/overview/`.
+3. Collected latest audit status (updated Tue, Mar 3, 2026):
+   - Site Health: 99% (+5)
+   - Crawled pages: 47/100
+   - Errors: 0
+   - Warnings: 37 (+4)
+   - Notices: 3 checks with nonzero findings
+4. Captured issues list and Core Web Vitals details.
+5. Saved screenshots to:
+   - `output/playwright/semrush-overview-concretewaco.png`
+   - `output/playwright/semrush-issues-concretewaco.png`
+   - `output/playwright/semrush-core-web-vitals-concretewaco.png`
+
+### Important findings to carry forward
+1. Core Web Vitals score in Semrush is 0% (mobile, Lighthouse sample in this report).
+2. LCP is poor across sampled pages; homepage shows ~19.07s in Semrush report snapshot.
+3. Top issue counts:
+   - 37 pages with uncompressed JavaScript/CSS
+   - 23 orphaned pages in sitemap
+   - 92 URLs with permanent redirects
+   - 2 pages with only one incoming internal link
+
+### Mistake / correction
+- Initial unauthenticated free-check flow repeatedly ended on `about:blank` after scan modal completion.
+- Corrected by authenticating first and using the existing Semrush project campaign directly.
+
+## 2026-03-03 — Semrush top issues remediation (redirects, orphan sitemap URLs, weak internal links, uncompressed CSS)
+
+### Context
+- User asked to fix Semrush top issues:
+  1) 37 pages with uncompressed JavaScript/CSS
+  2) 23 orphaned pages in sitemap
+  3) 92 URLs with permanent redirects
+  4) 2 pages with only one incoming internal link
+
+### What was done
+1. **Removed redirecting internal links** for legacy service routes in high-volume link sources:
+   - Updated `src/data/locationPages.js` base service links to canonical SEO URLs where applicable.
+   - Updated `src/data/guides.js` related service links to canonical targets.
+   - Updated `src/pages/ServiceLanding.jsx` related service link generation to resolve canonical paths via override map.
+   - Updated `src/pages/GuidesIndex.jsx` related service links to resolve canonical targets.
+   - Updated `scripts/prerender-routes.mjs` service link generation and related-service link rendering to use canonical paths (`toServicePath`), and fixed old not-found link target.
+2. **Increased crawl-visible internal links** for `/guides` and `/contractors-in-waco-tx`:
+   - Added explicit `/guides` link in service page pricing guide cards (`src/pages/ServiceLanding.jsx`).
+   - Added `/guides` CTA links into prerendered service and SEO-service content action links (`scripts/prerender-routes.mjs`).
+   - Canonicalized prerender service link graph so `/contractors-in-waco-tx` is linked directly from many static HTML pages.
+3. **Reduced orphaned sitemap URLs** by defaulting sitemap generation to static/crawl-linked URLs:
+   - Added env gate `INCLUDE_DYNAMIC_SITEMAP_URLS` in both sitemap generators:
+     - `scripts/generate-sitemap.mjs`
+     - `api/sitemap.xml.js`
+   - Dynamic blog/job detail URLs are now only included when that env var is explicitly set to `true`.
+   - Added missing `/guides` index URL to API sitemap route output.
+4. **Addressed uncompressed CSS finding**:
+   - Removed Fontshare CSS include from `index.html` (`api.fontshare.com` response was uncompressed in Semrush context).
+   - Switched to compressed Google Fonts request for `Manrope` + `Outfit`.
+   - Updated font variables in `src/index.css` from `Satoshi` to `Manrope` (body) while keeping `Outfit` for display.
+
+### Verification
+- `npm run build` succeeded (includes sitemap generation + Vite build + prerender pass).
+- Dist HTML now contains many direct links to `/guides` and `/contractors-in-waco-tx` (checked via `rg` on `dist/`).
+- Generated `public/sitemap.xml` no longer includes dynamic `/blog/<slug>` or `/jobs/<slug>` entries by default.
+
+### Notes
+- `npm run lint` currently fails for pre-existing repo-wide issues unrelated to this patch; no lint cleanup performed in this pass.

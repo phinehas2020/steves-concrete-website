@@ -28,6 +28,7 @@ const SEO_SERVICE_PAGES = seoServicePages
   .filter((service) => !service.redirectTo)
   .map((service) => service.slug)
 const REVIEW_PAGES = ['reviews']
+const INCLUDE_DYNAMIC_SITEMAP_URLS = process.env.INCLUDE_DYNAMIC_SITEMAP_URLS === 'true'
 const GUIDE_PAGES = [
   'guides/concrete-driveway-cost-waco-tx',
   'guides/stamped-concrete-cost-waco-tx',
@@ -75,6 +76,11 @@ export default async function handler(req, res) {
     {
       loc: `${SITE_URL}/jobs`,
       changefreq: 'weekly',
+      priority: '0.7',
+    },
+    {
+      loc: `${SITE_URL}/guides`,
+      changefreq: 'monthly',
       priority: '0.7',
     },
     {
@@ -137,7 +143,7 @@ export default async function handler(req, res) {
     })
   })
 
-  if (supabaseUrl && supabaseServiceRoleKey) {
+  if (INCLUDE_DYNAMIC_SITEMAP_URLS && supabaseUrl && supabaseServiceRoleKey) {
     try {
       const supabase = createClient(supabaseUrl, supabaseServiceRoleKey)
       const { data } = await supabase

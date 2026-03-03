@@ -456,6 +456,7 @@ function renderServiceContent(service) {
     actionLinks: [
       { href: '/#contact', label: 'Request estimate' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
+      { href: '/guides', label: 'View all pricing guides' },
       ...(service.pricingGuide ? [{ href: service.pricingGuide.href, label: 'View pricing guide' }] : []),
     ],
     sections: [
@@ -526,6 +527,7 @@ function renderSeoServiceContent(service) {
     actionLinks: [
       { href: '/#contact', label: 'Request estimate' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
+      { href: '/guides', label: 'View all pricing guides' },
       { href: '/jobs', label: 'View recent projects' },
     ],
     sections: [

@@ -5,6 +5,7 @@ import { SERVICE_CANONICAL_PATH_BY_SLUG } from '../src/data/servicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const OUTPUT_PATH = path.join(process.cwd(), 'public', 'sitemap.xml')
+const INCLUDE_DYNAMIC_SITEMAP_URLS = process.env.INCLUDE_DYNAMIC_SITEMAP_URLS === 'true'
 
 const STATIC_ROUTES = [
   { path: '/', changefreq: 'weekly', priority: '1.0' },
@@ -155,7 +156,7 @@ async function main() {
   const supabaseUrl = process.env.SUPABASE_URL
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-  if (supabaseUrl && serviceKey) {
+  if (INCLUDE_DYNAMIC_SITEMAP_URLS && supabaseUrl && serviceKey) {
     try {
       const supabase = createClient(supabaseUrl, serviceKey)
 
