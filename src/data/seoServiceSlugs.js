@@ -21,3 +21,74 @@ export const seoServiceSlugs = [
   { slug: 'contractors-in-waco-tx' },
   { slug: 'general-contractor-waco-tx', redirectTo: '/contractors-in-waco-tx' },
 ]
+
+export const servicePageLinks = [
+  {
+    label: 'Concrete Resurfacing in Waco, TX',
+    slug: 'concrete-resurfacing-waco-tx',
+  },
+  {
+    label: 'Sports Court Coating in Waco, TX',
+    slug: 'sports-court-coating-waco-tx',
+  },
+  {
+    label: 'Concrete Driveways in Waco, TX',
+    slug: 'concrete-driveways-waco-tx',
+  },
+  {
+    label: 'Concrete Patios in Waco, TX',
+    slug: 'concrete-patios-waco-tx',
+  },
+  {
+    label: 'Concrete Sidewalks in Waco, TX',
+    slug: 'concrete-sidewalks-waco-tx',
+  },
+  {
+    label: 'Commercial Concrete Contractor in Waco, TX',
+    slug: 'commercial-concrete-contractor-waco-tx',
+  },
+  {
+    label: 'Residential Concrete Contractors in Waco, TX',
+    slug: 'residential-concrete-contractor-waco-tx',
+  },
+  {
+    label: 'Stamped Concrete in Waco, TX',
+    slug: 'stamped-concrete-waco-tx',
+  },
+  {
+    label: 'Concrete Foundations in Waco, TX',
+    slug: 'concrete-foundations-waco-tx',
+  },
+  {
+    label: 'Parking Lot Concrete in Waco, TX',
+    slug: 'parking-lot-concrete-waco',
+  },
+  {
+    label: 'Foundation Repair in Waco, TX',
+    slug: 'foundation-repair-waco-tx',
+  },
+  {
+    label: 'House Leveling in Waco, TX',
+    slug: 'house-leveling-waco-tx',
+  },
+  {
+    label: 'Retaining Wall Installation in Waco, TX',
+    slug: 'retaining-walls-waco-tx',
+  },
+  {
+    label: 'Decorative Concrete in Waco, TX',
+    slug: 'decorative-concrete-waco',
+  },
+  {
+    label: 'Hardscaping Contractor in Waco, TX',
+    slug: 'hardscaping-waco-tx',
+  },
+  {
+    label: 'Concrete Deck Contractors in Waco, TX',
+    slug: 'concrete-deck-contractors',
+  },
+  {
+    label: 'Contractors in Waco, TX (Concrete Focus)',
+    slug: 'contractors-in-waco-tx',
+  },
+]

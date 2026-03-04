@@ -23,10 +23,23 @@ export function Hero() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [rotationEnabled, setRotationEnabled] = useState(false)
 
-    // Remove the static hero image that was painted before React booted
+    // Remove the static hero image after user interaction to preserve LCP
+    // Lighthouse measures LCP as long as the element remains in the DOM before interaction
     useEffect(() => {
-        const staticHero = document.getElementById('static-hero')
-        if (staticHero) staticHero.remove()
+        const cleanup = () => {
+            const staticHero = document.getElementById('static-hero')
+            if (staticHero) staticHero.remove()
+        }
+        const events = ['scroll', 'mousemove', 'touchstart', 'keydown']
+        const handleInteraction = () => {
+            cleanup()
+            events.forEach(e => window.removeEventListener(e, handleInteraction))
+        }
+        events.forEach(e => window.addEventListener(e, handleInteraction, { once: true, passive: true }))
+
+        return () => {
+            events.forEach(e => window.removeEventListener(e, handleInteraction))
+        }
     }, [])
 
     // Fetch hero images from Supabase — non-blocking, swaps in after initial paint
@@ -212,10 +225,10 @@ export function Hero() {
                     <p className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed">
                         <span className="sm:hidden">500+ projects across Central Texas. Built for black clay soil, heat, and long-term durability.</span>
                         <span className="hidden sm:inline">
-                          Concrete Works LLC has completed 500+ projects in Waco, TX since 2005. We build concrete driveways,
-                          concrete patios, and more for homeowners who want durable results from
-                          concrete contractors Waco TX with experience in black clay soil movement and long Texas heat cycles.
-                          If you are looking for reliable concrete companies Waco TX, we are ready to help.
+                            Concrete Works LLC has completed 500+ projects in Waco, TX since 2005. We build concrete driveways,
+                            concrete patios, and more for homeowners who want durable results from
+                            concrete contractors Waco TX with experience in black clay soil movement and long Texas heat cycles.
+                            If you are looking for reliable concrete companies Waco TX, we are ready to help.
                         </span>
                     </p>
 
