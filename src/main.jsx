@@ -4,16 +4,14 @@ import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router-
 import './index.css'
 import App from './App.jsx'
 
-// Remove the static hero image that lives outside #root after React's first
-// paint. On the homepage Hero.jsx also handles this, but on other routes the
-// static img would linger behind the page content (position:fixed, z-index:0).
-// Double rAF ensures removal only after the first frame is painted.
-requestAnimationFrame(() => {
-  requestAnimationFrame(() => {
-    const el = document.getElementById('static-hero')
-    if (el) el.remove()
-  })
-})
+// The static hero image lives outside #root so it survives React's initial
+// render on the homepage (preserving LCP). On every OTHER route, remove it
+// immediately — otherwise Lighthouse treats the full-viewport hero as LCP.
+// Hero.jsx handles cleanup on the homepage after React paints.
+if (window.location.pathname !== '/') {
+  const el = document.getElementById('static-hero')
+  if (el) el.remove()
+}
 import { NotFound } from './pages/NotFound'
 
 // Lightweight slug-only arrays keep the full data modules (and their image
