@@ -1,5 +1,51 @@
 # Napkin
 
+## 2026-03-04 — White pages caused by static routes using `useParams`
+
+### Context
+- User reported that many non-home pages were rendering as blank white screens.
+
+### Root cause
+- In `src/main.jsx`, mapped routes were static paths (for example `/services/concrete-driveways`) but route elements used wrapper components that read `useParams().slug`.
+- Static paths did not define `:slug`, so slug was `undefined`.
+- `ServiceLanding`, `LocationLanding`, `SeoServiceLanding`, `GuideLanding`, and `SportsCourtAreaLanding` return `null` when page lookup fails, which produced blank pages.
+
+### What fixed it
+1. Removed `useParams` wrappers in `src/main.jsx`.
+2. Passed each mapped slug directly to the lazy page components in route elements.
+3. Verified with Playwright route sweep and `npm run build`.
+
+### Pattern to keep
+- If generating one static route per slug, pass slug explicitly as a prop.
+- Only use `useParams` when the route path includes dynamic params like `/:slug`.
+
+### Self-corrections during validation
+- Shell quoting: when running `node --input-type=module -e` with template literals, zsh consumed backticks. Use heredoc (`<<'EOF'`) for route-list scripts.
+- Playwright eval context: avoid `new URL(page.url())` in this tool context; use `page.url()` directly to prevent `URL is not defined` failures.
+
+## 2026-03-04 — Remove internal strategy phrasing from public copy
+
+### Context
+- User reported front-facing text that sounded like internal SEO/project notes: “These two pages are now front-and-center… strategic services.”
+
+### What to do instead
+- Keep homepage/service copy customer-facing and outcome-focused.
+- Avoid internal rollout language (e.g., “now front-and-center,” “strategic services,” “priority pages”) in public UI text.
+
+## 2026-03-04 — Removed internal directory checklist from homepage
+
+### Context
+- User flagged a public-facing section titled "Local Citations to Submit Manually" and asked for immediate removal.
+
+### What was done
+1. Located the source in `src/App.jsx` (`DirectoryListings` component + render call).
+2. Removed the `DirectoryListings` component and its `GOOGLE_REVIEW_URL` constant.
+3. Removed `<DirectoryListings />` from the homepage render tree.
+4. Ran `npm run build` successfully to confirm frontend still compiles.
+
+### Pattern to keep
+- Do not ship internal SEO/operator checklists to public pages unless explicitly requested as public content.
+
 ## 2026-03-02 — Google tag (gtag.js) snippet added to base HTML
 
 ### Context
@@ -1448,3 +1494,49 @@
 - For this repo, keep data modules that are only needed by lazy routes out of the entry chunk by using slug-only route manifests.
 - Use `public/` for LCP images so `<link rel="preload">` can reference a stable URL without Vite hash.
 - Prefer plain `<img>` over `Motion.img` for the LCP element to avoid blocking paint on JS animation framework init.
+
+## 2026-03-04 — CWV recovery pass (interaction analytics + deferred contact/footer)
+
+### Context
+- Follow-up implementation to target Semrush-style mobile CWV regressions on service/location routes.
+
+### What was changed
+1. `index.html`
+   - Removed global Supabase preconnect/dns-prefetch.
+   - Switched hero preload/static hero to home-only runtime insertion (`window.__cwHomeStaticHero`).
+   - Changed GA load strategy to first interaction (`scroll`, `pointerdown`, `keydown`, `touchstart`) with 7s fallback timer.
+2. Landing pages
+   - Deferred `Contact` and `Footer` on service/location/guide/seo/sports pages using `DeferredSection`.
+3. `ContactForm.jsx`
+   - Removed `motion/react` usage (`AnimatePresence` wrappers replaced with plain React markup + CSS transitions).
+4. Logo delivery
+   - Added `public/logo-96.png` and switched Header/Footer to use it with explicit dimensions.
+5. `vercel.json`
+   - Added immutable static cache headers for `/assets/*`, `/images/*`, `/hero.webp`, and `/logo-96.png`.
+6. Added `scripts/lighthouse-sweep.mjs` + `npm run perf:sweep` for 10 URL CWV gate checks.
+
+### Validation notes
+- `npm run build` passes.
+- Local Playwright validation on `/services/concrete-foundations` confirms:
+  - no initial `/hero.webp` request,
+  - no initial `vendor-motion` request,
+  - GA script absent pre-interaction and loaded after interaction.
+- `npm run perf:sweep` against current production URL is still failing LCP thresholds across all 10 URLs (baseline), so deploy + recrawl is required before judging this patch’s impact.
+
+### Additional tuning + local gate results
+1. Added `--base-url` / `BASE_URL` support to `scripts/lighthouse-sweep.mjs` so local preview can be evaluated directly.
+2. Local sweep against preview (`http://127.0.0.1:4173`) after code changes:
+   - 9/10 routes passing strict gate (`LCP <= 2.5s`, `TBT <= 200ms`, `CLS <= 0.1`).
+   - Remaining miss was homepage by ~29ms in one run.
+3. Compressed `public/hero.webp` further (120KB -> 63KB) and adjusted static hero intrinsic dimensions in `index.html`.
+4. Focused rerun still showed homepage around `LCP ~2532ms` (very close threshold), indicating residual variance/text-render delay dominates over image bytes at this point.
+
+### Final home LCP fix + production confirmation
+1. Root cause for remaining home miss: `Hero.jsx` was still swapping to Supabase hero images early, which could become the LCP candidate.
+2. Added `allowDynamicHero` gate in `Hero.jsx`:
+   - keep static preloaded hero for first paint,
+   - only enable dynamic fetch/swap after interaction (with 12s fallback).
+3. Deployed to production via `vercel --prod --yes`.
+4. Post-deploy live 10-route sweep (`npm run perf:sweep`) now passes all tracked URLs:
+   - `/` LCP 1048ms, TBT 0ms, CLS 0.001
+   - all 9 non-home tracked routes pass thresholds as well.

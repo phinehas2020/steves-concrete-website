@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
+import { DeferredSection } from '../components/DeferredSection'
 const Contact = lazy(() => import('../components/Contact').then((m) => ({ default: m.Contact })))
 const Footer = lazy(() => import('../components/Footer').then((m) => ({ default: m.Footer })))
 import { Header } from '../components/Header'
@@ -206,17 +207,21 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
           </section>
         )}
 
-        <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
-          <section className="section-padding bg-stone-50">
-            <div className="container-main">
-              <Contact />
-            </div>
-          </section>
-        </Suspense>
+        <DeferredSection rootMargin="520px 0px" minHeight={760}>
+          <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
+            <section className="section-padding bg-stone-50">
+              <div className="container-main">
+                <Contact />
+              </div>
+            </section>
+          </Suspense>
+        </DeferredSection>
       </main>
-      <Suspense fallback={<div style={{ minHeight: 400 }} />}>
-        <Footer />
-      </Suspense>
+      <DeferredSection rootMargin="640px 0px" minHeight={400}>
+        <Suspense fallback={<div style={{ minHeight: 400 }} />}>
+          <Footer />
+        </Suspense>
+      </DeferredSection>
     </div>
   )
 }

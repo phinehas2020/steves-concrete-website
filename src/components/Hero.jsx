@@ -22,28 +22,44 @@ export function Hero() {
     const [heroImages, setHeroImages] = useState([])
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [rotationEnabled, setRotationEnabled] = useState(false)
+    const [allowDynamicHero, setAllowDynamicHero] = useState(false)
 
-    // Remove the static hero image after user interaction to preserve LCP
-    // Lighthouse measures LCP as long as the element remains in the DOM before interaction
+    // Keep the static preloaded hero as the first-paint source. Only after interaction
+    // (or a long fallback) do we allow dynamic hero image fetch/swap/rotation.
     useEffect(() => {
-        const cleanup = () => {
+        let fallbackTimeoutId
+
+        const activateDynamicHero = () => {
+            setAllowDynamicHero(true)
             const staticHero = document.getElementById('static-hero')
             if (staticHero) staticHero.remove()
+            events.forEach(e => window.removeEventListener(e, activateDynamicHero))
         }
+
         const events = ['scroll', 'mousemove', 'touchstart', 'keydown']
-        const handleInteraction = () => {
-            cleanup()
-            events.forEach(e => window.removeEventListener(e, handleInteraction))
+        events.forEach(e => window.addEventListener(e, activateDynamicHero, { once: true, passive: true }))
+
+        const scheduleFallback = () => {
+            fallbackTimeoutId = window.setTimeout(activateDynamicHero, 12000)
         }
-        events.forEach(e => window.addEventListener(e, handleInteraction, { once: true, passive: true }))
+
+        if (document.readyState === 'complete') {
+            scheduleFallback()
+        } else {
+            window.addEventListener('load', scheduleFallback, { once: true })
+        }
 
         return () => {
-            events.forEach(e => window.removeEventListener(e, handleInteraction))
+            events.forEach(e => window.removeEventListener(e, activateDynamicHero))
+            if (fallbackTimeoutId) window.clearTimeout(fallbackTimeoutId)
+            window.removeEventListener('load', scheduleFallback)
         }
     }, [])
 
     // Fetch hero images from Supabase — non-blocking, swaps in after initial paint
     useEffect(() => {
+        if (!allowDynamicHero) return undefined
+
         const fetchHeroImages = async () => {
             try {
                 const { supabase } = await import('../lib/supabase')
@@ -68,11 +84,12 @@ export function Hero() {
         }
 
         fetchHeroImages()
-    }, [])
+        return undefined
+    }, [allowDynamicHero])
 
     // Start rotation only after initial load and idle time.
     useEffect(() => {
-        if (heroImages.length <= 1 || typeof window === 'undefined') return undefined
+        if (!allowDynamicHero || heroImages.length <= 1 || typeof window === 'undefined') return undefined
 
         let cancelled = false
         let timeoutId
@@ -106,7 +123,7 @@ export function Hero() {
             }
             window.removeEventListener('load', scheduleEnable)
         }
-    }, [heroImages.length])
+    }, [allowDynamicHero, heroImages.length])
 
     useEffect(() => {
         if (!rotationEnabled || heroImages.length <= 1) return undefined
@@ -135,7 +152,7 @@ export function Hero() {
     // Determine which image to display:
     // Start with the static hero image (preloaded in HTML, no waterfall).
     // Once Supabase data arrives, swap to the dynamic image.
-    const hasSupabaseImages = heroImages.length > 0
+    const hasSupabaseImages = allowDynamicHero && heroImages.length > 0
     const safeCurrentImageIndex = hasSupabaseImages ? currentImageIndex % heroImages.length : 0
     const currentImage = hasSupabaseImages ? heroImages[safeCurrentImageIndex] : null
 

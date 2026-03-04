@@ -404,12 +404,7 @@ function renderPage({
 }
 
 function renderHomeContent() {
-  // Static hero image: painted by the browser before JS boots.
-  // React's createRoot replaces <div id="root"> contents on mount, so this
-  // disappears naturally once the app renders. Matches Hero.jsx layout.
-  const staticHeroImg = '<img src="/hero.webp" alt="Stamped concrete driveway project in Waco, Texas" width="1600" height="1066" fetchpriority="high" decoding="async" style="position:fixed;inset:0;width:100%;height:100vh;object-fit:cover;z-index:0;" />'
-
-  return staticHeroImg + renderPage({
+  return renderPage({
     eyebrow: 'Waco Concrete Contractor',
     title: 'Concrete Contractor Waco TX',
     subtitle:

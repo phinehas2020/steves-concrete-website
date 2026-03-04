@@ -1,5 +1,4 @@
 import { Phone, Mail, MapPin } from 'lucide-react'
-import logoImage from '../assets/images/logo.png'
 import { locationLinks } from '../data/locationPages'
 import { sportsCourtAreaLinks } from '../data/sportsCourtAreaPages'
 import { servicePageLinks } from '../data/seoServicePages'
@@ -24,6 +23,8 @@ const serviceQuickLinks = servicePageLinks.map((service) => ({
     href: `/${service.slug}`,
 }))
 
+const logoImage = '/logo-96.png'
+
 export function Footer() {
     const currentYear = new Date().getFullYear()
 
@@ -45,6 +46,10 @@ export function Footer() {
                                 <img
                                     src={logoImage}
                                     alt="Concrete Works LLC"
+                                    width={96}
+                                    height={60}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="h-12 w-auto"
                                 />
                             </div>

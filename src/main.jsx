@@ -3,15 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
-
-// The static hero image lives outside #root so it survives React's initial
-// render on the homepage (preserving LCP). On every OTHER route, remove it
-// immediately — otherwise Lighthouse treats the full-viewport hero as LCP.
-// Hero.jsx handles cleanup on the homepage after React paints.
-if (window.location.pathname !== '/') {
-  const el = document.getElementById('static-hero')
-  if (el) el.remove()
-}
 import { NotFound } from './pages/NotFound'
 
 // Lightweight slug-only arrays keep the full data modules (and their image

@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Header } from '../components/Header'
+import { DeferredSection } from '../components/DeferredSection'
 const Footer = lazy(() => import('../components/Footer').then((m) => ({ default: m.Footer })))
 const Contact = lazy(() => import('../components/Contact').then((m) => ({ default: m.Contact })))
 import {
@@ -374,13 +375,17 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
           </section>
         )}
 
-        <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
-          <Contact />
-        </Suspense>
+        <DeferredSection rootMargin="520px 0px" minHeight={760}>
+          <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
+            <Contact />
+          </Suspense>
+        </DeferredSection>
       </main>
-      <Suspense fallback={<div style={{ minHeight: 400 }} />}>
-        <Footer />
-      </Suspense>
+      <DeferredSection rootMargin="640px 0px" minHeight={400}>
+        <Suspense fallback={<div style={{ minHeight: 400 }} />}>
+          <Footer />
+        </Suspense>
+      </DeferredSection>
     </div>
   )
 }

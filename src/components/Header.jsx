@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { cn } from '../lib/utils'
 import { Menu, X, Phone } from 'lucide-react'
-import logoImage from '../assets/images/logo.png'
 
 const navLinks = [
     { label: 'Home', href: '/#home' },
@@ -15,6 +14,8 @@ const navLinks = [
     { label: 'Reviews', href: '/reviews' },
 ]
 
+const logoImage = '/logo-96.png'
+
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -27,6 +28,10 @@ export function Header() {
                         <img
                             src={logoImage}
                             alt="Concrete Works LLC"
+                            width={96}
+                            height={60}
+                            loading="eager"
+                            decoding="async"
                             className="h-12 max-h-12 w-auto object-contain"
                         />
                     </a>

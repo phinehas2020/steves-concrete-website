@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Send, CheckCircle, Loader2 } from 'lucide-react'
-import { motion as Motion, AnimatePresence } from 'motion/react'
 import { Button } from './Button'
 
 const TURNSTILE_SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
@@ -205,14 +204,8 @@ export function ContactForm({
 
   return (
     <div ref={formRef} className={className}>
-      <AnimatePresence mode="wait">
-        {formState === 'success' ? (
-          <Motion.div
-            key="success"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-col items-center justify-center text-center py-12"
-          >
+      {formState === 'success' ? (
+          <div className="flex flex-col items-center justify-center text-center py-12 anim-fade-in-up">
             <div className="size-20 bg-accent-500/10 rounded-full flex items-center justify-center mb-6 border border-accent-500/20">
               <CheckCircle className="size-10 text-accent-500" aria-hidden="true" />
             </div>
@@ -234,16 +227,9 @@ export function ContactForm({
             >
               Send Another Request
             </Button>
-          </Motion.div>
-        ) : (
-          <Motion.form
-            key="form"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onSubmit={handleSubmit}
-            className="space-y-6"
-          >
+          </div>
+      ) : (
+          <form onSubmit={handleSubmit} className="space-y-6 transition-opacity duration-200">
             <div className="absolute -left-[9999px] top-auto w-px h-px overflow-hidden" aria-hidden="true">
               <label htmlFor="website">Website</label>
               <input
@@ -358,28 +344,24 @@ export function ContactForm({
             </div>
 
             {requiresTurnstile && (
-                <div className="space-y-2">
-                  <div ref={turnstileContainerRef} />
-                  {!shouldInitTurnstile && (
-                    <p className="text-xs text-stone-500">Bot verification will load when this form is in view.</p>
-                  )}
-                  {turnstileConfigError && (
-                    <p className="text-xs text-red-600">{turnstileConfigError}</p>
-                  )}
-                  {!turnstileReady && (
-                    <p className="text-xs text-stone-500">Loading bot verification...</p>
-                  )}
-                </div>
-              )}
+              <div className="space-y-2">
+                <div ref={turnstileContainerRef} />
+                {!shouldInitTurnstile && (
+                  <p className="text-xs text-stone-500">Bot verification will load when this form is in view.</p>
+                )}
+                {turnstileConfigError && (
+                  <p className="text-xs text-red-600">{turnstileConfigError}</p>
+                )}
+                {!turnstileReady && (
+                  <p className="text-xs text-stone-500">Loading bot verification...</p>
+                )}
+              </div>
+            )}
 
             {formState === 'error' && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-5 py-4 font-medium"
-              >
+              <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl px-5 py-4 font-medium anim-fade-in-up">
                 {errorMessage || 'Something went wrong. Please call us directly at (254) 230-3102.'}
-              </motion.div>
+              </div>
             )}
 
             <Button
@@ -403,9 +385,8 @@ export function ContactForm({
             <p className="text-[10px] text-stone-500 text-center font-bold uppercase tracking-widest">
               Direct: (254) 230-3102 • Licensed & Insured
             </p>
-            </Motion.form>
-        )}
-      </AnimatePresence>
+          </form>
+      )}
     </div>
   )
 }

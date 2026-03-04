@@ -6,10 +6,21 @@
   <!-- Deploy refresh marker: 2026-03-04 csp-fix-2 -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <link rel="dns-prefetch" href="//db.phinehasadams.com" />
-  <link rel="preconnect" href="https://db.phinehasadams.com" crossorigin />
-  <!-- Preload hero image so browser discovers LCP element before JS boots -->
-  <link rel="preload" as="image" type="image/webp" href="/hero.webp" fetchpriority="high" />
+  <script>
+    (function () {
+      var isHomePath = window.location.pathname === '/' || window.location.pathname === '';
+      window.__cwHomeStaticHero = isHomePath;
+      if (!isHomePath) return;
+
+      var preload = document.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'image';
+      preload.type = 'image/webp';
+      preload.href = '/hero.webp';
+      preload.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(preload);
+    })();
+  </script>
 
   <!-- SEO Meta Tags (GSC-optimized for CTR) -->
   <title>Waco Concrete Contractors | Concrete Companies Waco TX | Concrete Works LLC</title>
@@ -26,13 +37,43 @@
   <meta name="geo.position" content="31.5493;-97.1467" />
   <meta name="ICBM" content="31.5493, -97.1467" />
 
-  <!-- Google tag (gtag.js) loaded after first paint -->
+  <!-- Google tag (gtag.js) loaded after first interaction with fallback -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+
+    var gtagFallbackTimer = null;
+    var interactionEvents = ['scroll', 'pointerdown', 'keydown', 'touchstart'];
+
+    function removeInteractionListeners() {
+      interactionEvents.forEach(function(eventName) {
+        window.removeEventListener(eventName, loadGtag);
+      });
+    }
+
+    function addAnalyticsPreconnectHints() {
+      ['https://www.googletagmanager.com', 'https://www.google-analytics.com'].forEach(function(origin) {
+        if (document.querySelector('link[rel="preconnect"][href="' + origin + '"]')) return;
+        var preconnect = document.createElement('link');
+        preconnect.rel = 'preconnect';
+        preconnect.href = origin;
+        preconnect.crossOrigin = '';
+        document.head.appendChild(preconnect);
+      });
+    }
+
     function loadGtag() {
       if (window.__gtagLoaded) return;
       window.__gtagLoaded = true;
+
+      removeInteractionListeners();
+      if (gtagFallbackTimer) {
+        clearTimeout(gtagFallbackTimer);
+        gtagFallbackTimer = null;
+      }
+
+      addAnalyticsPreconnectHints();
+
       var script = document.createElement('script');
       script.async = true;
       script.src = 'https://www.googletagmanager.com/gtag/js?id=G-RBM02DY6F6';
@@ -40,13 +81,19 @@
       gtag('js', new Date());
       gtag('config', 'G-RBM02DY6F6');
     }
-    window.addEventListener('load', function() {
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(loadGtag, { timeout: 4000 });
-      } else {
-        setTimeout(loadGtag, 1200);
-      }
-    });
+
+    function scheduleGtagLoad() {
+      interactionEvents.forEach(function(eventName) {
+        window.addEventListener(eventName, loadGtag, { once: true, passive: true });
+      });
+      gtagFallbackTimer = setTimeout(loadGtag, 7000);
+    }
+
+    if (document.readyState === 'complete') {
+      scheduleGtagLoad();
+    } else {
+      window.addEventListener('load', scheduleGtagLoad, { once: true });
+    }
   </script>
 
   <!-- Open Graph -->
@@ -210,18 +257,25 @@
 </head>
 
 <body>
-  <!-- Static hero image painted before JS boots; lives OUTSIDE #root so React
-       doesn't destroy it on render. Hero.jsx removes it once mounted. -->
-  <img
-    id="static-hero"
-    src="/hero.webp"
-    alt="Stamped concrete driveway project in Waco, Texas"
-    width="1600"
-    height="1066"
-    fetchpriority="high"
-    decoding="async"
-    style="position:fixed;inset:0;width:100%;height:100vh;object-fit:cover;z-index:0;"
-  />
+  <script>
+    if (window.__cwHomeStaticHero) {
+      var staticHero = document.createElement('img');
+      staticHero.id = 'static-hero';
+      staticHero.src = '/hero.webp';
+      staticHero.alt = 'Stamped concrete driveway project in Waco, Texas';
+      staticHero.width = 1080;
+      staticHero.height = 720;
+      staticHero.setAttribute('fetchpriority', 'high');
+      staticHero.decoding = 'async';
+      staticHero.style.position = 'fixed';
+      staticHero.style.inset = '0';
+      staticHero.style.width = '100%';
+      staticHero.style.height = '100vh';
+      staticHero.style.objectFit = 'cover';
+      staticHero.style.zIndex = '0';
+      document.body.appendChild(staticHero);
+    }
+  </script>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
