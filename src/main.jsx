@@ -1,6 +1,6 @@
 import { lazy, StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 
@@ -54,35 +54,6 @@ const SportsCourtAreaLanding = lazy(() =>
 )
 const Reviews = lazy(() => import('./pages/Reviews').then((m) => ({ default: m.Reviews })))
 
-// Wrapper components that look up their page data by URL slug.
-// This keeps the full data modules in the lazy-loaded chunk, not the entry chunk.
-
-function LocationRoute() {
-  const { slug } = useParams()
-  return <LocationLanding slug={slug} />
-}
-
-function ServiceRoute() {
-  const { slug } = useParams()
-  return <ServiceLanding slug={slug} />
-}
-
-function SeoServiceRoute({ redirectTo }) {
-  const { slug } = useParams()
-  if (redirectTo) return <Navigate to={redirectTo} replace />
-  return <SeoServiceLanding slug={slug} />
-}
-
-function GuideRoute() {
-  const { slug } = useParams()
-  return <GuideLanding slug={slug} />
-}
-
-function SportsCourtRoute() {
-  const { slug } = useParams()
-  return <SportsCourtAreaLanding slug={slug} />
-}
-
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
@@ -102,35 +73,35 @@ createRoot(document.getElementById('root')).render(
             <Route
               key={slug}
               path={`/${slug}`}
-              element={<LocationRoute />}
+              element={<LocationLanding slug={slug} />}
             />
           ))}
           {seoServiceSlugs.map(({ slug, redirectTo }) => (
             <Route
               key={slug}
               path={`/${slug}`}
-              element={redirectTo ? <Navigate to={redirectTo} replace /> : <SeoServiceRoute />}
+              element={redirectTo ? <Navigate to={redirectTo} replace /> : <SeoServiceLanding slug={slug} />}
             />
           ))}
           {serviceSlugs.map((slug) => (
             <Route
               key={slug}
               path={`/services/${slug}`}
-              element={<ServiceRoute />}
+              element={<ServiceLanding slug={slug} />}
             />
           ))}
           {guideSlugs.map((slug) => (
             <Route
               key={slug}
               path={`/guides/${slug}`}
-              element={<GuideRoute />}
+              element={<GuideLanding slug={slug} />}
             />
           ))}
           {sportsCourtAreaSlugs.map((slug) => (
             <Route
               key={slug}
               path={`/sports-court-coating/${slug}`}
-              element={<SportsCourtRoute />}
+              element={<SportsCourtAreaLanding slug={slug} />}
             />
           ))}
           <Route path="*" element={<NotFound />} />

@@ -9,9 +9,6 @@ import { useSeo, buildJsonLdGraph, SITE_URL, DEFAULT_IMAGE } from './lib/seo'
 import { servicePageLinks } from './data/seoServiceSlugs'
 import { locationLinks } from './data/locationSlugs'
 
-const GOOGLE_REVIEW_URL =
-  'https://www.google.com/maps/place/SLA+Concrete+Works/@31.6637838,-97.1149261,17z/data=!3m1!4b1!4m6!3m5!1s0x864f83d5fc2728cf:0x92d8085e5a37fa64!8m2!3d31.6637793!4d-97.1123512!16s%2Fg%2F11gf0qs4j0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D'
-
 const CostQuickAnswers = lazy(() =>
   import('./components/CostQuickAnswers').then((m) => ({ default: m.CostQuickAnswers })),
 )
@@ -123,49 +120,6 @@ function ServiceAreas() {
   )
 }
 
-function DirectoryListings() {
-  const directories = [
-    { label: 'Google Business Profile', url: GOOGLE_REVIEW_URL },
-    { label: 'Bing Places', url: 'https://www.bing.com/business/' },
-    { label: 'Yelp', url: 'https://www.yelp.com/biz/signup' },
-    { label: 'BBB', url: 'https://www.bbb.org/' },
-    { label: 'Angi', url: 'https://www.angi.com/companylist?trm=1' },
-    { label: 'HomeAdvisor', url: 'https://www.homeadvisor.com/join/' },
-    { label: 'Houzz', url: 'https://www.houzz.com/pro' },
-    { label: 'Greater Waco Chamber of Commerce', url: 'https://www.gcwtx.com/' },
-    { label: 'Facebook Business', url: 'https://www.facebook.com/business' },
-  ]
-
-  return (
-    <section className="section-padding bg-stone-950 text-white">
-      <div className="container-main">
-        <div className="max-w-3xl mb-8">
-          <p className="text-xs uppercase tracking-[0.25em] font-bold text-accent-400 mb-4">Directory Listings</p>
-          <h2 className="font-display font-black text-3xl sm:text-4xl text-balance text-white">
-            Local Citations to Submit Manually
-          </h2>
-          <p className="text-stone-300 text-pretty mt-4">
-            Ask the owner to claim and keep these listings current to support local ranking signals.
-            We have not linked these directly yet because profiles and profile IDs are account-specific.
-          </p>
-        </div>
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {directories.map((directory) => (
-            <li key={directory.label}>
-              <p className="rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white">
-                {directory.label}:
-                <a href={directory.url} className="ml-2 text-accent-400 hover:text-white underline" target="_blank" rel="noreferrer">
-                  Open platform
-                </a>
-              </p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  )
-}
-
 function App() {
   useSeo({
     title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Concrete Works LLC',
@@ -250,9 +204,6 @@ function App() {
               <Contact />
             </Suspense>
           </DeferredSection>
-        </div>
-        <div className="order-11 md:order-none">
-          <DirectoryListings />
         </div>
       </main>
       <DeferredSection rootMargin="640px 0px" minHeight={680}>
