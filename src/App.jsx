@@ -1,10 +1,10 @@
 import { lazy, Suspense } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { Services } from './components/Services'
+const Services = lazy(() => import('./components/Services').then((m) => ({ default: m.Services })))
 import { FeaturedServiceSpotlight } from './components/FeaturedServiceSpotlight'
 import { DeferredSection } from './components/DeferredSection'
-import { Footer } from './components/Footer'
+const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })))
 import { useSeo, buildJsonLdGraph, SITE_URL, DEFAULT_IMAGE } from './lib/seo'
 import { servicePageLinks } from './data/seoServicePages'
 import { locationLinks } from './data/locationPages'
@@ -190,7 +190,11 @@ function App() {
           <FeaturedServiceSpotlight />
         </div>
         <div className="order-3 md:order-none">
-          <Services />
+          <DeferredSection rootMargin="420px 0px" minHeight={480}>
+            <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={480} />}>
+              <Services />
+            </Suspense>
+          </DeferredSection>
         </div>
         <div className="order-4 md:order-none">
           <ServiceAreas />
@@ -250,7 +254,9 @@ function App() {
         </div>
       </main>
       <DeferredSection rootMargin="640px 0px" minHeight={680}>
-        <Footer />
+        <Suspense fallback={<SectionFallback minHeight={680} />}>
+          <Footer />
+        </Suspense>
       </DeferredSection>
     </div>
   )

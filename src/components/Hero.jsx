@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { motion as Motion, useInView, useMotionValue, useTransform, animate } from 'motion/react'
 import { ArrowRight, Phone } from 'lucide-react'
 import { heroStagger, staggerItem } from '../lib/animations'
-import { supabase } from '../lib/supabase'
 import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 
 // Static hero image served from public/ — browser can discover this immediately
@@ -66,6 +65,7 @@ export function Hero() {
     useEffect(() => {
         const fetchHeroImages = async () => {
             try {
+                const { supabase } = await import('../lib/supabase')
                 const { data, error } = await supabase
                     .from('hero_images')
                     .select('*')

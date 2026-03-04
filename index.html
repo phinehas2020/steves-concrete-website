@@ -210,7 +210,18 @@
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Static hero image painted before JS boots; React hydrates over this -->
+    <img
+      src="/hero.webp"
+      alt="Stamped concrete driveway project in Waco, Texas"
+      width="1600"
+      height="1066"
+      fetchpriority="high"
+      decoding="async"
+      style="position:fixed;inset:0;width:100%;height:100vh;object-fit:cover;z-index:0;"
+    />
+  </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 
