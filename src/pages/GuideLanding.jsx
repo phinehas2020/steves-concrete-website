@@ -9,8 +9,11 @@ import {
   buildFaqPage,
   buildJsonLdGraph,
 } from '../lib/seo'
+import { guidePages } from '../data/guides'
 
-export function GuideLanding({ page }) {
+export function GuideLanding({ page: pageProp, slug: slugProp }) {
+  const page = pageProp || guidePages.find((p) => p.slug === slugProp)
+  if (!page) return null
   const {
     slug,
     title,

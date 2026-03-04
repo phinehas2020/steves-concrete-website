@@ -12,7 +12,9 @@ import {
 } from '../lib/seo'
 import { seoServicePages } from '../data/seoServicePages'
 
-export function SeoServiceLanding({ page }) {
+export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
+  const page = pageProp || seoServicePages.find((p) => p.slug === slugProp)
+  if (!page) return null
   const { slug, title, introParagraph, metaTitle, metaDescription, sections, faq = [], heroImage } = page
 
   const relatedServices = seoServicePages

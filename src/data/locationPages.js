@@ -1,7 +1,10 @@
-import stampedDrivewayImg from '../assets/images/gallery-stamped-driveway.png'
-import patioAggregateImg from '../assets/images/gallery-patio-aggregate.png'
-import commercialParkingImg from '../assets/images/gallery-commercial-parking.png'
 import { getCanonicalServicePath } from './servicePages.js'
+
+// Use public/ WebP images instead of bundled PNG imports to keep them out of
+// the main JS chunk (~2.6 MB of PNGs were inflating the initial bundle).
+const stampedDrivewayImg = '/images/gallery-stamped-driveway.webp'
+const patioAggregateImg = '/images/gallery-patio-aggregate.webp'
+const commercialParkingImg = '/images/gallery-commercial-parking.webp'
 
 const baseServices = [
   { label: 'Concrete Contractors', href: getCanonicalServicePath('concrete-contractors') },

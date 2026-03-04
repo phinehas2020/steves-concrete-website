@@ -18,7 +18,9 @@ import {
 } from '../data/servicePages'
 import { guideLinks } from '../data/guides'
 
-export function ServiceLanding({ page }) {
+export function ServiceLanding({ page: pageProp, slug: slugProp }) {
+  const page = pageProp || servicePages.find((p) => p.slug === slugProp)
+  if (!page) return null
   const {
     slug,
     title,

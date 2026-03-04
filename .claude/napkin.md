@@ -1217,3 +1217,234 @@
 - Keep sitemap URLs aligned with prerendered static routes and direct rewrites.
 - Avoid slicing link collections in prerender home content when sitemap includes all items.
 - Add explicit crawlable links in prerender home for high-level pages (`/blog`, `/reviews`, `/privacy-policy`, `/terms-and-conditions`, `/jobs`).
+
+## 2026-03-03 — Semrush low internal-link pages resolved via prerender link architecture
+
+### Context
+- User asked to fix remaining Semrush technical issues after prior cleanup work.
+- Remaining actionable issue from prior run was low internal-link depth (pages with only one incoming internal link).
+
+### What was done
+1. Updated `scripts/prerender-routes.mjs` to add reusable cross-link blocks on prerendered pages:
+   - Added `companyResourceLinks` for `/reviews`, `/blog`, `/jobs`, `/privacy-policy`, `/terms-and-conditions`.
+   - Added `featuredSpecialtyServiceLinks` for:
+     - `/retaining-walls-waco-tx`
+     - `/decorative-concrete-waco`
+     - `/hardscaping-waco-tx`
+     - `/concrete-deck-contractors`
+2. Appended those link blocks to all prerendered page templates by default in `renderPage`.
+3. Kept home page from duplicating its existing resources section with `includeCompanyResourceLinks: false`.
+
+### Verification
+- `npm run build` passed.
+- `node --check scripts/prerender-routes.mjs` passed.
+- Local incoming-link crawl-map check against prerendered sitemap pages:
+  - Before patch: 7 pages had <=1 incoming link.
+  - After first pass: 4 pages had <=1 incoming link.
+  - After specialty-service links: **0 pages** had <=1 incoming link.
+- Internal-link redirect check against live domain for all discovered internal hrefs: **0 redirecting hrefs**.
+
+### Mistakes / learnings
+- I initially ran build + link-check in parallel, which produced a stale incoming-link result. Re-ran sequentially to confirm the correct post-build state.
+
+### Semrush rerun result (post-push)
+- Campaign: `28632856`
+- Updated: Tue, Mar 3, 2026 (same-day rerun after code push)
+- Outcome:
+  - Site Health: **100%**
+  - Errors: **0**
+  - Warnings: **0**
+  - Internal Linking score: **100%**
+  - AI Search Health: **100%**
+- Remaining notice shown in Top insights:
+  - "Blocked from crawling" (4 pages), all legacy non-canonical service URLs under `/services/...`.
+
+## 2026-03-03 — Core Web Vitals remediation pass (in progress)
+
+### What was learned
+1. Current production build still ships a large home-route JS chunk (`dist/assets/index-*.js` ~765 KB minified, ~230 KB gzip).
+2. Hero fallback image in bundle is still heavy (`dist/assets/hero-*.jpeg` ~580 KB), likely impacting mobile LCP.
+3. Multiple homepage/data-driven cards use raw Supabase public image URLs without resize/quality transforms.
+
+### Plan pattern
+- Prioritize reducing above-the-fold bytes first (hero image + immediate JS execution), then optimize dynamic image URLs for gallery/blog paths.
+
+### Implementation notes (same pass)
+1. Switching from static route maps in `src/main.jsx` to slug-based lazy route wrappers reduced homepage entry chunk pressure by keeping large page-data arrays out of initial route bootstrap.
+2. Hero fallback image converted from JPEG to WebP (`~567 KB` -> `~147 KB`) and slider behavior was reduced to first active image to avoid loading multiple full-screen hero images at once.
+3. Added reusable Supabase image URL transform utility (`storage/v1/render/image`) and applied it to blog/gallery/job imagery to reduce bytes on mobile.
+
+### Mistakes / corrections (same pass)
+1. Mistake: Introduced an invalid `map` return shape in `BlogIndex.jsx` while inlining optimized image vars.
+   - Correction: Switched to block-bodied `map` with explicit `return (...)`.
+2. Mistake: ESLint flagged `motion` as unused after edits because this repo expects JSX component identifiers to be capitalized for lint compatibility.
+   - Correction: Aliased imports to `Motion` and updated JSX usages (`<Motion.div>`, etc.).
+3. Mistake: `DeferredSection` initially called `setState` synchronously inside effect fallback path when `IntersectionObserver` was unavailable.
+   - Correction: Moved fallback behavior into lazy `useState` initializer to satisfy hooks lint rule and avoid cascaded renders.
+
+## 2026-03-03 — Performance pass rollback after user-reported CWV regression
+
+### Context
+- User reported Semrush Core Web Vitals score dropped after commit `7c5278f`.
+
+### What was done
+1. Confirmed live synthetic test variability:
+   - Desktop Lighthouse looked very strong.
+   - Mobile Lighthouse still showed LCP weakness (~4.5s), with biggest transfer contributors including app JS and `gtag.js`.
+2. Prioritized fast recovery over incremental debugging.
+3. Reverted the entire optimization commit on `main` and pushed:
+   - Revert commit: `908dccb`
+
+### Lesson
+- For this repo, ship performance changes in smaller isolated commits (image optimization, route changes, deferred rendering separately) so regressions can be attributed quickly.
+
+## 2026-03-03 — Supabase blocked by CSP in production
+
+### Context
+- Browser console showed CSP `connect-src` violations for `https://db.phinehasadams.com/rest/v1/...` requests (hero/blog/jobs fetches all blocked).
+
+### Root cause
+- `vercel.json` CSP headers allowed only GA/GTM/Cloudflare in `connect-src` and omitted Supabase endpoints.
+
+### Fix
+- Updated all route CSP header entries in `vercel.json` to include:
+  - `https://db.phinehasadams.com`
+  - `https://*.supabase.co`
+- Commit: `896381c`.
+
+### Note
+- Cloudflare Private Access Token / preload warnings in console are informational noise from Turnstile/challenge platform, not the direct blocker for Supabase API calls.
+
+### Follow-up correction (same CSP incident)
+- Initial fix updated existing CSP entries but route coverage was incomplete: some SEO root slugs and `/reviews` had no CSP header at all.
+- Added a catch-all headers rule (`source: "/:path*"`) with the correct CSP so every route consistently allows Supabase.
+- Commit: `774fd04`.
+
+### Additional mitigation (same incident)
+- Triggered a forced deploy (`f794244`) by touching `index.html` to help flush stale edge/browser snapshots after CSP updates.
+- Live header checks now show Supabase-allowed CSP on home, reviews, and SEO slug routes.
+
+## 2026-03-04 — CSP drift hardening (single-source header rule)
+
+### Context
+- User still reported stale CSP violations blocking Supabase REST calls even after earlier CSP allowlist fixes.
+- Live checks showed current headers were correct, but `vercel.json` still contained many duplicate route-specific CSP entries.
+
+### What was done
+1. Simplified `vercel.json` CSP configuration to a single global header rule:
+   - `source: "/:path*"` with the full `connect-src` allowlist including Supabase.
+2. Kept admin-only `X-Robots-Tag` rules unchanged.
+3. Preserved all rewrites, redirects, and cron entries as-is.
+
+### Why this matters
+- Removes CSP duplication drift risk across routes.
+- Future CSP edits happen in one place, preventing reintroduction of partial policies.
+
+### Validation
+- `jq . vercel.json` passed.
+- Header spot checks across home/services/blog/admin still include Supabase allowlist.
+
+## 2026-03-04 — CWV rescue patch after Semrush decline alert
+
+### Context
+- Semrush reported CWV decline on 3/10 pages and severe homepage regression (very high LCP/TBT in sampled crawl).
+- Live network capture showed first-load bottlenecks:
+  1. Turnstile script loaded immediately on page load.
+  2. Home fetched hero/blog/jobs data immediately and loaded multiple hero originals from Supabase.
+  3. Home mounted many below-the-fold sections at startup.
+
+### What was changed
+1. Added `DeferredSection` and lazy-loaded below-fold homepage sections in `src/App.jsx`:
+   - `CostQuickAnswers`, `BlogActivityStrip`, `Gallery`, `Values`, `Testimonials`, `FAQ`, `Contact`
+   - Sections now hydrate when near viewport instead of at first paint.
+2. Optimized hero image strategy in `src/components/Hero.jsx`:
+   - Stopped rendering all hero images simultaneously.
+   - Use first active hero image only for initial render.
+   - Added Supabase render-transform URLs + responsive `srcSet` (`webp`, quality/width params).
+   - Switched fallback hero asset from large JPEG to smaller PNG.
+3. Added `src/lib/imageOptimization.js` utility for Supabase image render URL conversion and responsive srcset generation.
+4. Deferred Turnstile setup in `src/components/ContactForm.jsx`:
+   - Initialize only when form is in/near viewport via IntersectionObserver.
+5. Updated `index.html`:
+   - Added preconnect/dns-prefetch hints for Supabase and GTM.
+   - Changed GA loading to idle-after-load instead of immediate head script fetch.
+6. Removed Supabase debug `console.log` noise in `src/lib/supabase.js`.
+
+### Verification
+- Targeted ESLint checks passed for modified files.
+- Build passed.
+- Bundle change observed:
+  - main home chunk: ~764.8 KB -> ~718.3 KB (minified)
+- Local Lighthouse before/after (home):
+  - Desktop score: 0.86 -> 0.98
+  - Desktop LCP: 2.6s -> 1.1s
+  - Mobile TBT: 60ms -> 40ms
+  - Mobile speed index: 3.8s -> 2.7s
+
+### Notes
+- Local lighthouse cannot perfectly mirror Semrush crawl environment, but network-level bottlenecks from live prod were directly targeted (early Turnstile + eager below-fold mounts + multiple hero originals).
+
+### Mistake + correction (same pass)
+- Mistake: Initial Supabase render URL optimization appended `format=webp`, which this Supabase image service rejected with HTTP 400.
+- Correction: Removed default `format` parameter usage and kept width/quality transforms only; verified render endpoint returns 200.
+
+## 2026-03-04 — Hero hybrid mode (fast first paint + delayed rotation)
+
+### Context
+- User asked to keep hero image rotation while preserving the CWV gains from the previous performance patch.
+
+### What was changed
+1. Updated `src/components/Hero.jsx` to use a hybrid strategy:
+   - Keep first paint as a single optimized hero image.
+   - Start slideshow rotation only after window load + idle delay.
+   - Rotate every 7s after enable.
+   - Preload next optimized hero image to reduce transition stutter.
+2. Kept Supabase render-image optimization parameters (`width` + `quality`) and avoided unsupported `format` parameter.
+
+### Verification
+- `npx eslint src/components/Hero.jsx src/lib/imageOptimization.js` passed.
+- `npm run build` passed.
+- Local Playwright check showed hero source changes after ~10s and additional optimized hero image requests (not all at first paint).
+
+### Mistake + correction
+- Mistake: Resetting state via synchronous `setState` in `useEffect` triggered hooks lint (`react-hooks/set-state-in-effect`).
+- Correction: Removed sync reset effect and used safe index derivation instead.
+
+## 2026-03-04 — Core Web Vitals deep fix (LCP waterfall + bundle splitting)
+
+### Context
+- Semrush CWV score was 0%, 8/10 pages rated "Poor" for LCP (4–17s).
+- Root cause: hero image trapped behind JS→React→Supabase API waterfall; 747KB single JS bundle; 2.6MB of PNGs bundled into entry chunk via locationPages.js imports.
+
+### What was done
+1. **Broke the hero waterfall (P0)**:
+   - Converted hero image to WebP (123KB), placed in `public/hero.webp`.
+   - Added `<link rel="preload" as="image" type="image/webp" href="/hero.webp">` in `index.html`.
+   - Hero.jsx now renders the static `/hero.webp` immediately; Supabase images swap in after data loads.
+   - Removed `Motion.img` animation wrapper from hero image (plain `<img>`) to avoid blocking LCP on JS.
+   - Removed unused bundled `hero.png` import.
+2. **Eliminated 2.6MB of bundled PNGs (P0)**:
+   - Converted `gallery-stamped-driveway.png`, `gallery-patio-aggregate.png`, `gallery-commercial-parking.png` to WebP in `public/images/`.
+   - Replaced `import` statements in `locationPages.js` with static URL string paths.
+3. **Split JS bundle via manualChunks (P1)**:
+   - `vendor-react` (47KB): react, react-dom, react-router-dom
+   - `vendor-motion` (101KB): motion/framer-motion
+   - `vendor-supabase` (167KB): @supabase/supabase-js
+   - Main entry chunk: **404KB** (down from 747KB, -46%)
+4. **Moved route data behind lazy boundaries (P1)**:
+   - Created lightweight slug-only files (`locationSlugs.js`, `serviceSlugs.js`, etc.) for route generation in `main.jsx`.
+   - Full data modules now load only when their lazy-loaded page component mounts.
+   - Each landing page accepts `slug` prop and does its own data lookup.
+5. **Removed unnecessary gtag preconnect** since gtag is already deferred to idle callback.
+
+### Verification
+- `npm run build` passed (includes sitemap + Vite build + prerender).
+- Main entry chunk: 747KB → 404KB (-46%).
+- No bundled PNGs except logo (11KB).
+- Hero preload link present in `dist/index.html`.
+- Prerendered HTML intact for all routes.
+
+### Pattern notes
+- For this repo, keep data modules that are only needed by lazy routes out of the entry chunk by using slug-only route manifests.
+- Use `public/` for LCP images so `<link rel="preload">` can reference a stable URL without Vite hash.
+- Prefer plain `<img>` over `Motion.img` for the LCP element to avoid blocking paint on JS animation framework init.

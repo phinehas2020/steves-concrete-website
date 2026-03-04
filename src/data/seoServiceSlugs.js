@@ -1,0 +1,23 @@
+// Lightweight slug+redirect list for route generation.
+export const seoServiceSlugs = [
+  { slug: 'concrete-resurfacing-waco-tx' },
+  { slug: 'sports-court-coating-waco-tx' },
+  { slug: 'concrete-driveways-waco-tx' },
+  { slug: 'concrete-patios-waco-tx' },
+  { slug: 'concrete-sidewalks-waco-tx' },
+  { slug: 'commercial-concrete-contractor-waco-tx' },
+  { slug: 'residential-concrete-contractor-waco-tx' },
+  { slug: 'concrete-repair-waco-tx', redirectTo: '/foundation-repair-waco-tx' },
+  { slug: 'stamped-concrete-waco-tx' },
+  { slug: 'concrete-foundations-waco-tx' },
+  { slug: 'concrete-parking-lots-waco-tx', redirectTo: '/parking-lot-concrete-waco' },
+  { slug: 'parking-lot-concrete-waco' },
+  { slug: 'foundation-repair-waco-tx' },
+  { slug: 'house-leveling-waco-tx' },
+  { slug: 'retaining-walls-waco-tx' },
+  { slug: 'decorative-concrete-waco' },
+  { slug: 'hardscaping-waco-tx' },
+  { slug: 'concrete-deck-contractors' },
+  { slug: 'contractors-in-waco-tx' },
+  { slug: 'general-contractor-waco-tx', redirectTo: '/contractors-in-waco-tx' },
+]

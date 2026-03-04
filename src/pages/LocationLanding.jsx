@@ -11,9 +11,11 @@ import {
   buildJsonLdGraph,
 } from '../lib/seo'
 import { guideLinks } from '../data/guides'
-import { locationLinks } from '../data/locationPages'
+import { locationPages, locationLinks } from '../data/locationPages'
 
-export function LocationLanding({ page }) {
+export function LocationLanding({ page: pageProp, slug: slugProp }) {
+  const page = pageProp || locationPages.find((p) => p.slug === slugProp)
+  if (!page) return null
   const {
     city,
     slug,

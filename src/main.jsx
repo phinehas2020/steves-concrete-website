@@ -1,14 +1,18 @@
 import { lazy, StrictMode, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import { NotFound } from './pages/NotFound'
-import { locationPages } from './data/locationPages'
-import { servicePages } from './data/servicePages'
-import { seoServicePages } from './data/seoServicePages'
-import { guidePages } from './data/guides'
-import { sportsCourtAreaPages } from './data/sportsCourtAreaPages'
+
+// Lightweight slug-only arrays keep the full data modules (and their image
+// references) out of the main entry chunk. Each landing component lazy-imports
+// its own data and looks up the page by slug via useParams().
+import { locationSlugs } from './data/locationSlugs'
+import { serviceSlugs } from './data/serviceSlugs'
+import { seoServiceSlugs } from './data/seoServiceSlugs'
+import { guideSlugs } from './data/guideSlugs'
+import { sportsCourtAreaSlugs } from './data/sportsCourtAreaSlugs'
 
 const AdminApp = lazy(() => import('./admin/AdminApp').then((m) => ({ default: m.AdminApp })))
 const BlogIndex = lazy(() => import('./pages/BlogIndex').then((m) => ({ default: m.BlogIndex })))
@@ -41,6 +45,35 @@ const SportsCourtAreaLanding = lazy(() =>
 )
 const Reviews = lazy(() => import('./pages/Reviews').then((m) => ({ default: m.Reviews })))
 
+// Wrapper components that look up their page data by URL slug.
+// This keeps the full data modules in the lazy-loaded chunk, not the entry chunk.
+
+function LocationRoute() {
+  const { slug } = useParams()
+  return <LocationLanding slug={slug} />
+}
+
+function ServiceRoute() {
+  const { slug } = useParams()
+  return <ServiceLanding slug={slug} />
+}
+
+function SeoServiceRoute({ redirectTo }) {
+  const { slug } = useParams()
+  if (redirectTo) return <Navigate to={redirectTo} replace />
+  return <SeoServiceLanding slug={slug} />
+}
+
+function GuideRoute() {
+  const { slug } = useParams()
+  return <GuideLanding slug={slug} />
+}
+
+function SportsCourtRoute() {
+  const { slug } = useParams()
+  return <SportsCourtAreaLanding slug={slug} />
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
@@ -56,39 +89,39 @@ createRoot(document.getElementById('root')).render(
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/reviews" element={<Reviews />} />
-          {locationPages.map((page) => (
+          {locationSlugs.map((slug) => (
             <Route
-              key={page.slug}
-              path={`/${page.slug}`}
-              element={<LocationLanding page={page} />}
+              key={slug}
+              path={`/${slug}`}
+              element={<LocationRoute />}
             />
           ))}
-          {seoServicePages.map((page) => (
+          {seoServiceSlugs.map(({ slug, redirectTo }) => (
             <Route
-              key={page.slug}
-              path={`/${page.slug}`}
-              element={page.redirectTo ? <Navigate to={page.redirectTo} replace /> : <SeoServiceLanding page={page} />}
+              key={slug}
+              path={`/${slug}`}
+              element={redirectTo ? <Navigate to={redirectTo} replace /> : <SeoServiceRoute />}
             />
           ))}
-          {servicePages.map((page) => (
+          {serviceSlugs.map((slug) => (
             <Route
-              key={page.slug}
-              path={`/services/${page.slug}`}
-              element={<ServiceLanding page={page} />}
+              key={slug}
+              path={`/services/${slug}`}
+              element={<ServiceRoute />}
             />
           ))}
-          {guidePages.map((page) => (
+          {guideSlugs.map((slug) => (
             <Route
-              key={page.slug}
-              path={`/guides/${page.slug}`}
-              element={<GuideLanding page={page} />}
+              key={slug}
+              path={`/guides/${slug}`}
+              element={<GuideRoute />}
             />
           ))}
-          {sportsCourtAreaPages.map((page) => (
+          {sportsCourtAreaSlugs.map((slug) => (
             <Route
-              key={page.slug}
-              path={`/sports-court-coating/${page.slug}`}
-              element={<SportsCourtAreaLanding page={page} />}
+              key={slug}
+              path={`/sports-court-coating/${slug}`}
+              element={<SportsCourtRoute />}
             />
           ))}
           <Route path="*" element={<NotFound />} />

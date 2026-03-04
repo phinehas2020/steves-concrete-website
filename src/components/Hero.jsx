@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion as Motion, useInView, useMotionValue, useTransform, animate } from 'motion/react'
 import { ArrowRight, Phone } from 'lucide-react'
-import heroImage from '../assets/images/hero.png'
 import { heroStagger, staggerItem } from '../lib/animations'
 import { supabase } from '../lib/supabase'
 import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
+
+// Static hero image served from public/ — browser can discover this immediately
+// via <link rel="preload"> in index.html, bypassing the JS→React→Supabase waterfall.
+const STATIC_HERO_SRC = '/hero.webp'
 
 const topLocationLinks = [
     { label: 'Woodway', href: '/woodway-tx-concrete-contractor' },
@@ -59,7 +62,7 @@ export function Hero() {
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [rotationEnabled, setRotationEnabled] = useState(false)
 
-    // Fetch hero images from Supabase
+    // Fetch hero images from Supabase — non-blocking, swaps in after initial paint
     useEffect(() => {
         const fetchHeroImages = async () => {
             try {
@@ -71,12 +74,10 @@ export function Hero() {
 
                 if (error) {
                     console.error('Error fetching hero images:', error)
-                    // Fallback to default image
                     setHeroImages([])
                 } else if (data && data.length > 0) {
                     setHeroImages(data)
                 } else {
-                    // No images in database, use default
                     setHeroImages([])
                 }
             } catch (error) {
@@ -150,17 +151,22 @@ export function Hero() {
         })
     }, [rotationEnabled, currentImageIndex, heroImages])
 
-    // Determine which image to display
-    const safeCurrentImageIndex = heroImages.length > 0 ? currentImageIndex % heroImages.length : 0
-    const currentImage = heroImages.length > 0 ? heroImages[safeCurrentImageIndex] : null
-    const rawImageSrc = currentImage?.image_url || heroImage
-    const imageSrc = getOptimizedImageUrl(rawImageSrc, {
-        width: 1600,
-        quality: 72,
-    })
-    const imageSrcSet = getResponsiveImageSrcSet(rawImageSrc, [640, 960, 1280, 1600], {
-        quality: 72,
-    })
+    // Determine which image to display:
+    // Start with the static hero image (preloaded in HTML, no waterfall).
+    // Once Supabase data arrives, swap to the dynamic image.
+    const hasSupabaseImages = heroImages.length > 0
+    const safeCurrentImageIndex = hasSupabaseImages ? currentImageIndex % heroImages.length : 0
+    const currentImage = hasSupabaseImages ? heroImages[safeCurrentImageIndex] : null
+
+    let imageSrc, imageSrcSet
+    if (currentImage?.image_url) {
+        const rawImageSrc = currentImage.image_url
+        imageSrc = getOptimizedImageUrl(rawImageSrc, { width: 1600, quality: 72 })
+        imageSrcSet = getResponsiveImageSrcSet(rawImageSrc, [640, 960, 1280, 1600], { quality: 72 })
+    } else {
+        imageSrc = STATIC_HERO_SRC
+        imageSrcSet = undefined
+    }
     const imageAlt = currentImage?.alt_text || "Stamped concrete driveway project in Waco, Texas"
 
     return (
@@ -168,10 +174,10 @@ export function Hero() {
             id="home"
             className="relative min-h-dvh flex items-center pt-20 overflow-hidden bg-stone-900 texture-grain-dark"
         >
-            {/* Background Image */}
+            {/* Background Image — static src renders immediately, Supabase swaps in later */}
             <div className="absolute inset-0">
-                <Motion.img
-                    key={imageSrc}
+                <img
+                    key={hasSupabaseImages ? imageSrc : 'static-hero'}
                     src={imageSrc}
                     srcSet={imageSrcSet || undefined}
                     sizes="100vw"
@@ -179,13 +185,10 @@ export function Hero() {
                     className="absolute inset-0 w-full h-full object-cover object-center"
                     style={{ minHeight: '100vh', minWidth: '100%' }}
                     width={1600}
-                    height={1067}
+                    height={1066}
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    initial={{ opacity: 0.6 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.9, ease: 'easeOut' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-stone-900/75 via-stone-900/70 to-stone-900/55" />
             </div>

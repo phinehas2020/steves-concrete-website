@@ -10,9 +10,11 @@ import {
   buildBreadcrumbs,
   buildJsonLdGraph,
 } from '../lib/seo'
-import { sportsCourtAreaLinks } from '../data/sportsCourtAreaPages'
+import { sportsCourtAreaPages, sportsCourtAreaLinks } from '../data/sportsCourtAreaPages'
 
-export function SportsCourtAreaLanding({ page }) {
+export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
+  const page = pageProp || sportsCourtAreaPages.find((p) => p.slug === slugProp)
+  if (!page) return null
   const {
     slug,
     areaName,
