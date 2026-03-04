@@ -5,7 +5,7 @@ const featuredServices = [
   {
     slug: 'concrete-resurfacing-waco-tx',
     title: 'Concrete Resurfacing',
-    tag: 'High-Value Upgrade',
+    tag: 'Popular Upgrade',
     icon: Layers,
     description:
       'Refresh worn driveways, patios, and walkways without full replacement. Ideal when the slab is structurally sound but the surface looks tired.',
@@ -48,10 +48,10 @@ export function FeaturedServiceSpotlight() {
             Featured Services
           </p>
           <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-balance">
-            Fast-Growth Concrete Services Clients Ask For First
+            Concrete Services Clients Ask For First
           </h2>
           <p className="mt-4 text-stone-300 text-lg text-pretty">
-            These two pages are now front-and-center so visitors immediately see your most strategic services.
+            These are two of our most requested services for restoring worn concrete and resurfacing outdoor courts in Central Texas.
           </p>
         </div>
 
