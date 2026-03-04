@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Send, CheckCircle, Loader2 } from 'lucide-react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion as Motion, AnimatePresence } from 'motion/react'
 import { Button } from './Button'
 
 const TURNSTILE_SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
@@ -68,28 +68,52 @@ export function ContactForm({
   const [honeypot, setHoneypot] = useState('')
   const [turnstileToken, setTurnstileToken] = useState('')
   const [turnstileReady, setTurnstileReady] = useState(!requiresTurnstile)
-  const [turnstileConfigError, setTurnstileConfigError] = useState('')
+  const [turnstileSetupError, setTurnstileSetupError] = useState('')
+  const [shouldInitTurnstile, setShouldInitTurnstile] = useState(() => {
+    if (!requiresTurnstile) return true
+    if (typeof window === 'undefined') return false
+    return typeof IntersectionObserver === 'undefined'
+  })
+  const turnstileConfigError =
+    requiresTurnstile && shouldInitTurnstile && !turnstileKeyLooksValid
+      ? 'Turnstile site key format looks invalid. Please check VITE_TURNSTILE_SITE_KEY for extra characters or spaces.'
+      : turnstileSetupError
 
-  const formStartedAtRef = useRef(Date.now())
+  const formRef = useRef(null)
+  const formStartedAtRef = useRef(0)
   const turnstileContainerRef = useRef(null)
   const turnstileWidgetIdRef = useRef(null)
 
   useEffect(() => {
-    if (!requiresTurnstile) {
-      setTurnstileConfigError('')
-      setTurnstileReady(true)
-      if (turnstileWidgetIdRef.current !== null && window.turnstile) {
-        window.turnstile.remove(turnstileWidgetIdRef.current)
-        turnstileWidgetIdRef.current = null
-      }
-      return undefined
-    }
+    formStartedAtRef.current = Date.now()
+  }, [])
+
+  useEffect(() => {
+    if (!requiresTurnstile || shouldInitTurnstile) return undefined
+
+    const node = formRef.current
+    if (!node) return undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShouldInitTurnstile(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '320px 0px' },
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [requiresTurnstile, shouldInitTurnstile])
+
+  useEffect(() => {
+    if (!requiresTurnstile || !shouldInitTurnstile) return undefined
 
     let cancelled = false
 
     if (!turnstileKeyLooksValid) {
-      setTurnstileConfigError('Turnstile site key format looks invalid. Please check VITE_TURNSTILE_SITE_KEY for extra characters or spaces.')
-      setTurnstileReady(false)
       return undefined
     }
 
@@ -104,14 +128,14 @@ export function ContactForm({
           'error-callback': () => setTurnstileToken(''),
         })
 
-        setTurnstileConfigError('')
+        setTurnstileSetupError('')
         setTurnstileReady(true)
       })
       .catch((error) => {
         console.error('Turnstile setup failed:', error)
         if (!cancelled) {
           setTurnstileReady(false)
-          setTurnstileConfigError('Turnstile failed to initialize. Please check your VITE_TURNSTILE_SITE_KEY and try again.')
+          setTurnstileSetupError('Turnstile failed to initialize. Please check your VITE_TURNSTILE_SITE_KEY and try again.')
         }
       })
 
@@ -123,7 +147,7 @@ export function ContactForm({
         turnstileWidgetIdRef.current = null
       }
     }
-  }, [requiresTurnstile, turnstileSiteKey])
+  }, [requiresTurnstile, shouldInitTurnstile, turnstileSiteKey, turnstileKeyLooksValid])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -180,10 +204,10 @@ export function ContactForm({
     formState === 'submitting' || (requiresTurnstile && (!turnstileReady || !turnstileToken))
 
   return (
-    <div className={className}>
+    <div ref={formRef} className={className}>
       <AnimatePresence mode="wait">
         {formState === 'success' ? (
-          <motion.div
+          <Motion.div
             key="success"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -210,9 +234,9 @@ export function ContactForm({
             >
               Send Another Request
             </Button>
-          </motion.div>
+          </Motion.div>
         ) : (
-          <motion.form
+          <Motion.form
             key="form"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -336,6 +360,9 @@ export function ContactForm({
             {requiresTurnstile && (
                 <div className="space-y-2">
                   <div ref={turnstileContainerRef} />
+                  {!shouldInitTurnstile && (
+                    <p className="text-xs text-stone-500">Bot verification will load when this form is in view.</p>
+                  )}
                   {turnstileConfigError && (
                     <p className="text-xs text-red-600">{turnstileConfigError}</p>
                   )}
@@ -376,7 +403,7 @@ export function ContactForm({
             <p className="text-[10px] text-stone-500 text-center font-bold uppercase tracking-widest">
               Direct: (254) 230-3102 • Licensed & Insured
             </p>
-          </motion.form>
+            </Motion.form>
         )}
       </AnimatePresence>
     </div>

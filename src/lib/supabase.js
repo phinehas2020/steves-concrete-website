@@ -11,9 +11,6 @@ const supabaseAnonKey = trimEnvValue(import.meta.env.VITE_SUPABASE_ANON_KEY)
 let supabaseClient
 
 if (supabaseUrl && supabaseAnonKey) {
-  // Log connection details for debugging
-  console.log('Connecting to Supabase:', supabaseUrl)
-  console.log('Anon key present:', !!supabaseAnonKey)
   supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
       persistSession: true,
@@ -25,7 +22,6 @@ if (supabaseUrl && supabaseAnonKey) {
   })
 } else {
   // Avoid throwing in build/dev; surface a clear error in runtime usage.
-  // eslint-disable-next-line no-console
   console.warn('Missing Supabase env vars: VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Supabase features will be disabled.')
   
   // Create a mock client that prevents crashes but logs errors on usage
