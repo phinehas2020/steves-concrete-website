@@ -210,18 +210,19 @@
 </head>
 
 <body>
-  <div id="root">
-    <!-- Static hero image painted before JS boots; React hydrates over this -->
-    <img
-      src="/hero.webp"
-      alt="Stamped concrete driveway project in Waco, Texas"
-      width="1600"
-      height="1066"
-      fetchpriority="high"
-      decoding="async"
-      style="position:fixed;inset:0;width:100%;height:100vh;object-fit:cover;z-index:0;"
-    />
-  </div>
+  <!-- Static hero image painted before JS boots; lives OUTSIDE #root so React
+       doesn't destroy it on render. Hero.jsx removes it once mounted. -->
+  <img
+    id="static-hero"
+    src="/hero.webp"
+    alt="Stamped concrete driveway project in Waco, Texas"
+    width="1600"
+    height="1066"
+    fetchpriority="high"
+    decoding="async"
+    style="position:fixed;inset:0;width:100%;height:100vh;object-fit:cover;z-index:0;"
+  />
+  <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

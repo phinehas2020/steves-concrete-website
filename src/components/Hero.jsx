@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { motion as Motion, useInView, useMotionValue, useTransform, animate } from 'motion/react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Phone } from 'lucide-react'
-import { heroStagger, staggerItem } from '../lib/animations'
 import { getOptimizedImageUrl, getResponsiveImageSrcSet } from '../lib/imageOptimization'
 
 // Static hero image served from public/ — browser can discover this immediately
@@ -20,46 +18,16 @@ const featuredServiceLinks = [
     { label: 'Parking Lot Concrete', href: '/parking-lot-concrete-waco' },
 ]
 
-// Animated counter component
-function AnimatedStat({ value, suffix = '', label }) {
-    const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, amount: 0.5 })
-    const count = useMotionValue(0)
-    const rounded = useTransform(count, (latest) => Math.round(latest))
-    const [displayValue, setDisplayValue] = useState(0)
-
-    useEffect(() => {
-        if (isInView) {
-            const controls = animate(count, value, {
-                duration: 2,
-                ease: [0.25, 0.46, 0.45, 0.94]
-            })
-
-            const unsubscribe = rounded.on('change', (latest) => {
-                setDisplayValue(latest)
-            })
-
-            return () => {
-                controls.stop()
-                unsubscribe()
-            }
-        }
-    }, [isInView, value, count, rounded])
-
-    return (
-        <div ref={ref} className="text-center sm:text-left">
-            <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">
-                {displayValue}{suffix}
-            </div>
-            <div className="text-xs sm:text-sm text-stone-400">{label}</div>
-        </div>
-    )
-}
-
 export function Hero() {
     const [heroImages, setHeroImages] = useState([])
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [rotationEnabled, setRotationEnabled] = useState(false)
+
+    // Remove the static hero image that was painted before React booted
+    useEffect(() => {
+        const staticHero = document.getElementById('static-hero')
+        if (staticHero) staticHero.remove()
+    }, [])
 
     // Fetch hero images from Supabase — non-blocking, swaps in after initial paint
     useEffect(() => {
@@ -218,45 +186,30 @@ export function Hero() {
             <div className="absolute bottom-0 left-0 right-0 h-2 bg-accent-500" />
 
             <div className="container-main relative z-10 py-20 sm:py-24 md:py-6">
-                <Motion.div
-                    className="max-w-3xl"
-                    variants={heroStagger}
-                    initial="hidden"
-                    animate="visible"
-                >
+                {/* CSS-driven stagger animation — no motion library needed */}
+                <div className="max-w-3xl hero-stagger">
                     {/* Badge */}
-                    <Motion.div
-                        className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-stone-800/80 backdrop-blur-sm rounded-full mb-4 sm:mb-6"
-                        variants={staggerItem}
-                    >
-                        <Motion.span
-                            className="size-2 bg-accent-500 rounded-full"
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                        />
+                    <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-stone-800/80 backdrop-blur-sm rounded-full mb-4 sm:mb-6">
+                        <span className="size-2 bg-accent-500 rounded-full badge-pulse-dot" />
                         <span className="text-xs sm:text-sm font-medium text-stone-300">
                             Serving Waco, Temple & McLennan County Since 2005
                         </span>
-                    </Motion.div>
+                    </div>
 
                     {/* Headline - GSC keyword-aligned: concrete contractor waco tx */}
-                    <Motion.h1
+                    <h1
                         className="font-display font-bold text-white text-balance leading-tight mb-6"
                         style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4.5rem)' }}
-                        variants={staggerItem}
                     >
                         Concrete Contractors
                         <span className="block text-accent-400">in Waco, TX</span>
                         <span className="block text-lg sm:text-xl font-medium text-stone-400 mt-2">
                             Licensed &amp; Insured · 20+ Years
                         </span>
-                    </Motion.h1>
+                    </h1>
 
                     {/* Subheadline */}
-                    <Motion.p
-                        className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed"
-                        variants={staggerItem}
-                    >
+                    <p className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed">
                         <span className="sm:hidden">500+ projects across Central Texas. Built for black clay soil, heat, and long-term durability.</span>
                         <span className="hidden sm:inline">
                           Concrete Works LLC has completed 500+ projects in Waco, TX since 2005. We build concrete driveways,
@@ -264,37 +217,27 @@ export function Hero() {
                           concrete contractors Waco TX with experience in black clay soil movement and long Texas heat cycles.
                           If you are looking for reliable concrete companies Waco TX, we are ready to help.
                         </span>
-                    </Motion.p>
+                    </p>
 
                     {/* CTAs */}
-                    <Motion.div
-                        className="flex flex-col sm:flex-row gap-4"
-                        variants={staggerItem}
-                    >
-                        <Motion.a
+                    <div className="flex flex-col sm:flex-row gap-4">
+                        <a
                             href="#contact"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px] text-lg"
-                            whileHover={{ scale: 1.02, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
+                            className="cta-hover inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px] text-lg"
                         >
                             Get Free Estimate
                             <ArrowRight className="size-5" aria-hidden="true" />
-                        </Motion.a>
-                        <Motion.a
+                        </a>
+                        <a
                             href="tel:254-230-3102"
-                            className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-stone-600 text-white font-semibold rounded-lg hover:bg-stone-800 hover:border-stone-500 transition-colors duration-150 min-h-[52px] text-lg"
-                            whileHover={{ scale: 1.02, y: -2 }}
-                            whileTap={{ scale: 0.98 }}
+                            className="cta-hover inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-stone-600 text-white font-semibold rounded-lg hover:bg-stone-800 hover:border-stone-500 transition-colors duration-150 min-h-[52px] text-lg"
                         >
                             <Phone className="size-5" aria-hidden="true" />
                             (254) 230-3102
-                        </Motion.a>
-                    </Motion.div>
+                        </a>
+                    </div>
 
-                    <Motion.div
-                        className="mt-6 flex flex-wrap items-center gap-2"
-                        variants={staggerItem}
-                    >
+                    <div className="mt-6 flex flex-wrap items-center gap-2">
                         <span className="text-xs font-semibold uppercase tracking-wide text-stone-400">
                             City pages:
                         </span>
@@ -307,12 +250,9 @@ export function Hero() {
                                 {link.label}
                             </a>
                         ))}
-                    </Motion.div>
+                    </div>
 
-                    <Motion.div
-                        className="mt-4 flex flex-wrap items-center gap-2"
-                        variants={staggerItem}
-                    >
+                    <div className="mt-4 flex flex-wrap items-center gap-2">
                         <span className="text-xs font-semibold uppercase tracking-wide text-stone-400">
                             Featured services:
                         </span>
@@ -325,20 +265,26 @@ export function Hero() {
                                 {link.label}
                             </a>
                         ))}
-                    </Motion.div>
+                    </div>
 
-                    {/* Trust Indicators - Animated Count Up */}
-                    <Motion.div
-                        className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-stone-700"
-                        variants={staggerItem}
-                    >
+                    {/* Trust Indicators - Static values (no motion count-up) */}
+                    <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-stone-700">
                         <div className="grid grid-cols-3 gap-4 sm:gap-8 md:gap-12">
-                            <AnimatedStat value={20} suffix="+" label="Years Experience" />
-                            <AnimatedStat value={500} suffix="+" label="Projects Completed" />
-                            <AnimatedStat value={100} suffix="%" label="Customer Satisfaction" />
+                            <div className="text-center sm:text-left">
+                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">20+</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Years Experience</div>
+                            </div>
+                            <div className="text-center sm:text-left">
+                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">500+</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Projects Completed</div>
+                            </div>
+                            <div className="text-center sm:text-left">
+                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">100%</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Customer Satisfaction</div>
+                            </div>
                         </div>
-                    </Motion.div>
-                </Motion.div>
+                    </div>
+                </div>
             </div>
         </section>
     )

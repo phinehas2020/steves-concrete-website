@@ -1,6 +1,7 @@
+import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
-import { Contact } from '../components/Contact'
-import { Footer } from '../components/Footer'
+const Contact = lazy(() => import('../components/Contact').then((m) => ({ default: m.Contact })))
+const Footer = lazy(() => import('../components/Footer').then((m) => ({ default: m.Footer })))
 import { Header } from '../components/Header'
 import {
   useSeo,
@@ -205,13 +206,17 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
           </section>
         )}
 
-        <section className="section-padding bg-stone-50">
-          <div className="container-main">
-            <Contact />
-          </div>
-        </section>
+        <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
+          <section className="section-padding bg-stone-50">
+            <div className="container-main">
+              <Contact />
+            </div>
+          </section>
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={<div style={{ minHeight: 400 }} />}>
+        <Footer />
+      </Suspense>
     </div>
   )
 }

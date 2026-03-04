@@ -1,6 +1,4 @@
-import { motion } from 'motion/react'
 import { Phone, Mail, MapPin, Clock, CheckCircle } from 'lucide-react'
-import { fadeInUp, viewportConfig } from '../lib/animations'
 import { ContactForm } from './ContactForm'
 
 const whatToExpect = [
@@ -16,12 +14,7 @@ export function Contact() {
             <div className="container-main">
                 <div className="grid gap-10 lg:gap-16 lg:grid-cols-2">
                     {/* Left Column - Info */}
-                    <motion.div
-                        variants={fadeInUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={viewportConfig}
-                    >
+                    <div>
                         <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
                             Get Started
                         </span>
@@ -29,7 +22,7 @@ export function Contact() {
                             Ready for a Free Estimate?
                         </h2>
                         <p className="text-lg text-stone-600 text-pretty mb-8">
-                            Tell us about your project. We'll review it and get back to you quickly 
+                            Tell us about your project. We'll review it and get back to you quickly
                             with honest feedback and a competitive quote.
                         </p>
 
@@ -131,18 +124,12 @@ export function Contact() {
                                 Emergency repairs available. Call anytime — if we don't answer, we call back within 4 hours.
                             </p>
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Right Column - Form */}
-                    <motion.div
-                        className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm"
-                        variants={fadeInUp}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={viewportConfig}
-                    >
+                    <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
                         <ContactForm />
-                    </motion.div>
+                    </div>
                 </div>
             </div>
         </section>

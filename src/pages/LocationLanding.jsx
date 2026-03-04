@@ -1,6 +1,7 @@
+import { lazy, Suspense } from 'react'
 import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
-import { Contact } from '../components/Contact'
+const Footer = lazy(() => import('../components/Footer').then((m) => ({ default: m.Footer })))
+const Contact = lazy(() => import('../components/Contact').then((m) => ({ default: m.Contact })))
 import {
   useSeo,
   SITE_URL,
@@ -396,9 +397,13 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
           </div>
         </section>
 
-        <Contact />
+        <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={<div style={{ minHeight: 400 }} />}>
+        <Footer />
+      </Suspense>
     </div>
   )
 }

@@ -539,6 +539,74 @@ span a {
 }
 
 /* ========================================
+   CSS ANIMATIONS - Replace motion/react on
+   critical-path components (Hero, Contact)
+   ======================================== */
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes badge-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero stagger children: each child delays by --stagger-index * 100ms */
+.hero-stagger > * {
+  opacity: 0;
+  animation: hero-fade-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.hero-stagger > *:nth-child(1) { animation-delay: 0.3s; }
+.hero-stagger > *:nth-child(2) { animation-delay: 0.4s; }
+.hero-stagger > *:nth-child(3) { animation-delay: 0.5s; }
+.hero-stagger > *:nth-child(4) { animation-delay: 0.6s; }
+.hero-stagger > *:nth-child(5) { animation-delay: 0.7s; }
+.hero-stagger > *:nth-child(6) { animation-delay: 0.8s; }
+.hero-stagger > *:nth-child(7) { animation-delay: 0.9s; }
+.hero-stagger > *:nth-child(8) { animation-delay: 1.0s; }
+
+.badge-pulse-dot {
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+/* Generic fade-in-up for sections (replaces motion fadeInUp) */
+.anim-fade-in-up {
+  opacity: 0;
+  animation: fade-in-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* CTA hover lift (replaces whileHover scale/y) */
+.cta-hover {
+  transition: transform 150ms ease-out;
+}
+.cta-hover:hover {
+  transform: scale(1.02) translateY(-2px);
+}
+.cta-hover:active {
+  transform: scale(0.98);
+}
+
+/* ========================================
    ANIMATION UTILITY CLASSES
    For components using Framer Motion
    ======================================== */

@@ -3,6 +3,17 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
+
+// Remove the static hero image that lives outside #root after React's first
+// paint. On the homepage Hero.jsx also handles this, but on other routes the
+// static img would linger behind the page content (position:fixed, z-index:0).
+// Double rAF ensures removal only after the first frame is painted.
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    const el = document.getElementById('static-hero')
+    if (el) el.remove()
+  })
+})
 import { NotFound } from './pages/NotFound'
 
 // Lightweight slug-only arrays keep the full data modules (and their image
