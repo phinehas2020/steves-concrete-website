@@ -56,6 +56,8 @@ function AnimatedStat({ value, suffix = '', label }) {
 
 export function Hero() {
     const [heroImages, setHeroImages] = useState([])
+    const [currentImageIndex, setCurrentImageIndex] = useState(0)
+    const [rotationEnabled, setRotationEnabled] = useState(false)
 
     // Fetch hero images from Supabase
     useEffect(() => {
@@ -86,8 +88,71 @@ export function Hero() {
         fetchHeroImages()
     }, [])
 
+    // Start rotation only after initial load and idle time.
+    useEffect(() => {
+        if (heroImages.length <= 1 || typeof window === 'undefined') return undefined
+
+        let cancelled = false
+        let timeoutId
+        let idleCallbackId
+
+        const enableRotation = () => {
+            if (!cancelled) setRotationEnabled(true)
+        }
+
+        const scheduleEnable = () => {
+            if ('requestIdleCallback' in window) {
+                idleCallbackId = window.requestIdleCallback(() => {
+                    timeoutId = window.setTimeout(enableRotation, 1800)
+                }, { timeout: 3000 })
+                return
+            }
+            timeoutId = window.setTimeout(enableRotation, 2200)
+        }
+
+        if (document.readyState === 'complete') {
+            scheduleEnable()
+        } else {
+            window.addEventListener('load', scheduleEnable, { once: true })
+        }
+
+        return () => {
+            cancelled = true
+            if (timeoutId) window.clearTimeout(timeoutId)
+            if (idleCallbackId && 'cancelIdleCallback' in window) {
+                window.cancelIdleCallback(idleCallbackId)
+            }
+            window.removeEventListener('load', scheduleEnable)
+        }
+    }, [heroImages.length])
+
+    useEffect(() => {
+        if (!rotationEnabled || heroImages.length <= 1) return undefined
+
+        const intervalId = window.setInterval(() => {
+            setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
+        }, 7000)
+
+        return () => window.clearInterval(intervalId)
+    }, [rotationEnabled, heroImages.length])
+
+    useEffect(() => {
+        if (!rotationEnabled || heroImages.length <= 1 || typeof window === 'undefined') return
+
+        const nextIndex = (currentImageIndex + 1) % heroImages.length
+        const nextImage = heroImages[nextIndex]
+        if (!nextImage?.image_url) return
+
+        const preloaded = new window.Image()
+        preloaded.src = getOptimizedImageUrl(nextImage.image_url, {
+            width: 1600,
+            quality: 72,
+        })
+    }, [rotationEnabled, currentImageIndex, heroImages])
+
     // Determine which image to display
-    const currentImage = heroImages.length > 0 ? heroImages[0] : null
+    const safeCurrentImageIndex = heroImages.length > 0 ? currentImageIndex % heroImages.length : 0
+    const currentImage = heroImages.length > 0 ? heroImages[safeCurrentImageIndex] : null
     const rawImageSrc = currentImage?.image_url || heroImage
     const imageSrc = getOptimizedImageUrl(rawImageSrc, {
         width: 1600,
@@ -105,7 +170,8 @@ export function Hero() {
         >
             {/* Background Image */}
             <div className="absolute inset-0">
-                <img
+                <Motion.img
+                    key={imageSrc}
                     src={imageSrc}
                     srcSet={imageSrcSet || undefined}
                     sizes="100vw"
@@ -117,6 +183,9 @@ export function Hero() {
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
+                    initial={{ opacity: 0.6 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.9, ease: 'easeOut' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-stone-900/75 via-stone-900/70 to-stone-900/55" />
             </div>
