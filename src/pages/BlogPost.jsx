@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { marked } from 'marked'
 import { supabase } from '../lib/supabase'
 import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
+import { renderBlogMarkdown } from '../lib/blogMarkdown'
 import {
   useSeo,
   SITE_URL,
@@ -126,7 +126,7 @@ export function BlogPost() {
 
   const contentHtml = useMemo(() => {
     if (!post?.content) return ''
-    const parsedHtml = marked.parse(post.content)
+    const parsedHtml = renderBlogMarkdown(post.content)
 
     if (typeof DOMParser === 'undefined') {
       return parsedHtml

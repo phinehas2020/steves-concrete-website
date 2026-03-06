@@ -1,5 +1,10 @@
 /* global process */
 import { createClient } from '@supabase/supabase-js'
+import {
+  sanitizePlainTextInline,
+  sanitizePlainTextParagraph,
+  toSafeMarkdownImageUrl,
+} from '../src/lib/blogMarkdown.js'
 
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
@@ -276,7 +281,7 @@ function extractResponseText(responseBody) {
   return ''
 }
 
-function sanitizeAiParagraph(value) {
+export function sanitizeAiParagraph(value) {
   const bannedClauses = [
     /\b(?:i\s+)?think\b[^.!?;]*[.!?;]?/gi,
     /\bwe\s+thought\b[^.!?;]*[.!?;]?/gi,
@@ -286,23 +291,14 @@ function sanitizeAiParagraph(value) {
     /\blooks\s+like\b/gi,
   ]
 
-  let paragraph = String(value || '')
-    .replace(/\s+/g, ' ')
-    .replace(/[—–]/g, '-')
-    .replace(/\s*--+\s*/g, ' ')
-    .replace(/#+\s*/g, '')
-    .trim()
+  let paragraph = sanitizePlainTextParagraph(value)
 
   for (const pattern of bannedClauses) {
     paragraph = paragraph.replace(pattern, '')
   }
 
-  paragraph = paragraph.replace(/\s+/g, ' ').trim()
+  paragraph = sanitizePlainTextParagraph(paragraph)
   if (!paragraph) return ''
-
-  if (!/[.!?]$/.test(paragraph)) {
-    paragraph = `${paragraph}.`
-  }
 
   return paragraph
 }
@@ -665,20 +661,27 @@ async function generateJobListingCopyWithPhoto({ leadPhoto, comments, category, 
   }
 }
 
-function buildGeneratedContent({ photos, title, introParagraph }) {
-  const introLine = toTrimmedString(introParagraph) || `Concrete project update: ${title}.`
+export function buildGeneratedContent({ photos, title, introParagraph }) {
+  const safeTitle = sanitizePlainTextInline(title, 95) || 'Concrete project update'
+  const introLine =
+    sanitizePlainTextParagraph(introParagraph) ||
+    sanitizePlainTextParagraph(`Concrete project update: ${safeTitle}`)
 
   const markdownImages = photos
     .map((photo, index) => {
-      const alt = shortText(
+      const imageUrl = toSafeMarkdownImageUrl(photo?.image_url)
+      if (!imageUrl) return ''
+
+      const altSource =
         getMeaningfulPhotoText(photo) ||
         photo.alt_text ||
         photo.source_caption ||
-        `${title} photo ${index + 1}`,
-        80
-      )
-      return `![${alt}](${photo.image_url})`
+        `${safeTitle} photo ${index + 1}`
+      const alt = shortText(sanitizePlainTextInline(altSource), 80) || `Project photo ${index + 1}`
+
+      return `![${alt}](${imageUrl})`
     })
+    .filter(Boolean)
     .join('\n\n')
 
   const sections = [introLine]
