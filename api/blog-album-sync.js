@@ -137,15 +137,18 @@ function normalizeRequestPayload(req) {
   return payload
 }
 
-function isCronRequest(req) {
+function getCronAuthToken(req) {
+  const authToken = toTrimmedString(req.headers.authorization || req.headers['x-api-key'])
+  return authToken.replace(/^Bearer\s+/i, '')
+}
+
+export function isCronRequest(req) {
   const cronHeader = toTrimmedString(req.headers['x-vercel-cron']) === '1'
   const cronSecret = toTrimmedString(process.env.CRON_SECRET)
-  const authToken = toTrimmedString(req.headers.authorization || req.headers['x-api-key'])
-  const token = authToken.replace(/^Bearer\s+/i, '')
 
-  if (cronHeader) return true
+  if (!cronHeader || !cronSecret) return false
 
-  if (!cronSecret) return false
+  const token = getCronAuthToken(req)
   return Boolean(token) && token === cronSecret
 }
 
@@ -583,7 +586,7 @@ async function requireAdminUser(req, supabase) {
   return adminUser
 }
 
-async function resolveRequester(req, supabase) {
+export async function resolveRequester(req, supabase) {
   if (isCronRequest(req)) {
     return {
       email: 'photo-studio-cron@system.local',
