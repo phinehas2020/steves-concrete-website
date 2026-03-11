@@ -255,7 +255,7 @@ export const servicePages = [
     seoDescription:
       'Concrete driveway install & replacement in Waco. Built for Central Texas soil. Free estimate: (254) 230-3102.',
     intro:
-      'A well-built driveway adds curb appeal and reduces maintenance for years. We design slope, drainage, and joint placement to protect your driveway through Central Texas summers.',
+      'For professional driveway installation, Waco residents know a well-built slab adds curb appeal and reduces maintenance for years. We design slope, drainage, and joint placement to protect your driveway through Central Texas summers.',
     benefits: baseBenefits,
     process: baseProcess,
     finishes: ['Broom finish', 'Light salt finish', 'Exposed aggregate accents', 'Decorative borders'],
@@ -515,7 +515,7 @@ export const servicePages = [
     seoDescription:
       'Concrete repair, crack fix & resurfacing in Waco. Free estimate: (254) 230-3102.',
     intro:
-      'We evaluate the cause of cracking or surface damage before recommending patching, resurfacing, or replacement.',
+      'When you need reliable concrete repair, Waco property owners trust us to evaluate the cause of cracking or surface damage before recommending patching, resurfacing, or replacement.',
     benefits: [
       'Stop water intrusion and further damage',
       'Refresh the look of aging surfaces',

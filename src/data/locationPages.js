@@ -80,7 +80,7 @@ export const locationPages = [
     seoDescription:
       'Waco concrete contractors for driveways, patios, stamped concrete, foundations, and repairs. Need concrete companies in Waco TX with fast estimates? Call (254) 230-3102.',
     intro:
-      'Concrete Works LLC partners with Waco homeowners, builders, and businesses comparing concrete companies Waco TX for reliable installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
+      'Concrete Works LLC partners with Waco homeowners, builders, and businesses searching for "concrete companies near me" for reliable installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
     highlights: baseHighlights,
     services: baseServices,
     nearbyAreas: ['Woodway', 'Hewitt', 'Bellmead', 'Robinson', 'China Spring', 'Lorena'],
@@ -120,8 +120,8 @@ export const locationPages = [
           'We offer multiple stamp patterns and color options so your new surface complements your exterior finishes.',
       },
       {
-        question: 'Do you handle commercial concrete in Temple?',
-        answer: 'Yes. We support small to mid-size commercial slabs, pads, and parking areas.',
+        question: 'Are you available if I need concrete repair near me in Temple?',
+        answer: 'Yes. We handle concrete repairs, small slab upgrades, and mid-size commercial slabs, pads, and parking areas across Temple.',
       },
     ],
   },
@@ -161,7 +161,7 @@ export const locationPages = [
     heroSubtitle:
       'Driveways, patios, stamped concrete, and slab repairs for Hewitt homes. Free on-site estimates with clear start dates.',
     seoDescription:
-      'Looking for a concrete contractor Hewitt Texas homeowners trust? We build driveways, patios, stamped concrete, and repairs designed for Central Texas black clay soil and heat expansion.',
+      'Looking for a Hewitt concrete contractor? We are the top-rated "driveway concrete contractors near me," building patios, stamped concrete, and repairs designed for Central Texas clay soil.',
     intro:
       'Concrete Works LLC helps Hewitt homeowners and property managers install concrete that lasts through hot summers and shifting black clay soil. We focus on proper base prep, drainage, and control-joint layout so your project looks sharp and performs long-term.',
     highlights: [

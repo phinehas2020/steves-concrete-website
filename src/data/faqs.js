@@ -25,6 +25,11 @@ export const FAQ_ITEMS = [
       'Ask each company to explain base prep, drainage, joint layout, reinforcement, and cure timing in writing. Reliable concrete contractors in Waco, TX should also show local project examples and a clear estimate scope.',
   },
   {
+    question: 'Are cement contractors and concrete contractors the same thing?',
+    answer:
+      'Yes, most people use the terms interchangeably, so if you are looking for "cement contractors near me" you actually need a "concrete contractor near me," which is what we are. Cement is just the grey powder ingredient that, along with water and aggregate, cures to become solid concrete.',
+  },
+  {
     question: "What's the difference between stamped and regular concrete?",
     answer:
       'Stamped concrete has patterns pressed into the surface while it is still wet — replicating stone, brick, or slate. It costs 30-50% less than natural stone but requires sealing every 2-3 years. Regular broom-finished concrete is more utilitarian, lower cost, and needs less maintenance.',
