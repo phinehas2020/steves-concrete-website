@@ -1,9 +1,8 @@
 import { lazy, Suspense } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-const Services = lazy(() => import('./components/Services').then((m) => ({ default: m.Services })))
-const FeaturedServiceSpotlight = lazy(() => import('./components/FeaturedServiceSpotlight').then((m) => ({ default: m.FeaturedServiceSpotlight })))
 import { DeferredSection } from './components/DeferredSection'
+const Services = lazy(() => import('./components/Services').then((m) => ({ default: m.Services })))
 const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })))
 import { useSeo, buildJsonLdGraph, SITE_URL, DEFAULT_IMAGE } from './lib/seo'
 import { servicePageLinks } from './data/seoServiceSlugs'
@@ -141,35 +140,30 @@ function App() {
           <Hero />
         </div>
         <div className="order-2 md:order-none">
-          <Suspense fallback={<SectionFallback className="section-padding bg-stone-950" minHeight={480} />}>
-            <FeaturedServiceSpotlight />
-          </Suspense>
-        </div>
-        <div className="order-3 md:order-none">
           <DeferredSection rootMargin="420px 0px" minHeight={480}>
             <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={480} />}>
               <Services />
             </Suspense>
           </DeferredSection>
         </div>
-        <div className="order-4 md:order-none">
+        <div className="order-3 md:order-none">
           <ServiceAreas />
         </div>
-        <div className="order-5 md:order-none">
+        <div className="order-4 md:order-none">
           <DeferredSection rootMargin="420px 0px" minHeight={360}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={360} />}>
               <CostQuickAnswers />
             </Suspense>
           </DeferredSection>
         </div>
-        <div className="order-6 md:order-none">
+        <div className="order-5 md:order-none">
           <DeferredSection rootMargin="420px 0px" minHeight={420}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-100" minHeight={420} />}>
               <BlogActivityStrip />
             </Suspense>
           </DeferredSection>
         </div>
-        <div className="order-7 md:order-none">
+        <div className="order-6 md:order-none">
           <DeferredSection rootMargin="520px 0px" minHeight={900}>
             <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={900} />}>
               <Gallery />
