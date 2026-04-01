@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion as Motion } from 'motion/react'
 import { BadgeCheck, Quote, Star } from 'lucide-react'
 import { fadeInUp, viewportConfig } from '../lib/animations'
@@ -47,6 +48,7 @@ function compactReviewText(value, maxLength = 220) {
 }
 
 export function Testimonials({ reviewsData }) {
+  const [showAllReviews, setShowAllReviews] = useState(false)
   const hasLiveReviews = reviewsData?.status === 'ready' && reviewsData.reviews.length > 0
   const liveTestimonials = hasLiveReviews
     ? reviewsData.reviews.map((review) => ({
@@ -67,7 +69,9 @@ export function Testimonials({ reviewsData }) {
         ...testimonial,
         badge: testimonial.project,
       }))
-  const featuredTestimonials = hasLiveReviews ? visibleTestimonials.slice(0, 2) : visibleTestimonials
+  const hasHiddenReviews = hasLiveReviews && visibleTestimonials.length > 2
+  const featuredTestimonials =
+    hasHiddenReviews && !showAllReviews ? visibleTestimonials.slice(0, 2) : visibleTestimonials
   const stats = [
     {
       value:
@@ -303,22 +307,36 @@ export function Testimonials({ reviewsData }) {
 
             {hasLiveReviews ? (
               <div className="rounded-[2rem] border border-stone-200 bg-stone-50 px-5 py-4 sm:px-6">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
                   <div>
                     <p className="text-sm font-semibold text-stone-900">
                       Live from Google Business Profile
                     </p>
                     <p className="text-sm text-stone-600">
-                      The homepage shows a couple of recent reviews. The full list lives on the reviews page.
+                      {showAllReviews
+                        ? 'Showing the full review list here on the homepage.'
+                        : 'Start with a couple of recent reviews, then open the full list if you want to read more.'}
                     </p>
                   </div>
 
-                  <a
-                    href="/reviews"
-                    className="inline-flex items-center justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-100"
-                  >
-                    {reviewsCtaLabel}
-                  </a>
+                  <div className="flex flex-wrap items-center gap-3">
+                    {hasHiddenReviews ? (
+                      <button
+                        type="button"
+                        onClick={() => setShowAllReviews((current) => !current)}
+                        className="inline-flex items-center justify-center rounded-lg bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-stone-800"
+                      >
+                        {showAllReviews ? 'Show fewer reviews' : `See more reviews (${visibleTestimonials.length})`}
+                      </button>
+                    ) : null}
+
+                    <a
+                      href="/reviews"
+                      className="inline-flex items-center justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-100"
+                    >
+                      {reviewsCtaLabel}
+                    </a>
+                  </div>
                 </div>
               </div>
             ) : null}
