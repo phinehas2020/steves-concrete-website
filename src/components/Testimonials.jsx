@@ -79,7 +79,7 @@ export function Testimonials({ reviewsData }) {
           ? reviewsData.rating.toFixed(1)
           : '5.0',
       label: 'Average rating',
-      detail: hasLiveReviews ? 'Pulled from the live Google profile' : 'Based on verified client feedback',
+      detail: hasLiveReviews ? '' : 'Based on verified client feedback',
     },
     {
       value:
@@ -87,7 +87,7 @@ export function Testimonials({ reviewsData }) {
           ? `${reviewsData.userRatingCount}+`
           : '47+',
       label: 'Verified reviews',
-      detail: hasLiveReviews ? 'Current Google Business reviews' : 'Homeowners and business owners',
+      detail: hasLiveReviews ? '' : 'Homeowners and business owners',
     },
     {
       value: '20+',
@@ -97,6 +97,8 @@ export function Testimonials({ reviewsData }) {
   ]
   const reviewsLink =
     reviewsData?.reviewUri || reviewsData?.placeUri || FALLBACK_GOOGLE_REVIEW_URL
+  const leaveReviewLink =
+    reviewsData?.writeReviewUri || reviewsData?.reviewUri || reviewsData?.placeUri || FALLBACK_GOOGLE_REVIEW_URL
   const reviewsCtaLabel =
     hasLiveReviews && reviewsData?.userRatingCount
       ? `See all ${reviewsData.userRatingCount} Google reviews`
@@ -207,7 +209,9 @@ export function Testimonials({ reviewsData }) {
                   <div key={stat.label} className="rounded-2xl bg-stone-50 border border-stone-200 p-4">
                     <div className="text-3xl font-display font-bold text-stone-900">{stat.value}</div>
                     <div className="mt-1 text-sm font-semibold text-stone-700">{stat.label}</div>
-                    <div className="mt-1 text-xs leading-relaxed text-stone-500">{stat.detail}</div>
+                    {stat.detail ? (
+                      <div className="mt-1 text-xs leading-relaxed text-stone-500">{stat.detail}</div>
+                    ) : null}
                   </div>
                 ))}
               </div>
@@ -220,12 +224,12 @@ export function Testimonials({ reviewsData }) {
                   See all reviews
                 </a>
                 <a
-                  href={reviewsLink}
+                  href={leaveReviewLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-lg border border-stone-300 px-4 py-2 text-sm font-semibold text-stone-700 transition-colors hover:bg-stone-50"
                 >
-                  Read them on Google
+                  Leave a review
                 </a>
               </div>
             </Motion.div>
