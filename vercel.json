@@ -94,6 +94,10 @@
       "destination": "/reviews/index.html"
     },
     {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
       "source": "/blog/:path*",
       "destination": "/index.html"
     },
@@ -160,16 +164,6 @@
     {
       "source": "/wp-sitemap-posts-page-1.xml",
       "destination": "https://www.concretewaco.com/sitemap.xml",
-      "permanent": true
-    },
-    {
-      "source": "/about",
-      "destination": "https://www.concretewaco.com/",
-      "permanent": true
-    },
-    {
-      "source": "/about/",
-      "destination": "https://www.concretewaco.com/",
       "permanent": true
     },
     {
