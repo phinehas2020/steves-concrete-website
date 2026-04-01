@@ -12,5 +12,6 @@ export const serviceSlugs = [
   'concrete-slabs',
   'stained-concrete',
   'concrete-sealing',
-  'concrete-leveling',
+  'concrete-demolition',
+  'concrete-sawing',
 ]

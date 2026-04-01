@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { DeferredSection } from './components/DeferredSection'
+import { useGoogleReviews } from './lib/googleReviews'
 const Services = lazy(() => import('./components/Services').then((m) => ({ default: m.Services })))
 const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })))
 import { useSeo, buildJsonLdGraph, SITE_URL, DEFAULT_IMAGE } from './lib/seo'
@@ -26,7 +27,7 @@ function SectionFallback({ className = 'section-padding bg-white', minHeight = 3
   return <div className={className} style={{ minHeight }} aria-hidden="true" />
 }
 
-function HomeLocalBusinessSchema() {
+function HomeLocalBusinessSchema({ reviewRating = '5.0', reviewCount = 47 } = {}) {
   const cityNames = ['Waco', ...locationLinks.map((location) => location.city)]
 
   return {
@@ -40,8 +41,8 @@ function HomeLocalBusinessSchema() {
     priceRange: '$$',
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: 47,
+      ratingValue: reviewRating,
+      reviewCount,
       bestRating: '5',
       worstRating: '1',
     },
@@ -120,6 +121,16 @@ function ServiceAreas() {
 }
 
 function App() {
+  const homeReviewsData = useGoogleReviews(3)
+  const homeReviewRating =
+    homeReviewsData.status === 'ready' && homeReviewsData.rating
+      ? homeReviewsData.rating.toFixed(1)
+      : '5.0'
+  const homeReviewCount =
+    homeReviewsData.status === 'ready' && homeReviewsData.userRatingCount
+      ? homeReviewsData.userRatingCount
+      : 47
+
   useSeo({
     title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Concrete Works LLC',
     description:
@@ -129,7 +140,12 @@ function App() {
     type: 'website',
     image: DEFAULT_IMAGE,
     imageAlt: 'Concrete Works LLC - Waco, TX concrete contractor',
-    jsonLd: buildJsonLdGraph(HomeLocalBusinessSchema()),
+    jsonLd: buildJsonLdGraph(
+      HomeLocalBusinessSchema({
+        reviewRating: homeReviewRating,
+        reviewCount: homeReviewCount,
+      }),
+    ),
   })
 
   return (
@@ -181,7 +197,7 @@ function App() {
         <div className="order-8 md:order-none">
           <DeferredSection rootMargin="500px 0px" minHeight={680}>
             <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={680} />}>
-              <Testimonials />
+              <Testimonials reviewsData={homeReviewsData} />
             </Suspense>
           </DeferredSection>
         </div>

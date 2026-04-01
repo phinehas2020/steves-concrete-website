@@ -15,6 +15,8 @@ const baseServices = [
   { label: 'Stamped Concrete', href: getCanonicalServicePath('stamped-concrete') },
   { label: 'Commercial Concrete', href: getCanonicalServicePath('commercial-concrete') },
   { label: 'Concrete Repair', href: getCanonicalServicePath('concrete-repair') },
+  { label: 'Concrete Demolition', href: getCanonicalServicePath('concrete-demolition') },
+  { label: 'Concrete Sawing', href: getCanonicalServicePath('concrete-sawing') },
   { label: 'Concrete Foundations', href: getCanonicalServicePath('concrete-foundations') },
 ]
 

@@ -1,8 +1,9 @@
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { useSeo, SITE_URL, DEFAULT_IMAGE, buildJsonLdGraph, buildBreadcrumbs } from '../lib/seo'
+import { FALLBACK_GOOGLE_REVIEW_URL, useGoogleReviews } from '../lib/googleReviews'
 
-const testimonials = [
+const fallbackTestimonials = [
   {
     firstName: 'Maria',
     city: 'Waco',
@@ -70,42 +71,100 @@ const localBusiness = {
   },
 }
 
-const GOOGLE_REVIEW_URL =
-  'https://www.google.com/maps/place/SLA+Concrete+Works/@31.6637838,-97.1149261,17z/data=!3m1!4b1!4m6!3m5!1s0x864f83d5fc2728cf:0x92d8085e5a37fa64!8m2!3d31.6637793!4d-97.1123512!16s%2Fg%2F11gf0qs4j0?entry=ttu&g_ep=EgoyMDI2MDIyNS4wIKXMDSoASAFQAw%3D%3D'
+function formatFallbackDate(value) {
+  const date = new Date(`${value}T12:00:00Z`)
+  if (Number.isNaN(date.getTime())) return value
 
-const aggregateRating = {
-  '@type': 'AggregateRating',
-  '@id': `${SITE_URL}/reviews#aggregate-rating`,
-  itemReviewed: localBusiness,
-  ratingValue: '4.9',
-  bestRating: '5',
-  worstRating: '1',
-  ratingCount: '38',
-  reviewCount: String(testimonials.length),
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(date)
 }
 
-const reviewNodes = testimonials.map((testimonial) => ({
-  '@type': 'Review',
-  itemReviewed: localBusiness,
-  author: {
-    '@type': 'Person',
-    name: testimonial.firstName,
-  },
-  reviewBody: `${testimonial.review} (${testimonial.firstName} in ${testimonial.city}, used: ${testimonial.service})`,
-  datePublished: testimonial.date,
-  reviewRating: {
-    '@type': 'Rating',
-    ratingValue: String(testimonial.rating),
+export function Reviews() {
+  const googleReviewsData = useGoogleReviews(5)
+  const hasLiveReviews =
+    googleReviewsData.status === 'ready' && googleReviewsData.reviews.length > 0
+  const reviewCards = hasLiveReviews
+    ? googleReviewsData.reviews.map((review) => ({
+        id: review.id,
+        heading: review.authorName,
+        meta: 'Google review',
+        review: review.text,
+        rating: review.rating,
+        date: review.relativePublishTimeDescription || 'Recent review',
+        authorUri: review.authorUri,
+        authorPhotoUri: review.authorPhotoUri,
+      }))
+    : fallbackTestimonials.map((testimonial) => ({
+        id: `${testimonial.firstName}-${testimonial.date}`,
+        heading: `${testimonial.firstName} — ${testimonial.city}`,
+        meta: `Service used: ${testimonial.service}`,
+        review: testimonial.review,
+        rating: testimonial.rating,
+        date: formatFallbackDate(testimonial.date),
+        authorUri: '',
+        authorPhotoUri: '',
+      }))
+  const ratingValue =
+    hasLiveReviews && googleReviewsData.rating ? googleReviewsData.rating.toFixed(1) : '4.9'
+  const ratingCount =
+    hasLiveReviews && googleReviewsData.userRatingCount
+      ? String(googleReviewsData.userRatingCount)
+      : '38'
+  const aggregateRating = {
+    '@type': 'AggregateRating',
+    '@id': `${SITE_URL}/reviews#aggregate-rating`,
+    itemReviewed: localBusiness,
+    ratingValue,
     bestRating: '5',
     worstRating: '1',
-  },
-}))
-
-export function Reviews() {
+    ratingCount,
+    reviewCount: hasLiveReviews ? ratingCount : String(fallbackTestimonials.length),
+  }
+  const reviewNodes = hasLiveReviews
+    ? googleReviewsData.reviews.map((review) => ({
+        '@type': 'Review',
+        itemReviewed: localBusiness,
+        author: {
+          '@type': 'Person',
+          name: review.authorName,
+        },
+        reviewBody: review.text,
+        datePublished: review.publishTime || undefined,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: String(review.rating),
+          bestRating: '5',
+          worstRating: '1',
+        },
+      }))
+    : fallbackTestimonials.map((testimonial) => ({
+        '@type': 'Review',
+        itemReviewed: localBusiness,
+        author: {
+          '@type': 'Person',
+          name: testimonial.firstName,
+        },
+        reviewBody: `${testimonial.review} (${testimonial.firstName} in ${testimonial.city}, used: ${testimonial.service})`,
+        datePublished: testimonial.date,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: String(testimonial.rating),
+          bestRating: '5',
+          worstRating: '1',
+        },
+      }))
   const breadcrumbsJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `${SITE_URL}/` },
     { name: 'Reviews', url: `${SITE_URL}/reviews` },
   ])
+  const googleReviewUrl =
+    googleReviewsData.writeReviewUri ||
+    googleReviewsData.reviewUri ||
+    googleReviewsData.placeUri ||
+    FALLBACK_GOOGLE_REVIEW_URL
 
   useSeo({
     title: 'Reviews | Concrete Works LLC | Waco TX',
@@ -130,24 +189,65 @@ export function Reviews() {
               Reviews from Waco, TX Customers
             </h1>
             <p className="text-lg text-stone-600 text-pretty mb-10">
-              Real feedback from homeowners and business owners in Waco and surrounding Central Texas communities.
+              {hasLiveReviews
+                ? 'Live Google reviews from homeowners and business owners around Waco and the surrounding area.'
+                : 'Real feedback from homeowners and business owners in Waco and surrounding Central Texas communities.'}
             </p>
           </div>
 
+          <div className="mb-8 grid gap-4 sm:grid-cols-3">
+            <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
+              <div className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">Average rating</div>
+              <div className="mt-2 font-display text-4xl font-bold text-stone-900">{ratingValue}</div>
+            </div>
+            <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
+              <div className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">Review count</div>
+              <div className="mt-2 font-display text-4xl font-bold text-stone-900">{ratingCount}</div>
+            </div>
+            <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
+              <div className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">Source</div>
+              <div className="mt-2 text-lg font-semibold text-stone-900">
+                {hasLiveReviews ? 'Google Business Profile' : 'Local fallback reviews'}
+              </div>
+            </div>
+          </div>
+
           <div className="grid gap-6">
-            {testimonials.map((testimonial) => (
+            {reviewCards.map((testimonial) => (
               <article
-                key={`${testimonial.firstName}-${testimonial.date}`}
+                key={testimonial.id}
                 className="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm"
               >
                 <div className="flex justify-between items-start gap-4">
-                  <div>
-                    <h2 className="font-display font-semibold text-xl text-stone-900">
-                      {testimonial.firstName} — {testimonial.city}
-                    </h2>
-                    <p className="text-sm text-stone-500 mt-1">
-                      Service used: {testimonial.service}
-                    </p>
+                  <div className="flex min-w-0 items-start gap-3">
+                    {testimonial.authorPhotoUri ? (
+                      <img
+                        src={testimonial.authorPhotoUri}
+                        alt={testimonial.heading}
+                        className="mt-0.5 size-11 rounded-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : null}
+
+                    <div className="min-w-0">
+                      <h2 className="font-display font-semibold text-xl text-stone-900">
+                        {testimonial.authorUri ? (
+                          <a
+                            href={testimonial.authorUri}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-accent-600"
+                          >
+                            {testimonial.heading}
+                          </a>
+                        ) : (
+                          testimonial.heading
+                        )}
+                      </h2>
+                      <p className="mt-1 text-sm text-stone-500">{testimonial.meta}</p>
+                    </div>
                   </div>
                   <span className="inline-flex items-center px-3 py-1 rounded-full bg-accent-500/10 text-accent-600 text-sm font-semibold">
                     {`★`.repeat(testimonial.rating)}
@@ -161,9 +261,9 @@ export function Reviews() {
             ))}
           </div>
 
-            <section className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <section className="mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <a
-              href={GOOGLE_REVIEW_URL}
+              href={googleReviewUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-7 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors"

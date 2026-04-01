@@ -13,7 +13,9 @@ export const seoServiceSlugs = [
   { slug: 'concrete-parking-lots-waco-tx', redirectTo: '/parking-lot-concrete-waco' },
   { slug: 'parking-lot-concrete-waco' },
   { slug: 'foundation-repair-waco-tx' },
-  { slug: 'house-leveling-waco-tx' },
+  { slug: 'house-leveling-waco-tx', redirectTo: '/foundation-repair-waco-tx' },
+  { slug: 'concrete-demolition-waco-tx' },
+  { slug: 'concrete-sawing-waco-tx' },
   { slug: 'retaining-walls-waco-tx' },
   { slug: 'decorative-concrete-waco' },
   { slug: 'hardscaping-waco-tx' },
@@ -68,8 +70,12 @@ export const servicePageLinks = [
     slug: 'foundation-repair-waco-tx',
   },
   {
-    label: 'House Leveling in Waco, TX',
-    slug: 'house-leveling-waco-tx',
+    label: 'Concrete Demolition in Waco, TX',
+    slug: 'concrete-demolition-waco-tx',
+  },
+  {
+    label: 'Concrete Sawing in Waco, TX',
+    slug: 'concrete-sawing-waco-tx',
   },
   {
     label: 'Retaining Wall Installation in Waco, TX',

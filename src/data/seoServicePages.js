@@ -915,65 +915,128 @@ export const seoServicePages = [
     ],
   },
   {
-    slug: 'house-leveling-waco-tx',
-    title: 'House Leveling in Waco, TX',
+    slug: 'concrete-demolition-waco-tx',
+    title: 'Concrete Demolition in Waco, TX',
     cardSummary:
-      'House leveling and slab stabilization support in Waco for settlement-related floor and foundation movement.',
-    metaTitle: 'House Leveling Waco TX | Concrete Works LLC',
+      'Driveway, patio, sidewalk, and slab tear-out with saw cutting, haul-off, and a clean site when the concrete is too far gone.',
+    metaTitle: 'Concrete Demolition in Waco, TX | Concrete Works LLC',
     metaDescription:
-      'Need house leveling in Waco TX? We assess slab movement, settlement patterns, and drainage conditions to plan practical leveling solutions.',
+      'Need concrete demolition in Waco, TX? We saw cut, break out, haul off, and clean up old concrete for driveway, patio, sidewalk, and slab replacement.',
     introParagraph:
-      'House leveling in Waco needs local soil awareness and careful structural planning. We evaluate movement signs, access constraints, and moisture behavior before recommending next steps.',
+      'Sometimes the right fix is to take the bad concrete out and start over. We cut it, break it out, haul it off, and leave the site ready for the next step.',
     sections: [
       {
-        heading: 'How leveling assessments work',
+        heading: 'How we plan the tear-out',
         paragraphs: [
-          'We start with visible movement clues like interior cracks, sloping floors, and sticking doors.',
-          'The goal is to identify movement source and decide whether leveling, repair, or additional structural input is needed.',
+          'Before we start breaking concrete, we look at access, nearby walls, utilities, and what needs to stay.',
+          'That keeps the job cleaner and helps us avoid turning one slab replacement into damage somewhere else.',
         ],
       },
       {
-        heading: 'Waco soil and moisture effects',
+        heading: 'Saw cuts first, then removal',
         paragraphs: [
-          'Expansive clay can cause repeated seasonal lift and settlement. That makes drainage planning a key part of leveling.',
-          'We evaluate runoff and grading around the home to reduce repeat stress after corrections.',
+          'We usually cut the slab before we start breaking it out. That gives us cleaner edges and better control.',
+          'It also helps keep cracks from running into concrete you were hoping to save.',
         ],
       },
       {
-        heading: 'Leveling scope and sequencing',
+        heading: 'Haul-off and cleanup',
         paragraphs: [
-          'Where leveling is feasible, we map the process to protect utilities and home access.',
-          'We provide a clear step-by-step plan so homeowners understand timing and expectations.',
+          'Nobody wants busted concrete sitting in the driveway for days. We load it out and clean the area as the job moves.',
+          'If replacement work is next, we leave the site ready for base prep or the new pour.',
         ],
       },
       {
-        heading: 'Long-term maintenance after leveling',
+        heading: 'When demolition makes more sense than repair',
         paragraphs: [
-          'House leveling works best with stable moisture control and periodic follow-up checks.',
-          'We share practical maintenance guidance so small issues are caught early.',
+          'Some slabs can be patched. Some are done. If the concrete is broken up, badly settled, or failing underneath, we will tell you that straight.',
+          'In those cases, demolition usually saves you from paying twice for a fix that was never going to last.',
         ],
       },
     ],
     faq: [
       {
-        question: 'What are early signs that a house may need leveling?',
+        question: 'How much does concrete demolition cost in Waco?',
         answer:
-          'Common signs include sloping floors, recurring wall cracks, and doors that stop closing normally.',
+          'Cost depends on thickness, access, haul-off, and whether the slab needs saw cuts first. We price it after a site visit so you know what is actually included.',
       },
       {
-        question: 'Do you service house leveling projects across Waco?',
+        question: 'Can you remove only part of a slab?',
         answer:
-          'Yes. We assess house leveling needs across Waco and surrounding Central Texas areas.',
+          'Yes. Partial tear-out is common when only one section needs to be replaced or opened up.',
       },
       {
-        question: 'Is drainage part of house leveling planning?',
+        question: 'Will demolition damage nearby concrete?',
         answer:
-          'Yes. Drainage is one of the most important factors in reducing repeat foundation movement.',
+          'We cut and remove in stages to protect nearby concrete as much as possible. Clean saw lines help a lot.',
       },
       {
-        question: 'Can leveling be phased?',
+        question: 'Do you handle debris haul-off after the tear-out?',
         answer:
-          'Depending on scope, leveling and supporting repairs can often be sequenced in practical phases.',
+          'Yes. We haul off the broken concrete and leave the area ready for the next trade or the replacement crew.',
+      },
+    ],
+  },
+  {
+    slug: 'concrete-sawing-waco-tx',
+    title: 'Concrete Sawing in Waco, TX',
+    cardSummary:
+      'Saw cutting for clean tear-out lines, utility openings, joints, and slab sections that need to come out without beating up the concrete around them.',
+    metaTitle: 'Concrete Sawing in Waco, TX | Concrete Works LLC',
+    metaDescription:
+      'Need concrete sawing in Waco, TX? We cut clean lines for demolition, utility access, partial slab replacement, and joint work.',
+    introParagraph:
+      'If a slab needs to be opened up, cut into sections, or prepped for demolition, saw cutting is usually the cleanest way to do it. It gives you a straight edge and saves the surrounding concrete from getting chewed up.',
+    sections: [
+      {
+        heading: 'Why a clean cut matters',
+        paragraphs: [
+          'Good saw cuts keep cracks from wandering into the part of the slab you are trying to keep.',
+          'They also make patch work, replacement, and demolition look cleaner when the job is finished.',
+        ],
+      },
+      {
+        heading: 'For demolition and partial replacement',
+        paragraphs: [
+          'When only part of a driveway, patio, or sidewalk needs to come out, we cut the section first and remove from there.',
+          'That keeps the tear-out under control and gives the new work a clean edge to tie back to.',
+        ],
+      },
+      {
+        heading: 'For plumbing, drainage, and other access',
+        paragraphs: [
+          'We also cut openings when plumbers or other trades need to get into the slab.',
+          'That could mean a drain line, a utility repair, or a section that needs to be opened without tearing up the whole area.',
+        ],
+      },
+      {
+        heading: 'Dust, slurry, and cleanup',
+        paragraphs: [
+          'Sawing gets messy fast if nobody stays on top of it.',
+          'We manage water, slurry, and cleanup so the site stays workable instead of turning into a bigger mess than it needs to be.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'What types of concrete do you saw cut?',
+        answer:
+          'Driveways, patios, sidewalks, house slabs, shop slabs, and cutouts for utility access or demolition prep.',
+      },
+      {
+        question: 'Can you saw cut concrete near walls or existing slabs?',
+        answer:
+          'Yes, if there is enough clearance to cut safely. We lay it out first so we are not guessing near finished surfaces or walls.',
+      },
+      {
+        question: 'Is saw cutting needed before demolition?',
+        answer:
+          'A lot of the time, yes. A saw cut gives the tear-out a stopping point and keeps breakage from traveling.',
+      },
+      {
+        question: 'How do you handle dust and slurry during cutting?',
+        answer:
+          'We use water when the job calls for it and clean up slurry as we go so the site does not get away from us.',
       },
     ],
   },
@@ -1368,6 +1431,6 @@ export const seoServicePages = [
 export const servicePageLinks = seoServicePages
   .filter((service) => !service.redirectTo)
   .map((service) => ({
-  label: service.title,
-  slug: service.slug,
-}))
+    label: service.title,
+    slug: service.slug,
+  }))

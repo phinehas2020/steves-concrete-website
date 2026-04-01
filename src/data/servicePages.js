@@ -4,7 +4,8 @@ export const SERVICE_CANONICAL_PATH_BY_SLUG = {
   'concrete-patios': '/concrete-patios-waco-tx',
   'parking-lots': '/parking-lot-concrete-waco',
   'concrete-repair': '/foundation-repair-waco-tx',
-  'concrete-leveling': '/house-leveling-waco-tx',
+  'concrete-demolition': '/concrete-demolition-waco-tx',
+  'concrete-sawing': '/concrete-sawing-waco-tx',
   'sidewalks-driveways': '/concrete-sidewalks-waco-tx',
   'stamped-concrete': '/stamped-concrete-waco-tx',
   'commercial-concrete': '/commercial-concrete-contractor-waco-tx',
@@ -819,73 +820,156 @@ export const servicePages = [
     ],
   },
   {
-    slug: 'concrete-leveling',
-    title: 'Concrete Leveling',
-    heroTitle: 'Concrete Leveling in Waco, TX',
+    slug: 'concrete-demolition',
+    title: 'Concrete Demolition',
+    heroTitle: 'Concrete Demolition in Waco, TX',
     heroSubtitle:
-      'Mudjacking and poly leveling to raise sunken slabs and restore flat surfaces.',
-    seoTitle: 'Concrete Leveling Waco TX | Concrete Works LLC',
+      'Controlled tear-out and haul-off for driveways, patios, slabs, and walkways that need to be removed cleanly.',
+    seoTitle: 'Concrete Demolition Waco TX | Concrete Works LLC',
     seoDescription:
-      'Concrete leveling in Waco. Raise sunken driveways & sidewalks. Mudjacking & poly foam. Free estimate: (254) 230-3102.',
+      'Concrete demolition in Waco. Controlled tear-out, saw cutting, and haul-off for replacement and site prep. Free estimate: (254) 230-3102.',
     intro:
-      'Sunken driveways and sidewalks are often caused by soil settlement. We evaluate the cause and offer mudjacking or poly foam leveling when appropriate.',
+      'When a slab is beyond repair or needs to be cleared for new work, we remove it with a controlled plan that protects the surrounding area. We think through access, utilities, haul-off, and replacement prep before the first cut is made.',
     benefits: [
-      'Restore flat surfaces without full replacement',
-      'Quick turnaround and minimal disruption',
-      'Address trip hazards and drainage',
+      'Controlled removal with less collateral damage',
+      'Clear prep for replacement pours or site changes',
+      'Site cleanup and haul-off handled in one scope',
     ],
     process: [
       {
-        title: 'Inspection',
-        description: 'We check the slab and underlying soil to recommend the best approach.',
+        title: 'Mark and plan',
+        description: 'We review the slab, confirm access, and map cut lines before equipment starts.',
       },
       {
-        title: 'Drill and inject',
-        description: 'Holes are drilled and grout or poly foam is injected under the slab.',
+        title: 'Controlled tear-out',
+        description: 'Saw cutting and removal methods are used to break concrete out in a controlled way.',
       },
       {
-        title: 'Patch and finish',
-        description: 'Holes are patched and the surface is left ready for use.',
+        title: 'Haul-off and prep',
+        description: 'Debris is removed, the base is cleaned up, and the site is prepared for the next phase.',
       },
     ],
-    finishes: ['Mudjacking (cement grout)', 'Polyurethane foam leveling', 'Surface patch blend'],
+    finishes: ['Full slab removal', 'Selective demolition', 'Haul-off and disposal', 'Base prep for rebuild'],
     localNotes: [
       {
-        title: 'Black clay settlement',
-        description: 'Central Texas soil movement often causes slabs to settle. We assess whether leveling or replacement is best.',
+        title: 'Access planning',
+        description: 'Tight driveways and active job sites need a demolition plan that fits the space we have.',
       },
       {
-        title: 'When leveling works',
-        description: 'Leveling is ideal when slabs have settled but not cracked severely.',
+        title: 'Utility awareness',
+        description: 'We verify the cut layout around utilities, edges, and nearby finishes before work begins.',
       },
       {
-        title: 'Drainage improvement',
-        description: 'Leveling can restore slope and improve water runoff.',
+        title: 'Rebuild ready',
+        description: 'When demolition is part of a replacement, we leave the base prepared for the next pour.',
       },
     ],
     costFactors: [
-      'Square footage and number of slabs',
-      'Settlement depth and access',
-      'Method (mudjacking vs poly)',
-      'Underlying cause and soil condition',
+      'Square footage and slab thickness',
+      'Reinforcement, mesh, or rebar inside the slab',
+      'Access for equipment, loading, and haul-off',
+      'Saw cutting and utility protection needs',
+      'Disposal distance and replacement prep',
     ],
     timeline:
-      'Most leveling projects take 1 day; surfaces are usable within 24–48 hours.',
+      'Most demolition jobs are completed in 1 day on site, though larger tear-outs or replacement prep can take longer.',
     faq: [
       {
-        question: 'How much does concrete leveling cost in Waco?',
+        question: 'How much does concrete demolition cost in Waco?',
         answer:
-          'Leveling typically runs $3–8 per square foot depending on method and depth. Call (254) 230-3102 for a free assessment and quote.',
+          'Demolition cost depends on slab size, thickness, access, and haul-off requirements. We provide a clear estimate after a site review.',
       },
       {
-        question: 'Mudjacking vs poly leveling — which is better?',
+        question: 'Can you remove just part of a slab?',
         answer:
-          'Mudjacking uses cement grout and is cost-effective. Poly foam is lighter, cures faster, and works in tighter spaces. We recommend based on your situation.',
+          'Yes. Selective demolition is common when only a section needs to be removed for repair or replacement.',
       },
       {
-        question: 'Can you level a sunken driveway?',
+        question: 'Do you handle haul-off after the tear-out?',
         answer:
-          'Yes. We evaluate settlement and drainage, then recommend leveling or replacement. Many sunken driveways can be raised successfully.',
+          'Yes. We can remove debris and leave the site clean and ready for the next phase of work.',
+      },
+      {
+        question: 'Will demolition damage nearby concrete?',
+        answer:
+          'We plan cut lines and removal methods to protect adjacent slabs and finishes as much as possible.',
+      },
+    ],
+  },
+  {
+    slug: 'concrete-sawing',
+    title: 'Concrete Sawing',
+    heroTitle: 'Concrete Sawing in Waco, TX',
+    heroSubtitle:
+      'Precision saw cutting for openings, control joints, repair cuts, and clean demolition lines on residential and commercial concrete.',
+    seoTitle: 'Concrete Sawing Waco TX | Concrete Works LLC',
+    seoDescription:
+      'Concrete sawing in Waco. Precision cutting for demolition lines, slab openings, and repair prep. Free estimate: (254) 230-3102.',
+    intro:
+      'Clean saw cuts matter when you are opening a slab, isolating a repair, or setting up a demolition. We cut concrete with a focus on accuracy, dust control, and protecting the surfaces around the cut.',
+    benefits: [
+      'Straight, accurate cuts for clean results',
+      'Less impact on the surrounding slab or finish',
+      'Useful for repairs, openings, and tear-out prep',
+    ],
+    process: [
+      {
+        title: 'Measure and mark',
+        description: 'We verify the layout, cut depth, and target area before we start cutting.',
+      },
+      {
+        title: 'Controlled cutting',
+        description: 'The right saw and cutting method are chosen for the slab, access, and dust control needs.',
+      },
+      {
+        title: 'Cleanup and follow-through',
+        description: 'Slurry, dust, and cut debris are cleaned up so the opening or next step is ready.',
+      },
+    ],
+    finishes: ['Control joints', 'Utility openings', 'Selective cut lines', 'Demolition prep cuts'],
+    localNotes: [
+      {
+        title: 'Existing slab accuracy',
+        description: 'We cut with care so the finished opening or joint lands where the project needs it.',
+      },
+      {
+        title: 'Dust and water control',
+        description: 'Saw cutting is managed to keep the site cleaner and easier to work around.',
+      },
+      {
+        title: 'Trade coordination',
+        description: 'Sawing often supports plumbers, electricians, or demolition crews that follow behind us.',
+      },
+    ],
+    costFactors: [
+      'Linear feet of cutting needed',
+      'Concrete thickness and reinforcement',
+      'Access for saws and water management',
+      'Wet cut vs dry cut requirements',
+      'Cleanup and disposal needs',
+    ],
+    timeline:
+      'Most saw cutting is completed the same day, though larger layouts or multiple openings may be staged in phases.',
+    faq: [
+      {
+        question: 'How much does concrete sawing cost in Waco?',
+        answer:
+          'Sawing is priced based on linear feet, thickness, access, and the kind of cut being made. We quote it clearly after reviewing the job.',
+      },
+      {
+        question: 'Can you cut openings for utilities or plumbing?',
+        answer:
+          'Yes. We regularly cut concrete for utility access, repairs, and other trade-related openings.',
+      },
+      {
+        question: 'Do you handle control joints or repair cuts?',
+        answer:
+          'Yes. We can cut control joints and repair-related lines to support cleaner long-term slab performance.',
+      },
+      {
+        question: 'Is sawing usually part of demolition?',
+        answer:
+          'Often it is. Controlled saw cutting helps define tear-out boundaries before the rest of the slab is removed.',
       },
     ],
   },
