@@ -15,11 +15,7 @@ const CostQuickAnswers = lazy(() =>
 const BlogActivityStrip = lazy(() =>
   import('./components/BlogActivityStrip').then((m) => ({ default: m.BlogActivityStrip })),
 )
-const Values = lazy(() => import('./components/Values').then((m) => ({ default: m.Values })))
 const Gallery = lazy(() => import('./components/Gallery').then((m) => ({ default: m.Gallery })))
-const Testimonials = lazy(() =>
-  import('./components/Testimonials').then((m) => ({ default: m.Testimonials })),
-)
 const FAQ = lazy(() => import('./components/FAQ').then((m) => ({ default: m.FAQ })))
 const Contact = lazy(() => import('./components/Contact').then((m) => ({ default: m.Contact })))
 
@@ -186,29 +182,14 @@ function App() {
             </Suspense>
           </DeferredSection>
         </div>
-        {/* Values - Hidden on mobile to reduce scroll to Gallery */}
-        <div className="hidden md:block md:order-none">
-          <DeferredSection rootMargin="520px 0px" minHeight={520}>
-            <Suspense fallback={<SectionFallback className="section-padding bg-stone-100" minHeight={520} />}>
-              <Values />
-            </Suspense>
-          </DeferredSection>
-        </div>
         <div className="order-8 md:order-none">
-          <DeferredSection rootMargin="500px 0px" minHeight={680}>
-            <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={680} />}>
-              <Testimonials reviewsData={homeReviewsData} />
-            </Suspense>
-          </DeferredSection>
-        </div>
-        <div className="order-9 md:order-none">
           <DeferredSection rootMargin="520px 0px" minHeight={620}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={620} />}>
               <FAQ />
             </Suspense>
           </DeferredSection>
         </div>
-        <div className="order-10 md:order-none">
+        <div className="order-9 md:order-none">
           <DeferredSection rootMargin="560px 0px" minHeight={760}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={760} />}>
               <Contact />

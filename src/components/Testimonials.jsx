@@ -129,8 +129,8 @@ export function Testimonials({ reviewsData }) {
             Meet Steve
           </h2>
           <p className="text-lg text-stone-600 text-pretty max-w-2xl">
-            Steve still runs Concrete Works the way he started it: show up, tell people the truth
-            about the job, and leave them with concrete that holds up.
+            Steve still runs the business the same way he always has. He answers straight, shows up,
+            and wants the concrete to hold up long after he leaves the jobsite.
           </p>
         </Motion.div>
 
@@ -198,9 +198,9 @@ export function Testimonials({ reviewsData }) {
               <blockquote className="relative">
                 <Quote className="absolute -top-1 -left-1 size-7 text-stone-200" aria-hidden="true" />
                 <p className="pl-6 text-lg sm:text-xl text-stone-700 text-pretty leading-relaxed">
-                  Around Waco, the pour gets the attention. Steve worries just as much about the
-                  base, drainage, and timing, because that is usually what decides whether a slab
-                  lasts.
+                  Around Waco, the finish gets all the attention. Steve worries just as much about
+                  the base, the drainage, and the timing, because that is usually what decides if a
+                  slab holds up.
                 </p>
               </blockquote>
 

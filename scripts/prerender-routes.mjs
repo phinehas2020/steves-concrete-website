@@ -113,6 +113,14 @@ const staticRoutes = [
     renderContent: renderGuidesIndexContent,
   },
   {
+    path: '/about',
+    title: 'Meet Steve | Concrete Works LLC',
+    description:
+      'Meet Steve, the owner of Concrete Works LLC in Waco, and learn how he approaches prep, drainage, and concrete jobs around Central Texas.',
+    h1: 'About Concrete Works LLC',
+    renderContent: renderAboutContent,
+  },
+  {
     path: '/reviews',
     title: 'Customer Reviews | Concrete Works LLC',
     description:
@@ -171,6 +179,11 @@ const sportsCourtAreaLinks = sportsCourtAreaPageData.map((area) => ({
 }))
 
 const companyResourceLinks = [
+  {
+    label: 'About Steve and the company',
+    href: '/about',
+    description: 'Owner background, process, and what matters before the concrete is poured.',
+  },
   {
     label: 'Customer reviews',
     href: '/reviews',
@@ -781,6 +794,61 @@ function renderGuidesIndexContent() {
       {
         title: 'Services these guides support',
         links: serviceLinks,
+      },
+    ],
+  })
+}
+
+function renderAboutContent() {
+  return renderPage({
+    eyebrow: 'Meet Steve',
+    title: 'Meet Steve, the owner behind Concrete Works',
+    subtitle:
+      'The person answering the call, walking the site, and staying involved through the job.',
+    introParagraphs: [
+      'If you call Concrete Works, you are usually talking to Steve. He is the one asking what is wrong, what you want built, and what the site looks like before he starts talking price.',
+      'He has been pouring concrete around Waco for more than 20 years. People like that he is direct, stays involved, and does not try to dress every job up like a sales pitch.',
+    ],
+    includeCompanyResourceLinks: false,
+    actionLinks: [
+      { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
+      { href: '/#contact', label: 'Request estimate' },
+      { href: '/reviews', label: 'Read customer reviews' },
+    ],
+    sections: [
+      {
+        title: 'What people like about working with Steve',
+        bullets: [
+          'They deal with the owner, not a separate sales team.',
+          'He pays attention to site prep, drainage, and the stuff under the slab that people do not usually see.',
+          'He is plain about scope, timing, and whether the job needs more work or less work.',
+          'He stays involved instead of disappearing after the estimate.',
+        ],
+      },
+      {
+        title: 'How he got into the work',
+        paragraphs: [
+          'Steve got into concrete after seeing too many slabs fail early because the prep was rushed or ignored. Most of the time the concrete got blamed for problems that really started with the base, the drainage, or the soil underneath.',
+          'That is still how he looks at jobs now. Around Waco, black clay and water movement can ruin a good-looking slab if the groundwork is sloppy.',
+        ],
+      },
+      {
+        title: 'How he runs a job',
+        bullets: [
+          'Step 1: Ask the right questions and walk the site before guessing at a price.',
+          'Step 2: Figure out access, drainage, grade, and whether old concrete needs to come out.',
+          'Step 3: Prep the base and forms so the slab starts right, not just looks good on pour day.',
+          'Step 4: Finish the job, explain cure timing, and make sure the customer knows what comes next.',
+        ],
+        orderedBullets: true,
+      },
+      {
+        title: 'Pages worth reviewing before you hire',
+        links: companyResourceLinks.filter((item) => item.href !== '/about'),
+      },
+      {
+        title: 'Core concrete services',
+        links: serviceLinks.slice(0, 8),
       },
     ],
   })

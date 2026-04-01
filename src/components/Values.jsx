@@ -90,22 +90,21 @@ export function Values() {
                         transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
                     >
                         <span className="inline-block text-accent-500 font-bold text-xs uppercase tracking-[0.2em] mb-6">
-                            Est. 2005 / Waco, TX
+                            Steve's approach / Waco, TX
                         </span>
                         <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-white text-balance mb-8 leading-[1.05]">
-                            Built to Outlast the <span className="text-stone-500 italic">Black Clay</span>
+                            How Steve thinks about a slab in Central Texas
                         </h2>
                         <div className="space-y-6 text-stone-400 text-lg leading-relaxed font-light">
                             <p>
-                                Stephen started Concrete Works after seeing too many driveways crack within five years 
-                                around Waco. The problem wasn't the concrete — it was the preparation. McLennan County's 
-                                notorious black clay expands when wet and shrinks when dry, heaving anything built on it 
-                                if you don't account for it.
+                                Steve got into this work after seeing too many driveways crack way too soon around
+                                Waco. Most of the time the problem was not the concrete itself. It was bad prep,
+                                poor drainage, or somebody pretending the black clay underneath would stay put.
                             </p>
                             <p>
-                                Twenty years and 500+ projects later, we've refined a process that accounts for Central 
-                                Texas soil, summer heat that hits 105°F, and freeze-thaw cycles that test every seam. 
-                                We don't pour and pray. We engineer for where we live.
+                                He has spent the last 20 years figuring out what actually holds up here. That means
+                                taking the base seriously, paying attention to slope and water, and not rushing the
+                                timing just because the truck is on site.
                             </p>
                         </div>
 
@@ -129,7 +128,7 @@ export function Values() {
                             className="mb-10"
                         >
                             <h3 className="font-display font-bold text-2xl text-white mb-4">
-                                The Master Plan
+                                How he runs a job
                             </h3>
                             <div className="h-1 w-20 bg-accent-500" />
                         </motion.div>
@@ -145,4 +144,3 @@ export function Values() {
         </section>
     )
 }
-
