@@ -37,12 +37,21 @@ const ownerHighlights = [
   'Still the one walking jobs and answering questions',
 ]
 
+function compactReviewText(value, maxLength = 220) {
+  const cleaned = String(value || '').replace(/\s+/g, ' ').trim()
+  if (cleaned.length <= maxLength) return cleaned
+
+  const shortened = cleaned.slice(0, maxLength).trim()
+  const lastSpace = shortened.lastIndexOf(' ')
+  return `${(lastSpace > 80 ? shortened.slice(0, lastSpace) : shortened).trim()}...`
+}
+
 export function Testimonials({ reviewsData }) {
   const hasLiveReviews = reviewsData?.status === 'ready' && reviewsData.reviews.length > 0
   const liveTestimonials = hasLiveReviews
     ? reviewsData.reviews.map((review) => ({
         key: review.id,
-        quote: review.text,
+        quote: compactReviewText(review.text),
         author: review.authorName,
         authorUri: review.authorUri,
         authorPhotoUri: review.authorPhotoUri,
@@ -58,6 +67,7 @@ export function Testimonials({ reviewsData }) {
         ...testimonial,
         badge: testimonial.project,
       }))
+  const featuredTestimonials = hasLiveReviews ? visibleTestimonials.slice(0, 2) : visibleTestimonials
   const stats = [
     {
       value:
@@ -83,6 +93,10 @@ export function Testimonials({ reviewsData }) {
   ]
   const reviewsLink =
     reviewsData?.reviewUri || reviewsData?.placeUri || FALLBACK_GOOGLE_REVIEW_URL
+  const reviewsCtaLabel =
+    hasLiveReviews && reviewsData?.userRatingCount
+      ? `See all ${reviewsData.userRatingCount} Google reviews`
+      : 'See all reviews'
 
   return (
     <section id="about" className="section-padding bg-white texture-grain-light relative overflow-hidden">
@@ -212,11 +226,11 @@ export function Testimonials({ reviewsData }) {
               </div>
             </Motion.div>
 
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {visibleTestimonials.map((testimonial, index) => (
+            <div className="grid gap-4 md:grid-cols-2">
+              {featuredTestimonials.map((testimonial, index) => (
                 <Motion.article
                   key={testimonial.key}
-                  className="rounded-2xl border border-stone-200 bg-stone-50 p-5 shadow-sm"
+                  className="flex h-full flex-col rounded-2xl border border-stone-200 bg-stone-50 p-5 shadow-sm"
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -228,7 +242,7 @@ export function Testimonials({ reviewsData }) {
                     ))}
                   </div>
 
-                  <blockquote className="relative mb-5">
+                  <blockquote className="relative mb-5 flex-1">
                     <Quote className="absolute -top-1 -left-1 size-5 text-stone-200" aria-hidden="true" />
                     <p className="pl-4 text-sm leading-relaxed text-stone-700 text-pretty">
                       {testimonial.quote}
@@ -272,9 +286,42 @@ export function Testimonials({ reviewsData }) {
                       {testimonial.badge}
                     </span>
                   </div>
+
+                  {hasLiveReviews ? (
+                    <div className="mt-4 border-t border-stone-200 pt-4">
+                      <a
+                        href="/reviews"
+                        className="text-sm font-semibold text-accent-600 transition-colors hover:text-accent-700"
+                      >
+                        Read the full review
+                      </a>
+                    </div>
+                  ) : null}
                 </Motion.article>
               ))}
             </div>
+
+            {hasLiveReviews ? (
+              <div className="rounded-[2rem] border border-stone-200 bg-stone-50 px-5 py-4 sm:px-6">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-stone-900">
+                      Live from Google Business Profile
+                    </p>
+                    <p className="text-sm text-stone-600">
+                      The homepage shows a couple of recent reviews. The full list lives on the reviews page.
+                    </p>
+                  </div>
+
+                  <a
+                    href="/reviews"
+                    className="inline-flex items-center justify-center rounded-lg bg-white px-4 py-2 text-sm font-semibold text-stone-900 transition-colors hover:bg-stone-100"
+                  >
+                    {reviewsCtaLabel}
+                  </a>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
