@@ -21,7 +21,7 @@ const leadsSmsTo = envString('LEADS_SMS_TO')
 const twilioFrom = envString('LEADS_SMS_FROM')
 const twilioAccountSid = envString('TWILIO_ACCOUNT_SID')
 const twilioAuthToken = envString('TWILIO_AUTH_TOKEN')
-const siteName = envString('LEADS_SITE_NAME', 'Concrete Works LLC')
+const siteName = envString('LEADS_SITE_NAME', 'SLA Concrete Works LLC')
 const turnstileSecretKey = envString('TURNSTILE_SECRET_KEY')
 
 const RATE_LIMIT_WINDOW_MINUTES = parsePositiveInt(process.env.LEAD_RATE_LIMIT_WINDOW_MINUTES, 10)

@@ -23,8 +23,8 @@ const navItems = [
 
 export function AdminApp() {
   useSeo({
-    title: 'Admin Dashboard | Concrete Works LLC',
-    description: 'Concrete Works LLC admin dashboard.',
+    title: 'Admin Dashboard | SLA Concrete Works LLC',
+    description: 'SLA Concrete Works LLC admin dashboard.',
     robots: 'noindex, nofollow',
     canonical: `${SITE_URL}/admin`,
     url: `${SITE_URL}/admin`,
@@ -142,7 +142,7 @@ export function AdminApp() {
             <div>
               <p className="text-xs uppercase tracking-wide text-stone-500">Admin</p>
               <h1 className="font-display font-bold text-2xl text-stone-900">
-                Concrete Works Dashboard
+                SLA Concrete Works LLC Dashboard
               </h1>
             </div>
             <div className="flex items-center gap-3">

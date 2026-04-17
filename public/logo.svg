@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">SLA Concrete Works LLC logo</title>
+  <desc id="desc">A blue-outlined hexagon logo for SLA Concrete Works LLC.</desc>
+  <g transform="translate(46 16)">
+    <path d="M160 4 300 54V176L160 226 20 176V54L160 4Z" fill="white"/>
+    <path d="M160 4 300 54V176L160 226 20 176V54L160 4Z" stroke="#1D4ED8" stroke-width="14" stroke-linejoin="round"/>
+    <path d="M160 18 284 63V167L160 211 36 167V63L160 18Z" stroke="#0EA5E9" stroke-width="4" stroke-linejoin="round" opacity="0.7"/>
+    <text x="160" y="52" text-anchor="middle" fill="#EA580C" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="700" letter-spacing="6">SLA</text>
+    <text x="160" y="118" text-anchor="middle" fill="#0F172A" font-family="Helvetica, Arial, sans-serif" font-size="48" font-weight="700">CONCRETE</text>
+    <rect x="40" y="138" width="240" height="40" rx="10" fill="#1D4ED8"/>
+    <text x="160" y="166" text-anchor="middle" fill="white" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="4">WORKS LLC</text>
+  </g>
+</svg>

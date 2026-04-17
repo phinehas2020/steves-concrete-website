@@ -15,7 +15,7 @@ const supabaseUrl = envString('SUPABASE_URL')
 const supabaseServiceRoleKey = envString('SUPABASE_SERVICE_ROLE_KEY')
 const resendApiKey = envString('RESEND_API_KEY')
 const leadsFrom = envString('LEADS_EMAIL_FROM')
-const siteName = envString('LEADS_SITE_NAME', 'Concrete Works LLC')
+const siteName = envString('LEADS_SITE_NAME', 'SLA Concrete Works LLC')
 
 function normalizeBody(body) {
   if (!body) return {}

@@ -242,7 +242,7 @@ export function Hero() {
                     <p className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed">
                         <span className="sm:hidden">500+ projects across Central Texas. Built for black clay soil, heat, and long-term durability.</span>
                         <span className="hidden sm:inline">
-                            Concrete Works LLC has completed 500+ projects in Waco, TX since 2005. We build concrete driveways,
+                            SLA Concrete Works LLC has completed 500+ projects in Waco, TX since 2005. We build concrete driveways,
                             concrete patios, and more for homeowners who want durable results from
                             concrete contractors Waco TX with experience in black clay soil movement and long Texas heat cycles.
                             If you are looking for reliable concrete companies Waco TX, we are ready to help.

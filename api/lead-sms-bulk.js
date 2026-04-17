@@ -16,7 +16,7 @@ const twilioAccountSid = envString('TWILIO_ACCOUNT_SID')
 const twilioAuthToken = envString('TWILIO_AUTH_TOKEN')
 const twilioFrom = envString('LEADS_SMS_FROM')
 const leadsSmsTo = envString('LEADS_SMS_TO')
-const siteName = envString('LEADS_SITE_NAME', 'Concrete Works LLC')
+const siteName = envString('LEADS_SITE_NAME', 'SLA Concrete Works LLC')
 
 function normalizeBody(body) {
   if (!body) return {}

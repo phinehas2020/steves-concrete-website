@@ -83,7 +83,7 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
     '@type': ['LocalBusiness', 'Contractor'],
     '@id': `${SITE_URL}/${slug}#local-business`,
     additionalType: 'https://schema.org/ConcreteContractor',
-    name: `Concrete Works LLC - ${city}`,
+    name: `SLA Concrete Works LLC - ${city}`,
     url: `${SITE_URL}/${slug}`,
     image: DEFAULT_IMAGE,
     telephone: '+1-254-230-3102',

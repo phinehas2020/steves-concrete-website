@@ -16,13 +16,13 @@ export function JobsIndex() {
   ])
 
   useSeo({
-    title: 'Concrete Projects Waco TX | Gallery | Concrete Works LLC',
+    title: 'Concrete Projects Waco TX | Gallery | SLA Concrete Works LLC',
     description:
       'Driveways, patios, stamped concrete & commercial projects in Waco. Free estimate: (254) 230-3102.',
     canonical: `${SITE_URL}/jobs`,
     url: `${SITE_URL}/jobs`,
     image: DEFAULT_IMAGE,
-    imageAlt: 'Concrete Works LLC project gallery',
+    imageAlt: 'SLA Concrete Works LLC project gallery',
     type: 'website',
     jsonLd: buildJsonLdGraph(breadcrumbsJsonLd),
   })

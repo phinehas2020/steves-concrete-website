@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 const SITE_URL = 'https://www.concretewaco.com'
-const SITE_NAME = 'Concrete Works LLC'
+const SITE_NAME = 'SLA Concrete Works LLC'
 const LOCALE = 'en_US'
 const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
@@ -9,10 +9,10 @@ const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 const DEFAULT_SEO = {
   title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Free Estimate (254) 230-3102',
   description:
-    'Concrete Works LLC is one of the trusted concrete contractors in Waco, TX offering full concrete services in Waco TX for driveways, patios, stamped concrete, slabs, and repairs. Free estimates: (254) 230-3102.',
+    'SLA Concrete Works LLC is one of the trusted concrete contractors in Waco, TX offering full concrete services in Waco TX for driveways, patios, stamped concrete, slabs, and repairs. Free estimates: (254) 230-3102.',
   canonical: SITE_URL + '/',
   image: DEFAULT_IMAGE,
-  imageAlt: "Concrete Works LLC - Waco's Trusted Concrete Contractor",
+  imageAlt: "SLA Concrete Works LLC - Waco's Trusted Concrete Contractor",
   type: 'website',
   robots: 'index, follow',
   twitterCard: 'summary_large_image',

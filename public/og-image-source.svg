@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F8F4EC"/>
+  <circle cx="1120" cy="96" r="140" fill="#F59E0B" fill-opacity="0.08"/>
+  <circle cx="154" cy="540" r="124" fill="#1D4ED8" fill-opacity="0.05"/>
+
+  <text x="82" y="96" fill="#F97316" font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="700" letter-spacing="8">SLA</text>
+  <text x="82" y="152" fill="#111827" font-family="Helvetica, Arial, sans-serif" font-size="58" font-weight="700">CONCRETE</text>
+  <rect x="82" y="172" width="332" height="54" rx="13" fill="#1D4ED8"/>
+  <text x="248" y="210" text-anchor="middle" fill="white" font-family="Helvetica, Arial, sans-serif" font-size="37" font-weight="700" letter-spacing="6">WORKS LLC</text>
+
+  <text x="82" y="344" fill="#111827" font-family="Helvetica, Arial, sans-serif" font-size="78" font-weight="700">Waco's Trusted</text>
+  <rect x="333" y="356" width="205" height="9" rx="4.5" fill="#EA580C"/>
+  <text x="82" y="426" fill="#111827" font-family="Helvetica, Arial, sans-serif" font-size="78" font-weight="700">Concrete</text>
+  <text x="82" y="508" fill="#111827" font-family="Helvetica, Arial, sans-serif" font-size="78" font-weight="700">Contractor</text>
+
+  <rect x="694" y="148" width="420" height="310" rx="28" fill="#706661"/>
+  <rect x="728" y="184" width="352" height="242" rx="20" fill="#D4C0AC"/>
+  <path d="M758 242c48-42 115-57 192-44 73 12 113 6 130-10v154H728V254c10 1 20-4 30-12Z" fill="#C7B09A"/>
+  <path d="M760 220c66 34 126 41 180 24 53-16 101-14 140 6" stroke="#9A7B60" stroke-width="8" stroke-linecap="round"/>
+  <path d="M744 292c54-28 105-36 154-25 44 10 91 7 140-9" stroke="#8B6B55" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+  <path d="M744 346c74 12 136 6 186-16 53-23 103-27 150-12" stroke="#7C5E4B" stroke-width="7" stroke-linecap="round" opacity="0.85"/>
+  <path d="M786 188V426" stroke="#A38773" stroke-width="6" stroke-linecap="round" opacity="0.45"/>
+  <path d="M952 184V426" stroke="#A38773" stroke-width="6" stroke-linecap="round" opacity="0.28"/>
+  <rect x="756" y="446" width="300" height="16" rx="8" fill="#F97316" fill-opacity="0.9"/>
+  <text x="906" y="536" text-anchor="middle" fill="#57534E" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700">Driveways / Patios / Repair / Commercial</text>
+</svg>

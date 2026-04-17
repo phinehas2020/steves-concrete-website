@@ -37,7 +37,7 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
     provider: {
       '@type': 'Organization',
       '@id': `${SITE_URL}/#organization`,
-      name: 'Concrete Works LLC',
+      name: 'SLA Concrete Works LLC',
       telephone: '+1-254-230-3102',
       url: `${SITE_URL}/`,
     },

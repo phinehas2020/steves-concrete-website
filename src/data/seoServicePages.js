@@ -5,7 +5,7 @@ export const seoServicePages = [
     heroImage: '/seo-images/concrete-resurfacing.png',
     cardSummary:
       'Restore worn concrete with overlays and texture refresh systems designed for Waco heat, UV exposure, and everyday traffic.',
-    metaTitle: 'Concrete Resurfacing in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Concrete Resurfacing in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Need concrete resurfacing in Waco, TX? We repair and resurface driveways, patios, and walkways with crack prep, overlays, and decorative finishes.',
     introParagraph:
@@ -76,7 +76,7 @@ export const seoServicePages = [
     heroImage: '/seo-images/sports-court-coating.png',
     cardSummary:
       'Professional resurfacing and acrylic coating for pickleball, tennis, and basketball courts in Waco with crack prep and precision striping.',
-    metaTitle: 'Sports Court Coating in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Sports Court Coating in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Sports court coating in Waco, TX for pickleball, tennis, and basketball courts. Acrylic resurfacing, crack prep, color coating, and line striping.',
     introParagraph:
@@ -146,7 +146,7 @@ export const seoServicePages = [
     title: 'Concrete Driveways in Waco, TX',
     cardSummary:
       'Plan a driveway that handles Central Texas heat, drainage swings, and traffic demands with a clear process and honest pricing.',
-    metaTitle: 'Concrete Driveways in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Concrete Driveways in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Need concrete driveway waco tx services? We build practical, durable driveways in Waco with base prep, reinforced edges, drainage planning, and expert curing for long-term use.',
     introParagraph:
@@ -216,7 +216,7 @@ export const seoServicePages = [
     title: 'Concrete Patios in Waco, TX',
     cardSummary:
       'Create a patio that looks custom and performs in heat, with practical layout, drainage, and finish options optimized for Waco.',
-    metaTitle: 'Concrete Patios in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Concrete Patios in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Need concrete patio waco tx design and installation? We install durable patios in Waco with proper drainage, reinforced base prep, and finishes that handle heat and outdoor use.',
     introParagraph:
@@ -286,7 +286,7 @@ export const seoServicePages = [
     title: 'Concrete Sidewalks in Waco, TX',
     cardSummary:
       'Add accessible, stable sidewalks with ADA-conscious planning and reliable drainage for homes and small commercial paths.',
-    metaTitle: 'Concrete Sidewalks in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Concrete Sidewalks in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Need concrete sidewalk installation waco done right? We design and install sidewalks in Waco with slope control, joint spacing, and reliable edge transitions.',
     introParagraph:
@@ -356,7 +356,7 @@ export const seoServicePages = [
     title: 'Commercial Concrete Contractor in Waco, TX',
     cardSummary:
       'Work with a commercial concrete contractor waco tx for controlled scheduling, traffic-safe workflow, and durable business-ready concrete.',
-    metaTitle: 'Commercial Concrete Contractor Waco TX | Concrete Works',
+    metaTitle: 'Commercial Concrete Contractor Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Need a commercial concrete contractor waco tx for driveways, pads, and site work? We handle commercial concrete projects across Waco and nearby Texas communities.',
     introParagraph:
@@ -426,7 +426,7 @@ export const seoServicePages = [
     title: 'Residential Concrete Contractors in Waco, TX',
     cardSummary:
       'Trusted residential concrete contractors in Waco, TX for driveways, patios, repairs, and home-focused slab upgrades.',
-    metaTitle: 'Residential Concrete Contractors Waco TX | Concrete Works',
+    metaTitle: 'Residential Concrete Contractors Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Need residential concrete work contractors in Waco, TX? We provide home-focused driveway, patio, slab, and repair plans with clear estimates and reliable schedules.',
     introParagraph:
@@ -502,7 +502,7 @@ export const seoServicePages = [
     title: 'Concrete Repair in Waco, TX',
     cardSummary:
       'Stabilize, patch, and restore concrete systems with practical repair strategies built for Waco soil movement and heat.',
-    metaTitle: 'Foundation & Concrete Repair Waco TX | Concrete Works',
+    metaTitle: 'Foundation & Concrete Repair Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Foundation repair Waco TX and concrete repair for sidewalks, driveways, and slabs. We assess settlement, spalling, and joint issues before repair or replacement recommendations.',
     introParagraph:
@@ -577,7 +577,7 @@ export const seoServicePages = [
     title: 'Stamped Concrete in Waco, TX',
     cardSummary:
       'Use stamped concrete for elegant texture, color, and durable outdoor surfaces that perform in Waco weather.',
-    metaTitle: 'Stamped Concrete in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Stamped Concrete in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Stamped concrete waco tx for residential and commercial spaces. We install durable stamped textures, color blends, and border details designed for Central Texas heat.',
     introParagraph:
@@ -647,7 +647,7 @@ export const seoServicePages = [
     title: 'Concrete Foundations in Waco, TX',
     cardSummary:
       'Engineered foundation concrete planning for decks, patios, and property additions with Waco soil-sensitive construction.',
-    metaTitle: 'Concrete Foundations in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Concrete Foundations in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Need concrete foundation waco tx support for additions, garage pads, and support slabs? We provide practical foundation concrete planning and installation support in Waco.',
     introParagraph:
@@ -718,7 +718,7 @@ export const seoServicePages = [
     title: 'Concrete Parking Lot Contractors in Waco, TX',
     cardSummary:
       'Commercial parking lot concrete for heavy traffic with strong edge detailing, safe turning lanes, and durable load planning.',
-    metaTitle: 'Parking Lot Concrete Contractors Waco TX | Concrete Works',
+    metaTitle: 'Parking Lot Concrete Contractors Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Need concrete parking lot contractors or parking lot construction companies in Waco? We build and repair commercial parking surfaces with reinforced base design, joint control, and traffic-safe implementation.',
     introParagraph:
@@ -793,7 +793,7 @@ export const seoServicePages = [
     title: 'Parking Lot Concrete in Waco, TX',
     cardSummary:
       'Concrete parking lot contractors for retail, office, church, and warehouse properties in Waco and nearby cities.',
-    metaTitle: 'Parking Lot Concrete Waco TX | Concrete Works LLC',
+    metaTitle: 'Parking Lot Concrete Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Need parking lot concrete in Waco? We build and repair parking lots with reinforced base prep, drainage planning, and traffic-safe scheduling.',
     introParagraph:
@@ -856,7 +856,7 @@ export const seoServicePages = [
     title: 'Foundation Repair in Waco, TX',
     cardSummary:
       'Foundation and slab repair planning for settlement, cracking, and moisture-related movement in Waco black clay soil.',
-    metaTitle: 'Foundation Repair Waco TX | Concrete Works LLC',
+    metaTitle: 'Foundation Repair Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Need foundation repair in Waco TX? We inspect slab movement, cracking, and drainage to recommend practical concrete repair or replacement plans.',
     introParagraph:
@@ -919,7 +919,7 @@ export const seoServicePages = [
     title: 'Concrete Demolition in Waco, TX',
     cardSummary:
       'Driveway, patio, sidewalk, and slab tear-out with saw cutting, haul-off, and a clean site when the concrete is too far gone.',
-    metaTitle: 'Concrete Demolition in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Concrete Demolition in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Need concrete demolition in Waco, TX? We saw cut, break out, haul off, and clean up old concrete for driveway, patio, sidewalk, and slab replacement.',
     introParagraph:
@@ -982,7 +982,7 @@ export const seoServicePages = [
     title: 'Concrete Sawing in Waco, TX',
     cardSummary:
       'Saw cutting for clean tear-out lines, utility openings, joints, and slab sections that need to come out without beating up the concrete around them.',
-    metaTitle: 'Concrete Sawing in Waco, TX | Concrete Works LLC',
+    metaTitle: 'Concrete Sawing in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Need concrete sawing in Waco, TX? We cut clean lines for demolition, utility access, partial slab replacement, and joint work.',
     introParagraph:
@@ -1045,7 +1045,7 @@ export const seoServicePages = [
     title: 'Retaining Wall Installation in Waco, TX',
     cardSummary:
       'Retaining wall installation for slope control, drainage, and landscape stability in Waco properties.',
-    metaTitle: 'Retaining Walls Waco TX | Concrete Works LLC',
+    metaTitle: 'Retaining Walls Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Need retaining wall installation in Waco TX? We build concrete retaining walls for slope control, drainage support, and long-term property protection.',
     introParagraph:
@@ -1108,7 +1108,7 @@ export const seoServicePages = [
     title: 'Decorative Concrete in Waco, TX',
     cardSummary:
       'Decorative concrete patios, driveways, and walkways with stamped, stained, and textured finishes for Waco homes.',
-    metaTitle: 'Decorative Concrete Waco TX | Concrete Works LLC',
+    metaTitle: 'Decorative Concrete Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Looking for decorative concrete in Waco? We install stamped, stained, and custom-finish concrete for patios, driveways, and walkways.',
     introParagraph:
@@ -1171,7 +1171,7 @@ export const seoServicePages = [
     title: 'Hardscaping Contractor in Waco, TX',
     cardSummary:
       'Hardscaping contractor services in Waco for patios, walkways, retaining walls, and structured outdoor spaces.',
-    metaTitle: 'Hardscaping Waco TX | Concrete Works LLC',
+    metaTitle: 'Hardscaping Waco TX | SLA Concrete Works LLC',
     metaDescription:
       'Need a hardscaping contractor in Waco TX? We build concrete patios, walkways, retaining walls, and outdoor living hardscape layouts.',
     introParagraph:
@@ -1297,9 +1297,9 @@ export const seoServicePages = [
     title: 'Contractors in Waco, TX (Concrete Focus)',
     cardSummary:
       'Searching for contractors in Waco TX? Work with a local concrete-first team for driveways, patios, foundations, and repairs.',
-    metaTitle: 'Contractors in Waco TX | Concrete Works LLC',
+    metaTitle: 'Contractors in Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Looking for contractors in Waco TX? Concrete Works LLC provides concrete driveways, patios, parking lots, and repair services across Waco and nearby cities.',
+      'Looking for contractors in Waco TX? SLA Concrete Works LLC provides concrete driveways, patios, parking lots, and repair services across Waco and nearby cities.',
     introParagraph:
       'If you are comparing contractors in Waco TX, concrete scope quality often determines long-term project success. Our team focuses on concrete-first planning with clear pricing and local soil-aware execution.',
     sections: [
@@ -1361,7 +1361,7 @@ export const seoServicePages = [
     title: 'General Contractor in Waco, TX',
     cardSummary:
       'General contractor waco tx support for concrete-focused builds, with scheduling, coordination, and transparent scope control.',
-    metaTitle: 'General Contractor in Waco, TX | Concrete Works LLC',
+    metaTitle: 'General Contractor in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
       'Looking for a general contractor waco tx with concrete expertise? We coordinate project planning, prep, and execution for concrete-heavy build scopes in Waco.',
     introParagraph:

@@ -55,15 +55,15 @@ export function BlogPost() {
     const notFound = Boolean(error)
     const fallback = {
       title: notFound
-        ? 'Post Not Found | Concrete Works LLC'
-        : 'Concrete Tips & Project Ideas | Concrete Works LLC',
+        ? 'Post Not Found | SLA Concrete Works LLC'
+        : 'Concrete Tips & Project Ideas | SLA Concrete Works LLC',
       description: notFound
         ? 'This post could not be found.'
         : 'Concrete tips, maintenance checklists, and design inspiration for Waco and Central Texas concrete projects.',
       canonical: `${SITE_URL}/blog/${slug}`,
       url: `${SITE_URL}/blog/${slug}`,
       image: DEFAULT_IMAGE,
-      imageAlt: 'Concrete Works LLC blog',
+      imageAlt: 'SLA Concrete Works LLC blog',
       type: 'article',
       robots: notFound ? 'noindex, nofollow' : 'index, follow',
     }
@@ -86,12 +86,12 @@ export function BlogPost() {
           author: {
             '@type': 'Organization',
             '@id': ORGANIZATION_ID,
-            name: 'Concrete Works LLC',
+            name: 'SLA Concrete Works LLC',
           },
           publisher: {
             '@type': 'Organization',
             '@id': ORGANIZATION_ID,
-            name: 'Concrete Works LLC',
+            name: 'SLA Concrete Works LLC',
             logo: {
               '@type': 'ImageObject',
               url: `${SITE_URL}/logo.png`,
@@ -112,7 +112,7 @@ export function BlogPost() {
 
     return {
       ...fallback,
-      title: `${post.title} | Concrete Works LLC`,
+      title: `${post.title} | SLA Concrete Works LLC`,
       description,
       image,
       imageAlt: post.title,

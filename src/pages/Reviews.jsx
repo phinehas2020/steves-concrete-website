@@ -54,7 +54,7 @@ const fallbackTestimonials = [
 const localBusiness = {
   '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
   '@id': `${SITE_URL}/#organization`,
-  name: 'Concrete Works LLC',
+  name: 'SLA Concrete Works LLC',
   url: SITE_URL,
   image: DEFAULT_IMAGE,
   address: {
@@ -167,13 +167,13 @@ export function Reviews() {
     FALLBACK_GOOGLE_REVIEW_URL
 
   useSeo({
-    title: 'Reviews | Concrete Works LLC | Waco TX',
+    title: 'Reviews | SLA Concrete Works LLC | Waco TX',
     description:
-      'Read recent customer reviews from Waco, TX for driveways, patios, sidewalks, concrete repair, and stamped concrete projects from Concrete Works LLC.',
+      'Read recent customer reviews from Waco, TX for driveways, patios, sidewalks, concrete repair, and stamped concrete projects from SLA Concrete Works LLC.',
     canonical: `${SITE_URL}/reviews`,
     url: `${SITE_URL}/reviews`,
     image: DEFAULT_IMAGE,
-    imageAlt: 'Concrete Works LLC reviews in Waco, TX',
+    imageAlt: 'SLA Concrete Works LLC reviews in Waco, TX',
     type: 'website',
     jsonLd: buildJsonLdGraph(localBusiness, aggregateRating, ...reviewNodes, breadcrumbsJsonLd),
   })

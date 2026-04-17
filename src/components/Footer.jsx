@@ -23,7 +23,7 @@ const serviceQuickLinks = servicePageLinks.map((service) => ({
     href: `/${service.slug}`,
 }))
 
-const logoImage = '/logo-96.png'
+const logoImage = '/logo.svg'
 
 export function Footer() {
     const currentYear = new Date().getFullYear()
@@ -45,7 +45,7 @@ export function Footer() {
                             <div className="bg-white rounded-xl p-1.5 shadow-sm">
                                 <img
                                     src={logoImage}
-                                    alt="Concrete Works LLC"
+                                    alt="SLA Concrete Works LLC"
                                     width={96}
                                     height={60}
                                     loading="lazy"
@@ -54,8 +54,9 @@ export function Footer() {
                                 />
                             </div>
                             <div>
-                                <div className="font-display font-black text-white text-2xl leading-none">CONCRETE WORKS</div>
-                                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-500 mt-1">Central Texas Elite</div>
+                                <div className="font-display font-black text-white text-xl leading-none">SLA CONCRETE</div>
+                                <div className="font-display font-black text-stone-300 text-lg leading-none mt-1">WORKS LLC</div>
+                                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-500 mt-2">Central Texas Elite</div>
                             </div>
                         </div>
                         <p className="text-pretty text-stone-400 text-lg leading-relaxed mb-8 max-w-md font-light">
@@ -176,7 +177,7 @@ export function Footer() {
                 {/* Bottom Bar */}
                 <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-600">
-                        © {currentYear} Concrete Works LLC. Built for the Texas Heat.
+                        © {currentYear} SLA Concrete Works LLC. Built for the Texas Heat.
                     </p>
                     <div className="flex gap-8">
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Licensed</span>

@@ -8,7 +8,7 @@ import { FALLBACK_GOOGLE_REVIEW_URL } from '../lib/googleReviews'
 const testimonials = [
   {
     quote:
-      'Concrete Works is professional, very conscientious and did the job at a really fair price. The driveway still looks perfect three years later.',
+      'SLA Concrete Works LLC is professional, very conscientious and did the job at a really fair price. The driveway still looks perfect three years later.',
     author: 'Tim T.',
     location: 'Sanger Heights, Waco',
     project: 'Stamped driveway',
@@ -147,7 +147,7 @@ export function Testimonials({ reviewsData }) {
               <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-stone-900">
                 <img
                   src={steveHeadshot}
-                  alt="Steve from Concrete Works LLC"
+                  alt="Steve from SLA Concrete Works LLC"
                   className="h-[34rem] w-full object-cover object-center"
                   loading="lazy"
                   decoding="async"

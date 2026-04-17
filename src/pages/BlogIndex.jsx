@@ -35,7 +35,7 @@ export function BlogIndex() {
       listItems.length > 0
         ? {
             '@type': 'ItemList',
-            name: 'Concrete Works LLC Blog',
+            name: 'SLA Concrete Works LLC Blog',
             description,
             itemListElement: listItems,
           }
@@ -49,12 +49,12 @@ export function BlogIndex() {
     const jsonLd = buildJsonLdGraph(itemListJsonLd, breadcrumbsJsonLd)
 
     return {
-      title: 'Concrete Contractor Waco TX | Concrete Tips & Project Ideas | Concrete Works LLC',
+      title: 'Concrete Contractor Waco TX | Concrete Tips & Project Ideas | SLA Concrete Works LLC',
       description,
       canonical: `${SITE_URL}/blog`,
       url: `${SITE_URL}/blog`,
       image: DEFAULT_IMAGE,
-      imageAlt: 'Concrete Works LLC blog updates and project ideas',
+      imageAlt: 'SLA Concrete Works LLC blog updates and project ideas',
       type: 'website',
       jsonLd,
     }
@@ -218,7 +218,7 @@ export function BlogIndex() {
                           />
                         ) : (
                           <div className="h-48 bg-stone-100 flex items-center justify-center text-stone-400 text-sm">
-                            Concrete Works LLC
+                            SLA Concrete Works LLC
                           </div>
                         )}
                         <div className="p-6">

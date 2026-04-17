@@ -14,7 +14,7 @@ const navLinks = [
     { label: 'Reviews', href: '/reviews' },
 ]
 
-const logoImage = '/logo-96.png'
+const logoImage = '/logo.svg'
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -27,7 +27,7 @@ export function Header() {
                     <a href="/#home" className="flex items-center flex-shrink-0">
                         <img
                             src={logoImage}
-                            alt="Concrete Works LLC"
+                            alt="SLA Concrete Works LLC"
                             width={96}
                             height={60}
                             loading="eager"
@@ -70,7 +70,7 @@ export function Header() {
                     <a
                         href="tel:254-230-3102"
                         className="lg:hidden flex items-center gap-2 px-3 py-2 text-sm font-medium text-stone-700 hover:text-accent-600 border border-stone-200 rounded-lg mr-2"
-                        aria-label="Call Concrete Works LLC"
+                        aria-label="Call SLA Concrete Works LLC"
                     >
                         <Phone className="size-4" aria-hidden="true" />
                         <span>(254) 230-3102</span>

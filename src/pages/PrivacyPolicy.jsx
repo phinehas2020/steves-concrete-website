@@ -77,9 +77,9 @@ const contactMethods = [
 
 export function PrivacyPolicy() {
   useSeo({
-    title: 'Privacy Policy | Concrete Works LLC',
+    title: 'Privacy Policy | SLA Concrete Works LLC',
     description:
-      'How Concrete Works LLC collects, uses, and protects personal data submitted through forms and contact requests.',
+      'How SLA Concrete Works LLC collects, uses, and protects personal data submitted through forms and contact requests.',
     canonical: `${SITE_URL}/privacy-policy`,
     url: `${SITE_URL}/privacy-policy`,
   })
@@ -97,7 +97,7 @@ export function PrivacyPolicy() {
               Privacy Policy
             </h1>
             <p className="mt-4 text-stone-600 max-w-3xl text-pretty">
-              Concrete Works LLC is committed to clear, practical data handling for leads, communication
+              SLA Concrete Works LLC is committed to clear, practical data handling for leads, communication
               records, and project follow-up.
             </p>
           </div>

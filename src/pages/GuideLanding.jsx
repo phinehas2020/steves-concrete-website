@@ -41,7 +41,7 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
   const faqJsonLd = buildFaqPage(faq)
 
   useSeo({
-    title: seoTitle || `${title} | Concrete Works LLC`,
+    title: seoTitle || `${title} | SLA Concrete Works LLC`,
     description: seoDescription,
     canonical: `${SITE_URL}/guides/${slug}`,
     url: `${SITE_URL}/guides/${slug}`,
@@ -205,7 +205,7 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
                     Ready for a concrete estimate?
                   </h3>
                   <p className="text-stone-300">
-                    Compare services and get a tailored quote from Concrete Works LLC.
+                    Compare services and get a tailored quote from SLA Concrete Works LLC.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-3">

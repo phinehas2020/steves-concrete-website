@@ -7,7 +7,7 @@ export const guidePages = [
     heroTitle: 'Concrete Driveway Cost in Waco, TX',
     heroSubtitle:
       'A clear, local guide to driveway pricing, options, and what actually drives your estimate.',
-    seoTitle: 'Concrete Driveway Cost Waco TX | Concrete Works LLC',
+    seoTitle: 'Concrete Driveway Cost Waco TX | SLA Concrete Works LLC',
     seoDescription:
       'Concrete driveway cost in Waco, TX. Typical per-square-foot ranges, what affects pricing, and how to plan your estimate. Updated February 2026.',
     summary:
@@ -100,7 +100,7 @@ export const guidePages = [
     heroTitle: 'Stamped Concrete Pricing in Waco, TX',
     heroSubtitle:
       'Patterns, color blends, and what drives the price of stamped concrete in Central Texas.',
-    seoTitle: 'Stamped Concrete Cost Waco TX | Concrete Works LLC',
+    seoTitle: 'Stamped Concrete Cost Waco TX | SLA Concrete Works LLC',
     seoDescription:
       'Stamped concrete cost in Waco, TX. Pricing factors, pattern options, sealing guidance, and local considerations. Updated February 2026.',
     summary:
@@ -189,7 +189,7 @@ export const guidePages = [
     heroTitle: 'Concrete Patio Cost in Waco, TX',
     heroSubtitle:
       'Pricing guidance for patios, finish upgrades, and layout choices that affect your estimate.',
-    seoTitle: 'Concrete Patio Cost Waco TX | Concrete Works LLC',
+    seoTitle: 'Concrete Patio Cost Waco TX | SLA Concrete Works LLC',
     seoDescription:
       'Concrete patio cost in Waco, TX. Pricing factors, finish options, and preparation tips for accurate estimates. Updated February 2026.',
     summary:

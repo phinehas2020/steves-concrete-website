@@ -6,7 +6,7 @@ const sections = [
   {
     title: 'Acceptance',
     paragraphs: [
-      'By using this website or contacting Concrete Works LLC, you agree to these Terms and Conditions.',
+      'By using this website or contacting SLA Concrete Works LLC, you agree to these Terms and Conditions.',
       'If you do not agree, please do not use this site, request an estimate, or rely on information published here.',
     ],
   },
@@ -60,7 +60,7 @@ const sections = [
   {
     title: 'Disclaimer',
     paragraphs: [
-      'Concrete Works LLC does not guarantee a crack-free or maintenance-free slab under extreme movement, load changes, or abnormal weather events.',
+      'SLA Concrete Works LLC does not guarantee a crack-free or maintenance-free slab under extreme movement, load changes, or abnormal weather events.',
       'Long-term performance depends on subgrade, cure practices, load expectations, and homeowner maintenance.',
     ],
   },
@@ -75,9 +75,9 @@ const sections = [
 
 export function TermsAndConditions() {
   useSeo({
-    title: 'Terms and Conditions | Concrete Works LLC',
+    title: 'Terms and Conditions | SLA Concrete Works LLC',
     description:
-      'Service terms for Concrete Works LLC, including estimates, scheduling, responsibility, and communication terms.',
+      'Service terms for SLA Concrete Works LLC, including estimates, scheduling, responsibility, and communication terms.',
     canonical: `${SITE_URL}/terms-and-conditions`,
     url: `${SITE_URL}/terms-and-conditions`,
   })
@@ -93,7 +93,7 @@ export function TermsAndConditions() {
               Terms and Conditions
             </h1>
             <p className="mt-4 text-stone-600 max-w-3xl text-pretty">
-              Concrete Works LLC uses practical terms that define what to expect before, during, and after every job.
+              SLA Concrete Works LLC uses practical terms that define what to expect before, during, and after every job.
             </p>
           </div>
         </section>

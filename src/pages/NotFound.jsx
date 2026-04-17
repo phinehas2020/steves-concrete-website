@@ -2,7 +2,7 @@ import { useSeo, SITE_URL } from '../lib/seo'
 
 export function NotFound() {
   useSeo({
-    title: 'Page Not Found | Concrete Works LLC',
+    title: 'Page Not Found | SLA Concrete Works LLC',
     description: 'This page could not be found.',
     robots: 'noindex, nofollow',
     canonical: `${SITE_URL}/404`,

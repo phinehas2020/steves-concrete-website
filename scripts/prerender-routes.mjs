@@ -15,15 +15,15 @@ const distDir = path.join(projectRoot, 'dist')
 const indexPath = path.join(distDir, 'index.html')
 
 const SITE_URL = 'https://www.concretewaco.com'
-const SITE_NAME = 'Concrete Works LLC'
+const SITE_NAME = 'SLA Concrete Works LLC'
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 const PHONE_DISPLAY = '(254) 230-3102'
 const PHONE_HREF = 'tel:254-230-3102'
 
 const homeMeta = {
-  title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Concrete Works LLC',
+  title: 'Waco Concrete Contractors | Concrete Companies Waco TX | SLA Concrete Works LLC',
   description:
-    'Need concrete contractors in Waco TX? Concrete Works LLC provides full concrete services in Waco TX for driveways, patios, sidewalks, slabs, and commercial concrete. Fast free estimates: (254) 230-3102.',
+    'Need concrete contractors in Waco TX? SLA Concrete Works LLC provides full concrete services in Waco TX for driveways, patios, sidewalks, slabs, and commercial concrete. Fast free estimates: (254) 230-3102.',
   canonical: `${SITE_URL}/`,
   h1: 'Concrete Contractor Waco TX',
 }
@@ -90,15 +90,15 @@ const locationPages = [
 const staticRoutes = [
   {
     path: '/blog',
-    title: 'Concrete Tips & Project Ideas | Concrete Works LLC',
+    title: 'Concrete Tips & Project Ideas | SLA Concrete Works LLC',
     description:
-      'Concrete tips, project ideas, and local insights from Concrete Works LLC in Waco, TX.',
+      'Concrete tips, project ideas, and local insights from SLA Concrete Works LLC in Waco, TX.',
     h1: 'Concrete Tips & Project Ideas',
     renderContent: renderBlogIndexContent,
   },
   {
     path: '/jobs',
-    title: 'Concrete Project Gallery | Concrete Works LLC',
+    title: 'Concrete Project Gallery | SLA Concrete Works LLC',
     description:
       'View recent concrete driveways, patios, stamped finishes, and commercial projects across Waco and Central Texas.',
     h1: 'Concrete Project Gallery',
@@ -106,7 +106,7 @@ const staticRoutes = [
   },
   {
     path: '/guides',
-    title: 'Concrete Pricing Guides in Waco, TX | Concrete Works LLC',
+    title: 'Concrete Pricing Guides in Waco, TX | SLA Concrete Works LLC',
     description:
       'Local pricing guides for concrete driveways, patios, and stamped concrete in Waco, TX. Built from real project experience.',
     h1: 'Concrete Pricing Guides in Waco, TX',
@@ -114,15 +114,15 @@ const staticRoutes = [
   },
   {
     path: '/about',
-    title: 'Meet Steve | Concrete Works LLC',
+    title: 'Meet Steve | SLA Concrete Works LLC',
     description:
-      'Meet Steve, the owner of Concrete Works LLC in Waco, and learn how he approaches prep, drainage, and concrete jobs around Central Texas.',
-    h1: 'About Concrete Works LLC',
+      'Meet Steve, the owner of SLA Concrete Works LLC in Waco, and learn how he approaches prep, drainage, and concrete jobs around Central Texas.',
+    h1: 'About SLA Concrete Works LLC',
     renderContent: renderAboutContent,
   },
   {
     path: '/reviews',
-    title: 'Customer Reviews | Concrete Works LLC',
+    title: 'Customer Reviews | SLA Concrete Works LLC',
     description:
       'Read recent reviews from Waco-area customers for driveways, patios, stamped concrete, and repair projects.',
     h1: 'Customer Reviews',
@@ -130,17 +130,17 @@ const staticRoutes = [
   },
   {
     path: '/privacy-policy',
-    title: 'Privacy Policy | Concrete Works LLC',
+    title: 'Privacy Policy | SLA Concrete Works LLC',
     description:
-      'Read how Concrete Works LLC collects, uses, and protects personal information submitted through website lead forms and communications.',
+      'Read how SLA Concrete Works LLC collects, uses, and protects personal information submitted through website lead forms and communications.',
     h1: 'Privacy Policy',
     renderContent: renderPrivacyPolicyContent,
   },
   {
     path: '/terms-and-conditions',
-    title: 'Terms and Conditions | Concrete Works LLC',
+    title: 'Terms and Conditions | SLA Concrete Works LLC',
     description:
-      'Review the terms for estimates, scheduling, communication, and service scope for Concrete Works LLC.',
+      'Review the terms for estimates, scheduling, communication, and service scope for SLA Concrete Works LLC.',
     h1: 'Terms and Conditions',
     renderContent: renderTermsAndConditionsContent,
   },
@@ -802,11 +802,11 @@ function renderGuidesIndexContent() {
 function renderAboutContent() {
   return renderPage({
     eyebrow: 'Meet Steve',
-    title: 'Meet Steve, the owner behind Concrete Works',
+    title: 'Meet Steve, the owner behind SLA Concrete Works LLC',
     subtitle:
       'The person answering the call, walking the site, and staying involved through the job.',
     introParagraphs: [
-      'If you call Concrete Works, you are usually talking to Steve. He is the one asking what is wrong, what you want built, and what the site looks like before he starts talking price.',
+      'If you call SLA Concrete Works LLC, you are usually talking to Steve. He is the one asking what is wrong, what you want built, and what the site looks like before he starts talking price.',
       'He has been pouring concrete around Waco for more than 20 years. People like that he is direct, stays involved, and does not try to dress every job up like a sales pitch.',
     ],
     includeCompanyResourceLinks: false,
@@ -898,7 +898,7 @@ function renderPrivacyPolicyContent() {
     eyebrow: 'Privacy',
     title: 'Privacy Policy',
     subtitle:
-      'Concrete Works LLC values clear and practical privacy practices for leads and communication.',
+      'SLA Concrete Works LLC values clear and practical privacy practices for leads and communication.',
     introParagraphs: [
       'Our goal is straightforward: only collect what helps us communicate and deliver projects safely and effectively.',
       'By submitting a request on our site, you are allowing us to process your contact details for estimates and project follow-up.',
@@ -954,7 +954,7 @@ function renderTermsAndConditionsContent() {
   return renderPage({
     eyebrow: 'Legal',
     title: 'Terms and Conditions',
-    subtitle: 'Service terms for clients and prospective clients of Concrete Works LLC.',
+    subtitle: 'Service terms for clients and prospective clients of SLA Concrete Works LLC.',
     introParagraphs: [
       'By using this site or contacting our team, you agree to the terms described on this page.',
       'These terms clarify expectations before work starts, including estimates, scheduling, and communication.',
@@ -1085,7 +1085,7 @@ function renderBlogIndexContent() {
     eyebrow: 'Blog',
     title: 'Concrete tips and project ideas for Central Texas',
     subtitle:
-      'Maintenance checklists, design options, and planning guides from the Concrete Works LLC team.',
+      'Maintenance checklists, design options, and planning guides from the SLA Concrete Works LLC team.',
     introParagraphs: [
       'Blog posts are loaded dynamically so we can publish new articles quickly. Use the links below to access our highest-value evergreen resources while new posts load.',
       'Most customers use the blog to compare finish options, understand cracking causes, and plan realistic budgets before requesting a quote.',
@@ -1273,8 +1273,8 @@ async function main() {
   const notFoundPath = path.join(distDir, '404.html')
   let notFoundHtml = applyMeta(htmlTemplate, {
     path: '/404',
-    title: 'Page Not Found | Concrete Works LLC',
-    description: 'The page you requested could not be found on Concrete Works LLC.',
+    title: 'Page Not Found | SLA Concrete Works LLC',
+    description: 'The page you requested could not be found on SLA Concrete Works LLC.',
     canonical: `${SITE_URL}/404`,
     h1: 'Page Not Found',
     robots: 'noindex, nofollow',

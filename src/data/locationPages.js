@@ -82,7 +82,7 @@ export const locationPages = [
     seoDescription:
       'Waco concrete contractors for driveways, patios, stamped concrete, foundations, and repairs. Need concrete companies in Waco TX with fast estimates? Call (254) 230-3102.',
     intro:
-      'Concrete Works LLC partners with Waco homeowners, builders, and businesses searching for "concrete companies near me" for reliable installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
+      'SLA Concrete Works LLC partners with Waco homeowners, builders, and businesses searching for "concrete companies near me" for reliable installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
     highlights: baseHighlights,
     services: baseServices,
     nearbyAreas: ['Woodway', 'Hewitt', 'Bellmead', 'Robinson', 'China Spring', 'Lorena'],
@@ -165,7 +165,7 @@ export const locationPages = [
     seoDescription:
       'Looking for a Hewitt concrete contractor? We are the top-rated "driveway concrete contractors near me," building patios, stamped concrete, and repairs designed for Central Texas clay soil.',
     intro:
-      'Concrete Works LLC helps Hewitt homeowners and property managers install concrete that lasts through hot summers and shifting black clay soil. We focus on proper base prep, drainage, and control-joint layout so your project looks sharp and performs long-term.',
+      'SLA Concrete Works LLC helps Hewitt homeowners and property managers install concrete that lasts through hot summers and shifting black clay soil. We focus on proper base prep, drainage, and control-joint layout so your project looks sharp and performs long-term.',
     highlights: [
       {
         title: 'Engineered for Hewitt soil conditions',
@@ -209,7 +209,7 @@ export const locationPages = [
     seoDescription:
       'Need a concrete contractor Woodway Texas property owners recommend? We install and replace driveways, patios, stamped concrete, and repairs built for Central Texas heat and clay soil movement.',
     intro:
-      'Concrete Works LLC delivers Woodway concrete projects with careful grading, reinforcement, and finishing detail. We account for black clay soil and summer heat expansion so your driveway, patio, or slab holds up and stays attractive.',
+      'SLA Concrete Works LLC delivers Woodway concrete projects with careful grading, reinforcement, and finishing detail. We account for black clay soil and summer heat expansion so your driveway, patio, or slab holds up and stays attractive.',
     highlights: [
       {
         title: 'Woodway-focused prep and drainage',
@@ -308,7 +308,7 @@ export const locationPages = [
     seoDescription:
       'Concrete contractor in McGregor, Texas for driveways, patios, commercial slabs, and repair projects. Get a free, no-obligation estimate from the local team.',
     intro:
-      'Concrete Works LLC delivers dependable concrete installs in McGregor with careful grading, reinforcement, and clean finishing.',
+      'SLA Concrete Works LLC delivers dependable concrete installs in McGregor with careful grading, reinforcement, and clean finishing.',
     highlights: baseHighlights,
     services: baseServices,
     nearbyAreas: ['Waco', 'Moody', 'Gatesville', 'Woodway', 'Lorena', 'Oglesby'],

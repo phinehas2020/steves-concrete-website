@@ -58,15 +58,15 @@ export function JobDetail() {
 
     const fallback = {
       title: notFound
-        ? 'Project Not Found | Concrete Works LLC'
-        : 'Concrete Project | Concrete Works LLC',
+        ? 'Project Not Found | SLA Concrete Works LLC'
+        : 'Concrete Project | SLA Concrete Works LLC',
       description: notFound
         ? 'This project could not be found.'
-        : 'Concrete project details from Concrete Works LLC in Central Texas.',
+        : 'Concrete project details from SLA Concrete Works LLC in Central Texas.',
       canonical: `${SITE_URL}/jobs/${resolvedSlug}`,
       url: `${SITE_URL}/jobs/${resolvedSlug}`,
       image: DEFAULT_IMAGE,
-      imageAlt: 'Concrete Works LLC project gallery',
+      imageAlt: 'SLA Concrete Works LLC project gallery',
       type: 'article',
       robots: notFound ? 'noindex, nofollow' : 'index, follow',
       jsonLd: buildJsonLdGraph(breadcrumbsJsonLd),
@@ -81,7 +81,7 @@ export function JobDetail() {
 
     return {
       ...fallback,
-      title: `${job.title} | Concrete Works LLC`,
+      title: `${job.title} | SLA Concrete Works LLC`,
       description,
       image,
       imageAlt: job.title,

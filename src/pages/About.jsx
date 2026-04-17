@@ -17,13 +17,13 @@ export function About() {
       : '28+'
 
   useSeo({
-    title: 'Meet Steve | Concrete Works LLC | Waco TX',
+    title: 'Meet Steve | SLA Concrete Works LLC | Waco TX',
     description:
-      'Meet Steve, the owner of Concrete Works LLC in Waco, and learn how he approaches prep, drainage, and concrete jobs around Central Texas.',
+      'Meet Steve, the owner of SLA Concrete Works LLC in Waco, and learn how he approaches prep, drainage, and concrete jobs around Central Texas.',
     canonical: `${SITE_URL}/about`,
     url: `${SITE_URL}/about`,
     image: DEFAULT_IMAGE,
-    imageAlt: 'About Steve and Concrete Works LLC in Waco, TX',
+    imageAlt: 'About Steve and SLA Concrete Works LLC in Waco, TX',
     type: 'website',
     jsonLd: buildJsonLdGraph(
       buildBreadcrumbs([
@@ -53,7 +53,7 @@ export function About() {
                 The guy behind the phone call, the estimate, and the final walkthrough.
               </h1>
               <p className="mt-6 max-w-3xl text-lg text-stone-300 text-pretty leading-relaxed">
-                If you call Concrete Works, you are usually talking to Steve. He is the one asking
+                If you call SLA Concrete Works LLC, you are usually talking to Steve. He is the one asking
                 what is going wrong, what you are trying to build, and whether the site has drainage
                 or access issues before he starts talking numbers.
               </p>

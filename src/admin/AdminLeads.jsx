@@ -58,7 +58,7 @@ const getDefaultMessage = (lead) => {
       ? 'about your project'
       : `about your ${serviceLabel.toLowerCase()} project`
 
-  return `Hi ${firstName},\n\nThanks for reaching out to Concrete Works ${serviceLine}. I'd like to ask a couple quick questions and schedule a site visit.\n\nWhat address is the project at, and what timeline are you hoping for?\n\nThanks,\nConcrete Works LLC`
+  return `Hi ${firstName},\n\nThanks for reaching out to SLA Concrete Works LLC ${serviceLine}. I'd like to ask a couple quick questions and schedule a site visit.\n\nWhat address is the project at, and what timeline are you hoping for?\n\nThanks,\nSLA Concrete Works LLC`
 }
 
 export function AdminLeads({ accessToken, currentUserEmail }) {
