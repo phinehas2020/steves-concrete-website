@@ -7,7 +7,7 @@ const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 
 const DEFAULT_SEO = {
-  title: 'Waco Concrete Contractors | Concrete Companies Waco TX | Free Estimate (254) 230-3102',
+  title: 'Waco Concrete Contractors | SLA Concrete Works LLC',
   description:
     'SLA Concrete Works LLC is one of the trusted concrete contractors in Waco, TX offering full concrete services in Waco TX for driveways, patios, stamped concrete, slabs, and repairs. Free estimates: (254) 230-3102.',
   canonical: SITE_URL + '/',
