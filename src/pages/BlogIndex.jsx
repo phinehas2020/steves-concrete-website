@@ -4,6 +4,7 @@ import { ArrowRight, Sparkles } from 'lucide-react'
 import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
+import { staticBlogPosts } from '../data/staticBlogPosts'
 import {
   useSeo,
   SITE_URL,
@@ -62,6 +63,21 @@ export function BlogIndex() {
 
   useSeo(seo)
 
+  const mergePosts = (remotePosts = []) => {
+    const bySlug = new Map()
+
+    for (const post of [...staticBlogPosts, ...remotePosts]) {
+      if (!post?.slug || bySlug.has(post.slug)) continue
+      bySlug.set(post.slug, post)
+    }
+
+    return [...bySlug.values()].sort((a, b) => {
+      const aTime = Date.parse(a?.published_at || a?.created_at || '') || 0
+      const bTime = Date.parse(b?.published_at || b?.created_at || '') || 0
+      return bTime - aTime
+    })
+  }
+
   useEffect(() => {
     let isMounted = true
 
@@ -75,12 +91,12 @@ export function BlogIndex() {
       if (!isMounted) return
 
       if (fetchError) {
-        setError('Unable to load posts right now.')
+        setPosts(mergePosts())
         setLoading(false)
         return
       }
 
-      setPosts(data || [])
+      setPosts(mergePosts(data || []))
       setLoading(false)
     }
 

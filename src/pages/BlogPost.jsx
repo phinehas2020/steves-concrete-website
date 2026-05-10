@@ -5,6 +5,7 @@ import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
 import { renderBlogMarkdown } from '../lib/blogMarkdown'
+import { staticBlogPosts } from '../data/staticBlogPosts'
 import {
   useSeo,
   SITE_URL,
@@ -25,6 +26,7 @@ export function BlogPost() {
     let isMounted = true
 
     const fetchPost = async () => {
+      const staticPost = staticBlogPosts.find((item) => item.slug === slug)
       const { data, error: fetchError } = await supabase
         .from('blog_posts')
         .select('*')
@@ -35,6 +37,12 @@ export function BlogPost() {
       if (!isMounted) return
 
       if (fetchError || !data) {
+        if (staticPost) {
+          setPost(staticPost)
+          setLoading(false)
+          return
+        }
+
         setError('Post not found.')
         setLoading(false)
         return
