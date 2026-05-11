@@ -1,25 +1,23 @@
 export const staticBlogPosts = [
   {
-    id: 'static-mount-calm-shop-foundation-2026-05-11',
+    id: 'static-shop-slab-base-prep-waco-2026-05-11',
     created_at: '2026-05-11T14:06:21.000Z',
     updated_at: '2026-05-11T14:06:21.000Z',
     published_at: '2026-05-11T14:06:21.000Z',
-    title: 'Mount Calm Shop Foundation Concrete Work Near Waco, TX',
-    slug: 'mount-calm-shop-foundation-concrete-near-waco-tx',
+    title: 'Concrete Shop Slab Base Prep Near Waco, TX',
+    slug: 'concrete-shop-slab-base-prep-waco-tx',
     excerpt:
-      'A field update from a 2,500 square foot Morton building shop foundation in Mount Calm, with rebar, forms, and fresh concrete finishing shown from the jobsite.',
+      'A practical look at what needs to happen before a shop slab pour in Central Texas, from subgrade and forms to steel, vapor barrier, and finish timing.',
     status: 'published',
-    cover_image_url:
-      '/blog-images/mount-calm-shop-foundation-concrete/01-62863c29-7af6-48b1-b3a7-21ec9c69edff.jpg',
     author_email: 'photo-studio-cron@system.local',
     content: [
-      'This set is from a Morton building shop foundation in Mount Calm, not far from the Waco area. The job was a 2,500 square foot shop slab, and the photos show the work at a few different points: forms set, steel in place, and the crew finishing the concrete inside the building.',
-      'On a shop foundation, the finished slab is only one part of the job. The layout, subgrade, moisture barrier, rebar, edge forms, and control joints all matter because the slab has to hold up after equipment, storage, vehicles, and daily use start putting weight on it.',
-      'The overhead view shows the foundation footprint before the pour, with the panels formed and reinforcement tied off. The inside photo shows the fresh concrete being worked with power trowels after placement. That finish work is where timing matters. Too early and the surface can tear up. Too late and it gets harder to close the slab clean.',
-      'For shop slabs, barndominiums, storage buildings, and other concrete foundations around Waco and Central Texas, the practical details are what make the difference. Good prep gives the finish crew a better shot at a flat, durable slab that drains right and stays usable for years.',
-      '![Fresh concrete being finished inside a Mount Calm Morton building shop foundation](/blog-images/mount-calm-shop-foundation-concrete/01-62863c29-7af6-48b1-b3a7-21ec9c69edff.jpg)',
-      '![Rebar and forms set for a 2500 square foot shop slab in Mount Calm, TX](/blog-images/mount-calm-shop-foundation-concrete/02-1bbd06bd-b7b6-4bbb-b5ce-a8ea998a3f86.jpg)',
-      '![Overhead view of the Mount Calm shop foundation layout before concrete placement](/blog-images/mount-calm-shop-foundation-concrete/03-9ba950b1-31c9-435b-be3d-f4c8f4f09719.jpg)',
+      'The newest captioned photo batches in the shared album were already covered by existing blog posts, so this update is a practical guide instead of another project recap. One thing those jobs all have in common is simple: the slab only performs as well as the prep under it.',
+      'For a shop slab near Waco, the first question is not just how smooth the finish will look. The important work starts with subgrade prep. Soft spots need to be cut out, low areas need to be built back up correctly, and the base needs to be compacted so the slab is not sitting on loose material.',
+      'Forms matter too. Straight forms keep the footprint clean, but they also set the height of the slab and help control drainage around doors, approaches, and parking areas. On a shop or metal building slab, a small mistake at the edge can show up later as water running the wrong direction.',
+      'Rebar, wire, or engineered steel placement should match the load the slab will see. A light storage slab is different from a shop floor that will carry trucks, lifts, equipment, or heavy shelving. The same goes for thickness. Four inches may be fine for some light-duty areas, but many shop slabs need more section, better reinforcement, or thickened edges.',
+      'A vapor barrier is another detail worth taking seriously in Central Texas. It helps control moisture movement through the slab, which matters if the building will be enclosed, insulated, used for storage, or finished out later.',
+      'The pour and finish are the part everybody sees, but good finishing depends on timing. The crew has to place, screed, float, edge, joint, and trowel the concrete while the slab is setting. Wind, heat, shade, and humidity can all change that window.',
+      'If you are planning a shop slab, barndominium slab, garage slab, or equipment pad around Waco, ask about the base, thickness, reinforcement, drainage, and joint layout before the truck shows up. Those details are not extra polish. They are what keep the concrete useful after the building starts getting used every day.',
     ].join('\n\n'),
   },
   {
