@@ -1,5 +1,28 @@
 export const staticBlogPosts = [
   {
+    id: 'static-mount-calm-shop-foundation-2026-05-11',
+    created_at: '2026-05-11T14:06:21.000Z',
+    updated_at: '2026-05-11T14:06:21.000Z',
+    published_at: '2026-05-11T14:06:21.000Z',
+    title: 'Mount Calm Shop Foundation Concrete Work Near Waco, TX',
+    slug: 'mount-calm-shop-foundation-concrete-near-waco-tx',
+    excerpt:
+      'A field update from a 2,500 square foot Morton building shop foundation in Mount Calm, with rebar, forms, and fresh concrete finishing shown from the jobsite.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/mount-calm-shop-foundation-concrete/01-62863c29-7af6-48b1-b3a7-21ec9c69edff.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    content: [
+      'This set is from a Morton building shop foundation in Mount Calm, not far from the Waco area. The job was a 2,500 square foot shop slab, and the photos show the work at a few different points: forms set, steel in place, and the crew finishing the concrete inside the building.',
+      'On a shop foundation, the finished slab is only one part of the job. The layout, subgrade, moisture barrier, rebar, edge forms, and control joints all matter because the slab has to hold up after equipment, storage, vehicles, and daily use start putting weight on it.',
+      'The overhead view shows the foundation footprint before the pour, with the panels formed and reinforcement tied off. The inside photo shows the fresh concrete being worked with power trowels after placement. That finish work is where timing matters. Too early and the surface can tear up. Too late and it gets harder to close the slab clean.',
+      'For shop slabs, barndominiums, storage buildings, and other concrete foundations around Waco and Central Texas, the practical details are what make the difference. Good prep gives the finish crew a better shot at a flat, durable slab that drains right and stays usable for years.',
+      '![Fresh concrete being finished inside a Mount Calm Morton building shop foundation](/blog-images/mount-calm-shop-foundation-concrete/01-62863c29-7af6-48b1-b3a7-21ec9c69edff.jpg)',
+      '![Rebar and forms set for a 2500 square foot shop slab in Mount Calm, TX](/blog-images/mount-calm-shop-foundation-concrete/02-1bbd06bd-b7b6-4bbb-b5ce-a8ea998a3f86.jpg)',
+      '![Overhead view of the Mount Calm shop foundation layout before concrete placement](/blog-images/mount-calm-shop-foundation-concrete/03-9ba950b1-31c9-435b-be3d-f4c8f4f09719.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-circle-k-lacy-lakeview-2026-05-10',
     created_at: '2026-05-10T14:20:00.000Z',
     updated_at: '2026-05-10T14:20:00.000Z',
