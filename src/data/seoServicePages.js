@@ -1113,39 +1113,39 @@ const baseSeoServicePages = [
     slug: 'retaining-walls-waco-tx',
     title: 'Retaining Wall Installation in Waco, TX',
     cardSummary:
-      'Retaining wall installation for slope control, drainage, and landscape stability in Waco properties.',
-    metaTitle: 'Retaining Walls Waco TX | SLA Concrete Works LLC',
+      'Retaining wall installation for slope control, drainage, clay-soil movement, and landscape stability in Waco properties.',
+    metaTitle: 'Retaining Wall Installation Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need retaining wall installation in Waco TX? We build concrete retaining walls for slope control, drainage support, and long-term property protection.',
+      'Need retaining wall installation in Waco TX? We build concrete retaining walls for slope control, drainage, clay soil movement, and property protection.',
     introParagraph:
-      'Retaining walls in Waco do more than improve appearance. They manage soil pressure, protect slabs, and improve drainage behavior around patios, driveways, and yard transitions.',
+      'Retaining walls in Waco do more than improve appearance. They manage soil pressure, protect slabs, and improve drainage behavior around patios, driveways, fence lines, and yard transitions where McLennan County clay holds water after heavy rain.',
     sections: [
       {
         heading: 'Wall planning and load management',
         paragraphs: [
-          'We evaluate slope angle, retained height, and runoff paths before selecting wall configuration.',
-          'Proper planning helps prevent wall movement and protects nearby concrete surfaces.',
+          'We evaluate slope angle, retained height, soil exposure, nearby slabs, and runoff paths before selecting wall configuration.',
+          'The goal is to keep the wall from acting like a dam. Proper planning helps reduce wall movement and protects nearby patios, walks, driveways, and foundation edges.',
         ],
       },
       {
         heading: 'Drainage behind the wall',
         paragraphs: [
-          'Drainage is critical for retaining wall durability. We include runoff strategies and pressure relief in design planning.',
-          'Without drainage control, hydrostatic pressure can shorten wall life and damage adjacent concrete.',
+          'Drainage is critical for retaining wall durability in Central Texas because saturated clay adds pressure behind the wall.',
+          'We plan runoff direction, pressure relief, and surface grades so water has a place to go instead of loading the wall after storms.',
         ],
       },
       {
         heading: 'Integration with patios and hardscape',
         paragraphs: [
-          'Retaining walls can be coordinated with patio expansions, walkway transitions, and seating zones.',
-          'We match layout and finish direction so the wall looks intentional with the surrounding project.',
+          'Retaining walls can be coordinated with patio expansions, walkway transitions, driveway edges, steps, and seating zones.',
+          'We match layout and finish direction so the wall looks intentional with the surrounding concrete work rather than patched onto the site later.',
         ],
       },
       {
         heading: 'Maintenance and inspection',
         paragraphs: [
-          'After installation, we recommend periodic checks for drainage performance and movement.',
-          'Early detection of pressure or settlement signs can prevent major repair costs.',
+          'After installation, we recommend periodic checks for drainage performance, soil washout, cracking, and movement after long wet stretches.',
+          'Early detection of pressure or settlement signs can prevent major repair costs and helps keep connected concrete surfaces performing as intended.',
         ],
       },
     ],
@@ -1158,7 +1158,7 @@ const baseSeoServicePages = [
       {
         question: 'Can retaining walls help with drainage issues?',
         answer:
-          'Yes, when wall and drainage systems are designed together as part of one plan.',
+          'Yes, when the wall, backfill, surface grade, and drainage path are designed together as part of one plan.',
       },
       {
         question: 'Do retaining walls pair with patio upgrades?',
@@ -1168,7 +1168,7 @@ const baseSeoServicePages = [
       {
         question: 'How long do concrete retaining walls last?',
         answer:
-          'With correct design, drainage, and maintenance, retaining walls can perform for many years.',
+          'With correct design, drainage, and maintenance, retaining walls can perform for many years. Drainage is usually the deciding factor in Waco clay soil.',
       },
     ],
   },
@@ -1239,39 +1239,39 @@ const baseSeoServicePages = [
     slug: 'hardscaping-waco-tx',
     title: 'Hardscaping Contractor in Waco, TX',
     cardSummary:
-      'Hardscaping contractor services in Waco for patios, walkways, retaining walls, and structured outdoor spaces.',
-    metaTitle: 'Hardscaping Waco TX | SLA Concrete Works LLC',
+      'Hardscaping contractor services in Waco for patios, walkways, retaining walls, drainage transitions, and structured outdoor spaces.',
+    metaTitle: 'Hardscaping Contractor Waco TX | Patios, Walkways & Walls',
     metaDescription:
-      'Need a hardscaping contractor in Waco TX? We build concrete patios, walkways, retaining walls, and outdoor living hardscape layouts.',
+      'Need a hardscaping contractor in Waco TX? We build concrete patios, walkways, retaining walls, drainage transitions, and outdoor living layouts.',
     introParagraph:
-      'Hardscaping projects combine structure, drainage, and finish design. We help Waco property owners build cohesive outdoor spaces with concrete patios, walkways, and support features that perform year-round.',
+      'Hardscaping projects combine structure, drainage, and finish design. We help Waco property owners build cohesive outdoor spaces with concrete patios, walkways, retaining walls, and support features that can handle heat, runoff, and clay-soil movement year-round.',
     sections: [
       {
         heading: 'Outdoor layout and flow planning',
         paragraphs: [
-          'We plan movement between entries, seating zones, and landscape areas before installation starts.',
-          'This reduces awkward transitions and improves both appearance and daily usability.',
+          'We plan movement between doors, gates, seating zones, driveways, and landscape areas before installation starts.',
+          'This reduces awkward transitions, controls trip points, and improves both appearance and daily usability.',
         ],
       },
       {
         heading: 'Hardscape elements we coordinate',
         paragraphs: [
-          'Common scopes include patios, walkways, retaining walls, and concrete deck zones.',
-          'Projects can be phased to fit budget and property access constraints.',
+          'Common scopes include patios, walkways, retaining walls, concrete deck zones, steps, pads, and tie-ins to existing flatwork.',
+          'Projects can be phased to fit budget, drainage priorities, and property access constraints without losing the final layout.',
         ],
       },
       {
         heading: 'Drainage and grade control',
         paragraphs: [
-          'Hardscape durability depends on drainage. We shape water flow away from slabs, foundations, and wall edges.',
-          'Grade planning is especially important in Waco clay soil conditions where water movement can shift over seasons.',
+          'Hardscape durability depends on drainage. We shape water flow away from slabs, foundations, doors, wall edges, and low spots that collect runoff.',
+          'Grade planning is especially important in Waco, Hewitt, Woodway, and Robinson clay soil conditions where water movement can change surface support over seasons.',
         ],
       },
       {
         heading: 'Long-term maintenance strategy',
         paragraphs: [
-          'We provide care guidance for sealing, cleaning, and periodic checks across hardscape surfaces.',
-          'Regular maintenance protects investment value and reduces future repair needs.',
+          'We provide care guidance for sealing, cleaning, joint checks, drainage checks, and periodic review across hardscape surfaces.',
+          'Regular maintenance protects investment value and reduces future repair needs, especially where patios, walkways, and retaining walls meet.',
         ],
       },
     ],
