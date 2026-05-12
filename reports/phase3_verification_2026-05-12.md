@@ -169,6 +169,11 @@
   - Report: `reports/owner_blocker_packet_2026-05-12.md`
   - Converts the remaining PageSpeed API, GSC sitemap submit, insurance, BBB, credentials, named case study, GBP, citation cleanup, and Louisiana licensing-record blockers into exact owner/account requests.
   - Includes verification evidence to collect for each blocked item.
+- Service-page PR workflow exception documented:
+  - Report: `reports/service_page_pr_workflow_exception_2026-05-12.md`
+  - `gh pr list --state all --limit 20` found only PR `#2` for Vercel Analytics and PR `#1` for the SEO/GEO content strategy guide.
+  - No service-page rewrite PRs exist because the work was committed and pushed directly to `main`.
+  - The report recommends accepting the documented exception or recreating pre-change review branches as explicit audit reconstruction work instead of creating empty/no-op PRs.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.
