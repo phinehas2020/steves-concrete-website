@@ -1,6 +1,6 @@
 # Image EXIF GPS Scan - 2026-05-12
 
-Correction: this first-pass report is superseded by `reports/image_gps_rescan_2026-05-12.md`. The original JSON parser mishandled `mdls -raw` NUL-separated output and incorrectly counted `0` located files. The corrected rescan found `24` files with macOS latitude/longitude metadata out of `87` scanned files.
+Correction: this first-pass report is superseded by `reports/image_gps_rescan_2026-05-12.md`. The original JSON parser mishandled `mdls -raw` NUL-separated output and incorrectly counted `0` located files. The corrected rescan and follow-up `exiftool` verification found `24` files with latitude/longitude metadata out of `87` scanned files.
 
 Goal item: add EXIF GPS to Waco coordinates where photo permits.
 
@@ -21,6 +21,8 @@ File extensions scanned: `.jpg`, `.jpeg`, `.webp`, `.png`
 
 Evidence JSON: `reports/image_exif_gps_scan_2026-05-12.json`
 
+Privacy note: the current JSON artifact is sanitized. It preserves summary counts and links to the corrected report/manifest, but does not retain the raw coordinate values that appeared in the superseded first-pass output.
+
 ## Original Result
 
 | Files scanned | Files with GPS latitude/longitude metadata |
@@ -31,7 +33,7 @@ Tooling: macOS `mdls` metadata fields `kMDItemLatitude` and `kMDItemLongitude`.
 
 ## Original Conclusion
 
-No existing project/gallery/blog image in the scanned public asset set currently exposes GPS metadata through macOS metadata indexing.
+This original conclusion was incorrect. The current evidence is in `reports/image_gps_rescan_2026-05-12.md` and the no-coordinate located-file manifest is `reports/image_gps_located_files_manifest_2026-05-12.md`.
 
 Do not add synthetic GPS metadata until the owner confirms:
 
