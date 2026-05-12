@@ -48,6 +48,18 @@ Result:
 403: Request had insufficient authentication scopes.
 ```
 
+Manual UI path attempt:
+
+```text
+https://search.google.com/search-console/sitemaps?resource_id=sc-domain%3Aconcretewaco.com
+```
+
+Result:
+
+```text
+The in-app browser redirected to Google sign-in for Google Search Console, so manual UI resubmission could not be completed from this unauthenticated browser session.
+```
+
 ## Status
 
-The sitemap exists in GSC and has no reported warnings or errors, but API resubmission remains blocked by OAuth scope. Manual GSC UI resubmission or a Google auth flow with Search Console write scope is still required.
+The sitemap exists in GSC and has no reported warnings or errors, but API resubmission remains blocked by OAuth scope. Manual GSC UI resubmission from an authenticated browser or a Google auth flow with Search Console write scope is still required.
