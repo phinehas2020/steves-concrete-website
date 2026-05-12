@@ -8,7 +8,7 @@ import { handleImageError } from '../lib/utils'
 import { buildCategoryOptions, fetchJobs, getStaticJobs } from '../data/jobs'
 
 // Project image component - displays actual project photos
-function ProjectImage({ job }) {
+function ProjectImage({ job, priority = false }) {
   const mainImage = job.images[0] || '/src/assets/images/gallery-driveway-custom.jpeg'
   
   return (
@@ -18,7 +18,11 @@ function ProjectImage({ job }) {
         alt={job.title}
         className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        loading="lazy"
+        width="1200"
+        height="1200"
+        loading={priority ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : 'auto'}
+        decoding="async"
         onError={handleImageError}
       />
       {/* Gradient overlay for text readability */}
@@ -172,7 +176,7 @@ export function JobGallery() {
                   <span className="sr-only">View {job.title}</span>
                 </Link>
                 
-                <ProjectImage job={job} />
+                <ProjectImage job={job} priority={index === 0} />
 
                 {/* Content Overlay */}
                 <div className="absolute inset-0 z-10 flex flex-col justify-end p-6 sm:p-8">
