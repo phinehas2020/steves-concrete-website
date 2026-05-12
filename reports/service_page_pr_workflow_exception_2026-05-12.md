@@ -6,7 +6,7 @@ Goal source: `goal.md`, output format: `Phase 3: One commit per task. Tag commit
 
 - The Phase 3 service-page work was already committed and pushed directly to `main`.
 - GitHub initially showed no service-page rewrite pull requests because the work had already landed on `main`.
-- Decision tracking issue: `#10` - `Decide service-page PR workflow exception`.
+- Decision tracking issue: `#10` - `Decide service-page PR workflow exception` - closed.
 - Reconstruction runbook: `reports/service_page_pr_reconstruction_runbook_2026-05-12.md`.
 - Existing pull requests found by `gh pr list --state all --limit 20`:
   - `#2` `Set up Vercel Web Analytics integration` - merged
@@ -42,7 +42,7 @@ Creating empty or no-op pull requests after the work is already merged would sat
    - changed source files
    - word-count, FAQ, schema, link, image, and mobile-render verification
    - before/after PageSpeed or GSC note if available
-3. If strict PR evidence is still required for this completed batch, recreate branches from pre-change commits and cherry-pick each rewrite into review branches. This is possible, but it should be treated as audit reconstruction work, not normal development.
+3. Strict PR evidence for this completed batch was reconstructed with PRs `#11` through `#15`; do not create additional no-op PRs for the same work.
 
 ## Recommended policy going forward
 

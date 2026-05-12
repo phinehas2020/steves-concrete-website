@@ -1,14 +1,28 @@
 # Service Page PR Reconstruction Runbook - 2026-05-12
 
-Purpose: give GitHub issue `#10` an exact path if strict audit PR reconstruction is chosen.
+Status: completed. The audit reconstruction path below was executed after the original direct-to-main service-page work. GitHub issue `#10` is closed, and audit PRs `#11` through `#15` now exist.
 
-This should not be treated as normal development. The service-page changes are already on `main`; reconstructing PRs now would create review artifacts for audit history, not mergeable feature work.
+Purpose: preserve the exact reconstruction method used for GitHub issue `#10`.
+
+This should not be treated as normal development. The service-page changes were already on `main`; the reconstruction PRs are review artifacts for audit history, not mergeable feature work.
+
+## Outcome
+
+Audit reconstruction PRs created:
+
+| PR | Title | Original commit |
+| --- | --- | --- |
+| `#11` | `Audit reconstruction: driveway service rewrite` | `6a10f33` |
+| `#12` | `Audit reconstruction: remaining service page depth pass` | `fad7f1d` |
+| `#13` | `Audit reconstruction: service project galleries` | `cea0e5e` |
+| `#14` | `Audit reconstruction: hardscape quick-win pages` | `7f49224` |
+| `#15` | `Audit reconstruction: Hewitt and Woodway location pages` | `cac277b` |
 
 ## Recommendation
 
-Prefer accepting the documented direct-to-main exception in `reports/service_page_pr_workflow_exception_2026-05-12.md`.
+Keep the documented direct-to-main exception in `reports/service_page_pr_workflow_exception_2026-05-12.md` and keep PRs `#11` through `#15` as audit artifacts.
 
-Use reconstruction only if a client, auditor, or internal process requires PR URLs for the already-completed service-page work.
+Do not repeat this reconstruction unless a future audit explicitly requires a different slice of already-completed work.
 
 ## Evidence commits
 
@@ -20,7 +34,7 @@ Use reconstruction only if a client, auditor, or internal process requires PR UR
 | Hardscape quick-win pages | `7f49224` | `61079d8` |
 | Hewitt/Woodway location pages | `cac277b` | `d2f59b6` |
 
-## Reconstruction strategy
+## Reconstruction strategy used
 
 Because `main` already contains these commits, do not create fake no-op PRs against `main`. Instead:
 
@@ -30,7 +44,7 @@ Because `main` already contains these commits, do not create fake no-op PRs agai
 4. Open PRs from each head branch into its audit base branch.
 5. Label every PR title and body as `audit reconstruction - do not merge`.
 
-## Example commands
+## Example commands used
 
 Run from a clean worktree or a temporary clone/worktree.
 
@@ -92,18 +106,8 @@ gh pr create \
   --body "Audit reconstruction for goal.md PR-per-service-page requirement. Original direct-to-main commit: cac277b. Do not merge."
 ```
 
-## Cleanup if accepted exception is chosen
+## Cleanup completed
 
-If the direct-to-main exception is accepted:
-
-- comment on GitHub issue `#10`
-- update `reports/completion_audit_2026-05-12.md`
-- close issue `#10`
-
-## Cleanup if reconstruction is performed
-
-If audit reconstruction PRs are created:
-
-- link the PR URLs in `reports/service_page_pr_workflow_exception_2026-05-12.md`
-- link the PR URLs in `reports/completion_audit_2026-05-12.md`
-- close issue `#10`
+- PR URLs are linked in `reports/service_page_pr_workflow_exception_2026-05-12.md`.
+- PR references are linked in `reports/completion_audit_2026-05-12.md`.
+- GitHub issue `#10` is closed.
