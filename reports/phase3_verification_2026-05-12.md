@@ -181,6 +181,7 @@
     - `#8` - `Complete GBP and citation cleanup`
 - Service-page PR workflow exception documented:
   - Report: `reports/service_page_pr_workflow_exception_2026-05-12.md`
+  - Reconstruction runbook: `reports/service_page_pr_reconstruction_runbook_2026-05-12.md`
   - `gh pr list --state all --limit 20` found only PR `#2` for Vercel Analytics and PR `#1` for the SEO/GEO content strategy guide.
   - No service-page rewrite PRs exist because the work was committed and pushed directly to `main`.
   - The report recommends accepting the documented exception or recreating pre-change review branches as explicit audit reconstruction work instead of creating empty/no-op PRs.

@@ -7,6 +7,7 @@ Goal source: `goal.md`, output format: `Phase 3: One commit per task. Tag commit
 - The Phase 3 service-page work was already committed and pushed directly to `main`.
 - GitHub currently shows no service-page rewrite pull requests.
 - Decision tracking issue: `#10` - `Decide service-page PR workflow exception`.
+- Reconstruction runbook: `reports/service_page_pr_reconstruction_runbook_2026-05-12.md`.
 - Existing pull requests found by `gh pr list --state all --limit 20`:
   - `#2` `Set up Vercel Web Analytics integration` - merged
   - `#1` `Add SEO + GEO Content Strategy Guide` - open

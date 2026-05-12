@@ -41,7 +41,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Local Lighthouse fallback performance sweep | `reports/lighthouse_sweep_2026-05-12.md`; 10 live URLs passed mobile lab thresholds with scores 95-98, LCP <= 2336ms, TBT 0ms, CLS 0 | Complete as supporting lab evidence |
 | Scheduled 30/60/90 reruns | Dates are documented in `reports/baseline_rankings.md`; `reports/seo_rerun_schedule_2026-05-12.md` adds exact dates, commands, account-side checks, report template, and GitHub issue reminders `#3`, `#4`, and `#5`; each reminder issue is assigned to a matching GitHub milestone with the rerun due date | Complete |
 | One atomic commit per task | SEO work is split into phase/task commits; remote blog commits were preserved during rebase | Complete |
-| Pull request per service-page rewrite | Work was pushed directly to `main`; `reports/service_page_pr_workflow_exception_2026-05-12.md` documents the GitHub PR state, why no-op backfill PRs were not created, and the repeatable workflow for future service-page rewrites; decision tracked in GitHub issue `#10` | Not complete; exception documented |
+| Pull request per service-page rewrite | Work was pushed directly to `main`; `reports/service_page_pr_workflow_exception_2026-05-12.md` documents the GitHub PR state, why no-op backfill PRs were not created, and the repeatable workflow for future service-page rewrites; `reports/service_page_pr_reconstruction_runbook_2026-05-12.md` gives an exact audit reconstruction path; decision tracked in GitHub issue `#10` | Not complete; exception documented |
 
 ## Current production state
 
