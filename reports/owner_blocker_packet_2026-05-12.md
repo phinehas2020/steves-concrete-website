@@ -201,8 +201,9 @@ Current state:
 - Permission form: `reports/image_gps_permission_form_2026-05-12.md`
 - Located files manifest: `reports/image_gps_located_files_manifest_2026-05-12.md`
 - The first scan incorrectly reported `0` located files because the parser mishandled `mdls -raw` NUL-separated output.
-- Corrected rescan found `24` of `87` public image files with macOS latitude/longitude metadata.
-- `exiftool` is not installed locally; sampled `sips` GPS fields returned `<nil>`, so the current evidence should be treated as macOS metadata evidence until final EXIF tooling is used.
+- Corrected macOS metadata rescan found `24` of `87` public image files with latitude/longitude metadata.
+- `exiftool 13.55` was later installed and used in read-only mode against the same image set; it matched the corrected count at `87` total files, `24` located files, and `63` files without GPS metadata.
+- Exact coordinate values are intentionally withheld from repo reports; use the filename manifest and owner permission form for the privacy decision instead of repeating jobsite/customer coordinates.
 
 Owner/account action:
 
@@ -216,7 +217,7 @@ Verification evidence:
 - Completed `reports/image_gps_permission_form_2026-05-12.md`.
 - Per-file retain/strip/normalize/leave-unchanged decisions from `reports/image_gps_located_files_manifest_2026-05-12.md`.
 - Owner-approved policy for retaining, stripping, normalizing, adding, or leaving metadata unchanged.
-- If changes are approved, rerun a dated scan after using `exiftool` or equivalent EXIF tooling.
+- If changes are approved, rerun a dated scan with `exiftool` or equivalent EXIF tooling.
 - Repeatable macOS metadata scan command: `node scripts/scan-image-gps-metadata.mjs --json=reports/image_gps_scan_YYYY-MM-DD.json --manifest=reports/image_gps_located_files_manifest_YYYY-MM-DD.md`
 
 ## 10. Louisiana licensing-record context

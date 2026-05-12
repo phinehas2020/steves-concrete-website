@@ -45,12 +45,12 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Current production state
 
-- Recent tracked repo commit verified during this audit pass: `e7a9f1e` - `Phase 3 verify GPS metadata with exiftool`
+- Recent tracked repo commit verified during this continuation pass: `aed437d` - `Phase 3 label GPS privacy review`
 - Current local build verification after latest state check: `npm run build` passed on 2026-05-12 at `b2bc912`; generated sitemap still reported `43` URLs.
 - Latest content deployment verified for code commit: `cac277b`
 - Handoff index: `reports/seo_handoff_index_2026-05-12.md`
 - Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -15` for the exact current HEAD.
-- Latest report-only production deployment verified after the EXIF GPS evidence update: `dpl_Bp7umEDAoFP8qfUgw2wuqsmYHxtx`, commit `e7a9f1e117a70090e088c35bffb3ceb84b98470f`, state `READY`
+- Latest report-only production deployment verified before this audit refresh: `dpl_53AyoPymPJW8bjkbAT3qQphe4AK1`, commit `aed437d88cdfa38e5697465127316d059154c3b1`, state `READY`; live checks returned `HTTP/2 200` for `https://www.concretewaco.com/` and `HTTP/2 308` from `https://concretewaco.com/` to the `www` canonical.
 - GitHub reconstruction PRs `#11` through `#15` were rechecked on 2026-05-12 and remain open with the `audit-reconstruction` label.
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
