@@ -103,7 +103,7 @@ High-priority corrections:
 
 - Buzzfile: latest public recheck still showed old `757 Shady Ln` / `(254) 412-2927`
 - Manta: public browser verification now confirms the listing is unclaimed and still shows old `757 Shady Lane` / `(254) 412-2927`
-- Levelset: search result indicated old address/phone; requires manual confirmation
+- Levelset: fresh public search result still shows old `757 Shady Ln` and `2542303180`, while the direct page returns `403 Forbidden`; verify/update through browser or account access
 - Greater Waco Chamber: `Dr` vs `Ln` street suffix
 - BuildZoom: latest public recheck still showed `1045 W ELM MOTT DR`; missing visible canonical phone/site in fetched page; permit/license wording needs owner/legal approval before reuse
 - Porch: partial profile; verify full NAP
