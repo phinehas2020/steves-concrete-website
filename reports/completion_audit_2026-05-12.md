@@ -2,7 +2,7 @@
 
 Objective: follow `goal.md` for the Concrete Works LLC / SLA Concrete Works SEO parity project.
 
-Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, and baseline-ranking work are substantially complete and verified. Some requirements remain blocked by external API quota, GSC permissions, off-site GBP/account work, or owner-provided trust facts.
+Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, baseline-ranking, and public citation audit work are substantially complete and verified. Some requirements remain blocked by external API quota, GSC permissions, off-site GBP/account work, or owner-provided trust facts.
 
 ## Prompt-to-artifact checklist
 
@@ -33,7 +33,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Submit sitemap to GSC | Existing sitemap found in GSC with 0 warnings/0 errors; API submit attempt returned 403 | Partially complete; resubmit requires UI/API permission fix |
 | GSC coverage clean | GSC sitemap list reported 0 warnings and 0 errors | Complete for sitemap report available through API |
 | Google Business Profile optimization | No GBP management API/tool available in this session | Blocked/off-site |
-| NAP/citation audit | Not completed across Yelp/BBB/Angi/chamber | Blocked/off-site |
+| NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md`; public web and Google Places audit found current canonical NAP plus stale Manta/Buzzfile/Levelset risks | Complete for public audit; corrections remain off-site |
 | GBP posts, Q&A, review outreach | Not completed | Blocked/off-site |
 | Baseline rankings final report | `reports/baseline_rankings.md`; Semrush live data used | Complete |
 | Scheduled 30/60/90 reruns | Dates are documented in `reports/baseline_rankings.md`; no scheduler created | Partially complete |
@@ -42,7 +42,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Current production state
 
-- Latest pushed commit: `98bd215` (`Phase 3 update live verification report`)
+- Latest pushed commit: `aa1f84d` (`Phase 3 add completion audit`)
 - Latest content/schema deployment verified for code commit: `18c515b`
 - Latest report-only deployment: `dpl_E3396ZExFvnabJim1onv6RmQ7ZdX`, commit `98bd215225360b55b94702f9b348a623dbd43f86`, state `READY`
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
@@ -56,6 +56,5 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
    - BBB profile/rating, if applicable
    - owner-approved bio/photo/credentials
    - named case-study permissions
-4. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites.
+4. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`.
 5. Decide whether to accept direct-to-main history or recreate PRs/branches for service-page rewrites.
-
