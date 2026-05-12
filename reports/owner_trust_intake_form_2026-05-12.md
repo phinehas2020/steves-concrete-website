@@ -6,6 +6,18 @@ Tracking issue: `#7` - `Collect owner trust proof for EEAT claims`
 
 Do not publish any item below until proof is provided and the owner approves the public wording.
 
+## Owner Bio, Photo, and Years in Trade
+
+Current site coverage already includes owner name, owner photo, bio language, and `20+` years copy. Use this section to confirm the details are owner-approved before treating them as final EEAT proof.
+
+- Owner name as it should appear publicly:
+- Owner photo approved for website use? `yes/no`
+- Bio copy approved? `yes/no`
+- `20+ years` language approved? `yes/no`
+- Should any credentials, trade history, or project background be added?
+- Public wording approved by owner:
+- Proof/approval location, kept outside public repo unless explicitly approved:
+
 ## Insurance
 
 - Carrier name:

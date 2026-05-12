@@ -109,9 +109,11 @@ Current state:
 
 - Owner name, photo, bio, and `20+` years language are represented.
 - Specific certifications/credentials were not verified in repo or public source checks.
+- Final owner approval for the represented bio/photo/year language should be collected in `reports/owner_trust_intake_form_2026-05-12.md`.
 
 Owner input needed:
 
+- Approval or correction for the owner name, photo, bio, and `20+` years wording already on the site.
 - Any concrete, safety, supplier, municipal, equipment, or trade certifications that can be verified.
 - The exact certificate/license name and issuing organization.
 - Whether it is current, expired, or historical.
