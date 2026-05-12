@@ -19,7 +19,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Service-page FAQ 8-12 questions | Local check across 18 pages: 10 or 11 FAQs | Complete |
 | Service-page project gallery 8+ images | Local check across 18 pages: 8 prerendered images per page, missing alt count 0 | Complete |
 | Real project photos, WebP, under 200KB | `public/jobs/2026-client-*.webp`; size check found no file over 200KB | Complete for available owner/project photo set |
-| EXIF GPS where photo permits | `scripts/scan-image-gps-metadata.mjs`; `reports/image_gps_rescan_2026-05-12.md`; `reports/image_gps_located_files_manifest_2026-05-12.md`; `reports/image_exif_gps_scan_2026-05-12.md`; `reports/image_exif_gps_scan_2026-05-12.json`; `reports/image_gps_permission_form_2026-05-12.md`; corrected reusable `mdls` scan found 24 of 87 files with macOS latitude/longitude metadata; `npx eslint scripts/scan-image-gps-metadata.mjs` passed; filename manifest lists the 24 located files without repeating precise coordinates; no owner permission/source policy available for retaining, stripping, normalizing, or adding GPS metadata; tracked in GitHub issue `#9` | Blocked by permission/privacy policy |
+| EXIF GPS where photo permits | `scripts/scan-image-gps-metadata.mjs`; `reports/image_gps_rescan_2026-05-12.md`; `reports/image_gps_located_files_manifest_2026-05-12.md`; `reports/image_exif_gps_scan_2026-05-12.md`; `reports/image_exif_gps_scan_2026-05-12.json`; `reports/image_gps_permission_form_2026-05-12.md`; corrected reusable `mdls` scan found 24 of 87 files with latitude/longitude metadata; `exiftool 13.55` read-only verification matched the count at `87` total, `24` located, `63` not located; `npx eslint scripts/scan-image-gps-metadata.mjs` passed; filename manifest lists the 24 located files without repeating precise coordinates; no owner permission/source policy available for retaining, stripping, normalizing, or adding GPS metadata; tracked in GitHub issue `#9` | Blocked by permission/privacy policy |
 | Internal linking: service pages to adjacent services, blogs, hub | Local check across 18 pages: hub present, two blog links, at least 3 adjacent service links | Complete |
 | Homepage links to all service pages / footer full nav | Existing service grid and footer links use `servicePageLinks`; verified by build and static output | Complete |
 | Trust/EEAT: license language | Commit `f6ef88f` replaced unverified license claims with Texas-specific permit-aware language; `reports/public_trust_record_audit_2026-05-12.md` documents why broad jurisdiction-neutral license wording should stay off the site | Complete |
@@ -45,12 +45,12 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Current production state
 
-- Recent tracked repo commit verified during this audit pass: `b2bc912` - `Phase 3 sync GBP issue labels`
+- Recent tracked repo commit verified during this audit pass: `e7a9f1e` - `Phase 3 verify GPS metadata with exiftool`
 - Current local build verification after latest state check: `npm run build` passed on 2026-05-12 at `b2bc912`; generated sitemap still reported `43` URLs.
 - Latest content deployment verified for code commit: `cac277b`
 - Handoff index: `reports/seo_handoff_index_2026-05-12.md`
 - Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -15` for the exact current HEAD.
-- Latest report-only production deployment verified after the GBP label sync: `dpl_AvxMrGM6jZB52omWTsuzgoLQxyK9`, commit `b2bc912a1df618f3a5e2252e17243f0cd3d9e5a9`, state `READY`
+- Latest report-only production deployment verified after the EXIF GPS evidence update: `dpl_Bp7umEDAoFP8qfUgw2wuqsmYHxtx`, commit `e7a9f1e117a70090e088c35bffb3ceb84b98470f`, state `READY`
 - GitHub reconstruction PRs `#11` through `#15` were rechecked on 2026-05-12 and remain open with the `audit-reconstruction` label.
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
