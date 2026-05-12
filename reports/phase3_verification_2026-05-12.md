@@ -136,6 +136,12 @@
   - Report: `reports/owner_eeat_verification_2026-05-12.md`
   - Verified source coverage for owner name, bio copy, `src/assets/images/steve-headshot.jpg`, rendered owner-photo alt text, and `20+` years copy.
   - Credentials/certifications remain blocked because no verified source was found in the repo.
+- Image EXIF GPS scan completed:
+  - Report: `reports/image_exif_gps_scan_2026-05-12.md`
+  - Evidence JSON: `reports/image_exif_gps_scan_2026-05-12.json`
+  - Scope: `86` public project/blog/gallery images.
+  - Result: `0` files exposed GPS latitude/longitude metadata through macOS metadata indexing.
+  - GPS writing remains blocked until the owner confirms project-location permission and whether exact or approximate coordinates are acceptable.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.

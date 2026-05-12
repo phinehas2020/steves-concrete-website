@@ -19,7 +19,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Service-page FAQ 8-12 questions | Local check across 18 pages: 10 or 11 FAQs | Complete |
 | Service-page project gallery 8+ images | Local check across 18 pages: 8 prerendered images per page, missing alt count 0 | Complete |
 | Real project photos, WebP, under 200KB | `public/jobs/2026-client-*.webp`; size check found no file over 200KB | Complete for available owner/project photo set |
-| EXIF GPS where photo permits | Not added; no permission/source EXIF policy available | Blocked |
+| EXIF GPS where photo permits | `reports/image_exif_gps_scan_2026-05-12.md`; `reports/image_exif_gps_scan_2026-05-12.json`; 86 public images scanned, 0 GPS-tagged; no owner permission/source policy available for adding synthetic GPS | Blocked by permission/source policy |
 | Internal linking: service pages to adjacent services, blogs, hub | Local check across 18 pages: hub present, two blog links, at least 3 adjacent service links | Complete |
 | Homepage links to all service pages / footer full nav | Existing service grid and footer links use `servicePageLinks`; verified by build and static output | Complete |
 | Trust/EEAT: license language | Commit `f6ef88f` replaced unverified license claims with Texas-specific permit-aware language | Complete |

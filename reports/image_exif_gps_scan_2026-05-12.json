@@ -1,0 +1,437 @@
+{
+  "scannedAt": "2026-05-12T18:13:05.842Z",
+  "fileCount": 86,
+  "gpsCount": 0,
+  "results": [
+    {
+      "file": "public/blog-images/lacy-lake-view-circle-k-concrete-flatwork/01-a43f360c-8c37-4e38-9619-0409f1c9eda9.jpg",
+      "hasGps": false,
+      "latitude": "31.63815\u0000-97.0975195\u0000(null)"
+    },
+    {
+      "file": "public/blog-images/lacy-lake-view-circle-k-concrete-flatwork/02-af4ec122-bf4b-47c9-880c-78b1100a04f3.jpg",
+      "hasGps": false,
+      "latitude": "31.63813666666667\u0000-97.09753333333333\u0000(null)"
+    },
+    {
+      "file": "public/blog-images/lacy-lake-view-circle-k-concrete-flatwork/03-fc7356f6-3af3-4c3f-a017-ad245a30d62f.jpg",
+      "hasGps": false,
+      "latitude": "31.63810833333334\u0000-97.09709166666667\u0000(null)"
+    },
+    {
+      "file": "public/blog-images/lacy-lake-view-circle-k-concrete-flatwork/04-46c4b588-88df-4763-a45c-cb2740537b37.jpg",
+      "hasGps": false,
+      "latitude": "31.638\u0000-97.09702216666666\u0000(null)"
+    },
+    {
+      "file": "public/blog-images/melody-grove-concrete-paving-prep/01-bf3b202e-bfc8-4345-9c93-5152dda2d1b3.jpg",
+      "hasGps": false,
+      "latitude": "31.58283\u0000-97.13390283333334\u0000(null)"
+    },
+    {
+      "file": "public/blog-images/melody-grove-concrete-paving-prep/02-ae26b793-b1ea-4cdd-bf6b-ae6f6f812ace.jpg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/blog-images/melody-grove-concrete-paving-prep/03-425ca989-75c8-4eb1-a98f-c7ef9ce9f8b2.jpg",
+      "hasGps": false,
+      "latitude": "31.58292\u0000-97.13329450000001\u0000(null)"
+    },
+    {
+      "file": "public/blog-images/melody-grove-concrete-paving-prep/04-9bf7f67a-da5d-4a80-b314-2653e433a806.jpg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/images/gallery-commercial-parking.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/images/gallery-patio-aggregate.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/images/gallery-stamped-driveway.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-1.jpeg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-10.jpeg",
+      "hasGps": false,
+      "latitude": "31.57203666666667\u0000-97.14776116666667\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-11.jpeg",
+      "hasGps": false,
+      "latitude": "31.57203666666667\u0000-97.14776116666667\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-12.jpeg",
+      "hasGps": false,
+      "latitude": "31.57202166666667\u0000-97.14732216666667\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-13.jpeg",
+      "hasGps": false,
+      "latitude": "31.57205\u0000-97.1474805\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-14.jpeg",
+      "hasGps": false,
+      "latitude": "31.57205\u0000-97.1474805\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-15.jpeg",
+      "hasGps": false,
+      "latitude": "31.57223\u0000-97.14741666666667\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-16.jpeg",
+      "hasGps": false,
+      "latitude": "31.572145\u0000-97.14731116666667\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-2.jpeg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-3.jpeg",
+      "hasGps": false,
+      "latitude": "31.57197\u0000-97.14746116666667\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-4.jpeg",
+      "hasGps": false,
+      "latitude": "31.57193333333333\u0000-97.14741383333333\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-5.jpeg",
+      "hasGps": false,
+      "latitude": "32.1105695\u0000-95.24682\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-6.jpeg",
+      "hasGps": false,
+      "latitude": "32.11055283333334\u0000-95.24672833333334\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-7.jpeg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-8.jpeg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-02-13-foundation-excavation-9.jpeg",
+      "hasGps": false,
+      "latitude": "31.57180333333333\u0000-97.14782783333334\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-03-27-concrete-formwork-1.jpeg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-03-27-concrete-formwork-2.jpeg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-03-27-concrete-formwork-3.jpeg",
+      "hasGps": false,
+      "latitude": "31.57216666666667\u0000-97.1474695\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-03-27-concrete-formwork-4.jpeg",
+      "hasGps": false,
+      "latitude": "31.572155\u0000-97.14746116666667\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-03-27-concrete-formwork-5.jpeg",
+      "hasGps": false,
+      "latitude": "31.57215833333333\u0000-97.14746116666667\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-03-27-concrete-formwork-6.jpeg",
+      "hasGps": false,
+      "latitude": "31.57195333333333\u0000-97.1472555\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-04-06-concrete-slab-finishing-1.jpeg",
+      "hasGps": false,
+      "latitude": "31.93646666666667\u0000-97.43986333333334\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-04-06-concrete-slab-finishing-2.jpeg",
+      "hasGps": false,
+      "latitude": "31.93656166666667\u0000-97.439995\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2024-04-06-concrete-slab-finishing-3.jpeg",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-commercial-pour-1.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-commercial-pour-2.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-commercial-pour-3.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-commercial-pour-4.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-commercial-pour-5.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-commercial-pour-6.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-covered-patio-1.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-covered-patio-2.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-covered-patio-3.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-covered-patio-4.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-covered-patio-5.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-covered-patio-6.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-driveway-slab-1.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-driveway-slab-2.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-driveway-slab-3.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-driveway-slab-4.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-driveway-slab-5.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-driveway-slab-6.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-retaining-wall-1.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-retaining-wall-2.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-retaining-wall-3.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-retaining-wall-4.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-retaining-wall-5.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-retaining-wall-6.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-shop-foundation-1.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-shop-foundation-2.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-shop-foundation-3.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-shop-foundation-4.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-shop-foundation-5.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-shop-foundation-6.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sidewalk-entry-1.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sidewalk-entry-2.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sidewalk-entry-3.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sidewalk-entry-4.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sidewalk-entry-5.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sidewalk-entry-6.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sports-court-1.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sports-court-2.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sports-court-3.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sports-court-4.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sports-court-5.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-sports-court-6.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-stamped-decorative-1.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-stamped-decorative-2.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-stamped-decorative-3.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-stamped-decorative-4.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-stamped-decorative-5.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/jobs/2026-client-stamped-decorative-6.webp",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/seo-images/concrete-resurfacing.png",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    },
+    {
+      "file": "public/seo-images/sports-court-coating.png",
+      "hasGps": false,
+      "latitude": "(null)\u0000(null)\u0000(null)"
+    }
+  ]
+}
