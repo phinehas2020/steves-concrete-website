@@ -56,7 +56,7 @@ export function Footer() {
                             <div>
                                 <div className="font-display font-black text-white text-xl leading-none">SLA CONCRETE</div>
                                 <div className="font-display font-black text-stone-300 text-lg leading-none mt-1">WORKS LLC</div>
-                                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-500 mt-2">Central Texas Elite</div>
+                                <div className="text-[10px] font-bold uppercase tracking-[0.3em] text-stone-500 mt-2">Central Texas Concrete</div>
                             </div>
                         </div>
                         <p className="text-pretty text-stone-400 text-lg leading-relaxed mb-8 max-w-md font-light">
@@ -66,7 +66,7 @@ export function Footer() {
                         </p>
                         <p className="text-sm leading-relaxed text-stone-500 mb-6 max-w-md">
                             Texas residential concrete flatwork does not use one statewide contractor license.
-                            Permit needs are reviewed by project, and insurance details are available during estimate.
+                            Permit needs, scope documentation, and project-risk questions are reviewed during estimate.
                         </p>
                         <div className="flex gap-4">
                             <a href="/#contact" className="px-6 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-bold text-white hover:bg-white/10 transition-colors">
@@ -185,7 +185,7 @@ export function Footer() {
                     </p>
                     <div className="flex gap-8">
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Permit-Aware</span>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Insured</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Owner-Run</span>
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Local</span>
                         <a
                             href="/privacy-policy"

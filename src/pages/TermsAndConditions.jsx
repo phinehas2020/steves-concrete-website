@@ -44,7 +44,7 @@ const sections = [
   {
     title: 'Liability',
     paragraphs: [
-      'We carry industry-standard liability insurance for business operations.',
+      'Insurance, liability, and site-risk questions should be reviewed during the estimate so expectations are clear before work begins.',
       'Any claims for damage, material disputes, or workmanship concerns must be reported promptly to allow immediate review.',
       'Our obligations are limited to the services clearly described in the project scope unless otherwise required by law.',
     ],

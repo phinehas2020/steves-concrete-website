@@ -383,7 +383,7 @@ export function ContactForm({
             </Button>
 
             <p className="text-[10px] text-stone-500 text-center font-bold uppercase tracking-widest">
-              Direct: (254) 230-3102 • Permit-Aware & Insured
+              Direct: (254) 230-3102 • Permit-Aware & Scope-Documented
             </p>
           </form>
       )}

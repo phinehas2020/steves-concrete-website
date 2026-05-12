@@ -1408,9 +1408,9 @@ const baseSeoServicePages = [
           'Yes. We provide no-obligation estimates for residential and light commercial concrete projects.',
       },
       {
-        question: 'Are you insured and permit-aware contractors in Waco TX?',
+        question: 'How do you handle permits, documentation, and insurance questions?',
         answer:
-          'Yes. We carry business insurance, review permit needs by project, and provide clear scope documentation before work begins.',
+          'We review permit needs by project, provide clear scope documentation, and discuss insurance or risk questions during the estimate.',
       },
       {
         question: 'Can you handle both small and large concrete jobs?',
@@ -1569,9 +1569,9 @@ function serviceDepthFaq(page) {
         'Use timing depends on weather, mix conditions, thickness, finish, and project type. We give project-specific guidance after the pour or coating work is complete.',
     },
     {
-      question: 'Are you insured and permit-aware for Waco concrete work?',
+      question: 'How do you handle permit and insurance questions for Waco concrete work?',
       answer:
-        'Yes. We plan work with permit needs in mind and can discuss insurance details during the estimate. Permit requirements vary by property, scope, and right-of-way impact.',
+        'We plan work with permit needs in mind and discuss documentation, insurance, or risk questions during the estimate. Permit requirements vary by property, scope, and right-of-way impact.',
     },
   ]
 }

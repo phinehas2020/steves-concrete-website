@@ -1286,7 +1286,7 @@ function renderTermsAndConditionsContent() {
       {
         title: 'Liability and Limits',
         bullets: [
-          'We are properly insured for business operations.',
+          'Insurance, liability, and site-risk questions should be reviewed during the estimate so expectations are clear before work begins.',
           'Long-term concrete performance depends on soil movement, load patterns, and ongoing maintenance practices.',
           'All workmanship concerns should be reported promptly so we can review the issue in context.',
         ],
