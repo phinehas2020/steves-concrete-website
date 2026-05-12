@@ -40,22 +40,30 @@ Result: ESLint passed; script output was `87` total, `24` located, `63` not loca
 | ---: | ---: | ---: |
 | 87 | 24 | 63 |
 
-`exiftool` is not installed locally. A spot check with `sips -g gpsLatitude -g gpsLongitude` returned `<nil>` for sampled files that `mdls` showed as located, so this should be treated as macOS metadata evidence first, not final proof of normalized writable EXIF GPS tags.
+Follow-up EXIF verification:
+
+```bash
+exiftool -ver
+find public/blog-images public/images public/jobs public/seo-images -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' -o -iname '*.png' \) -print0 | xargs -0 exiftool -n -csv -GPSLatitude -GPSLongitude > /tmp/steves-exiftool-gps.csv
+awk -F, 'NR==1 {next} {total++} $2 != "" && $3 != "" {located++} END {printf "total=%d located=%d notLocated=%d\n", total, located+0, total-(located+0)}' /tmp/steves-exiftool-gps.csv
+```
+
+Result: `exiftool` `13.55` matched the corrected count: `87` total, `24` located, `63` not located. The scan emitted one warning for an empty JPEG placeholder (`public/jobs/2024-04-06-concrete-slab-finishing-3.jpeg`) but still read all `87` image paths. The coordinate CSV was kept in `/tmp` and intentionally not committed.
 
 ## Located Groups
 
-| Group | Located files | Sample coordinates |
+| Group | Located files | Coordinate handling |
 | --- | ---: | --- |
-| `public/blog-images/lacy-lake-view-circle-k-concrete-flatwork` | 4 | `31.63815, -97.0975195` |
-| `public/blog-images/melody-grove-concrete-paving-prep` | 2 | `31.58283, -97.13390283333334` |
-| `public/jobs/2024-02-13-foundation-excavation` | 12 | `31.57203666666667, -97.14776116666667` |
-| `public/jobs/2024-03-27-concrete-formwork` | 4 | `31.57216666666667, -97.1474695` |
-| `public/jobs/2024-04-06-concrete-slab-finishing` | 2 | `31.93646666666667, -97.43986333333334` |
+| `public/blog-images/lacy-lake-view-circle-k-concrete-flatwork` | 4 | Withheld from this report |
+| `public/blog-images/melody-grove-concrete-paving-prep` | 2 | Withheld from this report |
+| `public/jobs/2024-02-13-foundation-excavation` | 12 | Withheld from this report |
+| `public/jobs/2024-03-27-concrete-formwork` | 4 | Withheld from this report |
+| `public/jobs/2024-04-06-concrete-slab-finishing` | 2 | Withheld from this report |
 
 ## Interpretation
 
-- The earlier `0 GPS` conclusion was incorrect for macOS metadata.
-- Some public JPEG originals appear to expose project-location coordinates through Spotlight metadata.
+- The earlier `0 GPS` conclusion was incorrect.
+- Some public JPEG originals expose project-location GPS metadata.
 - The newer optimized WebP client/project image set still appears to have no macOS latitude/longitude metadata.
 - Because these coordinates can point near real job locations, issue `#9` is now a privacy/permission decision, not just an implementation task.
 
@@ -68,4 +76,4 @@ Before changing image metadata, the owner should decide:
 3. Add approved approximate metadata only to selected public project photos.
 4. Leave all images unchanged and document that no additional GPS metadata should be added.
 
-If metadata changes are approved, install or use `exiftool` for final EXIF verification and rerun a dated scan after changes.
+If metadata changes are approved, use `exiftool` for final EXIF verification and rerun a dated scan after changes.
