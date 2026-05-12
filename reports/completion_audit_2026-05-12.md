@@ -45,12 +45,12 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Current production state
 
-- Recent tracked repo commit verified during this continuation pass: `aed437d` - `Phase 3 label GPS privacy review`
+- Current tracked repo commit verified during this continuation pass: `84fe0d5` - `Phase 3 sync approval gate comments`
 - Current local build verification after latest state check: `npm run build` passed on 2026-05-12 at `b2bc912`; generated sitemap still reported `43` URLs.
 - Latest content deployment verified for code commit: `cac277b`
 - Handoff index: `reports/seo_handoff_index_2026-05-12.md`
 - Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -15` for the exact current HEAD.
-- Latest report-only production deployment verified before this audit refresh: `dpl_53AyoPymPJW8bjkbAT3qQphe4AK1`, commit `aed437d88cdfa38e5697465127316d059154c3b1`, state `READY`; live checks returned `HTTP/2 200` for `https://www.concretewaco.com/` and `HTTP/2 308` from `https://concretewaco.com/` to the `www` canonical.
+- Latest report-only production deployment verified during this audit refresh: `dpl_83s1voqJriXfggq9cgnDXzSf7UaR`, state `Ready`; `npx vercel@latest inspect dpl_83s1voqJriXfggq9cgnDXzSf7UaR` showed the `www.concretewaco.com` and `concretewaco.com` aliases, and `curl -I -L https://www.concretewaco.com/` returned `HTTP/2 200` on 2026-05-12.
 - GitHub reconstruction PRs `#11` through `#15` were rechecked on 2026-05-12 and remain open with the `audit-reconstruction` label.
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
