@@ -151,6 +151,70 @@ export const serviceHeroImages = {
   'concrete-contractors': servicePreviewImages['contractors-in-waco-tx'],
 }
 
+const defaultGalleryProjectIds = [
+  'client-driveway-slab-2026',
+  'client-covered-patio-2026',
+  'client-commercial-pour-2026',
+  'client-stamped-decorative-2026',
+  'client-shop-foundation-2026',
+  'client-sidewalk-entry-2026',
+  'client-retaining-wall-2026',
+  'client-sports-court-2026',
+]
+
+const serviceGalleryProjectIds = {
+  'concrete-driveways-waco-tx': ['client-driveway-slab-2026', 'client-sidewalk-entry-2026'],
+  'concrete-patios-waco-tx': ['client-covered-patio-2026', 'client-stamped-decorative-2026'],
+  'concrete-sidewalks-waco-tx': ['client-sidewalk-entry-2026', 'client-driveway-slab-2026'],
+  'commercial-concrete-contractor-waco-tx': ['client-commercial-pour-2026', 'client-shop-foundation-2026'],
+  'residential-concrete-contractor-waco-tx': ['client-driveway-slab-2026', 'client-covered-patio-2026'],
+  'stamped-concrete-waco-tx': ['client-stamped-decorative-2026', 'client-covered-patio-2026'],
+  'concrete-foundations-waco-tx': ['client-shop-foundation-2026', 'client-commercial-pour-2026'],
+  'parking-lot-concrete-waco': ['client-commercial-pour-2026', 'client-shop-foundation-2026'],
+  'foundation-repair-waco-tx': ['client-retaining-wall-2026', 'client-shop-foundation-2026'],
+  'concrete-demolition-waco-tx': ['client-commercial-pour-2026', 'client-shop-foundation-2026'],
+  'concrete-sawing-waco-tx': ['client-commercial-pour-2026', 'client-sidewalk-entry-2026'],
+  'retaining-walls-waco-tx': ['client-retaining-wall-2026', 'client-commercial-pour-2026'],
+  'decorative-concrete-waco': ['client-stamped-decorative-2026', 'client-covered-patio-2026'],
+  'hardscaping-waco-tx': ['client-stamped-decorative-2026', 'client-retaining-wall-2026'],
+  'concrete-deck-contractors': ['client-covered-patio-2026', 'client-stamped-decorative-2026'],
+  'contractors-in-waco-tx': ['client-shop-foundation-2026', 'client-commercial-pour-2026'],
+  'concrete-resurfacing-waco-tx': ['client-covered-patio-2026', 'client-stamped-decorative-2026'],
+  'sports-court-coating-waco-tx': ['client-sports-court-2026', 'client-stamped-decorative-2026'],
+}
+
+const projectById = new Map(clientProjects.map((project) => [project.id, project]))
+
+function imageAlt(serviceTitle, project, index) {
+  return `${serviceTitle} photo ${index + 1}: ${project.title} in ${project.location}`
+}
+
+export function getServiceGalleryImages(slug, serviceTitle = 'Concrete project') {
+  const projectIds = [...(serviceGalleryProjectIds[slug] || []), ...defaultGalleryProjectIds]
+  const seen = new Set()
+  const images = []
+
+  for (const projectId of projectIds) {
+    const project = projectById.get(projectId)
+    if (!project) continue
+
+    project.images.forEach((src) => {
+      if (seen.has(src) || images.length >= 8) return
+      seen.add(src)
+      images.push({
+        src,
+        alt: imageAlt(serviceTitle, project, images.length),
+        title: project.title,
+        location: project.location,
+      })
+    })
+
+    if (images.length >= 8) break
+  }
+
+  return images
+}
+
 export function getServicePreviewImage(slug) {
   return servicePreviewImages[slug] || serviceHeroImages[slug] || null
 }
