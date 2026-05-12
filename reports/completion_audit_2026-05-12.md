@@ -39,7 +39,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | GSC-driven quick-win page pass | Commit `7f49224`; `/retaining-walls-waco-tx` and `/hardscaping-waco-tx` metadata/copy improved based on GSC opportunities; build and live metadata checks passed | Complete for first two priority pages |
 | GSC-driven location-page pass | Commit `cac277b`; `/hewitt-tx-concrete-contractor` and `/woodway-tx-concrete-contractor` planning sections and static metadata improved; build and live metadata checks passed | Complete for first two priority location pages |
 | Local Lighthouse fallback performance sweep | `reports/lighthouse_sweep_2026-05-12.md`; 10 live URLs passed mobile lab thresholds with scores 95-98, LCP <= 2336ms, TBT 0ms, CLS 0 | Complete as fallback evidence; does not replace PSI API requirement |
-| Scheduled 30/60/90 reruns | Dates are documented in `reports/baseline_rankings.md`; no scheduler created | Partially complete |
+| Scheduled 30/60/90 reruns | Dates are documented in `reports/baseline_rankings.md`; `reports/seo_rerun_schedule_2026-05-12.md` adds exact dates, commands, account-side checks, and report template | Complete as in-repo schedule; no external calendar/GitHub issues created |
 | One atomic commit per task | SEO work is split into phase/task commits; remote blog commits were preserved during rebase | Complete |
 | Pull request per service-page rewrite | Work was pushed directly to `main`; no PRs opened | Not complete |
 
@@ -61,5 +61,5 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
    - named case-study permissions
 4. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`.
 5. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts.
-6. Recheck GSC in 30 days to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
+6. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
 7. Decide whether to accept direct-to-main history or recreate PRs/branches for service-page rewrites.
