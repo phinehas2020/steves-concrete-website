@@ -68,9 +68,21 @@ These rows have at least 10 impressions, average position 4-20, and low CTR.
 - The next on-site opportunities are retaining walls, hardscaping, Hewitt, and Woodway because they show impressions in striking distance with zero clicks.
 - The off-site work in `reports/nap_citation_audit_2026-05-12.md` is directly relevant to the weakest local-intent rows because local pack trust likely controls a large share of clicks.
 
+## Canonical and redirect check
+
+Checked live on 2026-05-12:
+
+| URL | Result |
+| --- | --- |
+| `http://concretewaco.com/` | 308 to `https://concretewaco.com/` |
+| `https://concretewaco.com/` | 308 to `https://www.concretewaco.com/` |
+| `http://www.concretewaco.com/` | 308 to `https://www.concretewaco.com/` |
+| `https://www.concretewaco.com/` | 200 |
+
+The historical `http` rows in GSC do not appear to be caused by a current redirect failure.
+
 ## 30/60/90 rerun dates
 
 - 30-day check: 2026-06-11
 - 60-day check: 2026-07-11
 - 90-day check: 2026-08-10
-
