@@ -26,7 +26,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Trust/EEAT: owner bio/photo/credentials | Existing about-page copy references Steve and experience; no new verified credentials or photo inputs provided | Partially complete, needs owner input |
 | Trust/EEAT: insurance carrier and coverage type | Not provided | Blocked |
 | Trust/EEAT: BBB rating/widget | Not provided/verified | Blocked |
-| Trust/EEAT: GBP review widget via API | Existing Google Places/reviews wiring is present; not separately remediated in this phase | Partially complete |
+| Trust/EEAT: GBP review widget via API | `api/google-reviews.js`; `src/lib/googleReviews.js`; `reports/google_reviews_verification_2026-05-12.md`; local handler invocation returned live Google place/review data | Complete |
 | Trust/EEAT: named case studies with written permission | Not provided | Blocked |
 | Sitemap: remove changefreq/priority, add lastmod | `scripts/generate-sitemap.mjs`; `public/sitemap.xml`; live sitemap check showed 43 URLs, 43 lastmods, no changefreq/priority | Complete |
 | Robots: verify `/admin` disallow | `public/robots.txt`; verification report confirms `/admin` disallow | Complete |

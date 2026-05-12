@@ -125,6 +125,13 @@
   - Scope: all `43` URLs in `public/sitemap.xml`.
   - Viewport: `375x812`.
   - Result: `43/43` passed with no page-level horizontal overflow, no visible off-viewport elements at sampled scroll positions, no console errors, and no page/runtime errors.
+- Google reviews API verification passed:
+  - Report: `reports/google_reviews_verification_2026-05-12.md`
+  - Handler: `api/google-reviews.js`
+  - Local handler invocation with `.env` values returned `ok: true` without printing the API key.
+  - Verified place: `SLA Concrete Works`, `1045 W Elm Mott Ln, Elm Mott, TX 76640`.
+  - Returned rating: `5`; user rating count: `33`; reviews returned: `5`; reviews with text: `5`.
+  - Place, review, and write-review links were present.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.
