@@ -39,7 +39,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 - `main` contains the completed repo-side SEO work and the report/runbook handoff artifacts.
 - The site content/schema/performance work is substantially complete.
 - Search Console is reachable in the normal Chrome profile for `concretewaco.com`, and the sitemap submit form is visible; the final submit click is pending confirmation because it changes account-side state.
-- The goal is not complete because several remaining requirements depend on account access, owner proof, owner permission, or an explicit PR-workflow decision.
+- The goal is not complete because several remaining requirements depend on final GSC submit confirmation, account-side GBP/citation access, owner proof, or owner permission.
 
 ## Resume Order
 

@@ -2,7 +2,7 @@
 
 Objective: follow `goal.md` for the Concrete Works LLC / SLA Concrete Works SEO parity project.
 
-Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, PageSpeed API capture, baseline-ranking, public citation/trust audits, GSC performance baseline, and GSC-driven quick-win content passes are substantially complete and verified. Some requirements remain blocked by GSC submit permissions, off-site GBP/account work, owner-provided trust facts, or the missing PR-per-service-page workflow.
+Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, PageSpeed API capture, baseline-ranking, public citation/trust audits, GSC performance baseline, GSC-driven quick-win content passes, and service-page PR audit reconstruction are substantially complete and verified. Some requirements remain blocked by the final GSC submit confirmation, off-site GBP/account work, owner-provided trust facts, or image-location permission.
 
 ## Prompt-to-artifact checklist
 
@@ -41,7 +41,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Local Lighthouse fallback performance sweep | `reports/lighthouse_sweep_2026-05-12.md`; 10 live URLs passed mobile lab thresholds with scores 95-98, LCP <= 2336ms, TBT 0ms, CLS 0 | Complete as supporting lab evidence |
 | Scheduled 30/60/90 reruns | Dates are documented in `reports/baseline_rankings.md`; `reports/seo_rerun_schedule_2026-05-12.md` adds exact dates, commands, account-side checks, report template, and GitHub issue reminders `#3`, `#4`, and `#5`; each reminder issue is assigned to a matching GitHub milestone with the rerun due date; labels/milestones are summarized in `reports/github_issue_tracking_2026-05-12.md` | Complete |
 | One atomic commit per task | SEO work is split into phase/task commits; remote blog commits were preserved during rebase | Complete |
-| Pull request per service-page rewrite | Work was pushed directly to `main`; `reports/service_page_pr_workflow_exception_2026-05-12.md` documents the exception and links audit reconstruction PRs `#11`, `#12`, `#13`, `#14`, and `#15`; `reports/service_page_pr_reconstruction_runbook_2026-05-12.md` records the reconstruction method; issue `#10` is ready to close after this audit update | Complete as audit reconstruction; future rewrites should use normal PRs before merge |
+| Pull request per service-page rewrite | Work was pushed directly to `main`; `reports/service_page_pr_workflow_exception_2026-05-12.md` documents the exception and links audit reconstruction PRs `#11`, `#12`, `#13`, `#14`, and `#15`; `reports/service_page_pr_reconstruction_runbook_2026-05-12.md` records the reconstruction method; issue `#10` is closed | Complete as audit reconstruction; future rewrites should use normal PRs before merge |
 
 ## Current production state
 
