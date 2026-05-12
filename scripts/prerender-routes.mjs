@@ -17,8 +17,20 @@ const indexPath = path.join(distDir, 'index.html')
 const SITE_URL = 'https://www.concretewaco.com'
 const SITE_NAME = 'SLA Concrete Works LLC'
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
+const ORGANIZATION_ID = `${SITE_URL}/#organization`
+const WEBSITE_ID = `${SITE_URL}/#website`
+const SERVICE_AREA_ID = `${SITE_URL}/#mclennan-county-service-area`
+const GOOGLE_BUSINESS_PROFILE_URL =
+  'https://www.google.com/maps/place/SLA+Concrete+Works/@31.6637838,-97.1149261,17z/data=!3m1!4b1!4m6!3m5!1s0x864f83d5fc2728cf:0x92d8085e5a37fa64!8m2!3d31.6637793!4d-97.1123512!16s%2Fg%2F11gf0qs4j0'
 const PHONE_DISPLAY = '(254) 230-3102'
 const PHONE_HREF = 'tel:254-230-3102'
+const PHONE_SCHEMA = '+1-254-230-3102'
+const WACO_GEO = {
+  latitude: 31.5493,
+  longitude: -97.1467,
+}
+const MCLENNAN_COUNTY_POLYGON =
+  '31.915 -97.575 31.914 -96.989 31.213 -96.994 31.210 -97.588 31.915 -97.575'
 
 const homeMeta = {
   title: 'Waco Concrete Contractors | SLA Concrete Works LLC',
@@ -229,6 +241,11 @@ const routeMeta = [
   {
     path: '/',
     ...homeMeta,
+    schemaKind: 'home',
+    breadcrumbs: [
+      { name: 'Home', url: `${SITE_URL}/` },
+    ],
+    faq: FAQ_ITEMS,
     contentHtml: renderHomeContent(),
   },
   ...servicePageData.map((service) => {
@@ -242,6 +259,16 @@ const routeMeta = [
       canonical,
       robots: isServicePageCanonicalized(service.slug) ? 'noindex, follow' : 'index, follow',
       h1: service.heroTitle,
+      schemaKind: 'service',
+      schemaName: service.title,
+      schemaServiceType: service.title,
+      schemaDescription: service.seoDescription || service.heroSubtitle || service.intro,
+      faq: service.faq || [],
+      breadcrumbs: [
+        { name: 'Home', url: `${SITE_URL}/` },
+        { name: 'Services', url: `${SITE_URL}/#services` },
+        { name: service.title, url: canonical },
+      ],
       contentHtml: renderServiceContent(service),
     }
   }),
@@ -253,6 +280,16 @@ const routeMeta = [
     description: service.metaDescription,
     canonical: `${SITE_URL}/${service.slug}`,
     h1: service.title,
+    schemaKind: 'service',
+    schemaName: service.title,
+    schemaServiceType: service.title,
+    schemaDescription: service.metaDescription || service.cardSummary || service.introParagraph,
+    faq: service.faq || [],
+    breadcrumbs: [
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: 'Service Pages', url: `${SITE_URL}/#services` },
+      { name: service.title, url: `${SITE_URL}/${service.slug}` },
+    ],
     contentHtml: renderSeoServiceContent(service),
   })),
   ...locationPages.map((location) => ({
@@ -262,6 +299,30 @@ const routeMeta = [
       `${location.city} concrete contractor for driveways, patios, stamped concrete, and slab work. Free estimate: ${PHONE_DISPLAY}.`,
     canonical: `${SITE_URL}/${location.slug}`,
     h1: `${location.city}, TX Concrete Contractor`,
+    schemaKind: 'location',
+    schemaName: `${location.city}, TX Concrete Contractor`,
+    schemaDescription: location.intro,
+    faq: [
+      {
+        question: `Do you offer free estimates in ${location.city}?`,
+        answer: `Yes. We schedule free, no-obligation estimates for ${location.city} projects and nearby communities.`,
+      },
+      {
+        question: `What types of concrete projects do you handle in ${location.city}?`,
+        answer:
+          'Driveways, patios, stamped concrete, concrete repair, foundations, slabs, sealing, and leveling projects for residential and light commercial properties.',
+      },
+      {
+        question: `How quickly can my ${location.city} project be scheduled?`,
+        answer:
+          'Timing depends on scope and weather, but we provide clear availability and sequence during estimate so there are no surprises.',
+      },
+    ],
+    breadcrumbs: [
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: 'Service Areas', url: `${SITE_URL}/#service-areas` },
+      { name: `${location.city}, TX`, url: `${SITE_URL}/${location.slug}` },
+    ],
     contentHtml: renderLocationContent(location),
   })),
   ...sportsCourtAreaPageData.map((area) => ({
@@ -270,6 +331,16 @@ const routeMeta = [
     description: area.seoDescription,
     canonical: `${SITE_URL}/sports-court-coating/${area.slug}`,
     h1: area.heroTitle,
+    schemaKind: 'service',
+    schemaName: area.heroTitle,
+    schemaServiceType: 'Sports court coating',
+    schemaDescription: area.seoDescription || area.heroSubtitle || area.intro,
+    faq: area.faq || [],
+    breadcrumbs: [
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: 'Sports Court Coating', url: `${SITE_URL}/sports-court-coating-waco-tx` },
+      { name: area.areaName, url: `${SITE_URL}/sports-court-coating/${area.slug}` },
+    ],
     contentHtml: renderSportsCourtAreaContent(area),
   })),
   ...guidePageData.map((guide) => ({
@@ -278,6 +349,15 @@ const routeMeta = [
     description: guide.seoDescription,
     canonical: `${SITE_URL}/guides/${guide.slug}`,
     h1: guide.heroTitle,
+    schemaKind: 'guide',
+    schemaName: guide.title,
+    schemaDescription: guide.seoDescription || guide.summary,
+    faq: guide.faq || [],
+    breadcrumbs: [
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: 'Guides', url: `${SITE_URL}/guides` },
+      { name: guide.title, url: `${SITE_URL}/guides/${guide.slug}` },
+    ],
     contentHtml: renderGuideContent(guide),
   })),
   ...staticRoutes.map((route) => ({
@@ -286,6 +366,11 @@ const routeMeta = [
     description: route.description,
     canonical: `${SITE_URL}${route.path}`,
     h1: route.h1,
+    schemaKind: 'static',
+    breadcrumbs: [
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: route.h1, url: `${SITE_URL}${route.path}` },
+    ],
     contentHtml: route.renderContent(),
   })),
 ]
@@ -1188,32 +1273,276 @@ function upsertCanonical(html, canonical) {
   return html.replace('</head>', `${tag}\n</head>`)
 }
 
-function upsertJsonLd(html, canonical, title, description) {
-  const json = {
-    '@context': 'https://schema.org',
-    '@graph': [
+function cityArea(name) {
+  return {
+    '@type': 'City',
+    name,
+    addressRegion: 'TX',
+    addressCountry: 'US',
+  }
+}
+
+function serviceAreaPlaceSchema() {
+  return {
+    '@type': 'Place',
+    '@id': SERVICE_AREA_ID,
+    name: 'McLennan County concrete service area',
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: 'TX',
+      addressCountry: 'US',
+    },
+    geo: {
+      '@type': 'GeoShape',
+      polygon: MCLENNAN_COUNTY_POLYGON,
+    },
+  }
+}
+
+function localBusinessSchema({ includeOfferCatalog = false } = {}) {
+  const schema = {
+    '@type': ['LocalBusiness', 'Contractor'],
+    '@id': ORGANIZATION_ID,
+    additionalType: 'https://schema.org/ConcreteContractor',
+    name: SITE_NAME,
+    alternateName: 'SLA Concrete Works LLC of Waco',
+    description:
+      'Concrete contractor serving Waco, McLennan County, and nearby Central Texas communities with driveways, patios, stamped concrete, slabs, repairs, and commercial concrete work.',
+    url: `${SITE_URL}/`,
+    logo: `${SITE_URL}/logo.png`,
+    image: DEFAULT_IMAGE,
+    telephone: PHONE_SCHEMA,
+    email: 'slaconcrete@gmail.com',
+    foundingDate: '2005',
+    priceRange: '$$',
+    sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Waco',
+      addressRegion: 'TX',
+      addressCountry: 'US',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: WACO_GEO.latitude,
+      longitude: WACO_GEO.longitude,
+    },
+    openingHoursSpecification: [
       {
-        '@type': 'WebPage',
-        '@id': `${canonical}#webpage`,
-        url: canonical,
-        name: title,
-        description,
-        isPartOf: {
-          '@id': `${SITE_URL}/#website`,
-        },
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '07:00',
+        closes: '18:00',
       },
       {
-        '@type': 'WebSite',
-        '@id': `${SITE_URL}/#website`,
-        url: SITE_URL,
-        name: SITE_NAME,
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Saturday'],
+        opens: '08:00',
+        closes: '16:00',
       },
     ],
+    areaServed: [
+      { '@id': SERVICE_AREA_ID },
+      ...locationPages.map((location) => cityArea(location.city)),
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: '47',
+      bestRating: '5',
+      worstRating: '1',
+    },
+  }
+
+  if (includeOfferCatalog) {
+    schema.hasOfferCatalog = {
+      '@type': 'OfferCatalog',
+      name: 'Concrete services',
+      itemListElement: serviceLinks.map((service, index) => ({
+        '@type': 'Offer',
+        position: index + 1,
+        url: `${SITE_URL}${service.href}`,
+        itemOffered: {
+          '@type': 'Service',
+          name: service.label,
+          description: service.description,
+          provider: {
+            '@id': ORGANIZATION_ID,
+          },
+          areaServed: {
+            '@id': SERVICE_AREA_ID,
+          },
+        },
+      })),
+    }
+  }
+
+  return schema
+}
+
+function webSiteSchema() {
+  return {
+    '@type': 'WebSite',
+    '@id': WEBSITE_ID,
+    url: `${SITE_URL}/`,
+    name: SITE_NAME,
+    publisher: {
+      '@id': ORGANIZATION_ID,
+    },
+  }
+}
+
+function webPageSchema(canonical, title, description) {
+  return {
+    '@type': 'WebPage',
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: title,
+    description,
+    isPartOf: {
+      '@id': WEBSITE_ID,
+    },
+    about: {
+      '@id': ORGANIZATION_ID,
+    },
+  }
+}
+
+function breadcrumbSchema(items = []) {
+  if (!items.length) return null
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  }
+}
+
+function faqPageSchema(items = []) {
+  if (!items.length) return null
+  return {
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+}
+
+function serviceSchema(meta, canonical) {
+  if (meta.schemaKind !== 'service') return null
+  return {
+    '@type': 'Service',
+    '@id': `${canonical}#service`,
+    name: meta.schemaName || meta.h1 || meta.title,
+    serviceType: meta.schemaServiceType || meta.schemaName || meta.h1 || meta.title,
+    description: meta.schemaDescription || meta.description,
+    url: canonical,
+    provider: {
+      '@id': ORGANIZATION_ID,
+    },
+    areaServed: {
+      '@id': SERVICE_AREA_ID,
+    },
+    offers: {
+      '@type': 'Offer',
+      url: canonical,
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@id': ORGANIZATION_ID,
+      },
+    },
+  }
+}
+
+function locationPlaceSchema(meta, canonical) {
+  if (meta.schemaKind !== 'location') return null
+  return {
+    '@type': 'Place',
+    '@id': `${canonical}#place`,
+    name: meta.schemaName || meta.h1 || meta.title,
+    description: meta.schemaDescription || meta.description,
+    url: canonical,
+    containedInPlace: {
+      '@id': SERVICE_AREA_ID,
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: 'TX',
+      addressCountry: 'US',
+    },
+  }
+}
+
+function articleSchema(meta, canonical) {
+  if (meta.schemaKind !== 'guide') return null
+  return {
+    '@type': 'Article',
+    '@id': `${canonical}#article`,
+    headline: meta.schemaName || meta.h1 || meta.title,
+    description: meta.schemaDescription || meta.description,
+    mainEntityOfPage: {
+      '@id': `${canonical}#webpage`,
+    },
+    author: {
+      '@id': ORGANIZATION_ID,
+    },
+    publisher: {
+      '@id': ORGANIZATION_ID,
+    },
+  }
+}
+
+function buildRouteJsonLd(meta, canonical) {
+  const nodes = [
+    webSiteSchema(),
+    webPageSchema(canonical, meta.title, meta.description),
+    breadcrumbSchema(meta.breadcrumbs || []),
+    faqPageSchema(meta.faq || []),
+    serviceAreaPlaceSchema(),
+    serviceSchema(meta, canonical),
+    locationPlaceSchema(meta, canonical),
+    articleSchema(meta, canonical),
+  ]
+
+  if (meta.schemaKind === 'home') {
+    nodes.push(localBusinessSchema({ includeOfferCatalog: true }))
+  } else {
+    nodes.push({
+      '@id': ORGANIZATION_ID,
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      telephone: PHONE_SCHEMA,
+      logo: `${SITE_URL}/logo.png`,
+      sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
+    })
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': nodes.filter(Boolean),
+  }
+}
+
+function removeExistingJsonLd(html) {
+  return html.replace(/<script\b(?=[^>]*type=["']application\/ld\+json["'])[\s\S]*?<\/script>\s*/gi, '')
+}
+
+function upsertJsonLd(html, meta, canonical) {
+  const json = {
+    ...buildRouteJsonLd(meta, canonical),
   }
   const tag = `<script type="application/ld+json" data-prerender="route">${JSON.stringify(json)}</script>`
-  const regex = /<script type="application\/ld\+json" data-prerender="route">[\s\S]*?<\/script>/i
-  if (regex.test(html)) return html.replace(regex, tag)
-  return html.replace('</head>', `${tag}\n</head>`)
+  return removeExistingJsonLd(html).replace('</head>', `${tag}\n</head>`)
 }
 
 function upsertPrerenderContent(html, contentHtml) {
@@ -1246,7 +1575,7 @@ function applyMeta(html, meta) {
   updated = upsertMetaTag(updated, 'twitter:title', meta.title)
   updated = upsertMetaTag(updated, 'twitter:description', meta.description)
   updated = upsertMetaTag(updated, 'twitter:image', DEFAULT_IMAGE)
-  updated = upsertJsonLd(updated, canonical, meta.title, meta.description)
+  updated = upsertJsonLd(updated, meta, canonical)
   updated = upsertPrerenderContent(updated, meta.contentHtml || renderNotFoundContent())
   if (meta.robots && meta.robots !== 'index, follow') {
     updated = upsertMetaTag(updated, 'robots', meta.robots)
