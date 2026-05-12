@@ -4,6 +4,8 @@ Goal item: add EXIF GPS to Waco coordinates where photo permits.
 
 Tracking issue: `#9` - `Confirm image GPS metadata permissions`
 
+Permission form: `reports/image_gps_permission_form_2026-05-12.md`
+
 ## Scope
 
 Scanned image files under:

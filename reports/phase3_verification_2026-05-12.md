@@ -156,6 +156,7 @@
 - Image EXIF GPS scan completed:
   - Report: `reports/image_exif_gps_scan_2026-05-12.md`
   - Evidence JSON: `reports/image_exif_gps_scan_2026-05-12.json`
+  - Permission form: `reports/image_gps_permission_form_2026-05-12.md`
   - Scope: `86` public project/blog/gallery images.
   - Result: `0` files exposed GPS latitude/longitude metadata through macOS metadata indexing.
   - GPS writing remains blocked until the owner confirms project-location permission and whether exact or approximate coordinates are acceptable.
