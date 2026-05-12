@@ -1,6 +1,6 @@
 # SEO Rerun Schedule - 2026-05-12
 
-This file turns the 30/60/90-day follow-up requirement into a concrete checklist. It does not create calendar events, GitHub issues, or external reminders by itself.
+This file turns the 30/60/90-day follow-up requirement into a concrete checklist. GitHub issues were also created as external reminders.
 
 ## Rerun dates
 
@@ -9,6 +9,14 @@ This file turns the 30/60/90-day follow-up requirement into a concrete checklist
 | 30-day | 2026-06-11 | 2026-05-12 to 2026-06-10 |
 | 60-day | 2026-07-11 | 2026-06-11 to 2026-07-10 |
 | 90-day | 2026-08-10 | 2026-07-11 to 2026-08-09 |
+
+## GitHub reminders
+
+Created on 2026-05-12 in `phinehas2020/steves-concrete-website`:
+
+- `#3` - `30-day SEO rerun - 2026-06-11`
+- `#4` - `60-day SEO rerun - 2026-07-11`
+- `#5` - `90-day SEO rerun - 2026-08-10`
 
 ## Commands and tools to rerun
 
@@ -92,4 +100,3 @@ Save each rerun as `reports/seo_rerun_YYYY-MM-DD.md`.
 - Needs owner input:
 - Blocked:
 ```
-
