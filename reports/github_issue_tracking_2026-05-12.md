@@ -20,7 +20,7 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 | `#5` | `90-day SEO rerun - 2026-08-10` | `seo-rerun` | `90-day SEO rerun - 2026-08-10` |
 | `#6` | `Resolve GSC sitemap resubmission permission` | `blocked-account`, `decision-needed` | none |
 | `#7` | `Collect owner trust proof for EEAT claims` | `blocked-owner`, `decision-needed` | none |
-| `#8` | `Complete GBP and citation cleanup` | `blocked-account` | none |
+| `#8` | `Complete GBP and citation cleanup` | `blocked-account`, `decision-needed` | none |
 | `#9` | `Confirm image GPS metadata permissions` | `blocked-owner`, `decision-needed` | none |
 | `#10` | `Decide service-page PR workflow exception` | `decision-needed` | closed after audit reconstruction PRs `#11`-`#15` were created |
 
