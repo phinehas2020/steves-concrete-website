@@ -13,7 +13,7 @@ import {
   buildJsonLdGraph,
 } from '../lib/seo'
 import { seoServicePages } from '../data/seoServicePages'
-import { serviceHeroImages } from '../data/clientProjects'
+import { getServiceGalleryImages, serviceHeroImages } from '../data/clientProjects'
 
 const wacoPlanningLinks = [
   {
@@ -35,6 +35,7 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
   if (!page) return null
   const { slug, title, introParagraph, metaTitle, metaDescription, sections, faq = [], heroImage } = page
   const resolvedHeroImage = heroImage || serviceHeroImages[slug]
+  const galleryImages = getServiceGalleryImages(slug, title)
   const seoImage = resolvedHeroImage?.startsWith('/') ? `${SITE_URL}${resolvedHeroImage}` : resolvedHeroImage
 
   const relatedServices = seoServicePages
@@ -181,6 +182,41 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
             </div>
           </div>
         </section>
+
+        {galleryImages.length > 0 && (
+          <section className="section-padding bg-white">
+            <div className="container-main">
+              <div className="mb-8 max-w-3xl">
+                <span className="inline-block px-3 py-1 mb-4 rounded-full bg-stone-100 text-stone-600 font-semibold text-sm tracking-wide uppercase border border-stone-200">
+                  Recent Work
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900">
+                  Project photos for Waco concrete planning
+                </h2>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {galleryImages.map((image) => (
+                  <figure key={image.src} className="overflow-hidden rounded-lg border border-stone-200 bg-stone-50">
+                    <div className="aspect-[4/3] overflow-hidden bg-stone-100">
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        loading="lazy"
+                        width="480"
+                        height="360"
+                        className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.03]"
+                      />
+                    </div>
+                    <figcaption className="px-3 py-3 text-sm text-stone-600">
+                      <span className="block font-semibold text-stone-900">{image.title}</span>
+                      {image.location}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section-padding bg-stone-50">
           <div className="container-main">
