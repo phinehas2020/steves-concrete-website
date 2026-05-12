@@ -10,7 +10,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | --- | --- | --- |
 | Phase 1 crawl target and reference sites | `reports/audit_2026-05-12.csv`; `scripts/seo-phase1-audit.mjs` | Complete |
 | Phase 1 link graph | `reports/link_graph.html` | Complete |
-| Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | Audit script records unavailable/quota state; live PSI attempt returned `429` for homepage and driveway page | Blocked: no `PAGESPEED_API_KEY`, unauthenticated quota exceeded |
+| Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | Audit script records unavailable/quota state; live PSI attempt returned `429`; existing Google Places key returned `API_KEY_SERVICE_BLOCKED`; `reports/lighthouse_sweep_2026-05-12.md` adds local Lighthouse fallback evidence | Blocked for PSI API; Lighthouse fallback complete |
 | Phase 1 mobile 375px render check | Browser smoke checks documented in `reports/phase3_verification_2026-05-12.md` | Complete for representative routes, not every crawled URL |
 | Phase 2 ranked remediation plan | `reports/remediation_plan.md` | Complete |
 | Schema markup: LocalBusiness homepage, Service pages, BreadcrumbList, FAQPage, Place | `scripts/prerender-routes.mjs`; local static schema check across 54 files; live Rich Results Test result `WYow_kvZWHMaxyHIYd20OA` | Complete for tested live driveway page and local generated pages |
@@ -38,6 +38,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Baseline rankings final report | `reports/baseline_rankings.md`; Semrush live data used; `reports/gsc_performance_baseline_2026-05-12.md` adds 90-day GSC query/page baseline | Complete |
 | GSC-driven quick-win page pass | Commit `7f49224`; `/retaining-walls-waco-tx` and `/hardscaping-waco-tx` metadata/copy improved based on GSC opportunities; build and live metadata checks passed | Complete for first two priority pages |
 | GSC-driven location-page pass | Commit `cac277b`; `/hewitt-tx-concrete-contractor` and `/woodway-tx-concrete-contractor` planning sections and static metadata improved; build and live metadata checks passed | Complete for first two priority location pages |
+| Local Lighthouse fallback performance sweep | `reports/lighthouse_sweep_2026-05-12.md`; 10 live URLs passed mobile lab thresholds with scores 95-98, LCP <= 2336ms, TBT 0ms, CLS 0 | Complete as fallback evidence; does not replace PSI API requirement |
 | Scheduled 30/60/90 reruns | Dates are documented in `reports/baseline_rankings.md`; no scheduler created | Partially complete |
 | One atomic commit per task | SEO work is split into phase/task commits; remote blog commits were preserved during rebase | Complete |
 | Pull request per service-page rewrite | Work was pushed directly to `main`; no PRs opened | Not complete |
@@ -51,7 +52,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Remaining action list
 
-1. Add a `PAGESPEED_API_KEY`, then rerun PageSpeed/Core Web Vitals for homepage and top service pages.
+1. Add a Google API key with `pagespeedonline.googleapis.com` access enabled, then rerun PageSpeed/Core Web Vitals for homepage and top service pages.
 2. Resubmit `https://www.concretewaco.com/sitemap.xml` in GSC UI or refresh API permissions so `submit_sitemap` succeeds.
 3. Collect owner/trust facts before adding more EEAT claims:
    - insurance carrier and coverage type

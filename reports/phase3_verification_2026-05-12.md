@@ -73,6 +73,15 @@
   - `https://www.concretewaco.com/` returned `429` quota exceeded.
   - `https://www.concretewaco.com/concrete-driveways-waco-tx` returned `429` quota exceeded.
   - No `PAGESPEED_API_KEY` is configured in local environment.
+  - Existing Google Places API key was tested without printing the key and returned `API_KEY_SERVICE_BLOCKED` for `pagespeedonline.googleapis.com`.
+- Local Lighthouse fallback sweep passed:
+  - Report: `reports/lighthouse_sweep_2026-05-12.md`
+  - Command: `npm run perf:sweep -- --json`
+  - Scope: `10` live URLs under `https://www.concretewaco.com`.
+  - Result: `10/10` passed the script thresholds.
+  - Score range: `95` to `98`.
+  - Worst LCP: `2336ms`; TBT: `0ms` on all tested URLs; CLS: `0` on all tested URLs.
+  - This is supporting lab evidence only and does not replace the blocked PageSpeed API requirement.
 - GSC performance baseline added:
   - Report: `reports/gsc_performance_baseline_2026-05-12.md`
   - Date range: `2026-02-11` through `2026-05-10`, web search, USA.
