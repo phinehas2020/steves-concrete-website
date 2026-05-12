@@ -1,6 +1,6 @@
 # GSC Write Scope Runbook - 2026-05-12
 
-Purpose: unblock GitHub issue `#6` by refreshing Google auth with Search Console write scope and retrying the sitemap submit.
+Purpose: unblock GitHub issue `#6` by completing the staged authenticated Search Console UI submit, or by refreshing Google auth with Search Console write scope and retrying the sitemap submit.
 
 Official references:
 
@@ -29,9 +29,16 @@ Known blocked:
 - Direct API submit with the active `gcloud auth print-access-token` token returns `403 Request had insufficient authentication scopes`.
 - In-app browser UI attempt redirects to Google sign-in.
 
+Known staged:
+
+- The normal Google Chrome profile opens the authenticated Search Console sitemaps page for `concretewaco.com`.
+- The existing sitemap row is visible with status `Success`, submitted `Mar 2, 2026`, last read `May 11, 2026`, and `43` discovered pages.
+- The add-sitemap field and Submit button are visible.
+- The final Submit click changes account-side state and requires action-time confirmation before performing it.
+
 ## Preferred manual UI path
 
-Use a browser already signed into the Search Console owner account:
+Use the already-authenticated normal Chrome profile if it is still available:
 
 ```text
 https://search.google.com/search-console/sitemaps?resource_id=sc-domain%3Aconcretewaco.com
@@ -48,6 +55,8 @@ Record:
 - new `lastSubmitted` date
 - screenshot or exported sitemap details
 - whether warnings/errors remain `0`
+
+If the Chrome session is no longer authenticated, fall back to the API retry path below or sign into a Search Console owner account manually.
 
 ## API retry path
 
