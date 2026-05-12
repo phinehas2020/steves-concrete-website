@@ -152,8 +152,23 @@
   ],
   "redirects": [
     {
+      "source": "/concrete-repair-waco-tx",
+      "destination": "https://www.concretewaco.com/foundation-repair-waco-tx",
+      "permanent": true
+    },
+    {
       "source": "/concrete-parking-lots-waco-tx",
       "destination": "https://www.concretewaco.com/parking-lot-concrete-waco",
+      "permanent": true
+    },
+    {
+      "source": "/house-leveling-waco-tx",
+      "destination": "https://www.concretewaco.com/foundation-repair-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/general-contractor-waco-tx",
+      "destination": "https://www.concretewaco.com/contractors-in-waco-tx",
       "permanent": true
     },
     {
