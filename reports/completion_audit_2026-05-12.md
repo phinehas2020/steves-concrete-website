@@ -34,7 +34,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | GSC coverage clean | GSC sitemap list reported 0 warnings and 0 errors | Complete for sitemap report available through API |
 | Google Business Profile optimization | No GBP management API/tool available in this session | Blocked/off-site |
 | NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md`; public web and Google Places audit found current canonical NAP plus stale Manta/Buzzfile/Levelset risks | Complete for public audit; corrections remain off-site |
-| GBP posts, Q&A, review outreach | Not completed | Blocked/off-site |
+| GBP posts, Q&A, review outreach | `reports/gbp_action_pack_2026-05-12.md` provides owner-authored Q&A prompts, GBP post drafts, review outreach templates, and response guidelines | Draft/action pack complete; publishing remains blocked/off-site and owner-authored answers are still required |
 | Baseline rankings final report | `reports/baseline_rankings.md`; Semrush live data used; `reports/gsc_performance_baseline_2026-05-12.md` adds 90-day GSC query/page baseline | Complete |
 | GSC-driven quick-win page pass | Commit `7f49224`; `/retaining-walls-waco-tx` and `/hardscaping-waco-tx` metadata/copy improved based on GSC opportunities; build and live metadata checks passed | Complete for first two priority pages |
 | GSC-driven location-page pass | Commit `cac277b`; `/hewitt-tx-concrete-contractor` and `/woodway-tx-concrete-contractor` planning sections and static metadata improved; build and live metadata checks passed | Complete for first two priority location pages |
@@ -60,5 +60,6 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
    - owner-approved bio/photo/credentials
    - named case-study permissions
 4. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`.
-5. Recheck GSC in 30 days to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
-6. Decide whether to accept direct-to-main history or recreate PRs/branches for service-page rewrites.
+5. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts.
+6. Recheck GSC in 30 days to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
+7. Decide whether to accept direct-to-main history or recreate PRs/branches for service-page rewrites.

@@ -109,6 +109,10 @@
     - `/woodway-tx-concrete-contractor`: `882` words, title `Concrete Contractor Woodway Texas | Driveways, Patios, Stamped Concrete`, `1` parseable JSON-LD block.
   - Production deployment for commit `cac277b` became ready on Vercel.
   - Live metadata check passed for both pages with exactly `1` JSON-LD script in static HTML.
+- GBP action pack added:
+  - Report: `reports/gbp_action_pack_2026-05-12.md`
+  - Includes GBP profile checklist, owner-authored Q&A prompts, four weekly GBP post drafts, review outreach templates, review response guidance, and citation cleanup tie-in.
+  - This does not mean GBP was changed; publishing remains account-side and should use owner-approved answers and real project photos.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.
