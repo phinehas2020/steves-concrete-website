@@ -105,16 +105,49 @@ function upsertLink(rel, href) {
   tag.setAttribute('href', href)
 }
 
-function upsertJsonLd(id, json) {
-  const existing = document.head.querySelector(`script[data-seo-jsonld="${id}"]`)
+function jsonLdMatchesUrl(script, url) {
+  if (!script || !url) return false
+  try {
+    const parsed = JSON.parse(script.textContent || '{}')
+    const graph = Array.isArray(parsed?.['@graph']) ? parsed['@graph'] : [parsed]
+    return graph.some((node) => node?.['@type'] === 'WebPage' && normalizeCanonical(node.url) === url)
+  } catch {
+    return false
+  }
+}
+
+function upsertJsonLd(id, json, canonical) {
+  const jsonLdScripts = Array.from(document.head.querySelectorAll('script[type="application/ld+json"]'))
+  const managedScript = document.head.querySelector(`script[data-seo-jsonld="${id}"]`)
+  const matchingPrerenderScript = jsonLdScripts.find(
+    (script) =>
+      script.getAttribute('data-prerender') === 'route' &&
+      normalizeCanonical(script.getAttribute('data-page-url')) === canonical,
+  )
+  const existing =
+    managedScript ||
+    matchingPrerenderScript ||
+    jsonLdScripts.find((script) => jsonLdMatchesUrl(script, canonical)) ||
+    jsonLdScripts[0]
+  const duplicateScripts = jsonLdScripts.filter((script) => script !== existing)
+
   if (!json) {
     if (existing) existing.remove()
+    duplicateScripts.forEach((script) => script.remove())
     return
   }
+
+  if (existing && !existing.hasAttribute('data-seo-jsonld') && jsonLdMatchesUrl(existing, canonical)) {
+    existing.setAttribute('data-seo-jsonld', id)
+    duplicateScripts.forEach((duplicate) => duplicate.remove())
+    return
+  }
+
   const script = existing || document.createElement('script')
   script.type = 'application/ld+json'
   script.setAttribute('data-seo-jsonld', id)
   script.text = JSON.stringify(json)
+  duplicateScripts.forEach((duplicate) => duplicate.remove())
   if (!existing) document.head.appendChild(script)
 }
 
@@ -148,7 +181,7 @@ export function setSeo(overrides = {}) {
 
   upsertLink('canonical', canonical)
 
-  upsertJsonLd('page', meta.jsonLd)
+  upsertJsonLd('page', meta.jsonLd, canonical)
 }
 
 export function useSeo(overrides) {

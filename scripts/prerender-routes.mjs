@@ -1667,7 +1667,9 @@ function upsertJsonLd(html, meta, canonical) {
   const json = {
     ...buildRouteJsonLd(meta, canonical),
   }
-  const tag = `<script type="application/ld+json" data-prerender="route">${JSON.stringify(json)}</script>`
+  const tag = `<script type="application/ld+json" data-prerender="route" data-page-url="${escapeHtml(
+    canonical,
+  )}">${JSON.stringify(json)}</script>`
   return removeExistingJsonLd(html).replace('</head>', `${tag}\n</head>`)
 }
 
