@@ -63,3 +63,7 @@ The in-app browser redirected to Google sign-in for Google Search Console, so ma
 ## Status
 
 The sitemap exists in GSC and has no reported warnings or errors, but API resubmission remains blocked by OAuth scope. Manual GSC UI resubmission from an authenticated browser or a Google auth flow with Search Console write scope is still required.
+
+Follow-up runbook:
+
+- `reports/gsc_write_scope_runbook_2026-05-12.md`

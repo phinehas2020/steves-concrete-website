@@ -67,6 +67,7 @@
   - Direct Search Console API submit with the active gcloud access token returned `403` with `Request had insufficient authentication scopes`.
   - Browser UI attempt at the GSC sitemaps page redirected to Google sign-in, so manual UI resubmission could not be completed from the unauthenticated in-app browser session.
   - Report: `reports/gsc_sitemap_submit_retry_2026-05-12.md`
+  - Write-scope runbook: `reports/gsc_write_scope_runbook_2026-05-12.md`
   - Resubmission should be done from the GSC UI or after refreshing Google auth with Search Console write scope.
 - Google Rich Results Test on live driveway page passed after deployment:
   - URL tested: `https://www.concretewaco.com/concrete-driveways-waco-tx`
