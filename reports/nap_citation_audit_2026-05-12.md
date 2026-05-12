@@ -43,10 +43,10 @@ Evidence:
 
 1. Claim/update Manta because it is unclaimed and has the old `757 Shady Lane` / `(254) 412-2927` NAP.
 2. Update Buzzfile because it has the old `757 Shady Ln` / `(254) 412-2927` NAP and the stale phone number is embedded in its URL.
-3. Update or suppress Levelset if the old address/phone are confirmed after logging in or viewing manually.
+3. Update or suppress Levelset: fresh public search still shows the old address/phone, while the direct page returns `403 Forbidden`.
 4. Ask the Greater Waco Chamber and BuildZoom to normalize `1045 W Elm Mott Dr` to `1045 W Elm Mott Ln` if the Google Places address is the desired canonical version.
-5. Claim or refresh Porch with the canonical full NAP and website.
-6. Manually verify BBB, Yelp, and Angi from account dashboards; no exact public profile was confirmed from automated search.
+5. Claim or refresh Porch with the canonical full NAP and website before reusing its `5.0` / `14` review signal.
+6. Manually verify BBB, Yelp, Angi, and HomeAdvisor from account dashboards; no exact public profile was confirmed from fresh public search.
 
 ## Notes
 
