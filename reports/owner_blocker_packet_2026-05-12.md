@@ -2,31 +2,32 @@
 
 Purpose: turn the remaining `goal.md` blockers into concrete owner/account requests. Nothing below should be filled in by guessing; each item needs owner proof, account access, or an enabled API permission.
 
-## 1. PageSpeed Insights API
+## 1. PageSpeed Insights API - resolved
 
 Current state:
 
-- Unauthenticated PageSpeed Insights calls returned quota errors.
-- The existing Google Places API key was tested without printing the key and is blocked from `pagespeedonline.googleapis.com`.
-- Local Lighthouse fallback passed, but it does not satisfy the PageSpeed API requirement in `goal.md`.
+- Earlier unauthenticated PageSpeed Insights calls returned quota errors.
+- The existing key was previously blocked from `pagespeedonline.googleapis.com`.
+- `pagespeedonline.googleapis.com` is now enabled on Google Cloud project `eminent-subject-478800-q2`.
+- The existing `Maps Platform API Key` API-target restrictions now include `pagespeedonline.googleapis.com`.
+- `reports/audit_2026-05-12.csv` now has `pagespeed_mobile_status=ok` for all 44 target rows and all 194 reference rows.
 
 Owner/account action:
 
-- Enable the PageSpeed Insights API on a Google Cloud API key, or provide a new key scoped for `pagespeedonline.googleapis.com`.
-- Set one of these local env vars before the rerun:
-  - `PAGESPEED_API_KEY`
-  - `GOOGLE_PAGESPEED_API_KEY`
+- No owner action currently needed for the PageSpeed audit snapshot.
+- Keep PageSpeed API access enabled for future 30/60/90-day reruns.
 
-Verification command:
+Verification already completed:
 
 ```bash
 npm run build
 PAGESPEED_API_KEY='<enabled-key>' node scripts/seo-phase1-audit.mjs
 ```
 
-Expected verification artifact:
+Verification artifact:
 
-- `reports/audit_2026-05-12.csv` should show PageSpeed rows with `pagespeed_mobile_status=ok` for the target URLs.
+- `reports/pagespeed_api_verification_2026-05-12.md`
+- `reports/audit_2026-05-12.csv`
 
 ## 2. Google Search Console sitemap submit
 
@@ -34,7 +35,8 @@ Current state:
 
 - GSC property `sc-domain:concretewaco.com` is accessible.
 - Existing sitemap is present with zero warnings and zero errors.
-- API submit returned `403 Insufficient Permission`.
+- Fresh MCP `list_sites` reports `siteOwner`, but API submit still returned `403 Insufficient Permission`.
+- See `reports/gsc_sitemap_submit_retry_2026-05-12.md`.
 
 Owner/account action:
 

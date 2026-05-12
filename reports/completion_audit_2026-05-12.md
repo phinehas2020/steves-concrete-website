@@ -2,7 +2,7 @@
 
 Objective: follow `goal.md` for the Concrete Works LLC / SLA Concrete Works SEO parity project.
 
-Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, baseline-ranking, public citation/trust audits, GSC performance baseline, and GSC-driven quick-win content passes are substantially complete and verified. Some requirements remain blocked by external API quota, GSC permissions, off-site GBP/account work, or owner-provided trust facts.
+Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, PageSpeed API capture, baseline-ranking, public citation/trust audits, GSC performance baseline, and GSC-driven quick-win content passes are substantially complete and verified. Some requirements remain blocked by GSC submit permissions, off-site GBP/account work, owner-provided trust facts, or the missing PR-per-service-page workflow.
 
 ## Prompt-to-artifact checklist
 
@@ -10,7 +10,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | --- | --- | --- |
 | Phase 1 crawl target and reference sites | `reports/audit_2026-05-12.csv`; `scripts/seo-phase1-audit.mjs` | Complete |
 | Phase 1 link graph | `reports/link_graph.html` | Complete |
-| Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | Audit script records unavailable/quota state; live PSI attempt returned `429`; existing Google Places key returned `API_KEY_SERVICE_BLOCKED`; `reports/lighthouse_sweep_2026-05-12.md` adds local Lighthouse fallback evidence; `reports/owner_blocker_packet_2026-05-12.md` documents the exact key/access needed | Blocked for PSI API; Lighthouse fallback complete |
+| Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | `reports/pagespeed_api_verification_2026-05-12.md`; `reports/audit_2026-05-12.csv`; PageSpeed API enabled for the existing key; all 44 target rows and 194 reference rows now have `pagespeed_mobile_status=ok` with mobile score/LCP/CLS fields captured | Complete |
 | Phase 1 mobile 375px render check | `scripts/mobile-render-sweep.mjs`; `reports/mobile_render_sweep_2026-05-12.md`; `reports/mobile_render_sweep_2026-05-12.json`; all 43 sitemap URLs passed at 375x812 | Complete |
 | Phase 2 ranked remediation plan | `reports/remediation_plan.md` | Complete |
 | Schema markup: LocalBusiness homepage, Service pages, BreadcrumbList, FAQPage, Place | `scripts/prerender-routes.mjs`; local static schema check across 54 files; live Rich Results Test result `WYow_kvZWHMaxyHIYd20OA` | Complete for tested live driveway page and local generated pages |
@@ -30,7 +30,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Trust/EEAT: named case studies with written permission | Not provided | Blocked |
 | Sitemap: remove changefreq/priority, add lastmod | `scripts/generate-sitemap.mjs`; `public/sitemap.xml`; live sitemap check showed 43 URLs, 43 lastmods, no changefreq/priority | Complete |
 | Robots: verify `/admin` disallow | `public/robots.txt`; verification report confirms `/admin` disallow | Complete |
-| Submit sitemap to GSC | Existing sitemap found in GSC with 0 warnings/0 errors; API submit attempt returned 403; `reports/owner_blocker_packet_2026-05-12.md` records the exact owner/account action needed | Partially complete; resubmit requires UI/API permission fix |
+| Submit sitemap to GSC | `reports/gsc_sitemap_submit_retry_2026-05-12.md`; existing sitemap found in GSC with 0 warnings/0 errors; fresh MCP submit attempt still returned 403 despite `siteOwner` list access | Partially complete; resubmit requires UI/API permission fix |
 | GSC coverage clean | GSC sitemap list reported 0 warnings and 0 errors | Complete for sitemap report available through API |
 | Google Business Profile optimization | No GBP management API/tool available in this session | Blocked/off-site |
 | NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md`; `reports/public_trust_record_audit_2026-05-12.md`; public web and Google Places audit found current canonical NAP plus stale Manta/Buzzfile/Levelset risks; trust-profile search added BuildZoom, Porch, BBB, and Louisiana licensing-record notes | Complete for public audit; corrections remain off-site |
@@ -38,7 +38,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Baseline rankings final report | `reports/baseline_rankings.md`; Semrush live data used; `reports/gsc_performance_baseline_2026-05-12.md` adds 90-day GSC query/page baseline | Complete |
 | GSC-driven quick-win page pass | Commit `7f49224`; `/retaining-walls-waco-tx` and `/hardscaping-waco-tx` metadata/copy improved based on GSC opportunities; build and live metadata checks passed | Complete for first two priority pages |
 | GSC-driven location-page pass | Commit `cac277b`; `/hewitt-tx-concrete-contractor` and `/woodway-tx-concrete-contractor` planning sections and static metadata improved; build and live metadata checks passed | Complete for first two priority location pages |
-| Local Lighthouse fallback performance sweep | `reports/lighthouse_sweep_2026-05-12.md`; 10 live URLs passed mobile lab thresholds with scores 95-98, LCP <= 2336ms, TBT 0ms, CLS 0 | Complete as fallback evidence; does not replace PSI API requirement |
+| Local Lighthouse fallback performance sweep | `reports/lighthouse_sweep_2026-05-12.md`; 10 live URLs passed mobile lab thresholds with scores 95-98, LCP <= 2336ms, TBT 0ms, CLS 0 | Complete as supporting lab evidence |
 | Scheduled 30/60/90 reruns | Dates are documented in `reports/baseline_rankings.md`; `reports/seo_rerun_schedule_2026-05-12.md` adds exact dates, commands, account-side checks, and report template | Complete as in-repo schedule; no external calendar/GitHub issues created |
 | One atomic commit per task | SEO work is split into phase/task commits; remote blog commits were preserved during rebase | Complete |
 | Pull request per service-page rewrite | Work was pushed directly to `main`; no PRs opened | Not complete |
@@ -46,21 +46,20 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 ## Current production state
 
 - Latest content deployment verified for code commit: `cac277b`
-- Recent report-only commits include `40f7e6b` (`Phase 3 add NAP citation audit`), `aa1f84d` (`Phase 3 add completion audit`), the public trust record audit follow-up, and the owner blocker packet
+- Recent report-only commits include `40f7e6b` (`Phase 3 add NAP citation audit`), `aa1f84d` (`Phase 3 add completion audit`), the public trust record audit follow-up, the owner blocker packet, PageSpeed API verification, and the fresh GSC sitemap-submit retry report
 - Latest report-only deployment checked before the GSC baseline: `dpl_E3396ZExFvnabJim1onv6RmQ7ZdX`, commit `98bd215225360b55b94702f9b348a623dbd43f86`, state `READY`
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
 ## Remaining action list
 
-1. Add a Google API key with `pagespeedonline.googleapis.com` access enabled, then rerun PageSpeed/Core Web Vitals for homepage and top service pages.
-2. Resubmit `https://www.concretewaco.com/sitemap.xml` in GSC UI or refresh API permissions so `submit_sitemap` succeeds.
-3. Use `reports/owner_blocker_packet_2026-05-12.md` to collect owner/trust facts before adding more EEAT claims:
+1. Resubmit `https://www.concretewaco.com/sitemap.xml` in GSC UI or refresh API permissions so `submit_sitemap` succeeds.
+2. Use `reports/owner_blocker_packet_2026-05-12.md` to collect owner/trust facts before adding more EEAT claims:
    - insurance carrier and coverage type
    - BBB profile/rating, if applicable
    - owner-approved bio/photo/credentials
    - named case-study permissions
    - legal/account-approved wording for any Louisiana licensing-record context, if the owner wants to address it publicly
-4. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`.
-5. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts.
-6. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
-7. Decide whether to accept direct-to-main history or recreate PRs/branches for service-page rewrites.
+3. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`.
+4. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts.
+5. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
+6. Decide whether to accept direct-to-main history or recreate PRs/branches for service-page rewrites.

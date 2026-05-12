@@ -63,7 +63,9 @@
   - Last downloaded: `2026-05-11T09:40:14.335Z`
   - GSC warnings: `0`
   - GSC errors: `0`
-  - API sitemap submit attempt returned `403 Insufficient Permission`, so resubmission should be done from the GSC UI or after refreshing API permissions.
+  - Fresh MCP `list_sites` reported `siteOwner`, but API sitemap submit still returned `403 Insufficient Permission`.
+  - Report: `reports/gsc_sitemap_submit_retry_2026-05-12.md`
+  - Resubmission should be done from the GSC UI or after refreshing API permissions/scopes.
 - Google Rich Results Test on live driveway page passed after deployment:
   - URL tested: `https://www.concretewaco.com/concrete-driveways-waco-tx`
   - Result id: `WYow_kvZWHMaxyHIYd20OA`
@@ -71,11 +73,15 @@
   - `5` valid item groups detected.
   - Valid groups: Breadcrumbs, FAQ, Local businesses, Organization, Review snippets.
   - No non-critical issue text remained in the final result.
-- PageSpeed Insights attempt on live URLs remained blocked:
-  - `https://www.concretewaco.com/` returned `429` quota exceeded.
-  - `https://www.concretewaco.com/concrete-driveways-waco-tx` returned `429` quota exceeded.
-  - No `PAGESPEED_API_KEY` is configured in local environment.
-  - Existing Google Places API key was tested without printing the key and returned `API_KEY_SERVICE_BLOCKED` for `pagespeedonline.googleapis.com`.
+- PageSpeed Insights API verification completed:
+  - Report: `reports/pagespeed_api_verification_2026-05-12.md`
+  - Enabled `pagespeedonline.googleapis.com` on Google Cloud project `eminent-subject-478800-q2`.
+  - Updated the existing `Maps Platform API Key` API-target restrictions by preserving existing allowed services and adding `pagespeedonline.googleapis.com`.
+  - No API key value was printed or committed.
+  - Reran `scripts/seo-phase1-audit.mjs` with `PAGESPEED_API_KEY` populated from the existing local key.
+  - Refreshed `reports/audit_2026-05-12.csv` and `reports/link_graph.html`.
+  - Final PageSpeed coverage: `44/44` Concrete Waco target rows ok and `194/194` Concrete Contractor NYC reference rows ok.
+  - Target mobile score range: `78` to `100`; worst target LCP: `5252ms`; worst target CLS: `0.228433`.
 - Local Lighthouse fallback sweep passed:
   - Report: `reports/lighthouse_sweep_2026-05-12.md`
   - Command: `npm run perf:sweep -- --json`
@@ -83,7 +89,7 @@
   - Result: `10/10` passed the script thresholds.
   - Score range: `95` to `98`.
   - Worst LCP: `2336ms`; TBT: `0ms` on all tested URLs; CLS: `0` on all tested URLs.
-  - This is supporting lab evidence only and does not replace the blocked PageSpeed API requirement.
+  - This remains supporting lab evidence alongside the completed PageSpeed API capture.
 - GSC performance baseline added:
   - Report: `reports/gsc_performance_baseline_2026-05-12.md`
   - Date range: `2026-02-11` through `2026-05-10`, web search, USA.
@@ -169,7 +175,7 @@
 
 ## Known blockers and remaining work
 
-- PageSpeed Insights / Core Web Vitals could not be refreshed because no `PAGESPEED_API_KEY` is configured and the unauthenticated API returned quota exceeded during the audit.
+- PageSpeed Insights / Core Web Vitals are now refreshed in `reports/audit_2026-05-12.csv`; lower-scoring target URLs for later performance tuning are documented in `reports/pagespeed_api_verification_2026-05-12.md`.
 - Trust items that require owner inputs remain blocked:
   - Insurance carrier and coverage type
   - BBB rating/widget details, if applicable
