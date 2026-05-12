@@ -19,7 +19,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Service-page FAQ 8-12 questions | Local check across 18 pages: 10 or 11 FAQs | Complete |
 | Service-page project gallery 8+ images | Local check across 18 pages: 8 prerendered images per page, missing alt count 0 | Complete |
 | Real project photos, WebP, under 200KB | `public/jobs/2026-client-*.webp`; size check found no file over 200KB | Complete for available owner/project photo set |
-| EXIF GPS where photo permits | `reports/image_exif_gps_scan_2026-05-12.md`; `reports/image_exif_gps_scan_2026-05-12.json`; 86 public images scanned, 0 GPS-tagged; no owner permission/source policy available for adding synthetic GPS | Blocked by permission/source policy |
+| EXIF GPS where photo permits | `reports/image_exif_gps_scan_2026-05-12.md`; `reports/image_exif_gps_scan_2026-05-12.json`; 86 public images scanned, 0 GPS-tagged; no owner permission/source policy available for adding synthetic GPS; tracked in GitHub issue `#9` | Blocked by permission/source policy |
 | Internal linking: service pages to adjacent services, blogs, hub | Local check across 18 pages: hub present, two blog links, at least 3 adjacent service links | Complete |
 | Homepage links to all service pages / footer full nav | Existing service grid and footer links use `servicePageLinks`; verified by build and static output | Complete |
 | Trust/EEAT: license language | Commit `f6ef88f` replaced unverified license claims with Texas-specific permit-aware language; `reports/public_trust_record_audit_2026-05-12.md` documents why broad jurisdiction-neutral license wording should stay off the site | Complete |
@@ -41,7 +41,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Local Lighthouse fallback performance sweep | `reports/lighthouse_sweep_2026-05-12.md`; 10 live URLs passed mobile lab thresholds with scores 95-98, LCP <= 2336ms, TBT 0ms, CLS 0 | Complete as supporting lab evidence |
 | Scheduled 30/60/90 reruns | Dates are documented in `reports/baseline_rankings.md`; `reports/seo_rerun_schedule_2026-05-12.md` adds exact dates, commands, account-side checks, report template, and GitHub issue reminders `#3`, `#4`, and `#5` | Complete |
 | One atomic commit per task | SEO work is split into phase/task commits; remote blog commits were preserved during rebase | Complete |
-| Pull request per service-page rewrite | Work was pushed directly to `main`; `reports/service_page_pr_workflow_exception_2026-05-12.md` documents the GitHub PR state, why no-op backfill PRs were not created, and the repeatable workflow for future service-page rewrites | Not complete; exception documented |
+| Pull request per service-page rewrite | Work was pushed directly to `main`; `reports/service_page_pr_workflow_exception_2026-05-12.md` documents the GitHub PR state, why no-op backfill PRs were not created, and the repeatable workflow for future service-page rewrites; decision tracked in GitHub issue `#10` | Not complete; exception documented |
 
 ## Current production state
 
@@ -53,6 +53,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 ## Remaining action list
 
 1. Resubmit `https://www.concretewaco.com/sitemap.xml` in GSC UI or refresh Google auth with Search Console write scope so `submit_sitemap` succeeds.
+   Tracking issue: `#6`.
 2. Use `reports/owner_blocker_packet_2026-05-12.md` to collect owner/trust facts before adding more EEAT claims:
    - insurance carrier and coverage type
    - BBB profile/rating, if applicable
@@ -63,4 +64,4 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 3. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`. Tracking issue: `#8`.
 4. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts.
 5. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
-6. Decide whether to accept the documented direct-to-main exception in `reports/service_page_pr_workflow_exception_2026-05-12.md` or recreate review branches from pre-change commits for audit reconstruction.
+6. Decide whether to accept the documented direct-to-main exception in `reports/service_page_pr_workflow_exception_2026-05-12.md` or recreate review branches from pre-change commits for audit reconstruction. Tracking issue: `#10`.

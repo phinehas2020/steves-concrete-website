@@ -155,6 +155,7 @@
   - Scope: `86` public project/blog/gallery images.
   - Result: `0` files exposed GPS latitude/longitude metadata through macOS metadata indexing.
   - GPS writing remains blocked until the owner confirms project-location permission and whether exact or approximate coordinates are acceptable.
+  - Tracking issue: `#9` - `Confirm image GPS metadata permissions`
 - Unsupported insurance claim cleanup completed:
   - Report: `reports/insurance_claim_cleanup_2026-05-12.md`
   - Updated hero, footer, contact form, terms, service FAQ data, and prerender output text.
@@ -181,6 +182,7 @@
   - `gh pr list --state all --limit 20` found only PR `#2` for Vercel Analytics and PR `#1` for the SEO/GEO content strategy guide.
   - No service-page rewrite PRs exist because the work was committed and pushed directly to `main`.
   - The report recommends accepting the documented exception or recreating pre-change review branches as explicit audit reconstruction work instead of creating empty/no-op PRs.
+  - Tracking issue: `#10` - `Decide service-page PR workflow exception`
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.

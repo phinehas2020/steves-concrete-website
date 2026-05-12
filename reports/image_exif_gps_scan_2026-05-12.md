@@ -2,6 +2,8 @@
 
 Goal item: add EXIF GPS to Waco coordinates where photo permits.
 
+Tracking issue: `#9` - `Confirm image GPS metadata permissions`
+
 ## Scope
 
 Scanned image files under:
@@ -34,4 +36,3 @@ Do not add synthetic GPS metadata until the owner confirms:
 - Whether the GPS should be exact, approximate Waco/Elm Mott coordinates, or omitted for privacy.
 
 Until that policy is confirmed, the EXIF GPS requirement remains blocked by permission/source uncertainty rather than implementation.
-

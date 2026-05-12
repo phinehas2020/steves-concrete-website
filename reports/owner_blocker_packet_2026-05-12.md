@@ -7,6 +7,8 @@ GitHub tracking issues:
 - `#6` - `Resolve GSC sitemap resubmission permission`
 - `#7` - `Collect owner trust proof for EEAT claims`
 - `#8` - `Complete GBP and citation cleanup`
+- `#9` - `Confirm image GPS metadata permissions`
+- `#10` - `Decide service-page PR workflow exception`
 
 ## 1. PageSpeed Insights API - resolved
 
