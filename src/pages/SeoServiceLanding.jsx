@@ -13,11 +13,29 @@ import {
   buildJsonLdGraph,
 } from '../lib/seo'
 import { seoServicePages } from '../data/seoServicePages'
+import { serviceHeroImages } from '../data/clientProjects'
+
+const wacoPlanningLinks = [
+  {
+    href: '/waco-tx-concrete-contractor',
+    label: 'Waco concrete contractor hub',
+  },
+  {
+    href: '/blog/waco-concrete-driveway-cost-factors',
+    label: 'Waco driveway cost factors',
+  },
+  {
+    href: '/blog/stamped-concrete-patio-ideas-central-texas',
+    label: 'Stamped patio ideas for Central Texas',
+  },
+]
 
 export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
   const page = pageProp || seoServicePages.find((p) => p.slug === slugProp)
   if (!page) return null
   const { slug, title, introParagraph, metaTitle, metaDescription, sections, faq = [], heroImage } = page
+  const resolvedHeroImage = heroImage || serviceHeroImages[slug]
+  const seoImage = resolvedHeroImage?.startsWith('/') ? `${SITE_URL}${resolvedHeroImage}` : resolvedHeroImage
 
   const relatedServices = seoServicePages
     .filter((service) => service.slug !== slug && !service.redirectTo)
@@ -55,7 +73,7 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
     description: metaDescription,
     canonical: `${SITE_URL}/${slug}`,
     url: `${SITE_URL}/${slug}`,
-    image: DEFAULT_IMAGE,
+    image: seoImage || DEFAULT_IMAGE,
     imageAlt: `${title} in Waco, Texas`,
     type: 'website',
     jsonLd: buildJsonLdGraph(serviceJsonLd, faqJsonLd, breadcrumbsJsonLd),
@@ -67,7 +85,7 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
       <main className="flex-1 pt-20 sm:pt-24">
         <section className="bg-stone-900 text-white relative overflow-hidden">
           <div className="container-main py-16 sm:py-20 md:py-24">
-            <div className={`grid gap-12 lg:items-center ${heroImage ? 'lg:grid-cols-2' : ''}`}>
+            <div className={`grid gap-12 lg:items-center ${resolvedHeroImage ? 'lg:grid-cols-2' : ''}`}>
               <div className="max-w-3xl">
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
                   Service Detail
@@ -94,10 +112,10 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
                 </div>
               </div>
 
-              {heroImage && (
+              {resolvedHeroImage && (
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                   <img
-                    src={heroImage}
+                    src={resolvedHeroImage}
                     alt={title}
                     className="absolute inset-0 w-full h-full object-cover"
                   />
@@ -181,6 +199,17 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
                   className="bg-white rounded-xl border border-stone-200 px-5 py-4 font-semibold text-stone-900 hover:border-accent-500 transition-colors"
                 >
                   {service.title}
+                </Link>
+              ))}
+            </div>
+            <div className="mt-8 grid gap-4 md:grid-cols-3">
+              {wacoPlanningLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="bg-white rounded-xl border border-stone-200 px-5 py-4 font-semibold text-stone-900 hover:border-accent-500 transition-colors"
+                >
+                  {link.label}
                 </Link>
               ))}
             </div>

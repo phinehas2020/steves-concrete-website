@@ -275,6 +275,28 @@ const companyResourceLinks = [
   },
 ]
 
+const blogResourceLinks = [
+  {
+    label: 'Waco driveway cost factors',
+    href: '/blog/waco-concrete-driveway-cost-factors',
+    description: 'Budget drivers for Waco driveway work, including layout, base prep, finish, and access.',
+  },
+  {
+    label: 'Stamped patio ideas for Central Texas',
+    href: '/blog/stamped-concrete-patio-ideas-central-texas',
+    description: 'Pattern, color, border, drainage, and sealing ideas for decorative patios.',
+  },
+]
+
+const wacoHubResourceLinks = [
+  {
+    label: 'Waco concrete contractor hub',
+    href: '/waco-tx-concrete-contractor',
+    description: 'Local hub for Waco soil, drainage, pricing, permits, and concrete project planning.',
+  },
+  ...blogResourceLinks,
+]
+
 const featuredSpecialtyServiceLinks = [
   'retaining-walls-waco-tx',
   'decorative-concrete-waco',
@@ -706,6 +728,10 @@ function renderServiceContent(service) {
         links: localizedGuideLinks,
       },
       {
+        title: 'Waco contractor hub and blog resources',
+        links: wacoHubResourceLinks,
+      },
+      {
         title: 'Other concrete services you may need',
         links: relatedServiceLinks,
       },
@@ -758,6 +784,10 @@ function renderSeoServiceContent(service) {
       {
         title: 'Related service pages',
         links: relatedPages,
+      },
+      {
+        title: 'Waco contractor hub and blog resources',
+        links: wacoHubResourceLinks,
       },
       {
         title: 'Waco and nearby service coverage',
@@ -894,6 +924,10 @@ function renderSportsCourtAreaContent(area) {
       {
         title: 'More sports court coating areas',
         links: relatedAreaLinks,
+      },
+      {
+        title: 'Waco contractor hub and blog resources',
+        links: wacoHubResourceLinks,
       },
       {
         title: `${area.areaName} sports-court FAQs`,

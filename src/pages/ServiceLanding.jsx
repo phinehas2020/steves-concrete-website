@@ -19,6 +19,22 @@ import {
   isServicePageCanonicalized,
 } from '../data/servicePages'
 import { guideLinks } from '../data/guides'
+import { serviceHeroImages } from '../data/clientProjects'
+
+const wacoPlanningLinks = [
+  {
+    href: '/waco-tx-concrete-contractor',
+    label: 'Waco concrete contractor hub',
+  },
+  {
+    href: '/blog/waco-concrete-driveway-cost-factors',
+    label: 'Waco driveway cost factors',
+  },
+  {
+    href: '/blog/stamped-concrete-patio-ideas-central-texas',
+    label: 'Stamped patio ideas for Central Texas',
+  },
+]
 
 export function ServiceLanding({ page: pageProp, slug: slugProp }) {
   const page = pageProp || servicePages.find((p) => p.slug === slugProp)
@@ -53,6 +69,8 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
     .filter((service) => service.slug !== slug)
     .slice(0, 4)
   const relatedGuides = guideLinks.slice(0, 3)
+  const heroImage = serviceHeroImages[slug]
+  const seoImage = heroImage?.startsWith('/') ? `${SITE_URL}${heroImage}` : heroImage
   const areaServed = locationLinks.map((location) => ({
     '@type': 'City',
     name: location.city,
@@ -83,7 +101,7 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
     canonical: canonicalUrl,
     url: canonicalUrl,
     robots,
-    image: DEFAULT_IMAGE,
+    image: seoImage || DEFAULT_IMAGE,
     imageAlt: `${title} in Central Texas`,
     type: 'website',
     jsonLd: buildJsonLdGraph(serviceJsonLd, faqJsonLd, breadcrumbsJsonLd),
@@ -95,7 +113,7 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
       <main className="flex-1 pt-20 sm:pt-24">
         <section className="bg-white">
           <div className="container-main py-14 sm:py-18 md:py-20">
-            <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
               <div>
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold uppercase tracking-wide">
                   Service Detail
@@ -121,17 +139,30 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
                   </a>
                 </div>
               </div>
-              <div className="bg-stone-900 text-white rounded-2xl p-7 shadow-lg">
-                <h3 className="font-display font-semibold text-2xl mb-3">What to expect</h3>
-                <p className="text-stone-300 mb-4">{intro}</p>
-                <ul className="space-y-3 text-sm">
-                  {benefits.map((benefit) => (
-                    <li key={benefit} className="flex items-start gap-3">
-                      <span className="mt-1 size-2 rounded-full bg-accent-500" />
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="overflow-hidden bg-stone-900 text-white rounded-2xl shadow-lg">
+                {heroImage && (
+                  <div className="relative h-56 bg-stone-800">
+                    <img
+                      src={heroImage}
+                      alt={title}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="eager"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 to-transparent" />
+                  </div>
+                )}
+                <div className="p-7">
+                  <h3 className="font-display font-semibold text-2xl mb-3">What to expect</h3>
+                  <p className="text-stone-300 mb-4">{intro}</p>
+                  <ul className="space-y-3 text-sm">
+                    {benefits.map((benefit) => (
+                      <li key={benefit} className="flex items-start gap-3">
+                        <span className="mt-1 size-2 rounded-full bg-accent-500" />
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -339,6 +370,23 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
                     >
                       <span className="font-semibold text-stone-800">{guide.label}</span>
                       <span className="text-sm text-stone-500">Read guide</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-white border border-stone-200 rounded-2xl p-6 lg:col-span-2">
+                <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
+                  Waco planning resources
+                </h3>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {wacoPlanningLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center justify-between px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg hover:border-stone-300"
+                    >
+                      <span className="font-semibold text-stone-800">{link.label}</span>
+                      <span className="text-sm text-stone-500">Open</span>
                     </a>
                   ))}
                 </div>
