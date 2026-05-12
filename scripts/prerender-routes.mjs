@@ -6,7 +6,7 @@ import {
   isServicePageCanonicalized,
 } from '../src/data/servicePages.js'
 import { seoServicePages as seoServicePageData } from '../src/data/seoServicePages.js'
-import { clientProjects, getServiceGalleryImages } from '../src/data/clientProjects.js'
+import { getServiceGalleryImages } from '../src/data/clientProjects.js'
 import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
@@ -625,17 +625,14 @@ function renderImageGrid(images) {
   if (!images || images.length === 0) return ''
   return `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:16px;">${images
     .map(
-      (image) => {
-        const loading = image.loading === 'eager' ? 'eager' : 'lazy'
-        const fetchPriority = loading === 'eager' ? ' fetchpriority="high"' : ''
-        return `<figure style="margin:0;border:1px solid #e7e5e4;border-radius:8px;overflow:hidden;background:#fff;"><img src="${escapeHtml(
+      (image) =>
+        `<figure style="margin:0;border:1px solid #e7e5e4;border-radius:8px;overflow:hidden;background:#fff;"><img src="${escapeHtml(
           image.src,
         )}" alt="${escapeHtml(
           image.alt,
-        )}" loading="${loading}"${fetchPriority} width="480" height="360" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;"><figcaption style="padding:10px 12px;color:#57534e;font-size:0.92rem;"><strong style="display:block;color:#1c1917;">${escapeHtml(
+        )}" loading="lazy" width="480" height="360" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;"><figcaption style="padding:10px 12px;color:#57534e;font-size:0.92rem;"><strong style="display:block;color:#1c1917;">${escapeHtml(
           image.title,
-        )}</strong>${escapeHtml(image.location || '')}</figcaption></figure>`
-      },
+        )}</strong>${escapeHtml(image.location || '')}</figcaption></figure>`,
     )
     .join('')}</div>`
 }
@@ -1400,32 +1397,20 @@ function renderBlogIndexContent() {
 }
 
 function renderJobsIndexContent() {
-  const projectImages = clientProjects.map((project, index) => ({
-    src: project.images?.[0] || '',
-    alt: `${project.title} project photo in ${project.location || 'Central Texas'}`,
-    title: project.title,
-    location: project.location || 'Central Texas',
-    loading: index === 0 ? 'eager' : 'lazy',
-  })).filter((image) => image.src)
-
   return renderPage({
     eyebrow: 'Project Gallery',
     title: 'Concrete projects across Waco and Central Texas',
     subtitle:
       'Driveways, patios, stamped concrete, slabs, and repair jobs with location-specific notes and finish details.',
     introParagraphs: [
-      'Recent project photos and details show the kind of prep, forming, finishing, and cleanup customers compare before requesting an estimate.',
-      'The gallery can refresh from the jobs database, but these crawl-visible project examples keep the page useful even before dynamic content loads.',
+      'Project photos and details are loaded dynamically from our jobs database so new work can be published quickly.',
+      'For planning and pricing, review the linked service and guide pages below while gallery content loads.',
     ],
     actionLinks: [
       { href: '/#contact', label: 'Request project quote' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
     ],
     sections: [
-      {
-        title: 'Recent project examples',
-        images: projectImages,
-      },
       {
         title: 'Service pages referenced in recent projects',
         links: serviceLinks,
