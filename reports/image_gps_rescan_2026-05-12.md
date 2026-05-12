@@ -27,6 +27,15 @@ Reusable scanner added after this correction:
 node scripts/scan-image-gps-metadata.mjs --json=reports/image_gps_scan_YYYY-MM-DD.json --manifest=reports/image_gps_located_files_manifest_YYYY-MM-DD.md
 ```
 
+Verification after adding the reusable scanner:
+
+```bash
+npx eslint scripts/scan-image-gps-metadata.mjs
+node scripts/scan-image-gps-metadata.mjs --json=/tmp/steves-image-gps-scan.json --manifest=/tmp/steves-image-gps-manifest.md
+```
+
+Result: ESLint passed; script output was `87` total, `24` located, `63` not located.
+
 | Files scanned | Files with macOS latitude/longitude metadata | Files without macOS latitude/longitude metadata |
 | ---: | ---: | ---: |
 | 87 | 24 | 63 |
