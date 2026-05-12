@@ -10,6 +10,7 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 | `blocked-account` | Requires external account or authenticated dashboard access |
 | `blocked-owner` | Requires owner input, proof, approval, or permission |
 | `decision-needed` | Requires a documented owner or project decision |
+| `audit-reconstruction` | Audit-only reconstruction PR; do not merge into main |
 
 ## Tracked Issues
 
@@ -30,3 +31,4 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 - Issue `#6` is closed because authenticated Chrome Search Console UI resubmission succeeded and GSC showed `Submitted: May 12, 2026`, `Last read: May 12, 2026`, `Status: Success`, and `43` discovered pages.
 - Issues `#7` through `#9` remain open because they require owner proof/permission, GBP/citation dashboard work, or an explicit decision.
 - Issue `#10` is closed because reconstruction PRs `#11` through `#15` now exist.
+- PRs `#11` through `#15` are open audit artifacts and have the `audit-reconstruction` label.

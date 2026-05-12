@@ -22,6 +22,12 @@ Goal source: `goal.md`, output format: `Phase 3: One commit per task. Tag commit
 
 Created on 2026-05-12 after the direct-to-main work was already complete. These PRs are audit artifacts, not normal merge targets.
 
+GitHub label applied to all reconstruction PRs:
+
+```text
+audit-reconstruction
+```
+
 | PR | Title | Base | Head | Original commit |
 | --- | --- | --- | --- | --- |
 | `#11` | `Audit reconstruction: driveway service rewrite` | `audit/base-driveway-service` | `audit/pr-driveway-service` | `6a10f33` |
@@ -57,4 +63,4 @@ Creating empty or no-op pull requests after the work is already merged would sat
 
 ## Completion impact
 
-This report documents that the original workflow happened direct-to-main, then was reconstructed with audit PRs `#11` through `#15`. Future service-page rewrites should still use normal PRs before merging.
+This report documents that the original workflow happened direct-to-main, then was reconstructed with audit PRs `#11` through `#15`. Those PRs now carry the `audit-reconstruction` label to make clear they are audit artifacts, not normal merge targets. Future service-page rewrites should still use normal PRs before merging.
