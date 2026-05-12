@@ -62,6 +62,7 @@ Current state:
 
 - Unsupported generic insurance claims were softened across the site.
 - Carrier and coverage type are not verified.
+- Intake form: `reports/owner_trust_intake_form_2026-05-12.md`
 
 Owner input needed:
 

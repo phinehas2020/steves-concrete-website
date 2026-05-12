@@ -149,6 +149,7 @@
   - Place, review, and write-review links were present.
 - Owner EEAT source verification added:
   - Report: `reports/owner_eeat_verification_2026-05-12.md`
+  - Intake form: `reports/owner_trust_intake_form_2026-05-12.md`
   - Verified source coverage for owner name, bio copy, `src/assets/images/steve-headshot.jpg`, rendered owner-photo alt text, and `20+` years copy.
   - Credentials/certifications remain blocked because no verified source was found in the repo.
 - Image EXIF GPS scan completed:
