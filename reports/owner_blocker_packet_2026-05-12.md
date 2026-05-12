@@ -199,6 +199,7 @@ Current state:
 
 - Corrected rescan: `reports/image_gps_rescan_2026-05-12.md`
 - Permission form: `reports/image_gps_permission_form_2026-05-12.md`
+- Located files manifest: `reports/image_gps_located_files_manifest_2026-05-12.md`
 - The first scan incorrectly reported `0` located files because the parser mishandled `mdls -raw` NUL-separated output.
 - Corrected rescan found `24` of `87` public image files with macOS latitude/longitude metadata.
 - `exiftool` is not installed locally; sampled `sips` GPS fields returned `<nil>`, so the current evidence should be treated as macOS metadata evidence until final EXIF tooling is used.
@@ -213,6 +214,7 @@ Owner/account action:
 Verification evidence:
 
 - Completed `reports/image_gps_permission_form_2026-05-12.md`.
+- Per-file retain/strip/normalize/leave-unchanged decisions from `reports/image_gps_located_files_manifest_2026-05-12.md`.
 - Owner-approved policy for retaining, stripping, normalizing, adding, or leaving metadata unchanged.
 - If changes are approved, rerun a dated scan after using `exiftool` or equivalent EXIF tooling.
 

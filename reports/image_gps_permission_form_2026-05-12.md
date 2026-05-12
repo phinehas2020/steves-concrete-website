@@ -7,12 +7,14 @@ Source evidence:
 - `reports/image_exif_gps_scan_2026-05-12.md`
 - `reports/image_exif_gps_scan_2026-05-12.json`
 - `reports/image_gps_rescan_2026-05-12.md`
+- `reports/image_gps_located_files_manifest_2026-05-12.md`
 
 Corrected scan result:
 
 - `87` public images scanned in the corrected rescan
 - `24` images exposed macOS latitude/longitude metadata
 - `63` images did not expose macOS latitude/longitude metadata
+- `reports/image_gps_located_files_manifest_2026-05-12.md` lists the 24 located filenames without repeating exact coordinates
 
 Do not add, retain, normalize, or strip GPS metadata unless the owner approves the policy below.
 
