@@ -167,10 +167,42 @@ export const seoServicePages = [
         ],
       },
       {
+        heading: 'Thickness, joints, and reinforcement choices',
+        paragraphs: [
+          'Driveway thickness should match the way the slab will be used. A light residential driveway is different from a long rural approach, a shop entrance, or a parking area that sees trailers, delivery trucks, or equipment. During the estimate, we look at soil firmness, slope, parking layout, and vehicle turning points before recommending the final slab profile.',
+          'Control joints are planned before the crew pours. We place them where movement is most likely, around transitions, widened parking pads, apron areas, and long straight runs. Good joint layout does not eliminate every hairline crack, but it gives the concrete a controlled place to move as Waco weather shifts from dry heat to heavy rain.',
+          'Reinforcement is also chosen by use case. Some driveways benefit from wire mesh, some call for rebar, and some need added edge strength because vehicles repeatedly track along the same outside line. We explain the tradeoffs plainly so you know what is structural value and what is simply extra cost.',
+        ],
+      },
+      {
+        heading: 'Waco neighborhoods, site access, and driveway layouts',
+        paragraphs: [
+          'Concrete driveways in Waco are not all the same job. Castle Heights and older central Waco properties often have tight access, mature trees, narrow approaches, and existing garage elevations that cannot be ignored. Hewitt, Woodway, Robinson, Lorena, and China Spring projects may involve longer runs, wider parking pads, rural drainage, or new construction tie-ins.',
+          'We plan truck access, demolition staging, and washout before the first saw cut. That helps protect lawns, fences, nearby landscaping, and street edges during the work. On tighter properties, we may sequence demolition and forming in smaller sections so the job stays controlled and the finished driveway still drains correctly.',
+          'Layout choices also affect daily use. We can discuss parking pads, turnaround space, walkway tie-ins, trash-can routes, side-yard access, and transitions to garages or shops. A driveway that looks clean but forces awkward backing or water pooling is not finished well. The goal is a slab that works with how the property is actually used.',
+        ],
+      },
+      {
+        heading: 'Driveway replacement, widening, and repair decisions',
+        paragraphs: [
+          'Not every worn driveway needs a full replacement. If the slab is mostly stable and damage is limited to surface wear or isolated cracking, a repair or resurfacing conversation may make sense. If panels are heaving, settling, holding water, or breaking because the base failed, replacement is usually the cleaner long-term decision.',
+          'Widening an existing driveway takes careful edge planning. The new section needs proper base prep and a clean transition so it does not separate quickly from the older slab. We review the condition of the existing concrete, the elevation at the garage or curb, and the drainage path before recommending a widening plan.',
+          'For full replacement, we remove failed concrete, correct the base, set forms to the intended slope, and rebuild the slab with a joint pattern that fits the new footprint. That process is more involved than pouring over a weak driveway, but it is the difference between a short cosmetic fix and a surface built for years of use.',
+        ],
+      },
+      {
+        heading: 'Material planning for heat, runoff, and daily parking',
+        paragraphs: [
+          'A driveway mix and finish should be chosen for the way the slab will cure and perform in Central Texas, not just how it looks on pour day. Hot weather can shorten working time, fast runoff can erode weak edges, and shaded sections near trees may dry differently from full-sun panels. We plan pour timing, finish sequence, and cure instructions around those conditions.',
+          'We also look at where water leaves the driveway. A clean slope toward the street, drainage feature, or safe discharge area helps protect the slab base. When water collects along an edge or near a garage threshold, it can soften support below the concrete and make future cracking more likely. Good driveway work solves that before the finish crew ever touches the surface.',
+        ],
+      },
+      {
         heading: 'Choosing the finish for performance and style',
         paragraphs: [
           'From broom finish for traction to exposed aggregate and stamped accents, we match finish to how you use your entrance daily. We include practical recommendations for sun exposure, cleaning habits, and pet traffic, because texture, sealer choice, and cure schedule directly affect slip resistance and longevity.',
           'We discuss border details that protect the outer edge from chipping. That includes raised edges, color transitions, and transitions between paver, lawn, and concrete zones. These details keep curb appeal high and reduce maintenance calls after the first storm season.',
+          'Broom finish is often the most practical choice for daily driving because it provides traction, hides normal dust, and stays easy to clean. Stamped borders, exposed aggregate bands, or decorative entry panels can add curb appeal without making the full driveway harder to maintain. We help you decide where decorative work is worth it and where simple, durable concrete is the better value.',
         ],
       },
       {
@@ -178,6 +210,7 @@ export const seoServicePages = [
         paragraphs: [
           'Most driveway projects in Waco are quoted by footprint, demolition scope, base correction, and finish selection. A typical replacement requires access for saw cutting, excavation, and truck setup. We give you a transparent breakdown that helps compare options without hidden costs.',
           'After your site visit, we give you an estimate window and a realistic timeline. Many clients keep plans moving with one pre-pour prep meeting and one pour window, which helps scheduling stay predictable for your family or business operations.',
+          'The estimate also explains what is included in the work area. That may include old slab removal, haul-off, base correction, forms, reinforcement, finish, cleanup, and sealing recommendations. Clear scope matters because low driveway bids often leave out the parts that decide how the slab performs after the first hard weather cycle.',
         ],
       },
       {
@@ -185,6 +218,7 @@ export const seoServicePages = [
         paragraphs: [
           'Once complete, concrete performs best with regular cleaning and timely sealing. We provide care instructions in Waco style: focus on avoiding early over-wetting during the first week, controlling heavy loads, and planning periodic inspections after extreme heat periods.',
           'With a proper base, reinforced slab, and maintenance routine, your concrete driveway can resist cracking, rutting, and edge wear more effectively. If you notice early hairline movement, we advise adjustments early rather than waiting for major spalling or panel failure.',
+          'We also talk through realistic curing expectations. Concrete gains strength over time, so foot traffic, light use, and vehicle parking follow different milestones. Giving the slab the right early cure window is one of the simplest ways to protect the money you just put into the project.',
         ],
       },
     ],
@@ -198,6 +232,41 @@ export const seoServicePages = [
         question: 'How long does it take to install a concrete driveway in Waco?',
         answer:
           'Standard replacement projects are often completed in 1 to 2 days for prep and pour, with vehicle access usually returning after cure milestones are met.',
+      },
+      {
+        question: 'How thick should a concrete driveway be?',
+        answer:
+          'Thickness depends on vehicle use, soil conditions, and driveway layout. A standard residential drive is different from a trailer parking area, shop approach, or long rural driveway, so we size the slab during the site visit.',
+      },
+      {
+        question: 'Can you widen or extend my existing driveway?',
+        answer:
+          'Yes. We can widen, extend, or add parking pads when the existing driveway and drainage allow it. We check elevations, edge condition, and base needs before tying new concrete into an older slab.',
+      },
+      {
+        question: 'Do you remove and haul off old driveway concrete?',
+        answer:
+          'Yes. When replacement is the right option, the estimate can include demolition, removal, haul-off, base correction, forming, pour, finish, and cleanup.',
+      },
+      {
+        question: 'What finish is best for a Waco driveway?',
+        answer:
+          'A broom finish is usually the most practical driveway surface because it gives daily traction and simple maintenance. Stamped, bordered, or exposed aggregate details can be added where curb appeal matters most.',
+      },
+      {
+        question: 'Do driveway projects need permits in Waco?',
+        answer:
+          'Permit needs depend on the location and scope, especially when work affects a curb, apron, right-of-way, drainage path, or commercial property. We review the project details during planning and keep the estimate permit-aware.',
+      },
+      {
+        question: 'When can I drive on a new concrete driveway?',
+        answer:
+          'Vehicle access depends on weather, mix conditions, slab thickness, and curing progress. We give project-specific guidance after the pour so the concrete has time to gain strength before normal use.',
+      },
+      {
+        question: 'How do you reduce cracking in Waco clay soil?',
+        answer:
+          'We focus on subgrade prep, compaction, drainage slope, control-joint layout, reinforcement where needed, and realistic curing guidance. Concrete can still move, but proper prep helps direct movement and reduce avoidable failures.',
       },
       {
         question: 'Do you offer free estimates in Waco?',
