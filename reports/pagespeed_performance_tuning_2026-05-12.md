@@ -15,6 +15,8 @@ Purpose: tune the lowest-scoring target pages found after the keyed PageSpeed AP
 - `npm run build` passed.
 - Vercel production deployment `dpl_EtpwKonQziBAgQLMGZA21uivM7Fa` became ready and was aliased to `https://www.concretewaco.com`.
 - Keyed PageSpeed Insights mobile checks were rerun against live production URLs.
+- A later experiment to prerender project-gallery thumbnails on `/jobs` was reverted after live PSI regressed to score `74` and LCP `6527 ms`.
+- The revert deployment `dpl_222AyhHpotiCNMWiowJNbhsa3TWr` became ready; direct HTTP checks on `/jobs` returned `200` quickly, while immediate post-revert PSI retries hit transient `FAILED_DOCUMENT_REQUEST` timeouts from Google.
 
 ## Before and after
 
@@ -34,3 +36,4 @@ Purpose: tune the lowest-scoring target pages found after the keyed PageSpeed AP
 
 - `/jobs` still has the slowest target LCP, but the poor CLS was fixed and the mobile score improved.
 - The sports-court service page moved out of the low-score bucket after the hero image conversion.
+- Keep the reverted prerender-gallery approach out unless it is redesigned with smaller thumbnails or a different critical-render path.
