@@ -46,7 +46,12 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 ## Current production state
 
 - Latest content deployment verified for code commit: `cac277b`
-- Recent report-only commits include `40f7e6b` (`Phase 3 add NAP citation audit`), `aa1f84d` (`Phase 3 add completion audit`), the public trust record audit follow-up, the owner blocker packet, PageSpeed API verification, and the fresh GSC sitemap-submit retry report
+- Latest report/audit commits pushed to `origin/main` include:
+  - `aaa0b6d` - `Phase 3 track final audit blockers`
+  - `b360ffd` - `Phase 3 track remaining SEO blockers`
+  - `5f42d41` - `Phase 3 add SEO rerun reminders`
+  - `3f53ce3` - `Phase 3 refresh GSC retry evidence`
+  - `74d5f81` - `Phase 3 document service PR exception`
 - Latest report-only deployment checked before the GSC baseline: `dpl_E3396ZExFvnabJim1onv6RmQ7ZdX`, commit `98bd215225360b55b94702f9b348a623dbd43f86`, state `READY`
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
@@ -62,6 +67,6 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
    - legal/account-approved wording for any Louisiana licensing-record context, if the owner wants to address it publicly
    Tracking issue: `#7`.
 3. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`. Tracking issue: `#8`.
-4. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts.
-5. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
+4. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts. Tracking issue: `#8`.
+5. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical. Tracking issues: `#3`, `#4`, and `#5`.
 6. Decide whether to accept the documented direct-to-main exception in `reports/service_page_pr_workflow_exception_2026-05-12.md` or recreate review branches from pre-change commits for audit reconstruction. Tracking issue: `#10`.
