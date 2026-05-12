@@ -18,6 +18,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 | Mobile render sweep | `reports/mobile_render_sweep_2026-05-12.md` |
 | Lighthouse fallback sweep | `reports/lighthouse_sweep_2026-05-12.md` |
 | GBP public profile verification | `reports/gbp_public_profile_verification_2026-05-12.md` |
+| GBP dashboard access check | `reports/gbp_dashboard_access_check_2026-05-12.md` |
 | NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md` |
 | Citation correction templates | `reports/citation_correction_request_templates_2026-05-12.md` |
 | Image GPS corrected rescan | `reports/image_gps_rescan_2026-05-12.md` |
@@ -48,6 +49,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 - The site content/schema/performance work is substantially complete.
 - Search Console sitemap resubmission is complete: the authenticated normal Chrome profile submitted `https://www.concretewaco.com/sitemap.xml`, and GSC showed `Submitted: May 12, 2026`, `Last read: May 12, 2026`, `Status: Success`, and `43` discovered pages.
 - Owner trust proof now explicitly tracks the `goal.md` / source discrepancy: `goal.md` names `Phinehas Adams`, while the site source names Steve/Stephen and `Stephen Alexander, Owner`.
+- GBP dashboard access check showed `SLA Concrete Works` as `Verified` in Business Profile Manager with edit/photo/post controls visible; no account-side fields were changed.
 - Citation cleanup has listing-specific correction request templates for GBP, Manta, Buzzfile, Levelset, Greater Waco Chamber, BuildZoom, and Porch.
 - Image GPS handling has a no-coordinate located-file manifest and a repeatable scanner that reproduced the corrected `87` scanned, `24` located, `63` not-located count.
 - The goal is not complete because several remaining requirements depend on account-side GBP/citation access, owner proof, or owner permission.
@@ -55,7 +57,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 ## Resume Order
 
 1. If owner proof is available, resolve issue `#7` using `reports/owner_decision_packet_2026-05-12.md` and `reports/owner_trust_intake_form_2026-05-12.md`; confirm the public owner/operator identity before adding any insurance, BBB, credential, or named-case-study claims.
-2. If GBP/citation dashboard access is available, resolve issue `#8` using `reports/gbp_public_profile_verification_2026-05-12.md`, `reports/gbp_citation_cleanup_runbook_2026-05-12.md`, and `reports/citation_correction_request_templates_2026-05-12.md`.
+2. If explicit approval for account-side GBP edits is available, resolve issue `#8` using `reports/gbp_public_profile_verification_2026-05-12.md`, `reports/gbp_dashboard_access_check_2026-05-12.md`, `reports/gbp_citation_cleanup_runbook_2026-05-12.md`, and `reports/citation_correction_request_templates_2026-05-12.md`.
 3. If image-location permission is available, resolve issue `#9` using `reports/image_gps_rescan_2026-05-12.md`, `reports/image_gps_located_files_manifest_2026-05-12.md`, and `scripts/scan-image-gps-metadata.mjs` before retaining, stripping, normalizing, or adding any GPS metadata.
 4. Keep PRs `#11` through `#15` as audit reconstruction artifacts; future service-page rewrites should use normal PRs before merge.
 5. On the milestone dates, run issues `#3`, `#4`, and `#5`.

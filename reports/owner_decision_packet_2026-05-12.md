@@ -52,6 +52,7 @@ Tracking issue: `#8`
 Source files:
 
 - `reports/gbp_public_profile_verification_2026-05-12.md`
+- `reports/gbp_dashboard_access_check_2026-05-12.md`
 - `reports/gbp_citation_cleanup_runbook_2026-05-12.md`
 - `reports/citation_correction_request_templates_2026-05-12.md`
 - `reports/nap_citation_audit_2026-05-12.md`
@@ -76,6 +77,14 @@ Read-only public data currently shows:
 - `33` reviews
 - public website URI `http://concretewaco.com/`
 - public primary type `general_contractor` / `General contractor`
+
+Read-only dashboard check currently shows:
+
+- `SLA Concrete Works` is present in Business Profile Manager
+- status `Verified`
+- address shown as `1045 W Elm Mott Ln, Elm Mott, TX 76640`
+- edit/photo/post controls are visible
+- no account-side fields were changed
 
 Decision/action needed in GBP dashboard:
 

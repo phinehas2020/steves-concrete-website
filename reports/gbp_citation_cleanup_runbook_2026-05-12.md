@@ -6,6 +6,7 @@ Source reports:
 
 - `reports/gbp_action_pack_2026-05-12.md`
 - `reports/gbp_public_profile_verification_2026-05-12.md`
+- `reports/gbp_dashboard_access_check_2026-05-12.md`
 - `reports/citation_correction_request_templates_2026-05-12.md`
 - `reports/nap_citation_audit_2026-05-12.md`
 - `reports/public_trust_record_audit_2026-05-12.md`
@@ -29,6 +30,7 @@ Do not add unverified license, BBB, or insurance claims while editing listings.
 
 Verify or update:
 
+- Read-only dashboard check on `2026-05-12` showed `SLA Concrete Works` in Business Profile Manager with status `Verified` and visible edit/photo/post controls. No fields were changed.
 - Primary category: `Concrete contractor`
 - Read-only Places API check on `2026-05-12` returned public primary type `general_contractor` / `General contractor`; verify the actual GBP dashboard category and switch the primary category to `Concrete contractor` if available and accurate.
 - Service area: McLennan County
