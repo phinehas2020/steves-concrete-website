@@ -47,6 +47,58 @@ const locationPages = [
     nearbyAreas: ['Woodway', 'Hewitt', 'Bellmead', 'Robinson', 'China Spring', 'Lorena'],
     intro:
       'We design concrete for black clay movement, summer heat, and the drainage issues common in McLennan County neighborhoods.',
+    planningSections: [
+      {
+        title: 'Concrete work in Waco starts with soil and drainage',
+        paragraphs: [
+          'Waco concrete does not fail only because of the mix. Most early problems start below the slab, where expansive black clay swells after rain and shrinks during long hot stretches. That movement puts stress on driveway panels, patio edges, sidewalks, and approach slabs. Before we talk finish options, we look at subgrade condition, slope, drainage paths, and where water will sit after the next storm.',
+          'For homes around Castle Heights, Brookview, Woodway, Hewitt, Robinson, Lorena, and China Spring, the right prep depends on the site. A shaded backyard patio, a sloped driveway apron, and a shop slab on open ground all need different base and joint decisions. We check access, grade changes, roof runoff, vehicle loads, and nearby structures so the pour is planned for the actual property instead of a generic square-foot number.',
+        ],
+      },
+      {
+        title: 'Service scope and technical details',
+        paragraphs: [
+          'Driveways usually need a compacted base, planned control joints, reinforced edges where traffic turns, and a finish that gives traction without trapping too much dirt. Patios need attention to house transitions, door thresholds, drainage away from the slab, and shade or cover plans. Sidewalks need smooth transitions, clean edges, and expansion space near existing concrete or masonry.',
+          'For slabs and light commercial concrete, we talk through thickness, reinforcement, expected loads, finish tolerance, and whether the slab will carry vehicles, storage racks, equipment, or foot traffic only. Common residential work uses broom finish for traction, while decorative patios may use stamped patterns, exposed aggregate, integral color, stained concrete, or a sealed smooth border when that fits the site and budget.',
+        ],
+      },
+      {
+        title: 'Process and timeline',
+        paragraphs: [
+          'A normal Waco project starts with a site walk and measurements. We confirm demolition, haul-off, access for forms and concrete delivery, drainage concerns, utility conflicts, and finish goals. After that, the estimate should clearly separate prep, forming, reinforcement, concrete, finishing, and any decorative or sealing work.',
+          'Once scheduled, the crew moves through excavation or removal, base prep, forming, reinforcement, pour, finish, and cure guidance. Some smaller residential jobs can be prepped and poured quickly; larger driveways, patios with decorative detail, commercial slabs, or projects with drainage correction need more sequencing. Weather matters too. Extreme heat, heavy rain, and sudden cold snaps can change timing, so cure protection is part of the plan rather than an afterthought.',
+        ],
+      },
+      {
+        title: 'Pricing transparency',
+        paragraphs: [
+          'We do not quote one flat number for every slab because that hides the real cost drivers. Square footage matters, but Waco concrete pricing also depends on tear-out, base correction, truck access, thickness, reinforcement, finish choice, drainage work, and how much hand forming is needed. A simple broom-finished patio is not the same scope as a stamped driveway with demolition and grade correction.',
+          'When pricing ranges are discussed, they should be treated as planning numbers until the site is measured. The estimate is where the real scope gets locked down. If a lower price leaves out haul-off, reinforcement, base work, or cure guidance, it is not an apples-to-apples concrete bid.',
+        ],
+      },
+      {
+        title: 'Permits, trust, and project communication',
+        paragraphs: [
+          'Texas does not have a single statewide concrete-contractor license for ordinary residential flatwork, but municipal requirements and right-of-way rules can still apply depending on the project. Work touching approaches, sidewalks near public access, drainage, or commercial sites may need extra review. We flag those issues during the estimate instead of assuming every slab is permit-free.',
+          'Customers also need to know who is responsible for communication. Steve stays involved from the first call through the site visit and scope discussion, so the person looking at drainage, soil, and access is connected to the plan. That matters when a project changes after demolition or weather shifts the pour window.',
+        ],
+      },
+      {
+        title: 'Neighborhoods and common project types',
+        paragraphs: [
+          'Older Waco neighborhoods often need concrete that ties into existing walks, narrow drives, mature trees, and drainage that was not designed for today\'s vehicle use. Newer subdivisions may have cleaner access but still need attention around garage lips, sidewalks, and yard grades. Rural properties outside town can add longer access paths, shop approaches, equipment pads, and thicker sections where vehicles or trailers will cross the slab.',
+          'We see different priorities across the area. Castle Heights and Woodway projects often lean toward clean curb appeal and decorative patios. Robinson, Lorena, and China Spring properties may need longer drives, shop slabs, or drainage correction. Commercial Waco jobs usually need scheduling clarity, safe access, and a finish that works for customers, trucks, or employees without turning into a maintenance problem.',
+        ],
+      },
+      {
+        title: 'What to prepare before the estimate',
+        paragraphs: [
+          'The best estimate starts with practical details: approximate square footage, photos of the site, whether old concrete needs to be removed, where water currently drains, and how soon you need the work finished. For driveways, note vehicle types and whether delivery trucks or trailers use the area. For patios, note shade structures, outdoor kitchens, door thresholds, and where water should move during heavy rain.',
+          'If you are comparing multiple Waco concrete bids, ask each contractor to spell out base prep, reinforcement, joint spacing, finish, cure timing, haul-off, and cleanup. That keeps the conversation about build quality instead of only total price. A clear scope protects both sides before the pour day arrives.',
+          'Good photos help too. A few wide shots, close-ups of cracks or pooling water, and a picture of access from the street can answer early questions before the site visit. That lets the estimate focus on the decisions that actually change the build.',
+        ],
+      },
+    ],
   },
   {
     city: 'Temple',
@@ -754,6 +806,10 @@ function renderLocationContent(location) {
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
     ],
     sections: [
+      ...(location.planningSections || []).map((section) => ({
+        title: section.title,
+        paragraphs: section.paragraphs,
+      })),
       {
         title: `Concrete services available in ${location.city}`,
         links: cityServiceLinks,
@@ -1437,12 +1493,12 @@ function faqPageSchema(items = []) {
 }
 
 function serviceSchema(meta, canonical) {
-  if (meta.schemaKind !== 'service') return null
+  if (meta.schemaKind !== 'service' && meta.schemaKind !== 'location') return null
   return {
     '@type': 'Service',
     '@id': `${canonical}#service`,
     name: meta.schemaName || meta.h1 || meta.title,
-    serviceType: meta.schemaServiceType || meta.schemaName || meta.h1 || meta.title,
+    serviceType: meta.schemaServiceType || (meta.schemaKind === 'location' ? 'Concrete contractor' : meta.schemaName || meta.h1 || meta.title),
     description: meta.schemaDescription || meta.description,
     url: canonical,
     provider: {

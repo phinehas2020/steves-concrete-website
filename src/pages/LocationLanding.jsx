@@ -31,6 +31,7 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
     faq,
     seoTitle,
     seoDescription,
+    planningSections = [],
   } = page
 
   const resolvedTitle = seoTitle || `${heroTitle} | Free Estimate (254) 230-3102`
@@ -195,6 +196,38 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
             </div>
           </div>
         </section>
+
+        {planningSections.length > 0 && (
+          <section className="section-padding bg-stone-50">
+            <div className="container-main">
+              <div className="max-w-3xl mb-10">
+                <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                  Waco planning details
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                  Concrete planned for soil, heat, drainage, and daily use
+                </h2>
+                <p className="text-lg text-stone-600 text-pretty">
+                  A useful estimate should explain how the slab will be built, not only what the finished surface will look like.
+                </p>
+              </div>
+              <div className="grid gap-6 lg:grid-cols-2">
+                {planningSections.map((section) => (
+                  <article key={section.title} className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
+                    <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
+                      {section.title}
+                    </h3>
+                    <div className="space-y-4 text-stone-600 leading-relaxed text-pretty">
+                      {section.paragraphs.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section-padding bg-stone-50">
           <div className="container-main">
