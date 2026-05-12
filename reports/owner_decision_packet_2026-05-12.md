@@ -101,11 +101,11 @@ Decision/action needed in GBP dashboard:
 
 High-priority corrections:
 
-- Manta: old `757 Shady Lane` / `(254) 412-2927`
-- Buzzfile: old `757 Shady Ln` / `(254) 412-2927`
+- Buzzfile: latest public recheck still showed old `757 Shady Ln` / `(254) 412-2927`
+- Manta: latest automated fetch returned Cloudflare `403`; verify manually or inside the listing/account dashboard before editing
 - Levelset: search result indicated old address/phone; requires manual confirmation
 - Greater Waco Chamber: `Dr` vs `Ln` street suffix
-- BuildZoom: `Dr` vs `Ln`; missing visible canonical phone/site in fetched page
+- BuildZoom: latest public recheck still showed `1045 W ELM MOTT DR`; missing visible canonical phone/site in fetched page; permit/license wording needs owner/legal approval before reuse
 - Porch: partial profile; verify full NAP
 
 Use `reports/citation_correction_request_templates_2026-05-12.md` for request text.
@@ -134,6 +134,7 @@ Current evidence:
 - `87` public project/blog/gallery/SEO images scanned
 - `24` expose macOS latitude/longitude metadata
 - `63` do not expose macOS latitude/longitude metadata
+- `exiftool 13.55` read-only verification matched the corrected count: `87` total images, `24` located, `63` without GPS metadata
 - reusable scanner passed ESLint and reproduced `87 / 24 / 63`
 - exact coordinates are intentionally not repeated in the owner-facing manifest
 
