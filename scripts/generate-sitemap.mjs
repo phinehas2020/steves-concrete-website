@@ -4,16 +4,18 @@ import { SERVICE_CANONICAL_PATH_BY_SLUG } from '../src/data/servicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const OUTPUT_PATH = path.join(process.cwd(), 'public', 'sitemap.xml')
+const SITEMAP_LASTMOD =
+  process.env.SITEMAP_LASTMOD_DATE || new Date().toISOString().slice(0, 10)
 
 const STATIC_ROUTES = [
-  { path: '/', changefreq: 'weekly', priority: '1.0' },
-  { path: '/blog', changefreq: 'weekly', priority: '0.7' },
-  { path: '/jobs', changefreq: 'weekly', priority: '0.7' },
-  { path: '/guides', changefreq: 'monthly', priority: '0.7' },
-  { path: '/about', changefreq: 'monthly', priority: '0.7' },
-  { path: '/reviews', changefreq: 'monthly', priority: '0.7' },
-  { path: '/privacy-policy', changefreq: 'yearly', priority: '0.4' },
-  { path: '/terms-and-conditions', changefreq: 'yearly', priority: '0.4' },
+  { path: '/' },
+  { path: '/blog' },
+  { path: '/jobs' },
+  { path: '/guides' },
+  { path: '/about' },
+  { path: '/reviews' },
+  { path: '/privacy-policy' },
+  { path: '/terms-and-conditions' },
 ]
 
 const LOCATION_PAGES = [
@@ -56,12 +58,8 @@ function escapeXml(value) {
     .replaceAll("'", '&#39;')
 }
 
-function toEntry({ loc, lastmod, changefreq, priority }) {
-  const parts = [`<loc>${escapeXml(loc)}</loc>`]
-  if (lastmod) parts.push(`<lastmod>${lastmod}</lastmod>`)
-  if (changefreq) parts.push(`<changefreq>${changefreq}</changefreq>`)
-  if (priority) parts.push(`<priority>${priority}</priority>`)
-  return `<url>${parts.join('')}</url>`
+function toEntry({ loc, lastmod }) {
+  return `<url><loc>${escapeXml(loc)}</loc><lastmod>${escapeXml(lastmod || SITEMAP_LASTMOD)}</lastmod></url>`
 }
 
 function addUrl(urls, loc, meta = {}) {
@@ -70,9 +68,7 @@ function addUrl(urls, loc, meta = {}) {
   if (urls.has(key)) return
   urls.set(key, {
     loc: normalized,
-    lastmod: meta.lastmod,
-    changefreq: meta.changefreq,
-    priority: meta.priority,
+    lastmod: meta.lastmod || SITEMAP_LASTMOD,
   })
 }
 
@@ -84,10 +80,7 @@ async function main() {
   }
 
   LOCATION_PAGES.forEach((slug) => {
-    addUrl(routes, `/${slug}`, {
-      changefreq: 'monthly',
-      priority: '0.6',
-    })
+    addUrl(routes, `/${slug}`)
   })
 
   const [serviceSlugs, seoServiceSlugs, guideSlugs, sportsCourtSlugs] = await Promise.all([
@@ -100,33 +93,21 @@ async function main() {
   serviceSlugs
     .filter((slug) => !NON_CANONICAL_SERVICE_SLUGS.has(slug))
     .forEach((slug) => {
-    addUrl(routes, `/services/${slug}`, {
-      changefreq: 'monthly',
-      priority: '0.65',
-    })
+    addUrl(routes, `/services/${slug}`)
   })
 
   seoServiceSlugs
     .filter((slug) => !NON_CANONICAL_SEO_SERVICE_SLUGS.has(slug))
     .forEach((slug) => {
-    addUrl(routes, `/${slug}`, {
-      changefreq: 'monthly',
-      priority: '0.72',
-    })
+    addUrl(routes, `/${slug}`)
   })
 
   guideSlugs.forEach((slug) => {
-    addUrl(routes, `/guides/${slug}`, {
-      changefreq: 'monthly',
-      priority: '0.68',
-    })
+    addUrl(routes, `/guides/${slug}`)
   })
 
   sportsCourtSlugs.forEach((slug) => {
-    addUrl(routes, `/sports-court-coating/${slug}`, {
-      changefreq: 'monthly',
-      priority: '0.64',
-    })
+    addUrl(routes, `/sports-court-coating/${slug}`)
   })
 
   const entries = Array.from(routes.values())
