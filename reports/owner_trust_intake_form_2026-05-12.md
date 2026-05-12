@@ -10,7 +10,14 @@ Do not publish any item below until proof is provided and the owner approves the
 
 Current site coverage already includes owner name, owner photo, bio language, and `20+` years copy. Use this section to confirm the details are owner-approved before treating them as final EEAT proof.
 
+Source discrepancy to resolve:
+
+- `goal.md` names `Phinehas Adams` as owner.
+- Current site source names Steve/Stephen and includes `Stephen Alexander, Owner`.
+
 - Owner name as it should appear publicly:
+- Is the public owner/operator Steve, Stephen Alexander, Phinehas Adams, or another approved name?
+- Should schema use the same public owner/operator name? `yes/no`
 - Owner photo approved for website use? `yes/no`
 - Bio copy approved? `yes/no`
 - `20+ years` language approved? `yes/no`
