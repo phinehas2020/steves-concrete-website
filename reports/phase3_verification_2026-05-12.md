@@ -19,6 +19,8 @@
 - `109cd0a` - Phase 3 add organization schema recommendations
 - `db53eb9` - Phase 3 remove organization rich result warnings
 - `18c515b` - Phase 3 use verified business address schema
+- `98bd215` - Phase 3 update live verification report
+- `aa1f84d` - Phase 3 add completion audit
 - `40f7e6b` - Phase 3 add NAP citation audit
 - `067f605` - Phase 3 add GSC performance baseline
 - `61079d8` - Phase 3 document canonical redirect check
@@ -150,6 +152,11 @@
   - Production deployment for commit `12b80ab` became ready on Vercel.
   - Live pattern check passed on `/`, `/terms-and-conditions`, and `/concrete-patios-waco-tx`.
   - Carrier and coverage type remain blocked until owner proof is provided.
+- Public trust record audit completed:
+  - Report: `reports/public_trust_record_audit_2026-05-12.md`
+  - Sources checked: Louisiana State Licensing Board for Contractors public violation database and September 18, 2025 agenda PDF, BuildZoom, Porch, and public BBB search results.
+  - The audit supports keeping license, insurance, and BBB language conservative until owner/legal/account proof is available.
+  - It also reinforces the existing Texas-specific permit-aware wording and documents that no broad license, BBB, or insurance badge claim should be restored from public search alone.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.

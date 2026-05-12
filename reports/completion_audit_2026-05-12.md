@@ -2,7 +2,7 @@
 
 Objective: follow `goal.md` for the Concrete Works LLC / SLA Concrete Works SEO parity project.
 
-Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, baseline-ranking, public citation audit, GSC performance baseline, and GSC-driven quick-win content passes are substantially complete and verified. Some requirements remain blocked by external API quota, GSC permissions, off-site GBP/account work, or owner-provided trust facts.
+Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, baseline-ranking, public citation/trust audits, GSC performance baseline, and GSC-driven quick-win content passes are substantially complete and verified. Some requirements remain blocked by external API quota, GSC permissions, off-site GBP/account work, or owner-provided trust facts.
 
 ## Prompt-to-artifact checklist
 
@@ -22,10 +22,10 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | EXIF GPS where photo permits | `reports/image_exif_gps_scan_2026-05-12.md`; `reports/image_exif_gps_scan_2026-05-12.json`; 86 public images scanned, 0 GPS-tagged; no owner permission/source policy available for adding synthetic GPS | Blocked by permission/source policy |
 | Internal linking: service pages to adjacent services, blogs, hub | Local check across 18 pages: hub present, two blog links, at least 3 adjacent service links | Complete |
 | Homepage links to all service pages / footer full nav | Existing service grid and footer links use `servicePageLinks`; verified by build and static output | Complete |
-| Trust/EEAT: license language | Commit `f6ef88f` replaced unverified license claims with Texas-specific permit-aware language | Complete |
+| Trust/EEAT: license language | Commit `f6ef88f` replaced unverified license claims with Texas-specific permit-aware language; `reports/public_trust_record_audit_2026-05-12.md` documents why broad jurisdiction-neutral license wording should stay off the site | Complete |
 | Trust/EEAT: owner bio/photo/credentials | `reports/owner_eeat_verification_2026-05-12.md`; source includes owner name, bio, headshot asset, alt text, and 20+ years copy; no verified credentials/certifications found | Complete for bio/photo/years; credentials remain blocked until owner provides proof |
-| Trust/EEAT: insurance carrier and coverage type | `reports/insurance_claim_cleanup_2026-05-12.md`; unsupported generic `Insured`/liability-insurance claims were softened; build and live pattern checks passed; carrier and coverage type still not provided | Blocked until owner provides carrier/coverage proof |
-| Trust/EEAT: BBB rating/widget | Not provided/verified | Blocked |
+| Trust/EEAT: insurance carrier and coverage type | `reports/insurance_claim_cleanup_2026-05-12.md`; `reports/public_trust_record_audit_2026-05-12.md`; unsupported generic `Insured`/liability-insurance claims were softened; build and live pattern checks passed; carrier and coverage type still not provided | Blocked until owner provides carrier/coverage proof |
+| Trust/EEAT: BBB rating/widget | `reports/public_trust_record_audit_2026-05-12.md`; no exact public BBB profile was confirmed, so no BBB badge/rating/accreditation claim was added | Blocked until owner provides dashboard/profile proof |
 | Trust/EEAT: GBP review widget via API | `api/google-reviews.js`; `src/lib/googleReviews.js`; `reports/google_reviews_verification_2026-05-12.md`; local handler invocation returned live Google place/review data | Complete |
 | Trust/EEAT: named case studies with written permission | Not provided | Blocked |
 | Sitemap: remove changefreq/priority, add lastmod | `scripts/generate-sitemap.mjs`; `public/sitemap.xml`; live sitemap check showed 43 URLs, 43 lastmods, no changefreq/priority | Complete |
@@ -33,7 +33,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Submit sitemap to GSC | Existing sitemap found in GSC with 0 warnings/0 errors; API submit attempt returned 403 | Partially complete; resubmit requires UI/API permission fix |
 | GSC coverage clean | GSC sitemap list reported 0 warnings and 0 errors | Complete for sitemap report available through API |
 | Google Business Profile optimization | No GBP management API/tool available in this session | Blocked/off-site |
-| NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md`; public web and Google Places audit found current canonical NAP plus stale Manta/Buzzfile/Levelset risks | Complete for public audit; corrections remain off-site |
+| NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md`; `reports/public_trust_record_audit_2026-05-12.md`; public web and Google Places audit found current canonical NAP plus stale Manta/Buzzfile/Levelset risks; trust-profile search added BuildZoom, Porch, BBB, and Louisiana licensing-record notes | Complete for public audit; corrections remain off-site |
 | GBP posts, Q&A, review outreach | `reports/gbp_action_pack_2026-05-12.md` provides owner-authored Q&A prompts, GBP post drafts, review outreach templates, and response guidelines | Draft/action pack complete; publishing remains blocked/off-site and owner-authored answers are still required |
 | Baseline rankings final report | `reports/baseline_rankings.md`; Semrush live data used; `reports/gsc_performance_baseline_2026-05-12.md` adds 90-day GSC query/page baseline | Complete |
 | GSC-driven quick-win page pass | Commit `7f49224`; `/retaining-walls-waco-tx` and `/hardscaping-waco-tx` metadata/copy improved based on GSC opportunities; build and live metadata checks passed | Complete for first two priority pages |
@@ -46,7 +46,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 ## Current production state
 
 - Latest content deployment verified for code commit: `cac277b`
-- Recent report-only commits include `40f7e6b` (`Phase 3 add NAP citation audit`) and `aa1f84d` (`Phase 3 add completion audit`)
+- Recent report-only commits include `40f7e6b` (`Phase 3 add NAP citation audit`), `aa1f84d` (`Phase 3 add completion audit`), and the public trust record audit follow-up
 - Latest report-only deployment checked before the GSC baseline: `dpl_E3396ZExFvnabJim1onv6RmQ7ZdX`, commit `98bd215225360b55b94702f9b348a623dbd43f86`, state `READY`
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
@@ -59,6 +59,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
    - BBB profile/rating, if applicable
    - owner-approved bio/photo/credentials
    - named case-study permissions
+   - legal/account-approved wording for any Louisiana licensing-record context, if the owner wants to address it publicly
 4. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`.
 5. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts.
 6. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical.
