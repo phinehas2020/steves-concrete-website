@@ -46,12 +46,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 ## Current production state
 
 - Latest content deployment verified for code commit: `cac277b`
-- Latest report/audit commits pushed to `origin/main` include:
-  - `aaa0b6d` - `Phase 3 track final audit blockers`
-  - `b360ffd` - `Phase 3 track remaining SEO blockers`
-  - `5f42d41` - `Phase 3 add SEO rerun reminders`
-  - `3f53ce3` - `Phase 3 refresh GSC retry evidence`
-  - `74d5f81` - `Phase 3 document service PR exception`
+- Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -12` for the exact current HEAD.
 - Latest report-only deployment checked before the GSC baseline: `dpl_E3396ZExFvnabJim1onv6RmQ7ZdX`, commit `98bd215225360b55b94702f9b348a623dbd43f86`, state `READY`
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
