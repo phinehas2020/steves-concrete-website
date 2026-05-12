@@ -61,6 +61,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
    - named case-study permissions
    - legal/account-approved wording for any Louisiana licensing-record context, if the owner wants to address it publicly
    Tracking issue: `#7`.
+   Owner-facing packet: `reports/owner_decision_packet_2026-05-12.md`.
 2. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the GBP category/website checks in `reports/gbp_public_profile_verification_2026-05-12.md`, the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`, and the listing-specific templates in `reports/citation_correction_request_templates_2026-05-12.md`. Tracking issue: `#8`.
 3. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts. Tracking issue: `#8`.
 4. Resolve image GPS/privacy handling using `reports/image_gps_rescan_2026-05-12.md`, `reports/image_gps_located_files_manifest_2026-05-12.md`, `reports/image_gps_permission_form_2026-05-12.md`, and `scripts/scan-image-gps-metadata.mjs`: retain, strip, normalize, add approved metadata, or leave unchanged. Tracking issue: `#9`.

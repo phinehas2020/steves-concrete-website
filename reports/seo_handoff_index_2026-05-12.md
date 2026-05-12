@@ -25,6 +25,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 | Image GPS scan command | `scripts/scan-image-gps-metadata.mjs` |
 | Owner EEAT verification | `reports/owner_eeat_verification_2026-05-12.md` |
 | Owner trust intake | `reports/owner_trust_intake_form_2026-05-12.md` |
+| Owner decision packet | `reports/owner_decision_packet_2026-05-12.md` |
 | Owner/account blockers | `reports/owner_blocker_packet_2026-05-12.md` |
 | GitHub issue tracking | `reports/github_issue_tracking_2026-05-12.md` |
 
@@ -53,7 +54,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 
 ## Resume Order
 
-1. If owner proof is available, resolve issue `#7` using `reports/owner_trust_intake_form_2026-05-12.md`; confirm the public owner/operator identity before adding any insurance, BBB, credential, or named-case-study claims.
+1. If owner proof is available, resolve issue `#7` using `reports/owner_decision_packet_2026-05-12.md` and `reports/owner_trust_intake_form_2026-05-12.md`; confirm the public owner/operator identity before adding any insurance, BBB, credential, or named-case-study claims.
 2. If GBP/citation dashboard access is available, resolve issue `#8` using `reports/gbp_public_profile_verification_2026-05-12.md`, `reports/gbp_citation_cleanup_runbook_2026-05-12.md`, and `reports/citation_correction_request_templates_2026-05-12.md`.
 3. If image-location permission is available, resolve issue `#9` using `reports/image_gps_rescan_2026-05-12.md`, `reports/image_gps_located_files_manifest_2026-05-12.md`, and `scripts/scan-image-gps-metadata.mjs` before retaining, stripping, normalizing, or adding any GPS metadata.
 4. Keep PRs `#11` through `#15` as audit reconstruction artifacts; future service-page rewrites should use normal PRs before merge.
