@@ -140,6 +140,7 @@ Current state:
 
 - GBP action pack is drafted in `reports/gbp_action_pack_2026-05-12.md`.
 - No GBP dashboard changes were made from this repo session.
+- Cleanup runbook: `reports/gbp_citation_cleanup_runbook_2026-05-12.md`
 
 Owner/account action:
 
