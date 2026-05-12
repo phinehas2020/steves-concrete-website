@@ -46,6 +46,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 ## Current production state
 
 - Recent tracked repo commit verified during this audit pass: `902b605` - `Phase 3 label reconstruction PRs`
+- Current local build verification after report/script updates: `npm run build` passed on 2026-05-12 after commit `2c503e8`; generated sitemap still reported `43` URLs.
 - Latest content deployment verified for code commit: `cac277b`
 - Handoff index: `reports/seo_handoff_index_2026-05-12.md`
 - Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -12` for the exact current HEAD.
