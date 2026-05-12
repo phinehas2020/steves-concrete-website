@@ -31,6 +31,10 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 - Issues `#3` through `#5` also have dated GitHub milestones.
 - Issue `#6` is closed because authenticated Chrome Search Console UI resubmission succeeded and GSC showed `Submitted: May 12, 2026`, `Last read: May 12, 2026`, `Status: Success`, and `43` discovered pages.
 - Issues `#7` through `#9` remain open because they require owner proof/permission, explicit approval, GBP/citation dashboard work, or a documented decision.
+- Approval-gate comments were added after the final citation/GPS evidence refresh:
+  - `#7`: `https://github.com/phinehas2020/steves-concrete-website/issues/7#issuecomment-4435566212`
+  - `#8`: `https://github.com/phinehas2020/steves-concrete-website/issues/8#issuecomment-4435566221`
+  - `#9`: `https://github.com/phinehas2020/steves-concrete-website/issues/9#issuecomment-4435566230`
 - Issue `#8` has both `blocked-account` and `blocked-owner`: dashboard access was confirmed read-only, but externally visible edits still require explicit approval.
 - Issue `#9` has `privacy-review` because exact image-location metadata can point near real jobsite/customer locations; owner policy is required before retaining, stripping, normalizing, or adding GPS metadata.
 - Issue `#10` is closed because reconstruction PRs `#11` through `#15` now exist.
