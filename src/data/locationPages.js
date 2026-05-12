@@ -215,9 +215,39 @@ export const locationPages = [
     heroSubtitle:
       'Driveways, patios, stamped concrete, and slab repairs for Hewitt homes. Free on-site estimates with clear start dates.',
     seoDescription:
-      'Looking for a Hewitt concrete contractor? We are the top-rated "driveway concrete contractors near me," building patios, stamped concrete, and repairs designed for Central Texas clay soil.',
+      'Looking for a concrete contractor in Hewitt, Texas? SLA Concrete Works builds driveways, patios, stamped concrete, and repairs for clay soil.',
     intro:
       'SLA Concrete Works LLC helps Hewitt homeowners and property managers install concrete that lasts through hot summers and shifting black clay soil. We focus on proper base prep, drainage, and control-joint layout so your project looks sharp and performs long-term.',
+    planningSections: [
+      {
+        title: 'Driveway and patio planning in Hewitt',
+        paragraphs: [
+          'Hewitt concrete work often has to tie cleanly into garage aprons, sidewalks, fences, and backyard gates. Before we price a driveway or patio, we look at access, existing grades, roof runoff, and where water collects after a storm.',
+          'That matters because a good-looking slab can still fail early if water sits at the edge or the base is soft. We plan subgrade correction, compacted base, reinforcement, and control joints around the way the driveway or patio will actually be used.',
+        ],
+      },
+      {
+        title: 'Central Texas clay and drainage',
+        paragraphs: [
+          'Hewitt sits in the same black-clay belt that affects Waco, Woodway, Robinson, and Lorena. Clay can swell after rain and shrink during long hot stretches, which adds stress to patios, walks, and driveway panels.',
+          'We cannot promise concrete will never crack, but we can reduce avoidable movement by shaping drainage, avoiding trapped water, planning joints, and matching slab thickness to the expected use.',
+        ],
+      },
+      {
+        title: 'Common Hewitt concrete projects',
+        paragraphs: [
+          'The most common Hewitt scopes are driveway replacement, patio extensions, sidewalk repairs, stamped patios, shed pads, and small slab repairs around homes and light commercial properties.',
+          'For decorative work, we talk through traction, color, sealer maintenance, furniture placement, and how the finish will look next to brick, stone, fencing, or landscaping already on the property.',
+        ],
+      },
+      {
+        title: 'What the estimate should answer',
+        paragraphs: [
+          'A useful Hewitt estimate should explain tear-out, haul-off, base prep, reinforcement, finish, joint layout, cure timing, and cleanup. Those details make it easier to compare bids without guessing what is included.',
+          'We also flag schedule risks early. Heavy rain, extreme heat, tight access, demolition surprises, and drainage corrections can change the sequence, so the plan should leave room for the real site conditions.',
+        ],
+      },
+    ],
     highlights: [
       {
         title: 'Engineered for Hewitt soil conditions',
@@ -259,9 +289,39 @@ export const locationPages = [
     heroSubtitle:
       'Concrete driveways, patios, decorative finishes, and repairs for Woodway homes with free local estimates.',
     seoDescription:
-      'Need a concrete contractor Woodway Texas property owners recommend? We install and replace driveways, patios, stamped concrete, and repairs built for Central Texas heat and clay soil movement.',
+      'Need a concrete contractor in Woodway, Texas? SLA Concrete Works installs driveways, patios, stamped concrete, and repairs built for heat and clay soil.',
     intro:
       'SLA Concrete Works LLC delivers Woodway concrete projects with careful grading, reinforcement, and finishing detail. We account for black clay soil and summer heat expansion so your driveway, patio, or slab holds up and stays attractive.',
+    planningSections: [
+      {
+        title: 'Concrete work for Woodway properties',
+        paragraphs: [
+          'Woodway projects often balance curb appeal with practical drainage and grade control. Driveways, patios, walkways, and retaining-wall tie-ins need to look clean while still moving water away from the slab and nearby structures.',
+          'Before the pour, we review access, slope, shade, existing flatwork, and any low spots that hold water. Those details shape the base prep, thickness, joint layout, finish selection, and cure plan.',
+        ],
+      },
+      {
+        title: 'Drainage around slopes, trees, and outdoor living areas',
+        paragraphs: [
+          'Many Woodway lots have mature landscaping, shade, grade changes, or backyard living areas where concrete has to fit into the property instead of just filling a rectangle.',
+          'We plan concrete edges, transitions, and runoff paths so patios and walkways do not push water toward doors, wall edges, or soft soil pockets. Good drainage is one of the best ways to protect the finished surface.',
+        ],
+      },
+      {
+        title: 'Finish choices that fit the site',
+        paragraphs: [
+          'Broom finish works well where traction and low maintenance matter most. Stamped, stained, exposed aggregate, and border details can make patios or front walks feel more finished when the site supports the extra maintenance.',
+          'We explain the tradeoffs before the job starts: decorative surfaces need sealing and care, while simpler finishes are easier to maintain around trees, shade, irrigation, and heavy foot traffic.',
+        ],
+      },
+      {
+        title: 'Comparing Woodway concrete bids',
+        paragraphs: [
+          'When comparing Woodway bids, ask whether demolition, haul-off, compacted base, reinforcement, drainage correction, finish, sealing, and cleanup are included. Those items change the real cost more than a headline square-foot price.',
+          'A clear scope protects the project. It also helps avoid shortcuts around base prep or joint layout, which are the parts you cannot see once the concrete is finished.',
+        ],
+      },
+    ],
     highlights: [
       {
         title: 'Woodway-focused prep and drainage',

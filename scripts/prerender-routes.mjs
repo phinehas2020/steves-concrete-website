@@ -125,16 +125,82 @@ const locationPages = [
   {
     city: 'Hewitt',
     slug: 'hewitt-tx-concrete-contractor',
+    seoTitle: 'Concrete Contractor Hewitt Texas | Driveways, Patios, Concrete Repair',
+    seoDescription:
+      'Looking for a concrete contractor in Hewitt, Texas? SLA Concrete Works builds driveways, patios, stamped concrete, and repairs for clay soil.',
     nearbyAreas: ['Woodway', 'Waco', 'Lorena', 'Robinson', 'Beverly Hills'],
     intro:
       'Hewitt homeowners typically choose decorative patio and driveway upgrades, with extra attention to clean transitions and curb appeal.',
+    planningSections: [
+      {
+        title: 'Driveway and patio planning in Hewitt',
+        paragraphs: [
+          'Hewitt concrete work often has to tie cleanly into garage aprons, sidewalks, fences, and backyard gates. Before we price a driveway or patio, we look at access, existing grades, roof runoff, and where water collects after a storm.',
+          'That matters because a good-looking slab can still fail early if water sits at the edge or the base is soft. We plan subgrade correction, compacted base, reinforcement, and control joints around the way the driveway or patio will actually be used.',
+        ],
+      },
+      {
+        title: 'Central Texas clay and drainage',
+        paragraphs: [
+          'Hewitt sits in the same black-clay belt that affects Waco, Woodway, Robinson, and Lorena. Clay can swell after rain and shrink during long hot stretches, which adds stress to patios, walks, and driveway panels.',
+          'We cannot promise concrete will never crack, but we can reduce avoidable movement by shaping drainage, avoiding trapped water, planning joints, and matching slab thickness to the expected use.',
+        ],
+      },
+      {
+        title: 'Common Hewitt concrete projects',
+        paragraphs: [
+          'The most common Hewitt scopes are driveway replacement, patio extensions, sidewalk repairs, stamped patios, shed pads, and small slab repairs around homes and light commercial properties.',
+          'For decorative work, we talk through traction, color, sealer maintenance, furniture placement, and how the finish will look next to brick, stone, fencing, or landscaping already on the property.',
+        ],
+      },
+      {
+        title: 'What the estimate should answer',
+        paragraphs: [
+          'A useful Hewitt estimate should explain tear-out, haul-off, base prep, reinforcement, finish, joint layout, cure timing, and cleanup. Those details make it easier to compare bids without guessing what is included.',
+          'We also flag schedule risks early. Heavy rain, extreme heat, tight access, demolition surprises, and drainage corrections can change the sequence, so the plan should leave room for the real site conditions.',
+        ],
+      },
+    ],
   },
   {
     city: 'Woodway',
     slug: 'woodway-tx-concrete-contractor',
+    seoTitle: 'Concrete Contractor Woodway Texas | Driveways, Patios, Stamped Concrete',
+    seoDescription:
+      'Need a concrete contractor in Woodway, Texas? SLA Concrete Works installs driveways, patios, stamped concrete, and repairs built for heat and clay soil.',
     nearbyAreas: ['Waco', 'Hewitt', 'Robinson', 'China Spring', 'Lorena'],
     intro:
       'Woodway projects prioritize polished finishes and long-term performance through freeze-thaw shifts and extreme summer heat.',
+    planningSections: [
+      {
+        title: 'Concrete work for Woodway properties',
+        paragraphs: [
+          'Woodway projects often balance curb appeal with practical drainage and grade control. Driveways, patios, walkways, and retaining-wall tie-ins need to look clean while still moving water away from the slab and nearby structures.',
+          'Before the pour, we review access, slope, shade, existing flatwork, and any low spots that hold water. Those details shape the base prep, thickness, joint layout, finish selection, and cure plan.',
+        ],
+      },
+      {
+        title: 'Drainage around slopes, trees, and outdoor living areas',
+        paragraphs: [
+          'Many Woodway lots have mature landscaping, shade, grade changes, or backyard living areas where concrete has to fit into the property instead of just filling a rectangle.',
+          'We plan concrete edges, transitions, and runoff paths so patios and walkways do not push water toward doors, wall edges, or soft soil pockets. Good drainage is one of the best ways to protect the finished surface.',
+        ],
+      },
+      {
+        title: 'Finish choices that fit the site',
+        paragraphs: [
+          'Broom finish works well where traction and low maintenance matter most. Stamped, stained, exposed aggregate, and border details can make patios or front walks feel more finished when the site supports the extra maintenance.',
+          'We explain the tradeoffs before the job starts: decorative surfaces need sealing and care, while simpler finishes are easier to maintain around trees, shade, irrigation, and heavy foot traffic.',
+        ],
+      },
+      {
+        title: 'Comparing Woodway concrete bids',
+        paragraphs: [
+          'When comparing Woodway bids, ask whether demolition, haul-off, compacted base, reinforcement, drainage correction, finish, sealing, and cleanup are included. Those items change the real cost more than a headline square-foot price.',
+          'A clear scope protects the project. It also helps avoid shortcuts around base prep or joint layout, which are the parts you cannot see once the concrete is finished.',
+        ],
+      },
+    ],
   },
   {
     city: 'Robinson',
@@ -376,8 +442,9 @@ const routeMeta = [
   })),
   ...locationPages.map((location) => ({
     path: `/${location.slug}`,
-    title: `${location.city} TX Concrete Contractor | ${SITE_NAME}`,
+    title: location.seoTitle || `${location.city} TX Concrete Contractor | ${SITE_NAME}`,
     description:
+      location.seoDescription ||
       `${location.city} concrete contractor for driveways, patios, stamped concrete, and slab work. Free estimate: ${PHONE_DISPLAY}.`,
     canonical: `${SITE_URL}/${location.slug}`,
     h1: `${location.city}, TX Concrete Contractor`,
