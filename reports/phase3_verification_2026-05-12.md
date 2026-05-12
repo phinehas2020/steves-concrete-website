@@ -1,5 +1,7 @@
 # Phase 3 Verification - 2026-05-12
 
+Handoff index: `reports/seo_handoff_index_2026-05-12.md`
+
 ## Completed commits
 
 - `7e7103c` - Phase 1-2 SEO audit and remediation plan

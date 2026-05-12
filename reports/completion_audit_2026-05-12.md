@@ -46,6 +46,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 ## Current production state
 
 - Latest content deployment verified for code commit: `cac277b`
+- Handoff index: `reports/seo_handoff_index_2026-05-12.md`
 - Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -12` for the exact current HEAD.
 - Latest report-only deployment checked before the GSC baseline: `dpl_E3396ZExFvnabJim1onv6RmQ7ZdX`, commit `98bd215225360b55b94702f9b348a623dbd43f86`, state `READY`
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
