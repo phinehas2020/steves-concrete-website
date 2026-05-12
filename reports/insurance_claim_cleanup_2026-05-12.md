@@ -29,6 +29,12 @@ The generated/static search no longer finds these unsupported claim patterns:
 - `Are you insured`
 - `>Insured<`
 
+After production deployment for commit `12b80ab`, the same pattern check passed on:
+
+- `https://www.concretewaco.com/`
+- `https://www.concretewaco.com/terms-and-conditions`
+- `https://www.concretewaco.com/concrete-patios-waco-tx`
+
 Remaining insurance references are framed as questions to discuss during estimate, not as a carrier/coverage claim.
 
 ## Remaining blocker
@@ -39,4 +45,3 @@ To complete the original insurance EEAT requirement, the owner still needs to pr
 - Coverage type
 - Any public wording the carrier/owner approves
 - Whether the claim should appear in footer, About page, service pages, schema, or only in estimate documentation
-

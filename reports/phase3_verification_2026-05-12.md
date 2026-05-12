@@ -147,6 +147,8 @@
   - Updated hero, footer, contact form, terms, service FAQ data, and prerender output text.
   - `npm run build` passed.
   - Static search no longer found `Permit-Aware · Insured`, `Permit-Aware & Insured`, `properly insured`, `industry-standard liability insurance`, `We carry business insurance`, `Are you insured`, or `>Insured<`.
+  - Production deployment for commit `12b80ab` became ready on Vercel.
+  - Live pattern check passed on `/`, `/terms-and-conditions`, and `/concrete-patios-waco-tx`.
   - Carrier and coverage type remain blocked until owner proof is provided.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.

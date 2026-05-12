@@ -24,7 +24,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Homepage links to all service pages / footer full nav | Existing service grid and footer links use `servicePageLinks`; verified by build and static output | Complete |
 | Trust/EEAT: license language | Commit `f6ef88f` replaced unverified license claims with Texas-specific permit-aware language | Complete |
 | Trust/EEAT: owner bio/photo/credentials | `reports/owner_eeat_verification_2026-05-12.md`; source includes owner name, bio, headshot asset, alt text, and 20+ years copy; no verified credentials/certifications found | Complete for bio/photo/years; credentials remain blocked until owner provides proof |
-| Trust/EEAT: insurance carrier and coverage type | `reports/insurance_claim_cleanup_2026-05-12.md`; unsupported generic `Insured`/liability-insurance claims were softened; carrier and coverage type still not provided | Blocked until owner provides carrier/coverage proof |
+| Trust/EEAT: insurance carrier and coverage type | `reports/insurance_claim_cleanup_2026-05-12.md`; unsupported generic `Insured`/liability-insurance claims were softened; build and live pattern checks passed; carrier and coverage type still not provided | Blocked until owner provides carrier/coverage proof |
 | Trust/EEAT: BBB rating/widget | Not provided/verified | Blocked |
 | Trust/EEAT: GBP review widget via API | `api/google-reviews.js`; `src/lib/googleReviews.js`; `reports/google_reviews_verification_2026-05-12.md`; local handler invocation returned live Google place/review data | Complete |
 | Trust/EEAT: named case studies with written permission | Not provided | Blocked |
