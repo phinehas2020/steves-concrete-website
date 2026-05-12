@@ -54,3 +54,10 @@ Evidence:
 - The strongest public citations currently aligned with the site are Google Places and Greater Waco Chamber.
 - The biggest NAP risk is stale directory data using `757 Shady Ln, Waco, TX 76705` and `(254) 412-2927`.
 
+## Public recheck - 2026-05-12
+
+Follow-up fetches after the owner-decision packet confirmed the highest-priority citation risks are still real:
+
+- Buzzfile still renders `757 SHADY LN, Waco, TX 76705` and `(254) 412-2927` on the public page and in the removal/update form data.
+- BuildZoom still renders `1045 W ELM MOTT DR, Elm Mott, TX 76640`, with no visible canonical phone/site in the fetched page. The page also exposes permit and `License: Not Required` language, so it may be useful as public permit evidence after owner/legal review, but it should not be copied into site trust claims without approval.
+- Manta returned a Cloudflare `403` challenge to automated fetch, so that listing still requires manual browser/account verification before treating it as corrected or current.
