@@ -132,6 +132,10 @@
   - Verified place: `SLA Concrete Works`, `1045 W Elm Mott Ln, Elm Mott, TX 76640`.
   - Returned rating: `5`; user rating count: `33`; reviews returned: `5`; reviews with text: `5`.
   - Place, review, and write-review links were present.
+- Owner EEAT source verification added:
+  - Report: `reports/owner_eeat_verification_2026-05-12.md`
+  - Verified source coverage for owner name, bio copy, `src/assets/images/steve-headshot.jpg`, rendered owner-photo alt text, and `20+` years copy.
+  - Credentials/certifications remain blocked because no verified source was found in the repo.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.

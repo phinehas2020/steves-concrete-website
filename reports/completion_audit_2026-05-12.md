@@ -23,7 +23,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Internal linking: service pages to adjacent services, blogs, hub | Local check across 18 pages: hub present, two blog links, at least 3 adjacent service links | Complete |
 | Homepage links to all service pages / footer full nav | Existing service grid and footer links use `servicePageLinks`; verified by build and static output | Complete |
 | Trust/EEAT: license language | Commit `f6ef88f` replaced unverified license claims with Texas-specific permit-aware language | Complete |
-| Trust/EEAT: owner bio/photo/credentials | Existing about-page copy references Steve and experience; no new verified credentials or photo inputs provided | Partially complete, needs owner input |
+| Trust/EEAT: owner bio/photo/credentials | `reports/owner_eeat_verification_2026-05-12.md`; source includes owner name, bio, headshot asset, alt text, and 20+ years copy; no verified credentials/certifications found | Complete for bio/photo/years; credentials remain blocked until owner provides proof |
 | Trust/EEAT: insurance carrier and coverage type | Not provided | Blocked |
 | Trust/EEAT: BBB rating/widget | Not provided/verified | Blocked |
 | Trust/EEAT: GBP review widget via API | `api/google-reviews.js`; `src/lib/googleReviews.js`; `reports/google_reviews_verification_2026-05-12.md`; local handler invocation returned live Google place/review data | Complete |
