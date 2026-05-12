@@ -27,10 +27,13 @@ Source discrepancy to resolve:
 
 ## Insurance
 
+Current site status: unsupported generic insurance claims have been removed or softened. A stale search-result snippet may still show older wording until Google recrawls, but live/source checks on 2026-05-12 found no current `licensed and insured`, BBB, or broad insurance-claim copy.
+
 - Carrier name:
 - Coverage type:
 - Active policy? `yes/no`
 - Public wording approved by owner:
+- Where should approved wording appear? `footer/about/service pages/schema/estimate docs only`
 - Proof location, kept outside public repo unless explicitly approved:
 
 Safe example after proof:
