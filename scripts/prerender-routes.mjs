@@ -26,9 +26,16 @@ const GOOGLE_BUSINESS_PROFILE_URL =
 const PHONE_DISPLAY = '(254) 230-3102'
 const PHONE_HREF = 'tel:254-230-3102'
 const PHONE_SCHEMA = '+1-254-230-3102'
-const WACO_GEO = {
-  latitude: 31.5493,
-  longitude: -97.1467,
+const BUSINESS_ADDRESS = {
+  streetAddress: '1045 W Elm Mott Ln',
+  addressLocality: 'Elm Mott',
+  addressRegion: 'TX',
+  postalCode: '76640',
+  addressCountry: 'US',
+}
+const BUSINESS_GEO = {
+  latitude: 31.6637793,
+  longitude: -97.1123512,
 }
 const MCLENNAN_COUNTY_POLYGON =
   '31.915 -97.575 31.914 -96.989 31.213 -96.994 31.210 -97.588 31.915 -97.575'
@@ -1427,7 +1434,7 @@ function serviceAreaPlaceSchema() {
 
 function localBusinessSchema({ includeOfferCatalog = false } = {}) {
   const schema = {
-    '@type': ['LocalBusiness', 'Contractor'],
+    '@type': 'LocalBusiness',
     '@id': ORGANIZATION_ID,
     additionalType: 'https://schema.org/ConcreteContractor',
     name: SITE_NAME,
@@ -1444,14 +1451,12 @@ function localBusinessSchema({ includeOfferCatalog = false } = {}) {
     sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Waco',
-      addressRegion: 'TX',
-      addressCountry: 'US',
+      ...BUSINESS_ADDRESS,
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: WACO_GEO.latitude,
-      longitude: WACO_GEO.longitude,
+      latitude: BUSINESS_GEO.latitude,
+      longitude: BUSINESS_GEO.longitude,
     },
     openingHoursSpecification: [
       {
