@@ -106,7 +106,7 @@ High-priority corrections:
 - Levelset: fresh public search result still shows old `757 Shady Ln` and `2542303180`, while the direct page returns `403 Forbidden`; verify/update through browser or account access
 - Greater Waco Chamber: public listing has correct phone/site but still uses `1045 W Elm Mott Dr`; normalize to `Ln` if the Google Places/legal address is canonical
 - BuildZoom: latest public recheck still showed `1045 W ELM MOTT DR`; missing visible canonical phone/site in fetched page; permit/license wording needs owner/legal approval before reuse
-- Porch: partial profile; verify full NAP
+- Porch: public profile shows `5.0` rating from `14` online reviews, but business info still lists old `757 Shady Ln`; correct NAP before reusing Porch reviews as a trust signal
 
 Use `reports/citation_correction_request_templates_2026-05-12.md` for request text.
 
