@@ -217,6 +217,7 @@ Verification evidence:
 - Per-file retain/strip/normalize/leave-unchanged decisions from `reports/image_gps_located_files_manifest_2026-05-12.md`.
 - Owner-approved policy for retaining, stripping, normalizing, adding, or leaving metadata unchanged.
 - If changes are approved, rerun a dated scan after using `exiftool` or equivalent EXIF tooling.
+- Repeatable macOS metadata scan command: `node scripts/scan-image-gps-metadata.mjs --json=reports/image_gps_scan_YYYY-MM-DD.json --manifest=reports/image_gps_located_files_manifest_YYYY-MM-DD.md`
 
 ## 10. Louisiana licensing-record context
 

@@ -21,6 +21,12 @@ mdls -raw -name kMDItemLatitude -name kMDItemLongitude
 
 Correct parsing: split raw output on the NUL separator.
 
+Reusable scanner added after this correction:
+
+```bash
+node scripts/scan-image-gps-metadata.mjs --json=reports/image_gps_scan_YYYY-MM-DD.json --manifest=reports/image_gps_located_files_manifest_YYYY-MM-DD.md
+```
+
 | Files scanned | Files with macOS latitude/longitude metadata | Files without macOS latitude/longitude metadata |
 | ---: | ---: | ---: |
 | 87 | 24 | 63 |

@@ -52,7 +52,7 @@ If this form is not completed, leave image files unchanged and keep the EXIF GPS
 If approved:
 
 - add metadata only to explicitly eligible images
-- rerun GPS scan
+- rerun GPS scan with `node scripts/scan-image-gps-metadata.mjs --json=reports/image_gps_scan_YYYY-MM-DD.json --manifest=reports/image_gps_located_files_manifest_YYYY-MM-DD.md`
 - add a dated verification report under `reports/`
 - update `reports/completion_audit_2026-05-12.md`
 - close GitHub issue `#9`
