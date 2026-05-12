@@ -14,9 +14,9 @@ This file turns the 30/60/90-day follow-up requirement into a concrete checklist
 
 Created on 2026-05-12 in `phinehas2020/steves-concrete-website`:
 
-- `#3` - `30-day SEO rerun - 2026-06-11`
-- `#4` - `60-day SEO rerun - 2026-07-11`
-- `#5` - `90-day SEO rerun - 2026-08-10`
+- `#3` - `30-day SEO rerun - 2026-06-11`; milestone `30-day SEO rerun - 2026-06-11`, due `2026-06-11`
+- `#4` - `60-day SEO rerun - 2026-07-11`; milestone `60-day SEO rerun - 2026-07-11`, due `2026-07-11`
+- `#5` - `90-day SEO rerun - 2026-08-10`; milestone `90-day SEO rerun - 2026-08-10`, due `2026-08-10`
 
 ## Commands and tools to rerun
 

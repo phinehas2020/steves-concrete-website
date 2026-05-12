@@ -129,9 +129,9 @@
   - Dates covered: `2026-06-11`, `2026-07-11`, and `2026-08-10`.
   - Includes build/performance commands, GSC/Semrush/GBP/citation checks, and a reusable rerun report template.
   - GitHub reminder issues created:
-    - `#3` - `30-day SEO rerun - 2026-06-11`
-    - `#4` - `60-day SEO rerun - 2026-07-11`
-    - `#5` - `90-day SEO rerun - 2026-08-10`
+    - `#3` - `30-day SEO rerun - 2026-06-11`; assigned to matching milestone due `2026-06-11`
+    - `#4` - `60-day SEO rerun - 2026-07-11`; assigned to matching milestone due `2026-07-11`
+    - `#5` - `90-day SEO rerun - 2026-08-10`; assigned to matching milestone due `2026-08-10`
 - Full mobile render sweep passed:
   - Script: `scripts/mobile-render-sweep.mjs`
   - Report: `reports/mobile_render_sweep_2026-05-12.md`
