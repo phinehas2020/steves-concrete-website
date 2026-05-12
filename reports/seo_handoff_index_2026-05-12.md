@@ -17,6 +17,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 | PageSpeed tuning | `reports/pagespeed_performance_tuning_2026-05-12.md` |
 | Mobile render sweep | `reports/mobile_render_sweep_2026-05-12.md` |
 | Lighthouse fallback sweep | `reports/lighthouse_sweep_2026-05-12.md` |
+| GBP public profile verification | `reports/gbp_public_profile_verification_2026-05-12.md` |
 | NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md` |
 | Owner/account blockers | `reports/owner_blocker_packet_2026-05-12.md` |
 | GitHub issue tracking | `reports/github_issue_tracking_2026-05-12.md` |
@@ -45,7 +46,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 
 1. If confirmation is available, resolve issue `#6` first by submitting `https://www.concretewaco.com/sitemap.xml` from the already-authenticated Chrome Search Console tab, then verify and close the issue.
 2. If owner proof is available, resolve issue `#7` before adding any insurance, BBB, credential, or named-case-study claims.
-3. If GBP/citation dashboard access is available, resolve issue `#8` using `reports/gbp_citation_cleanup_runbook_2026-05-12.md`.
+3. If GBP/citation dashboard access is available, resolve issue `#8` using `reports/gbp_public_profile_verification_2026-05-12.md` and `reports/gbp_citation_cleanup_runbook_2026-05-12.md`.
 4. If image-location permission is available, resolve issue `#9` before writing any EXIF GPS metadata.
 5. Keep PRs `#11` through `#15` as audit reconstruction artifacts; future service-page rewrites should use normal PRs before merge.
 6. On the milestone dates, run issues `#3`, `#4`, and `#5`.

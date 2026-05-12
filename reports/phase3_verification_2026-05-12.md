@@ -127,8 +127,11 @@ Handoff index: `reports/seo_handoff_index_2026-05-12.md`
   - Live metadata check passed for both pages with exactly `1` JSON-LD script in static HTML.
 - GBP action pack added:
   - Report: `reports/gbp_action_pack_2026-05-12.md`
+  - Public profile verification: `reports/gbp_public_profile_verification_2026-05-12.md`
   - Cleanup runbook: `reports/gbp_citation_cleanup_runbook_2026-05-12.md`
   - Includes GBP profile checklist, owner-authored Q&A prompts, four weekly GBP post drafts, review outreach templates, review response guidance, and citation cleanup tie-in.
+  - Read-only Places API check verified the public profile is operational with the canonical address/phone and `5` rating from `33` reviews.
+  - Places data also surfaced two dashboard cleanup checks: public primary type `general_contractor` / `General contractor`, and public website URI `http://concretewaco.com/`.
   - This does not mean GBP was changed; publishing remains account-side and should use owner-approved answers and real project photos.
 - Rerun schedule added:
   - Report: `reports/seo_rerun_schedule_2026-05-12.md`

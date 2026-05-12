@@ -5,6 +5,7 @@ Purpose: make GitHub issue `#8` executable from the Google Business Profile and 
 Source reports:
 
 - `reports/gbp_action_pack_2026-05-12.md`
+- `reports/gbp_public_profile_verification_2026-05-12.md`
 - `reports/nap_citation_audit_2026-05-12.md`
 - `reports/public_trust_record_audit_2026-05-12.md`
 - `reports/owner_blocker_packet_2026-05-12.md`
@@ -28,10 +29,12 @@ Do not add unverified license, BBB, or insurance claims while editing listings.
 Verify or update:
 
 - Primary category: `Concrete contractor`
+- Read-only Places API check on `2026-05-12` returned public primary type `general_contractor` / `General contractor`; verify the actual GBP dashboard category and switch the primary category to `Concrete contractor` if available and accurate.
 - Service area: McLennan County
 - Website: `https://www.concretewaco.com/`
+- Read-only Places API check returned public website URI `http://concretewaco.com/`; update to the canonical HTTPS www URL if the dashboard allows it.
 - Phone: use the owner-confirmed canonical phone from GBP/account records
-- Hours: owner-confirmed current hours
+- Hours: owner-confirmed current hours; public Places data currently shows Monday-Saturday `8:00 AM - 6:00 PM`, Sunday closed.
 - Services: driveway concrete, patio concrete, stamped concrete, concrete repair, foundations/slabs, sidewalks/walkways, retaining walls/hardscaping where applicable
 
 Publish only owner-approved Q&A answers from `reports/gbp_action_pack_2026-05-12.md`.
