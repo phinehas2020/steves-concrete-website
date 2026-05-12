@@ -37,6 +37,16 @@ After production deployment for commit `12b80ab`, the same pattern check passed 
 
 Remaining insurance references are framed as questions to discuss during estimate, not as a carrier/coverage claim.
 
+## Search snippet caveat
+
+A follow-up web search on 2026-05-12 surfaced an apparently stale search-result snippet for `https://www.concretewaco.com/` that still referenced older license/insurance positioning. Treat that as search-index cache until recrawl, not as live copy.
+
+Current live/source checks on 2026-05-12 found no matches for the unsupported trust-claim patterns in:
+
+- `curl -sS https://www.concretewaco.com/`
+- `curl -sS https://concretewaco.com/`
+- `rg -n -i "licensed and insured|fully insured|properly insured|industry-standard liability insurance|we carry business insurance|permit-aware .*insured|>insured<|bbb accredited|bbb rated|licensed contractor" src public dist index.html`
+
 ## Remaining blocker
 
 To complete the original insurance EEAT requirement, the owner still needs to provide:
