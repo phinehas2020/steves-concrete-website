@@ -45,12 +45,12 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Current production state
 
-- Current tracked repo commit verified during this continuation pass: `84fe0d5` - `Phase 3 sync approval gate comments`
+- Report/audit commits verified during this continuation sequence include `84fe0d5` (`Phase 3 sync approval gate comments`) and `d1f32b5` (`Phase 3 refresh completion audit deployment state`). Because report-only commits can trigger additional Vercel builds, use `git log --oneline --decorate -15` for the exact current HEAD.
 - Current local build verification after latest state check: `npm run build` passed on 2026-05-12 at `b2bc912`; generated sitemap still reported `43` URLs.
 - Latest content deployment verified for code commit: `cac277b`
 - Handoff index: `reports/seo_handoff_index_2026-05-12.md`
-- Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -15` for the exact current HEAD.
-- Latest report-only production deployment verified during this audit refresh: `dpl_83s1voqJriXfggq9cgnDXzSf7UaR`, state `Ready`; `npx vercel@latest inspect dpl_83s1voqJriXfggq9cgnDXzSf7UaR` showed the `www.concretewaco.com` and `concretewaco.com` aliases, and `curl -I -L https://www.concretewaco.com/` returned `HTTP/2 200` on 2026-05-12.
+- Later report/audit commits pushed to `origin/main` are documentation and tracking updates only.
+- Report-only production deployments verified during this audit refresh include `dpl_83s1voqJriXfggq9cgnDXzSf7UaR` and `dpl_DCuJ4zWK6eVdYP67DJu3mWsYd5vL`, both `Ready`; Vercel inspect showed the `www.concretewaco.com` and `concretewaco.com` aliases, and `curl -I -L https://www.concretewaco.com/` returned `HTTP/2 200` on 2026-05-12.
 - GitHub reconstruction PRs `#11` through `#15` were rechecked on 2026-05-12 and remain open with the `audit-reconstruction` label.
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
