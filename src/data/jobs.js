@@ -1,5 +1,6 @@
 // Jobs data - now fetches from Supabase
 import { supabase } from '../lib/supabase'
+import { clientProjects } from './clientProjects'
 
 export const DEFAULT_JOB_CATEGORIES = [
   'Driveways',
@@ -14,13 +15,38 @@ export const DEFAULT_JOB_CATEGORIES = [
 ]
 
 export function buildCategoryOptions(jobs = []) {
-  const mergedCategories = [...DEFAULT_JOB_CATEGORIES]
+  const categoriesWithJobs = new Set()
   jobs.forEach((job) => {
-    if (job?.category && !mergedCategories.includes(job.category)) {
-      mergedCategories.push(job.category)
+    if (job?.category) {
+      categoriesWithJobs.add(job.category)
     }
   })
-  return ['All', ...mergedCategories]
+
+  const orderedCategories = [
+    ...DEFAULT_JOB_CATEGORIES.filter((category) => categoriesWithJobs.has(category)),
+    ...Array.from(categoriesWithJobs)
+      .filter((category) => !DEFAULT_JOB_CATEGORIES.includes(category))
+      .sort((a, b) => a.localeCompare(b)),
+  ]
+
+  return ['All', ...orderedCategories]
+}
+
+function sortJobs(jobs = []) {
+  return [...jobs].sort((a, b) => {
+    const aOrder = a.display_order ?? Number.MAX_SAFE_INTEGER
+    const bOrder = b.display_order ?? Number.MAX_SAFE_INTEGER
+    if (aOrder !== bOrder) return aOrder - bOrder
+    return new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime()
+  })
+}
+
+function mergeClientProjects(jobsData = []) {
+  const existingSlugs = new Set(jobsData.map((job) => job.slug))
+  return sortJobs([
+    ...clientProjects.filter((project) => !existingSlugs.has(project.slug)),
+    ...jobsData,
+  ])
 }
 
 // Fetch jobs from Supabase
@@ -40,12 +66,12 @@ export async function fetchJobs() {
         details: error.details,
         hint: error.hint
       })
-      throw error
+      return mergeClientProjects([])
     }
 
     if (!jobsData || jobsData.length === 0) {
       console.log('No jobs found in database')
-      return []
+      return mergeClientProjects([])
     }
 
     // Fetch images for each job
@@ -68,10 +94,10 @@ export async function fetchJobs() {
       })
     )
 
-    return jobsWithImages
+    return mergeClientProjects(jobsWithImages)
   } catch (error) {
     console.error('Error in fetchJobs:', error)
-    throw error
+    return mergeClientProjects([])
   }
 }
 

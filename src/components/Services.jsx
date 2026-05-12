@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { seoServicePages } from '../data/seoServicePages'
 import { Link } from 'react-router-dom'
+import { getServicePreviewImage } from '../data/clientProjects'
 
 const iconMap = {
   'concrete-driveways-waco-tx': Truck,
@@ -124,6 +125,7 @@ export function Services() {
           <AnimatePresence mode="popLayout">
             {visibleServices.map((service, index) => {
               const Icon = iconMap[service.slug] || Layout
+              const previewImage = getServicePreviewImage(service.slug)
               return (
                 <motion.div
                   key={service.slug}
@@ -132,24 +134,43 @@ export function Services() {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ delay: index * 0.1 }}
                   layout
-                  className="group p-8 bg-stone-50 rounded-2xl border border-stone-100 hover:border-accent-500/30 hover:bg-white hover:shadow-xl hover:shadow-stone-200/50 transition-all duration-300 flex flex-col"
+                  className="group overflow-hidden bg-stone-50 rounded-2xl border border-stone-100 hover:border-accent-500/30 hover:bg-white hover:shadow-xl hover:shadow-stone-200/50 transition-all duration-300 flex flex-col"
                 >
-                  <div className="size-14 bg-white rounded-xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-accent-500 group-hover:text-white transition-colors duration-300">
-                    <Icon className="size-7" />
+                  {previewImage ? (
+                    <div className="relative h-44 overflow-hidden bg-stone-200">
+                      <img
+                        src={previewImage}
+                        alt={service.title}
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-stone-950/55 via-stone-950/10 to-transparent" />
+                      <div className="absolute bottom-4 left-4 size-12 bg-white/95 rounded-xl flex items-center justify-center text-stone-900 shadow-sm group-hover:bg-accent-500 group-hover:text-white transition-colors duration-300">
+                        <Icon className="size-6" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="px-8 pt-8">
+                      <div className="size-14 bg-white rounded-xl flex items-center justify-center mb-6 shadow-sm group-hover:bg-accent-500 group-hover:text-white transition-colors duration-300">
+                        <Icon className="size-7" />
+                      </div>
+                    </div>
+                  )}
+                  <div className="p-8 flex flex-1 flex-col">
+                    <h3 className="font-display font-bold text-xl text-stone-900 mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="text-stone-600 text-sm leading-relaxed mb-6 flex-1">
+                      {service.cardSummary}
+                    </p>
+                    <Link
+                      to={`/${service.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-bold text-stone-900 hover:text-accent-600 transition-colors"
+                    >
+                      Learn More
+                      <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
-                  <h3 className="font-display font-bold text-xl text-stone-900 mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-stone-600 text-sm leading-relaxed mb-6 flex-1">
-                    {service.cardSummary}
-                  </p>
-                  <Link
-                    to={`/${service.slug}`}
-                    className="inline-flex items-center gap-2 text-sm font-bold text-stone-900 hover:text-accent-600 transition-colors"
-                  >
-                    Learn More
-                    <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
                 </motion.div>
               )
             })}
