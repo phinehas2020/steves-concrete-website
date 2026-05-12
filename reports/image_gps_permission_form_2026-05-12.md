@@ -6,17 +6,21 @@ Source evidence:
 
 - `reports/image_exif_gps_scan_2026-05-12.md`
 - `reports/image_exif_gps_scan_2026-05-12.json`
+- `reports/image_gps_rescan_2026-05-12.md`
 
-Current scan result:
+Corrected scan result:
 
-- `86` public images scanned
-- `0` images exposed GPS latitude/longitude metadata through macOS metadata indexing
+- `87` public images scanned in the corrected rescan
+- `24` images exposed macOS latitude/longitude metadata
+- `63` images did not expose macOS latitude/longitude metadata
 
-Do not add synthetic GPS metadata unless the owner approves the policy below.
+Do not add, retain, normalize, or strip GPS metadata unless the owner approves the policy below.
 
 ## Policy Decision
 
 - Should approximate GPS metadata be added to eligible project photos? `yes/no`
+- Should existing GPS/location metadata on JPEG originals be retained? `yes/no`
+- Should existing GPS/location metadata on customer/jobsite originals be stripped for privacy? `yes/no`
 - If yes, should coordinates be:
   - exact project coordinates
   - approximate neighborhood/service-area coordinates
@@ -30,6 +34,7 @@ Do not add synthetic GPS metadata unless the owner approves the policy below.
 For each photo/project group:
 
 - Image filenames:
+- Current metadata status: `located/not located/unknown`
 - Project location approved for metadata:
 - Customer permission confirmed? `yes/no/not applicable`
 - Exact or approximate coordinates approved:
@@ -38,7 +43,7 @@ For each photo/project group:
 
 ## Default If Not Approved
 
-If this form is not completed, leave image files unchanged and keep the EXIF GPS requirement marked blocked by permission/source uncertainty.
+If this form is not completed, leave image files unchanged and keep the EXIF GPS requirement marked blocked by permission/source uncertainty. Because the corrected rescan found existing location metadata on some originals, leaving files unchanged may also mean leaving existing location metadata in place.
 
 ## After Decision
 

@@ -164,10 +164,12 @@ Handoff index: `reports/seo_handoff_index_2026-05-12.md`
 - Image EXIF GPS scan completed:
   - Report: `reports/image_exif_gps_scan_2026-05-12.md`
   - Evidence JSON: `reports/image_exif_gps_scan_2026-05-12.json`
+  - Corrected rescan: `reports/image_gps_rescan_2026-05-12.md`
   - Permission form: `reports/image_gps_permission_form_2026-05-12.md`
-  - Scope: `86` public project/blog/gallery images.
-  - Result: `0` files exposed GPS latitude/longitude metadata through macOS metadata indexing.
-  - GPS writing remains blocked until the owner confirms project-location permission and whether exact or approximate coordinates are acceptable.
+  - Original scan scope: `86` public project/blog/gallery images.
+  - Corrected rescan scope: `87` public project/blog/gallery/SEO images.
+  - Corrected result: `24` files exposed macOS latitude/longitude metadata; `63` did not.
+  - GPS handling remains blocked until the owner confirms whether to retain, strip, normalize, or add metadata and whether exact or approximate coordinates are acceptable.
   - Tracking issue: `#9` - `Confirm image GPS metadata permissions`
 - Unsupported insurance claim cleanup completed:
   - Report: `reports/insurance_claim_cleanup_2026-05-12.md`

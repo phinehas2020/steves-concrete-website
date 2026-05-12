@@ -1,5 +1,7 @@
 # Image EXIF GPS Scan - 2026-05-12
 
+Correction: this first-pass report is superseded by `reports/image_gps_rescan_2026-05-12.md`. The original JSON parser mishandled `mdls -raw` NUL-separated output and incorrectly counted `0` located files. The corrected rescan found `24` files with macOS latitude/longitude metadata out of `87` scanned files.
+
 Goal item: add EXIF GPS to Waco coordinates where photo permits.
 
 Tracking issue: `#9` - `Confirm image GPS metadata permissions`
@@ -19,7 +21,7 @@ File extensions scanned: `.jpg`, `.jpeg`, `.webp`, `.png`
 
 Evidence JSON: `reports/image_exif_gps_scan_2026-05-12.json`
 
-## Result
+## Original Result
 
 | Files scanned | Files with GPS latitude/longitude metadata |
 | ---: | ---: |
@@ -27,7 +29,7 @@ Evidence JSON: `reports/image_exif_gps_scan_2026-05-12.json`
 
 Tooling: macOS `mdls` metadata fields `kMDItemLatitude` and `kMDItemLongitude`.
 
-## Conclusion
+## Original Conclusion
 
 No existing project/gallery/blog image in the scanned public asset set currently exposes GPS metadata through macOS metadata indexing.
 
