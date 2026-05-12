@@ -4,13 +4,13 @@ Purpose: turn the remaining `goal.md` blockers into concrete owner/account reque
 
 GitHub tracking issues:
 
-- `#6` - `Resolve GSC sitemap resubmission permission`
 - `#7` - `Collect owner trust proof for EEAT claims`
 - `#8` - `Complete GBP and citation cleanup`
 - `#9` - `Confirm image GPS metadata permissions`
 
 Closed/completed tracking:
 
+- `#6` - `Resolve GSC sitemap resubmission permission`; closed after authenticated Chrome Search Console UI submit
 - `#10` - `Decide service-page PR workflow exception`; closed after audit reconstruction PRs `#11` through `#15`
 
 ## 1. PageSpeed Insights API - resolved
@@ -40,7 +40,7 @@ Verification artifact:
 - `reports/pagespeed_api_verification_2026-05-12.md`
 - `reports/audit_2026-05-12.csv`
 
-## 2. Google Search Console sitemap submit
+## 2. Google Search Console sitemap submit - resolved
 
 Current state:
 
@@ -48,18 +48,20 @@ Current state:
 - Existing sitemap is present with zero warnings and zero errors.
 - Fresh MCP `list_sites` reports `siteOwner`, but API submit still returned `403 Insufficient Permission`.
 - Direct Search Console API submit with the active gcloud token returned `403` because the token has insufficient authentication scopes.
-- Normal Chrome profile can reach the authenticated Search Console sitemap page for `concretewaco.com`.
-- The existing sitemap row shows `Success`, submitted `Mar 2, 2026`, last read `May 11, 2026`, and `43` discovered pages.
+- Normal Chrome profile submitted `https://www.concretewaco.com/sitemap.xml` through the authenticated Search Console UI on 2026-05-12.
+- GSC success dialog showed `Sitemap submitted successfully`.
+- Post-submit table shows `Success`, submitted `May 12, 2026`, last read `May 12, 2026`, and `43` discovered pages.
 - See `reports/gsc_sitemap_submit_retry_2026-05-12.md`.
 
 Owner/account action:
 
-- Confirm the final GSC Submit click for `https://www.concretewaco.com/sitemap.xml` in the already-authenticated Chrome profile, or refresh Google auth with Search Console write scope and retry API submission.
+- No owner/account action is currently needed for the sitemap resubmission.
+- Optional future cleanup: refresh Google auth with Search Console write scope if automated API submits are desired.
 
 Verification evidence to collect:
 
-- GSC sitemap `lastSubmitted` date after resubmission.
-- Screenshot or API result showing the submit succeeded.
+- Completed GSC sitemap `lastSubmitted` date: `May 12, 2026`.
+- Browser evidence: authenticated Chrome success dialog and post-submit table state.
 
 ## 3. Insurance proof
 

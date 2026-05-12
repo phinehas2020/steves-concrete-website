@@ -68,11 +68,12 @@ Handoff index: `reports/seo_handoff_index_2026-05-12.md`
   - Fresh MCP `list_sites` reported `siteOwner`, but repeated API sitemap submit attempts still returned `403 Insufficient Permission`.
   - Direct Search Console API submit with the active gcloud access token returned `403` with `Request had insufficient authentication scopes`.
   - Browser UI attempt at the GSC sitemaps page redirected to Google sign-in, so manual UI resubmission could not be completed from the unauthenticated in-app browser session.
-  - Normal Chrome profile check reached the authenticated Search Console sitemaps page for `concretewaco.com`; the existing sitemap row showed `Success`, `43` discovered pages, submitted `Mar 2, 2026`, and last read `May 11, 2026`.
-  - The final UI submit action is staged but not clicked yet because it changes Google Search Console account state and requires action-time confirmation.
+  - Normal Chrome profile submitted `https://www.concretewaco.com/sitemap.xml` through the authenticated Search Console UI on 2026-05-12.
+  - The success dialog showed `Sitemap submitted successfully`.
+  - Post-submit table state showed `Submitted: May 12, 2026`, `Last read: May 12, 2026`, `Status: Success`, `43` discovered pages, and `0` discovered videos.
   - Report: `reports/gsc_sitemap_submit_retry_2026-05-12.md`
   - Write-scope runbook: `reports/gsc_write_scope_runbook_2026-05-12.md`
-  - Resubmission should be completed from the authenticated GSC UI after confirmation, or after refreshing Google auth with Search Console write scope.
+  - API write scope can still be refreshed later for automation, but the manual GSC resubmission requirement is complete.
 - Google Rich Results Test on live driveway page passed after deployment:
   - URL tested: `https://www.concretewaco.com/concrete-driveways-waco-tx`
   - Result id: `WYow_kvZWHMaxyHIYd20OA`
@@ -187,9 +188,10 @@ Handoff index: `reports/seo_handoff_index_2026-05-12.md`
 - Owner blocker packet completed:
   - Report: `reports/owner_blocker_packet_2026-05-12.md`
   - Converts the remaining PageSpeed API, GSC sitemap submit, insurance, BBB, credentials, named case study, GBP, citation cleanup, and Louisiana licensing-record blockers into exact owner/account requests.
+  - The GSC sitemap submit item is now resolved by the authenticated Chrome UI success on 2026-05-12.
   - Includes verification evidence to collect for each blocked item.
   - GitHub blocker issues created:
-    - `#6` - `Resolve GSC sitemap resubmission permission`
+    - `#6` - `Resolve GSC sitemap resubmission permission` - closed after successful UI submit
     - `#7` - `Collect owner trust proof for EEAT claims`
     - `#8` - `Complete GBP and citation cleanup`
 - Service-page PR workflow exception documented:

@@ -72,11 +72,36 @@ Result:
 The normal Google Chrome profile opened the Search Console sitemaps page for concretewaco.com. The existing sitemap row was visible with status Success, submitted Mar 2, 2026, last read May 11, 2026, and 43 discovered pages. The "Add a new sitemap" field and Submit button were visible.
 ```
 
-The final submit click was not performed because it changes Google Search Console account state and requires action-time confirmation.
+Authenticated Chrome UI submit:
+
+```text
+Submitted at: 2026-05-12 16:53 CDT
+Account shown in Chrome: phinehasmadams031@gmail.com
+Sitemap submitted: https://www.concretewaco.com/sitemap.xml
+```
+
+Result:
+
+```text
+Sitemap submitted successfully
+Google will periodically process it and look for changes. You will be notified if anything goes wrong with it in the future.
+```
+
+Post-submit table state:
+
+```text
+Sitemap: https://www.concretewaco.com/sitemap.xml
+Type: Sitemap
+Submitted: May 12, 2026
+Last read: May 12, 2026
+Status: Success
+Discovered pages: 43
+Discovered videos: 0
+```
 
 ## Status
 
-The sitemap exists in GSC and has no reported warnings or errors. API resubmission remains blocked by OAuth scope. Manual GSC UI resubmission is now staged in an authenticated Chrome profile, but the final submit action still requires confirmation before changing account-side state.
+The sitemap exists in GSC, has no reported warnings or errors, and was manually resubmitted successfully through the authenticated normal Chrome Search Console UI on 2026-05-12. API resubmission remains blocked by OAuth scope, but it is no longer needed for issue `#6`.
 
 Follow-up runbook:
 

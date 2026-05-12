@@ -2,7 +2,7 @@
 
 Objective: follow `goal.md` for the Concrete Works LLC / SLA Concrete Works SEO parity project.
 
-Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, PageSpeed API capture, baseline-ranking, public citation/trust audits, GSC performance baseline, GSC-driven quick-win content passes, and service-page PR audit reconstruction are substantially complete and verified. Some requirements remain blocked by the final GSC submit confirmation, off-site GBP/account work, owner-provided trust facts, or image-location permission.
+Status: not complete. The code, reports, deployment, schema, service-page content, image, linking, sitemap, PageSpeed API capture, baseline-ranking, public citation/trust audits, GSC sitemap resubmission, GSC performance baseline, GSC-driven quick-win content passes, and service-page PR audit reconstruction are substantially complete and verified. Some requirements remain blocked by off-site GBP/account work, owner-provided trust facts, or image-location permission.
 
 ## Prompt-to-artifact checklist
 
@@ -30,7 +30,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Trust/EEAT: named case studies with written permission | Not provided; tracked in GitHub issue `#7` | Blocked |
 | Sitemap: remove changefreq/priority, add lastmod | `scripts/generate-sitemap.mjs`; `public/sitemap.xml`; live sitemap check showed 43 URLs, 43 lastmods, no changefreq/priority | Complete |
 | Robots: verify `/admin` disallow | `public/robots.txt`; verification report confirms `/admin` disallow | Complete |
-| Submit sitemap to GSC | `reports/gsc_sitemap_submit_retry_2026-05-12.md`; `reports/gsc_write_scope_runbook_2026-05-12.md`; existing sitemap found in GSC with 0 warnings/0 errors; repeated MCP submit attempts still returned 403 despite `siteOwner` list access; direct API attempt returned `Request had insufficient authentication scopes`; unauthenticated in-app browser redirected to Google sign-in; normal Chrome profile reached the authenticated GSC sitemaps page and showed the existing sitemap as `Success` with 43 discovered pages; tracked in GitHub issue `#6` | Partially complete; final UI submit click requires action-time confirmation |
+| Submit sitemap to GSC | `reports/gsc_sitemap_submit_retry_2026-05-12.md`; `reports/gsc_write_scope_runbook_2026-05-12.md`; existing sitemap found in GSC with 0 warnings/0 errors; repeated MCP submit attempts still returned 403 despite `siteOwner` list access; direct API attempt returned `Request had insufficient authentication scopes`; unauthenticated in-app browser redirected to Google sign-in; normal Chrome profile submitted `https://www.concretewaco.com/sitemap.xml` successfully on 2026-05-12; post-submit GSC table showed `Submitted: May 12, 2026`, `Last read: May 12, 2026`, `Status: Success`, and `43` discovered pages; GitHub issue `#6` closed | Complete |
 | GSC coverage clean | GSC sitemap list reported 0 warnings and 0 errors | Complete for sitemap report available through API |
 | Google Business Profile optimization | `reports/gbp_public_profile_verification_2026-05-12.md`; `reports/gbp_citation_cleanup_runbook_2026-05-12.md`; read-only Places API verified the public profile is operational with canonical address/phone, rating `5`, and `33` reviews, but public primary type is `general_contractor` and public website URI is `http://concretewaco.com/`; dashboard work is tracked in GitHub issue `#8` | Blocked/off-site; category and website should be fixed or confirmed in GBP dashboard |
 | NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md`; `reports/public_trust_record_audit_2026-05-12.md`; `reports/gbp_citation_cleanup_runbook_2026-05-12.md`; public web and Google Places audit found current canonical NAP plus stale Manta/Buzzfile/Levelset risks; trust-profile search added BuildZoom, Porch, BBB, and Louisiana licensing-record notes; correction workflow tracked in GitHub issue `#8` | Complete for public audit; corrections remain off-site |
@@ -53,16 +53,14 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Remaining action list
 
-1. Confirm and complete the staged GSC UI resubmission of `https://www.concretewaco.com/sitemap.xml` in the authenticated Chrome profile, or refresh Google auth with Search Console write scope so `submit_sitemap` succeeds.
-   Tracking issue: `#6`.
-2. Use `reports/owner_blocker_packet_2026-05-12.md` to collect owner/trust facts before adding more EEAT claims:
+1. Use `reports/owner_blocker_packet_2026-05-12.md` to collect owner/trust facts before adding more EEAT claims:
    - insurance carrier and coverage type
    - BBB profile/rating, if applicable
    - owner-approved bio/photo/credentials
    - named case-study permissions
    - legal/account-approved wording for any Louisiana licensing-record context, if the owner wants to address it publicly
    Tracking issue: `#7`.
-3. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the GBP category/website checks in `reports/gbp_public_profile_verification_2026-05-12.md` and the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`. Tracking issue: `#8`.
-4. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts. Tracking issue: `#8`.
-5. Resolve image GPS/privacy handling using `reports/image_gps_rescan_2026-05-12.md` and `reports/image_gps_permission_form_2026-05-12.md`: retain, strip, normalize, add approved metadata, or leave unchanged. Tracking issue: `#9`.
-6. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical. Tracking issues: `#3`, `#4`, and `#5`.
+2. Complete GBP/off-site work from `goal.md` in the Google Business Profile dashboard and citation sites, starting with the GBP category/website checks in `reports/gbp_public_profile_verification_2026-05-12.md` and the stale Manta, Buzzfile, and Levelset entries documented in `reports/nap_citation_audit_2026-05-12.md`. Tracking issue: `#8`.
+3. Have the owner fill in and approve the Q&A answers in `reports/gbp_action_pack_2026-05-12.md`, then publish them in GBP with real project photos/posts. Tracking issue: `#8`.
+4. Resolve image GPS/privacy handling using `reports/image_gps_rescan_2026-05-12.md` and `reports/image_gps_permission_form_2026-05-12.md`: retain, strip, normalize, add approved metadata, or leave unchanged. Tracking issue: `#9`.
+5. Recheck GSC on the 30/60/90-day dates in `reports/seo_rerun_schedule_2026-05-12.md` to confirm Google consolidates old `http://concretewaco.com/` visibility into the current `https://www.concretewaco.com/` canonical. Tracking issues: `#3`, `#4`, and `#5`.

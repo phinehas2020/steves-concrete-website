@@ -30,7 +30,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 | `#3` 30-day SEO rerun | repo/account follow-up | `reports/seo_rerun_schedule_2026-05-12.md` |
 | `#4` 60-day SEO rerun | repo/account follow-up | `reports/seo_rerun_schedule_2026-05-12.md` |
 | `#5` 90-day SEO rerun | repo/account follow-up | `reports/seo_rerun_schedule_2026-05-12.md` |
-| `#6` GSC sitemap resubmit | authenticated Google account plus final submit confirmation | `reports/gsc_write_scope_runbook_2026-05-12.md` |
+| `#6` GSC sitemap resubmit | closed; authenticated Chrome Search Console UI submit succeeded on 2026-05-12 | `reports/gsc_sitemap_submit_retry_2026-05-12.md` |
 | `#7` trust proof | owner proof and approval decisions | `reports/owner_trust_intake_form_2026-05-12.md` |
 | `#8` GBP/citation cleanup | owner/account dashboards and category/website decisions | `reports/gbp_citation_cleanup_runbook_2026-05-12.md` |
 | `#9` image GPS metadata | owner permission | `reports/image_gps_permission_form_2026-05-12.md` |
@@ -40,17 +40,16 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 
 - `main` contains the completed repo-side SEO work and the report/runbook handoff artifacts.
 - The site content/schema/performance work is substantially complete.
-- Search Console is reachable in the normal Chrome profile for `concretewaco.com`, and the sitemap submit form is visible; the final submit click is pending confirmation because it changes account-side state.
-- The goal is not complete because several remaining requirements depend on final GSC submit confirmation, account-side GBP/citation access, owner proof, or owner permission.
+- Search Console sitemap resubmission is complete: the authenticated normal Chrome profile submitted `https://www.concretewaco.com/sitemap.xml`, and GSC showed `Submitted: May 12, 2026`, `Last read: May 12, 2026`, `Status: Success`, and `43` discovered pages.
+- The goal is not complete because several remaining requirements depend on account-side GBP/citation access, owner proof, or owner permission.
 
 ## Resume Order
 
-1. If confirmation is available, resolve issue `#6` first by submitting `https://www.concretewaco.com/sitemap.xml` from the already-authenticated Chrome Search Console tab, then verify and close the issue.
-2. If owner proof is available, resolve issue `#7` before adding any insurance, BBB, credential, or named-case-study claims.
-3. If GBP/citation dashboard access is available, resolve issue `#8` using `reports/gbp_public_profile_verification_2026-05-12.md` and `reports/gbp_citation_cleanup_runbook_2026-05-12.md`.
-4. If image-location permission is available, resolve issue `#9` using `reports/image_gps_rescan_2026-05-12.md` before retaining, stripping, normalizing, or adding any GPS metadata.
-5. Keep PRs `#11` through `#15` as audit reconstruction artifacts; future service-page rewrites should use normal PRs before merge.
-6. On the milestone dates, run issues `#3`, `#4`, and `#5`.
+1. If owner proof is available, resolve issue `#7` before adding any insurance, BBB, credential, or named-case-study claims.
+2. If GBP/citation dashboard access is available, resolve issue `#8` using `reports/gbp_public_profile_verification_2026-05-12.md` and `reports/gbp_citation_cleanup_runbook_2026-05-12.md`.
+3. If image-location permission is available, resolve issue `#9` using `reports/image_gps_rescan_2026-05-12.md` before retaining, stripping, normalizing, or adding any GPS metadata.
+4. Keep PRs `#11` through `#15` as audit reconstruction artifacts; future service-page rewrites should use normal PRs before merge.
+5. On the milestone dates, run issues `#3`, `#4`, and `#5`.
 
 ## Do Not Do
 

@@ -1,6 +1,6 @@
 # GSC Write Scope Runbook - 2026-05-12
 
-Purpose: unblock GitHub issue `#6` by completing the staged authenticated Search Console UI submit, or by refreshing Google auth with Search Console write scope and retrying the sitemap submit.
+Purpose: document how GitHub issue `#6` was unblocked by completing the authenticated Search Console UI submit, and preserve the API write-scope fallback for future sitemap submissions.
 
 Official references:
 
@@ -15,7 +15,14 @@ https://www.googleapis.com/auth/webmasters
 
 Google documents that `https://www.googleapis.com/auth/webmasters` is the read/write scope, while `https://www.googleapis.com/auth/webmasters.readonly` is read-only.
 
-## Current blocker
+## Final result
+
+- Authenticated normal Chrome Search Console UI submitted `https://www.concretewaco.com/sitemap.xml` on 2026-05-12.
+- Success dialog text: `Sitemap submitted successfully`.
+- Post-submit GSC table showed `Submitted: May 12, 2026`, `Last read: May 12, 2026`, `Status: Success`, `Discovered pages: 43`, and `Discovered videos: 0`.
+- GitHub issue `#6` was closed from this evidence.
+
+## API scope blocker preserved for reference
 
 Known working:
 
@@ -23,22 +30,15 @@ Known working:
 - `list_sitemaps` returns `https://www.concretewaco.com/sitemap.xml`.
 - GSC reports `0` sitemap warnings and `0` sitemap errors.
 
-Known blocked:
+Known API blocked:
 
 - MCP `submit_sitemap` returns `403 Insufficient Permission`.
 - Direct API submit with the active `gcloud auth print-access-token` token returns `403 Request had insufficient authentication scopes`.
-- In-app browser UI attempt redirects to Google sign-in.
+- In-app browser UI attempt redirected to Google sign-in.
 
-Known staged:
+## Completed manual UI path
 
-- The normal Google Chrome profile opens the authenticated Search Console sitemaps page for `concretewaco.com`.
-- The existing sitemap row is visible with status `Success`, submitted `Mar 2, 2026`, last read `May 11, 2026`, and `43` discovered pages.
-- The add-sitemap field and Submit button are visible.
-- The final Submit click changes account-side state and requires action-time confirmation before performing it.
-
-## Preferred manual UI path
-
-Use the already-authenticated normal Chrome profile if it is still available:
+The already-authenticated normal Chrome profile was used:
 
 ```text
 https://search.google.com/search-console/sitemaps?resource_id=sc-domain%3Aconcretewaco.com
@@ -52,11 +52,12 @@ https://www.concretewaco.com/sitemap.xml
 
 Record:
 
-- new `lastSubmitted` date
-- screenshot or exported sitemap details
-- whether warnings/errors remain `0`
+- new `lastSubmitted` date: `May 12, 2026`
+- `lastRead` date: `May 12, 2026`
+- status: `Success`
+- discovered pages: `43`
 
-If the Chrome session is no longer authenticated, fall back to the API retry path below or sign into a Search Console owner account manually.
+Use the API retry path below only for a future automation cleanup, not for current issue `#6`.
 
 ## API retry path
 
@@ -96,4 +97,4 @@ Update:
 
 - `reports/gsc_sitemap_submit_retry_2026-05-12.md` or a new dated GSC retry report
 - `reports/completion_audit_2026-05-12.md`
-- GitHub issue `#6`
+- GitHub issue `#6` closed
