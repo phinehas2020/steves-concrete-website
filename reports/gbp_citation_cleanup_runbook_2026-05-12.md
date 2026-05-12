@@ -6,6 +6,7 @@ Source reports:
 
 - `reports/gbp_action_pack_2026-05-12.md`
 - `reports/gbp_public_profile_verification_2026-05-12.md`
+- `reports/citation_correction_request_templates_2026-05-12.md`
 - `reports/nap_citation_audit_2026-05-12.md`
 - `reports/public_trust_record_audit_2026-05-12.md`
 - `reports/owner_blocker_packet_2026-05-12.md`
@@ -78,6 +79,8 @@ For each listing:
 - record after NAP
 - save screenshot/export
 - note whether the listing is pending moderation
+
+Use `reports/citation_correction_request_templates_2026-05-12.md` for listing-specific correction language.
 
 ## Report After Cleanup
 

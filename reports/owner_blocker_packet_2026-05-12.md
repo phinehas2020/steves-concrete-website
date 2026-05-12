@@ -152,6 +152,7 @@ Current state:
 - Public GBP/Places verification is documented in `reports/gbp_public_profile_verification_2026-05-12.md`.
 - No GBP dashboard changes were made from this repo session.
 - Cleanup runbook: `reports/gbp_citation_cleanup_runbook_2026-05-12.md`
+- Correction request templates: `reports/citation_correction_request_templates_2026-05-12.md`
 - Read-only Places data confirms the public profile is operational, with address `1045 W Elm Mott Ln, Elm Mott, TX 76640`, phone `(254) 230-3102`, rating `5`, and `33` reviews.
 - Read-only Places data also shows public primary type `general_contractor` / `General contractor` and website URI `http://concretewaco.com/`.
 
@@ -179,6 +180,7 @@ Current state:
 
 - `reports/nap_citation_audit_2026-05-12.md` identifies stale public NAP risks.
 - `reports/public_trust_record_audit_2026-05-12.md` adds trust-profile context.
+- `reports/citation_correction_request_templates_2026-05-12.md` provides listing-specific request language for GBP, Manta, Buzzfile, Levelset, Greater Waco Chamber, BuildZoom, and Porch.
 
 Owner/account action:
 
