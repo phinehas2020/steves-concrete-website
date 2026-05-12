@@ -29,19 +29,20 @@ The audit command was run with `PAGESPEED_API_KEY` populated from the existing l
 
 | Site | Rows | PageSpeed status | Score range | Worst LCP | Worst CLS |
 | --- | ---: | --- | ---: | ---: | ---: |
-| Concrete Waco target | 44 | 44 ok | 78-100 | 5252 ms | 0.228433 |
+| Concrete Waco target | 44 | 44 ok | 85-100 | 4203 ms | 0.007695 |
 | Concrete Contractor NYC reference | 194 | 194 ok | 37-69 | 18696 ms | 0.130417 |
 
 ## Target pages needing later performance attention
 
 | URL | Mobile score | LCP | CLS |
 | --- | ---: | ---: | ---: |
-| `https://www.concretewaco.com/jobs` | 78 | 3619 ms | 0.228433 |
-| `https://www.concretewaco.com/sports-court-coating-waco-tx` | 80 | 5252 ms | 0 |
+| `https://www.concretewaco.com/jobs` | 85 | 4203 ms | 0.007695 |
 | `https://www.concretewaco.com/mcgregor-tx-concrete-contractor` | 85 | 1868 ms | 0 |
+| `https://www.concretewaco.com/commercial-concrete-contractor-waco-tx` | 93 | 2702 ms | 0 |
 
 ## Notes
 
 - Initial run produced transient PSI failures on a small set of URLs while the key/service change propagated.
 - Failed rows were retried with the same key, and the CSV now has `pagespeed_mobile_status=ok` for all 238 rows.
+- Follow-up tuning moved the target score range from `78-100` to `85-100`; details are in `reports/pagespeed_performance_tuning_2026-05-12.md`.
 - This completes the `goal.md` PageSpeed API capture requirement for the current audit snapshot.

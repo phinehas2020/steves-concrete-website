@@ -82,7 +82,8 @@
   - Reran `scripts/seo-phase1-audit.mjs` with `PAGESPEED_API_KEY` populated from the existing local key.
   - Refreshed `reports/audit_2026-05-12.csv` and `reports/link_graph.html`.
   - Final PageSpeed coverage: `44/44` Concrete Waco target rows ok and `194/194` Concrete Contractor NYC reference rows ok.
-  - Target mobile score range: `78` to `100`; worst target LCP: `5252ms`; worst target CLS: `0.228433`.
+  - Follow-up tuning report: `reports/pagespeed_performance_tuning_2026-05-12.md`
+  - Target mobile score range after tuning: `85` to `100`; worst target LCP: `4203ms`; worst target CLS: `0.007695`.
 - Local Lighthouse fallback sweep passed:
   - Report: `reports/lighthouse_sweep_2026-05-12.md`
   - Command: `npm run perf:sweep -- --json`

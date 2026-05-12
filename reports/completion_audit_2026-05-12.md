@@ -10,7 +10,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | --- | --- | --- |
 | Phase 1 crawl target and reference sites | `reports/audit_2026-05-12.csv`; `scripts/seo-phase1-audit.mjs` | Complete |
 | Phase 1 link graph | `reports/link_graph.html` | Complete |
-| Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | `reports/pagespeed_api_verification_2026-05-12.md`; `reports/audit_2026-05-12.csv`; PageSpeed API enabled for the existing key; all 44 target rows and 194 reference rows now have `pagespeed_mobile_status=ok` with mobile score/LCP/CLS fields captured | Complete |
+| Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | `reports/pagespeed_api_verification_2026-05-12.md`; `reports/pagespeed_performance_tuning_2026-05-12.md`; `reports/audit_2026-05-12.csv`; PageSpeed API enabled for the existing key; all 44 target rows and 194 reference rows now have `pagespeed_mobile_status=ok` with mobile score/LCP/CLS fields captured; target score range improved to 85-100 | Complete |
 | Phase 1 mobile 375px render check | `scripts/mobile-render-sweep.mjs`; `reports/mobile_render_sweep_2026-05-12.md`; `reports/mobile_render_sweep_2026-05-12.json`; all 43 sitemap URLs passed at 375x812 | Complete |
 | Phase 2 ranked remediation plan | `reports/remediation_plan.md` | Complete |
 | Schema markup: LocalBusiness homepage, Service pages, BreadcrumbList, FAQPage, Place | `scripts/prerender-routes.mjs`; local static schema check across 54 files; live Rich Results Test result `WYow_kvZWHMaxyHIYd20OA` | Complete for tested live driveway page and local generated pages |

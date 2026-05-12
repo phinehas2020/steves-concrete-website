@@ -18,7 +18,7 @@ Source artifacts:
 | CTA and phone prominence | Phone on 93%; forms not detected | Phone/forms on 100% | 7/10 | Phone is strong; form markup is deferred or not crawl-visible. |
 | Trust signals | Reviews 100%; license 7%; insurance 9% | Reviews 49%; license 54%; insurance 47% | 6/10 | Reviews are strong; verified license/insurance claims need broader placement. |
 | Local signal depth | Waco/McLennan references present | NYC borough/location pages deep | 6/10 | Waco pages need more neighborhood, soil, permit, and project specifics. |
-| Mobile/CWV evidence | PageSpeed API captured for 44/44 target URLs; mobile score range 78-100 | PageSpeed API captured for 194/194 reference URLs; mobile score range 37-69 | 9/10 | Waco now has stronger measured mobile performance, with `/jobs` and sports-court coating pages still worth later tuning. |
+| Mobile/CWV evidence | PageSpeed API captured for 44/44 target URLs; mobile score range 85-100 | PageSpeed API captured for 194/194 reference URLs; mobile score range 37-69 | 9/10 | Waco now has stronger measured mobile performance; `/jobs` still has the slowest target LCP and can be tuned further later. |
 
 ## Ranked Fix List
 
