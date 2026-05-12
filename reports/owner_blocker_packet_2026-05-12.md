@@ -8,7 +8,10 @@ GitHub tracking issues:
 - `#7` - `Collect owner trust proof for EEAT claims`
 - `#8` - `Complete GBP and citation cleanup`
 - `#9` - `Confirm image GPS metadata permissions`
-- `#10` - `Decide service-page PR workflow exception`
+
+Closed/completed tracking:
+
+- `#10` - `Decide service-page PR workflow exception`; closed after audit reconstruction PRs `#11` through `#15`
 
 ## 1. PageSpeed Insights API - resolved
 
@@ -45,11 +48,13 @@ Current state:
 - Existing sitemap is present with zero warnings and zero errors.
 - Fresh MCP `list_sites` reports `siteOwner`, but API submit still returned `403 Insufficient Permission`.
 - Direct Search Console API submit with the active gcloud token returned `403` because the token has insufficient authentication scopes.
+- Normal Chrome profile can reach the authenticated Search Console sitemap page for `concretewaco.com`.
+- The existing sitemap row shows `Success`, submitted `Mar 2, 2026`, last read `May 11, 2026`, and `43` discovered pages.
 - See `reports/gsc_sitemap_submit_retry_2026-05-12.md`.
 
 Owner/account action:
 
-- In GSC, manually resubmit `https://www.concretewaco.com/sitemap.xml`, or refresh Google auth with Search Console write scope and retry API submission.
+- Confirm the final GSC Submit click for `https://www.concretewaco.com/sitemap.xml` in the already-authenticated Chrome profile, or refresh Google auth with Search Console write scope and retry API submission.
 
 Verification evidence to collect:
 
@@ -139,13 +144,19 @@ Verification evidence:
 Current state:
 
 - GBP action pack is drafted in `reports/gbp_action_pack_2026-05-12.md`.
+- Public GBP/Places verification is documented in `reports/gbp_public_profile_verification_2026-05-12.md`.
 - No GBP dashboard changes were made from this repo session.
 - Cleanup runbook: `reports/gbp_citation_cleanup_runbook_2026-05-12.md`
+- Read-only Places data confirms the public profile is operational, with address `1045 W Elm Mott Ln, Elm Mott, TX 76640`, phone `(254) 230-3102`, rating `5`, and `33` reviews.
+- Read-only Places data also shows public primary type `general_contractor` / `General contractor` and website URI `http://concretewaco.com/`.
 
 Owner/account action:
 
-- Confirm primary category is `Concrete contractor`.
+- Confirm the actual GBP dashboard primary category and switch it to `Concrete contractor` if available and accurate.
+- Keep `General contractor` only as a secondary category if accurate.
+- Update the website field to `https://www.concretewaco.com/` if the dashboard allows it.
 - Confirm service area covers McLennan County.
+- Confirm current hours; public Places data currently shows Monday-Saturday `8:00 AM - 6:00 PM`, Sunday closed.
 - Publish one post per week using real project photos.
 - Seed Q&A only with owner-authored answers.
 - Respond to reviews within 48 hours.
@@ -153,6 +164,7 @@ Owner/account action:
 Verification evidence:
 
 - GBP dashboard screenshots or exported profile details after edits.
+- Screenshot/export of primary category and website field.
 - New post URLs/screenshots.
 - Review response timestamps.
 
@@ -174,7 +186,30 @@ Verification evidence:
 - Updated listing URLs.
 - Before/after screenshots or exported listing details.
 
-## 9. Louisiana licensing-record context
+## 9. Image GPS metadata permission
+
+Current state:
+
+- Corrected rescan: `reports/image_gps_rescan_2026-05-12.md`
+- Permission form: `reports/image_gps_permission_form_2026-05-12.md`
+- The first scan incorrectly reported `0` located files because the parser mishandled `mdls -raw` NUL-separated output.
+- Corrected rescan found `24` of `87` public image files with macOS latitude/longitude metadata.
+- `exiftool` is not installed locally; sampled `sips` GPS fields returned `<nil>`, so the current evidence should be treated as macOS metadata evidence until final EXIF tooling is used.
+
+Owner/account action:
+
+- Decide whether existing location metadata on jobsite/customer originals should be retained or stripped for privacy.
+- Decide whether approved approximate GPS metadata should be added to selected project photos.
+- Decide whether exact coordinates, approximate neighborhood coordinates, or canonical business/Waco-area coordinates are acceptable.
+- Confirm whether residential/customer projects should be excluded.
+
+Verification evidence:
+
+- Completed `reports/image_gps_permission_form_2026-05-12.md`.
+- Owner-approved policy for retaining, stripping, normalizing, adding, or leaving metadata unchanged.
+- If changes are approved, rerun a dated scan after using `exiftool` or equivalent EXIF tooling.
+
+## 10. Louisiana licensing-record context
 
 Current state:
 
