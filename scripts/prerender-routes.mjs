@@ -1642,22 +1642,7 @@ function buildRouteJsonLd(meta, canonical) {
   if (meta.schemaKind === 'home') {
     nodes.push(localBusinessSchema({ includeOfferCatalog: true }))
   } else {
-    nodes.push({
-      '@id': ORGANIZATION_ID,
-      '@type': 'Organization',
-      name: SITE_NAME,
-      url: `${SITE_URL}/`,
-      telephone: PHONE_SCHEMA,
-      logo: `${SITE_URL}/logo.png`,
-      image: DEFAULT_IMAGE,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Waco',
-        addressRegion: 'TX',
-        addressCountry: 'US',
-      },
-      sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
-    })
+    nodes.push(localBusinessSchema())
   }
 
   return {
