@@ -1,5 +1,30 @@
 export const staticBlogPosts = [
   {
+    id: 'static-melody-grove-concrete-paving-prep-2026-05-12',
+    created_at: '2026-05-12T14:28:00.000Z',
+    updated_at: '2026-05-12T14:28:00.000Z',
+    published_at: '2026-05-12T14:28:00.000Z',
+    title: 'Melody Grove Concrete Paving Prep in Waco, TX',
+    slug: 'melody-grove-concrete-paving-prep-waco-tx',
+    excerpt:
+      'A field update from the Melody Grove housing project in Waco, showing forms, rebar, and prep work before more concrete paving and sidewalk placement.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/melody-grove-concrete-paving-prep/01-bf3b202e-bfc8-4345-9c93-5152dda2d1b3.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1gvcf8h',
+    content: [
+      'This batch is from the Melody Grove housing project in Waco, where the crew was getting ready for more concrete paving and sidewalk work. The photos show the job before the pour: forms set, rebar in place, grade work cleaned up, and the crew checking the layout before concrete placement.',
+      'That prep is not the shiny part of the job, but it is what makes the finished concrete hold up. On a housing project like this, the paving and sidewalks have to line up with doors, walks, drainage, parking areas, and everyday foot traffic. If the forms are off or the base is loose, the problem shows up after the slab is already down.',
+      'For concrete paving in Waco, especially around apartment, housing, and commercial sites, the small steps matter. Rebar spacing, tie-ins, form height, compacted base, and clean edges all help the finished concrete carry traffic and shed water the right way.',
+      'SLA Concrete Works handles concrete sidewalks, flatwork, paving, driveways, patios, and repair work around Waco and Central Texas. If you have a similar project, we can look at the site, talk through the prep, and give a practical estimate before the concrete truck shows up.',
+      '![Forms and rebar set for concrete paving at Melody Grove in Waco, TX](/blog-images/melody-grove-concrete-paving-prep/01-bf3b202e-bfc8-4345-9c93-5152dda2d1b3.jpg)',
+      '![Concrete sidewalk and paving prep beside Melody Grove housing units in Waco](/blog-images/melody-grove-concrete-paving-prep/02-ae26b793-b1ea-4cdd-bf6b-ae6f6f812ace.jpg)',
+      '![Crew preparing concrete forms and reinforcement at the Melody Grove project](/blog-images/melody-grove-concrete-paving-prep/03-425ca989-75c8-4eb1-a98f-c7ef9ce9f8b2.jpg)',
+      '![Melody Grove concrete paving layout before the sidewalk pour in Waco](/blog-images/melody-grove-concrete-paving-prep/04-9bf7f67a-da5d-4a80-b314-2653e433a806.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-shop-slab-base-prep-waco-2026-05-11',
     created_at: '2026-05-11T14:06:21.000Z',
     updated_at: '2026-05-11T14:06:21.000Z',
