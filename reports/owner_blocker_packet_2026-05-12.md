@@ -2,6 +2,12 @@
 
 Purpose: turn the remaining `goal.md` blockers into concrete owner/account requests. Nothing below should be filled in by guessing; each item needs owner proof, account access, or an enabled API permission.
 
+GitHub tracking issues:
+
+- `#6` - `Resolve GSC sitemap resubmission permission`
+- `#7` - `Collect owner trust proof for EEAT claims`
+- `#8` - `Complete GBP and citation cleanup`
+
 ## 1. PageSpeed Insights API - resolved
 
 Current state:

@@ -172,6 +172,10 @@
   - Report: `reports/owner_blocker_packet_2026-05-12.md`
   - Converts the remaining PageSpeed API, GSC sitemap submit, insurance, BBB, credentials, named case study, GBP, citation cleanup, and Louisiana licensing-record blockers into exact owner/account requests.
   - Includes verification evidence to collect for each blocked item.
+  - GitHub blocker issues created:
+    - `#6` - `Resolve GSC sitemap resubmission permission`
+    - `#7` - `Collect owner trust proof for EEAT claims`
+    - `#8` - `Complete GBP and citation cleanup`
 - Service-page PR workflow exception documented:
   - Report: `reports/service_page_pr_workflow_exception_2026-05-12.md`
   - `gh pr list --state all --limit 20` found only PR `#2` for Vercel Analytics and PR `#1` for the SEO/GEO content strategy guide.
