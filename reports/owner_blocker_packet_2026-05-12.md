@@ -36,11 +36,12 @@ Current state:
 - GSC property `sc-domain:concretewaco.com` is accessible.
 - Existing sitemap is present with zero warnings and zero errors.
 - Fresh MCP `list_sites` reports `siteOwner`, but API submit still returned `403 Insufficient Permission`.
+- Direct Search Console API submit with the active gcloud token returned `403` because the token has insufficient authentication scopes.
 - See `reports/gsc_sitemap_submit_retry_2026-05-12.md`.
 
 Owner/account action:
 
-- In GSC, manually resubmit `https://www.concretewaco.com/sitemap.xml`, or give the API identity Owner/Full permission for sitemap submission.
+- In GSC, manually resubmit `https://www.concretewaco.com/sitemap.xml`, or refresh Google auth with Search Console write scope and retry API submission.
 
 Verification evidence to collect:
 

@@ -30,7 +30,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Trust/EEAT: named case studies with written permission | Not provided | Blocked |
 | Sitemap: remove changefreq/priority, add lastmod | `scripts/generate-sitemap.mjs`; `public/sitemap.xml`; live sitemap check showed 43 URLs, 43 lastmods, no changefreq/priority | Complete |
 | Robots: verify `/admin` disallow | `public/robots.txt`; verification report confirms `/admin` disallow | Complete |
-| Submit sitemap to GSC | `reports/gsc_sitemap_submit_retry_2026-05-12.md`; existing sitemap found in GSC with 0 warnings/0 errors; fresh MCP submit attempt still returned 403 despite `siteOwner` list access | Partially complete; resubmit requires UI/API permission fix |
+| Submit sitemap to GSC | `reports/gsc_sitemap_submit_retry_2026-05-12.md`; existing sitemap found in GSC with 0 warnings/0 errors; fresh MCP submit attempt still returned 403 despite `siteOwner` list access; direct API attempt returned `Request had insufficient authentication scopes` | Partially complete; resubmit requires UI/API write-scope fix |
 | GSC coverage clean | GSC sitemap list reported 0 warnings and 0 errors | Complete for sitemap report available through API |
 | Google Business Profile optimization | No GBP management API/tool available in this session | Blocked/off-site |
 | NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md`; `reports/public_trust_record_audit_2026-05-12.md`; public web and Google Places audit found current canonical NAP plus stale Manta/Buzzfile/Levelset risks; trust-profile search added BuildZoom, Porch, BBB, and Louisiana licensing-record notes | Complete for public audit; corrections remain off-site |
@@ -52,7 +52,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Remaining action list
 
-1. Resubmit `https://www.concretewaco.com/sitemap.xml` in GSC UI or refresh API permissions so `submit_sitemap` succeeds.
+1. Resubmit `https://www.concretewaco.com/sitemap.xml` in GSC UI or refresh Google auth with Search Console write scope so `submit_sitemap` succeeds.
 2. Use `reports/owner_blocker_packet_2026-05-12.md` to collect owner/trust facts before adding more EEAT claims:
    - insurance carrier and coverage type
    - BBB profile/rating, if applicable

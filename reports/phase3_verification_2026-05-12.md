@@ -64,8 +64,9 @@
   - GSC warnings: `0`
   - GSC errors: `0`
   - Fresh MCP `list_sites` reported `siteOwner`, but API sitemap submit still returned `403 Insufficient Permission`.
+  - Direct Search Console API submit with the active gcloud access token returned `403` with `Request had insufficient authentication scopes`.
   - Report: `reports/gsc_sitemap_submit_retry_2026-05-12.md`
-  - Resubmission should be done from the GSC UI or after refreshing API permissions/scopes.
+  - Resubmission should be done from the GSC UI or after refreshing Google auth with Search Console write scope.
 - Google Rich Results Test on live driveway page passed after deployment:
   - URL tested: `https://www.concretewaco.com/concrete-driveways-waco-tx`
   - Result id: `WYow_kvZWHMaxyHIYd20OA`

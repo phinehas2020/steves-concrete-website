@@ -16,7 +16,7 @@ Purpose: refresh the sitemap-submission evidence after the GSC MCP tool became a
 
 ## Submit result
 
-Attempted:
+MCP attempt:
 
 ```text
 siteUrl: sc-domain:concretewaco.com
@@ -29,6 +29,18 @@ Result:
 403: Insufficient Permission
 ```
 
+Direct Search Console API attempt with the active `gcloud auth print-access-token` token:
+
+```text
+PUT https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Aconcretewaco.com/sitemaps/https%3A%2F%2Fwww.concretewaco.com%2Fsitemap.xml
+```
+
+Result:
+
+```text
+403: Request had insufficient authentication scopes.
+```
+
 ## Status
 
-The sitemap exists in GSC and has no reported warnings or errors, but API resubmission remains blocked. Manual GSC UI resubmission or a different API identity/scope is still required.
+The sitemap exists in GSC and has no reported warnings or errors, but API resubmission remains blocked by OAuth scope. Manual GSC UI resubmission or a Google auth flow with Search Console write scope is still required.
