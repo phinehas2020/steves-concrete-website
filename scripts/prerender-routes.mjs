@@ -748,10 +748,10 @@ function renderServiceContent(service) {
 }
 
 function renderSeoServiceContent(service) {
-  const sectionBullets = (service.sections || []).map((section) => {
-    const detail = (section.paragraphs || []).filter(Boolean).join(' ')
-    return `${section.heading}: ${truncateSentence(detail, 190)}`
-  })
+  const serviceSections = (service.sections || []).map((section) => ({
+    title: section.heading,
+    paragraphs: section.paragraphs || [],
+  }))
 
   const relatedPages = seoServicePageData
     .filter((item) => item.slug !== service.slug && !item.redirectTo)
@@ -779,8 +779,11 @@ function renderSeoServiceContent(service) {
     sections: [
       {
         title: `What to expect with ${service.title.toLowerCase()}`,
-        bullets: sectionBullets,
+        paragraphs: [
+          `${SITE_NAME} plans each ${service.title.toLowerCase()} project around site access, drainage, soil movement, finish expectations, and the way the slab will be used after installation.`,
+        ],
       },
+      ...serviceSections,
       {
         title: 'Related service pages',
         links: relatedPages,
