@@ -45,12 +45,13 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 ## Current production state
 
-- Recent tracked repo commit verified during this audit pass: `902b605` - `Phase 3 label reconstruction PRs`
-- Current local build verification after report/script updates: `npm run build` passed on 2026-05-12 after commit `2c503e8`; generated sitemap still reported `43` URLs.
+- Recent tracked repo commit verified during this audit pass: `b2bc912` - `Phase 3 sync GBP issue labels`
+- Current local build verification after latest state check: `npm run build` passed on 2026-05-12 at `b2bc912`; generated sitemap still reported `43` URLs.
 - Latest content deployment verified for code commit: `cac277b`
 - Handoff index: `reports/seo_handoff_index_2026-05-12.md`
-- Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -12` for the exact current HEAD.
-- Latest report-only deployment checked before the GSC baseline: `dpl_E3396ZExFvnabJim1onv6RmQ7ZdX`, commit `98bd215225360b55b94702f9b348a623dbd43f86`, state `READY`
+- Later report/audit commits pushed to `origin/main` are documentation and tracking updates only; use `git log --oneline --decorate -15` for the exact current HEAD.
+- Latest report-only production deployment verified after the GBP label sync: `dpl_AvxMrGM6jZB52omWTsuzgoLQxyK9`, commit `b2bc912a1df618f3a5e2252e17243f0cd3d9e5a9`, state `READY`
+- GitHub reconstruction PRs `#11` through `#15` were rechecked on 2026-05-12 and remain open with the `audit-reconstruction` label.
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
 ## Remaining action list
