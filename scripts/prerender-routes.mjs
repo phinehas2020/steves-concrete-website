@@ -6,6 +6,7 @@ import {
   isServicePageCanonicalized,
 } from '../src/data/servicePages.js'
 import { seoServicePages as seoServicePageData } from '../src/data/seoServicePages.js'
+import { getServiceGalleryImages } from '../src/data/clientProjects.js'
 import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
@@ -521,7 +522,15 @@ function renderFaqList(items) {
     .join('')
 }
 
-function renderSection({ title, paragraphs = [], bullets = [], orderedBullets = false, links = [], faq = [] }) {
+function renderSection({
+  title,
+  paragraphs = [],
+  bullets = [],
+  orderedBullets = false,
+  links = [],
+  images = [],
+  faq = [],
+}) {
   const paragraphHtml = paragraphs
     .filter(Boolean)
     .map((paragraph) => `<p style="margin:0 0 12px;color:#57534e;">${escapeHtml(paragraph)}</p>`)
@@ -535,7 +544,23 @@ function renderSection({ title, paragraphs = [], bullets = [], orderedBullets = 
       : ''
   }${paragraphHtml}${renderBulletList(bullets, orderedBullets)}${renderLinkList(links)}${renderFaqList(
     faq,
-  )}</section>`
+  )}${renderImageGrid(images)}</section>`
+}
+
+function renderImageGrid(images) {
+  if (!images || images.length === 0) return ''
+  return `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:16px;">${images
+    .map(
+      (image) =>
+        `<figure style="margin:0;border:1px solid #e7e5e4;border-radius:8px;overflow:hidden;background:#fff;"><img src="${escapeHtml(
+          image.src,
+        )}" alt="${escapeHtml(
+          image.alt,
+        )}" loading="lazy" width="480" height="360" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;"><figcaption style="padding:10px 12px;color:#57534e;font-size:0.92rem;"><strong style="display:block;color:#1c1917;">${escapeHtml(
+          image.title,
+        )}</strong>${escapeHtml(image.location || '')}</figcaption></figure>`,
+    )
+    .join('')}</div>`
 }
 
 function renderPage({
@@ -752,6 +777,7 @@ function renderSeoServiceContent(service) {
     title: section.heading,
     paragraphs: section.paragraphs || [],
   }))
+  const galleryImages = getServiceGalleryImages(service.slug, service.title)
 
   const relatedPages = seoServicePageData
     .filter((item) => item.slug !== service.slug && !item.redirectTo)
@@ -784,6 +810,13 @@ function renderSeoServiceContent(service) {
         ],
       },
       ...serviceSections,
+      {
+        title: 'Recent project photos for planning',
+        paragraphs: [
+          'These project photos show the type of prep, forming, finish, access, and cleanup details customers often compare before requesting an estimate.',
+        ],
+        images: galleryImages,
+      },
       {
         title: 'Related service pages',
         links: relatedPages,
