@@ -29,15 +29,15 @@ The audit command was run with `PAGESPEED_API_KEY` populated from the existing l
 
 | Site | Rows | PageSpeed status | Score range | Worst LCP | Worst CLS |
 | --- | ---: | --- | ---: | ---: | ---: |
-| Concrete Waco target | 44 | 44 ok | 85-100 | 4203 ms | 0.007695 |
+| Concrete Waco target | 44 | 44 ok | 85-100 | 3751 ms | 0.007695 |
 | Concrete Contractor NYC reference | 194 | 194 ok | 37-69 | 18696 ms | 0.130417 |
 
 ## Target pages needing later performance attention
 
 | URL | Mobile score | LCP | CLS |
 | --- | ---: | ---: | ---: |
-| `https://www.concretewaco.com/jobs` | 85 | 4203 ms | 0.007695 |
 | `https://www.concretewaco.com/mcgregor-tx-concrete-contractor` | 85 | 1868 ms | 0 |
+| `https://www.concretewaco.com/jobs` | 88 | 3751 ms | 0.007695 |
 | `https://www.concretewaco.com/commercial-concrete-contractor-waco-tx` | 93 | 2702 ms | 0 |
 
 ## Notes

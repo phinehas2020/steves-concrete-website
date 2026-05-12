@@ -16,20 +16,21 @@ Purpose: tune the lowest-scoring target pages found after the keyed PageSpeed AP
 - Vercel production deployment `dpl_EtpwKonQziBAgQLMGZA21uivM7Fa` became ready and was aliased to `https://www.concretewaco.com`.
 - Keyed PageSpeed Insights mobile checks were rerun against live production URLs.
 - A later experiment to prerender project-gallery thumbnails on `/jobs` was reverted after live PSI regressed to score `74` and LCP `6527 ms`.
-- The revert deployment `dpl_222AyhHpotiCNMWiowJNbhsa3TWr` became ready; direct HTTP checks on `/jobs` returned `200` quickly, while immediate post-revert PSI retries hit transient `FAILED_DOCUMENT_REQUEST` timeouts from Google.
+- The revert deployment `dpl_222AyhHpotiCNMWiowJNbhsa3TWr` became ready; direct HTTP checks on `/jobs` returned `200` quickly.
+- After transient PSI `FAILED_DOCUMENT_REQUEST` timeouts cleared, a settled post-revert PageSpeed run returned `/jobs` score `88`, LCP `3751 ms`, TBT `0`, and CLS `0.007695`.
 
 ## Before and after
 
 | URL | Before score | After score | Before LCP | After LCP | Before CLS | After CLS |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `https://www.concretewaco.com/jobs` | 78 | 85 | 3619 ms | 4203 ms | 0.228433 | 0.007695 |
+| `https://www.concretewaco.com/jobs` | 78 | 88 | 3619 ms | 3751 ms | 0.228433 | 0.007695 |
 | `https://www.concretewaco.com/sports-court-coating-waco-tx` | 80 | 96 | 5252 ms | 2102 ms | 0 | 0 |
 
 ## Current target summary
 
 - Target URLs with PageSpeed status ok: `44/44`
 - Target mobile score range: `85-100`
-- Worst target LCP: `4203 ms`
+- Worst target LCP: `3751 ms`
 - Worst target CLS: `0.007695`
 
 ## Notes
