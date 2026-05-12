@@ -19,6 +19,10 @@
 - `109cd0a` - Phase 3 add organization schema recommendations
 - `db53eb9` - Phase 3 remove organization rich result warnings
 - `18c515b` - Phase 3 use verified business address schema
+- `40f7e6b` - Phase 3 add NAP citation audit
+- `067f605` - Phase 3 add GSC performance baseline
+- `61079d8` - Phase 3 document canonical redirect check
+- `7f49224` - Phase 3 improve hardscape quick win pages
 
 ## Verification run
 
@@ -68,6 +72,26 @@
   - `https://www.concretewaco.com/` returned `429` quota exceeded.
   - `https://www.concretewaco.com/concrete-driveways-waco-tx` returned `429` quota exceeded.
   - No `PAGESPEED_API_KEY` is configured in local environment.
+- GSC performance baseline added:
+  - Report: `reports/gsc_performance_baseline_2026-05-12.md`
+  - Date range: `2026-02-11` through `2026-05-10`, web search, USA.
+  - Device totals: `127` clicks, `10,616` impressions.
+  - Quick-win pages identified: `/retaining-walls-waco-tx`, `/hardscaping-waco-tx`, `/hewitt-tx-concrete-contractor`, `/woodway-tx-concrete-contractor`, and the homepage.
+- Canonical redirect check passed on live URLs:
+  - `http://concretewaco.com/` returned `308` to `https://concretewaco.com/`.
+  - `https://concretewaco.com/` returned `308` to `https://www.concretewaco.com/`.
+  - `http://www.concretewaco.com/` returned `308` to `https://www.concretewaco.com/`.
+  - `https://www.concretewaco.com/` returned `200`.
+- Hardscape quick-win page verification:
+  - `npm run build` passed after the retaining-wall and hardscaping copy/metadata pass.
+  - Static check after build:
+    - `/retaining-walls-waco-tx`: `1697` words, `8` images, `0` missing alt attributes, `1` parseable JSON-LD block.
+    - `/hardscaping-waco-tx`: `1654` words, `8` images, `0` missing alt attributes, `1` parseable JSON-LD block.
+  - Production deployment for commit `7f49224` became ready on Vercel.
+  - Live metadata check passed:
+    - `/retaining-walls-waco-tx` title: `Retaining Wall Installation Waco TX | SLA Concrete Works LLC`.
+    - `/hardscaping-waco-tx` title: `Hardscaping Contractor Waco TX | Patios, Walkways &amp; Walls`.
+    - Both live pages returned exactly `1` JSON-LD script in static HTML.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.
