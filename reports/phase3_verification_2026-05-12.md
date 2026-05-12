@@ -157,6 +157,10 @@
   - Sources checked: Louisiana State Licensing Board for Contractors public violation database and September 18, 2025 agenda PDF, BuildZoom, Porch, and public BBB search results.
   - The audit supports keeping license, insurance, and BBB language conservative until owner/legal/account proof is available.
   - It also reinforces the existing Texas-specific permit-aware wording and documents that no broad license, BBB, or insurance badge claim should be restored from public search alone.
+- Owner blocker packet completed:
+  - Report: `reports/owner_blocker_packet_2026-05-12.md`
+  - Converts the remaining PageSpeed API, GSC sitemap submit, insurance, BBB, credentials, named case study, GBP, citation cleanup, and Louisiana licensing-record blockers into exact owner/account requests.
+  - Includes verification evidence to collect for each blocked item.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.

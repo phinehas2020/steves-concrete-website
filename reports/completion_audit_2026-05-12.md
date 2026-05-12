@@ -10,7 +10,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | --- | --- | --- |
 | Phase 1 crawl target and reference sites | `reports/audit_2026-05-12.csv`; `scripts/seo-phase1-audit.mjs` | Complete |
 | Phase 1 link graph | `reports/link_graph.html` | Complete |
-| Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | Audit script records unavailable/quota state; live PSI attempt returned `429`; existing Google Places key returned `API_KEY_SERVICE_BLOCKED`; `reports/lighthouse_sweep_2026-05-12.md` adds local Lighthouse fallback evidence | Blocked for PSI API; Lighthouse fallback complete |
+| Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | Audit script records unavailable/quota state; live PSI attempt returned `429`; existing Google Places key returned `API_KEY_SERVICE_BLOCKED`; `reports/lighthouse_sweep_2026-05-12.md` adds local Lighthouse fallback evidence; `reports/owner_blocker_packet_2026-05-12.md` documents the exact key/access needed | Blocked for PSI API; Lighthouse fallback complete |
 | Phase 1 mobile 375px render check | `scripts/mobile-render-sweep.mjs`; `reports/mobile_render_sweep_2026-05-12.md`; `reports/mobile_render_sweep_2026-05-12.json`; all 43 sitemap URLs passed at 375x812 | Complete |
 | Phase 2 ranked remediation plan | `reports/remediation_plan.md` | Complete |
 | Schema markup: LocalBusiness homepage, Service pages, BreadcrumbList, FAQPage, Place | `scripts/prerender-routes.mjs`; local static schema check across 54 files; live Rich Results Test result `WYow_kvZWHMaxyHIYd20OA` | Complete for tested live driveway page and local generated pages |
@@ -30,11 +30,11 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Trust/EEAT: named case studies with written permission | Not provided | Blocked |
 | Sitemap: remove changefreq/priority, add lastmod | `scripts/generate-sitemap.mjs`; `public/sitemap.xml`; live sitemap check showed 43 URLs, 43 lastmods, no changefreq/priority | Complete |
 | Robots: verify `/admin` disallow | `public/robots.txt`; verification report confirms `/admin` disallow | Complete |
-| Submit sitemap to GSC | Existing sitemap found in GSC with 0 warnings/0 errors; API submit attempt returned 403 | Partially complete; resubmit requires UI/API permission fix |
+| Submit sitemap to GSC | Existing sitemap found in GSC with 0 warnings/0 errors; API submit attempt returned 403; `reports/owner_blocker_packet_2026-05-12.md` records the exact owner/account action needed | Partially complete; resubmit requires UI/API permission fix |
 | GSC coverage clean | GSC sitemap list reported 0 warnings and 0 errors | Complete for sitemap report available through API |
 | Google Business Profile optimization | No GBP management API/tool available in this session | Blocked/off-site |
 | NAP/citation audit | `reports/nap_citation_audit_2026-05-12.md`; `reports/public_trust_record_audit_2026-05-12.md`; public web and Google Places audit found current canonical NAP plus stale Manta/Buzzfile/Levelset risks; trust-profile search added BuildZoom, Porch, BBB, and Louisiana licensing-record notes | Complete for public audit; corrections remain off-site |
-| GBP posts, Q&A, review outreach | `reports/gbp_action_pack_2026-05-12.md` provides owner-authored Q&A prompts, GBP post drafts, review outreach templates, and response guidelines | Draft/action pack complete; publishing remains blocked/off-site and owner-authored answers are still required |
+| GBP posts, Q&A, review outreach | `reports/gbp_action_pack_2026-05-12.md` provides owner-authored Q&A prompts, GBP post drafts, review outreach templates, and response guidelines; `reports/owner_blocker_packet_2026-05-12.md` turns the dashboard-side work into a verification checklist | Draft/action pack complete; publishing remains blocked/off-site and owner-authored answers are still required |
 | Baseline rankings final report | `reports/baseline_rankings.md`; Semrush live data used; `reports/gsc_performance_baseline_2026-05-12.md` adds 90-day GSC query/page baseline | Complete |
 | GSC-driven quick-win page pass | Commit `7f49224`; `/retaining-walls-waco-tx` and `/hardscaping-waco-tx` metadata/copy improved based on GSC opportunities; build and live metadata checks passed | Complete for first two priority pages |
 | GSC-driven location-page pass | Commit `cac277b`; `/hewitt-tx-concrete-contractor` and `/woodway-tx-concrete-contractor` planning sections and static metadata improved; build and live metadata checks passed | Complete for first two priority location pages |
@@ -46,7 +46,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 ## Current production state
 
 - Latest content deployment verified for code commit: `cac277b`
-- Recent report-only commits include `40f7e6b` (`Phase 3 add NAP citation audit`), `aa1f84d` (`Phase 3 add completion audit`), and the public trust record audit follow-up
+- Recent report-only commits include `40f7e6b` (`Phase 3 add NAP citation audit`), `aa1f84d` (`Phase 3 add completion audit`), the public trust record audit follow-up, and the owner blocker packet
 - Latest report-only deployment checked before the GSC baseline: `dpl_E3396ZExFvnabJim1onv6RmQ7ZdX`, commit `98bd215225360b55b94702f9b348a623dbd43f86`, state `READY`
 - Production aliases include `www.concretewaco.com` and `concretewaco.com`.
 
@@ -54,7 +54,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 
 1. Add a Google API key with `pagespeedonline.googleapis.com` access enabled, then rerun PageSpeed/Core Web Vitals for homepage and top service pages.
 2. Resubmit `https://www.concretewaco.com/sitemap.xml` in GSC UI or refresh API permissions so `submit_sitemap` succeeds.
-3. Collect owner/trust facts before adding more EEAT claims:
+3. Use `reports/owner_blocker_packet_2026-05-12.md` to collect owner/trust facts before adding more EEAT claims:
    - insurance carrier and coverage type
    - BBB profile/rating, if applicable
    - owner-approved bio/photo/credentials
