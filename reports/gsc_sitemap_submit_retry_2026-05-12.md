@@ -6,6 +6,7 @@ Purpose: refresh the sitemap-submission evidence after the GSC MCP tool became a
 
 - `list_sites` returned `sc-domain:concretewaco.com` with permission level `siteOwner`.
 - `list_sitemaps` returned the existing sitemap `https://www.concretewaco.com/sitemap.xml`.
+- A second in-session retry after commit `74d5f81` produced the same read/write split: list access still worked as `siteOwner`, while `submit_sitemap` still returned `403 Insufficient Permission`.
 - Existing sitemap state:
   - Last submitted: `2026-03-02T17:44:02.762Z`
   - Last downloaded: `2026-05-11T09:40:14.335Z`
@@ -24,6 +25,12 @@ feedpath: https://www.concretewaco.com/sitemap.xml
 ```
 
 Result:
+
+```text
+403: Insufficient Permission
+```
+
+Second MCP retry result:
 
 ```text
 403: Insufficient Permission
