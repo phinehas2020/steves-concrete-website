@@ -38,11 +38,12 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 
 - `main` contains the completed repo-side SEO work and the report/runbook handoff artifacts.
 - The site content/schema/performance work is substantially complete.
+- Search Console is reachable in the normal Chrome profile for `concretewaco.com`, and the sitemap submit form is visible; the final submit click is pending confirmation because it changes account-side state.
 - The goal is not complete because several remaining requirements depend on account access, owner proof, owner permission, or an explicit PR-workflow decision.
 
 ## Resume Order
 
-1. If Google account access is available, resolve issue `#6` first using `reports/gsc_write_scope_runbook_2026-05-12.md`.
+1. If confirmation is available, resolve issue `#6` first by submitting `https://www.concretewaco.com/sitemap.xml` from the already-authenticated Chrome Search Console tab, then verify and close the issue.
 2. If owner proof is available, resolve issue `#7` before adding any insurance, BBB, credential, or named-case-study claims.
 3. If GBP/citation dashboard access is available, resolve issue `#8` using `reports/gbp_citation_cleanup_runbook_2026-05-12.md`.
 4. If image-location permission is available, resolve issue `#9` before writing any EXIF GPS metadata.

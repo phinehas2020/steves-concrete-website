@@ -68,9 +68,11 @@ Handoff index: `reports/seo_handoff_index_2026-05-12.md`
   - Fresh MCP `list_sites` reported `siteOwner`, but repeated API sitemap submit attempts still returned `403 Insufficient Permission`.
   - Direct Search Console API submit with the active gcloud access token returned `403` with `Request had insufficient authentication scopes`.
   - Browser UI attempt at the GSC sitemaps page redirected to Google sign-in, so manual UI resubmission could not be completed from the unauthenticated in-app browser session.
+  - Normal Chrome profile check reached the authenticated Search Console sitemaps page for `concretewaco.com`; the existing sitemap row showed `Success`, `43` discovered pages, submitted `Mar 2, 2026`, and last read `May 11, 2026`.
+  - The final UI submit action is staged but not clicked yet because it changes Google Search Console account state and requires action-time confirmation.
   - Report: `reports/gsc_sitemap_submit_retry_2026-05-12.md`
   - Write-scope runbook: `reports/gsc_write_scope_runbook_2026-05-12.md`
-  - Resubmission should be done from the GSC UI or after refreshing Google auth with Search Console write scope.
+  - Resubmission should be completed from the authenticated GSC UI after confirmation, or after refreshing Google auth with Search Console write scope.
 - Google Rich Results Test on live driveway page passed after deployment:
   - URL tested: `https://www.concretewaco.com/concrete-driveways-waco-tx`
   - Result id: `WYow_kvZWHMaxyHIYd20OA`
@@ -216,4 +218,4 @@ Handoff index: `reports/seo_handoff_index_2026-05-12.md`
   - Weekly GBP posts
   - Q&A seeding with owner-authored answers
   - Review outreach and response workflow
-- Pull requests per service-page rewrite were not opened from this local `main` branch. The current work is represented as atomic local commits.
+- Pull requests per service-page rewrite were reconstructed for audit purposes as PRs `#11` through `#15`; future service-page rewrites should use normal PRs before merging.

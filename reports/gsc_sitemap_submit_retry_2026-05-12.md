@@ -60,9 +60,23 @@ Result:
 The in-app browser redirected to Google sign-in for Google Search Console, so manual UI resubmission could not be completed from this unauthenticated browser session.
 ```
 
+Authenticated Chrome profile check:
+
+```text
+https://search.google.com/search-console/sitemaps?resource_id=sc-domain%3Aconcretewaco.com
+```
+
+Result:
+
+```text
+The normal Google Chrome profile opened the Search Console sitemaps page for concretewaco.com. The existing sitemap row was visible with status Success, submitted Mar 2, 2026, last read May 11, 2026, and 43 discovered pages. The "Add a new sitemap" field and Submit button were visible.
+```
+
+The final submit click was not performed because it changes Google Search Console account state and requires action-time confirmation.
+
 ## Status
 
-The sitemap exists in GSC and has no reported warnings or errors, but API resubmission remains blocked by OAuth scope. Manual GSC UI resubmission from an authenticated browser or a Google auth flow with Search Console write scope is still required.
+The sitemap exists in GSC and has no reported warnings or errors. API resubmission remains blocked by OAuth scope. Manual GSC UI resubmission is now staged in an authenticated Chrome profile, but the final submit action still requires confirmation before changing account-side state.
 
 Follow-up runbook:
 
