@@ -1649,6 +1649,13 @@ function buildRouteJsonLd(meta, canonical) {
       url: `${SITE_URL}/`,
       telephone: PHONE_SCHEMA,
       logo: `${SITE_URL}/logo.png`,
+      image: DEFAULT_IMAGE,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Waco',
+        addressRegion: 'TX',
+        addressCountry: 'US',
+      },
       sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
     })
   }
