@@ -11,6 +11,7 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 | `blocked-owner` | Requires owner input, proof, approval, or permission |
 | `decision-needed` | Requires a documented owner or project decision |
 | `audit-reconstruction` | Audit-only reconstruction PR; do not merge into main |
+| `privacy-review` | Requires owner privacy decision before changing or publishing sensitive data |
 
 ## Tracked Issues
 
@@ -22,7 +23,7 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 | `#6` | `Resolve GSC sitemap resubmission permission` | `blocked-account`, `decision-needed` | closed after authenticated Chrome GSC UI submit on 2026-05-12 |
 | `#7` | `Collect owner trust proof for EEAT claims` | `blocked-owner`, `decision-needed` | none |
 | `#8` | `Complete GBP and citation cleanup` | `blocked-account`, `blocked-owner`, `decision-needed` | none |
-| `#9` | `Confirm image GPS metadata permissions` | `blocked-owner`, `decision-needed` | none |
+| `#9` | `Confirm image GPS metadata permissions` | `blocked-owner`, `decision-needed`, `privacy-review` | none |
 | `#10` | `Decide service-page PR workflow exception` | `decision-needed` | closed after audit reconstruction PRs `#11`-`#15` were created |
 
 ## Notes
@@ -31,5 +32,6 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 - Issue `#6` is closed because authenticated Chrome Search Console UI resubmission succeeded and GSC showed `Submitted: May 12, 2026`, `Last read: May 12, 2026`, `Status: Success`, and `43` discovered pages.
 - Issues `#7` through `#9` remain open because they require owner proof/permission, explicit approval, GBP/citation dashboard work, or a documented decision.
 - Issue `#8` has both `blocked-account` and `blocked-owner`: dashboard access was confirmed read-only, but externally visible edits still require explicit approval.
+- Issue `#9` has `privacy-review` because exact image-location metadata can point near real jobsite/customer locations; owner policy is required before retaining, stripping, normalizing, or adding GPS metadata.
 - Issue `#10` is closed because reconstruction PRs `#11` through `#15` now exist.
 - PRs `#11` through `#15` are open audit artifacts and have the `audit-reconstruction` label.
