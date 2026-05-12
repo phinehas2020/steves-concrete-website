@@ -60,4 +60,4 @@ Follow-up fetches after the owner-decision packet confirmed the highest-priority
 
 - Buzzfile still renders `757 SHADY LN, Waco, TX 76705` and `(254) 412-2927` on the public page and in the removal/update form data.
 - BuildZoom still renders `1045 W ELM MOTT DR, Elm Mott, TX 76640`, with no visible canonical phone/site in the fetched page. The page also exposes permit and `License: Not Required` language, so it may be useful as public permit evidence after owner/legal review, but it should not be copied into site trust claims without approval.
-- Manta returned a Cloudflare `403` challenge to automated fetch, so that listing still requires manual browser/account verification before treating it as corrected or current.
+- Manta public browser verification succeeded after the earlier automated `403`: the listing is still unclaimed and still shows `757 Shady Lane, Waco, TX 76705` and `(254) 412-2927`, so it remains a high-priority claim/update task.

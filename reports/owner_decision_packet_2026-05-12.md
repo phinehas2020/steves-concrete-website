@@ -102,7 +102,7 @@ Decision/action needed in GBP dashboard:
 High-priority corrections:
 
 - Buzzfile: latest public recheck still showed old `757 Shady Ln` / `(254) 412-2927`
-- Manta: latest automated fetch returned Cloudflare `403`; verify manually or inside the listing/account dashboard before editing
+- Manta: public browser verification now confirms the listing is unclaimed and still shows old `757 Shady Lane` / `(254) 412-2927`
 - Levelset: search result indicated old address/phone; requires manual confirmation
 - Greater Waco Chamber: `Dr` vs `Ln` street suffix
 - BuildZoom: latest public recheck still showed `1045 W ELM MOTT DR`; missing visible canonical phone/site in fetched page; permit/license wording needs owner/legal approval before reuse
