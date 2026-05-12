@@ -1,4 +1,4 @@
-export const seoServicePages = [
+const baseSeoServicePages = [
   {
     slug: 'concrete-resurfacing-waco-tx',
     title: 'Concrete Resurfacing in Waco, TX',
@@ -1496,6 +1496,97 @@ export const seoServicePages = [
     ],
   },
 ]
+
+function serviceLabel(title) {
+  return String(title || 'concrete work')
+    .replace(/\s+in\s+Waco,\s*TX$/i, '')
+    .replace(/\s+Waco,\s*TX$/i, '')
+    .toLowerCase()
+}
+
+function serviceDepthSections(page) {
+  const label = serviceLabel(page.title)
+
+  return [
+    {
+      heading: 'Local planning for Waco soil, heat, and drainage',
+      paragraphs: [
+        `Every ${label} project has to account for Central Texas conditions before the first form is set. Waco's expansive clay, fast summer heat, and heavy rain cycles can change how concrete cures, drains, and moves over time. We review grade, access, surrounding structures, and water flow so the finished work is planned for the property instead of copied from a generic template.`,
+        `That local review includes practical details such as where trucks can stage, how runoff should leave the slab, whether nearby trees or fences limit access, and how new concrete should meet existing walks, driveways, patios, curbs, or building entries. Small planning choices at this stage often decide whether a project feels clean and durable years later.`,
+      ],
+    },
+    {
+      heading: 'Estimate details, scope clarity, and scheduling',
+      paragraphs: [
+        `A useful ${label} estimate should explain more than a square-foot number. We document the visible work area, demolition needs, base correction, forms, reinforcement assumptions, finish expectations, cleanup, and any permit-aware planning items that may affect the job. That gives you a clearer way to compare options and understand what is actually included.`,
+        `Scheduling is handled around weather, material availability, crew access, and cure timing. When a project touches a driveway, business entrance, rental property, or outdoor living space, we talk through access windows before work starts so families, tenants, customers, or employees are not surprised by the sequence.`,
+      ],
+    },
+    {
+      heading: 'Process from site visit through closeout',
+      paragraphs: [
+        `Most ${label} work starts with a site visit, photos, measurements, and a conversation about how the concrete will be used. From there, we confirm the recommended scope, identify risks, and explain the order of operations before you approve the work. The goal is to make the job predictable before equipment and concrete trucks arrive.`,
+        `During installation, the crew checks forms, slope, transitions, and finish details against the plan. After the work is complete, we review cleanup, cure guidance, and maintenance expectations. You should know when the surface can be used, what early care matters most, and which warning signs should be addressed quickly.`,
+      ],
+    },
+    {
+      heading: 'Quality checks that protect long-term performance',
+      paragraphs: [
+        `Concrete performance depends on base support, drainage, joint layout, finish timing, and early curing. We watch those details because they are difficult to fix after the slab is hard. A clean finish is important, but it only matters if the concrete below it was planned and placed correctly.`,
+        `We also avoid promising that concrete will never crack. Any contractor who works honestly in Waco should talk about soil movement, water control, and realistic maintenance. Our approach is to reduce preventable failures, direct movement where possible, and give you a clear maintenance path after the project is done.`,
+      ],
+    },
+  ]
+}
+
+function serviceDepthFaq(page) {
+  const label = serviceLabel(page.title)
+
+  return [
+    {
+      question: `What should I prepare before a ${label} estimate?`,
+      answer:
+        'Photos, rough dimensions, access notes, and a short list of goals are helpful. We still verify measurements and site conditions in person before finalizing scope.',
+    },
+    {
+      question: `What affects the price of ${label} in Waco?`,
+      answer:
+        'Pricing depends on square footage, demolition, base correction, drainage needs, reinforcement, finish type, access, and cure or scheduling constraints.',
+    },
+    {
+      question: 'Do you account for Waco clay soil and drainage?',
+      answer:
+        'Yes. We review slope, runoff, subgrade condition, and nearby structures so the project is planned around Central Texas soil movement and water behavior.',
+    },
+    {
+      question: 'Can the work be phased if my property needs more than one concrete project?',
+      answer:
+        'Often, yes. We can sequence related work so access, drainage, and finish transitions still make sense across multiple phases.',
+    },
+    {
+      question: 'How soon can the concrete be used after installation?',
+      answer:
+        'Use timing depends on weather, mix conditions, thickness, finish, and project type. We give project-specific guidance after the pour or coating work is complete.',
+    },
+    {
+      question: 'Are you insured and permit-aware for Waco concrete work?',
+      answer:
+        'Yes. We plan work with permit needs in mind and can discuss insurance details during the estimate. Permit requirements vary by property, scope, and right-of-way impact.',
+    },
+  ]
+}
+
+function enrichSeoServicePage(page) {
+  if (page.redirectTo || page.slug === 'concrete-driveways-waco-tx') return page
+
+  return {
+    ...page,
+    sections: [...(page.sections || []), ...serviceDepthSections(page)],
+    faq: [...(page.faq || []), ...serviceDepthFaq(page)],
+  }
+}
+
+export const seoServicePages = baseSeoServicePages.map(enrichSeoServicePage)
 
 export const servicePageLinks = seoServicePages
   .filter((service) => !service.redirectTo)
