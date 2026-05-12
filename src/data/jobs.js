@@ -49,6 +49,10 @@ function mergeClientProjects(jobsData = []) {
   ])
 }
 
+export function getStaticJobs() {
+  return mergeClientProjects([])
+}
+
 // Fetch jobs from Supabase
 export async function fetchJobs() {
   try {

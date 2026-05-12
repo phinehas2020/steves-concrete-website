@@ -5,7 +5,7 @@ import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { MapPin, ArrowUpRight } from 'lucide-react'
 import { handleImageError } from '../lib/utils'
-import { buildCategoryOptions, fetchJobs } from '../data/jobs'
+import { buildCategoryOptions, fetchJobs, getStaticJobs } from '../data/jobs'
 
 // Project image component - displays actual project photos
 function ProjectImage({ job }) {
@@ -29,8 +29,7 @@ function ProjectImage({ job }) {
 
 export function JobGallery() {
   const [activeCategory, setActiveCategory] = useState('All')
-  const [jobs, setJobs] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [jobs, setJobs] = useState(() => getStaticJobs())
   const [error, setError] = useState(null)
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -49,8 +48,6 @@ export function JobGallery() {
         console.error('Error loading jobs:', err)
         setError('Failed to load jobs. Please try again later.')
         setJobs([])
-      } finally {
-        setLoading(false)
       }
     }
     loadJobs()
@@ -132,9 +129,7 @@ export function JobGallery() {
         </div>
 
         {/* Projects Grid */}
-        {loading ? (
-          <div className="text-center py-12 text-stone-500">Loading jobs...</div>
-        ) : error ? (
+        {error ? (
           <div className="text-center py-12">
             <p className="text-red-600 mb-4">{error}</p>
             <button

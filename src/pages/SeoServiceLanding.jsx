@@ -118,6 +118,11 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
                   <img
                     src={resolvedHeroImage}
                     alt={title}
+                    width="640"
+                    height="640"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl"></div>

@@ -73,7 +73,7 @@ const baseSeoServicePages = [
   {
     slug: 'sports-court-coating-waco-tx',
     title: 'Sports Court Coating in Waco, TX',
-    heroImage: '/seo-images/sports-court-coating.png',
+    heroImage: '/seo-images/sports-court-coating.webp',
     cardSummary:
       'Professional resurfacing and acrylic coating for pickleball, tennis, and basketball courts in Waco with crack prep and precision striping.',
     metaTitle: 'Sports Court Coating in Waco, TX | SLA Concrete Works LLC',
