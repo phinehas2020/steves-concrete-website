@@ -32,7 +32,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 | `#7` trust proof | owner | `reports/owner_trust_intake_form_2026-05-12.md` |
 | `#8` GBP/citation cleanup | owner/account dashboards | `reports/gbp_citation_cleanup_runbook_2026-05-12.md` |
 | `#9` image GPS metadata | owner permission | `reports/image_gps_permission_form_2026-05-12.md` |
-| `#10` PR workflow exception | audit reconstruction completed with PRs `#11`-`#15` | `reports/service_page_pr_workflow_exception_2026-05-12.md` |
+| `#10` PR workflow exception | closed; audit reconstruction completed with PRs `#11`-`#15` | `reports/service_page_pr_workflow_exception_2026-05-12.md` |
 
 ## Current State
 

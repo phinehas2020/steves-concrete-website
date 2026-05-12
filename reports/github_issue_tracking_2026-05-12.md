@@ -22,10 +22,10 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 | `#7` | `Collect owner trust proof for EEAT claims` | `blocked-owner` | none |
 | `#8` | `Complete GBP and citation cleanup` | `blocked-account` | none |
 | `#9` | `Confirm image GPS metadata permissions` | `blocked-owner`, `decision-needed` | none |
-| `#10` | `Decide service-page PR workflow exception` | `decision-needed` | audit reconstruction PRs `#11`-`#15` created; close after audit update |
+| `#10` | `Decide service-page PR workflow exception` | `decision-needed` | closed after audit reconstruction PRs `#11`-`#15` were created |
 
 ## Notes
 
 - Issues `#3` through `#5` also have dated GitHub milestones.
 - Issues `#6` through `#9` remain open because they require authenticated account access, owner proof/permission, or an explicit decision.
-- Issue `#10` can be closed after the audit update because reconstruction PRs `#11` through `#15` now exist.
+- Issue `#10` is closed because reconstruction PRs `#11` through `#15` now exist.

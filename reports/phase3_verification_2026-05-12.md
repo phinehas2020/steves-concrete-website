@@ -196,7 +196,7 @@ Handoff index: `reports/seo_handoff_index_2026-05-12.md`
     - `#13` - `Audit reconstruction: service project galleries`
     - `#14` - `Audit reconstruction: hardscape quick-win pages`
     - `#15` - `Audit reconstruction: Hewitt and Woodway location pages`
-  - Tracking issue: `#10` - `Decide service-page PR workflow exception`
+  - Tracking issue `#10` was closed after audit reconstruction PRs `#11` through `#15` were created and documented.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.
