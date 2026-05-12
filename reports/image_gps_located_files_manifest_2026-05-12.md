@@ -1,6 +1,6 @@
 # Image GPS Located Files Manifest - 2026-05-12
 
-Purpose: support GitHub issue `#9` without repeating precise jobsite coordinates in another public report. This manifest lists files that expose macOS latitude/longitude metadata according to the corrected `mdls` scan.
+Purpose: support GitHub issue `#9` without repeating precise jobsite coordinates in another public report. This manifest lists files that expose latitude/longitude metadata according to the corrected scan and follow-up `exiftool` verification.
 
 Source report:
 
@@ -10,6 +10,7 @@ Tooling:
 
 ```text
 mdls -raw -name kMDItemLatitude -name kMDItemLongitude
+exiftool 13.55 -n -csv -GPSLatitude -GPSLongitude
 ```
 
 Corrected result:

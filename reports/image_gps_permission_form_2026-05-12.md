@@ -12,8 +12,9 @@ Source evidence:
 Corrected scan result:
 
 - `87` public images scanned in the corrected rescan
-- `24` images exposed macOS latitude/longitude metadata
-- `63` images did not expose macOS latitude/longitude metadata
+- `24` images exposed latitude/longitude metadata
+- `63` images did not expose latitude/longitude metadata
+- `exiftool 13.55` read-only verification matched the corrected count
 - `reports/image_gps_located_files_manifest_2026-05-12.md` lists the 24 located filenames without repeating exact coordinates
 
 Do not add, retain, normalize, or strip GPS metadata unless the owner approves the policy below.
@@ -53,6 +54,7 @@ If approved:
 
 - add metadata only to explicitly eligible images
 - rerun GPS scan with `node scripts/scan-image-gps-metadata.mjs --json=reports/image_gps_scan_YYYY-MM-DD.json --manifest=reports/image_gps_located_files_manifest_YYYY-MM-DD.md`
+- verify final metadata state with `exiftool`
 - add a dated verification report under `reports/`
 - update `reports/completion_audit_2026-05-12.md`
 - close GitHub issue `#9`
