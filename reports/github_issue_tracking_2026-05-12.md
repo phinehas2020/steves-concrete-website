@@ -11,9 +11,9 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 | `blocked-owner` | Requires owner input, proof, approval, or permission |
 | `decision-needed` | Requires a documented owner or project decision |
 
-## Open Issues
+## Tracked Issues
 
-| Issue | Title | Labels | Milestone |
+| Issue | Title | Labels | Milestone / status |
 | --- | --- | --- | --- |
 | `#3` | `30-day SEO rerun - 2026-06-11` | `seo-rerun` | `30-day SEO rerun - 2026-06-11` |
 | `#4` | `60-day SEO rerun - 2026-07-11` | `seo-rerun` | `60-day SEO rerun - 2026-07-11` |
@@ -22,9 +22,10 @@ Purpose: document the GitHub issue labels and milestones now used for the remain
 | `#7` | `Collect owner trust proof for EEAT claims` | `blocked-owner` | none |
 | `#8` | `Complete GBP and citation cleanup` | `blocked-account` | none |
 | `#9` | `Confirm image GPS metadata permissions` | `blocked-owner`, `decision-needed` | none |
-| `#10` | `Decide service-page PR workflow exception` | `decision-needed` | none |
+| `#10` | `Decide service-page PR workflow exception` | `decision-needed` | audit reconstruction PRs `#11`-`#15` created; close after audit update |
 
 ## Notes
 
 - Issues `#3` through `#5` also have dated GitHub milestones.
-- Issues `#6` through `#10` remain open because they require authenticated account access, owner proof/permission, or an explicit decision.
+- Issues `#6` through `#9` remain open because they require authenticated account access, owner proof/permission, or an explicit decision.
+- Issue `#10` can be closed after the audit update because reconstruction PRs `#11` through `#15` now exist.

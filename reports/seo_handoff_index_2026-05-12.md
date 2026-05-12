@@ -21,7 +21,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 | Owner/account blockers | `reports/owner_blocker_packet_2026-05-12.md` |
 | GitHub issue tracking | `reports/github_issue_tracking_2026-05-12.md` |
 
-## Open Issues
+## Tracked Issues
 
 | Issue | Owner | Artifact |
 | --- | --- | --- |
@@ -32,7 +32,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 | `#7` trust proof | owner | `reports/owner_trust_intake_form_2026-05-12.md` |
 | `#8` GBP/citation cleanup | owner/account dashboards | `reports/gbp_citation_cleanup_runbook_2026-05-12.md` |
 | `#9` image GPS metadata | owner permission | `reports/image_gps_permission_form_2026-05-12.md` |
-| `#10` PR workflow exception | project decision | `reports/service_page_pr_reconstruction_runbook_2026-05-12.md` |
+| `#10` PR workflow exception | audit reconstruction completed with PRs `#11`-`#15` | `reports/service_page_pr_workflow_exception_2026-05-12.md` |
 
 ## Current State
 
@@ -46,7 +46,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 2. If owner proof is available, resolve issue `#7` before adding any insurance, BBB, credential, or named-case-study claims.
 3. If GBP/citation dashboard access is available, resolve issue `#8` using `reports/gbp_citation_cleanup_runbook_2026-05-12.md`.
 4. If image-location permission is available, resolve issue `#9` before writing any EXIF GPS metadata.
-5. Decide issue `#10`: accept the documented direct-to-main exception or run audit reconstruction PRs.
+5. Keep PRs `#11` through `#15` as audit reconstruction artifacts; future service-page rewrites should use normal PRs before merge.
 6. On the milestone dates, run issues `#3`, `#4`, and `#5`.
 
 ## Do Not Do

@@ -188,9 +188,14 @@ Handoff index: `reports/seo_handoff_index_2026-05-12.md`
 - Service-page PR workflow exception documented:
   - Report: `reports/service_page_pr_workflow_exception_2026-05-12.md`
   - Reconstruction runbook: `reports/service_page_pr_reconstruction_runbook_2026-05-12.md`
-  - `gh pr list --state all --limit 20` found only PR `#2` for Vercel Analytics and PR `#1` for the SEO/GEO content strategy guide.
-  - No service-page rewrite PRs exist because the work was committed and pushed directly to `main`.
-  - The report recommends accepting the documented exception or recreating pre-change review branches as explicit audit reconstruction work instead of creating empty/no-op PRs.
+  - `gh pr list --state all --limit 20` initially found only PR `#2` for Vercel Analytics and PR `#1` for the SEO/GEO content strategy guide.
+  - The service-page work was originally committed and pushed directly to `main`.
+  - Audit reconstruction PRs were created after the fact:
+    - `#11` - `Audit reconstruction: driveway service rewrite`
+    - `#12` - `Audit reconstruction: remaining service page depth pass`
+    - `#13` - `Audit reconstruction: service project galleries`
+    - `#14` - `Audit reconstruction: hardscape quick-win pages`
+    - `#15` - `Audit reconstruction: Hewitt and Woodway location pages`
   - Tracking issue: `#10` - `Decide service-page PR workflow exception`
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
