@@ -1,0 +1,1174 @@
+{
+  "generatedAt": "2026-05-12T18:06:25.544Z",
+  "viewport": {
+    "width": 375,
+    "height": 812
+  },
+  "sitemapPath": "public/sitemap.xml",
+  "urlCount": 43,
+  "passCount": 43,
+  "failCount": 0,
+  "results": [
+    {
+      "url": "https://www.concretewaco.com/",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Waco Concrete Contractors | SLA Concrete Works LLC",
+      "h1": "Concrete Contractorsin Waco, TXPermit-Aware · Insured · 20+ Years",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2792,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5584,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/about",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Meet Steve | SLA Concrete Works LLC | Waco TX",
+      "h1": "The guy behind the phone call, the estimate, and the final walkthrough.",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3939,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7878,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/blog",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Contractor Waco TX | Concrete Tips & Project Ideas | SLA Concrete Works LLC",
+      "h1": "Expert Insights for Central Texas Concrete Projects",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 4623,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 9245,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/commercial-concrete-contractor-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Commercial Concrete Contractor Waco TX | SLA Concrete Works LLC",
+      "h1": "Commercial Concrete Contractor in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 6136,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 12271,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/concrete-deck-contractors",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Deck Contractors | Waco TX",
+      "h1": "Concrete Deck Contractors in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5556,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 11111,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/concrete-demolition-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Demolition in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Concrete Demolition in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5476,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 10951,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/concrete-driveways-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Driveways in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Concrete Driveways in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7308,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 14615,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/concrete-foundations-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Foundations in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Concrete Foundations in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5957,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 11914,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/concrete-patios-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Patios in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Concrete Patios in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 6243,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 12486,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/concrete-resurfacing-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Resurfacing in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Concrete Resurfacing in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 6102,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 12203,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/concrete-sawing-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Sawing in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Concrete Sawing in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5316,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 10631,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/concrete-sidewalks-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Sidewalks in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Concrete Sidewalks in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 6068,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 12135,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/contractors-in-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Contractors in Waco TX | SLA Concrete Works LLC",
+      "h1": "Contractors in Waco, TX (Concrete Focus)",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5581,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 11162,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/decorative-concrete-waco",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Decorative Concrete Waco TX | SLA Concrete Works LLC",
+      "h1": "Decorative Concrete in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5482,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 10963,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/foundation-repair-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Foundation Repair Waco TX | SLA Concrete Works LLC",
+      "h1": "Foundation Repair in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5494,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 10987,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/guides/concrete-driveway-cost-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Driveway Cost Waco TX | SLA Concrete Works LLC",
+      "h1": "Concrete Driveway Cost in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2661,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5322,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/guides/concrete-patio-cost-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Patio Cost Waco TX | SLA Concrete Works LLC",
+      "h1": "Concrete Patio Cost in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2406,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 4812,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/guides/stamped-concrete-cost-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Stamped Concrete Cost Waco TX | SLA Concrete Works LLC",
+      "h1": "Stamped Concrete Pricing in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2526,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5051,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/guides",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Cost Guide Waco TX | Driveway, Patio, Stamped Concrete",
+      "h1": "Waco concrete pricing, without the guesswork",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3562,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7123,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/hardscaping-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Hardscaping Contractor Waco TX | Patios, Walkways & Walls",
+      "h1": "Hardscaping Contractor in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5700,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 11399,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/hewitt-tx-concrete-contractor",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Contractor Hewitt Texas | Driveways, Patios, Concrete Repair",
+      "h1": "Concrete Contractor Hewitt Texas",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 4881,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 9762,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/jobs",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Projects Waco TX | Gallery | SLA Concrete Works LLC",
+      "h1": "Recent Pours",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 1935,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3870,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/killeen-tx-concrete-contractor",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Contractor Killeen TX | Waco Area Concrete Contractor",
+      "h1": "Concrete Contractor in Killeen, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3633,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7266,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/lorena-tx-concrete-contractor",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Contractor Lorena TX | Concrete Work in Central Texas",
+      "h1": "Concrete Contractor in Lorena, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3646,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7292,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/mcgregor-tx-concrete-contractor",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Contractor McGregor TX | Concrete Driveways, Patios & Slabs",
+      "h1": "Concrete Contractor in McGregor, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3637,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7273,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/parking-lot-concrete-waco",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Parking Lot Concrete Waco TX | SLA Concrete Works LLC",
+      "h1": "Parking Lot Concrete in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5616,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 11232,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/privacy-policy",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Privacy Policy | SLA Concrete Works LLC",
+      "h1": "Privacy Policy",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2553,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5105,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/residential-concrete-contractor-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Residential Concrete Contractors Waco TX | SLA Concrete Works LLC",
+      "h1": "Residential Concrete Contractors in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 6091,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 12182,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/retaining-walls-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Retaining Wall Installation Waco TX | SLA Concrete Works LLC",
+      "h1": "Retaining Wall Installation in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5696,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 11392,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/reviews",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Reviews | SLA Concrete Works LLC | Waco TX",
+      "h1": "Reviews from Waco, TX Customers",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2756,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5512,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/robinson-tx-concrete-contractor",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Contractor Robinson TX | Concrete Driveways & Patios",
+      "h1": "Concrete Contractor in Robinson, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3637,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7273,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/services/concrete-sealing",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Sealing Waco TX | SLA Concrete Works LLC",
+      "h1": "Concrete Sealing in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3461,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 6921,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/services/concrete-slabs",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Slab Waco TX | Garage & Shop Slabs (254) 230-3102",
+      "h1": "Concrete Slabs in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3459,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 6918,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/services/stained-concrete",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Stained Concrete Waco TX | Acid & Water-Based (254) 230-3102",
+      "h1": "Stained Concrete in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3556,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7111,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/sports-court-coating-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Sports Court Coating in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Sports Court Coating in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5980,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 11960,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/sports-court-coating/dallas-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Sports Court Coating Dallas TX | Pickleball Court Resurfacing",
+      "h1": "Sports Court Coating in Dallas, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2583,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5166,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/sports-court-coating/fort-worth-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Sports Court Coating Fort Worth TX | Court Resurfacing Services",
+      "h1": "Sports Court Coating in Fort Worth, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2558,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5116,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/sports-court-coating/texas",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Sports Court Coating Texas | Pickleball & Tennis Court Resurfacing",
+      "h1": "Sports Court Coating Services in Texas",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2493,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 4985,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/stamped-concrete-waco-tx",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Stamped Concrete in Waco, TX | SLA Concrete Works LLC",
+      "h1": "Stamped Concrete in Waco, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5902,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 11803,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/temple-tx-concrete-contractor",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Contractor Temple TX | Concrete Contractor Near Me in Central Texas",
+      "h1": "Concrete Contractor in Temple, TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 3680,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 7360,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/terms-and-conditions",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Terms and Conditions | SLA Concrete Works LLC",
+      "h1": "Terms and Conditions",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 2506,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 5011,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/waco-tx-concrete-contractor",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Waco Concrete Contractors | Concrete Companies Waco TX",
+      "h1": "Concrete Contractor Waco TX",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 6506,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 13011,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    },
+    {
+      "url": "https://www.concretewaco.com/woodway-tx-concrete-contractor",
+      "status": 200,
+      "pass": true,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "title": "Concrete Contractor Woodway Texas | Driveways, Patios, Stamped Concrete",
+      "h1": "Concrete Contractor Woodway Texas",
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "overflowX": 0,
+      "samples": [
+        {
+          "scrollY": 0,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 4868,
+          "offViewportElements": []
+        },
+        {
+          "scrollY": 9735,
+          "offViewportElements": []
+        }
+      ],
+      "offViewportElements": []
+    }
+  ]
+}

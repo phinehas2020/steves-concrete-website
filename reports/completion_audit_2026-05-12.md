@@ -11,7 +11,7 @@ Status: not complete. The code, reports, deployment, schema, service-page conten
 | Phase 1 crawl target and reference sites | `reports/audit_2026-05-12.csv`; `scripts/seo-phase1-audit.mjs` | Complete |
 | Phase 1 link graph | `reports/link_graph.html` | Complete |
 | Phase 1 PageSpeed/Core Web Vitals via PageSpeed API | Audit script records unavailable/quota state; live PSI attempt returned `429`; existing Google Places key returned `API_KEY_SERVICE_BLOCKED`; `reports/lighthouse_sweep_2026-05-12.md` adds local Lighthouse fallback evidence | Blocked for PSI API; Lighthouse fallback complete |
-| Phase 1 mobile 375px render check | Browser smoke checks documented in `reports/phase3_verification_2026-05-12.md` | Complete for representative routes, not every crawled URL |
+| Phase 1 mobile 375px render check | `scripts/mobile-render-sweep.mjs`; `reports/mobile_render_sweep_2026-05-12.md`; `reports/mobile_render_sweep_2026-05-12.json`; all 43 sitemap URLs passed at 375x812 | Complete |
 | Phase 2 ranked remediation plan | `reports/remediation_plan.md` | Complete |
 | Schema markup: LocalBusiness homepage, Service pages, BreadcrumbList, FAQPage, Place | `scripts/prerender-routes.mjs`; local static schema check across 54 files; live Rich Results Test result `WYow_kvZWHMaxyHIYd20OA` | Complete for tested live driveway page and local generated pages |
 | Reject deploys with Rich Results warnings | Rich Results initially found duplicate FAQ and business warnings; fixed in commits `b9f3660`, `109cd0a`, `db53eb9`, `18c515b`; final live driveway test had 5 valid item groups and no warning text | Complete for live driveway page; other templates share same schema path but were not individually run through Google UI |

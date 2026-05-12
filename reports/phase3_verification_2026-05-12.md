@@ -118,6 +118,13 @@
   - Dates covered: `2026-06-11`, `2026-07-11`, and `2026-08-10`.
   - Includes build/performance commands, GSC/Semrush/GBP/citation checks, and a reusable rerun report template.
   - No external calendar events or GitHub issues were created.
+- Full mobile render sweep passed:
+  - Script: `scripts/mobile-render-sweep.mjs`
+  - Report: `reports/mobile_render_sweep_2026-05-12.md`
+  - Evidence JSON: `reports/mobile_render_sweep_2026-05-12.json`
+  - Scope: all `43` URLs in `public/sitemap.xml`.
+  - Viewport: `375x812`.
+  - Result: `43/43` passed with no page-level horizontal overflow, no visible off-viewport elements at sampled scroll positions, no console errors, and no page/runtime errors.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.
