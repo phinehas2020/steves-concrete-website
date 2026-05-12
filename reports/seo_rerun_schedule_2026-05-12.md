@@ -33,7 +33,7 @@ Then refresh the live/account-side data:
 - Semrush: refresh the same target keyword set used in `reports/baseline_rankings.md`.
 - Google Business Profile: record review count, average rating, latest posts, unanswered Q&A, and profile completeness.
 - Citation cleanup: recheck Manta, Buzzfile, Levelset, Chamber, BuildZoom, Porch, BBB, Yelp, Angi, and HomeAdvisor against the canonical NAP.
-- PageSpeed Insights API: rerun once a key with `pagespeedonline.googleapis.com` access is available.
+- PageSpeed Insights API: rerun with the existing enabled key; `pagespeedonline.googleapis.com` access was verified during the baseline pass.
 
 ## Report template
 
