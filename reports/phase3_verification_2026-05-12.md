@@ -23,6 +23,7 @@
 - `067f605` - Phase 3 add GSC performance baseline
 - `61079d8` - Phase 3 document canonical redirect check
 - `7f49224` - Phase 3 improve hardscape quick win pages
+- `cac277b` - Phase 3 improve Hewitt Woodway location pages
 
 ## Verification run
 
@@ -92,6 +93,13 @@
     - `/retaining-walls-waco-tx` title: `Retaining Wall Installation Waco TX | SLA Concrete Works LLC`.
     - `/hardscaping-waco-tx` title: `Hardscaping Contractor Waco TX | Patios, Walkways &amp; Walls`.
     - Both live pages returned exactly `1` JSON-LD script in static HTML.
+- Location quick-win page verification:
+  - `npm run build` passed after the Hewitt and Woodway planning-section and metadata pass.
+  - Static check after build:
+    - `/hewitt-tx-concrete-contractor`: `892` words, title `Concrete Contractor Hewitt Texas | Driveways, Patios, Concrete Repair`, `1` parseable JSON-LD block.
+    - `/woodway-tx-concrete-contractor`: `882` words, title `Concrete Contractor Woodway Texas | Driveways, Patios, Stamped Concrete`, `1` parseable JSON-LD block.
+  - Production deployment for commit `cac277b` became ready on Vercel.
+  - Live metadata check passed for both pages with exactly `1` JSON-LD script in static HTML.
 - Browser smoke checks on `http://127.0.0.1:5173`:
   - Mobile viewport `375x812`: `/concrete-driveways-waco-tx`, `/concrete-patios-waco-tx`, `/waco-tx-concrete-contractor`, and `/` had no horizontal overflow and no console errors.
   - Desktop viewport `1440x900`: same route set had no horizontal overflow and no console errors.
