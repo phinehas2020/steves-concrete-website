@@ -128,6 +128,7 @@
   - This does not mean GBP was changed; publishing remains account-side and should use owner-approved answers and real project photos.
 - Rerun schedule added:
   - Report: `reports/seo_rerun_schedule_2026-05-12.md`
+  - GitHub tracking summary: `reports/github_issue_tracking_2026-05-12.md`
   - Dates covered: `2026-06-11`, `2026-07-11`, and `2026-08-10`.
   - Includes build/performance commands, GSC/Semrush/GBP/citation checks, and a reusable rerun report template.
   - GitHub reminder issues created:
