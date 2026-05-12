@@ -60,7 +60,7 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
   const resolvedTitle = seoTitle || `${title} Waco TX | Free Estimate (254) 230-3102`
   const description =
     seoDescription ||
-    `${title} in Waco, TX. Licensed & insured. Free estimate: (254) 230-3102.`
+    `${title} in Waco, TX with soil-aware prep, clear scope, and permit-aware planning. Free estimate: (254) 230-3102.`
   const serviceAreaText = locationLinks.map((location) => location.city).join(', ')
   const canonicalPath = getCanonicalServicePath(slug)
   const canonicalUrl = `${SITE_URL}${canonicalPath}`

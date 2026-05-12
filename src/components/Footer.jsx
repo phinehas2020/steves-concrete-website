@@ -64,6 +64,10 @@ export function Footer() {
                             We specialize in decorative and structural concrete that handles 
                             the brutal Texas heat.
                         </p>
+                        <p className="text-sm leading-relaxed text-stone-500 mb-6 max-w-md">
+                            Texas residential concrete flatwork does not use one statewide contractor license.
+                            Permit needs are reviewed by project, and insurance details are available during estimate.
+                        </p>
                         <div className="flex gap-4">
                             <a href="/#contact" className="px-6 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-bold text-white hover:bg-white/10 transition-colors">
                                 Get a Quote
@@ -180,7 +184,7 @@ export function Footer() {
                         © {currentYear} SLA Concrete Works LLC. Built for the Texas Heat.
                     </p>
                     <div className="flex gap-8">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Licensed</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Permit-Aware</span>
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Insured</span>
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Local</span>
                         <a

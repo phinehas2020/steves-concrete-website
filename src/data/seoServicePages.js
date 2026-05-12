@@ -1339,9 +1339,9 @@ export const seoServicePages = [
           'Yes. We provide no-obligation estimates for residential and light commercial concrete projects.',
       },
       {
-        question: 'Are you licensed and insured contractors in Waco TX?',
+        question: 'Are you insured and permit-aware contractors in Waco TX?',
         answer:
-          'Yes. We are licensed and insured and provide clear scope documentation before work begins.',
+          'Yes. We carry business insurance, review permit needs by project, and provide clear scope documentation before work begins.',
       },
       {
         question: 'Can you handle both small and large concrete jobs?',

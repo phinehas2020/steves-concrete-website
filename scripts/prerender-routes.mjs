@@ -580,7 +580,7 @@ function renderHomeContent() {
     eyebrow: 'Waco Concrete Contractor',
     title: 'Concrete Contractor Waco TX',
     subtitle:
-      'Licensed and insured concrete contractor serving Waco and surrounding Central Texas communities since 2005.',
+      'Permit-aware concrete contractor serving Waco and surrounding Central Texas communities since 2005.',
     introParagraphs: [
       `${SITE_NAME} builds driveways, patios, stamped concrete, foundations, and repair projects designed for black clay soil movement, heavy heat cycles, and daily traffic.`,
       `When people search for a Waco concrete contractor, they usually need clear pricing, honest timelines, and work that stays level after the first summer. Our process starts with site prep, slope planning, reinforcement, and realistic cure guidance so the finished slab performs for years.` ,

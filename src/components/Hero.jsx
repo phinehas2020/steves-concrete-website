@@ -234,7 +234,7 @@ export function Hero() {
                         Concrete Contractors
                         <span className="block text-accent-400">in Waco, TX</span>
                         <span className="block text-lg sm:text-xl font-medium text-stone-400 mt-2">
-                            Licensed &amp; Insured · 20+ Years
+                            Permit-Aware · Insured · 20+ Years
                         </span>
                     </h1>
 
