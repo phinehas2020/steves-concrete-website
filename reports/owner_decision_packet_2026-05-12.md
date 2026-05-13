@@ -24,7 +24,7 @@ There is a source discrepancy:
 
 Decision needed:
 
-- Public owner/operator name to use:
+- Public owner/operator name to use: current site wording, Steve / `Stephen Alexander, Owner`, approved by user clarification on 2026-05-12.
 - Should website schema use the same name? `yes/no`
 - Owner photo approved for website use? `yes/no`
 - Current bio copy approved? `yes/no`

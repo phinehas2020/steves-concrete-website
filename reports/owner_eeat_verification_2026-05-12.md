@@ -16,8 +16,8 @@ Goal item: About page owner name, photo, bio, credentials, and years in trade wi
 
 `goal.md` identifies the target-site owner as `Phinehas Adams`, while the current website source identifies the public business owner/operator as Steve/Stephen and includes `Stephen Alexander, Owner` in `src/components/Values.jsx`.
 
-No owner-name change should be made from either source alone. The owner/trust intake should explicitly confirm which public owner/operator name is correct for the website, schema, owner bio, photo alt text, and any future EEAT claim.
+User clarification on 2026-05-12 approved the owner/operator name already on the site. Keep the current public wording, Steve / `Stephen Alexander, Owner`, unless the owner later requests a correction. Schema owner-name alignment, owner photo/bio/years approval, and stronger EEAT claims still require separate approval or proof.
 
 ## Conclusion
 
-The owner bio/photo portion of the EEAT requirement is already represented in source, but the public owner/operator name should be explicitly approved because `goal.md` and the site source disagree. The remaining gap is specific verified credentials or certifications; no credential claim should be added until the owner provides exact wording and proof.
+The owner bio/photo portion of the EEAT requirement is already represented in source, and the public owner/operator name should remain the current site wording after the 2026-05-12 user clarification. The remaining gaps are schema-name confirmation, owner photo/bio/years approval if stronger EEAT treatment is desired, and specific verified credentials or certifications; no credential claim should be added until the owner provides exact wording and proof.
