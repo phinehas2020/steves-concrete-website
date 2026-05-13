@@ -15,11 +15,11 @@ Source discrepancy to resolve:
 - `goal.md` names `Phinehas Adams` as owner.
 - Current site source names Steve/Stephen and includes `Stephen Alexander, Owner`.
 
-- Owner name as it should appear publicly:
-- Is the public owner/operator Steve, Stephen Alexander, Phinehas Adams, or another approved name?
-- Should schema use the same public owner/operator name? `yes/no`
-- Owner photo approved for website use? `yes/no`
-- Bio copy approved? `yes/no`
+- Owner name as it should appear publicly: current site wording, Steve / `Stephen Alexander, Owner`, approved by user clarification on 2026-05-12.
+- Is the public owner/operator Steve, Stephen Alexander, Phinehas Adams, or another approved name? Current site wording approved: Steve / `Stephen Alexander, Owner`.
+- Should schema use the same public owner/operator name? `yes`, approved by user clarification on 2026-05-13.
+- Owner photo approved for website use? `yes`, approved by user clarification on 2026-05-13.
+- Bio copy approved? `yes`, approved by user clarification on 2026-05-13.
 - `20+ years` language approved? `yes/no`
 - Should any credentials, trade history, or project background be added?
 - Public wording approved by owner:

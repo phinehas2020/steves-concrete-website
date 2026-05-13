@@ -57,6 +57,11 @@ const localBusiness = {
   name: 'SLA Concrete Works LLC',
   url: SITE_URL,
   image: DEFAULT_IMAGE,
+  founder: {
+    '@type': 'Person',
+    name: 'Stephen Alexander',
+    jobTitle: 'Owner-Operator',
+  },
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Waco',

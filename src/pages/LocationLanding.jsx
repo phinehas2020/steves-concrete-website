@@ -89,6 +89,11 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
     image: DEFAULT_IMAGE,
     telephone: '+1-254-230-3102',
     priceRange: '$$',
+    founder: {
+      '@type': 'Person',
+      name: 'Stephen Alexander',
+      jobTitle: 'Owner-Operator',
+    },
     areaServed: {
       '@type': 'City',
       name: city,

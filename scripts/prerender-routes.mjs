@@ -37,6 +37,11 @@ const BUSINESS_GEO = {
   latitude: 31.6637793,
   longitude: -97.1123512,
 }
+const OWNER_PERSON_SCHEMA = {
+  '@type': 'Person',
+  name: 'Stephen Alexander',
+  jobTitle: 'Owner-Operator',
+}
 const MCLENNAN_COUNTY_POLYGON =
   '31.915 -97.575 31.914 -96.989 31.213 -96.994 31.210 -97.588 31.915 -97.575'
 
@@ -1445,9 +1450,9 @@ function renderNotFoundContent() {
 
 function upsertTitle(html, title) {
   if (/<title[\s\S]*?<\/title>/i.test(html)) {
-    return html.replace(/<title[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`)
+    return html.replace(/<title[\s\S]*?<\/title>/i, () => `<title>${escapeHtml(title)}</title>`)
   }
-  return html.replace('</head>', `<title>${escapeHtml(title)}</title>\n</head>`)
+  return html.replace('</head>', () => `<title>${escapeHtml(title)}</title>\n</head>`)
 }
 
 function removeMetaTag(html, key) {
@@ -1461,16 +1466,16 @@ function upsertMetaTag(html, key, value) {
   const selector = key.startsWith('og:') || key.startsWith('article:') ? 'property' : 'name'
   const regex = new RegExp(`<meta[^>]*${selector}=["']${key}["'][^>]*>`, 'i')
   const tag = `<meta ${selector}="${key}" content="${content}" />`
-  if (regex.test(html)) return html.replace(regex, tag)
-  return html.replace('</head>', `${tag}\n</head>`)
+  if (regex.test(html)) return html.replace(regex, () => tag)
+  return html.replace('</head>', () => `${tag}\n</head>`)
 }
 
 function upsertCanonical(html, canonical) {
   const href = escapeHtml(canonical)
   const regex = /<link[^>]*rel=["']canonical["'][^>]*>/i
   const tag = `<link rel="canonical" href="${href}" />`
-  if (regex.test(html)) return html.replace(regex, tag)
-  return html.replace('</head>', `${tag}\n</head>`)
+  if (regex.test(html)) return html.replace(regex, () => tag)
+  return html.replace('</head>', () => `${tag}\n</head>`)
 }
 
 function cityArea(name) {
@@ -1515,6 +1520,7 @@ function localBusinessSchema({ includeOfferCatalog = false } = {}) {
     email: 'slaconcrete@gmail.com',
     foundingDate: '2005',
     priceRange: '$$',
+    founder: OWNER_PERSON_SCHEMA,
     sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
     address: {
       '@type': 'PostalAddress',
@@ -1734,7 +1740,7 @@ function upsertJsonLd(html, meta, canonical) {
   const tag = `<script type="application/ld+json" data-prerender="route" data-page-url="${escapeHtml(
     canonical,
   )}">${JSON.stringify(json)}</script>`
-  return removeExistingJsonLd(html).replace('</head>', `${tag}\n</head>`)
+  return removeExistingJsonLd(html).replace('</head>', () => `${tag}\n</head>`)
 }
 
 function upsertPrerenderContent(html, contentHtml) {
@@ -1742,10 +1748,10 @@ function upsertPrerenderContent(html, contentHtml) {
   const replacement = `<div id="root">\n${contentHtml}\n</div>`
 
   if (/<div id="root"><\/div>/i.test(cleanHtml)) {
-    return cleanHtml.replace(/<div id="root"><\/div>/i, replacement)
+    return cleanHtml.replace(/<div id="root"><\/div>/i, () => replacement)
   }
 
-  return cleanHtml.replace(/<div id="root">[\s\S]*?<\/div>/i, replacement)
+  return cleanHtml.replace(/<div id="root">[\s\S]*?<\/div>/i, () => replacement)
 }
 
 function applyMeta(html, meta) {

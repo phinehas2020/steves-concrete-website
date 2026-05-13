@@ -56,7 +56,7 @@ Purpose: quick entry point for the Concrete Waco SEO parity work driven by `goal
 
 ## Resume Order
 
-1. If owner proof is available, resolve issue `#7` using `reports/owner_decision_packet_2026-05-12.md` and `reports/owner_trust_intake_form_2026-05-12.md`; confirm the public owner/operator identity before adding any insurance, BBB, credential, or named-case-study claims.
+1. If owner proof is available, resolve issue `#7` using `reports/owner_decision_packet_2026-05-12.md` and `reports/owner_trust_intake_form_2026-05-12.md`; the public owner/operator identity, matching schema name, owner photo, and current bio are approved, but insurance, BBB, credential, `20+ years`, or named-case-study claims still need proof before adding or strengthening them.
 2. If explicit approval for account-side GBP edits is available, resolve issue `#8` using `reports/gbp_public_profile_verification_2026-05-12.md`, `reports/gbp_dashboard_access_check_2026-05-12.md`, `reports/gbp_citation_cleanup_runbook_2026-05-12.md`, and `reports/citation_correction_request_templates_2026-05-12.md`.
 3. If image-location permission is available, resolve issue `#9` using `reports/image_gps_rescan_2026-05-12.md`, `reports/image_gps_located_files_manifest_2026-05-12.md`, and `scripts/scan-image-gps-metadata.mjs` before retaining, stripping, normalizing, or adding any GPS metadata.
 4. Keep PRs `#11` through `#15` as audit reconstruction artifacts; future service-page rewrites should use normal PRs before merge.

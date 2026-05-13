@@ -19,6 +19,12 @@ const Gallery = lazy(() => import('./components/Gallery').then((m) => ({ default
 const FAQ = lazy(() => import('./components/FAQ').then((m) => ({ default: m.FAQ })))
 const Contact = lazy(() => import('./components/Contact').then((m) => ({ default: m.Contact })))
 
+const OWNER_PERSON_SCHEMA = {
+  '@type': 'Person',
+  name: 'Stephen Alexander',
+  jobTitle: 'Owner-Operator',
+}
+
 function SectionFallback({ className = 'section-padding bg-white', minHeight = 320 }) {
   return <div className={className} style={{ minHeight }} aria-hidden="true" />
 }
@@ -35,6 +41,7 @@ function HomeLocalBusinessSchema({ reviewRating = '5.0', reviewCount = 47 } = {}
     image: DEFAULT_IMAGE,
     telephone: '+1-254-230-3102',
     priceRange: '$$',
+    founder: OWNER_PERSON_SCHEMA,
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: reviewRating,
