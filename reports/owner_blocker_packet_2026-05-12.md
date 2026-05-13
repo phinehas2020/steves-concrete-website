@@ -112,12 +112,11 @@ Current state:
 - Owner name, photo, bio, and `20+` years language are represented.
 - `goal.md` names `Phinehas Adams` as owner, while current site source names Steve/Stephen and includes `Stephen Alexander, Owner`; user clarification on 2026-05-12 approved keeping the current site owner/operator wording.
 - Specific certifications/credentials were not verified in repo or public source checks.
-- Final owner approval for the represented bio/photo/year language should be collected in `reports/owner_trust_intake_form_2026-05-12.md`.
+- Owner approval for the represented name/schema/photo/bio/year language is now recorded in `reports/owner_trust_intake_form_2026-05-12.md`.
 
 Owner input needed:
 
-- Remaining approval or correction for the `20+` years wording already on the site; the public owner/operator name, schema-name alignment, owner photo, and bio were approved by user clarifications on 2026-05-12 and 2026-05-13.
-- Any concrete, safety, supplier, municipal, equipment, or trade certifications that can be verified.
+- Any concrete, safety, supplier, municipal, equipment, or trade certifications that can be verified; do not invent placeholders.
 - The exact certificate/license name and issuing organization.
 - Whether it is current, expired, or historical.
 

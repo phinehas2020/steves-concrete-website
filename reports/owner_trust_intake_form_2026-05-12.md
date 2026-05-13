@@ -20,7 +20,7 @@ Source discrepancy to resolve:
 - Should schema use the same public owner/operator name? `yes`, approved by user clarification on 2026-05-13.
 - Owner photo approved for website use? `yes`, approved by user clarification on 2026-05-13.
 - Bio copy approved? `yes`, approved by user clarification on 2026-05-13.
-- `20+ years` language approved? `yes/no`
+- `20+ years` language approved? `yes`, approved by user clarification on 2026-05-13.
 - Should any credentials, trade history, or project background be added?
 - Public wording approved by owner:
 - Proof/approval location, kept outside public repo unless explicitly approved:
@@ -28,6 +28,8 @@ Source discrepancy to resolve:
 ## Insurance
 
 Current site status: unsupported generic insurance claims have been removed or softened. A stale search-result snippet may still show older wording until Google recrawls, but live/source checks on 2026-05-12 found no current `licensed and insured`, BBB, or broad insurance-claim copy.
+
+Do not fill this section with placeholder or invented details. User asked to make up insurance/BBB/certification information temporarily on 2026-05-13, but these claims must remain off the site until real proof and approved wording are available.
 
 - Carrier name:
 - Coverage type:

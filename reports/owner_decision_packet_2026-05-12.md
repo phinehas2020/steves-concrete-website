@@ -28,7 +28,7 @@ Decision needed:
 - Should website schema use the same name? `yes`, approved by user clarification on 2026-05-13.
 - Owner photo approved for website use? `yes`, approved by user clarification on 2026-05-13.
 - Current bio copy approved? `yes`, approved by user clarification on 2026-05-13.
-- `20+ years` language approved? `yes/no`
+- `20+ years` language approved? `yes`, approved by user clarification on 2026-05-13.
 
 ### Trust Proof Needed
 
@@ -39,6 +39,8 @@ Decision needed:
 - Current credentials/certifications:
 - Named case studies or customer quotes with written permission:
 - Legal/account-approved wording for Louisiana licensing-record context, if any:
+
+Do not invent insurance, BBB, credential, or certification details. User asked to make these up temporarily on 2026-05-13, but `goal.md` requires verifiable claims and no fabricated trust signals.
 
 Default if not approved:
 
