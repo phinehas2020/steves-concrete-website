@@ -1,5 +1,28 @@
 export const staticBlogPosts = [
   {
+    id: 'static-burnet-shop-foundation-finish-2026-05-13',
+    created_at: '2026-05-13T14:12:00.000Z',
+    updated_at: '2026-05-13T14:12:00.000Z',
+    published_at: '2026-05-13T14:12:00.000Z',
+    title: 'Burnet TX Shop Foundation Finish',
+    slug: 'burnet-tx-shop-foundation-finish',
+    excerpt:
+      'A field update from a 9,600 square foot shop foundation in Burnet, Texas, showing the finished concrete slab after placement and cleanup.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/burnet-shop-foundation-finish/01-8faae271-6a79-482b-ba6c-feb80d76a10c.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1uk8nh2',
+    content: [
+      'This update is from a shop foundation in Burnet, Texas. The slab is about 9,600 square feet, and these photos show the concrete after the main pour and finish work were done.',
+      'There is nothing fancy to dress up here. On a shop foundation this size, the important parts are straight edges, the right elevation, a clean finish, and enough planning before the trucks show up. Once the concrete starts coming, the crew has to keep placement, screeding, floating, and timing moving together.',
+      'A large shop slab also has to be useful after the building is up. That means paying attention to the base, forms, reinforcement, drainage, door openings, and the way equipment or vehicles will use the floor later. The finish people see at the end depends on all of that prep.',
+      'SLA Concrete Works handles shop foundations, concrete slabs, commercial flatwork, paving, sidewalks, driveways, patios, and concrete repair across Waco and Central Texas. If you are planning a shop slab or building pad, it is worth talking through the site before concrete day so the details are clear.',
+      '![Finished 9,600 square foot shop foundation slab in Burnet, Texas](/blog-images/burnet-shop-foundation-finish/01-8faae271-6a79-482b-ba6c-feb80d76a10c.jpg)',
+      '![Clean concrete finish on a large Burnet TX shop foundation](/blog-images/burnet-shop-foundation-finish/02-4d306076-19e7-4ecf-a0a4-11ac9198e927.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-melody-grove-concrete-paving-prep-2026-05-12',
     created_at: '2026-05-12T14:28:00.000Z',
     updated_at: '2026-05-12T14:28:00.000Z',
