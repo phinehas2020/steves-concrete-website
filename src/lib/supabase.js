@@ -6,12 +6,14 @@ function trimEnvValue(value) {
 }
 
 const supabaseUrl = trimEnvValue(import.meta.env.VITE_SUPABASE_URL)
-const supabaseAnonKey = trimEnvValue(import.meta.env.VITE_SUPABASE_ANON_KEY)
+const supabasePublishableKey = trimEnvValue(
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY
+)
 
 let supabaseClient
 
-if (supabaseUrl && supabaseAnonKey) {
-  supabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+if (supabaseUrl && supabasePublishableKey) {
+  supabaseClient = createClient(supabaseUrl, supabasePublishableKey, {
     auth: {
       persistSession: true,
       autoRefreshToken: true,
@@ -22,7 +24,9 @@ if (supabaseUrl && supabaseAnonKey) {
   })
 } else {
   // Avoid throwing in build/dev; surface a clear error in runtime usage.
-  console.warn('Missing Supabase env vars: VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Supabase features will be disabled.')
+  console.warn(
+    'Missing Supabase env vars: VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY (or VITE_SUPABASE_ANON_KEY). Supabase features will be disabled.',
+  )
   
   // Create a mock client that prevents crashes but logs errors on usage
   supabaseClient = {

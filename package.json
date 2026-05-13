@@ -8,7 +8,9 @@
     "build": "node scripts/generate-sitemap.mjs && vite build && node scripts/prerender-routes.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "perf:sweep": "node scripts/lighthouse-sweep.mjs"
+    "perf:sweep": "node scripts/lighthouse-sweep.mjs",
+    "supabase:migrate:hosted": "node scripts/migrate-supabase-project.mjs --use-vercel-source",
+    "supabase:migrate:one-shot": "node scripts/migrate-supabase-project.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.50.2",

@@ -1,5 +1,117 @@
 # Napkin
 
+## 2026-03-09 — Self-hosted to hosted Supabase migration constraints
+
+### Context
+- User needs a no-data-loss migration from self-hosted Supabase (`https://db.phinehasadams.com`) to hosted Supabase.
+
+### What mattered
+1. The app is already env-driven for Supabase, so the cutover is mostly data + storage migration plus env swaps, not a frontend/backend rewrite.
+2. Production Vercel envs still point at the self-hosted source; local `.env` does not include the source service-role key.
+3. Current Supabase MCP is pointed at the self-hosted instance, and read-only DB auth is failing there, so do not depend on MCP table inspection for this migration.
+4. Stored data includes full Supabase-origin URLs in table fields and blog markdown content, so migration code must rewrite the source origin to the hosted origin while preserving bucket paths.
+5. Storage that must move with the tables: `jobs`, `hero-images`, and `blog-images`.
+6. When the hosted project is brand new, schema bootstrap must run before the row-copy script; otherwise the first insert fails with `Could not find the table 'public.admin_users' in the schema cache`.
+
+## 2026-03-09 — Migration run attempt to auyombraozsdfckobnzx
+
+### Context
+- User requested running the self-hosted → hosted migration immediately with the provided URLs and keys.
+- I used `npm run supabase:migrate:one-shot -- --skip-schema --use-vercel-source` and executed a dry run first to validate access.
+
+### What happened
+- Source access works and was read from Vercel env (`--use-vercel-source`), including 12 discovered tables and expected row counts.
+- Dry run confirmed source rows:
+  - `admin_users: 2`
+  - `leads: 7`
+  - `blog_posts: 11`
+  - `jobs: 6`
+  - `hero_images: 4`
+  - `email_recipients: 1`
+  - `blog_ai_prompt_settings: 1`
+  - `blog_photo_albums: 1`
+  - `blog_photos: 150`
+  - `blog_post_photos: 44`
+  - `job_images: 26`
+  - `blog_post_generation_jobs: 12`
+- Full run then failed at first write:
+  - `Could not find the table 'public.admin_users' in the schema cache`.
+- This confirms `https://auyombraozsdfckobnzx.supabase.co` currently has no exposed public schema tables at all (`/rest/v1/` returns only `/`), so a schema bootstrap step is still required.
+
+### Next action required
+- Need the target DB connection string or DB password (`TARGET_SUPABASE_DB_URL` with password) or equivalent schema-bootstrap method before rerunning the full migration script.
+
+## 2026-03-09 — Completed migration to hosted Supabase
+
+### Context
+- User supplied the hosted DB password and asked for one-shot migration with no data loss; do not store the password in repo notes.
+- `scripts/migrate-supabase-project.mjs` already handled copy workflow, but migration would fail on fresh hosted projects until schema existed.
+
+### What happened
+1. Bootstraped hosted DB schema directly with `supabase/hosted-schema-bootstrap.sql` and verified public tables and storage buckets exist.
+2. Re-ran migration script in write mode:
+   - `SOURCE` loaded from Vercel production env via `--use-vercel-source`
+   - `TARGET_SUPABASE_URL=https://auyombraozsdfckobnzx.supabase.co`
+   - `TARGET_SUPABASE_SERVICE_ROLE_KEY` and `TARGET_SUPABASE_DB_URL` configured with supplied password
+   - `--skip-schema`
+3. Copy completed end-to-end with row and storage counts matching source for all targeted entities.
+
+### Validation
+- Public table counts match source values:
+  - `admin_users: 2`
+  - `leads: 7`
+  - `blog_posts: 11`
+  - `jobs: 6`
+  - `hero_images: 4`
+  - `email_recipients: 1`
+  - `blog_ai_prompt_settings: 1`
+  - `blog_photo_albums: 1`
+  - `blog_photos: 150`
+  - `blog_post_photos: 44`
+  - `job_images: 26`
+  - `blog_post_generation_jobs: 12`
+- Auth users copied: `3`
+- Storage objects copied:
+  - `jobs: 13`
+  - `hero-images: 4`
+  - `blog-images: 150`
+- Final script output: `Migration complete.`
+
+## 2026-03-06 — Blog markdown needs explicit URL and HTML controls
+
+### Context
+- High-severity finding `db2b1c1ef8488191affc543294723866` flagged stored XSS in generated blog content.
+
+### What mattered
+1. `marked` v12 does not sanitize raw HTML or dangerous URL schemes for us in this repo.
+2. Photo captions/alt text are also a trust boundary because they get interpolated into generated markdown image syntax.
+3. The safer pattern here is defense in depth:
+   - coerce AI/caption-derived text to plain text before storing markdown
+   - reject unsafe image/link URLs during markdown generation
+   - render blog markdown with explicit HTML stripping and safe URL handling
+4. Self-correction:
+   - ESLint here rejects control-character regexes (`no-control-regex`), so use character-code filtering helpers instead of `[\u0000-\u001F\u007F]`.
+
+## 2026-03-06 — Cron auth must require CRON_SECRET, not just `x-vercel-cron`
+
+### Context
+- Security finding `342ea94cd63881919b925280b47fc5f5` flagged a high-severity auth bypass in `api/blog-album-sync.js`.
+
+### Root cause
+- `isCronRequest()` returned `true` as soon as `x-vercel-cron: 1` was present.
+- That let `resolveRequester()` skip admin auth and treat spoofed requests as the system cron user.
+- The checked-in project notes and `.env.example` also did not call out `CRON_SECRET`, which made it easy to rely on the header alone.
+
+### What fixed it
+1. Require both the Vercel cron header and a bearer token matching `CRON_SECRET` before granting system access.
+2. Keep all other requests on the normal admin-auth path.
+3. Add a focused Node test file covering spoofed header rejection, valid cron auth, and preserved admin auth.
+4. Add `CRON_SECRET` to `.env.example` so scheduled jobs are configured intentionally.
+
+### Pattern to keep
+- Treat request-origin headers as hints, never credentials.
+- For privileged automation endpoints, separate “looks like cron” from “is authorized as cron” and fail closed when the secret is missing.
+
 ## 2026-03-04 — White pages caused by static routes using `useParams`
 
 ### Context
@@ -22,6 +134,28 @@
 ### Self-corrections during validation
 - Shell quoting: when running `node --input-type=module -e` with template literals, zsh consumed backticks. Use heredoc (`<<'EOF'`) for route-list scripts.
 - Playwright eval context: avoid `new URL(page.url())` in this tool context; use `page.url()` directly to prevent `URL is not defined` failures.
+
+## 2026-03-05 — Semrush broken internal JS/CSS hash alerts were stale-crawl artifacts
+
+### Context
+- Semrush Site Audit reported 10 "broken internal JavaScript and CSS files" for hashes like:
+  - `/assets/index-DRxNBMrZ.js`
+  - `/assets/index-DkB4RX07.css`
+
+### What we verified
+1. Current live HTML on affected URLs references:
+   - `/assets/index-B134T-zZ.js`
+   - `/assets/index-Bs4Srm59.css`
+2. Both current asset URLs return `200` on production.
+3. A sitemap sweep (41 URLs) found:
+   - `old_hash_refs=0`
+   - `missing_asset_refs=0`
+4. Old Semrush-reported hash URLs still return `404` (expected after deploy hash rollover).
+
+### Practical interpretation
+- This was not an active site-wide outage at verification time.
+- The Semrush findings were from crawl timing against an older deployment hash set.
+- Action pattern: rerun crawl after deploy before making code changes.
 
 ## 2026-03-04 — Remove internal strategy phrasing from public copy
 
@@ -64,6 +198,16 @@
 
 ### What was done
 1. Refactored `api/blog-album-sync.js` handler to use shared album-sync helper for both manual and cron flows.
+
+## 2026-03-12 — Hosted Supabase auth URL config after migration
+
+### Context
+- User asked what to enter in Supabase Auth URL Configuration after moving from self-hosted/local settings to hosted Supabase.
+
+### What mattered
+1. The app’s canonical production domain is hardcoded as `https://www.concretewaco.com` in SEO/sitemap files.
+2. Admin magic-link login sends users to `${window.location.origin}/admin`, so allowed redirect URLs must include `/admin` for each environment used.
+3. `supabase/config.toml` still shows local-only auth URLs (`http://127.0.0.1:3000`), which are not right for hosted production auth settings.
 2. Added cron-safe behavior:
    - GET/cron/manual requests with no explicit `albumId`/`albumUrl` now sync all `active = true` rows in `blog_photo_albums`.
    - Each album is synced independently so one failure won’t stop the full daily run.
@@ -1540,3 +1684,17 @@
 4. Post-deploy live 10-route sweep (`npm run perf:sweep`) now passes all tracked URLs:
    - `/` LCP 1048ms, TBT 0ms, CLS 0.001
    - all 9 non-home tracked routes pass thresholds as well.
+
+## 2026-04-17 — Brand rename to SLA Concrete Works LLC
+
+### Context
+- User asked to change the website name from `Concrete Works` / `Concrete Works LLC` to `SLA Concrete Works LLC` across the whole site.
+
+### What mattered
+1. The rename was not just page copy; it also lived in SEO titles, structured data, admin UI, lead-email fallbacks, prerender content, `llms.txt`, and public 404 metadata.
+2. The old name was baked into `public/logo.png`, `public/logo-96.png`, and `public/og-image.jpg`, so text-only search was not enough.
+3. For this repo, a simple live-code sweep that excludes reports/docs is the fastest safe boundary for “website” branding changes.
+
+### Asset note
+1. ImageMagick rasterized simple SVG shapes/text reliably enough here, but the first pass with gradients, filters, and fancier typography produced broken PNG/JPG output.
+2. Keep the source assets simple (`public/logo.svg`, `public/og-image-source.svg`) before regenerating raster fallbacks.
