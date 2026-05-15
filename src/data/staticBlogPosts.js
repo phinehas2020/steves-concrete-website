@@ -1,5 +1,28 @@
 export const staticBlogPosts = [
   {
+    id: 'static-central-texas-commercial-canopy-slab-finish-2026-05-15',
+    created_at: '2026-05-15T14:25:00.000Z',
+    updated_at: '2026-05-15T14:25:00.000Z',
+    published_at: '2026-05-15T14:25:00.000Z',
+    title: 'Commercial Canopy Concrete Slab Finish in Central Texas',
+    slug: 'commercial-canopy-concrete-slab-finish-central-texas',
+    excerpt:
+      'A field update from a commercial canopy slab showing the concrete after finishing, edge cleanup, and the early cure stage.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/central-texas-commercial-canopy-slab-finish/01-c2147a10-519c-4bdd-b085-e51bf8859ef7.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '0D9F6DE2-5524-46AD-8A94-34F38441F746',
+    content: [
+      'This update is from a commercial canopy slab in Central Texas. The photos show the concrete after the finish work, with the slab tied into the building, the canopy columns, and the outside edge forms still visible around the pour.',
+      'Work like this has to be useful first. The slab needs the right slope, clean transitions at the building, room for equipment and traffic, and edges that do not fight the next phase of the job. The finish matters, but it only looks right when the layout and prep were right before the truck arrived.',
+      'You can see the crew left a clean surface under the canopy and around the apron. On commercial concrete, that kind of flatwork has to handle daily use, water movement, and vehicle traffic without turning into a maintenance problem a few months later.',
+      'SLA Concrete Works handles commercial flatwork, concrete slabs, paving, sidewalks, driveways, patios, and concrete repair across Waco and Central Texas. If you are planning a slab around a shop, canopy, service lane, or parking area, it is worth getting the grade, access, and finish expectations clear before pour day.',
+      '![Finished commercial canopy concrete slab in Central Texas](/blog-images/central-texas-commercial-canopy-slab-finish/01-c2147a10-519c-4bdd-b085-e51bf8859ef7.jpg)',
+      '![Commercial concrete flatwork around canopy columns and building access](/blog-images/central-texas-commercial-canopy-slab-finish/02-795c14e0-ed1e-4146-8b89-8c2b7227b44e.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-burnet-shop-foundation-finish-2026-05-13',
     created_at: '2026-05-13T14:12:00.000Z',
     updated_at: '2026-05-13T14:12:00.000Z',
