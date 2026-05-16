@@ -1,5 +1,30 @@
 export const staticBlogPosts = [
   {
+    id: 'static-melody-grove-parking-area-sidewalk-2026-05-16',
+    created_at: '2026-05-16T14:15:00.000Z',
+    updated_at: '2026-05-16T14:15:00.000Z',
+    published_at: '2026-05-16T14:15:00.000Z',
+    title: 'Melody Grove Parking Area and Sidewalk Concrete in Waco, TX',
+    slug: 'melody-grove-parking-area-sidewalk-concrete-waco-tx',
+    excerpt:
+      'A field update from Melody Grove in Waco showing new concrete parking area, sidewalk, curb, and flatwork around the housing community.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/melody-grove-parking-area-sidewalk/01-1a65e0b6-f1a3-429e-8a42-02ec211611a6.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '10lbecr',
+    content: [
+      'This update is from the Melody Grove housing community in Waco. The batch shows new concrete parking area work, sidewalk sections, curb lines, and flatwork getting tied into the buildings and site access.',
+      'This kind of job is not just about getting concrete on the ground. The parking area has to drain, the sidewalk needs to meet doors and walking paths cleanly, and the edges have to work with landscaping, utilities, and the next phase of construction.',
+      'You can see finished sections already in place, plus active placement where the crew is working off the truck, forms, and steel. On housing work like this, the layout matters because residents, visitors, deliveries, and maintenance traffic will use the same concrete every day.',
+      'SLA Concrete Works handles concrete parking areas, sidewalks, curbs, driveways, slabs, patios, and concrete repair across Waco and Central Texas. For apartment, housing, and commercial flatwork, it helps to talk through grade, access, drainage, and finish expectations before pour day.',
+      '![New concrete parking area and sidewalk at Melody Grove housing in Waco, TX](/blog-images/melody-grove-parking-area-sidewalk/01-1a65e0b6-f1a3-429e-8a42-02ec211611a6.jpg)',
+      '![Finished concrete flatwork beside parking structures at Melody Grove in Waco](/blog-images/melody-grove-parking-area-sidewalk/02-73d47775-96e8-4959-908a-87bfb4625c42.jpg)',
+      '![Concrete crew placing fresh parking area flatwork at Melody Grove](/blog-images/melody-grove-parking-area-sidewalk/03-0cbe23a4-c406-4df5-99b0-dd8a2e59295b.jpg)',
+      '![Concrete truck and crew pouring reinforced parking area concrete in Waco](/blog-images/melody-grove-parking-area-sidewalk/04-e18b2456-8cc8-422e-9906-4ea7b75e9de7.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-central-texas-commercial-canopy-slab-finish-2026-05-15',
     created_at: '2026-05-15T14:25:00.000Z',
     updated_at: '2026-05-15T14:25:00.000Z',
