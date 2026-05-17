@@ -1,5 +1,29 @@
 export const staticBlogPosts = [
   {
+    id: 'static-hillcrest-hospital-front-entrance-concrete-replacement-2026-05-17',
+    created_at: '2026-05-17T14:05:34.000Z',
+    updated_at: '2026-05-17T14:05:34.000Z',
+    published_at: '2026-05-17T14:05:34.000Z',
+    title: 'Hillcrest Hospital Front Entrance Concrete Replacement in Waco, TX',
+    slug: 'hillcrest-hospital-front-entrance-concrete-replacement-waco-tx',
+    excerpt:
+      'A field update from Baylor Scott & White Hillcrest Hospital in Waco showing concrete replacement at the front entrance after demo and cleanup.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/hillcrest-hospital-front-entrance-concrete-replacement/01-b1e81ab8-1e08-44ae-85a7-d66b579bc963.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1eu2d0a',
+    content: [
+      'This update is from the front entrance at Baylor Scott & White Hillcrest Hospital in Waco. The batch shows the demo and replacement work wrapped up at the main entry area, with the new concrete back in place around the columns, doors, trench drain, and pedestrian path.',
+      'Entrance concrete like this has to be handled cleanly because people are still moving around the building. The work area has to stay blocked off, the edges have to meet the existing pavers and drainage, and the finish has to be useful for steady foot traffic instead of just looking good in a photo.',
+      'You can see the fresh broom finish, the protection around the entrance, and the way the replacement section ties back into the existing front drive and covered drop-off area. On a hospital entrance, the small details matter because the concrete is used all day by patients, visitors, staff, wheelchairs, carts, and deliveries.',
+      'SLA Concrete Works handles commercial concrete replacement, sidewalks, entrance flatwork, slabs, driveways, curbs, parking areas, and concrete repair across Waco and Central Texas. For busy public entrances, it helps to plan the demo, access, drainage, and finish before the crew starts breaking out concrete.',
+      '![New broom finished concrete replacement at the Hillcrest Hospital front entrance in Waco, TX](/blog-images/hillcrest-hospital-front-entrance-concrete-replacement/01-b1e81ab8-1e08-44ae-85a7-d66b579bc963.jpg)',
+      '![Fresh concrete tied into the covered hospital entry, stone columns, and pedestrian walkway](/blog-images/hillcrest-hospital-front-entrance-concrete-replacement/02-9c68890c-deaa-407e-a63d-1aa9eee2e6d3.jpg)',
+      '![Baylor Scott & White Hillcrest front entrance concrete work with safety barriers in place](/blog-images/hillcrest-hospital-front-entrance-concrete-replacement/03-0870e946-95d5-4ff3-8658-18ce5d35727b.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-melody-grove-parking-area-sidewalk-2026-05-16',
     created_at: '2026-05-16T14:15:00.000Z',
     updated_at: '2026-05-16T14:15:00.000Z',
