@@ -1,5 +1,33 @@
 export const staticBlogPosts = [
   {
+    id: 'static-jewett-shop-slab-finish-2026-05-18',
+    created_at: '2026-05-18T14:12:21.000Z',
+    updated_at: '2026-05-18T14:12:21.000Z',
+    published_at: '2026-05-18T14:12:21.000Z',
+    title: 'Jewett TX Shop Slab Finish for a New Morton Building',
+    slug: 'jewett-tx-shop-slab-finish-new-morton-building',
+    excerpt:
+      'A field update from Jewett, Texas showing a 3,200 square foot shop slab after the concrete was poured, finished, and tied into the new Morton Building.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/jewett-shop-slab-finish/01-8fa6df3e-75ed-4ae4-9856-49f9bce40c88.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '6F3B1EA3-79E5-49D2-9558-D95467F6D458',
+    source_photo_guids: [
+      '8FA6DF3E-75ED-4AE4-9856-49F9BCE40C88',
+      '91896317-C5A8-483D-8487-1C8B358A4E04',
+    ],
+    content: [
+      'This update is from a new Morton Building shop slab in Jewett, Texas. The album note says this was a 3,200 square foot shop slab, and the still photos show the concrete after the pour and finish work were done.',
+      'There is not much mystery in a slab like this, but there is plenty that has to be right. The surface has to be flat enough to use, the edges have to tie into the building cleanly, and the outside apron has to shed water instead of pushing it back toward the door openings.',
+      'The inside photo shows the floor after finishing with the ride-on trowel still in the building. The outside photo shows the covered apron along the metal building, with the concrete pulled tight to the wall line and column layout.',
+      'Shop slabs need more planning than a small patio because they usually see equipment, storage, trailers, and steady traffic. Base prep, reinforcement, form height, drainage, and finish timing all matter before the concrete truck shows up.',
+      'SLA Concrete Works handles shop slabs, metal building foundations, concrete aprons, driveways, sidewalks, parking areas, and flatwork across Waco and Central Texas. For a shop slab, it helps to settle the building layout, door openings, water flow, and intended use before pour day.',
+      '![Finished interior concrete shop slab inside a new Morton Building in Jewett, Texas](/blog-images/jewett-shop-slab-finish/01-8fa6df3e-75ed-4ae4-9856-49f9bce40c88.jpg)',
+      '![Covered exterior concrete apron beside a new metal shop building in Jewett, TX](/blog-images/jewett-shop-slab-finish/02-91896317-c5a8-483d-8487-1c8b358a4e04.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-hillcrest-hospital-front-entrance-concrete-replacement-2026-05-17',
     created_at: '2026-05-17T14:05:34.000Z',
     updated_at: '2026-05-17T14:05:34.000Z',
