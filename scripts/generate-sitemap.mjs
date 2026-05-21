@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
+import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 import { SERVICE_CANONICAL_PATH_BY_SLUG } from '../src/data/servicePages.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
@@ -105,6 +106,14 @@ async function main() {
   guideSlugs.forEach((slug) => {
     addUrl(routes, `/guides/${slug}`)
   })
+
+  staticBlogPosts
+    .filter((post) => post?.slug && post?.status === 'published')
+    .forEach((post) => {
+      const lastmod = (post.updated_at || post.published_at || post.created_at || SITEMAP_LASTMOD)
+        .slice(0, 10)
+      addUrl(routes, `/blog/${post.slug}`, { lastmod })
+    })
 
   sportsCourtSlugs.forEach((slug) => {
     addUrl(routes, `/sports-court-coating/${slug}`)

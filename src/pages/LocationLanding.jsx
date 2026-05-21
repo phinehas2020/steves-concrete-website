@@ -32,6 +32,7 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
     seoTitle,
     seoDescription,
     planningSections = [],
+    localSearchLinks = [],
   } = page
 
   const resolvedTitle = seoTitle || `${heroTitle} | Free Estimate (254) 230-3102`
@@ -409,6 +410,40 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
             </div>
           </div>
         </section>
+
+        {localSearchLinks.length > 0 && (
+          <section className="section-padding bg-white border-t border-stone-100">
+            <div className="container-main">
+              <div className="max-w-3xl mb-8">
+                <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                  Local search paths
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                  More ways to plan a {city} concrete project
+                </h2>
+                <p className="text-lg text-stone-600 text-pretty">
+                  These pages connect common {city} searches with the service details, project examples, and estimate guidance customers usually need next.
+                </p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {localSearchLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="block rounded-xl border border-stone-200 bg-stone-50 p-5 hover:border-stone-300 hover:bg-stone-100 transition-colors"
+                  >
+                    <span className="font-display font-semibold text-xl text-stone-900">
+                      {link.label}
+                    </span>
+                    <span className="mt-2 block text-sm text-stone-600 text-pretty">
+                      {link.description}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section-padding bg-stone-50">
           <div className="container-main max-w-3xl">

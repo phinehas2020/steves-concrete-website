@@ -5,6 +5,7 @@ import {
   servicePages,
 } from '../src/data/servicePages.js'
 import { seoServicePages } from '../src/data/seoServicePages.js'
+import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const LOCATION_PAGES = [
@@ -35,6 +36,12 @@ const GUIDE_PAGES = [
 const SPORTS_COURT_AREA_PAGES = sportsCourtAreaPages.map(
   (page) => `sports-court-coating/${page.slug}`,
 )
+const STATIC_BLOG_POSTS = staticBlogPosts
+  .filter((post) => post?.slug && post?.status === 'published')
+  .map((post) => ({
+    slug: `blog/${post.slug}`,
+    lastmod: (post.updated_at || post.published_at || post.created_at || '').slice(0, 10),
+  }))
 
 function toUrlEntry({ loc, lastmod, changefreq, priority }) {
   const parts = [`<loc>${loc}</loc>`]
@@ -120,6 +127,15 @@ export default async function handler(req, res) {
       loc: `${SITE_URL}/${slug}`,
       changefreq: 'monthly',
       priority: '0.68',
+    })
+  })
+
+  STATIC_BLOG_POSTS.forEach((post) => {
+    urls.push({
+      loc: `${SITE_URL}/${post.slug}`,
+      lastmod: post.lastmod,
+      changefreq: 'monthly',
+      priority: '0.62',
     })
   })
 

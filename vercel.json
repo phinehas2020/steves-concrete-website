@@ -98,6 +98,26 @@
       "destination": "/about/index.html"
     },
     {
+      "source": "/blog/circle-k-concrete-flatwork-lacy-lakeview-tx",
+      "destination": "/blog/circle-k-concrete-flatwork-lacy-lakeview-tx/index.html"
+    },
+    {
+      "source": "/blog/concrete-shop-slab-base-prep-waco-tx",
+      "destination": "/blog/concrete-shop-slab-base-prep-waco-tx/index.html"
+    },
+    {
+      "source": "/blog/melody-grove-concrete-paving-prep-waco-tx",
+      "destination": "/blog/melody-grove-concrete-paving-prep-waco-tx/index.html"
+    },
+    {
+      "source": "/blog/stamped-concrete-patio-ideas-central-texas",
+      "destination": "/blog/stamped-concrete-patio-ideas-central-texas/index.html"
+    },
+    {
+      "source": "/blog/waco-concrete-driveway-cost-factors",
+      "destination": "/blog/waco-concrete-driveway-cost-factors/index.html"
+    },
+    {
       "source": "/blog/:path*",
       "destination": "/index.html"
     },

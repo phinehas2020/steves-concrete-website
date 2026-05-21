@@ -210,12 +210,12 @@ export const locationPages = [
   {
     slug: 'hewitt-tx-concrete-contractor',
     city: 'Hewitt',
-    seoTitle: 'Concrete Contractor Hewitt Texas | Driveways, Patios, Concrete Repair',
+    seoTitle: 'Concrete Contractor Hewitt Texas | Driveways, Patios, Small Jobs',
     heroTitle: 'Concrete Contractor Hewitt Texas',
     heroSubtitle:
-      'Driveways, patios, stamped concrete, and slab repairs for Hewitt homes. Free on-site estimates with clear start dates.',
+      'Driveways, patios, stamped concrete, small concrete jobs, and slab repairs for Hewitt homes. Free on-site estimates with clear start dates.',
     seoDescription:
-      'Looking for a concrete contractor in Hewitt, Texas? SLA Concrete Works builds driveways, patios, stamped concrete, and repairs for clay soil.',
+      'Looking for a concrete contractor in Hewitt, Texas? SLA Concrete Works builds driveways, patios, stamped concrete, small slabs, and repairs for clay soil.',
     intro:
       'SLA Concrete Works LLC helps Hewitt homeowners and property managers install concrete that lasts through hot summers and shifting black clay soil. We focus on proper base prep, drainage, and control-joint layout so your project looks sharp and performs long-term.',
     planningSections: [
@@ -238,6 +238,20 @@ export const locationPages = [
         paragraphs: [
           'The most common Hewitt scopes are driveway replacement, patio extensions, sidewalk repairs, stamped patios, shed pads, and small slab repairs around homes and light commercial properties.',
           'For decorative work, we talk through traction, color, sealer maintenance, furniture placement, and how the finish will look next to brick, stone, fencing, or landscaping already on the property.',
+        ],
+      },
+      {
+        title: 'Small concrete jobs and near-me searches',
+        paragraphs: [
+          'Many Hewitt calls start as a simple search for a concrete contractor near me, small job concrete contractors near me, or concrete patio services. Those projects still need real planning because a short walkway, patio extension, or small equipment pad can crack early if the base, drainage, and tie-ins are rushed.',
+          'We handle small slabs, entry walks, patio add-ons, driveway approach repairs, shed pads, and uneven concrete replacement when the site makes sense. The estimate confirms access, minimum-load realities, finish expectations, and whether the project should be bundled with nearby concrete work to control cost.',
+        ],
+      },
+      {
+        title: 'Driveway replacement and patio extension priorities',
+        paragraphs: [
+          'Hewitt driveway replacement usually comes down to traffic loads, garage transitions, expansion space, and water movement away from the house. We look for low spots, edge failures, thin existing sections, and places where vehicles turn across the slab.',
+          'Patio extensions need the same attention. Door thresholds, downspouts, shade lines, fence access, and furniture layout all affect the pour. We plan the slab so the finished space feels usable, drains cleanly, and fits the rest of the backyard instead of looking like an afterthought.',
         ],
       },
       {
@@ -267,6 +281,28 @@ export const locationPages = [
     ],
     services: baseServices,
     nearbyAreas: ['Waco', 'Woodway', 'Robinson', 'Lorena', 'Beverly Hills', 'Woodland Hills'],
+    localSearchLinks: [
+      {
+        label: 'Hewitt driveway replacement',
+        href: '/concrete-driveways-waco-tx',
+        description: 'Driveway prep, tear-out, slope, reinforcement, and approach planning for Hewitt homes.',
+      },
+      {
+        label: 'Hewitt patio extension planning',
+        href: '/concrete-patios-waco-tx',
+        description: 'Patio additions, backyard transitions, stamped options, and drainage around doors and fences.',
+      },
+      {
+        label: 'Small slab and sidewalk work',
+        href: '/concrete-sidewalks-waco-tx',
+        description: 'Entry walks, small pads, sidewalk repairs, and practical flatwork for tight-access areas.',
+      },
+      {
+        label: 'Recent Waco-area project updates',
+        href: '/blog',
+        description: 'Local job notes and concrete planning articles that support city and service pages.',
+      },
+    ],
     projects: baseProjects('Hewitt'),
     faq: [
       {
@@ -278,6 +314,11 @@ export const locationPages = [
         question: 'Can I get a quick estimate for a Hewitt patio or driveway?',
         answer:
           'Yes. We offer free on-site estimates in Hewitt and can usually schedule a site visit quickly so you can compare options and pricing.',
+      },
+      {
+        question: 'Do you take small concrete jobs in Hewitt?',
+        answer:
+          'Yes, when the access, concrete minimums, and schedule make sense. Common small projects include patio extensions, entry walks, shed pads, approach repairs, and short sidewalk replacements.',
       },
     ],
   },

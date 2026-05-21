@@ -9,6 +9,7 @@ import { seoServicePages as seoServicePageData } from '../src/data/seoServicePag
 import { getServiceGalleryImages } from '../src/data/clientProjects.js'
 import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
+import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
 
 const projectRoot = process.cwd()
@@ -130,9 +131,9 @@ const locationPages = [
   {
     city: 'Hewitt',
     slug: 'hewitt-tx-concrete-contractor',
-    seoTitle: 'Concrete Contractor Hewitt Texas | Driveways, Patios, Concrete Repair',
+    seoTitle: 'Concrete Contractor Hewitt Texas | Driveways, Patios, Small Jobs',
     seoDescription:
-      'Looking for a concrete contractor in Hewitt, Texas? SLA Concrete Works builds driveways, patios, stamped concrete, and repairs for clay soil.',
+      'Looking for a concrete contractor in Hewitt, Texas? SLA Concrete Works builds driveways, patios, stamped concrete, small slabs, and repairs for clay soil.',
     nearbyAreas: ['Woodway', 'Waco', 'Lorena', 'Robinson', 'Beverly Hills'],
     intro:
       'Hewitt homeowners typically choose decorative patio and driveway upgrades, with extra attention to clean transitions and curb appeal.',
@@ -156,6 +157,20 @@ const locationPages = [
         paragraphs: [
           'The most common Hewitt scopes are driveway replacement, patio extensions, sidewalk repairs, stamped patios, shed pads, and small slab repairs around homes and light commercial properties.',
           'For decorative work, we talk through traction, color, sealer maintenance, furniture placement, and how the finish will look next to brick, stone, fencing, or landscaping already on the property.',
+        ],
+      },
+      {
+        title: 'Small concrete jobs and near-me searches',
+        paragraphs: [
+          'Many Hewitt calls start as a simple search for a concrete contractor near me, small job concrete contractors near me, or concrete patio services. Those projects still need real planning because a short walkway, patio extension, or small equipment pad can crack early if the base, drainage, and tie-ins are rushed.',
+          'We handle small slabs, entry walks, patio add-ons, driveway approach repairs, shed pads, and uneven concrete replacement when the site makes sense. The estimate confirms access, minimum-load realities, finish expectations, and whether the project should be bundled with nearby concrete work to control cost.',
+        ],
+      },
+      {
+        title: 'Driveway replacement and patio extension priorities',
+        paragraphs: [
+          'Hewitt driveway replacement usually comes down to traffic loads, garage transitions, expansion space, and water movement away from the house. We look for low spots, edge failures, thin existing sections, and places where vehicles turn across the slab.',
+          'Patio extensions need the same attention. Door thresholds, downspouts, shade lines, fence access, and furniture layout all affect the pour. We plan the slab so the finished space feels usable, drains cleanly, and fits the rest of the backyard instead of looking like an afterthought.',
         ],
       },
       {
@@ -514,6 +529,28 @@ const routeMeta = [
     ],
     contentHtml: renderGuideContent(guide),
   })),
+  ...staticBlogPosts
+    .filter((post) => post?.slug && post?.status === 'published')
+    .map((post) => ({
+      path: `/blog/${post.slug}`,
+      title: `${post.title} | ${SITE_NAME}`,
+      description:
+        post.excerpt ||
+        'Concrete tips, project planning advice, and local Waco-area concrete updates from SLA Concrete Works LLC.',
+      canonical: `${SITE_URL}/blog/${post.slug}`,
+      h1: post.title,
+      schemaKind: 'blog',
+      schemaName: post.title,
+      schemaDescription: post.excerpt,
+      publishedTime: post.published_at || post.created_at,
+      modifiedTime: post.updated_at || post.published_at || post.created_at,
+      breadcrumbs: [
+        { name: 'Home', url: `${SITE_URL}/` },
+        { name: 'Blog', url: `${SITE_URL}/blog` },
+        { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
+      ],
+      contentHtml: renderStaticBlogPostContent(post),
+    })),
   ...staticRoutes.map((route) => ({
     path: route.path,
     title: route.title,
@@ -587,6 +624,51 @@ function renderLinkList(items) {
         }</li>`,
     )
     .join('')}</ul>`
+}
+
+function renderInlineMarkdown(value) {
+  return escapeHtml(value).replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    (_match, label, href) =>
+      `<a href="${escapeHtml(href)}" style="color:#ea580c;font-weight:700;text-decoration:none;">${label}</a>`,
+  )
+}
+
+function renderSimpleMarkdown(content = '') {
+  const blocks = String(content)
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean)
+
+  return blocks
+    .map((block, index) => {
+      const imageMatch = block.match(/^!\[([^\]]*)\]\(([^)]+)\)$/)
+      if (imageMatch) {
+        return `<figure style="margin:22px 0;border:1px solid #e7e5e4;border-radius:12px;overflow:hidden;background:#fff;"><img src="${escapeHtml(
+          imageMatch[2],
+        )}" alt="${escapeHtml(
+          imageMatch[1],
+        )}" loading="lazy" width="900" height="675" style="display:block;width:100%;height:auto;"><figcaption style="padding:10px 12px;color:#57534e;font-size:0.92rem;">${escapeHtml(
+          imageMatch[1],
+        )}</figcaption></figure>`
+      }
+
+      if (block.startsWith('# ')) {
+        if (index === 0) return ''
+        return `<h2 style="margin:28px 0 10px;font-size:1.55rem;line-height:1.25;color:#1c1917;">${escapeHtml(
+          block.replace(/^#\s+/, ''),
+        )}</h2>`
+      }
+
+      if (block.startsWith('## ')) {
+        return `<h2 style="margin:28px 0 10px;font-size:1.35rem;line-height:1.3;color:#1c1917;">${escapeHtml(
+          block.replace(/^##\s+/, ''),
+        )}</h2>`
+      }
+
+      return `<p style="margin:0 0 14px;color:#57534e;">${renderInlineMarkdown(block)}</p>`
+    })
+    .join('')
 }
 
 function renderFaqList(items) {
@@ -1432,6 +1514,24 @@ function renderJobsIndexContent() {
   })
 }
 
+function renderStaticBlogPostContent(post) {
+  return `<main data-prerender-content="true" style="max-width:860px;margin:0 auto;padding:96px 20px 64px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.65;background:#fafaf9;color:#1c1917;"><p style="margin:0 0 8px;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:#ea580c;font-weight:700;">Concrete Blog</p><h1 style="margin:0 0 14px;font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;color:#1c1917;">${escapeHtml(
+    post.title,
+  )}</h1><p style="margin:0 0 20px;color:#44403c;font-size:1.05rem;">${escapeHtml(
+    post.excerpt || 'Concrete planning advice from SLA Concrete Works LLC.',
+  )}</p><article style="background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:24px;">${renderSimpleMarkdown(
+    post.content,
+  )}</article>${renderSection({
+    title: 'Keep planning your concrete project',
+    links: [
+      { label: 'Request a free estimate', href: '/#contact' },
+      { label: 'Hewitt concrete contractor page', href: '/hewitt-tx-concrete-contractor' },
+      { label: 'Waco concrete contractor hub', href: '/waco-tx-concrete-contractor' },
+      { label: 'Project gallery', href: '/jobs' },
+    ],
+  })}</main>`
+}
+
 function renderNotFoundContent() {
   return renderPage({
     eyebrow: '404',
@@ -1687,6 +1787,26 @@ function locationPlaceSchema(meta, canonical) {
 }
 
 function articleSchema(meta, canonical) {
+  if (meta.schemaKind === 'blog') {
+    return {
+      '@type': 'BlogPosting',
+      '@id': `${canonical}#article`,
+      headline: meta.schemaName || meta.h1 || meta.title,
+      description: meta.schemaDescription || meta.description,
+      datePublished: meta.publishedTime,
+      dateModified: meta.modifiedTime || meta.publishedTime,
+      mainEntityOfPage: {
+        '@id': `${canonical}#webpage`,
+      },
+      author: {
+        '@id': ORGANIZATION_ID,
+      },
+      publisher: {
+        '@id': ORGANIZATION_ID,
+      },
+    }
+  }
+
   if (meta.schemaKind !== 'guide') return null
   return {
     '@type': 'Article',
@@ -1756,6 +1876,7 @@ function upsertPrerenderContent(html, contentHtml) {
 
 function applyMeta(html, meta) {
   const canonical = normalizeCanonical(meta.canonical || `${SITE_URL}${meta.path === '/' ? '/' : meta.path}`)
+  const ogType = meta.schemaKind === 'blog' ? 'article' : 'website'
   let updated = html
   updated = upsertTitle(updated, meta.title)
   updated = upsertMetaTag(updated, 'description', meta.description)
@@ -1763,7 +1884,7 @@ function applyMeta(html, meta) {
   updated = upsertCanonical(updated, canonical)
   updated = upsertMetaTag(updated, 'og:title', meta.title)
   updated = upsertMetaTag(updated, 'og:description', meta.description)
-  updated = upsertMetaTag(updated, 'og:type', 'website')
+  updated = upsertMetaTag(updated, 'og:type', ogType)
   updated = upsertMetaTag(updated, 'og:site_name', SITE_NAME)
   updated = upsertMetaTag(updated, 'og:locale', 'en_US')
   updated = upsertMetaTag(updated, 'og:url', canonical)
@@ -1773,6 +1894,12 @@ function applyMeta(html, meta) {
   updated = upsertMetaTag(updated, 'twitter:title', meta.title)
   updated = upsertMetaTag(updated, 'twitter:description', meta.description)
   updated = upsertMetaTag(updated, 'twitter:image', DEFAULT_IMAGE)
+  if (meta.publishedTime) {
+    updated = upsertMetaTag(updated, 'article:published_time', meta.publishedTime)
+  }
+  if (meta.modifiedTime) {
+    updated = upsertMetaTag(updated, 'article:modified_time', meta.modifiedTime)
+  }
   updated = upsertJsonLd(updated, meta, canonical)
   updated = upsertPrerenderContent(updated, meta.contentHtml || renderNotFoundContent())
   if (meta.robots && meta.robots !== 'index, follow') {

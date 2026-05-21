@@ -27,6 +27,14 @@ const wacoPlanningLinks = [
     label: 'Waco concrete contractor hub',
   },
   {
+    href: '/hewitt-tx-concrete-contractor',
+    label: 'Hewitt concrete contractor page',
+  },
+  {
+    href: '/jobs',
+    label: 'Recent project gallery',
+  },
+  {
     href: '/blog/waco-concrete-driveway-cost-factors',
     label: 'Waco driveway cost factors',
   },
@@ -378,7 +386,7 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
                 <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
                   Waco planning resources
                 </h3>
-                <div className="grid gap-3 sm:grid-cols-3">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
                   {wacoPlanningLinks.map((link) => (
                     <a
                       key={link.href}
