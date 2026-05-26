@@ -1,5 +1,27 @@
 export const staticBlogPosts = [
   {
+    id: 'static-river-walk-shotcrete-bank-stabilization-2026-05-26',
+    created_at: '2026-05-26T23:28:52.000Z',
+    updated_at: '2026-05-26T23:28:52.000Z',
+    published_at: '2026-05-26T23:28:52.000Z',
+    title: 'River Walk Development Shotcrete Bank Stabilization in Waco, TX',
+    slug: 'river-walk-shotcrete-bank-stabilization-waco-tx',
+    excerpt:
+      'A field update from the River Walk development in Waco showing bank erosion cleanup and shotcrete stabilization work along the slope.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/river-walk-shotcrete-bank-stabilization/01-d786aead-b08a-4ab0-8499-29978a3fac31.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '121waaq',
+    content: [
+      'This update is from the River Walk development project in Waco. The photo shows the bank opened up and cleaned back before shotcrete stabilization, with the slope exposed, fencing above it, and the work area ready for the next pass.',
+      'Bank work like this is not the same as pouring a driveway or a flat slab. The main job is holding the soil in place, getting the loose material cleaned out, and giving the slope something solid so rain and runoff do not keep cutting it back.',
+      'Shotcrete helps on a steep or awkward bank because the concrete can be sprayed into place instead of trying to form and pour a regular wall. The prep still matters. If the bank is not cleaned up and shaped right, the finish on top is not going to solve the real problem underneath.',
+      'SLA Concrete Works handles concrete repair, retaining and stabilization work, slabs, paving, sidewalks, driveways, and commercial flatwork around Waco and Central Texas. On jobs with erosion or slope movement, it is worth looking at drainage and access before the concrete work starts.',
+      '![Exposed river bank at the River Walk development before shotcrete stabilization in Waco, TX](/blog-images/river-walk-shotcrete-bank-stabilization/01-d786aead-b08a-4ab0-8499-29978a3fac31.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-waco-driveway-cost-factors-2026-05-21',
     created_at: '2026-05-21T15:10:00.000Z',
     updated_at: '2026-05-21T15:10:00.000Z',
