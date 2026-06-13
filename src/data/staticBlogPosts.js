@@ -1,5 +1,30 @@
 export const staticBlogPosts = [
   {
+    id: 'static-mount-calm-shop-foundation-concrete-2026-06-13',
+    created_at: '2026-06-13T14:06:39.000Z',
+    updated_at: '2026-06-13T14:06:39.000Z',
+    published_at: '2026-06-13T14:06:39.000Z',
+    title: 'Mount Calm TX Shop Foundation Concrete Prep Near Waco',
+    slug: 'mount-calm-tx-shop-foundation-concrete-prep',
+    excerpt:
+      'A field update from a 2,500 square foot Morton building shop foundation in Mount Calm, TX, with formwork, steel, vapor barrier, and finished slab photos.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/mount-calm-shop-foundation-concrete/02-1bbd06bd-b7b6-4bbb-b5ce-a8ea998a3f86.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1v8ehd3',
+    content: [
+      'This update is from a 2,500 square foot shop foundation for a Morton building in Mount Calm, northeast of Waco. The photos show the slab before the pour, the layout from above, and the finished concrete inside the building after the crew worked it down.',
+      'A shop foundation like this is not the place to guess. The forms set the footprint, the vapor barrier helps control moisture, and the steel has to be in place before the trucks show up. Once concrete starts hitting the ground, there is not much time to fix missed prep.',
+      'The overhead photo gives a good look at the building pad and the way the slab sits on the site. The close-up shows the reinforcing steel and vapor barrier across the floor area. The finished photo is the part everybody wants to see, but that finish depends on the setup being right first.',
+      'For shop slabs around Mount Calm, Waco, and Central Texas, the main questions are simple: what will the building be used for, what loads will the floor carry, how will water move around the pad, and what access does the crew have on pour day. Those details decide the thickness, reinforcement, finish timing, and cleanup plan.',
+      'SLA Concrete Works handles shop foundations, concrete slabs, metal building pads, driveways, sidewalks, paving, and concrete repair across the Waco area. On projects like this, the best work happens before the pour starts.',
+      '![Rebar and vapor barrier ready for a Mount Calm TX shop foundation near Waco](/blog-images/mount-calm-shop-foundation-concrete/02-1bbd06bd-b7b6-4bbb-b5ce-a8ea998a3f86.jpg)',
+      '![Aerial view of the formed Morton building shop foundation pad in Mount Calm, TX](/blog-images/mount-calm-shop-foundation-concrete/03-9ba950b1-31c9-435b-be3d-f4c8f4f09719.jpg)',
+      '![Finished concrete slab inside a Morton building shop foundation in Mount Calm, TX](/blog-images/mount-calm-shop-foundation-concrete/01-62863c29-7af6-48b1-b3a7-21ec9c69edff.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-river-walk-shotcrete-bank-stabilization-2026-05-26',
     created_at: '2026-05-26T23:28:52.000Z',
     updated_at: '2026-05-26T23:28:52.000Z',
