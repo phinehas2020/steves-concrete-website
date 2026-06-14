@@ -1,5 +1,35 @@
 export const staticBlogPosts = [
   {
+    id: 'static-magnolia-rv-concrete-pads-waco-2026-06-14',
+    created_at: '2026-06-14T14:09:33.000Z',
+    updated_at: '2026-06-14T14:09:33.000Z',
+    published_at: '2026-06-14T14:09:33.000Z',
+    title: 'Magnolia RV Concrete Pads in Waco, TX',
+    slug: 'magnolia-rv-concrete-pads-waco-tx',
+    excerpt:
+      'A field update from Magnolia RV in Waco showing concrete RV pads, covered parking structures, grading, forms, and fresh flatwork around the site.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/magnolia-rv-concrete-pads-waco/02-7971d590-a297-486d-bc2b-5feb78fcb309.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1jftw2g',
+    content: [
+      'This update is from the Magnolia RV site in Waco. The photos show a run of concrete RV pads and covered parking areas, with several slabs already down and more forming, grading, and cleanup still happening around the site.',
+      'On a job like this, the concrete has to be useful every day. RV pads need straight layout, the right slope, clean edges, and enough room around posts, utilities, and drive lanes. If the grade is wrong or the forms wander, it shows up fast once vehicles start moving through.',
+      'You can see the covered structures set over the new pads, the red dirt being shaped between pours, and the gravel drives giving the crew access through the work area. Some sections are finished, and other areas are still being formed and prepped for the next pass.',
+      'This kind of RV and commercial flatwork is not fancy work, but it has to be done right. Water needs somewhere to go, the pads need to meet the surrounding drive areas cleanly, and the finish has to hold up to regular traffic instead of just looking good the day it is poured.',
+      'SLA Concrete Works handles concrete pads, commercial flatwork, driveways, sidewalks, paving, slabs, and concrete repair across Waco and Central Texas. For RV parks and commercial sites, it helps to plan the grade, access, drainage, and pour sequence before the trucks show up.',
+      '![Concrete RV pads and covered parking structures at Magnolia RV in Waco, TX](/blog-images/magnolia-rv-concrete-pads-waco/02-7971d590-a297-486d-bc2b-5feb78fcb309.jpg)',
+      '![Fresh concrete pad, forms, and red dirt grading at the Magnolia RV site in Waco](/blog-images/magnolia-rv-concrete-pads-waco/01-640968e3-2023-493b-b30e-23593097b905.jpg)',
+      '![Long row of covered RV parking pads with new concrete flatwork in Waco](/blog-images/magnolia-rv-concrete-pads-waco/03-005ede53-4534-4143-8952-6686ca8fe2ce.jpg)',
+      '![Magnolia RV concrete pads, gravel access, and covered structures under construction](/blog-images/magnolia-rv-concrete-pads-waco/04-f903134a-966e-4ff7-9bd8-06aba8c65c84.jpg)',
+      '![Finished concrete RV pads beside utility posts and covered parking frames](/blog-images/magnolia-rv-concrete-pads-waco/05-c64c6348-c508-4e7e-86a8-0c5296e69a7b.jpg)',
+      '![Concrete pad layout and covered RV spaces at a Waco commercial site](/blog-images/magnolia-rv-concrete-pads-waco/06-db6f9091-9488-4840-b6e8-426909e12148.jpg)',
+      '![Small site building, forms, and concrete pad prep at Magnolia RV in Waco](/blog-images/magnolia-rv-concrete-pads-waco/07-4fc5d348-99ab-4dc9-846c-0ed69617d60b.jpg)',
+      '![Concrete crew and equipment working around new Magnolia RV pad forms](/blog-images/magnolia-rv-concrete-pads-waco/08-1a1af200-efb3-4665-a5fc-391c72edd749.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-mount-calm-shop-foundation-concrete-2026-06-13',
     created_at: '2026-06-13T14:06:39.000Z',
     updated_at: '2026-06-13T14:06:39.000Z',
