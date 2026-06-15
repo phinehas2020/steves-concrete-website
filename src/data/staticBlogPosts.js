@@ -1,5 +1,31 @@
 export const staticBlogPosts = [
   {
+    id: 'static-city-of-waco-sidewalk-concrete-pour-2026-06-15',
+    created_at: '2026-06-15T14:08:33.000Z',
+    updated_at: '2026-06-15T14:08:33.000Z',
+    published_at: '2026-06-15T14:08:33.000Z',
+    title: 'City of Waco Sidewalk Concrete Pour',
+    slug: 'city-of-waco-sidewalk-concrete-pour',
+    excerpt:
+      'A field update from a City of Waco sidewalk concrete pour, with fresh flatwork, forms, finish work, and cleanup around a public walkway.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/city-of-waco-sidewalk-concrete-pour/01-bd3fce5d-158e-4f58-a3a1-bef64ddf444a.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1jcd0ic',
+    content: [
+      'This update is from a City of Waco sidewalk pour. The photos show fresh sidewalk concrete going in, with forms set, the crew working the surface, and the walkway being tied back into the surrounding area.',
+      'Sidewalk work looks simple from the street, but the details still matter. The base has to be firm, the forms need to hold a clean line, and the concrete needs the right slope so water does not sit on the walk or run back where it should not.',
+      'On a public walkway, the finish has to be practical. It needs enough texture for foot traffic, clean edges where it meets existing concrete, and joints that help control cracking instead of letting the slab break wherever it wants.',
+      'The batch also shows the normal jobsite work around a pour: tools out, grade checked, concrete placed, and cleanup happening as the slab starts to set. That is the part that keeps the finished sidewalk from looking patched together later.',
+      'SLA Concrete Works handles sidewalk concrete, city and commercial flatwork, driveways, slabs, paving, and concrete repair across Waco and Central Texas. Good sidewalk work comes down to prep, slope, finish timing, and cleanup.',
+      '![Fresh sidewalk concrete being placed for a City of Waco walkway project](/blog-images/city-of-waco-sidewalk-concrete-pour/01-bd3fce5d-158e-4f58-a3a1-bef64ddf444a.jpg)',
+      '![Concrete crew finishing a City of Waco sidewalk section beside the street](/blog-images/city-of-waco-sidewalk-concrete-pour/02-118df955-9a82-49c4-a4e4-3f74c6d2f4bf.jpg)',
+      '![Formed sidewalk concrete and fresh flatwork on a Waco public walkway](/blog-images/city-of-waco-sidewalk-concrete-pour/03-c9e6bda2-ce77-42cc-b1f1-281da2f66c1d.jpg)',
+      '![Finished sidewalk pour area with tools and cleanup around the new concrete](/blog-images/city-of-waco-sidewalk-concrete-pour/04-5c4ef26c-aded-4869-99cb-7000e3a076d0.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-magnolia-rv-concrete-pads-waco-2026-06-14',
     created_at: '2026-06-14T14:09:33.000Z',
     updated_at: '2026-06-14T14:09:33.000Z',
