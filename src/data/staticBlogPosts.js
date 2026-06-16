@@ -1,5 +1,30 @@
 export const staticBlogPosts = [
   {
+    id: 'static-cameron-park-zoo-concrete-pour-2026-06-16',
+    created_at: '2026-06-16T14:15:00.000Z',
+    updated_at: '2026-06-16T14:15:00.000Z',
+    published_at: '2026-06-16T14:15:00.000Z',
+    title: 'Cameron Park Zoo Concrete Walkway Pour in Waco, TX',
+    slug: 'cameron-park-zoo-concrete-pour-waco-tx',
+    excerpt:
+      'A field update from Cameron Park Zoo in Waco showing a new concrete walkway pour, clean tie-ins, broom finish, and site cleanup around the path.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/cameron-park-zoo-concrete-pour/01-d80ac1cf-acab-4fbe-bf0c-82e055789599.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: 'zf1jdt',
+    content: [
+      'This update is from a concrete pour at Cameron Park Zoo in Waco. The photos show a new walkway section in place, running through a tight area with fencing, trees, exhibit walls, and existing paths close by.',
+      'Zoo work is not the same as pouring an open driveway. Access is tighter, the edges have to meet what is already there, and the finish has to be useful for steady foot traffic. A clean broom finish matters here because this walkway needs traction and drainage, not a slick surface.',
+      'You can see the new concrete tied into the path around it, with straight joints, clean edges, and cleanup started around the slab. That kind of detail keeps the walkway from looking like a patch after everything is opened back up.',
+      'On public walkways, the small things are what people notice later. The grade needs to move water off the path, the forms need to hold the line, and the finish has to be timed right so the surface holds up to regular use.',
+      'SLA Concrete Works handles sidewalk concrete, walkway pours, commercial flatwork, concrete repair, driveways, slabs, and paving across Waco and Central Texas. For public or commercial concrete, good prep and clean tie-ins make the job last longer.',
+      '![New concrete walkway pour at Cameron Park Zoo in Waco, TX](/blog-images/cameron-park-zoo-concrete-pour/01-d80ac1cf-acab-4fbe-bf0c-82e055789599.jpg)',
+      '![Fresh broom finished concrete path tied into the zoo walkway area](/blog-images/cameron-park-zoo-concrete-pour/02-f11839a7-ab95-401b-9ddb-1074a8708a2e.jpg)',
+      '![Cameron Park Zoo concrete walkway section with clean edges and site cleanup](/blog-images/cameron-park-zoo-concrete-pour/03-0f071ab3-4640-4d15-8497-e5591481ffbb.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-city-of-waco-sidewalk-concrete-pour-2026-06-15',
     created_at: '2026-06-15T14:08:33.000Z',
     updated_at: '2026-06-15T14:08:33.000Z',
