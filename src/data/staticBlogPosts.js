@@ -1,5 +1,29 @@
 export const staticBlogPosts = [
   {
+    id: 'static-hewitt-tx-concrete-slab-pour-2026-06-17',
+    created_at: '2026-06-17T14:05:56.000Z',
+    updated_at: '2026-06-17T14:05:56.000Z',
+    published_at: '2026-06-17T14:05:56.000Z',
+    title: 'Hewitt TX Concrete Slab Pour Near Waco',
+    slug: 'hewitt-tx-concrete-slab-pour-near-waco',
+    excerpt:
+      'A field update from a Hewitt, TX concrete pour showing a fresh slab, formwork, edge finishing, and cleanup around a residential-style flatwork project.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/hewitt-tx-concrete-pour/01-570e0b01-242a-4f49-8eab-24604ba9a5b4.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1fyf7w8',
+    content: [
+      'This update is from a concrete pour in Hewitt, Texas, just south of Waco. The photos show a fresh rectangular slab with the forms still holding the edges, the crew working the surface, and cleanup starting around the pour area.',
+      'On a slab like this, the finish depends on what happened before the truck showed up. The base has to be shaped, the forms need to stay straight, and the grade around the slab has to make sense so water does not sit against the concrete after the job is done.',
+      'You can see the crew working the edges and surface while the concrete is still fresh. That timing matters. If the finish is rushed, the surface can show it later. If the forms move or the edge work gets sloppy, the slab never looks clean no matter how good the middle is.',
+      'This kind of Hewitt concrete work is simple on paper, but it still needs good prep, enough room for the crew to work, and a practical finish for daily use. The best slab is the one that drains right, meets the surrounding grade cleanly, and does not need explaining after the tools are picked up.',
+      'SLA Concrete Works handles concrete slabs, driveways, sidewalks, patios, parking areas, and concrete repair around Hewitt, Waco, and Central Texas. For flatwork like this, the job starts with layout, base prep, access, and finish timing.',
+      '![Fresh Hewitt TX concrete slab pour with forms and crew finishing the surface](/blog-images/hewitt-tx-concrete-pour/01-570e0b01-242a-4f49-8eab-24604ba9a5b4.jpg)',
+      '![Concrete crew edging and cleaning up around a new slab in Hewitt near Waco](/blog-images/hewitt-tx-concrete-pour/02-2144ccb9-11f4-4a54-8e3e-3086a6c15aa1.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-cameron-park-zoo-concrete-pour-2026-06-16',
     created_at: '2026-06-16T14:15:00.000Z',
     updated_at: '2026-06-16T14:15:00.000Z',
