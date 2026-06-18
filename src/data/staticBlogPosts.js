@@ -1,5 +1,30 @@
 export const staticBlogPosts = [
   {
+    id: 'static-melody-grove-parking-lot-concrete-pour-2026-06-18',
+    created_at: '2026-06-18T14:05:14.000Z',
+    updated_at: '2026-06-18T14:05:14.000Z',
+    published_at: '2026-06-18T14:05:14.000Z',
+    title: 'Melody Grove Parking Lot Concrete Pour in Waco, TX',
+    slug: 'melody-grove-parking-lot-concrete-pour-waco-tx',
+    excerpt:
+      'A field update from Melody Grove in Waco showing a freshly poured concrete parking lot, curb work, forms, equipment, and cleanup around the housing complex.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/melody-grove-parking-lot-pour-waco-tx/01-6087acf7-d92f-4bfe-9e5e-37b58e531594.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1848605',
+    content: [
+      'This update is from the Melody Grove housing complex in Waco, Texas. The photos show a new concrete parking lot section after the pour, with curb work, forms, cleanup, and equipment still on site.',
+      'Parking lot concrete has to do more than look flat. It needs the right slope so water moves off the slab, the edges have to line up with the walks and drive lanes, and the finish has to hold up to regular traffic without turning slick.',
+      'You can see the crew working the curb and edge areas while the forms are still in place. That is where a lot of these jobs are won or lost. If the curb line is off or the grade around it is rough, the finished parking area never looks right.',
+      'The finished section ties into the housing buildings and the rest of the site work around Melody Grove. There is still cleanup and grading around the edges, but the main concrete area is down and ready for the next steps.',
+      'SLA Concrete Works handles parking lot concrete, sidewalks, curbs, driveways, slabs, paving, and concrete repair around Waco and Central Texas. On apartment and housing projects, good access, drainage, and clean tie-ins matter as much as the pour itself.',
+      '![Fresh concrete parking lot section at Melody Grove housing in Waco, TX](/blog-images/melody-grove-parking-lot-pour-waco-tx/01-6087acf7-d92f-4bfe-9e5e-37b58e531594.jpg)',
+      '![Concrete curb work and forms beside the Melody Grove parking lot pour](/blog-images/melody-grove-parking-lot-pour-waco-tx/02-a64595ae-da6e-4c16-9c7e-924198aa693e.jpg)',
+      '![Crew finishing concrete edges and curb at Melody Grove in Waco](/blog-images/melody-grove-parking-lot-pour-waco-tx/03-46867eda-854d-4848-ac5b-450ddbfe002c.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-hewitt-tx-concrete-slab-pour-2026-06-17',
     created_at: '2026-06-17T14:05:56.000Z',
     updated_at: '2026-06-17T14:05:56.000Z',
