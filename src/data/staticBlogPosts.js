@@ -1,5 +1,36 @@
 export const staticBlogPosts = [
   {
+    id: 'static-hubbard-tx-concrete-resurfacing-2026-06-19',
+    created_at: '2026-06-19T14:06:45.000Z',
+    updated_at: '2026-06-19T14:06:45.000Z',
+    published_at: '2026-06-19T14:06:45.000Z',
+    title: 'Hubbard TX Concrete Resurfacing Around a Shop and Patio',
+    slug: 'hubbard-tx-concrete-resurfacing-shop-patio',
+    excerpt:
+      'A field update from Hubbard, TX showing about 1,600 square feet of old concrete resurfaced around a shop, porch, covered patio, walkways, and gravel tie-ins.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/hubbard-tx-concrete-resurfacing/01-2bcefc4d-7b57-4765-bf85-55cfbd1f2df9.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: 'qloi2f',
+    content: [
+      'This update is from a concrete resurfacing job in Hubbard, Texas. The batch notes called out about 1,600 square feet of old concrete, and the photos show the finished work around a shop, porch, covered patio, walkways, and gravel edges.',
+      'Resurfacing is not just spreading a new coat and walking away. The old concrete has to be cleaned up, the weak spots need attention, and the new surface has to meet the doors, posts, steps, and existing edges without leaving awkward lips or low spots.',
+      'You can see the resurfaced areas running under the covered shop space and around the house. The finish is clean, but it is still practical concrete. It needs enough texture for daily use, especially where people are walking in from the gravel or coming off the porch.',
+      'The small tie-ins matter on a job like this. Around the shop doors, patio posts, walkway corners, and the step by the entry, the concrete has to look right and drain right. If those edges are rushed, the whole job looks rough even when the open areas are fine.',
+      'SLA Concrete Works handles concrete resurfacing, patios, sidewalks, shop slabs, driveways, flatwork, and concrete repair around Hubbard, Waco, and Central Texas. On older concrete, the prep work usually decides how good the finished surface looks and how well it holds up.',
+      '![Resurfaced concrete under a covered shop area in Hubbard, TX](/blog-images/hubbard-tx-concrete-resurfacing/01-2bcefc4d-7b57-4765-bf85-55cfbd1f2df9.jpg)',
+      '![Fresh concrete resurfacing on a covered porch and walkway in Hubbard, Texas](/blog-images/hubbard-tx-concrete-resurfacing/02-065411e7-d2a3-42a9-a266-a68320784206.jpg)',
+      '![Clean concrete finish tied into a brick entry step on a Hubbard porch](/blog-images/hubbard-tx-concrete-resurfacing/03-d2ded9c5-bc50-43b2-8c04-5b3def5de499.jpg)',
+      '![Phone screenshot showing the Hubbard concrete resurfacing project area](/blog-images/hubbard-tx-concrete-resurfacing/04-3cab7097-00eb-43af-8544-01b807f73d44.jpg)',
+      '![Concrete resurfacing tied into a walkway, privacy fence, and shop wall](/blog-images/hubbard-tx-concrete-resurfacing/05-2f6077c6-1c71-41fd-b885-724a7da0decf.jpg)',
+      '![Resurfaced patio concrete under a covered outdoor area beside a shop](/blog-images/hubbard-tx-concrete-resurfacing/06-e8233813-6897-478b-91aa-05f0492de9bf.jpg)',
+      '![Finished concrete surface around a shop door and covered work area](/blog-images/hubbard-tx-concrete-resurfacing/07-f4b3351f-b4f2-4462-8f20-be7bbb6fb722.jpg)',
+      '![Screenshot detail of the Hubbard concrete resurfacing and patio finish](/blog-images/hubbard-tx-concrete-resurfacing/08-d260cdb2-804c-43f2-a0eb-92a217d8ca6e.jpg)',
+      '![Screenshot of the completed concrete resurfacing around the Hubbard property](/blog-images/hubbard-tx-concrete-resurfacing/09-a2939fe9-4874-4022-9910-60b08942c1f9.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-melody-grove-parking-lot-concrete-pour-2026-06-18',
     created_at: '2026-06-18T14:05:14.000Z',
     updated_at: '2026-06-18T14:05:14.000Z',
