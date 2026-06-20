@@ -1,5 +1,29 @@
 export const staticBlogPosts = [
   {
+    id: 'static-melody-grove-handicap-parking-concrete-2026-06-20',
+    created_at: '2026-06-20T14:10:29.000Z',
+    updated_at: '2026-06-20T14:10:29.000Z',
+    published_at: '2026-06-20T14:10:29.000Z',
+    title: 'Melody Grove Handicap Parking Concrete Prep in Waco, TX',
+    slug: 'melody-grove-handicap-parking-concrete-waco-tx',
+    excerpt:
+      'A field update from Melody Grove in Waco showing concrete prep for handicap parking, with forms, base work, layout, and jobsite cleanup before the next pour.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/melody-grove-handicap-parking-waco/01-410ab6b1-7da4-47ef-8cb6-f67dc461dfdd.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: 'wf9qd4',
+    content: [
+      'This update is from Melody Grove housing in Waco, Texas. The photos show prep work for handicap parking and nearby flatwork, with forms going in, base material shaped, and the crew working through the layout around the buildings.',
+      'This part of a concrete job does not look finished yet, but it is where a lot of the important work happens. The forms need to hold the right line, the base needs to be firm, and the grade has to make sense before any concrete truck shows up.',
+      'On parking and sidewalk work around housing, the tie-ins matter. The new concrete has to meet doors, walks, curb areas, and drive lanes without leaving rough transitions or low spots that hold water.',
+      'You can see the crew working around trees, existing buildings, dirt, gravel, and equipment. That is normal on this kind of Waco concrete project. There is not much open room, so layout and cleanup have to stay ahead of the pour.',
+      'SLA Concrete Works handles parking lot concrete, handicap parking flatwork, sidewalks, curbs, driveways, slabs, and concrete repair around Waco and Central Texas. Good flatwork starts with prep that is straight, solid, and ready before the concrete is placed.',
+      '![Concrete crew setting forms for handicap parking work at Melody Grove in Waco, TX](/blog-images/melody-grove-handicap-parking-waco/01-410ab6b1-7da4-47ef-8cb6-f67dc461dfdd.jpg)',
+      '![Base prep and form layout for Melody Grove handicap parking concrete in Waco](/blog-images/melody-grove-handicap-parking-waco/02-83e78be1-2251-445c-a2b6-017cb606b889.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-hubbard-tx-concrete-resurfacing-2026-06-19',
     created_at: '2026-06-19T14:06:45.000Z',
     updated_at: '2026-06-19T14:06:45.000Z',
