@@ -1,5 +1,30 @@
 export const staticBlogPosts = [
   {
+    id: 'static-temple-drainage-channel-concrete-2026-06-21',
+    created_at: '2026-06-21T14:11:42.000Z',
+    updated_at: '2026-06-21T14:11:42.000Z',
+    published_at: '2026-06-21T14:11:42.000Z',
+    title: 'Temple TX Concrete Drainage Channel Work',
+    slug: 'temple-tx-concrete-drainage-channel-work',
+    excerpt:
+      'A field update from Temple, TX showing concrete drainage channel work with forms, rebar, narrow access, placement, and finish work between fence lines.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/temple-drainage-channel-concrete/01-392fac0d-4c5f-49f7-a09d-7575eba39cba.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1yxrm2z',
+    content: [
+      'This update is from a drainage channel job in Temple, Texas. The photos show a long narrow run between fence lines, with forms set, steel in place, and the crew working the concrete into a tight area.',
+      'This kind of concrete work is not about making a big open slab look pretty. The channel has to move water, hold its shape, and stay lined up in a space where there is not much room for equipment or extra material.',
+      'You can see the rebar laid out before placement, then the crew bringing concrete down the run and finishing the sides. On a narrow drainage channel, the edges matter because a rough line or low spot can hold water where it should be moving out.',
+      'Access is a big part of the job. Working between fences means the crew has to keep forms, tools, concrete, and cleanup moving without tearing up the surrounding area. It is slower than an open pour, but it is the right way to keep the work controlled.',
+      'SLA Concrete Works handles concrete drainage channels, sidewalks, flatwork, slabs, driveways, curbs, and concrete repair around Temple, Waco, and Central Texas. For drainage work, the grade and prep decide whether the concrete actually does its job after the first hard rain.',
+      '![Forms and rebar set for a concrete drainage channel in Temple, TX](/blog-images/temple-drainage-channel-concrete/01-392fac0d-4c5f-49f7-a09d-7575eba39cba.jpg)',
+      '![Concrete crew placing and finishing a narrow drainage channel between fences in Temple](/blog-images/temple-drainage-channel-concrete/02-87b77e15-60d1-4738-a6af-ba3324e99867.jpg)',
+      '![Finished section of concrete drainage channel work with clean edges in Temple, Texas](/blog-images/temple-drainage-channel-concrete/03-51c57517-9559-47db-999b-522feb8d6ca6.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-melody-grove-handicap-parking-concrete-2026-06-20',
     created_at: '2026-06-20T14:10:29.000Z',
     updated_at: '2026-06-20T14:10:29.000Z',
