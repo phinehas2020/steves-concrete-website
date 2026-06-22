@@ -1,5 +1,34 @@
 export const staticBlogPosts = [
   {
+    id: 'static-georgetown-shop-foundation-retaining-wall-2026-06-22',
+    created_at: '2026-06-22T14:06:51.000Z',
+    updated_at: '2026-06-22T14:06:51.000Z',
+    published_at: '2026-06-22T14:06:51.000Z',
+    title: 'Georgetown TX Shop Foundation and Concrete Retaining Wall Work',
+    slug: 'georgetown-tx-shop-foundation-concrete-retaining-wall',
+    excerpt:
+      'A field update from Georgetown, TX showing a shop foundation slab, fresh concrete flatwork, formwork, and concrete retaining wall finish work on the same jobsite.',
+    status: 'published',
+    cover_image_url:
+      '/blog-images/georgetown-tx-shop-foundation-concrete/01-7d3b1d9f-4feb-497b-b62f-2ed1928db297.jpg',
+    author_email: 'photo-studio-cron@system.local',
+    source_batch_key: '1v3ap60',
+    content: [
+      'This update is from a Georgetown, Texas concrete job with a shop foundation slab and retaining wall work on the same property. The photos show fresh concrete down, forms still in place, crew members working the finish, and the wall cleaned up after placement.',
+      'A shop slab like this has to start with the right base and layout. The forms set the shape, the steel and vapor barrier need to be ready before the truck gets there, and the finish has to be worked while the concrete is still in the right window.',
+      'The retaining wall side of the job is a different kind of detail. The wall has to hold a straight line, sit on a solid footing, and leave enough room around the site for grading and drainage once the dirt work catches up.',
+      'You can see the job moving in stages: the slab being placed and finished near the building, then the wall work along the edge of the property. That is normal on a larger concrete job. It is not all one clean pour from start to finish. The crew has to keep each section right so the next part has something solid to tie into.',
+      'SLA Concrete Works handles shop foundations, concrete slabs, retaining walls, driveways, flatwork, sidewalks, and concrete repair around Georgetown, Waco, and Central Texas. On jobs like this, the prep, grade, forms, and finish timing matter just as much as the concrete itself.',
+      '![Fresh concrete shop foundation slab being finished in Georgetown, TX](/blog-images/georgetown-tx-shop-foundation-concrete/01-7d3b1d9f-4feb-497b-b62f-2ed1928db297.jpg)',
+      '![Crew working the edge of a Georgetown TX shop slab with rebar and vapor barrier beside the pour](/blog-images/georgetown-tx-shop-foundation-concrete/02-d6824830-3bee-4765-8b42-6dfa8f4a50b3.jpg)',
+      '![Wide view of a fresh concrete shop foundation slab near Georgetown with forms still set](/blog-images/georgetown-tx-shop-foundation-concrete/03-22a9c983-18d6-4232-990e-fe8bc3b0db07.jpg)',
+      '![Concrete retaining wall finish work on a Georgetown jobsite](/blog-images/georgetown-tx-shop-foundation-concrete/04-b6e9111a-308d-4039-a871-d2ab3bbcc3eb.jpg)',
+      '![Long concrete retaining wall with dirt grading and power lines near Georgetown, Texas](/blog-images/georgetown-tx-shop-foundation-concrete/05-0af443a5-366a-4cda-9be4-3a35efd9be5e.jpg)',
+      '![Finished section of concrete retaining wall and cleared jobsite access in Georgetown](/blog-images/georgetown-tx-shop-foundation-concrete/06-b956b6bc-e36a-432b-aaa4-f784396902ad.jpg)',
+      '![Concrete retaining wall running along a Georgetown TX property edge after finish work](/blog-images/georgetown-tx-shop-foundation-concrete/07-06acdd1e-b53c-4ca6-a8bb-42e7a8095f68.jpg)',
+    ].join('\n\n'),
+  },
+  {
     id: 'static-temple-drainage-channel-concrete-2026-06-21',
     created_at: '2026-06-21T14:11:42.000Z',
     updated_at: '2026-06-21T14:11:42.000Z',
