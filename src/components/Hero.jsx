@@ -14,8 +14,10 @@ const topLocationLinks = [
 ]
 
 const featuredServiceLinks = [
-    { label: 'Foundation Repair', href: '/foundation-repair-waco-tx' },
+    { label: 'Driveways', href: '/concrete-driveways-waco-tx' },
+    { label: 'Patios', href: '/concrete-patios-waco-tx' },
     { label: 'Parking Lot Concrete', href: '/parking-lot-concrete-waco' },
+    { label: 'Foundation Work', href: '/concrete-foundations-waco-tx' },
 ]
 
 export function Hero() {
@@ -240,12 +242,11 @@ export function Hero() {
 
                     {/* Subheadline */}
                     <p className="text-lg sm:text-xl text-stone-300 text-pretty max-w-xl mb-8 leading-relaxed">
-                        <span className="sm:hidden">500+ projects across Central Texas. Built for black clay soil, heat, and long-term durability.</span>
+                        <span className="sm:hidden">Driveways, patios, slabs, and repairs planned for Waco clay soil, heat, drainage, and daily use.</span>
                         <span className="hidden sm:inline">
-                            SLA Concrete Works LLC has completed 500+ projects in Waco, TX since 2005. We build concrete driveways,
-                            concrete patios, and more for homeowners who want durable results from
-                            concrete contractors Waco TX with experience in black clay soil movement and long Texas heat cycles.
-                            If you are looking for reliable concrete companies Waco TX, we are ready to help.
+                            SLA Concrete Works LLC builds driveways, patios, slabs, and repair work for Waco-area homeowners
+                            and businesses. Steve looks at drainage, black clay soil movement, access, reinforcement, and cure
+                            timing before pricing the job, so the estimate explains how the concrete will actually be built.
                         </span>
                     </p>
 
@@ -309,8 +310,8 @@ export function Hero() {
                                 <div className="text-xs sm:text-sm text-stone-400">Projects Completed</div>
                             </div>
                             <div className="text-center sm:text-left">
-                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">100%</div>
-                                <div className="text-xs sm:text-sm text-stone-400">Customer Satisfaction</div>
+                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">5.0</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Review Rating</div>
                             </div>
                         </div>
                     </div>

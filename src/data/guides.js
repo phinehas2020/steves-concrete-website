@@ -266,6 +266,120 @@ export const guidePages = [
       },
     ],
   },
+  {
+    slug: 'do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx',
+    title: 'Do I Need a Permit to Pour a Concrete Slab in Waco, TX?',
+    heroTitle: 'Do I Need a Permit to Pour a Concrete Slab in Waco, TX?',
+    heroSubtitle:
+      'A practical planning guide for patios, driveway extensions, shop pads, sidewalks, and concrete slabs before you pour.',
+    seoTitle: 'Do I Need a Permit to Pour a Concrete Slab? Waco TX Guide',
+    seoDescription:
+      'Do you need a permit to pour a concrete slab in Waco, TX? Learn which concrete projects may need review before patios, driveways, approaches, sidewalks, and shop pads.',
+    badgeLabel: 'Planning Guide',
+    primaryCtaLabel: 'Review Planning Factors',
+    factorEyebrow: 'Permit planning',
+    factorTitle: 'Project details that can change permit needs',
+    factorIntro:
+      'Permit needs depend on where the slab sits, what it touches, how water moves, and whether the work affects public access or a structure.',
+    localEyebrow: 'Waco area checks',
+    localTitle: 'Why local concrete projects should be checked first',
+    localIntro:
+      'Waco, nearby cities, county areas, HOAs, and utility easements can all treat similar concrete projects differently.',
+    faqIntro:
+      'General planning answers for homeowners comparing concrete slab, driveway, patio, and pad projects.',
+    summary:
+      'A small backyard slab may be simple, but concrete work can need extra review when it touches a curb, driveway approach, sidewalk, drainage path, right-of-way, commercial property, utility area, or structural foundation. The safest move is to check the project scope before demolition or forming begins.',
+    quickStats: [
+      { label: 'Highest-risk areas', value: 'Curbs, aprons, sidewalks' },
+      { label: 'Drainage impact', value: 'Always review' },
+      { label: 'Commercial work', value: 'Stricter review' },
+      { label: 'Best next step', value: 'Scope check first' },
+    ],
+    factors: [
+      'Whether the slab touches a curb, sidewalk, driveway apron, street edge, or public right-of-way',
+      'Whether the project changes drainage, slope, runoff, or where water leaves the property',
+      'Whether the concrete supports a building, garage, shop, carport, equipment pad, or heavy vehicle use',
+      'Whether the work is residential, commercial, rental, public-facing, or part of a larger construction project',
+      'Whether utilities, easements, septic areas, gas lines, irrigation, trees, fences, or retaining walls are nearby',
+      'Whether an HOA, subdivision rule, landlord, insurer, or lender requires approval before exterior work',
+    ],
+    localNotes: [
+      {
+        title: 'City vs. county rules',
+        description:
+          'A slab inside Waco city limits may be reviewed differently from a similar slab outside the city or in a nearby community such as Hewitt, Woodway, Robinson, or Lorena.',
+      },
+      {
+        title: 'Driveway approaches',
+        description:
+          'Projects that affect the curb, apron, sidewalk, street edge, or public access deserve extra attention before concrete is removed or poured.',
+      },
+      {
+        title: 'Drainage and clay soil',
+        description:
+          'Even when a permit is not the main issue, changing the slope can push water toward a house, neighbor, slab edge, or soft clay pocket.',
+      },
+    ],
+    checklist: [
+      'Write down the project address and whether it is inside city limits.',
+      'Measure the planned slab, driveway extension, patio, or pad area.',
+      'Take photos from the street, from each corner of the work area, and from any low spots where water collects.',
+      'Note whether the project touches a curb, sidewalk, driveway approach, drainage path, fence, utility area, or structure.',
+      'Check HOA, landlord, builder, or property-manager requirements before scheduling the pour.',
+      'Ask the estimator to identify permit-aware planning items in writing before work begins.',
+    ],
+    relatedServices: [
+      {
+        label: 'Concrete Foundations',
+        href: getCanonicalServicePath('concrete-foundations'),
+      },
+      {
+        label: 'Concrete Driveways',
+        href: getCanonicalServicePath('concrete-driveways'),
+      },
+      { label: 'Concrete Patios', href: getCanonicalServicePath('concrete-patios') },
+      {
+        label: 'Concrete Demolition',
+        href: getCanonicalServicePath('concrete-demolition'),
+      },
+      {
+        label: 'Concrete Contractors',
+        href: getCanonicalServicePath('concrete-contractors'),
+      },
+    ],
+    faq: [
+      {
+        question: 'Do I need a permit to pour a concrete slab in Waco?',
+        answer:
+          'It depends on the property, slab purpose, and whether the work affects right-of-way, drainage, sidewalks, approaches, utilities, commercial use, or structural support. Before pouring, confirm the scope with the proper city, county, HOA, or project authority.',
+      },
+      {
+        question: 'Does a small backyard patio usually need a permit?',
+        answer:
+          'Some small detached patios are simple, but you should still check if the patio changes drainage, sits near utilities, ties into a structure, affects setbacks, or is controlled by an HOA or property manager.',
+      },
+      {
+        question: 'Which concrete projects are more likely to need review?',
+        answer:
+          'Driveway approaches, curb work, sidewalk changes, commercial slabs, building foundations, shop pads, carports, drainage changes, and work near public access are more likely to need extra review before construction.',
+      },
+      {
+        question: 'Can SLA Concrete Works help with permit-aware planning?',
+        answer:
+          'Yes. During the estimate we look for permit-aware planning issues such as right-of-way, drainage, access, demolition, structural support, and nearby utilities so the scope is clearer before work starts.',
+      },
+      {
+        question: 'Should I pour concrete before checking permit requirements?',
+        answer:
+          'No. If a project needs approval and you pour first, the fix can cost more than checking upfront. It is better to confirm the project path before forms, demolition, or concrete delivery.',
+      },
+      {
+        question: 'Is this guide legal advice?',
+        answer:
+          'No. This is general planning guidance for Waco-area concrete projects. Permit rules can change and depend on the property, so confirm requirements with the appropriate local authority before construction.',
+      },
+    ],
+  },
 ]
 
 export const guideLinks = guidePages.map((guide) => ({

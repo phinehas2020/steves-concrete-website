@@ -9,7 +9,7 @@ const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 const DEFAULT_SEO = {
   title: 'Waco Concrete Contractors | SLA Concrete Works LLC',
   description:
-    'SLA Concrete Works LLC is one of the trusted concrete contractors in Waco, TX offering full concrete services in Waco TX for driveways, patios, stamped concrete, slabs, and repairs. Free estimates: (254) 230-3102.',
+    'Waco concrete contractor for driveways, patios, slabs, foundations, and repairs. Owner-run planning for clay soil, drainage, and clear estimates.',
   canonical: SITE_URL + '/',
   image: DEFAULT_IMAGE,
   imageAlt: "SLA Concrete Works LLC - Waco's Trusted Concrete Contractor",

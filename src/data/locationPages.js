@@ -155,55 +155,153 @@ export const locationPages = [
   {
     slug: 'temple-tx-concrete-contractor',
     city: 'Temple',
-    seoTitle: 'Concrete Contractor Temple TX | Concrete Contractor Near Me in Central Texas',
+    seoTitle: 'Concrete Contractor Temple TX | Driveways, Patios & Repair',
     heroTitle: 'Concrete Contractor in Temple, TX',
     heroSubtitle:
-      'Driveways, patios, stamped finishes, and commercial pours for Temple homes and businesses.',
+      'Driveways, patios, sidewalks, slabs, and concrete repairs for Temple homes, rentals, and light commercial properties.',
     seoDescription:
-      'Concrete contractor in Temple, TX and nearby communities. Need a concrete contractor near me for driveways, patios, stamped concrete, or repairs? Call for a free estimate.',
+      'Concrete contractor in Temple TX for driveways, patios, sidewalks, slabs, repairs, and small commercial concrete. Clear estimates and local planning.',
     intro:
-      'We help Temple property owners upgrade curb appeal with durable concrete work that handles Central Texas heat and soil shifts.',
+      'We help Temple property owners plan concrete work that handles Central Texas heat, daily traffic, drainage, and soil shifts. Driveways, patios, sidewalks, and small commercial slabs all start with site access, slope, base prep, and finish expectations.',
+    planningSections: [
+      {
+        title: 'Temple driveway, patio, and sidewalk planning',
+        paragraphs: [
+          'Temple projects often involve practical upgrades: replacing a driveway, adding a patio, repairing a walkway, or improving access around a rental, shop, or small business. We start by checking where vehicles, people, water, and equipment will move.',
+          'That first look shapes the scope. Tight side-yard access, existing garage elevations, tree roots, fence gates, and drainage near doors can all change the right slab thickness, base prep, joint layout, and finish.',
+        ],
+      },
+      {
+        title: 'Concrete repair versus replacement in Temple',
+        paragraphs: [
+          'If the concrete is cracked but mostly stable, repair or resurfacing may be worth discussing. If panels are settling, holding water, breaking apart, or moving because the base failed, replacement is usually the cleaner long-term choice.',
+          'We explain the difference during the estimate so you do not pay for a patch that cannot hold. A practical recommendation should include the cause of the failure, not just the visible crack.',
+        ],
+      },
+      {
+        title: 'Commercial and rental-property scheduling',
+        paragraphs: [
+          'Temple commercial and rental-property work often needs clear access planning. Tenants, customers, deliveries, and parking all affect how the job should be phased.',
+          'We talk through demolition, prep, pour, cure, and reopening windows before work starts so the project does not create avoidable surprises for the people using the property.',
+        ],
+      },
+      {
+        title: 'What a useful Temple estimate should include',
+        paragraphs: [
+          'A strong concrete estimate should spell out demolition, haul-off, base correction, forms, reinforcement, finish, control joints, cleanup, and cure guidance.',
+          'If you are comparing contractors, ask each one to explain those items in plain language. The most important parts of concrete work are usually covered up once the slab is finished.',
+        ],
+      },
+    ],
     highlights: baseHighlights,
     services: baseServices,
     nearbyAreas: ["Belton", "Morgan's Point", 'Little River-Academy', 'Salado', 'Troy', 'Oenaville'],
+    localSearchLinks: [
+      {
+        label: 'Temple driveway planning',
+        href: '/concrete-driveways-waco-tx',
+        description: 'Driveway tear-out, base prep, reinforcement, drainage, and cure guidance for Central Texas homes.',
+      },
+      {
+        label: 'Temple patio and walkway ideas',
+        href: '/concrete-patios-waco-tx',
+        description: 'Patios, walks, outdoor transitions, and finish choices for homes and rental properties.',
+      },
+      {
+        label: 'Concrete repair and slab movement',
+        href: '/foundation-repair-waco-tx',
+        description: 'How to decide whether cracked or settled concrete needs repair, replacement, or drainage correction.',
+      },
+    ],
     projects: baseProjects('Temple'),
     faq: [
       {
-        question: 'Can you match stamped concrete to my Temple home style?',
+        question: 'Do you offer free concrete estimates in Temple?',
         answer:
-          'We offer multiple stamp patterns and color options so your new surface complements your exterior finishes.',
+          'Yes. We provide free estimates for Temple driveways, patios, sidewalks, slabs, repair work, and light commercial concrete when the scope fits our service area.',
       },
       {
-        question: 'Are you available if I need concrete repair near me in Temple?',
-        answer: 'Yes. We handle concrete repairs, small slab upgrades, and mid-size commercial slabs, pads, and parking areas across Temple.',
+        question: 'Can you help decide between repair and replacement?',
+        answer:
+          'Yes. We inspect cracking, settlement, drainage, base condition, and daily use before recommending repair, section replacement, or a full repour.',
+      },
+      {
+        question: 'Can you match stamped concrete to my Temple home style?',
+        answer:
+          'We offer multiple stamp patterns and color options so your new surface complements your exterior finishes while still fitting traction and maintenance needs.',
       },
     ],
   },
   {
     slug: 'killeen-tx-concrete-contractor',
     city: 'Killeen',
-    seoTitle: 'Concrete Contractor Killeen TX | Waco Area Concrete Contractor',
+    seoTitle: 'Concrete Contractor Killeen TX | Driveways, Patios & Slabs',
     heroTitle: 'Concrete Contractor in Killeen, TX',
     heroSubtitle:
-      'Concrete driveways, patios, stamped finishes, and repair work across Killeen and surrounding areas.',
+      'Concrete driveways, patios, slabs, sidewalks, and repair work across Killeen and surrounding areas.',
     seoDescription:
-      'Concrete contractor in Killeen, Texas for driveways, patios, stamped concrete, and concrete repair. Serving nearby Waco communities with free estimates.',
+      'Concrete contractor in Killeen TX for driveways, patios, slabs, sidewalks, concrete repair, and light commercial flatwork with clear estimates.',
     intro:
-      'From new driveways to backyard upgrades, we deliver clean concrete lines and dependable performance for Killeen properties.',
+      'From new driveways to backyard patios, shop pads, sidewalks, and repair work, we plan Killeen concrete around access, heat, drainage, and daily traffic. The goal is a clear scope before the crew arrives.',
+    planningSections: [
+      {
+        title: 'Killeen concrete projects need access planning',
+        paragraphs: [
+          'Killeen properties often involve busy driveways, rental turnover, tight schedules, or heavy daily vehicle use. Before quoting, we look at truck access, demolition staging, parking needs, and how the property will be used while work is underway.',
+          'That planning matters for driveways, patios, sidewalks, and small commercial pads. A clean finish is only part of the job; the base, slope, reinforcement, and cure window decide how the slab performs.',
+        ],
+      },
+      {
+        title: 'Driveways, slabs, and repair work',
+        paragraphs: [
+          'Common Killeen calls include driveway replacement, patio additions, sidewalk repairs, shop pads, equipment pads, and concrete repair near entries or parking areas.',
+          'We explain whether the existing concrete can be repaired or whether replacement is the better long-term path. If base failure, drainage, or repeated heavy traffic caused the damage, patching alone may not be enough.',
+        ],
+      },
+      {
+        title: 'Scheduling around homes, rentals, and businesses',
+        paragraphs: [
+          'Concrete work can interrupt access if it is not sequenced correctly. We discuss prep day, pour timing, cure milestones, and when foot or vehicle traffic can safely return.',
+          'For rental or light commercial properties, that communication helps owners coordinate tenants, customers, and maintenance crews without guessing.',
+        ],
+      },
+    ],
     highlights: baseHighlights,
     services: baseServices,
     nearbyAreas: ['Harker Heights', 'Fort Cavazos', 'Nolanville', 'Copperas Cove', 'Belton', 'Kempner'],
+    localSearchLinks: [
+      {
+        label: 'Killeen driveway and slab planning',
+        href: '/concrete-driveways-waco-tx',
+        description: 'How base prep, reinforcement, vehicle use, and drainage affect driveway and slab projects.',
+      },
+      {
+        label: 'Killeen concrete repair questions',
+        href: '/foundation-repair-waco-tx',
+        description: 'Crack, settlement, and drainage questions to answer before patching or replacing concrete.',
+      },
+      {
+        label: 'Commercial concrete planning',
+        href: '/commercial-concrete-contractor-waco-tx',
+        description: 'Scheduling, access, and traffic-safe concrete planning for business properties.',
+      },
+    ],
     projects: baseProjects('Killeen'),
     faq: [
       {
-        question: 'Do you work with military families in Killeen?',
+        question: 'Do you offer concrete estimates in Killeen?',
         answer:
-          'Absolutely. We schedule efficiently and provide clear documentation for every project.',
+          'Yes. We provide estimates for Killeen driveways, patios, sidewalks, slabs, pads, and repair projects when the location and schedule fit our service area.',
       },
       {
         question: 'Can you repair existing concrete in Killeen?',
         answer:
-          'Yes. We inspect cracks, spalling, and settling before recommending the best repair approach.',
+          'Yes. We inspect cracks, spalling, settlement, drainage, and base condition before recommending repair or replacement.',
+      },
+      {
+        question: 'Can Killeen projects be scheduled around limited access?',
+        answer:
+          'Often, yes. We discuss parking, tenant or customer access, cure timing, and job sequencing before work starts.',
       },
     ],
   },
@@ -362,6 +460,13 @@ export const locationPages = [
           'A clear scope protects the project. It also helps avoid shortcuts around base prep or joint layout, which are the parts you cannot see once the concrete is finished.',
         ],
       },
+      {
+        title: 'Retaining walls, steps, and hardscape tie-ins',
+        paragraphs: [
+          'Woodway concrete work often touches slopes, mature landscaping, outdoor living spaces, or drainage transitions. When a patio, walkway, retaining wall, or step layout is planned separately, water and grade problems can show up between the pieces.',
+          'We look at the whole hardscape path before recommending the next pour. That helps the driveway, patio, wall, or walkway connect cleanly and keeps runoff from collecting where it can soften the base.',
+        ],
+      },
     ],
     highlights: [
       {
@@ -382,6 +487,23 @@ export const locationPages = [
     ],
     services: baseServices,
     nearbyAreas: ['Waco', 'Hewitt', 'China Spring', 'Robinson', 'Lorena', 'Beverly Hills'],
+    localSearchLinks: [
+      {
+        label: 'Woodway retaining wall planning',
+        href: '/retaining-walls-waco-tx',
+        description: 'Slope control, drainage relief, patio edges, and wall-to-flatwork transitions for Woodway properties.',
+      },
+      {
+        label: 'Woodway patio and hardscape layouts',
+        href: '/hardscaping-waco-tx',
+        description: 'Patios, walks, retaining walls, steps, drainage transitions, and outdoor living layouts.',
+      },
+      {
+        label: 'Woodway driveway replacement',
+        href: '/concrete-driveways-waco-tx',
+        description: 'Driveway tear-out, widening, reinforcement, drainage, and finish choices for daily use.',
+      },
+    ],
     projects: baseProjects('Woodway'),
     faq: [
       {
@@ -393,6 +515,11 @@ export const locationPages = [
         question: 'Can you install a stamped concrete patio in Woodway?',
         answer:
           'Absolutely. We offer stamped patterns and color options, then seal the surface and share maintenance tips to keep it looking clean.',
+      },
+      {
+        question: 'Do you build retaining walls or drainage transitions in Woodway?',
+        answer:
+          'Yes. We plan retaining walls, patio edges, walks, and drainage transitions together so water does not collect against slabs or soft soil pockets.',
       },
     ],
   },
@@ -426,23 +553,74 @@ export const locationPages = [
   {
     slug: 'lorena-tx-concrete-contractor',
     city: 'Lorena',
-    seoTitle: 'Concrete Contractor Lorena TX | Concrete Work in Central Texas',
+    seoTitle: 'Concrete Contractor Lorena TX | Patios, Driveways & Hardscaping',
     heroTitle: 'Concrete Contractor in Lorena, TX',
     heroSubtitle:
-      'Stamped concrete, patios, driveways, and repairs for Lorena homes and properties.',
+      'Stamped concrete, patios, driveways, hardscaping, and repairs for Lorena homes and properties.',
     seoDescription:
-      'Concrete contractor in Lorena, TX for durable driveways, patios, stamped concrete, and concrete repairs. Reliable estimates for Lorena-area concrete work.',
+      'Concrete contractor in Lorena, TX for durable driveways, patios, hardscaping, stamped concrete, and concrete repairs. Free estimates for Lorena-area concrete work.',
     intro:
-      'Lorena homeowners trust us for detailed prep, smooth finishes, and long-lasting concrete work that fits the property.',
+      'Lorena homeowners trust us for detailed prep, smooth finishes, drainage-aware hardscaping, and long-lasting concrete work that fits the property.',
     highlights: baseHighlights,
-    services: baseServices,
+    planningSections: [
+      {
+        title: 'Hardscaping and drainage planning in Lorena',
+        paragraphs: [
+          'A good hardscaping contractor in Lorena should think beyond the finished surface. Patios, walkways, retaining wall edges, steps, driveway tie-ins, and outdoor living areas all change how water moves across the property. If those pieces are planned separately, runoff can collect against slab edges or push into soft clay pockets.',
+          'We look at slope, roof runoff, fence lines, gates, yard access, existing concrete, and where people actually walk before recommending the layout. That helps a Lorena patio, walkway, or hardscape transition feel natural while still protecting the base below the concrete.',
+        ],
+      },
+      {
+        title: 'Driveways, patios, shop pads, and rural access',
+        paragraphs: [
+          'Many Lorena projects need a different plan than a tight city-lot pour. Longer driveways, shop slabs, equipment pads, backyard patios, and driveway extensions can involve more grading, vehicle turning space, and drainage review than the square footage alone suggests.',
+          'During the estimate, we document demolition, base prep, reinforcement assumptions, finish, joint layout, access for trucks, and any permit-aware planning items. That gives you a clearer way to compare bids before the pour is scheduled.',
+        ],
+      },
+    ],
+    services: [
+      ...baseServices.slice(0, 4),
+      { label: 'Hardscaping', href: '/hardscaping-waco-tx' },
+      { label: 'Retaining Walls', href: '/retaining-walls-waco-tx' },
+      ...baseServices.slice(4),
+    ],
     nearbyAreas: ['Waco', 'Hewitt', 'Robinson', 'Woodway', 'Golinda', 'McGregor'],
     projects: baseProjects('Lorena'),
+    localSearchLinks: [
+      {
+        label: 'Hardscaping contractor for Lorena projects',
+        href: '/hardscaping-waco-tx',
+        description:
+          'Patios, walkways, retaining wall tie-ins, steps, pads, and drainage transitions planned around Central Texas soil.',
+      },
+      {
+        label: 'Retaining wall installation near Lorena',
+        href: '/retaining-walls-waco-tx',
+        description:
+          'Slope control, soil pressure, patio edges, and water movement for properties that need grade support.',
+      },
+      {
+        label: 'Concrete slab permit planning',
+        href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx',
+        description:
+          'What to check before pouring a patio, driveway extension, shop pad, sidewalk, or support slab.',
+      },
+    ],
     faq: [
       {
         question: 'What finishes are available in Lorena?',
         answer:
           'We offer broom, exposed aggregate, and stamped finishes with multiple color options.',
+      },
+      {
+        question: 'Do you handle hardscaping contractor work in Lorena?',
+        answer:
+          'Yes. We plan Lorena hardscaping projects such as patios, walkways, retaining wall tie-ins, steps, pads, and drainage transitions so the layout works with the property instead of creating low spots.',
+      },
+      {
+        question: 'Can you build a driveway extension or shop pad in Lorena?',
+        answer:
+          'Yes. We review vehicle use, slab thickness, reinforcement, access, drainage, and cure timing before pricing driveway extensions, garage pads, shop slabs, and similar concrete work.',
       },
       {
         question: 'How far out are you scheduling Lorena projects?',

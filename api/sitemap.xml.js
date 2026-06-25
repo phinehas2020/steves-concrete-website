@@ -1,11 +1,15 @@
-/* eslint-env node */
 import { sportsCourtAreaPages } from '../src/data/sportsCourtAreaPages.js'
 import {
   SERVICE_CANONICAL_PATH_BY_SLUG,
   servicePages,
 } from '../src/data/servicePages.js'
 import { seoServicePages } from '../src/data/seoServicePages.js'
+import { guidePages } from '../src/data/guides.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
+import {
+  fetchPublishedBlogPosts,
+  mergePublishedBlogPosts,
+} from './_published-blog-posts.js'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const LOCATION_PAGES = [
@@ -28,27 +32,23 @@ const SEO_SERVICE_PAGES = seoServicePages
   .filter((service) => !service.redirectTo)
   .map((service) => service.slug)
 const REVIEW_PAGES = ['reviews']
-const GUIDE_PAGES = [
-  'guides/concrete-driveway-cost-waco-tx',
-  'guides/stamped-concrete-cost-waco-tx',
-  'guides/concrete-patio-cost-waco-tx',
-]
+const GUIDE_PAGES = guidePages.map((page) => `guides/${page.slug}`)
 const SPORTS_COURT_AREA_PAGES = sportsCourtAreaPages.map(
   (page) => `sports-court-coating/${page.slug}`,
 )
-const STATIC_BLOG_POSTS = staticBlogPosts
-  .filter((post) => post?.slug && post?.status === 'published')
-  .map((post) => ({
-    slug: `blog/${post.slug}`,
-    lastmod: (post.updated_at || post.published_at || post.created_at || '').slice(0, 10),
-  }))
-
 function toUrlEntry({ loc, lastmod, changefreq, priority }) {
   const parts = [`<loc>${loc}</loc>`]
   if (lastmod) parts.push(`<lastmod>${lastmod}</lastmod>`)
   if (changefreq) parts.push(`<changefreq>${changefreq}</changefreq>`)
   if (priority) parts.push(`<priority>${priority}</priority>`)
   return `<url>${parts.join('')}</url>`
+}
+
+function toBlogSitemapPost(post) {
+  return {
+    slug: `blog/${post.slug}`,
+    lastmod: (post.updated_at || post.published_at || post.created_at || '').slice(0, 10),
+  }
 }
 
 export default async function handler(req, res) {
@@ -77,6 +77,11 @@ export default async function handler(req, res) {
       loc: `${SITE_URL}/guides`,
       changefreq: 'monthly',
       priority: '0.7',
+    },
+    {
+      loc: `${SITE_URL}/about`,
+      changefreq: 'monthly',
+      priority: '0.6',
     },
     {
       loc: `${SITE_URL}/privacy-policy`,
@@ -130,7 +135,10 @@ export default async function handler(req, res) {
     })
   })
 
-  STATIC_BLOG_POSTS.forEach((post) => {
+  const remoteBlogPosts = await fetchPublishedBlogPosts()
+  const blogPosts = mergePublishedBlogPosts(staticBlogPosts, remoteBlogPosts).map(toBlogSitemapPost)
+
+  blogPosts.forEach((post) => {
     urls.push({
       loc: `${SITE_URL}/${post.slug}`,
       lastmod: post.lastmod,

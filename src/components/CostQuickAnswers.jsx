@@ -48,7 +48,7 @@ export function CostQuickAnswers() {
             href="/guides"
             className="inline-flex items-center gap-2 text-accent-600 font-semibold hover:text-accent-700 transition-colors"
           >
-            View all pricing guides
+            View all planning guides
             <ArrowRight className="size-4" />
           </a>
         </Motion.div>

@@ -203,12 +203,12 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
           </div>
         </section>
 
-        {planningSections.length > 0 && (
+                {planningSections.length > 0 && (
           <section className="section-padding bg-stone-50">
             <div className="container-main">
               <div className="max-w-3xl mb-10">
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Waco planning details
+                  {city} planning details
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
                   Concrete planned for soil, heat, drainage, and daily use
@@ -340,13 +340,13 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
           <div className="container-main">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                Pricing Resources
+                Planning Resources
               </span>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                Concrete pricing guides for {city} projects
+                Concrete planning guides for {city} projects
               </h2>
               <p className="text-lg text-stone-600 text-pretty">
-                Use these local cost guides to compare options before your estimate.
+                Use these local guides to compare costs, permit questions, and project details before your estimate.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

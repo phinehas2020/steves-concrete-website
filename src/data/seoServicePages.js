@@ -715,69 +715,74 @@ const baseSeoServicePages = [
     slug: 'concrete-foundations-waco-tx',
     title: 'Concrete Foundations in Waco, TX',
     cardSummary:
-      'Engineered foundation concrete planning for decks, patios, and property additions with Waco soil-sensitive construction.',
-    metaTitle: 'Concrete Foundations in Waco, TX | SLA Concrete Works LLC',
+      'Concrete foundation contractors for additions, garages, shops, pads, and support slabs planned around Waco clay soil and drainage.',
+    metaTitle: 'Concrete Foundation Contractors Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need concrete foundation waco tx support for additions, garage pads, and support slabs? We provide practical foundation concrete planning and installation support in Waco.',
+      'Need concrete foundation contractors in Waco TX? We plan and pour garage pads, shop slabs, additions, footings, and support slabs with drainage and reinforcement detail.',
     introParagraph:
-      'Concrete foundation waco tx planning starts with load direction, soil movement, and seasonal water behavior. In Waco, foundations require disciplined grading and reinforcement alignment to prevent stress at corners and slab edges.',
+      'Concrete foundation work in Waco should start with load, soil, water, and access. Whether you need a garage pad, shop slab, addition footing, equipment pad, or support slab, the plan has to account for black clay movement, drainage, reinforcement, and how the new concrete ties into the rest of the property.',
     sections: [
       {
-        heading: 'Foundation planning for additions and support slabs',
+        heading: 'Foundation planning for additions, shops, garages, and pads',
         paragraphs: [
-          'Whether your project supports a garage pad or a structural slab, we evaluate load path from first principles. That includes support points, expected weight, and movement risks.',
-          'A strong foundation plan begins with proper excavation depth and compaction. If this stage is undersized, even the best concrete mix will carry tension long-term.',
+          'Foundation concrete is not just a thicker patio. We look at what the slab or footing will carry, where weight will concentrate, how vehicles or equipment will move across it, and how water leaves the area after a storm.',
+          'A useful foundation estimate should identify excavation, base correction, form layout, reinforcement assumptions, thickness, edge details, and cure timing. Those details matter more than a generic square-foot price when the concrete will support a building, shop, garage, or heavy equipment.',
         ],
       },
       {
-        heading: 'Reinforcement and crack control',
+        heading: 'Reinforcement, thickness, and crack control',
         paragraphs: [
-          'Rebar layout and joint strategy are selected by area geometry, not just thickness. We coordinate these details so shrinkage and settlement remain controlled.',
-          'For high-load zones, we detail thicker headers and transitions to reduce risk at edges and corners where crack concentration typically starts.',
+          'Rebar, wire mesh, thickened edges, control joints, and dowel or tie-in decisions should match the use case. A shed pad, a shop slab, a driveway-connected garage pad, and a small addition do not all need the same layout.',
+          'We plan joint locations and reinforcement before the pour so movement is directed where possible. Concrete can still crack, especially in Central Texas, but good reinforcement and joint planning reduce avoidable stress at corners, entries, and load paths.',
         ],
       },
       {
-        heading: 'Water, drainage, and footing strategy',
+        heading: 'Drainage, moisture, and footing strategy',
         paragraphs: [
-          'Footing and foundation performance often fail at drainage points. We design channels and perimeter movement routes so water is not trapped under or against concrete planes.',
-          'In Central Texas, moisture cycles can be abrupt, so we focus on positive drainage paths and consistent subgrade profile.',
+          'Many foundation problems start with water. If runoff sits against the slab edge or moves under the base, Waco clay can swell, shrink, and put uneven pressure on the concrete.',
+          'We review slope, downspouts, low spots, perimeter drainage, and adjacent flatwork before the pour. When the site needs correction, it is better to solve that before concrete is placed than to patch movement later.',
         ],
       },
       {
-        heading: 'Inspections and quality checkpoints',
+        heading: 'Pre-pour checks and documentation',
         paragraphs: [
-          'We include thickness checks, reinforcement placement checks, and pour-level reviews during installation. This reduces the chance of rework and improves long-term structural confidence.',
-          'Project notes and photos are shared so you can review each phase and verify details before cure progresses.',
+          'Before concrete arrives, the work should be easy to inspect: forms set to the right elevation, base compacted, reinforcement placed, access clear, and drainage path understood.',
+          'Photos and notes help owners compare what was promised with what was built. For foundation-related work, that documentation is useful later if you add walls, equipment, framing, or additional concrete phases.',
         ],
       },
       {
-        heading: 'Long-term service and support',
+        heading: 'When foundation repair is a different service',
         paragraphs: [
-          'Foundation concrete holds long-term when load, drainage, and maintenance are stable. We provide practical service options if you see early movement signs.',
-          'If settlement appears to continue, we coordinate structural review before small cracks become expensive failures.',
+          'New foundation concrete and foundation repair are different conversations. If an existing slab is settling, heaving, or cracking, the first step is diagnosis. If you are planning a new pad, footing, or slab, the first step is layout and support planning.',
+          'When a project appears structural beyond flatwork scope, we will flag it early so you can involve the right specialist instead of guessing. That honesty protects the budget and the finished project.',
         ],
       },
     ],
     faq: [
       {
-        question: 'Do you handle both new foundation slabs and pad upgrades?',
+        question: 'Do you handle concrete foundation contractor work in Waco TX?',
         answer:
-          'Yes. We support both new foundation-related concrete and replacement or strengthening for existing concrete base areas.',
+          'Yes. We handle foundation-related concrete such as garage pads, shop slabs, support slabs, equipment pads, additions, and footing-adjacent flatwork when the site and scope fit our concrete services.',
       },
       {
-        question: 'How do you protect foundations from local soil movement?',
+        question: 'How do you protect foundation concrete from Waco clay movement?',
         answer:
-          'By combining proper compaction, drainage, and joint strategy with reinforced placement planning.',
+          'We focus on compacted base, positive drainage, reinforcement, edge support, joint planning, and realistic cure guidance. No concrete is movement-proof, but those steps reduce avoidable failures.',
       },
       {
         question: 'What affects foundation concrete pricing?',
         answer:
-          'Area size, soil conditions, reinforcement needs, access, and finish detail determine most cost changes.',
+          'Area size, thickness, excavation, base correction, reinforcement, footing or edge details, access, concrete volume, and drainage work are the main cost drivers.',
       },
       {
-        question: 'Can foundation concrete be inspected by phase?',
+        question: 'Can you pour a shop slab or garage pad?',
         answer:
-          'Yes. We schedule inspections during excavation, reinforcement, and pre-pour stages for better control.',
+          'Yes. We can plan shop slabs, garage pads, and similar support slabs with the right thickness, reinforcement, access, and cure guidance for the intended use.',
+      },
+      {
+        question: 'Do I need foundation repair or a new concrete foundation?',
+        answer:
+          'If the existing slab is moving or cracked, start with diagnosis. If you are adding a new structure, pad, or support area, start with layout, load, drainage, and reinforcement planning.',
       },
     ],
   },
@@ -924,39 +929,53 @@ const baseSeoServicePages = [
     slug: 'foundation-repair-waco-tx',
     title: 'Foundation Repair in Waco, TX',
     cardSummary:
-      'Foundation and slab repair planning for settlement, cracking, and moisture-related movement in Waco black clay soil.',
+      'Foundation repair and slab movement planning for cracks, settlement, drainage, and Waco black clay soil conditions.',
     metaTitle: 'Foundation Repair Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need foundation repair in Waco TX? We inspect slab movement, cracking, and drainage to recommend practical concrete repair or replacement plans.',
+      'Need foundation repair in Waco TX? We inspect cracks, slab movement, drainage, and soil issues before recommending concrete repair, replacement, or specialist review.',
     introParagraph:
-      'Foundation repair in Waco starts with diagnosis, not guesses. We inspect crack patterns, elevation shifts, and drainage behavior before recommending repairs so you avoid short-lived patches.',
+      'Foundation repair in Waco starts with diagnosis, not guesses. Expansive black clay, roof runoff, poor slope, and older concrete tie-ins can all make slabs crack, settle, or lift. We inspect crack patterns, drainage behavior, slab edges, and access before recommending concrete repair, section replacement, or a structural specialist when the problem goes beyond flatwork.',
     sections: [
       {
-        heading: 'Inspection before repair',
+        heading: 'Foundation repair starts with the cause of movement',
         paragraphs: [
-          'We review movement patterns, water routes, and slab stress points to find the real cause of damage.',
-          'This process helps determine whether a repair, section replacement, or broader plan is needed.',
+          'A crack is only the symptom. Before pricing foundation repair in Waco TX, we look for what changed around the concrete: standing water, washed-out support, tree roots, downspouts, poor grading, heavy loads, or old slab sections pulling against newer work.',
+          'That inspection helps decide whether the project is a surface repair, a partial tear-out, a drainage correction, a replacement slab, or a situation that needs engineering or foundation-specialist review before concrete work starts.',
         ],
       },
       {
-        heading: 'Common Waco foundation issues',
+        heading: 'Common Waco foundation and slab warning signs',
         paragraphs: [
-          'Black clay expansion and moisture swings can stress slab edges and create uneven settlement.',
-          'We address drainage and surface water control because these often drive repeat failure.',
+          'Common warning signs include stair-step cracking near masonry, slab edges dropping or lifting, water holding against the home, concrete pulling away from a porch or garage, doors that recently started sticking, and cracks that keep widening after rain and dry cycles.',
+          'Not every crack means a foundation emergency, but repeated movement should not be covered with a cosmetic patch. If water or soil movement is still active, the repair will usually fail again unless the cause is handled.',
         ],
       },
       {
-        heading: 'Repair options and scope clarity',
+        heading: 'Repair, replacement, or specialist review',
         paragraphs: [
-          'Where feasible, we stabilize and repair affected areas with practical sequencing and access planning.',
-          'If replacement is required, we outline the exact scope and timeline before work starts.',
+          'Some foundation-adjacent concrete can be repaired with crack prep, section replacement, slab edge correction, drainage improvement, or a better tie-in to surrounding flatwork. Other problems are structural and should be reviewed before anyone promises a simple concrete fix.',
+          'We keep that distinction clear. SLA Concrete Works can help with practical concrete repair and replacement work, but if the issue points to deeper structural movement, we will say so early instead of selling a patch that does not solve the problem.',
+        ],
+      },
+      {
+        heading: 'Drainage and soil control around the foundation',
+        paragraphs: [
+          'Waco foundation repair often comes back to water. Clay soil swells when it stays wet and shrinks when it dries out, which can put uneven pressure on slabs, sidewalks, driveways, porches, and foundation edges.',
+          'During the estimate, we review surface slope, roof runoff, downspout discharge, low spots, nearby concrete, and where water should go after a storm. Improving drainage before or during concrete repair is usually the difference between a lasting fix and repeat cracking.',
+        ],
+      },
+      {
+        heading: 'What a foundation repair estimate should include',
+        paragraphs: [
+          'A useful estimate should explain the visible damage, likely cause, repair limits, access, demolition or saw cutting, base correction, drainage assumptions, reinforcement, finish, cleanup, and cure timing. It should also state when the scope is concrete repair rather than structural foundation stabilization.',
+          'If you are comparing foundation repair Waco bids, ask what each contractor is actually fixing. A lower price that only seals a crack may not be comparable to a plan that corrects support, removes failed concrete, and improves water movement.',
         ],
       },
       {
         heading: 'Post-repair durability plan',
         paragraphs: [
-          'After repair, we provide a maintenance checklist to reduce repeat movement risk.',
-          'Early follow-up inspections are recommended when weather extremes increase slab stress.',
+          'After repair or replacement, we provide practical cure and maintenance guidance so the concrete is protected during the first few weeks. Heavy use, water exposure, and extreme heat can all affect early performance.',
+          'Longer term, watch for water returning to the same edge, cracks that widen after storms, or settled areas that keep moving. Early follow-up is cheaper than waiting for a small slab problem to become a larger foundation concern.',
         ],
       },
     ],
@@ -964,22 +983,37 @@ const baseSeoServicePages = [
       {
         question: 'Do you offer foundation repair estimates in Waco TX?',
         answer:
-          'Yes. We provide a site inspection and written recommendation for repair or replacement options.',
+          'Yes. We inspect visible cracks, slab movement, drainage, access, and surrounding concrete before recommending repair, replacement, or structural review.',
       },
       {
-        question: 'Can cracked slabs always be repaired?',
+        question: 'Can cracked foundation slabs always be repaired?',
         answer:
-          'Not always. Some cracks are repairable, while others indicate deeper movement that requires replacement or structural review.',
+          'Not always. Some cracks can be repaired, but cracks caused by ongoing settlement, heaving, or water problems may need drainage correction, section replacement, or a specialist evaluation.',
+      },
+      {
+        question: 'What causes foundation problems in Waco?',
+        answer:
+          'Expansive clay soil, poor drainage, roof runoff, weak base support, tree roots, heavy loads, and older slab tie-ins can all contribute to movement around Waco homes.',
+      },
+      {
+        question: 'Do you handle pier and beam or structural foundation leveling?',
+        answer:
+          'We focus on concrete repair, slab-related concrete work, and replacement planning. If the issue requires structural foundation leveling, piers, or engineering review, we will flag that during the estimate.',
       },
       {
         question: 'How quickly can foundation repairs be scheduled?',
         answer:
-          'Scheduling depends on scope and weather, but we prioritize projects where movement affects safety or access.',
+          'Scheduling depends on diagnosis, weather, demolition needs, concrete availability, and whether the scope is a repair, replacement, or review-first situation.',
       },
       {
         question: 'Do you handle drainage-related slab issues?',
         answer:
-          'Yes. Drainage correction is part of many foundation-related repair plans in Waco.',
+          'Yes. Drainage correction is part of many foundation-related concrete repair plans because water control often determines whether the fix lasts.',
+      },
+      {
+        question: 'What should I send before requesting a foundation repair estimate?',
+        answer:
+          'Send photos of the cracks, wide shots of the surrounding slab or foundation edge, any water pooling after rain, approximate dimensions, and notes about when the movement first appeared.',
       },
     ],
   },
@@ -1116,14 +1150,21 @@ const baseSeoServicePages = [
       'Retaining wall installation for slope control, drainage, clay-soil movement, and landscape stability in Waco properties.',
     metaTitle: 'Retaining Wall Installation Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need retaining wall installation in Waco TX? We build concrete retaining walls for slope control, drainage, clay soil movement, and property protection.',
+      'Need retaining wall installation in Waco TX? We plan retaining walls for slope control, drainage, clay soil pressure, patios, driveways, and yard transitions.',
     introParagraph:
       'Retaining walls in Waco do more than improve appearance. They manage soil pressure, protect slabs, and improve drainage behavior around patios, driveways, fence lines, and yard transitions where McLennan County clay holds water after heavy rain.',
     sections: [
       {
+        heading: 'When a retaining wall is the right fix',
+        paragraphs: [
+          'A retaining wall makes sense when a slope is washing out, soil is pushing toward a patio or driveway, or a usable outdoor area needs a cleaner grade transition. It should not be treated as decoration first.',
+          'We evaluate slope angle, retained height, soil exposure, nearby slabs, fences, trees, and runoff paths before selecting the wall approach. Those details decide whether the wall helps the property or just traps more water.',
+        ],
+      },
+      {
         heading: 'Wall planning and load management',
         paragraphs: [
-          'We evaluate slope angle, retained height, soil exposure, nearby slabs, and runoff paths before selecting wall configuration.',
+          'Retained soil is heavy, and saturated Central Texas clay gets heavier after storms. The wall layout has to account for pressure, drainage, edge support, and what sits above or below the wall.',
           'The goal is to keep the wall from acting like a dam. Proper planning helps reduce wall movement and protects nearby patios, walks, driveways, and foundation edges.',
         ],
       },
@@ -1139,6 +1180,13 @@ const baseSeoServicePages = [
         paragraphs: [
           'Retaining walls can be coordinated with patio expansions, walkway transitions, driveway edges, steps, and seating zones.',
           'We match layout and finish direction so the wall looks intentional with the surrounding concrete work rather than patched onto the site later.',
+        ],
+      },
+      {
+        heading: 'What a retaining wall estimate should explain',
+        paragraphs: [
+          'A good estimate should explain wall length, height, excavation, drainage path, backfill assumptions, access limits, finish expectations, and how the wall connects to nearby concrete.',
+          'If the wall is part of a larger patio, walkway, driveway, or hardscape project, we sequence the work so drainage and transitions make sense across the whole area.',
         ],
       },
       {
@@ -1159,6 +1207,11 @@ const baseSeoServicePages = [
         question: 'Can retaining walls help with drainage issues?',
         answer:
           'Yes, when the wall, backfill, surface grade, and drainage path are designed together as part of one plan.',
+      },
+      {
+        question: 'What causes retaining walls to move or fail in Waco?',
+        answer:
+          'Common causes include trapped water, saturated clay pressure, poor backfill, weak edge support, and walls built without a clear drainage path.',
       },
       {
         question: 'Do retaining walls pair with patio upgrades?',
@@ -1242,29 +1295,36 @@ const baseSeoServicePages = [
       'Hardscaping contractor services in Waco for patios, walkways, retaining walls, drainage transitions, and structured outdoor spaces.',
     metaTitle: 'Hardscaping Contractor Waco TX | Patios, Walkways & Walls',
     metaDescription:
-      'Need a hardscaping contractor in Waco TX? We build concrete patios, walkways, retaining walls, drainage transitions, and outdoor living layouts.',
+      'Need a hardscaping contractor in Waco TX? We build concrete patios, walkways, retaining walls, steps, pads, drainage transitions, and outdoor living layouts.',
     introParagraph:
       'Hardscaping projects combine structure, drainage, and finish design. We help Waco property owners build cohesive outdoor spaces with concrete patios, walkways, retaining walls, and support features that can handle heat, runoff, and clay-soil movement year-round.',
     sections: [
       {
         heading: 'Outdoor layout and flow planning',
         paragraphs: [
-          'We plan movement between doors, gates, seating zones, driveways, and landscape areas before installation starts.',
-          'This reduces awkward transitions, controls trip points, and improves both appearance and daily usability.',
+          'We plan movement between doors, gates, seating zones, driveways, pool areas, sheds, and landscape edges before installation starts.',
+          'This reduces awkward transitions, controls trip points, and improves both appearance and daily usability. Good hardscaping should make the property easier to use, not just add more concrete.',
         ],
       },
       {
         heading: 'Hardscape elements we coordinate',
         paragraphs: [
-          'Common scopes include patios, walkways, retaining walls, concrete deck zones, steps, pads, and tie-ins to existing flatwork.',
-          'Projects can be phased to fit budget, drainage priorities, and property access constraints without losing the final layout.',
+          'Common scopes include patios, walkways, retaining walls, concrete deck zones, steps, shed pads, equipment pads, driveway tie-ins, and transitions to existing flatwork.',
+          'Projects can be phased to fit budget, drainage priorities, and property access constraints without losing the final layout. When phases are likely, we plan edges and grades so the next section can tie in cleanly.',
         ],
       },
       {
         heading: 'Drainage and grade control',
         paragraphs: [
           'Hardscape durability depends on drainage. We shape water flow away from slabs, foundations, doors, wall edges, and low spots that collect runoff.',
-          'Grade planning is especially important in Waco, Hewitt, Woodway, and Robinson clay soil conditions where water movement can change surface support over seasons.',
+          'Grade planning is especially important in Waco, Hewitt, Woodway, Robinson, and Lorena clay soil conditions where water movement can change surface support over seasons.',
+        ],
+      },
+      {
+        heading: 'Choosing concrete, stone, or a mixed hardscape',
+        paragraphs: [
+          'Concrete is usually the practical choice for daily traffic, clean transitions, and lower maintenance. Stone, pavers, borders, or decorative finishes can be useful when the project needs a softer outdoor-living look.',
+          'We talk through the tradeoffs before work starts: traction, heat, sealing, weed control, edge movement, repair access, and how the finished surface will look next to the house and landscaping.',
         ],
       },
       {
@@ -1279,7 +1339,7 @@ const baseSeoServicePages = [
       {
         question: 'What does a hardscaping contractor in Waco usually build?',
         answer:
-          'Typical hardscaping scopes include patios, walkways, retaining walls, and outdoor concrete living areas.',
+          'Typical hardscaping scopes include patios, walkways, retaining walls, steps, pads, driveway tie-ins, drainage transitions, and outdoor concrete living areas.',
       },
       {
         question: 'Can hardscaping be completed in phases?',
@@ -1292,9 +1352,19 @@ const baseSeoServicePages = [
           'Yes. Drainage planning is included to protect slabs and prevent pooling around outdoor features.',
       },
       {
+        question: 'Do you handle hardscaping contractor work near Lorena?',
+        answer:
+          'Yes. We help Lorena-area property owners plan patios, walkways, retaining wall tie-ins, steps, pads, and drainage transitions as part of concrete hardscaping projects.',
+      },
+      {
+        question: 'How do I know where to start with a hardscape project?',
+        answer:
+          'Start with the problem you are trying to solve: more patio space, safer walkways, slope control, drainage, or better access. The layout should follow that need first, then finish choices.',
+      },
+      {
         question: 'Do you serve neighborhoods outside central Waco?',
         answer:
-          'Yes. We serve Waco and nearby communities including Woodway, Hewitt, Robinson, and Temple-area neighborhoods.',
+          'Yes. We serve Waco and nearby communities including Woodway, Hewitt, Robinson, Lorena, and Temple-area neighborhoods.',
       },
     ],
   },
@@ -1368,36 +1438,43 @@ const baseSeoServicePages = [
       'Searching for contractors in Waco TX? Work with a local concrete-first team for driveways, patios, foundations, and repairs.',
     metaTitle: 'Contractors in Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Looking for contractors in Waco TX? SLA Concrete Works LLC provides concrete driveways, patios, parking lots, and repair services across Waco and nearby cities.',
+      'Looking for contractors in Waco TX for concrete work? Compare prep, drainage, reinforcement, scope, and schedule for driveways, patios, slabs, and repairs.',
     introParagraph:
-      'If you are comparing contractors in Waco TX, concrete scope quality often determines long-term project success. Our team focuses on concrete-first planning with clear pricing and local soil-aware execution.',
+      'If you are comparing contractors in Waco TX for a concrete project, the most important details are usually hidden before the pour. Base prep, drainage, reinforcement, joint layout, access, cleanup, and cure timing all affect whether the finished concrete keeps performing after the crew leaves.',
     sections: [
       {
-        heading: 'Why contractor selection matters',
+        heading: 'How to compare concrete contractors in Waco',
         paragraphs: [
-          'A strong contractor plan covers prep, drainage, reinforcement, and realistic scheduling.',
-          'We document scope details early so project expectations stay clear from estimate to closeout.',
+          'Start by asking each contractor to explain what is included in writing. The estimate should identify demolition or haul-off, base correction, reinforcement, finish, drainage work, control joints, cleanup, and when the concrete can be used.',
+          'If one bid is much lower, check whether it leaves out the work you cannot see after the slab is finished. Cheap concrete often gets expensive when the base, drainage, or edges were not handled correctly.',
         ],
       },
       {
         heading: 'Concrete services most requested in Waco',
         paragraphs: [
-          'Top requests include driveways, patios, parking lots, slab repairs, and foundation-related concrete work.',
-          'We support residential and light commercial properties with one coordinated team.',
+          'Top requests include driveways, patios, parking lots, slab repairs, shop pads, foundation-related concrete work, sidewalks, retaining wall tie-ins, and concrete demolition before replacement.',
+          'We support residential and light commercial properties with one coordinated team, which helps keep scheduling and communication simpler from first call to cleanup.',
         ],
       },
       {
         heading: 'Local execution standards',
         paragraphs: [
-          'Waco projects need heat-aware curing and clay-soil planning to reduce future cracking risk.',
-          'Our process is built around those conditions so finished work performs longer.',
+          'Waco projects need heat-aware curing, clay-soil planning, and drainage control to reduce preventable cracking and movement.',
+          'Our process is built around those conditions. We look at how water moves, where loads concentrate, how the slab ties into existing concrete, and what the customer needs to use the space for after the pour.',
         ],
       },
       {
         heading: 'Estimate and scheduling process',
         paragraphs: [
-          'Most projects begin with a site walk, scope confirmation, and phased schedule.',
-          'You receive clear next steps for prep, pour window, and cure milestones.',
+          'Most projects begin with a site walk, scope confirmation, measurements, photos, and a realistic schedule.',
+          'You receive clear next steps for prep, pour window, finish expectations, cure milestones, and any weather or access issues that could affect timing.',
+        ],
+      },
+      {
+        heading: 'Questions worth asking before you hire',
+        paragraphs: [
+          'Ask who will be on site, how changes are handled after demolition, what happens if rain shifts the pour, whether cleanup is included, and what the contractor expects from you before the crew arrives.',
+          'A good contractor should be comfortable answering those questions because they are normal parts of a concrete job, not surprises.',
         ],
       },
     ],
@@ -1420,7 +1497,12 @@ const baseSeoServicePages = [
       {
         question: 'What should I compare when choosing a contractor?',
         answer:
-          'Compare prep quality, drainage planning, reinforcement details, timeline clarity, and communication process.',
+          'Compare prep quality, drainage planning, reinforcement details, demolition or haul-off, finish scope, timeline clarity, cleanup, and communication process.',
+      },
+      {
+        question: 'Why should I avoid choosing only by the lowest bid?',
+        answer:
+          'The lowest bid may skip base work, reinforcement, drainage corrections, thickened edges, sealing, or cleanup. Compare what is included before deciding.',
       },
     ],
   },

@@ -10,17 +10,17 @@ import { useSeo, SITE_URL, DEFAULT_IMAGE, buildBreadcrumbs, buildJsonLdGraph } f
 export function GuidesIndex() {
   const breadcrumbsJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `${SITE_URL}/` },
-    { name: 'Pricing Guides', url: `${SITE_URL}/guides` },
+    { name: 'Planning Guides', url: `${SITE_URL}/guides` },
   ])
 
   useSeo({
-    title: 'Concrete Cost Guide Waco TX | Driveway, Patio, Stamped Concrete',
+    title: 'Concrete Planning Guides Waco TX | Costs, Permits & Patios',
     description:
-      'Concrete driveway, patio & stamped concrete cost guides for Waco. Free estimate: (254) 230-3102.',
+      'Concrete driveway, patio, stamped concrete, and slab permit planning guides for Waco. Free estimate: (254) 230-3102.',
     canonical: `${SITE_URL}/guides`,
     url: `${SITE_URL}/guides`,
     image: DEFAULT_IMAGE,
-    imageAlt: 'Concrete pricing guides in Waco, Texas',
+    imageAlt: 'Concrete planning guides in Waco, Texas',
     type: 'website',
     jsonLd: buildJsonLdGraph(breadcrumbsJsonLd),
   })
@@ -33,14 +33,14 @@ export function GuidesIndex() {
           <div className="container-main py-16 sm:py-20 md:py-24">
             <div className="max-w-3xl">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
-                Pricing Guides
+                Planning Guides
               </span>
               <h1 className="mt-5 font-display font-bold text-balance leading-tight" style={{ fontSize: 'clamp(2.4rem, 1.6rem + 3vw, 4rem)' }}>
-                Waco concrete pricing, without the guesswork
+                Waco concrete planning, without the guesswork
               </h1>
               <p className="mt-5 text-lg text-stone-300 text-pretty max-w-2xl">
                 Straightforward, local guidance based on real Central Texas projects.
-                Use these guides to plan your budget before requesting an estimate.
+                Use these guides to plan your budget, permit questions, and project details before requesting an estimate.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <a

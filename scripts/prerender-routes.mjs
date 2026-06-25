@@ -11,6 +11,11 @@ import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
+import {
+  fetchPublishedBlogPosts,
+  mergePublishedBlogPosts,
+} from '../api/_published-blog-posts.js'
+import { loadLocalEnvFile } from './load-local-env.mjs'
 
 const projectRoot = process.cwd()
 const distDir = path.join(projectRoot, 'dist')
@@ -49,10 +54,14 @@ const MCLENNAN_COUNTY_POLYGON =
 const homeMeta = {
   title: 'Waco Concrete Contractors | SLA Concrete Works LLC',
   description:
-    'Need concrete contractors in Waco TX? SLA Concrete Works LLC provides full concrete services in Waco TX for driveways, patios, sidewalks, slabs, and commercial concrete. Fast free estimates: (254) 230-3102.',
+    'Waco concrete contractor for driveways, patios, slabs, foundations, and repairs. Owner-run planning for clay soil, drainage, and clear estimates.',
   canonical: `${SITE_URL}/`,
   h1: 'Concrete Contractor Waco TX',
 }
+
+await loadLocalEnvFile()
+const remoteBlogPosts = await fetchPublishedBlogPosts()
+const publishedBlogPosts = mergePublishedBlogPosts(staticBlogPosts, remoteBlogPosts)
 
 const locationPages = [
   {
@@ -117,16 +126,109 @@ const locationPages = [
   {
     city: 'Temple',
     slug: 'temple-tx-concrete-contractor',
+    seoTitle: 'Concrete Contractor Temple TX | Driveways, Patios & Repair',
+    seoDescription:
+      'Concrete contractor in Temple TX for driveways, patios, sidewalks, slabs, repairs, and small commercial concrete. Clear estimates and local planning.',
     nearbyAreas: ['Belton', "Morgan's Point", 'Little River-Academy', 'Salado', 'Troy'],
     intro:
-      'Temple projects often combine driveway replacements with patio upgrades, so layout and slope planning are handled together.',
+      'We help Temple property owners plan concrete work that handles Central Texas heat, daily traffic, drainage, and soil shifts. Driveways, patios, sidewalks, and small commercial slabs all start with site access, slope, base prep, and finish expectations.',
+    faq: [
+      {
+        question: 'Do you offer free concrete estimates in Temple?',
+        answer:
+          'Yes. We provide free estimates for Temple driveways, patios, sidewalks, slabs, repair work, and light commercial concrete when the scope fits our service area.',
+      },
+      {
+        question: 'Can you help decide between repair and replacement?',
+        answer:
+          'Yes. We inspect cracking, settlement, drainage, base condition, and daily use before recommending repair, section replacement, or a full repour.',
+      },
+      {
+        question: 'Can you match stamped concrete to my Temple home style?',
+        answer:
+          'We offer multiple stamp patterns and color options so your new surface complements your exterior finishes while still fitting traction and maintenance needs.',
+      },
+    ],
+    planningSections: [
+      {
+        title: 'Temple driveway, patio, and sidewalk planning',
+        paragraphs: [
+          'Temple projects often involve practical upgrades: replacing a driveway, adding a patio, repairing a walkway, or improving access around a rental, shop, or small business. We start by checking where vehicles, people, water, and equipment will move.',
+          'That first look shapes the scope. Tight side-yard access, existing garage elevations, tree roots, fence gates, and drainage near doors can all change the right slab thickness, base prep, joint layout, and finish.',
+        ],
+      },
+      {
+        title: 'Concrete repair versus replacement in Temple',
+        paragraphs: [
+          'If the concrete is cracked but mostly stable, repair or resurfacing may be worth discussing. If panels are settling, holding water, breaking apart, or moving because the base failed, replacement is usually the cleaner long-term choice.',
+          'We explain the difference during the estimate so you do not pay for a patch that cannot hold. A practical recommendation should include the cause of the failure, not just the visible crack.',
+        ],
+      },
+      {
+        title: 'Commercial and rental-property scheduling',
+        paragraphs: [
+          'Temple commercial and rental-property work often needs clear access planning. Tenants, customers, deliveries, and parking all affect how the job should be phased.',
+          'We talk through demolition, prep, pour, cure, and reopening windows before work starts so the project does not create avoidable surprises for the people using the property.',
+        ],
+      },
+      {
+        title: 'What a useful Temple estimate should include',
+        paragraphs: [
+          'A strong concrete estimate should spell out demolition, haul-off, base correction, forms, reinforcement, finish, control joints, cleanup, and cure guidance.',
+          'If you are comparing contractors, ask each one to explain those items in plain language. The most important parts of concrete work are usually covered up once the slab is finished.',
+        ],
+      },
+    ],
   },
   {
     city: 'Killeen',
     slug: 'killeen-tx-concrete-contractor',
+    seoTitle: 'Concrete Contractor Killeen TX | Driveways, Patios & Slabs',
+    seoDescription:
+      'Concrete contractor in Killeen TX for driveways, patios, slabs, sidewalks, concrete repair, and light commercial flatwork with clear estimates.',
     nearbyAreas: ['Harker Heights', 'Fort Cavazos', 'Nolanville', 'Copperas Cove', 'Belton'],
     intro:
-      'Killeen slabs and driveways are planned for heavy daily traffic, long sun exposure, and fast scheduling needs.',
+      'From new driveways to backyard patios, shop pads, sidewalks, and repair work, we plan Killeen concrete around access, heat, drainage, and daily traffic. The goal is a clear scope before the crew arrives.',
+    faq: [
+      {
+        question: 'Do you offer concrete estimates in Killeen?',
+        answer:
+          'Yes. We provide estimates for Killeen driveways, patios, sidewalks, slabs, pads, and repair projects when the location and schedule fit our service area.',
+      },
+      {
+        question: 'Can you repair existing concrete in Killeen?',
+        answer:
+          'Yes. We inspect cracks, spalling, settlement, drainage, and base condition before recommending repair or replacement.',
+      },
+      {
+        question: 'Can Killeen projects be scheduled around limited access?',
+        answer:
+          'Often, yes. We discuss parking, tenant or customer access, cure timing, and job sequencing before work starts.',
+      },
+    ],
+    planningSections: [
+      {
+        title: 'Killeen concrete projects need access planning',
+        paragraphs: [
+          'Killeen properties often involve busy driveways, rental turnover, tight schedules, or heavy daily vehicle use. Before quoting, we look at truck access, demolition staging, parking needs, and how the property will be used while work is underway.',
+          'That planning matters for driveways, patios, sidewalks, and small commercial pads. A clean finish is only part of the job; the base, slope, reinforcement, and cure window decide how the slab performs.',
+        ],
+      },
+      {
+        title: 'Driveways, slabs, and repair work',
+        paragraphs: [
+          'Common Killeen calls include driveway replacement, patio additions, sidewalk repairs, shop pads, equipment pads, and concrete repair near entries or parking areas.',
+          'We explain whether the existing concrete can be repaired or whether replacement is the better long-term path. If base failure, drainage, or repeated heavy traffic caused the damage, patching alone may not be enough.',
+        ],
+      },
+      {
+        title: 'Scheduling around homes, rentals, and businesses',
+        paragraphs: [
+          'Concrete work can interrupt access if it is not sequenced correctly. We discuss prep day, pour timing, cure milestones, and when foot or vehicle traffic can safely return.',
+          'For rental or light commercial properties, that communication helps owners coordinate tenants, customers, and maintenance crews without guessing.',
+        ],
+      },
+    ],
   },
   {
     city: 'Hewitt',
@@ -190,7 +292,24 @@ const locationPages = [
       'Need a concrete contractor in Woodway, Texas? SLA Concrete Works installs driveways, patios, stamped concrete, and repairs built for heat and clay soil.',
     nearbyAreas: ['Waco', 'Hewitt', 'Robinson', 'China Spring', 'Lorena'],
     intro:
-      'Woodway projects prioritize polished finishes and long-term performance through freeze-thaw shifts and extreme summer heat.',
+      'SLA Concrete Works LLC delivers Woodway concrete projects with careful grading, reinforcement, and finishing detail. We account for black clay soil and summer heat expansion so your driveway, patio, or slab holds up and stays attractive.',
+    faq: [
+      {
+        question: 'Do you replace older driveways in Woodway?',
+        answer:
+          'Yes. We remove failing concrete, rebuild the base, and repour with proper reinforcement and joint layout for better durability.',
+      },
+      {
+        question: 'Can you install a stamped concrete patio in Woodway?',
+        answer:
+          'Absolutely. We offer stamped patterns and color options, then seal the surface and share maintenance tips to keep it looking clean.',
+      },
+      {
+        question: 'Do you build retaining walls or drainage transitions in Woodway?',
+        answer:
+          'Yes. We plan retaining walls, patio edges, walks, and drainage transitions together so water does not collect against slabs or soft soil pockets.',
+      },
+    ],
     planningSections: [
       {
         title: 'Concrete work for Woodway properties',
@@ -220,6 +339,13 @@ const locationPages = [
           'A clear scope protects the project. It also helps avoid shortcuts around base prep or joint layout, which are the parts you cannot see once the concrete is finished.',
         ],
       },
+      {
+        title: 'Retaining walls, steps, and hardscape tie-ins',
+        paragraphs: [
+          'Woodway concrete work often touches slopes, mature landscaping, outdoor living spaces, or drainage transitions. When a patio, walkway, retaining wall, or step layout is planned separately, water and grade problems can show up between the pieces.',
+          'We look at the whole hardscape path before recommending the next pour. That helps the driveway, patio, wall, or walkway connect cleanly and keeps runoff from collecting where it can soften the base.',
+        ],
+      },
     ],
   },
   {
@@ -232,9 +358,60 @@ const locationPages = [
   {
     city: 'Lorena',
     slug: 'lorena-tx-concrete-contractor',
+    seoTitle: 'Concrete Contractor Lorena TX | Patios, Driveways & Hardscaping',
+    seoDescription:
+      'Concrete contractor in Lorena, TX for durable driveways, patios, hardscaping, stamped concrete, and concrete repairs. Free estimates for Lorena-area concrete work.',
     nearbyAreas: ['Waco', 'Hewitt', 'Robinson', 'Woodway', 'Golinda'],
     intro:
-      'Lorena properties benefit from precise grading and moisture control that reduce long-term slab movement.',
+      'Lorena homeowners trust us for detailed prep, smooth finishes, drainage-aware hardscaping, and long-lasting concrete work that fits the property.',
+    planningSections: [
+      {
+        title: 'Hardscaping and drainage planning in Lorena',
+        paragraphs: [
+          'A good hardscaping contractor in Lorena should think beyond the finished surface. Patios, walkways, retaining wall edges, steps, driveway tie-ins, and outdoor living areas all change how water moves across the property. If those pieces are planned separately, runoff can collect against slab edges or push into soft clay pockets.',
+          'We look at slope, roof runoff, fence lines, gates, yard access, existing concrete, and where people actually walk before recommending the layout. That helps a Lorena patio, walkway, or hardscape transition feel natural while still protecting the base below the concrete.',
+        ],
+      },
+      {
+        title: 'Driveways, patios, shop pads, and rural access',
+        paragraphs: [
+          'Many Lorena projects need a different plan than a tight city-lot pour. Longer driveways, shop slabs, equipment pads, backyard patios, and driveway extensions can involve more grading, vehicle turning space, and drainage review than the square footage alone suggests.',
+          'During the estimate, we document demolition, base prep, reinforcement assumptions, finish, joint layout, access for trucks, and any permit-aware planning items. That gives you a clearer way to compare bids before the pour is scheduled.',
+        ],
+      },
+    ],
+    localSearchLinks: [
+      {
+        label: 'Hardscaping contractor for Lorena projects',
+        href: '/hardscaping-waco-tx',
+        description:
+          'Patios, walkways, retaining wall tie-ins, steps, pads, and drainage transitions planned around Central Texas soil.',
+      },
+      {
+        label: 'Retaining wall installation near Lorena',
+        href: '/retaining-walls-waco-tx',
+        description:
+          'Slope control, soil pressure, patio edges, and water movement for properties that need grade support.',
+      },
+      {
+        label: 'Concrete slab permit planning',
+        href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx',
+        description:
+          'What to check before pouring a patio, driveway extension, shop pad, sidewalk, or support slab.',
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you handle hardscaping contractor work in Lorena?',
+        answer:
+          'Yes. We plan Lorena hardscaping projects such as patios, walkways, retaining wall tie-ins, steps, pads, and drainage transitions so the layout works with the property instead of creating low spots.',
+      },
+      {
+        question: 'Can you build a driveway extension or shop pad in Lorena?',
+        answer:
+          'Yes. We review vehicle use, slab thickness, reinforcement, access, drainage, and cure timing before pricing driveway extensions, garage pads, shop slabs, and similar concrete work.',
+      },
+    ],
   },
   {
     city: 'McGregor',
@@ -264,10 +441,10 @@ const staticRoutes = [
   },
   {
     path: '/guides',
-    title: 'Concrete Pricing Guides in Waco, TX | SLA Concrete Works LLC',
+    title: 'Concrete Planning Guides in Waco, TX | SLA Concrete Works LLC',
     description:
-      'Local pricing guides for concrete driveways, patios, and stamped concrete in Waco, TX. Built from real project experience.',
-    h1: 'Concrete Pricing Guides in Waco, TX',
+      'Local planning guides for Waco concrete projects, including pricing, patios, driveways, stamped concrete, and slab permit questions.',
+    h1: 'Concrete Planning Guides in Waco, TX',
     renderContent: renderGuidesIndexContent,
   },
   {
@@ -335,6 +512,33 @@ const sportsCourtAreaLinks = sportsCourtAreaPageData.map((area) => ({
   href: `/sports-court-coating/${area.slug}`,
   description: area.heroSubtitle,
 }))
+
+function buildLocationFaq(location) {
+  const defaultFaq = [
+    {
+      question: `Do you offer free estimates in ${location.city}?`,
+      answer: `Yes. We schedule free, no-obligation estimates for ${location.city} projects and nearby communities.`,
+    },
+    {
+      question: `What types of concrete projects do you handle in ${location.city}?`,
+      answer:
+        'Driveways, patios, stamped concrete, concrete repair, foundations, slabs, sealing, and leveling projects for residential and light commercial properties.',
+    },
+    {
+      question: `How quickly can my ${location.city} project be scheduled?`,
+      answer:
+        'Timing depends on scope and weather, but we provide clear availability and sequence during estimate so there are no surprises.',
+    },
+  ]
+
+  const customFaq = Array.isArray(location.faq) ? location.faq : []
+  const merged = [...customFaq, ...defaultFaq]
+
+  return merged.filter(
+    (item, index, allItems) =>
+      allItems.findIndex((candidate) => candidate.question === item.question) === index,
+  )
+}
 
 const companyResourceLinks = [
   {
@@ -471,22 +675,7 @@ const routeMeta = [
     schemaKind: 'location',
     schemaName: `${location.city}, TX Concrete Contractor`,
     schemaDescription: location.intro,
-    faq: [
-      {
-        question: `Do you offer free estimates in ${location.city}?`,
-        answer: `Yes. We schedule free, no-obligation estimates for ${location.city} projects and nearby communities.`,
-      },
-      {
-        question: `What types of concrete projects do you handle in ${location.city}?`,
-        answer:
-          'Driveways, patios, stamped concrete, concrete repair, foundations, slabs, sealing, and leveling projects for residential and light commercial properties.',
-      },
-      {
-        question: `How quickly can my ${location.city} project be scheduled?`,
-        answer:
-          'Timing depends on scope and weather, but we provide clear availability and sequence during estimate so there are no surprises.',
-      },
-    ],
+    faq: buildLocationFaq(location),
     breadcrumbs: [
       { name: 'Home', url: `${SITE_URL}/` },
       { name: 'Service Areas', url: `${SITE_URL}/#service-areas` },
@@ -529,9 +718,7 @@ const routeMeta = [
     ],
     contentHtml: renderGuideContent(guide),
   })),
-  ...staticBlogPosts
-    .filter((post) => post?.slug && post?.status === 'published')
-    .map((post) => ({
+  ...publishedBlogPosts.map((post) => ({
       path: `/blog/${post.slug}`,
       title: `${post.title} | ${SITE_NAME}`,
       description:
@@ -776,7 +963,7 @@ function renderHomeContent() {
     actionLinks: [
       { href: '/#contact', label: 'Request free estimate' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
-      { href: '/guides', label: 'View local pricing guides' },
+      { href: '/guides', label: 'View local planning guides' },
     ],
     sections: [
       {
@@ -807,9 +994,9 @@ function renderHomeContent() {
         ],
       },
       {
-        title: 'Waco concrete cost guides',
+        title: 'Waco concrete planning guides',
         paragraphs: [
-          'These guides explain common price ranges, cost drivers, and planning checklists so you can budget before requesting a quote.',
+          'These guides explain common price ranges, permit questions, cost drivers, and planning checklists so you can prepare before requesting a quote.',
         ],
         links: guideLinks,
       },
@@ -884,7 +1071,7 @@ function renderServiceContent(service) {
     actionLinks: [
       { href: '/#contact', label: 'Request estimate' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
-      { href: '/guides', label: 'View all pricing guides' },
+      { href: '/guides', label: 'View all planning guides' },
       ...(service.pricingGuide ? [{ href: service.pricingGuide.href, label: 'View pricing guide' }] : []),
     ],
     sections: [
@@ -960,7 +1147,7 @@ function renderSeoServiceContent(service) {
     actionLinks: [
       { href: '/#contact', label: 'Request estimate' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
-      { href: '/guides', label: 'View all pricing guides' },
+      { href: '/guides', label: 'View all planning guides' },
       { href: '/jobs', label: 'View recent projects' },
     ],
     sections: [
@@ -1001,23 +1188,15 @@ function renderSeoServiceContent(service) {
 function renderLocationContent(location) {
   const cityServiceLinks = serviceLinks.slice(0, 8)
   const nearby = (location.nearbyAreas || []).map((area) => `${area}, TX`)
-
-  const locationFaq = [
-    {
-      question: `Do you offer free estimates in ${location.city}?`,
-      answer: `Yes. We schedule free, no-obligation estimates for ${location.city} projects and nearby communities.`,
-    },
-    {
-      question: `What types of concrete projects do you handle in ${location.city}?`,
-      answer:
-        'Driveways, patios, stamped concrete, concrete repair, foundations, slabs, sealing, and leveling projects for residential and light commercial properties.',
-    },
-    {
-      question: `How quickly can my ${location.city} project be scheduled?`,
-      answer:
-        'Timing depends on scope and weather, but we provide clear availability and sequence during estimate so there are no surprises.',
-    },
-  ]
+  const locationFaq = buildLocationFaq(location)
+  const localSearchSections = (location.localSearchLinks || []).length
+    ? [
+        {
+          title: `More ${location.city} planning paths`,
+          links: location.localSearchLinks,
+        },
+      ]
+    : []
 
   return renderPage({
     eyebrow: `${location.city} Service Area`,
@@ -1037,6 +1216,7 @@ function renderLocationContent(location) {
         title: section.title,
         paragraphs: section.paragraphs,
       })),
+      ...localSearchSections,
       {
         title: `Concrete services available in ${location.city}`,
         links: cityServiceLinks,
@@ -1136,12 +1316,12 @@ function renderSportsCourtAreaContent(area) {
 
 function renderGuidesIndexContent() {
   return renderPage({
-    eyebrow: 'Pricing Guides',
-    title: 'Waco concrete pricing, without guesswork',
+    eyebrow: 'Planning Guides',
+    title: 'Waco concrete planning, without guesswork',
     subtitle:
-      'Local cost guides for driveways, patios, and stamped concrete based on common Central Texas project conditions.',
+      'Local guides for concrete pricing, slab permit questions, driveways, patios, and stamped concrete based on Central Texas project conditions.',
     introParagraphs: [
-      'Every guide includes practical pricing ranges, what drives costs up or down, and what to prepare before requesting an estimate.',
+      'Every guide includes practical project factors, what drives cost or approval needs, and what to prepare before requesting an estimate.',
       `If you need a scope-specific number, call ${PHONE_DISPLAY} and we will walk your site and provide a detailed estimate.`,
     ],
     actionLinks: [
@@ -1150,7 +1330,7 @@ function renderGuidesIndexContent() {
     ],
     sections: [
       {
-        title: 'Concrete pricing guides for Waco projects',
+        title: 'Concrete planning guides for Waco projects',
         links: guideLinks,
       },
       {
@@ -1402,53 +1582,69 @@ function renderGuideContent(guide) {
     (range) => `${range.label}: ${range.range} - ${range.detail}`,
   )
   const notes = (guide.localNotes || []).map((note) => `${note.title}: ${note.description}`)
+  const isPricingGuide = ranges.length > 0
+  const sections = [
+    {
+      title: isPricingGuide ? 'Quick pricing stats' : 'Quick planning checkpoints',
+      bullets: (guide.quickStats || []).map((stat) => `${stat.label}: ${stat.value}`),
+    },
+    ranges.length > 0
+      ? {
+          title: 'Typical Waco pricing ranges',
+          bullets: ranges,
+        }
+      : null,
+    {
+      title: guide.factorTitle || 'Factors that affect final cost',
+      bullets: guide.factors || [],
+    },
+    {
+      title: guide.localTitle || 'Local project considerations',
+      bullets: notes,
+    },
+    {
+      title: 'Pre-estimate checklist',
+      bullets: guide.checklist || [],
+      orderedBullets: true,
+    },
+    {
+      title: 'Related services',
+      links: (guide.relatedServices || []).map((service) => ({
+        ...service,
+        description: 'Compare scope details, process, and service-specific FAQs.',
+      })),
+    },
+    {
+      title: 'Guide FAQs',
+      faq: guide.faq || [],
+    },
+  ].filter(
+    (section) =>
+      section &&
+      [
+        section.paragraphs,
+        section.bullets,
+        section.links,
+        section.images,
+        section.faq,
+      ].some((items) => Array.isArray(items) && items.length > 0),
+  )
 
   return renderPage({
-    eyebrow: 'Pricing Guide',
+    eyebrow: guide.badgeLabel || 'Pricing Guide',
     title: guide.heroTitle,
     subtitle: guide.heroSubtitle,
     introParagraphs: [
       guide.summary,
-      'Use this guide to set a realistic budget range before requesting a formal estimate. Final pricing depends on your site prep, access, and finish details.',
+      isPricingGuide
+        ? 'Use this guide to set a realistic budget range before requesting a formal estimate. Final pricing depends on your site prep, access, and finish details.'
+        : 'Use this guide to prepare better project questions before requesting a formal estimate. Final requirements depend on your property, scope, and local review path.',
     ],
     actionLinks: [
       { href: '/#contact', label: 'Request project estimate' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
     ],
-    sections: [
-      {
-        title: 'Quick pricing stats',
-        bullets: (guide.quickStats || []).map((stat) => `${stat.label}: ${stat.value}`),
-      },
-      {
-        title: 'Typical Waco pricing ranges',
-        bullets: ranges,
-      },
-      {
-        title: 'Factors that affect final cost',
-        bullets: guide.factors || [],
-      },
-      {
-        title: 'Local project considerations',
-        bullets: notes,
-      },
-      {
-        title: 'Pre-estimate checklist',
-        bullets: guide.checklist || [],
-        orderedBullets: true,
-      },
-      {
-        title: 'Related services',
-        links: (guide.relatedServices || []).map((service) => ({
-          ...service,
-          description: 'Compare scope details, process, and service-specific FAQs.',
-        })),
-      },
-      {
-        title: 'Guide FAQs',
-        faq: guide.faq || [],
-      },
-    ],
+    sections,
   })
 }
 
@@ -1464,11 +1660,11 @@ function renderBlogIndexContent() {
     ],
     actionLinks: [
       { href: '/#contact', label: 'Request estimate' },
-      { href: '/guides', label: 'Explore pricing guides' },
+      { href: '/guides', label: 'Explore planning guides' },
     ],
     sections: [
       {
-        title: 'Start with these local pricing resources',
+        title: 'Start with these local planning resources',
         links: guideLinks,
       },
       {
@@ -1543,7 +1739,7 @@ function renderNotFoundContent() {
     actionLinks: [
       { href: '/', label: 'Back to homepage' },
       { href: getCanonicalServicePath('concrete-driveways'), label: 'View services' },
-      { href: '/guides', label: 'View pricing guides' },
+      { href: '/guides', label: 'View planning guides' },
     ],
   })
 }

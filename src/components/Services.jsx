@@ -45,16 +45,20 @@ const iconMap = {
 }
 
 const servicePriorityOrder = [
-  'foundation-repair-waco-tx',
-  'concrete-demolition-waco-tx',
-  'concrete-sawing-waco-tx',
-  'parking-lot-concrete-waco',
   'concrete-driveways-waco-tx',
   'concrete-patios-waco-tx',
-  'retaining-walls-waco-tx',
+  'stamped-concrete-waco-tx',
+  'residential-concrete-contractor-waco-tx',
+  'commercial-concrete-contractor-waco-tx',
+  'parking-lot-concrete-waco',
+  'concrete-foundations-waco-tx',
+  'foundation-repair-waco-tx',
   'decorative-concrete-waco',
+  'retaining-walls-waco-tx',
   'hardscaping-waco-tx',
   'concrete-deck-contractors',
+  'concrete-demolition-waco-tx',
+  'concrete-sawing-waco-tx',
   'contractors-in-waco-tx',
 ]
 

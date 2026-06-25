@@ -22,7 +22,17 @@ export const FAQ_ITEMS = [
   {
     question: 'How do I compare concrete companies in Waco, TX before hiring?',
     answer:
-      'Ask each company to explain base prep, drainage, joint layout, reinforcement, and cure timing in writing. Reliable concrete contractors in Waco, TX should also show local project examples and a clear estimate scope.',
+      'Ask each company to explain base prep, drainage, joint layout, reinforcement, demolition or haul-off, finish, cleanup, and cure timing in writing. A useful bid should make clear what is included, what could change after demolition, and who is responsible for communication.',
+  },
+  {
+    question: 'Why are concrete bids sometimes so different?',
+    answer:
+      'The low number may leave out removal, base correction, reinforcement, drainage work, thicker edges, sealing, or cleanup. Before choosing a contractor, compare the actual scope line by line instead of only comparing the total.',
+  },
+  {
+    question: 'What should I send before requesting a concrete estimate?',
+    answer:
+      'Wide photos, close-up photos of cracks or drainage problems, rough dimensions, the project address, access notes, and your preferred timeline all help. Steve still verifies the site in person before final pricing.',
   },
   {
     question: 'Are cement contractors and concrete contractors the same thing?',

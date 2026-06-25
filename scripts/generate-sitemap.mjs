@@ -2,6 +2,11 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 import { SERVICE_CANONICAL_PATH_BY_SLUG } from '../src/data/servicePages.js'
+import {
+  fetchPublishedBlogPosts,
+  mergePublishedBlogPosts,
+} from '../api/_published-blog-posts.js'
+import { loadLocalEnvFile } from './load-local-env.mjs'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const OUTPUT_PATH = path.join(process.cwd(), 'public', 'sitemap.xml')
@@ -74,6 +79,8 @@ function addUrl(urls, loc, meta = {}) {
 }
 
 async function main() {
+  await loadLocalEnvFile()
+
   const routes = new Map()
 
   for (const route of STATIC_ROUTES) {
@@ -107,13 +114,14 @@ async function main() {
     addUrl(routes, `/guides/${slug}`)
   })
 
-  staticBlogPosts
-    .filter((post) => post?.slug && post?.status === 'published')
-    .forEach((post) => {
-      const lastmod = (post.updated_at || post.published_at || post.created_at || SITEMAP_LASTMOD)
-        .slice(0, 10)
-      addUrl(routes, `/blog/${post.slug}`, { lastmod })
-    })
+  const remoteBlogPosts = await fetchPublishedBlogPosts()
+  const blogPosts = mergePublishedBlogPosts(staticBlogPosts, remoteBlogPosts)
+
+  blogPosts.forEach((post) => {
+    const lastmod = (post.updated_at || post.published_at || post.created_at || SITEMAP_LASTMOD)
+      .slice(0, 10)
+    addUrl(routes, `/blog/${post.slug}`, { lastmod })
+  })
 
   sportsCourtSlugs.forEach((slug) => {
     addUrl(routes, `/sports-court-coating/${slug}`)

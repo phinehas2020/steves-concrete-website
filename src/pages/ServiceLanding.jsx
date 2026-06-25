@@ -337,7 +337,7 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
                 Plan your project with related services and guides
               </h2>
               <p className="text-lg text-stone-600 text-pretty">
-                Compare service options, local pricing guides, and nearby coverage before scheduling your estimate.
+                Compare service options, local planning guides, and nearby coverage before scheduling your estimate.
               </p>
             </div>
             <div className="grid gap-6 lg:grid-cols-2">
@@ -360,14 +360,14 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
               </div>
               <div className="bg-white border border-stone-200 rounded-2xl p-6">
                 <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
-                  Pricing guides
+                  Planning guides
                 </h3>
                 <div className="space-y-3">
                   <a
                     href="/guides"
                     className="flex items-center justify-between px-4 py-3 bg-stone-50 border border-stone-200 rounded-lg hover:border-stone-300"
                   >
-                    <span className="font-semibold text-stone-800">All Pricing Guides</span>
+                    <span className="font-semibold text-stone-800">All Planning Guides</span>
                     <span className="text-sm text-stone-500">View guides</span>
                   </a>
                   {relatedGuides.map((guide) => (

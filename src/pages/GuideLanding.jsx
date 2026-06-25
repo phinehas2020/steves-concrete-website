@@ -31,11 +31,20 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
     checklist = [],
     relatedServices = [],
     faq = [],
+    badgeLabel = 'Pricing Guide',
+    primaryCtaLabel = 'View Pricing Factors',
+    factorEyebrow = 'What affects price',
+    factorTitle = 'Factors that move your estimate',
+    factorIntro = 'Every site is different. These are the items that most often shift total cost.',
+    localEyebrow = 'Local considerations',
+    localTitle = 'Why Waco projects price differently',
+    localIntro = 'Central Texas soil and climate influence how concrete is planned and built.',
+    faqIntro = 'Quick answers to common pricing questions.',
   } = page
 
   const breadcrumbsJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `${SITE_URL}/` },
-    { name: 'Pricing Guides', url: `${SITE_URL}/guides` },
+    { name: 'Planning Guides', url: `${SITE_URL}/guides` },
     { name: title, url: `${SITE_URL}/guides/${slug}` },
   ])
   const faqJsonLd = buildFaqPage(faq)
@@ -60,7 +69,7 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
               <div>
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-100 text-stone-600 text-xs font-semibold uppercase tracking-wide">
-                  Pricing Guide
+                  {badgeLabel}
                 </span>
                 <h1 className="mt-5 font-display font-bold text-stone-900 text-balance leading-tight" style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 3.75rem)' }}>
                   {heroTitle}
@@ -73,7 +82,7 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
                     href="#pricing"
                     className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
                   >
-                    View Pricing Factors
+                    {primaryCtaLabel}
                   </a>
                   <a
                     href="#contact"
@@ -134,13 +143,13 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <div>
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  What affects price
+                  {factorEyebrow}
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Factors that move your estimate
+                  {factorTitle}
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty mb-6">
-                  Every site is different. These are the items that most often shift total cost.
+                  {factorIntro}
                 </p>
                 <ul className="space-y-3 text-stone-700">
                   {factors.map((factor) => (
@@ -173,13 +182,13 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
             <div className="container-main">
               <div className="text-center max-w-2xl mx-auto mb-10">
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Local considerations
+                  {localEyebrow}
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Why Waco projects price differently
+                  {localTitle}
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty">
-                  Central Texas soil and climate influence how concrete is planned and built.
+                  {localIntro}
                 </p>
               </div>
               <div className="grid gap-6 md:grid-cols-3">
@@ -235,7 +244,7 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
                   {title} questions
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty">
-                  Quick answers to common pricing questions.
+                  {faqIntro}
                 </p>
               </div>
               <div className="space-y-4">

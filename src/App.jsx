@@ -137,7 +137,7 @@ function App() {
   useSeo({
     title: 'Waco Concrete Contractors | SLA Concrete Works LLC',
     description:
-      'Need concrete contractors in Waco TX? SLA Concrete Works LLC provides full concrete services in Waco TX for driveways, patios, sidewalks, slabs, and commercial concrete. Fast free estimates: (254) 230-3102.',
+      'Waco concrete contractor for driveways, patios, slabs, foundations, and repairs. Owner-run planning for clay soil, drainage, and clear estimates.',
     canonical: `${SITE_URL}/`,
     url: `${SITE_URL}/`,
     type: 'website',
