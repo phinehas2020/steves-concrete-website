@@ -56,6 +56,28 @@ on www.concretewaco.com the same day.
   - Citation corrections: `reports/citation_correction_request_templates_2026-05-12.md`
   - Review outreach workflow (templates ready, needs owner approval)
 
+## Live SERP verification — 2026-07-01, searched from Waco, TX
+
+Observed in the owner's browser (geo: Waco, TX) for **"concrete contractors
+waco tx"** the same day the optimization deployed:
+
+- **Local pack (top of page): SLA Concrete Works is the #1 non-sponsored
+  business listing** — 5.0★, 38 reviews (up from 33 in May). The only listing
+  above it is a paid ad (Groundworks, Sponsored).
+- Organic blue links (below the pack): page 1 is Gonzalez Concrete,
+  directories (LocalsLoveUs, BBB, Procore), JGAR, wacoconcrete.net, Waco
+  Concrete Services, Integrated, wacoconcreteworks.com. concretewaco.com was
+  not on organic page 1 in this view — the GSC "position 2.5" average comes
+  primarily from local-pack impressions. The organic web ranking is the leg
+  today's on-site work targets.
+- **The owner's Google Ads campaign "Sales-Performance Max-12" is PAUSED.**
+  The paid slot above SLA's pack listing is currently ceded to a competitor.
+  Resuming ads is the only same-day path to owning the very top of the page —
+  owner decision (budget).
+
+Caveat: view is signed-in/personalized; validate with a Local Falcon grid
+scan or incognito checks for a neutral reading.
+
 ## Measurement plan
 
 - ~2026-07-08 and ~2026-07-15: pull GSC positions for the queries in the
