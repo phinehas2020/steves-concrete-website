@@ -17,9 +17,9 @@ export function About() {
       : '28+'
 
   useSeo({
-    title: 'Meet Steve | SLA Concrete Works LLC | Waco TX',
+    title: 'About SLA Concrete Works | Owner-Run Waco Concrete Contractor',
     description:
-      'Meet Steve, the owner of SLA Concrete Works LLC in Waco, and learn how he approaches prep, drainage, and concrete jobs around Central Texas.',
+      'Meet Steve Alexander, owner of SLA Concrete Works LLC. 20+ years of Waco concrete experience, 500+ projects, and a 5-star Google rating. Call (254) 230-3102.',
     canonical: `${SITE_URL}/about`,
     url: `${SITE_URL}/about`,
     image: DEFAULT_IMAGE,

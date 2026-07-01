@@ -415,6 +415,13 @@ export const locationPages = [
         ],
       },
       {
+        title: 'Hewitt neighborhoods and daily traffic',
+        paragraphs: [
+          'Hewitt work clusters around the neighborhoods off Hewitt Drive and Spring Valley Road, where driveways see steady school-run and commuter traffic. Widening a driveway, adding a parking pad, or replacing a cracked approach are frequent requests because many households have more vehicles than the original slab was designed for.',
+          'That daily use shapes the plan. Extra width needs the same base quality as the original drive, approach transitions have to meet the street cleanly, and pours get scheduled so the household is not blocked in longer than necessary.',
+        ],
+      },
+      {
         title: 'What the estimate should answer',
         paragraphs: [
           'A useful Hewitt estimate should explain tear-out, haul-off, base prep, reinforcement, finish, joint layout, cure timing, and cleanup. Those details make it easier to compare bids without guessing what is included.',
@@ -480,6 +487,11 @@ export const locationPages = [
         answer:
           'Yes, when the access, concrete minimums, and schedule make sense. Common small projects include patio extensions, entry walks, shed pads, approach repairs, and short sidewalk replacements.',
       },
+      {
+        question: 'How fast can you look at a Hewitt project?',
+        answer:
+          'Usually quickly — Hewitt sits minutes from our regular routes, so estimates are easy to schedule. Send photos and rough dimensions and we can often give a preliminary read before the site visit.',
+      },
     ],
   },
   {
@@ -527,6 +539,13 @@ export const locationPages = [
         paragraphs: [
           'Woodway concrete work often touches slopes, mature landscaping, outdoor living spaces, or drainage transitions. When a patio, walkway, retaining wall, or step layout is planned separately, water and grade problems can show up between the pieces.',
           'We look at the whole hardscape path before recommending the next pour. That helps the driveway, patio, wall, or walkway connect cleanly and keeps runoff from collecting where it can soften the base.',
+        ],
+      },
+      {
+        title: 'Woodway lots along Bosque Boulevard and Highway 84',
+        paragraphs: [
+          'Woodway runs along Highway 84 with established neighborhoods, larger wooded lots, and grade changes that flat subdivisions do not have. Driveways and patios here often have to work around mature oaks, root zones, and slopes that move water fast during storms.',
+          'We plan around those features instead of against them: approaches that protect root systems, patio elevations that step with the yard, and drainage that directs runoff away from both the new concrete and the trees the property was built around.',
         ],
       },
     ],
@@ -582,6 +601,11 @@ export const locationPages = [
         question: 'Do you build retaining walls or drainage transitions in Woodway?',
         answer:
           'Yes. We plan retaining walls, patio edges, walks, and drainage transitions together so water does not collect against slabs or soft soil pockets.',
+      },
+      {
+        question: 'Can you pour around mature trees in Woodway?',
+        answer:
+          'Yes, carefully. We adjust layout, edge lines, and slab thickness near root zones, and we talk through the tradeoffs so the driveway or patio does not damage the trees that make the lot valuable.',
       },
     ],
   },

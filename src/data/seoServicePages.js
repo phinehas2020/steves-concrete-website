@@ -1436,9 +1436,9 @@ const baseSeoServicePages = [
     title: 'Contractors in Waco, TX (Concrete Focus)',
     cardSummary:
       'Searching for contractors in Waco TX? Work with a local concrete-first team for driveways, patios, foundations, and repairs.',
-    metaTitle: 'Contractors in Waco TX | SLA Concrete Works LLC',
+    metaTitle: 'Contractors in Waco TX | 5-Star Concrete Team | SLA Concrete Works',
     metaDescription:
-      'Looking for contractors in Waco TX for concrete work? Compare prep, drainage, reinforcement, scope, and schedule for driveways, patios, slabs, and repairs.',
+      'Comparing contractors in Waco TX? SLA Concrete Works is a 5-star, owner-run concrete contractor for driveways, patios, slabs, and repair. Free estimates: (254) 230-3102.',
     introParagraph:
       'If you are comparing contractors in Waco TX for a concrete project, the most important details are usually hidden before the pour. Base prep, drainage, reinforcement, joint layout, access, cleanup, and cure timing all affect whether the finished concrete keeps performing after the crew leaves.',
     sections: [
