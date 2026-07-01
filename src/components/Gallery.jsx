@@ -17,7 +17,7 @@ function ProjectImage({ job }) {
         <div className="absolute inset-0 z-0 overflow-hidden">
             <img
                 src={mainImage}
-                alt={job.title}
+                alt={job.location ? `${job.title} — concrete project in ${job.location}` : `${job.title} — concrete project in Central Texas`}
                 className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 loading="lazy"

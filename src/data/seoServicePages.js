@@ -930,9 +930,9 @@ const baseSeoServicePages = [
     title: 'Foundation Repair in Waco, TX',
     cardSummary:
       'Foundation repair and slab movement planning for cracks, settlement, drainage, and Waco black clay soil conditions.',
-    metaTitle: 'Foundation Repair Waco TX | SLA Concrete Works LLC',
+    metaTitle: 'Foundation Repair Waco TX | Concrete & Slab Repair | SLA Concrete Works',
     metaDescription:
-      'Need foundation repair in Waco TX? We inspect cracks, slab movement, drainage, and soil issues before recommending concrete repair, replacement, or specialist review.',
+      'Foundation repair in Waco TX for cracked, settling, or shifting slabs. Concrete foundation repair, drainage correction, and honest repair-vs-replace guidance. Free estimates: (254) 230-3102.',
     introParagraph:
       'Foundation repair in Waco starts with diagnosis, not guesses. Expansive black clay, roof runoff, poor slope, and older concrete tie-ins can all make slabs crack, settle, or lift. We inspect crack patterns, drainage behavior, slab edges, and access before recommending concrete repair, section replacement, or a structural specialist when the problem goes beyond flatwork.',
     sections: [

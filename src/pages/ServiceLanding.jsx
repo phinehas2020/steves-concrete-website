@@ -152,7 +152,7 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
                   <div className="relative h-56 bg-stone-800">
                     <img
                       src={heroImage}
-                      alt={title}
+                      alt={`${title} project by SLA Concrete Works in Waco, TX`}
                       className="absolute inset-0 h-full w-full object-cover"
                       loading="eager"
                     />
@@ -160,7 +160,7 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
                   </div>
                 )}
                 <div className="p-7">
-                  <h3 className="font-display font-semibold text-2xl mb-3">What to expect</h3>
+                  <h2 className="font-display font-semibold text-2xl mb-3">What to expect</h2>
                   <p className="text-stone-300 mb-4">{intro}</p>
                   <ul className="space-y-3 text-sm">
                     {benefits.map((benefit) => (

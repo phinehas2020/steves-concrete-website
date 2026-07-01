@@ -46,9 +46,15 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
   const galleryImages = getServiceGalleryImages(slug, title)
   const seoImage = resolvedHeroImage?.startsWith('/') ? `${SITE_URL}${resolvedHeroImage}` : resolvedHeroImage
 
-  const relatedServices = seoServicePages
-    .filter((service) => service.slug !== slug && !service.redirectTo)
-    .slice(0, 4)
+  // Rotate around the current page so each page surfaces different neighbors
+  // instead of every page linking to the same first four entries.
+  const nonRedirectServices = seoServicePages.filter((service) => !service.redirectTo)
+  const currentIndex = nonRedirectServices.findIndex((service) => service.slug === slug)
+  const relatedServices = (
+    currentIndex === -1
+      ? nonRedirectServices.filter((service) => service.slug !== slug)
+      : [...nonRedirectServices.slice(currentIndex + 1), ...nonRedirectServices.slice(0, currentIndex)]
+  ).slice(0, 4)
 
   const serviceJsonLd = {
     '@type': 'Service',

@@ -37,10 +37,10 @@ const baseHighlights = [
 
 const baseProjects = (city) => [
   {
-    title: `${city} stamped driveway`,
-    description: 'Ashlar slate finish with charcoal accents.',
+    title: 'Stamped concrete driveway',
+    description: `Ashlar slate finish with charcoal accents — a popular choice for ${city}-area homes.`,
     image: stampedDrivewayImg,
-    alt: `Stamped concrete driveway project in ${city}, Texas`,
+    alt: 'Stamped concrete driveway with ashlar slate pattern and charcoal accents in Central Texas',
     stats: [
       { label: 'Area', value: '720 sq ft' },
       { label: 'Mix', value: '4,000 PSI' },
@@ -48,10 +48,10 @@ const baseProjects = (city) => [
     ],
   },
   {
-    title: `${city} patio extension`,
+    title: 'Patio extension',
     description: 'Exposed aggregate with a smooth border.',
     image: patioAggregateImg,
-    alt: `Concrete patio extension in ${city}, Texas`,
+    alt: 'Exposed aggregate concrete patio extension with smooth trowel border in Central Texas',
     stats: [
       { label: 'Area', value: '360 sq ft' },
       { label: 'Finish', value: 'Exposed aggregate' },
@@ -59,10 +59,10 @@ const baseProjects = (city) => [
     ],
   },
   {
-    title: `${city} commercial slab`,
+    title: 'Commercial slab',
     description: 'Large pour with durable joint layout.',
     image: commercialParkingImg,
-    alt: `Commercial concrete project near ${city}, Texas`,
+    alt: 'Commercial concrete slab with planned control joints in Central Texas',
     stats: [
       { label: 'Area', value: '2,400 sq ft' },
       { label: 'Use', value: 'Light industrial' },
@@ -186,6 +186,27 @@ export const locationPages = [
         ],
       },
       {
+        title: 'Temple neighborhoods and property types',
+        paragraphs: [
+          'Temple concrete calls come from a wide mix of properties: established neighborhoods west of downtown, newer subdivisions growing toward Belton and Troy, rental houses near the hospital and medical corridor, and light commercial sites along the I-35 frontage and Loop 363. Each setting changes how a driveway, patio, or slab should be planned, because access, parking during the pour, and how quickly the space needs to reopen all matter.',
+          'Older Temple streets often mean narrow drives, mature trees, and existing sidewalks the new concrete has to tie into cleanly. Newer subdivisions usually have better truck access but tighter drainage and HOA expectations. We look at both before pricing so the estimate reflects the actual site instead of a generic square-foot guess.',
+        ],
+      },
+      {
+        title: 'Bell County clay, heat, and drainage',
+        paragraphs: [
+          'Temple sits on the same blackland clay belt that runs through most of Central Texas. That soil swells after rain and shrinks through long summer heat, which is why unprepared slabs crack early. Base compaction, reinforcement, and joint layout all have to be planned around that movement.',
+          'Drainage is the other half. Roof runoff, low spots, and slopes that push water toward a slab edge will soften the base over time. We shape grade and plan drainage paths before the pour so the finished concrete is protected from the most common local failure mode.',
+        ],
+      },
+      {
+        title: 'What drives concrete pricing in Temple',
+        paragraphs: [
+          'Temple concrete pricing depends on more than square footage. Tear-out and haul-off, base correction, slab thickness, reinforcement, finish choice, and truck access all move the number. A straightforward broom-finish patio is a different scope than a stamped driveway with demolition and grade work.',
+          'We put those items in writing so you can compare bids line for line. If a lower Temple bid leaves out haul-off, base prep, or reinforcement, it is not the same project — it is a smaller scope that usually costs more later.',
+        ],
+      },
+      {
         title: 'What a useful Temple estimate should include',
         paragraphs: [
           'A strong concrete estimate should spell out demolition, haul-off, base correction, forms, reinforcement, finish, control joints, cleanup, and cure guidance.',
@@ -230,6 +251,16 @@ export const locationPages = [
         answer:
           'We offer multiple stamp patterns and color options so your new surface complements your exterior finishes while still fitting traction and maintenance needs.',
       },
+      {
+        question: 'Do you travel from the Waco area to Temple?',
+        answer:
+          'Yes. Temple is a short run down I-35 from our home base, and we schedule Temple estimates and pours in efficient windows. Driveways, patios, slabs, and repair work are all in normal service range.',
+      },
+      {
+        question: 'What concrete work do you do most in Temple?',
+        answer:
+          'Driveway replacements, backyard patios, sidewalk and walkway repairs, shop and shed slabs, and light commercial flatwork for rentals and small businesses are the most common Temple requests.',
+      },
     ],
   },
   {
@@ -263,6 +294,27 @@ export const locationPages = [
         paragraphs: [
           'Concrete work can interrupt access if it is not sequenced correctly. We discuss prep day, pour timing, cure milestones, and when foot or vehicle traffic can safely return.',
           'For rental or light commercial properties, that communication helps owners coordinate tenants, customers, and maintenance crews without guessing.',
+        ],
+      },
+      {
+        title: 'Killeen, Harker Heights, and Fort Cavazos-area properties',
+        paragraphs: [
+          'A lot of Killeen concrete work happens on rental homes and investment properties, where owners and property managers need dependable scheduling and a slab that survives tenant turnover. We also hear from military families near Fort Cavazos working against PCS timelines who need clear start dates and honest communication.',
+          'For those projects we confirm scope quickly, put the schedule in writing, and sequence demolition, pour, and cure so driveways and entries are usable as soon as the concrete can safely take traffic.',
+        ],
+      },
+      {
+        title: 'Soil and drainage around Killeen',
+        paragraphs: [
+          'Killeen and Harker Heights sit on shallow limestone and clay mixes that handle water differently across even a single street. Some lots drain fast; others hold water against slab edges after storms. We check where runoff actually goes before we plan base prep and slope.',
+          'That inspection shapes the pour. Thickness, reinforcement, joint spacing, and edge protection get matched to the soil and traffic on your site instead of copied from the last job.',
+        ],
+      },
+      {
+        title: 'Light commercial and parking concrete in Killeen',
+        paragraphs: [
+          'Killeen businesses ask for parking pads, sidewalk replacements, dumpster pads, accessible entry work, and equipment slabs. Those jobs need phasing so customers and deliveries keep moving while sections cure.',
+          'We plan traffic control, pour sequence, and reopening milestones with the property owner up front so a small commercial project does not turn into a week of blocked entrances.',
         ],
       },
     ],
@@ -302,6 +354,16 @@ export const locationPages = [
         question: 'Can Killeen projects be scheduled around limited access?',
         answer:
           'Often, yes. We discuss parking, tenant or customer access, cure timing, and job sequencing before work starts.',
+      },
+      {
+        question: 'Do you serve Harker Heights, Nolanville, and Copperas Cove?',
+        answer:
+          'Yes. We cover the greater Killeen area including Harker Heights, Nolanville, and Copperas Cove when the project scope and schedule fit our routes.',
+      },
+      {
+        question: 'Can you work around a PCS move or rental turnover deadline?',
+        answer:
+          'Often, yes. Tell us the deadline during the estimate and we will be honest about whether the prep, pour, and cure schedule can meet it.',
       },
     ],
   },
