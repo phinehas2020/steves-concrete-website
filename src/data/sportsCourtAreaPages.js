@@ -150,9 +150,9 @@ export const sportsCourtAreaPages = [
     heroSubtitle:
       'Court resurfacing and acrylic coating for tennis, pickleball, and basketball play surfaces.',
     seoTitle:
-      'Sports Court Coating Fort Worth TX | Court Resurfacing Services',
+      'Court Coating & Striping Fort Worth TX | Tennis & Pickleball Courts',
     seoDescription:
-      'Sports court coating in Fort Worth, TX for pickleball, tennis, and basketball courts. Resurfacing, crack repair, and line striping for reliable play.',
+      'Sports court coating and line striping in Fort Worth, TX for tennis, pickleball, and basketball courts. Resurfacing, crack repair, and striping for reliable play.',
     intro:
       'Fort Worth court projects often combine crack repair, traction-focused coatings, and full line repainting. We build scopes around court condition and how often the surface is used.',
     nearbyAreas: ['Arlington', 'Benbrook', 'Keller', 'Burleson', 'Aledo', 'Saginaw'],
