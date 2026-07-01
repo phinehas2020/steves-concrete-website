@@ -172,6 +172,61 @@
   ],
   "redirects": [
     {
+      "source": "/services/concrete-contractors",
+      "destination": "https://www.concretewaco.com/contractors-in-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/concrete-driveways",
+      "destination": "https://www.concretewaco.com/concrete-driveways-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/concrete-patios",
+      "destination": "https://www.concretewaco.com/concrete-patios-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/parking-lots",
+      "destination": "https://www.concretewaco.com/parking-lot-concrete-waco",
+      "permanent": true
+    },
+    {
+      "source": "/services/concrete-repair",
+      "destination": "https://www.concretewaco.com/foundation-repair-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/concrete-demolition",
+      "destination": "https://www.concretewaco.com/concrete-demolition-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/concrete-sawing",
+      "destination": "https://www.concretewaco.com/concrete-sawing-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/sidewalks-driveways",
+      "destination": "https://www.concretewaco.com/concrete-sidewalks-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/stamped-concrete",
+      "destination": "https://www.concretewaco.com/stamped-concrete-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/commercial-concrete",
+      "destination": "https://www.concretewaco.com/commercial-concrete-contractor-waco-tx",
+      "permanent": true
+    },
+    {
+      "source": "/services/concrete-foundations",
+      "destination": "https://www.concretewaco.com/concrete-foundations-waco-tx",
+      "permanent": true
+    },
+    {
       "source": "/concrete-repair-waco-tx",
       "destination": "https://www.concretewaco.com/foundation-repair-waco-tx",
       "permanent": true

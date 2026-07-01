@@ -172,9 +172,9 @@ export function Reviews() {
     FALLBACK_GOOGLE_REVIEW_URL
 
   useSeo({
-    title: 'Reviews | SLA Concrete Works LLC | Waco TX',
+    title: 'Reviews | 5-Star Waco Concrete Contractor | SLA Concrete Works',
     description:
-      'Read recent customer reviews from Waco, TX for driveways, patios, sidewalks, concrete repair, and stamped concrete projects from SLA Concrete Works LLC.',
+      'See why Waco homeowners rate SLA Concrete Works 5 stars on Google. Real reviews from driveway, patio, stamped concrete, and repair projects. Free estimates: (254) 230-3102.',
     canonical: `${SITE_URL}/reviews`,
     url: `${SITE_URL}/reviews`,
     image: DEFAULT_IMAGE,

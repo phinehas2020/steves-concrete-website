@@ -519,9 +519,9 @@ const staticRoutes = [
   },
   {
     path: '/reviews',
-    title: 'Customer Reviews | SLA Concrete Works LLC',
+    title: 'Reviews | 5-Star Waco Concrete Contractor | SLA Concrete Works',
     description:
-      'Read recent reviews from Waco-area customers for driveways, patios, stamped concrete, and repair projects.',
+      'See why Waco homeowners rate SLA Concrete Works 5 stars on Google. Real reviews from driveway, patio, stamped concrete, and repair projects. Free estimates: (254) 230-3102.',
     h1: 'Customer Reviews',
     renderContent: renderReviewsContent,
   },
@@ -1017,7 +1017,7 @@ function renderHomeContent() {
     subtitle:
       'Permit-aware concrete contractor serving Waco and surrounding Central Texas communities since 2005.',
     introParagraphs: [
-      `${SITE_NAME} builds driveways, patios, stamped concrete, foundations, and repair projects designed for black clay soil movement, heavy heat cycles, and daily traffic.`,
+      `${SITE_NAME} builds driveways, patios, stamped concrete, foundations, and repair projects across Waco, Texas designed for black clay soil movement, heavy heat cycles, and daily traffic.`,
       `When people compare concrete companies in Waco TX, they usually need clear pricing, honest timelines, and work that stays level after the first summer. As an owner-run Waco concrete contractor, we start every project with site prep, slope planning, reinforcement, and realistic cure guidance so the finished slab performs for years.`,
       `Call ${PHONE_DISPLAY} for a free estimate. Most leads get a same-day response and a clear next-step plan for site visit, scope, and scheduling.`,
     ],
