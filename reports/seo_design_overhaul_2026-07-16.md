@@ -109,11 +109,15 @@ Ranked-but-unserved demand found in GSC:
 - `npm run lint`: 37 errors, all pre-existing (unused motion imports,
   api/ process globals, legacy hook patterns) — none in changed code.
 
+## Google notification (done same day, signed-in GSC UI)
+- Sitemap resubmitted 2026-07-16 ("Sitemap submitted successfully").
+- Priority crawl requested and confirmed ("Indexing requested") for:
+  /concrete-demolition-waco-tx (was Discovered–not indexed),
+  /small-concrete-jobs-waco-tx (new, already discovered via sitemap),
+  /parking-lot-concrete-waco (indexed; recrawl for the rewrite).
+- Robinson/McGregor and the other rewritten pages ride the sitemap recrawl.
+
 ## Follow-ups (owner or next session)
-- Request indexing in signed-in GSC UI (API is read-only) for:
-  /concrete-demolition-waco-tx, /small-concrete-jobs-waco-tx,
-  /parking-lot-concrete-waco, /robinson-tx-concrete-contractor,
-  /mcgregor-tx-concrete-contractor, plus sitemap resubmit.
 - Foundation repair (pos ~51): decide whether to compete harder (content +
   links) or reposition the page toward concrete slab repair specifically.
 - GBP action pack / citation corrections / review outreach remain the
