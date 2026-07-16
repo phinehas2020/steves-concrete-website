@@ -15,27 +15,21 @@ import {
 import { seoServicePages } from '../data/seoServicePages'
 import { getServiceGalleryImages, serviceHeroImages } from '../data/clientProjects'
 
-const wacoPlanningLinks = [
-  {
-    href: '/waco-tx-concrete-contractor',
-    label: 'Waco concrete contractor hub',
-  },
-  {
-    href: '/hewitt-tx-concrete-contractor',
-    label: 'Hewitt concrete contractor page',
-  },
-  {
-    href: '/jobs',
-    label: 'Recent project gallery',
-  },
-  {
-    href: '/blog/waco-concrete-driveway-cost-factors',
-    label: 'Waco driveway cost factors',
-  },
-  {
-    href: '/blog/stamped-concrete-patio-ideas-central-texas',
-    label: 'Stamped patio ideas for Central Texas',
-  },
+// Pool of planning/local links; each page shows a different rotation so the
+// same five links don't repeat site-wide.
+const planningLinkPool = [
+  { href: '/waco-tx-concrete-contractor', label: 'Waco concrete contractor hub' },
+  { href: '/hewitt-tx-concrete-contractor', label: 'Hewitt concrete contractor page' },
+  { href: '/woodway-tx-concrete-contractor', label: 'Woodway concrete contractor page' },
+  { href: '/temple-tx-concrete-contractor', label: 'Temple concrete contractor page' },
+  { href: '/jobs', label: 'Recent project gallery' },
+  { href: '/guides/concrete-driveway-cost-waco-tx', label: 'Driveway cost guide for Waco' },
+  { href: '/guides/concrete-patio-cost-waco-tx', label: 'Patio cost guide for Waco' },
+  { href: '/guides/stamped-concrete-cost-waco-tx', label: 'Stamped concrete cost guide' },
+  { href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx', label: 'Slab permit guide for Waco' },
+  { href: '/blog/waco-concrete-driveway-cost-factors', label: 'Waco driveway cost factors' },
+  { href: '/blog/stamped-concrete-patio-ideas-central-texas', label: 'Stamped patio ideas for Central Texas' },
+  { href: '/reviews', label: 'Customer reviews' },
 ]
 
 export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
@@ -55,6 +49,12 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
       ? nonRedirectServices.filter((service) => service.slug !== slug)
       : [...nonRedirectServices.slice(currentIndex + 1), ...nonRedirectServices.slice(0, currentIndex)]
   ).slice(0, 4)
+
+  const planningStart = ((currentIndex === -1 ? 0 : currentIndex) * 3) % planningLinkPool.length
+  const wacoPlanningLinks = [
+    ...planningLinkPool.slice(planningStart),
+    ...planningLinkPool.slice(0, planningStart),
+  ].slice(0, 5)
 
   const serviceJsonLd = {
     '@type': 'Service',
@@ -243,8 +243,9 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
               Related concrete services in Waco, TX
             </h2>
             <p className="text-stone-600 text-pretty max-w-2xl mb-8">
-              Need more ideas for your project? Explore these related services with local teams and
-              concrete planning experience.
+              A lot of projects end up combining two or three of these — a driveway replacement
+              usually starts with demolition, and most patios get a decorative finish. Here is
+              other work we handle around Waco.
             </p>
             <div className="grid gap-4 md:grid-cols-2">
               {relatedServices.map((service) => (
@@ -291,13 +292,9 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
           </section>
         )}
 
-        <DeferredSection rootMargin="520px 0px" minHeight={760}>
+        <DeferredSection anchorId="contact" rootMargin="520px 0px" minHeight={760}>
           <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
-            <section className="section-padding bg-stone-50">
-              <div className="container-main">
-                <Contact />
-              </div>
-            </section>
+            <Contact />
           </Suspense>
         </DeferredSection>
       </main>

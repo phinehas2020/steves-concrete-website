@@ -159,7 +159,7 @@ function App() {
           <Hero />
         </div>
         <div className="order-2 md:order-none">
-          <DeferredSection rootMargin="420px 0px" minHeight={480}>
+          <DeferredSection anchorId="services" rootMargin="420px 0px" minHeight={480}>
             <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={480} />}>
               <Services />
             </Suspense>
@@ -190,14 +190,14 @@ function App() {
           </DeferredSection>
         </div>
         <div className="order-8 md:order-none">
-          <DeferredSection rootMargin="520px 0px" minHeight={620}>
+          <DeferredSection anchorId="faq" rootMargin="520px 0px" minHeight={620}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={620} />}>
               <FAQ />
             </Suspense>
           </DeferredSection>
         </div>
         <div className="order-9 md:order-none">
-          <DeferredSection rootMargin="560px 0px" minHeight={760}>
+          <DeferredSection anchorId="contact" rootMargin="560px 0px" minHeight={760}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={760} />}>
               <Contact />
             </Suspense>

@@ -5,6 +5,7 @@ export function DeferredSection({
   className = '',
   rootMargin = '320px 0px',
   minHeight = 0,
+  anchorId,
 }) {
   const containerRef = useRef(null)
   const [shouldRender, setShouldRender] = useState(() => {
@@ -36,8 +37,16 @@ export function DeferredSection({
 
   const style = minHeight ? { minHeight } : undefined
 
+  // Anchor targets (e.g. #contact) live inside the deferred children, so hash
+  // links would silently no-op before render. Host the id on the placeholder
+  // until the real section takes over.
   return (
-    <div ref={containerRef} className={className} style={style}>
+    <div
+      ref={containerRef}
+      id={shouldRender ? undefined : anchorId}
+      className={className}
+      style={style}
+    >
       {shouldRender ? children : null}
     </div>
   )

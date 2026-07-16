@@ -148,9 +148,9 @@ const baseSeoServicePages = [
       'Plan a driveway that handles Central Texas heat, drainage swings, and traffic demands with a clear process and honest pricing.',
     metaTitle: 'Concrete Driveways in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need concrete driveway waco tx services? We build practical, durable driveways in Waco with base prep, reinforced edges, drainage planning, and expert curing for long-term use.',
+      'Concrete driveways in Waco built for black clay soil: real base prep, reinforcement, and drainage planning. Most driveways run $6–12/sq ft. Free estimate: (254) 230-3102.',
     introParagraph:
-      'If you are searching for a concrete driveway waco tx, the first thing to know is that Waco’s black clay soil, summer heat, and changing rain cycles can shorten the life of a driveway if prep is rushed. Our driveway crews in Waco, TX start with soil testing, grading, and control-joint design so the pour performs through heat spikes, heavy vehicles, and normal maintenance.',
+      'The first thing to know about pouring a driveway in Waco is that the black clay under it moves — it swells after rain and shrinks through the long dry stretches. A driveway that skips base prep to hit a low price will crack at the edges within a few years. We start with the subgrade, the slope, and the joint layout, because that is what decides how the driveway looks in year ten.',
     sections: [
       {
         heading: 'Why driveway prep is everything in Waco',
@@ -256,7 +256,7 @@ const baseSeoServicePages = [
       {
         question: 'Do driveway projects need permits in Waco?',
         answer:
-          'Permit needs depend on the location and scope, especially when work affects a curb, apron, right-of-way, drainage path, or commercial property. We review the project details during planning and keep the estimate permit-aware.',
+          'Permit needs depend on the location and scope — mostly when work touches a curb, apron, right-of-way, drainage path, or commercial property. We flag anything that needs a permit during the estimate instead of letting it surprise you mid-job.',
       },
       {
         question: 'When can I drive on a new concrete driveway?',
@@ -287,9 +287,9 @@ const baseSeoServicePages = [
       'Create a patio that looks custom and performs in heat, with practical layout, drainage, and finish options optimized for Waco.',
     metaTitle: 'Concrete Patios in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need concrete patio waco tx design and installation? We install durable patios in Waco with proper drainage, reinforced base prep, and finishes that handle heat and outdoor use.',
+      'Concrete patios in Waco — broom finish, stamped, or stained, planned for drainage and shade. Typical patios run $6–12/sq ft, stamped $12–18. Free estimate: (254) 230-3102.',
     introParagraph:
-      'For many Waco homeowners, a concrete patio is the most-used outdoor room on the property. If you are choosing a concrete patio waco tx, you need one built for heavy foot traffic, grills and patio furniture, and fast heat-cycling days in summer. Our process in Waco, TX is to design around use first, then finish and style.',
+      'A patio is usually the most-used slab on the property, and the mistakes show up fast: water pooling by the back door, a surface too hot to walk on in August, random cracks across the middle. We plan the slope, the shade, and the joint lines before we talk finishes — then help you pick between broom finish, stamped, or stained based on how much upkeep you actually want.',
     sections: [
       {
         heading: 'Patio layout that matches daily movement',
@@ -357,9 +357,9 @@ const baseSeoServicePages = [
       'Add accessible, stable sidewalks with ADA-conscious planning and reliable drainage for homes and small commercial paths.',
     metaTitle: 'Concrete Sidewalks in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need concrete sidewalk installation waco done right? We design and install sidewalks in Waco with slope control, joint spacing, and reliable edge transitions.',
+      'Sidewalk installation and replacement in Waco — proper slope, clean joints, no trip lips where old meets new. Residential and commercial. Free estimate: (254) 230-3102.',
     introParagraph:
-      'If you are searching for concrete sidewalk installation waco, the right approach starts with accessibility and movement safety. In Waco, sidewalks should be designed for both pedestrians and weather, with careful grading, drainage control, and smooth transitions at driveways and street edges.',
+      'Sidewalks look simple, but they are where sloppy work shows first: a lip where new meets old, water that sheets across the walk instead of off it, cracks that wander because nobody planned the joints. We pour walks for homes and businesses around Waco with the slope, joint spacing, and transitions done right — including ADA ramps where the project needs them.',
     sections: [
       {
         heading: 'Accessibility-first sidewalk planning',
@@ -424,69 +424,62 @@ const baseSeoServicePages = [
     slug: 'commercial-concrete-contractor-waco-tx',
     title: 'Commercial Concrete Contractor in Waco, TX',
     cardSummary:
-      'Work with a commercial concrete contractor waco tx for controlled scheduling, traffic-safe workflow, and durable business-ready concrete.',
+      'Parking lots, sidewalks, ADA ramps, dumpster pads, and shop slabs — scheduled around your business hours.',
     metaTitle: 'Commercial Concrete Contractor Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need a commercial concrete contractor waco tx for driveways, pads, and site work? We handle commercial concrete projects across Waco and nearby Texas communities.',
+      'Commercial concrete for Waco businesses: parking lots, sidewalks, ADA ramps, dumpster pads, and shop slabs. We have poured for hospitals, gas stations, and metal buildings. (254) 230-3102.',
     introParagraph:
-      'As a commercial concrete contractor waco tx, we build concrete that supports business schedules, foot traffic, and vehicle movement. Waco businesses need durable results with minimal operational disruption, so our process blends planning, safety, and clear communication.',
+      'We pour commercial concrete all over the Waco area — parking lots, sidewalks, ADA ramps, dumpster pads, truck aprons, and slabs for shops and metal buildings. Recent work includes the entrance at Baylor Scott & White Hillcrest, flatwork at the Circle K in Lacy Lakeview, and a 9,600 square foot shop foundation in Burnet. Stephen runs the crew himself, so the person who bid your job is the one standing on it.',
     sections: [
       {
-        heading: 'Commercial workflow designed for operations',
+        heading: 'The commercial work we handle',
         paragraphs: [
-          'Most commercial sites are active, so we coordinate pour windows, access points, and material flow around business hours. That reduces downtime and helps keep staff and customers informed.',
-          'We break projects into measurable phases: prep, pour, finish, and reopen guidance. This gives decision-makers a timeline they can communicate internally.',
+          'Most of our commercial calls are for parking lot sections or full pours, sidewalks and ADA ramps, dumpster pads, truck aprons and approaches, equipment pads, and slabs for shops, warehouses, and metal buildings. We also cut out and replace failed sections when the whole lot does not need to go.',
+          'If part of your scope is asphalt, striping, or major dirt work, we will tell you up front what we do ourselves and what needs another trade. Nobody gets strung along on work we do not do.',
         ],
       },
       {
-        heading: 'Heavy-use concrete design',
+        heading: 'Working around an open business',
         paragraphs: [
-          'For industrial and retail zones, reinforcement and thickness are selected for load frequency. We evaluate turning paths, forklift routes, and loading strips before final structural decisions.',
-          'Expansion joints are not optional on larger commercial sections. We map joint layout to control cracking, reduce corner stress, and support predictable movement over warm and wet cycles.',
+          'A closed entrance costs you money, so we plan pours in sections. Customers keep a way in, staff keep a place to park, and each section reopens as soon as it can safely carry traffic. Early-morning pours help in summer anyway — the heat here forces the schedule, so we use it to stay out of your busiest hours.',
+          'Before we start you will know which areas are blocked on which days, where the barriers go, and when each section reopens. If rain pushes a pour, we tell you the day it happens, not after.',
         ],
       },
       {
-        heading: 'Code-conscious implementation and safety',
+        heading: 'Built for the loads it will actually carry',
         paragraphs: [
-          'We follow practical safety guidance for temporary barriers, signage, and dust control. This is important in high-traffic settings, especially near customer entrances.',
-          'Where needed, we coordinate with facility owners for utility and access restrictions before work starts so there are fewer interruptions and no unsafe conditions during pour windows.',
+          'A sidewalk, a customer parking stall, and a dumpster approach that takes a loaded garbage truck twice a week are three different designs. Thickness, reinforcement, and base depth get sized to the traffic — most commercial flatwork runs 3,000 to 4,000 PSI, with thicker sections and heavier steel where trucks turn or park.',
+          'Joint layout matters more on big sections than anywhere else. Concrete moves on Central Texas clay no matter who pours it — the joints decide where it cracks. We lay them out on purpose instead of letting the slab decide.',
         ],
       },
       {
-        heading: 'Commercial pricing transparency',
+        heading: 'What a commercial bid from us includes',
         paragraphs: [
-          'Commercial bids include base prep, reinforcement, edges, and scheduling constraints. This helps avoid assumptions that often create unexpected charges late in a project.',
-          'If your site includes multiple phases, we provide a phase roadmap and written closeout details so your team knows what happened and when each section is ready.',
-        ],
-      },
-      {
-        heading: 'Why Waco climate planning matters for business projects',
-        paragraphs: [
-          'Heat and sudden rain events can affect both cure and site access. We watch daily forecasts and shift work windows as needed to protect surface quality.',
-          'After completion, we also provide long-life maintenance expectations so business owners understand what routine checks preserve traffic surfaces and signage visibility.',
+          'The bid spells out demolition and haul-off, base prep, reinforcement, thickness, finish, joint layout, and cleanup — line by line. If another bid comes in cheaper, you can see exactly which of those items it skipped.',
+          'Multi-phase jobs get a phase plan in writing so your team knows what is happening when, and what is ready for traffic at each step.',
         ],
       },
     ],
     faq: [
       {
-        question: 'Do you work with business owners on phased scheduling?',
+        question: 'Can you pour without shutting the business down?',
         answer:
-          'Yes. We can split commercial scope into smaller phases to keep operations moving and minimize downtime.',
+          'Almost always. We stage the work in sections so an entrance and part of the parking stay open, and each section reopens as soon as it can carry traffic.',
       },
       {
-        question: 'What concrete services can you provide for commercial sites?',
+        question: 'What commercial concrete work do you take on?',
         answer:
-          'We handle sidewalks, truck aprons, pads, parking perimeter concrete, and utility-side walkway areas in Waco and nearby communities.',
+          'Parking lots and lot sections, sidewalks, ADA ramps, dumpster pads, truck aprons, equipment pads, and slabs for shops and metal buildings. We also replace failed sections without redoing the whole lot.',
       },
       {
-        question: 'Can commercial projects be done around customer traffic?',
+        question: 'How long before new concrete can take vehicle traffic?',
         answer:
-          'Yes, with staged access and safety barriers. We tailor schedule and sequence to your busiest hours.',
+          'Cars can usually drive on it after about 7 days; heavy trucks need longer. It depends on thickness, mix, and weather, so we give you real dates for your pour rather than a guess.',
       },
       {
-        question: 'How do you handle high-temperature pours?',
+        question: 'How do summer pours work in Waco heat?',
         answer:
-          'We adjust pour timing and curing controls in summer to protect edge integrity and reduce early surface stress.',
+          'We pour early, adjust the mix, and keep water on the cure. Hot-weather pours are routine here — it just takes planning the schedule around the forecast.',
       },
     ],
   },
@@ -494,74 +487,67 @@ const baseSeoServicePages = [
     slug: 'residential-concrete-contractor-waco-tx',
     title: 'Residential Concrete Contractors in Waco, TX',
     cardSummary:
-      'Trusted residential concrete contractors in Waco, TX for driveways, patios, repairs, and home-focused slab upgrades.',
+      'Driveways, patios, sidewalks, garage slabs, and repairs for Waco-area homes — one estimate, one crew, no surprises.',
     metaTitle: 'Residential Concrete Contractors Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Need residential concrete work contractors in Waco, TX? We provide home-focused driveway, patio, slab, and repair plans with clear estimates and reliable schedules.',
+      'Driveways, patios, sidewalks, garage slabs, and concrete repair for Waco-area homes. Owner-run since 2005, free written estimates. Call or text (254) 230-3102.',
     introParagraph:
-      'If you are comparing residential concrete work contractors in Waco, TX, the right fit should feel local, clear, and transparent. We handle measurements, grading review, and construction details so your project stays practical and on a realistic timeline.',
+      'Most of what we pour is for homeowners: driveways, patios, sidewalks, garage and shop slabs, steps, and repairs. Stephen does the site visit himself, measures it, and gives you a written price. If something does not need to be torn out yet, he will tell you that too — plenty of estimates end with "keep an eye on it and call me in a couple of years."',
     sections: [
       {
-        heading: 'Home-focused planning and communication',
+        heading: 'How we plan concrete around a home',
         paragraphs: [
-          'Residential work often mixes use cases: kids in the driveway, family cars, outdoor entertaining, and seasonal weather. We start with how your household uses each area so finish and reinforcement are selected correctly.',
-          'You get one clear estimate and regular check-ins because we believe home projects should stay easy to follow and family-friendly during construction.',
+          'Before we talk finishes, we look at what the concrete has to live with: where the roof dumps water, how the yard drains, what the clay under it is doing, and how you actually use the space. A driveway that carries a work truck every day gets planned differently than one that holds two sedans.',
+          'That is also where we catch the stuff that ruins jobs later — a downspout aimed at the new slab, a grade that sends water at the garage, tree roots headed for the corner. Fixing those on paper is cheap. Fixing them after the pour is not.',
         ],
       },
       {
-        heading: 'Driveway, patio, and porch integration',
+        heading: 'Tying new concrete into what is already there',
         paragraphs: [
-          'We connect new pours to existing paths and steps so entrances, walk routes, and landscaping transitions are visually clean and structurally sound.',
-          'Where a lot of transitions exist, we plan edges and joint lines to avoid random crack lines and avoid pooling in front of doors.',
+          'Most homes are not blank slates. New work has to meet an existing sidewalk, porch, garage floor, or street approach, and those transitions are where bad jobs show. We set elevations so doors still swing, water runs away from the house, and you do not get a trip lip where old meets new.',
+          'Joint lines get planned too. Concrete on this clay is going to move — the joints decide where it cracks, so we put them where the crack will follow the line instead of wandering across the middle of your patio.',
         ],
       },
       {
-        heading: 'Homeowner-friendly material selection',
+        heading: 'Finish options, honestly ranked',
         paragraphs: [
-          'Material and finish choices should match your maintenance style. If you prefer lower ongoing care, we recommend practical textures and maintenance schedules that still feel high quality.',
-          'For homes that want detail, we can include stamped, sealed, or border-enhanced options that still prioritize durability.',
+          'A standard broom finish is the workhorse: good traction, easy to maintain, cheapest per foot. Stamped and stained concrete look great and cost more — both in the pour and in resealing every 2 to 3 years. We will tell you which one actually fits how much maintenance you want to do, not just which one costs more.',
+          'If you want detail without the full stamped price, a plain field with a stamped or colored border is a common middle ground on Waco patios.',
         ],
       },
       {
-        heading: 'Cost clarity for families and owners',
+        heading: 'What the estimate covers',
         paragraphs: [
-          'Residential quotes reflect scope and site access, so surprises are minimized. We identify any demolition, trucking access, and grading corrections before approvals.',
-          'This helps you compare accurately with alternatives and avoid budget drift when weather delays or access changes appear later.',
-        ],
-      },
-      {
-        heading: 'Aftercare support for long-term performance',
-        paragraphs: [
-          'We recommend a simple routine: controlled loading in early curing, scheduled sealer checks, and annual visual inspections before major weather shifts.',
-          'If questions arise after install, we inspect, document, and offer practical solutions before issues become larger repair items.',
+          'The written estimate lists demolition and haul-off, base work, reinforcement, thickness, finish, and cleanup. When another bid is cheaper, compare line by line — the difference is usually something left out under the slab, where you cannot see it until it fails.',
+          'After the pour you get real dates: when you can walk on it, when cars can use it, and when it is fully cured. Then we tell you the one thing most people skip — reseal it every couple of years and it will outlast the mortgage.',
         ],
       },
     ],
     faq: [
       {
-        question: 'Do you handle both small residential pours and large jobs?',
+        question: 'Do you take small residential jobs?',
         answer:
-          'Yes. We work with everything from single-driveway projects to larger residential concrete projects across Waco and nearby communities.',
+          'Yes — steps, a cracked sidewalk section, a small pad for a shed or AC unit. Small jobs get the same written estimate as big ones. If it is cheaper for you to patch than replace, we will say so.',
       },
       {
-        question: 'Do you offer full residential concrete services in Waco, TX?',
+        question: 'What residential work do you do?',
         answer:
-          'Yes. We provide residential concrete services in Waco, TX for driveways, patios, walkways, repairs, and slab upgrades with one coordinated team.',
+          'Driveways, patios, sidewalks, garage and shop slabs, steps, stamped and stained finishes, and repair or replacement of failed concrete anywhere around Waco.',
       },
       {
-        question: 'Are you available for emergency concrete repair after storms?',
+        question: 'Can you fix storm or water damage quickly?',
         answer:
-          'Yes. We prioritize urgent household and pathway issues when weather damage affects safety or access.',
+          'If damage is blocking your driveway or creating a trip hazard, call us and we will work you in as fast as scheduling allows.',
       },
       {
-        question: 'Can you recommend a realistic finish for a family home?',
+        question: 'Which finish should I pick for a family home?',
         answer:
-          'Absolutely. We match finish choice to your family’s daily traffic and maintenance schedule.',
+          'For most driveways, broom finish — best traction and lowest upkeep. For patios, it depends how much resealing you are willing to do; we will walk you through it at the estimate.',
       },
       {
-        question: 'Can my family use all areas immediately after installation?',
+        question: 'How soon can we use the new concrete?',
         answer:
-          'Use timelines vary by thickness and weather. We provide safe-use dates based on observed curing progress.',
+          'Foot traffic in a day or two, vehicles at about 7 days, full strength at 28. Weather shifts those numbers, so we give you exact dates for your pour.',
       },
     ],
   },
@@ -648,9 +634,9 @@ const baseSeoServicePages = [
       'Use stamped concrete for elegant texture, color, and durable outdoor surfaces that perform in Waco weather.',
     metaTitle: 'Stamped Concrete in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
-      'Stamped concrete waco tx for residential and commercial spaces. We install durable stamped textures, color blends, and border details designed for Central Texas heat.',
+      'Stamped concrete patios, walkways, and borders in Waco — ashlar slate, stone, and brick patterns that hold up in Texas heat. Runs $12–18/sq ft. Free estimate: (254) 230-3102.',
     introParagraph:
-      'Stamped concrete waco tx is one of the fastest ways to add style without losing durability. In Waco, stamped finishes need correct base conditions and accurate timing to keep patterns crisp through high temperature swings.',
+      'Stamped concrete gets you the look of stone, slate, or brick at a fraction of what the real material costs installed — most stamped work here runs $12–18 per square foot. The catch nobody mentions in the sales pitch: stamping is a timing game. In Waco summer heat the window between "too wet to stamp" and "too hard to stamp" gets short, and a rushed stamp job shows forever. We schedule stamped pours around that window, not around convenience.',
     sections: [
       {
         heading: 'Pattern selection and pattern performance',
@@ -867,38 +853,43 @@ const baseSeoServicePages = [
     title: 'Parking Lot Concrete in Waco, TX',
     cardSummary:
       'Concrete parking lot contractors for retail, office, church, and warehouse properties in Waco and nearby cities.',
-    metaTitle: 'Parking Lot Concrete Waco TX | SLA Concrete Works LLC',
+    metaTitle: 'Parking Lot Concrete Waco TX | Pours & Repairs | SLA Concrete Works',
     metaDescription:
-      'Need parking lot concrete in Waco? We build and repair parking lots with reinforced base prep, drainage planning, and traffic-safe scheduling.',
+      'Concrete parking lots poured and repaired in Waco — retail, church, office, and warehouse lots, staged so your business stays open. Free estimate: (254) 230-3102.',
     introParagraph:
-      'Property owners searching for parking lot concrete Waco services usually need a crew that can protect business access while delivering long-term slab performance. We stage work around operations and build for daily vehicle traffic.',
+      'We pour and repair concrete parking lots for retail strips, churches, offices, and warehouses around Waco — including the handicap parking and flatwork at Melody Grove and the lot work at the Circle K in Lacy Lakeview. The two things that kill a lot early are water trapped under the slab and sections that were never sized for the trucks that actually use them. We plan for both before the first form goes in.',
     sections: [
       {
-        heading: 'Commercial-first lot planning',
+        heading: 'Sizing the slab for the traffic it will really see',
         paragraphs: [
-          'Every lot starts with traffic path planning, turn radius checks, and stall flow. This prevents corner failures and random cracking in high-use zones.',
-          'We align joint spacing and reinforcement around expected traffic loads so the slab performs under repeated use.',
+          'A customer parking stall and the lane a delivery truck uses twice a day need different concrete. We look at where vehicles turn, where they park, and where the garbage truck sits while the dumpster is lifted — those zones get more thickness and heavier reinforcement, because that is where lots break first.',
+          'Joint layout is planned around stall lines and traffic paths so the inevitable movement on Central Texas clay follows the joints instead of cracking through the middle of a drive lane.',
         ],
       },
       {
-        heading: 'Drainage and subgrade prep',
+        heading: 'Drainage and base prep — where cheap lots fail',
         paragraphs: [
-          'Parking lots fail early when water is trapped near slab edges. We grade for positive drainage before concrete placement.',
-          'Compaction and thickness targets are set by use case, from lighter retail flow to heavier service traffic.',
+          'Most parking lot failures we get called to repair started under the slab: water ponding at the edges, soaking into the clay, and taking the support out from under the corners. We grade for positive drainage and compact the base before any concrete shows up.',
+          'If a bid for your lot does not spell out base depth and compaction, that is the corner being cut. It is invisible on day one and very visible in year three.',
         ],
       },
       {
-        heading: 'Business-friendly staging and reopening',
+        heading: 'Keeping the business open while we pour',
         paragraphs: [
-          'We can split large parking scopes into phases to reduce disruption. Each phase includes access notes and safe-use guidance.',
-          'After pour, we provide staged reopening windows based on cure timing and weather conditions.',
+          'Lots get poured in sections. Customers keep an entrance and part of the parking the whole time, and each section reopens once it can carry traffic — cars at roughly a week, heavy trucks later. You get the phase map before we start, so you can tell staff and customers exactly what is blocked and when.',
         ],
       },
       {
-        heading: 'Repair and replacement options',
+        heading: 'Parking lot repair: section replacement vs. full tear-out',
         paragraphs: [
-          'If your lot has isolated failures, we can evaluate section repairs before recommending full replacement.',
-          'When replacement is the better long-term move, we provide a clear scope and timeline before demolition begins.',
+          'If your lot has a few failed panels, buckled aprons, or a broken dumpster pad, we can usually saw-cut and replace just those sections and tie them cleanly into the surrounding slab. That is a fraction of the cost of redoing the lot.',
+          'When the failures are widespread — map cracking across drive lanes, multiple sunken sections, base problems everywhere we open it up — patching becomes throwing money at a lot that is done. We will tell you which situation you have and price both paths so you can decide.',
+        ],
+      },
+      {
+        heading: 'Concrete or asphalt for a Waco lot?',
+        paragraphs: [
+          'Asphalt costs less up front; concrete costs less over its life. In Waco heat, asphalt softens, ruts under dumpsters and truck lanes, and needs sealcoating every few years, while concrete shrugs off the summer and lasts decades with joint maintenance. For high-heat, heavy-load spots — dumpster pads, truck aprons, drive-thru lanes — concrete wins even on lots that stay asphalt everywhere else.',
         ],
       },
     ],
@@ -906,22 +897,22 @@ const baseSeoServicePages = [
       {
         question: 'Do you handle both new lots and parking lot repairs in Waco?',
         answer:
-          'Yes. We build new lots and also handle section repairs or replacement depending on slab condition and traffic needs.',
+          'Both. New pours for retail, church, office, and warehouse lots, and section repairs — failed panels, aprons, dumpster pads — where the rest of the lot is still good.',
       },
       {
         question: 'How long before a parking lot can reopen?',
         answer:
-          'Reopen timing depends on thickness, weather, and traffic type. We provide staged reopening guidance for each project.',
+          'Sections reopen to cars at about 7 days depending on weather and thickness; truck lanes need longer. Because we pour in phases, part of your lot is open the entire time.',
       },
       {
-        question: 'Are you local parking lot contractors in Waco TX?',
+        question: 'Can you replace just the broken sections of our lot?',
         answer:
-          'Yes. We serve Waco and nearby communities with commercial concrete planning and installation.',
+          'Usually, yes. We saw-cut the failed panels, fix the base underneath, and pour new sections that tie into the existing slab. If the damage is too widespread for that to make sense, we will say so.',
       },
       {
-        question: 'Can work be staged to keep business open?',
+        question: 'Do you pour dumpster pads and truck aprons?',
         answer:
-          'Yes. We often phase parking lot work to preserve partial access when site layout allows it.',
+          'Yes — they are some of the most common commercial calls we get, usually because the asphalt there has rutted or the old pad broke up under the garbage truck.',
       },
     ],
   },
@@ -1019,14 +1010,14 @@ const baseSeoServicePages = [
   },
   {
     slug: 'concrete-demolition-waco-tx',
-    title: 'Concrete Demolition in Waco, TX',
+    title: 'Concrete Demolition & Removal in Waco, TX',
     cardSummary:
       'Driveway, patio, sidewalk, and slab tear-out with saw cutting, haul-off, and a clean site when the concrete is too far gone.',
-    metaTitle: 'Concrete Demolition in Waco, TX | SLA Concrete Works LLC',
+    metaTitle: 'Concrete Demolition & Removal Waco TX | Tear-Out & Haul-Off',
     metaDescription:
-      'Need concrete demolition in Waco, TX? We saw cut, break out, haul off, and clean up old concrete for driveway, patio, sidewalk, and slab replacement.',
+      'Concrete demolition and removal in Waco — we saw cut, break out, haul off, and leave the site ready for the new pour. Driveways, patios, slabs. Call (254) 230-3102.',
     introParagraph:
-      'Sometimes the right fix is to take the bad concrete out and start over. We cut it, break it out, haul it off, and leave the site ready for the next step.',
+      'Sometimes the right fix is to take the bad concrete out and start over. We cut it, break it out, haul it off, and leave the site ready for the next step — whether that is a new pour by us or dirt work for something else. Demolition and hauling are part of most driveway and patio replacements we do, so this is routine work, not a specialty add-on.',
     sections: [
       {
         heading: 'How we plan the tear-out',
@@ -1054,6 +1045,19 @@ const baseSeoServicePages = [
         paragraphs: [
           'Some slabs can be patched. Some are done. If the concrete is broken up, badly settled, or failing underneath, we will tell you that straight.',
           'In those cases, demolition usually saves you from paying twice for a fix that was never going to last.',
+        ],
+      },
+      {
+        heading: 'What drives the price of a tear-out',
+        paragraphs: [
+          'Four things set the cost: how thick the slab is, whether it has steel in it, how close a truck can get, and how much has to be hauled. A 4-inch patio a bobcat can reach is a quick job; an 8-inch reinforced slab behind a fence is not. Either way, demolition is usually a small piece of the total compared to the new concrete going back in.',
+          'If we are doing the replacement pour too, the tear-out gets priced into one written estimate so you are not coordinating two contractors over the same hole.',
+        ],
+      },
+      {
+        heading: 'Where the old concrete goes',
+        paragraphs: [
+          'Broken concrete does not go to a landfill by default — most of what we haul gets crushed and reused as road base or fill. If you have a low spot on your own property and want the material kept on site, tell us at the estimate and we can usually make that work and take the haul-off charge out.',
         ],
       },
     ],
@@ -1196,12 +1200,19 @@ const baseSeoServicePages = [
           'Early detection of pressure or settlement signs can prevent major repair costs and helps keep connected concrete surfaces performing as intended.',
         ],
       },
+      {
+        heading: 'Where we build retaining walls',
+        paragraphs: [
+          'Most of our wall work is in Waco, Hewitt, and Woodway — sloped backyard lots in Woodway especially, where grade changes and mature trees make walls part of almost every patio conversation. But we take wall jobs across the smaller communities too: Abbott, Aquilla, Lacy Lakeview, Riesel, Robinson, Lorena, and the farm and ranch properties between them.',
+          'The wall we built for the Oncor power transfer station in Riesel is a good example of the heavier end of that work — engineered concrete retaining structure, real load, real drainage requirements. The same thinking scales down to a backyard wall: figure out where the water goes first, then build the wall.',
+        ],
+      },
     ],
     faq: [
       {
         question: 'Do you install retaining walls for residential properties in Waco?',
         answer:
-          'Yes. We build retaining walls for homes and small commercial properties throughout the Waco area.',
+          'Yes — and in the surrounding towns. Hewitt, Woodway, Robinson, Lorena, Abbott, Aquilla, Lacy Lakeview, Riesel, and the rural properties in between are all normal territory for us.',
       },
       {
         question: 'Can retaining walls help with drainage issues?',
@@ -1234,34 +1245,32 @@ const baseSeoServicePages = [
     metaDescription:
       'Looking for decorative concrete in Waco? We install stamped, stained, and custom-finish concrete for patios, driveways, and walkways.',
     introParagraph:
-      'Decorative concrete gives Waco property owners design flexibility without sacrificing durability. We help you select finish systems that match use, maintenance goals, and Central Texas weather conditions.',
+      'Decorative concrete covers everything past a plain gray broom finish: stamped patterns, acid and water-based stains, exposed aggregate, and colored borders. We have poured all of it around Waco — stamped walkways, a decorative playground surface, exposed aggregate patios. The honest starting point is that every decorative finish trades some maintenance for the look, and the right choice depends on how much resealing you are actually going to do.',
     sections: [
       {
-        heading: 'Choosing the right decorative finish',
+        heading: 'The four finishes, with the trade-offs',
         paragraphs: [
-          'We compare stamped, stained, exposed aggregate, and textured options based on traction and design goals.',
-          'Finish recommendations are matched to sun exposure, traffic level, and maintenance preference.',
+          'Stamped runs $12–18 per square foot and gives you the stone or slate look — it needs resealing every 2–3 years or the color dulls. Stained is cheaper and works on existing concrete, but the color rides on the surface, so wear shows in traffic paths. Exposed aggregate is the most forgiving decorative finish for Texas sun — the texture is the stone itself, so there is no pattern to wear off — and it gives the best traction around pools. Textured broom variations and colored concrete are the budget end: color mixed through the pour that never peels.',
+          'On a driveway, we steer most people toward exposed aggregate or integral color over a full stamped field. Stamped driveways look great but take the most maintenance in the one spot you least want to maintain.',
         ],
       },
       {
-        heading: 'Pattern and color planning',
+        heading: 'Pattern and color choices happen before pour day',
         paragraphs: [
-          'Pattern scale, border treatment, and color tone are planned before pour day to avoid rushed decisions.',
-          'This keeps the final surface cohesive with your home and existing hardscape.',
+          'Stamp pattern, border treatment, and color get locked in before the truck is scheduled — never rushed at the site. We bring samples, and we will tell you how a color reads in full Texas sun versus the brochure photo, because dark colors on an uncovered west-facing patio get genuinely hot underfoot in July.',
+          'A common middle ground on Waco patios: plain broom-finished field with a stamped or colored border. You get the custom look at a fraction of the stamped price, and the high-wear center of the patio is the easy-maintenance part.',
         ],
       },
       {
-        heading: 'Durability in Texas weather',
+        heading: 'What Texas weather does to decorative finishes',
         paragraphs: [
-          'Decorative surfaces need correct prep and curing to handle heat and moisture swings.',
-          'We use process controls that help preserve finish quality over time.',
+          'Heat and UV are harder on decorative concrete than traffic is. Sealer breaks down faster in full sun, stains fade unevenly where sprinklers hit, and hot-weather pours need the timing right or the stamps drag. We pour decorative work early in the day in summer and cure it properly, because a stamped surface that dried too fast can never be fixed — only replaced.',
         ],
       },
       {
-        heading: 'Care and resealing',
+        heading: 'The maintenance schedule, up front',
         paragraphs: [
-          'We provide a resealing and cleaning plan for your exact finish type.',
-          'Simple maintenance protects color depth and helps prevent early wear.',
+          'Stamped and stained surfaces want resealing every 2–3 years — a morning of work with a roller, or a modest bill if we do it. Exposed aggregate and integral color can go longer. We put the schedule for your specific finish in writing at handoff, because the difference between a decorative patio that looks good in year ten and one that looks tired in year four is almost always the sealer.',
         ],
       },
     ],
@@ -1373,38 +1382,30 @@ const baseSeoServicePages = [
     title: 'Concrete Deck Contractors in Waco, TX',
     cardSummary:
       'Concrete deck contractors for pool decks, patio decks, and elevated outdoor concrete surfaces in Waco.',
-    metaTitle: 'Concrete Deck Contractors | Waco TX',
+    metaTitle: 'Concrete Pool Deck Contractors Waco TX | SLA Concrete Works',
     metaDescription:
-      'Need concrete deck contractors in Waco TX? We build pool decks and patio decks with traction-focused finishes and heat-aware design.',
+      'Concrete pool decks and patio decks in Waco — real traction underfoot, finishes that stay walkable in July, drainage away from the pool. Free estimate: (254) 230-3102.',
     introParagraph:
-      'Concrete deck contractors in Waco should balance style, traction, and heat performance. We design pool and patio deck surfaces to stay durable and comfortable through long Central Texas summers.',
+      'A pool deck has two jobs that fight each other: it has to grip wet bare feet, and it has to stay cool enough to walk on in a Waco July. Get either one wrong and the deck fails at the only thing it exists for. We build pool and patio decks with the texture, color, and drainage picked for how the surface actually gets used — not just how it photographs.',
     sections: [
       {
-        heading: 'Deck use and safety planning',
+        heading: 'Traction and surface heat, in that order',
         paragraphs: [
-          'We start with how the deck is used: pool traffic, furniture layout, and daily foot patterns.',
-          'This helps us choose texture and finish systems that improve safety and comfort.',
+          'Wet concrete around a pool needs texture — a light broom finish, exposed aggregate, or a textured overlay all grip better than anything smooth or heavily sealed. Color matters just as much: dark decorative colors soak up sun and get painfully hot, so around pools we keep colors light and tell you plainly when a finish you like will cook bare feet in August.',
+          'Exposed aggregate is our most-recommended pool deck finish here for a reason: the traction is built into the surface, it hides splash stains, and it stays cooler than dark stamped work.',
         ],
       },
       {
-        heading: 'Finish systems for pool and patio decks',
+        heading: 'Water has to leave the deck — away from the pool',
         paragraphs: [
-          'Finish options include broom, textured overlays, and decorative borders depending on project style.',
-          'We prioritize slip resistance and easy maintenance where water exposure is common.',
+          'Deck slabs get sloped so splash-out and rain drain away from both the pool and the house. On renovation work we also check what the original deck did wrong — most older decks we replace were draining toward the coping, which is why they settled and cracked at the pool edge.',
+          'The joint between deck and pool coping gets planned, not improvised. That seam takes the most movement on the whole deck, and it is where cheap deck jobs fail first.',
         ],
       },
       {
-        heading: 'Heat and weather durability',
+        heading: 'Resurfacing an existing deck vs. replacing it',
         paragraphs: [
-          'Deck pours are planned for Waco heat cycles with curing practices that reduce early stress.',
-          'Joint layout and drainage details are set to limit pooling and edge wear.',
-        ],
-      },
-      {
-        heading: 'Repair and resurfacing support',
-        paragraphs: [
-          'If an older deck is structurally sound, resurfacing may restore appearance without full replacement.',
-          'We inspect condition first and outline the best long-term path for your property.',
+          'If your deck is structurally sound but ugly — surface wear, stains, dated color — a resurfacing overlay can fix the look for a fraction of replacement cost. If panels have settled toward the pool or the cracks go through the slab, an overlay is just an expensive coat of paint on a failing deck. We look first, then tell you which one you have.',
         ],
       },
     ],
@@ -1438,7 +1439,7 @@ const baseSeoServicePages = [
       'Searching for contractors in Waco TX? Work with a local concrete-first team for driveways, patios, foundations, and repairs.',
     metaTitle: 'Contractors in Waco TX | 5-Star Concrete Team | SLA Concrete Works',
     metaDescription:
-      'Comparing contractors in Waco TX? SLA Concrete Works is a 5-star, owner-run concrete contractor for driveways, patios, slabs, and repair. Free estimates: (254) 230-3102.',
+      'Comparing contractors in Waco? Owner-run concrete crew, 5.0 stars, 500+ local projects since 2005 — and estimates that show exactly what is included, line by line. (254) 230-3102.',
     introParagraph:
       'If you are comparing contractors in Waco TX for a concrete project, the most important details are usually hidden before the pour. Base prep, drainage, reinforcement, joint layout, access, cleanup, and cure timing all affect whether the finished concrete keeps performing after the crew leaves.',
     sections: [
@@ -1577,98 +1578,73 @@ const baseSeoServicePages = [
       },
     ],
   },
+  {
+    slug: 'small-concrete-jobs-waco-tx',
+    title: 'Small Concrete Jobs in Waco, TX',
+    cardSummary:
+      'Steps, single sidewalk sections, AC and shed pads, small patios — the jobs bigger outfits will not call you back about.',
+    metaTitle: 'Small Concrete Jobs Waco TX | Pads, Steps & Short Pours',
+    metaDescription:
+      'Small concrete jobs in Waco — steps, sidewalk sections, AC and shed pads, small patios, short pours. Yes, we actually call back. Text photos to (254) 230-3102 for a quick quote.',
+    introParagraph:
+      'If you have called three contractors about a cracked sidewalk section or a 10x10 shed pad and nobody called back, you already know the problem: a lot of crews only want the big pours. We take small jobs and slot them in between the big ones. Text us a couple of photos and rough dimensions at (254) 230-3102 and you will usually have a ballpark the same day.',
+    sections: [
+      {
+        heading: 'What counts as a small job',
+        paragraphs: [
+          'Steps and stoops. One or two buckled sidewalk panels. A pad for an AC unit, generator, hot tub, or shed. A trash-can pad by the gate. Extending a patio a few feet. Replacing the section of driveway that cracked — not the whole driveway. If it is under a truckload of concrete, it is a small job, and we do them every week.',
+          'Small does not mean careless. A shed pad still gets a compacted base and the right thickness, because a pad that tilts in two years was not cheap — it was wasted.',
+        ],
+      },
+      {
+        heading: 'Why small jobs cost more per square foot — the honest math',
+        paragraphs: [
+          'Concrete plants charge a short-load fee when a truck rolls out less than full, and a crew day has a floor cost whether we pour 80 feet or 800. That is why a small pad costs more per square foot than a driveway, and why some outfits quote small jobs silly-high hoping you will go away. We keep it fair by batching small jobs in the same area — if we are already pouring in your part of town, your job rides on that mobilization.',
+        ],
+      },
+      {
+        heading: 'How scheduling works',
+        paragraphs: [
+          'Small jobs fill the gaps between larger pours, which usually means we can get to yours faster than a big project — often the same week or the one after. Weather moves everything in this business, but a small pour is the easiest thing on the calendar to slide into a good morning.',
+        ],
+      },
+      {
+        heading: 'Fixing trip hazards and single sections',
+        paragraphs: [
+          'A raised sidewalk lip or a dropped step is the kind of thing that gets someone hurt and turns into a liability question, especially for rental properties and storefronts. We saw-cut the bad section, fix what is underneath, and pour it back so it ties flush into the concrete around it. One clean section replacement beats a mudjacked patch that lets go next summer.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Do you have a minimum job size?',
+        answer:
+          'There is a practical minimum because a crew and equipment cost the same to show up either way — but we would rather quote it straight than dodge your call. Text photos and dimensions and we will tell you honestly if it is worth doing.',
+      },
+      {
+        question: 'What is a short pour or short load?',
+        answer:
+          'Ordering less than a full concrete truck. The plant charges a short-load fee for it, which is baked into small-job pricing. It is normal — it just needs to be in the estimate instead of showing up as a surprise.',
+      },
+      {
+        question: 'Can you replace just one section of sidewalk or driveway?',
+        answer:
+          'Yes — that is one of our most common small jobs. We saw-cut the failed panel, correct the base, and pour a new section that sits flush with the old concrete.',
+      },
+      {
+        question: 'How fast can a small job get scheduled?',
+        answer:
+          'Usually faster than a big one — small pours slot between larger projects, often within a week or two depending on weather and where you are.',
+      },
+    ],
+  },
 ]
 
-function serviceLabel(title) {
-  return String(title || 'concrete work')
-    .replace(/\s+in\s+Waco,\s*TX$/i, '')
-    .replace(/\s+Waco,\s*TX$/i, '')
-    .toLowerCase()
-}
-
-function serviceDepthSections(page) {
-  const label = serviceLabel(page.title)
-
-  return [
-    {
-      heading: 'Local planning for Waco soil, heat, and drainage',
-      paragraphs: [
-        `Every ${label} project has to account for Central Texas conditions before the first form is set. Waco's expansive clay, fast summer heat, and heavy rain cycles can change how concrete cures, drains, and moves over time. We review grade, access, surrounding structures, and water flow so the finished work is planned for the property instead of copied from a generic template.`,
-        `That local review includes practical details such as where trucks can stage, how runoff should leave the slab, whether nearby trees or fences limit access, and how new concrete should meet existing walks, driveways, patios, curbs, or building entries. Small planning choices at this stage often decide whether a project feels clean and durable years later.`,
-      ],
-    },
-    {
-      heading: 'Estimate details, scope clarity, and scheduling',
-      paragraphs: [
-        `A useful ${label} estimate should explain more than a square-foot number. We document the visible work area, demolition needs, base correction, forms, reinforcement assumptions, finish expectations, cleanup, and any permit-aware planning items that may affect the job. That gives you a clearer way to compare options and understand what is actually included.`,
-        `Scheduling is handled around weather, material availability, crew access, and cure timing. When a project touches a driveway, business entrance, rental property, or outdoor living space, we talk through access windows before work starts so families, tenants, customers, or employees are not surprised by the sequence.`,
-      ],
-    },
-    {
-      heading: 'Process from site visit through closeout',
-      paragraphs: [
-        `Most ${label} work starts with a site visit, photos, measurements, and a conversation about how the concrete will be used. From there, we confirm the recommended scope, identify risks, and explain the order of operations before you approve the work. The goal is to make the job predictable before equipment and concrete trucks arrive.`,
-        `During installation, the crew checks forms, slope, transitions, and finish details against the plan. After the work is complete, we review cleanup, cure guidance, and maintenance expectations. You should know when the surface can be used, what early care matters most, and which warning signs should be addressed quickly.`,
-      ],
-    },
-    {
-      heading: 'Quality checks that protect long-term performance',
-      paragraphs: [
-        `Concrete performance depends on base support, drainage, joint layout, finish timing, and early curing. We watch those details because they are difficult to fix after the slab is hard. A clean finish is important, but it only matters if the concrete below it was planned and placed correctly.`,
-        `We also avoid promising that concrete will never crack. Any contractor who works honestly in Waco should talk about soil movement, water control, and realistic maintenance. Our approach is to reduce preventable failures, direct movement where possible, and give you a clear maintenance path after the project is done.`,
-      ],
-    },
-  ]
-}
-
-function serviceDepthFaq(page) {
-  const label = serviceLabel(page.title)
-
-  return [
-    {
-      question: `What should I prepare before a ${label} estimate?`,
-      answer:
-        'Photos, rough dimensions, access notes, and a short list of goals are helpful. We still verify measurements and site conditions in person before finalizing scope.',
-    },
-    {
-      question: `What affects the price of ${label} in Waco?`,
-      answer:
-        'Pricing depends on square footage, demolition, base correction, drainage needs, reinforcement, finish type, access, and cure or scheduling constraints.',
-    },
-    {
-      question: 'Do you account for Waco clay soil and drainage?',
-      answer:
-        'Yes. We review slope, runoff, subgrade condition, and nearby structures so the project is planned around Central Texas soil movement and water behavior.',
-    },
-    {
-      question: 'Can the work be phased if my property needs more than one concrete project?',
-      answer:
-        'Often, yes. We can sequence related work so access, drainage, and finish transitions still make sense across multiple phases.',
-    },
-    {
-      question: 'How soon can the concrete be used after installation?',
-      answer:
-        'Use timing depends on weather, mix conditions, thickness, finish, and project type. We give project-specific guidance after the pour or coating work is complete.',
-    },
-    {
-      question: 'How do you handle permit and insurance questions for Waco concrete work?',
-      answer:
-        'We plan work with permit needs in mind and discuss documentation, insurance, or risk questions during the estimate. Permit requirements vary by property, scope, and right-of-way impact.',
-    },
-  ]
-}
-
-function enrichSeoServicePage(page) {
-  if (page.redirectTo || page.slug === 'concrete-driveways-waco-tx') return page
-
-  return {
-    ...page,
-    sections: [...(page.sections || []), ...serviceDepthSections(page)],
-    faq: [...(page.faq || []), ...serviceDepthFaq(page)],
-  }
-}
-
-export const seoServicePages = baseSeoServicePages.map(enrichSeoServicePage)
+// NOTE: these pages used to get four templated "depth" sections and six
+// templated FAQs auto-appended per page. That stamped near-identical blocks
+// across ~17 URLs — an obvious duplicate-content footprint — so the injection
+// was removed. Depth now lives in each page's own copy.
+export const seoServicePages = baseSeoServicePages
 
 export const servicePageLinks = seoServicePages
   .filter((service) => !service.redirectTo)

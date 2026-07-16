@@ -29,7 +29,7 @@ export function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="bg-stone-950 text-stone-300 safe-bottom relative overflow-hidden">
+        <footer className="bg-stone-950 text-stone-300 safe-bottom relative overflow-hidden pb-20 md:pb-0">
             {/* Local texture - subtle horizon silhouette */}
             <div className="absolute bottom-0 left-0 right-0 h-64 opacity-[0.03] pointer-events-none">
                 <svg viewBox="0 0 1200 200" preserveAspectRatio="none" className="w-full h-full">
@@ -184,8 +184,8 @@ export function Footer() {
                         © {currentYear} SLA Concrete Works LLC. Built for the Texas Heat.
                     </p>
                     <div className="flex gap-8">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Permit-Aware</span>
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Owner-Run</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Since 2005</span>
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Local</span>
                         <a
                             href="/privacy-policy"

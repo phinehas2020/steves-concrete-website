@@ -37,7 +37,7 @@ export const FAQ_ITEMS = [
   {
     question: 'Are cement contractors and concrete contractors the same thing?',
     answer:
-      'Yes, most people use the terms interchangeably, so if you are looking for "cement contractors near me" you actually need a "concrete contractor near me," which is what we are. Cement is just the grey powder ingredient that, along with water and aggregate, cures to become solid concrete.',
+      'For practical purposes, yes — most people use the terms interchangeably. Technically, cement is just the grey powder ingredient; mix it with water, sand, and rock and it cures into concrete. Whichever word you searched, a concrete contractor is what you need, and that is what we are.',
   },
   {
     question: "What's the difference between stamped and regular concrete?",

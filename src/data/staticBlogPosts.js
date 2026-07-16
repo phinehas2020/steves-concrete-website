@@ -503,7 +503,7 @@ export const staticBlogPosts = [
     status: 'published',
     author_email: 'photo-studio-cron@system.local',
     content: [
-      'The newest captioned photo batches in the shared album were already covered by existing blog posts, so this update is a practical guide instead of another project recap. One thing those jobs all have in common is simple: the slab only performs as well as the prep under it.',
+      'After a run of shop slab and foundation jobs around Waco this season, the same lesson kept coming up on every single one: the slab only performs as well as the prep under it. So instead of another project recap, here is the practical version of what that means.',
       'For a shop slab near Waco, the first question is not just how smooth the finish will look. The important work starts with subgrade prep. Soft spots need to be cut out, low areas need to be built back up correctly, and the base needs to be compacted so the slab is not sitting on loose material.',
       'Forms matter too. Straight forms keep the footprint clean, but they also set the height of the slab and help control drainage around doors, approaches, and parking areas. On a shop or metal building slab, a small mistake at the edge can show up later as water running the wrong direction.',
       'Rebar, wire, or engineered steel placement should match the load the slab will see. A light storage slab is different from a shop floor that will carry trucks, lifts, equipment, or heavy shelving. The same goes for thickness. Four inches may be fine for some light-duty areas, but many shop slabs need more section, better reinforcement, or thickened edges.',

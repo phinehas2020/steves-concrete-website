@@ -326,7 +326,7 @@ export const guidePages = [
       'Take photos from the street, from each corner of the work area, and from any low spots where water collects.',
       'Note whether the project touches a curb, sidewalk, driveway approach, drainage path, fence, utility area, or structure.',
       'Check HOA, landlord, builder, or property-manager requirements before scheduling the pour.',
-      'Ask the estimator to identify permit-aware planning items in writing before work begins.',
+      'Ask the estimator to put in writing whether any part of the job needs a permit before work begins.',
     ],
     relatedServices: [
       {
@@ -364,9 +364,9 @@ export const guidePages = [
           'Driveway approaches, curb work, sidewalk changes, commercial slabs, building foundations, shop pads, carports, drainage changes, and work near public access are more likely to need extra review before construction.',
       },
       {
-        question: 'Can SLA Concrete Works help with permit-aware planning?',
+        question: 'Will SLA Concrete Works tell me if my project needs a permit?',
         answer:
-          'Yes. During the estimate we look for permit-aware planning issues such as right-of-way, drainage, access, demolition, structural support, and nearby utilities so the scope is clearer before work starts.',
+          'Yes. During the estimate we check the things that usually trigger one — right-of-way, drainage, demolition, structural support, and nearby utilities — and tell you plainly whether your job needs a permit before work starts.',
       },
       {
         question: 'Should I pour concrete before checking permit requirements?',

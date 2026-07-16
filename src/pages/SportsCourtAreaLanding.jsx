@@ -26,7 +26,6 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
     seoTitle,
     seoDescription,
     localFocus = [],
-    targetKeywords = [],
     services = [],
     process = [],
     nearbyAreas = [],
@@ -176,22 +175,20 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
               </div>
               <div className="bg-white border border-stone-200 rounded-2xl p-6">
                 <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
-                  Search trends in {areaName}
+                  Based in Waco, working the I-35 corridor
                 </h3>
-                <p className="text-stone-600 text-pretty mb-5">
-                  These are common phrases people use when looking for court repair and resurfacing
-                  help in this market.
+                <p className="text-stone-600 text-pretty mb-3">
+                  Our crew is based in Waco and takes court projects up and down I-35 — {areaName}{' '}
+                  work gets scheduled in batches so travel does not inflate your price.
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {targetKeywords.map((keyword) => (
-                    <span
-                      key={keyword}
-                      className="px-3 py-1.5 bg-stone-100 text-stone-700 rounded-full text-xs font-medium"
-                    >
-                      {keyword}
-                    </span>
-                  ))}
-                </div>
+                <p className="text-stone-600 text-pretty">
+                  Send photos of your court and its dimensions to{' '}
+                  <a href="sms:+12542303102" className="font-semibold text-accent-600 hover:underline">
+                    (254) 230-3102
+                  </a>{' '}
+                  and we will tell you honestly whether it needs a recoat, crack repair first, or
+                  full resurfacing.
+                </p>
               </div>
             </div>
           </div>
@@ -274,7 +271,7 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
           </section>
         )}
 
-        <DeferredSection rootMargin="520px 0px" minHeight={760}>
+        <DeferredSection anchorId="contact" rootMargin="520px 0px" minHeight={760}>
           <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
             <Contact />
           </Suspense>

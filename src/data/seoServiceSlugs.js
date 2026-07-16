@@ -22,6 +22,7 @@ export const seoServiceSlugs = [
   { slug: 'concrete-deck-contractors' },
   { slug: 'contractors-in-waco-tx' },
   { slug: 'general-contractor-waco-tx', redirectTo: '/contractors-in-waco-tx' },
+  { slug: 'small-concrete-jobs-waco-tx' },
 ]
 
 export const servicePageLinks = [
@@ -96,5 +97,9 @@ export const servicePageLinks = [
   {
     label: 'Contractors in Waco, TX (Concrete Focus)',
     slug: 'contractors-in-waco-tx',
+  },
+  {
+    label: 'Small Concrete Jobs in Waco, TX',
+    slug: 'small-concrete-jobs-waco-tx',
   },
 ]

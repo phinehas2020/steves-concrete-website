@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { cn } from '../lib/utils'
 import { Menu, X, Phone } from 'lucide-react'
+import { StickyCallBar } from './StickyCallBar'
 
 const navLinks = [
     { label: 'Home', href: '/#home' },
@@ -130,6 +131,7 @@ export function Header() {
                     </div>
                 </nav>
             </div>
+            <StickyCallBar />
         </header>
     )
 }

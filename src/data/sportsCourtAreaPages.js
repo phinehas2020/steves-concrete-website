@@ -102,7 +102,7 @@ export const sportsCourtAreaPages = [
     seoDescription:
       'Need sports court coating in Dallas, TX? We resurface pickleball, tennis, and basketball courts with crack repair, acrylic color systems, and precision striping.',
     intro:
-      'Dallas facilities need coatings that keep traction and color through long heat cycles and heavy scheduling. We focus on prep quality first, then install finishes designed for daily play.',
+      'A lot of Dallas court calls right now are pickleball — new striping on old tennis courts, dedicated conversions, and HOA courts that have not been recoated in a decade. We are based in Waco and batch our Dallas-area court work so the travel does not land on your bill.',
     nearbyAreas: ['Plano', 'Frisco', 'Garland', 'Irving', 'Richardson', 'Mesquite'],
     localFocus: [
       {
@@ -141,6 +141,16 @@ export const sportsCourtAreaPages = [
         answer:
           'Yes. We support residential associations, schools, parks, and private properties throughout the Dallas area.',
       },
+      {
+        question: 'You are based in Waco — do you really cover Dallas?',
+        answer:
+          'Yes. Court coating jobs are scheduled in regional batches, so Dallas projects get grouped together. You get the same crew and pricing structure as our local work — travel is our problem, not yours.',
+      },
+      {
+        question: 'Can you convert a tennis court to pickleball?',
+        answer:
+          'Yes — either full conversion or shared-use striping so the court plays both. It is one of the most common requests we get in the Dallas area right now.',
+      },
     ],
   },
   {
@@ -154,7 +164,7 @@ export const sportsCourtAreaPages = [
     seoDescription:
       'Sports court coating and line striping in Fort Worth, TX for tennis, pickleball, and basketball courts. Resurfacing, crack repair, and striping for reliable play.',
     intro:
-      'Fort Worth court projects often combine crack repair, traction-focused coatings, and full line repainting. We build scopes around court condition and how often the surface is used.',
+      'Most Fort Worth court projects start with cracks — Texas clay moves under court slabs the same way it moves under driveways, and coating over an untreated crack just prints the crack back through. We repair first, then coat and stripe, and we will tell you upfront if a slab is too far gone to be worth coating.',
     nearbyAreas: ['Arlington', 'Benbrook', 'Keller', 'Burleson', 'Aledo', 'Saginaw'],
     localFocus: [
       {
@@ -190,7 +200,12 @@ export const sportsCourtAreaPages = [
       {
         question: 'What affects resurfacing cost for Fort Worth courts?',
         answer:
-          'Main factors are crack severity, square footage, coating system choice, and striping complexity.',
+          'Main factors are crack severity, square footage, coating system choice, and striping complexity. Crack repair is usually the swing item — send photos and we can ballpark it before anyone drives out.',
+      },
+      {
+        question: 'Can you just re-stripe our court without a full resurface?',
+        answer:
+          'If the coating is still sound, yes — line repainting alone is a legitimate scope, and it is much cheaper. If the surface is chalking or peeling, we will show you why striping alone would not last.',
       },
     ],
   },

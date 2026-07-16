@@ -242,10 +242,11 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
                 Recent Projects
               </span>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                Concrete projects near {city}
+                Recent work across Central Texas
               </h2>
               <p className="text-lg text-stone-600 text-pretty">
-                A snapshot of the finishes and scale we bring to properties across the area.
+                The same finishes and prep standards come to every {city} project — here is what
+                that looks like on real jobs.
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
@@ -471,7 +472,7 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
           </div>
         </section>
 
-        <DeferredSection rootMargin="520px 0px" minHeight={760}>
+        <DeferredSection anchorId="contact" rootMargin="520px 0px" minHeight={760}>
           <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
             <Contact />
           </Suspense>

@@ -261,7 +261,7 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
           </section>
         )}
 
-        <DeferredSection rootMargin="520px 0px" minHeight={760}>
+        <DeferredSection anchorId="contact" rootMargin="520px 0px" minHeight={760}>
           <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
             <Contact />
           </Suspense>

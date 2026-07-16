@@ -35,38 +35,40 @@ const baseHighlights = [
   },
 ]
 
-const baseProjects = (city) => [
+// Shown on every city page under an honest "across Central Texas" heading —
+// keep descriptions regional; never imply a card is a job in that city.
+const baseProjects = () => [
   {
     title: 'Stamped concrete driveway',
-    description: `Ashlar slate finish with charcoal accents — a popular choice for ${city}-area homes.`,
+    description: 'Ashlar slate pattern with charcoal accents on a Central Texas driveway.',
     image: stampedDrivewayImg,
     alt: 'Stamped concrete driveway with ashlar slate pattern and charcoal accents in Central Texas',
     stats: [
-      { label: 'Area', value: '720 sq ft' },
+      { label: 'Pattern', value: 'Ashlar slate' },
       { label: 'Mix', value: '4,000 PSI' },
-      { label: 'Completion', value: 'May 2025' },
+      { label: 'Finish', value: 'Stamped + sealed' },
     ],
   },
   {
     title: 'Patio extension',
-    description: 'Exposed aggregate with a smooth border.',
+    description: 'Exposed aggregate with a smooth trowel border — a common backyard upgrade here.',
     image: patioAggregateImg,
     alt: 'Exposed aggregate concrete patio extension with smooth trowel border in Central Texas',
     stats: [
-      { label: 'Area', value: '360 sq ft' },
       { label: 'Finish', value: 'Exposed aggregate' },
-      { label: 'Completion', value: 'Aug 2024' },
+      { label: 'Border', value: 'Smooth trowel' },
+      { label: 'Traction', value: 'Barefoot-friendly' },
     ],
   },
   {
     title: 'Commercial slab',
-    description: 'Large pour with durable joint layout.',
+    description: 'Larger pour with a joint layout planned for trucks and equipment.',
     image: commercialParkingImg,
     alt: 'Commercial concrete slab with planned control joints in Central Texas',
     stats: [
-      { label: 'Area', value: '2,400 sq ft' },
       { label: 'Use', value: 'Light industrial' },
-      { label: 'Completion', value: 'Nov 2024' },
+      { label: 'Joints', value: 'Sawcut layout' },
+      { label: 'Mix', value: '4,000 PSI' },
     ],
   },
 ]
@@ -78,11 +80,11 @@ export const locationPages = [
     heroTitle: 'Concrete Contractor Waco TX',
     seoTitle: 'Waco Concrete Contractors | Concrete Companies Waco TX',
     heroSubtitle:
-      'Looking for contractors in Waco TX for driveways, patios, stamped concrete, or slab work? Free estimate: (254) 230-3102.',
+      'Driveways, patios, stamped concrete, and slab work for Waco homes and businesses. Free estimate: (254) 230-3102.',
     seoDescription:
-      'Waco concrete contractors for driveways, patios, stamped concrete, foundations, and repairs. Need concrete companies in Waco TX with fast estimates? Call (254) 230-3102.',
+      'Waco concrete contractors for driveways, patios, stamped concrete, foundations, and repairs. Owner-run, 5.0 stars, 500+ local projects since 2005. Call (254) 230-3102.',
     intro:
-      'SLA Concrete Works LLC partners with Waco homeowners, builders, and businesses searching for "concrete companies near me" for reliable installs and repairs. We focus on clean prep, crisp finishing, and long-term durability.',
+      'We design concrete for black clay movement, summer heat, and the drainage issues common in McLennan County neighborhoods — clean prep, crisp finishing, and a written scope you can hold us to.',
     planningSections: [
       {
         title: 'Concrete work in Waco starts with soil and drainage',
@@ -401,10 +403,10 @@ export const locationPages = [
         ],
       },
       {
-        title: 'Small concrete jobs and near-me searches',
+        title: 'Small concrete jobs in Hewitt',
         paragraphs: [
-          'Many Hewitt calls start as a simple search for a concrete contractor near me, small job concrete contractors near me, or concrete patio services. Those projects still need real planning because a short walkway, patio extension, or small equipment pad can crack early if the base, drainage, and tie-ins are rushed.',
-          'We handle small slabs, entry walks, patio add-ons, driveway approach repairs, shed pads, and uneven concrete replacement when the site makes sense. The estimate confirms access, minimum-load realities, finish expectations, and whether the project should be bundled with nearby concrete work to control cost.',
+          'A lot of Hewitt calls are small jobs — a short walkway, a patio extension, a shed or equipment pad — and plenty of contractors simply never call back on those. We take them, and we plan them properly, because a small pad on rushed base and bad drainage cracks just as fast as a big one.',
+          'We handle small slabs, entry walks, patio add-ons, driveway approach repairs, shed pads, and single-section replacements. If we are already pouring nearby, bundling your small job with that trip is the easiest way to keep the price down — ask about it at the estimate.',
         ],
       },
       {
@@ -619,7 +621,28 @@ export const locationPages = [
     seoDescription:
       'Concrete contractor in Robinson, Texas for concrete driveways, patios, and repair work. Local team, clear pricing, and free estimate support.',
     intro:
-      'We help Robinson property owners add curb appeal with smooth finishes, clean edges, and solid drainage planning.',
+      'Robinson work is usually driveway replacements, slab repairs, shop pads, and patios — planned around the same black clay that moves everything in McLennan County.',
+    planningSections: [
+      {
+        title: 'What Robinson properties usually need',
+        paragraphs: [
+          'Robinson sits right on the clay like the rest of the county, but the lots run bigger than central Waco, and that changes the work. We see more shop slabs, RV and trailer pads, and longer driveways here — pours where the concrete has to carry real weight, not just a sedan. Those get thicker sections and heavier reinforcement where the wheels actually go.',
+          'The newer subdivisions off the Robinson Drive corridor bring the opposite kind of job: builder-grade driveways and patios that were poured fast and are showing it a few years in. Replacing a cracked approach or extending a too-small patio are two of our most common Robinson calls.',
+        ],
+      },
+      {
+        title: 'Drainage on flat lots',
+        paragraphs: [
+          'A lot of Robinson ground is flat, which sounds ideal until you need water to leave. Flat lots hold water against slab edges after storms, and wet clay under a slab edge is how corners crack and settle. We plan slope into every pour — even when the yard barely has any — so water moves off the concrete instead of soaking in beside it.',
+        ],
+      },
+      {
+        title: 'Rural-edge and shop work',
+        paragraphs: [
+          'Toward the edges of Robinson and out to Bruceville-Eddy and Lorena, projects get more rural: shop foundations, equipment pads, aprons where gravel drives meet new concrete. Access is usually easy on these lots, which helps the price — the concrete truck can get close, and there is room to stage forms and base material without tearing up the yard.',
+        ],
+      },
+    ],
     highlights: baseHighlights,
     services: baseServices,
     nearbyAreas: ['Waco', 'Hewitt', 'Woodway', 'Lorena', 'Bruceville-Eddy', 'Bellmead'],
@@ -627,12 +650,17 @@ export const locationPages = [
     faq: [
       {
         question: 'Do you offer free estimates in Robinson?',
-        answer: 'Yes. We provide free on-site estimates for Robinson projects.',
+        answer: 'Yes — Stephen does the site visit himself, measures, and puts the price in writing. No obligation.',
       },
       {
         question: 'Can you handle small concrete pads in Robinson?',
         answer:
-          'Absolutely. We take on walkways, pads, and smaller pours alongside larger installs.',
+          'Yes. Walkways, shed and equipment pads, and single-section repairs are regular work for us in Robinson, often scheduled alongside bigger pours nearby.',
+      },
+      {
+        question: 'Do you pour shop slabs and RV pads in Robinson?',
+        answer:
+          'All the time — larger Robinson lots make these common. We size thickness and reinforcement for the actual loads: a slab that holds a trailer or lift needs more than a patio does.',
       },
     ],
   },
@@ -660,7 +688,7 @@ export const locationPages = [
         title: 'Driveways, patios, shop pads, and rural access',
         paragraphs: [
           'Many Lorena projects need a different plan than a tight city-lot pour. Longer driveways, shop slabs, equipment pads, backyard patios, and driveway extensions can involve more grading, vehicle turning space, and drainage review than the square footage alone suggests.',
-          'During the estimate, we document demolition, base prep, reinforcement assumptions, finish, joint layout, access for trucks, and any permit-aware planning items. That gives you a clearer way to compare bids before the pour is scheduled.',
+          'During the estimate, we document demolition, base prep, reinforcement assumptions, finish, joint layout, access for trucks, and anything that might need a permit. That gives you a clearer way to compare bids before the pour is scheduled.',
         ],
       },
     ],
@@ -725,7 +753,28 @@ export const locationPages = [
     seoDescription:
       'Concrete contractor in McGregor, Texas for driveways, patios, commercial slabs, and repair projects. Get a free, no-obligation estimate from the local team.',
     intro:
-      'SLA Concrete Works LLC delivers dependable concrete installs in McGregor with careful grading, reinforcement, and clean finishing.',
+      'McGregor projects lean toward shop slabs, driveways, and equipment pads where load planning matters — plus the usual patios and repairs around town.',
+    planningSections: [
+      {
+        title: 'Shop slabs and working concrete',
+        paragraphs: [
+          'McGregor is a working town — between the industrial park, the ranches, and the properties along US-84, a lot of what we pour here has to carry equipment, not just foot traffic. Shop foundations, welding and equipment pads, and aprons where a gravel drive meets the slab are the bread and butter of our McGregor work.',
+          'For those pours, the conversation starts with what will actually sit on the concrete. A slab under a car lift, a tractor, or a loaded trailer gets sized differently — thicker sections, heavier steel, joints planned around where the weight parks. Getting that right up front costs a little more; getting it wrong costs a new slab.',
+        ],
+      },
+      {
+        title: 'Driveways and home concrete in town',
+        paragraphs: [
+          'In McGregor proper, the calls look more like the rest of the county: driveway replacements, patio pours, sidewalk sections, and steps around older homes. Older-in-town lots often have existing concrete the new work has to tie into cleanly — we set elevations so old and new meet flush, with no trip lip and no water trapped at the seam.',
+        ],
+      },
+      {
+        title: 'Rural drives and long runs',
+        paragraphs: [
+          'Outside town toward Moody, Oglesby, and Gatesville, driveways get long. Pouring a full rural drive in concrete is a real budget number, so we often talk through practical hybrids: concrete where it matters most — the apron at the road, the parking and turnaround by the house, the shop approach — with gravel holding the run between. It keeps the cost sane and puts the concrete where wheels turn and water crosses.',
+        ],
+      },
+    ],
     highlights: baseHighlights,
     services: baseServices,
     nearbyAreas: ['Waco', 'Moody', 'Gatesville', 'Woodway', 'Lorena', 'Oglesby'],
@@ -733,12 +782,18 @@ export const locationPages = [
     faq: [
       {
         question: 'Do you work on commercial concrete in McGregor?',
-        answer: 'Yes. We handle pads, parking areas, and light commercial pours.',
+        answer:
+          'Yes — pads, parking areas, aprons, and slabs for shops and light industrial use. Load planning is most of the conversation on these jobs.',
       },
       {
         question: 'Can you match stamped concrete colors in McGregor?',
         answer:
           'We can blend colors and release agents to match stone or brick tones that fit your exterior.',
+      },
+      {
+        question: 'Do you pour full rural driveways?',
+        answer:
+          'We do, and we will also tell you when a hybrid makes more sense — concrete at the road apron, house parking, and shop approach, with gravel between. It is often half the cost and covers the spots that actually fail.',
       },
     ],
   },

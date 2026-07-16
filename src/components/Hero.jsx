@@ -18,6 +18,7 @@ const featuredServiceLinks = [
     { label: 'Patios', href: '/concrete-patios-waco-tx' },
     { label: 'Parking Lot Concrete', href: '/parking-lot-concrete-waco' },
     { label: 'Foundation Work', href: '/concrete-foundations-waco-tx' },
+    { label: 'Small Jobs', href: '/small-concrete-jobs-waco-tx' },
 ]
 
 export function Hero() {
@@ -236,7 +237,7 @@ export function Hero() {
                         Concrete Contractors
                         <span className="block text-accent-400">in Waco, TX</span>
                         <span className="block text-lg sm:text-xl font-medium text-stone-400 mt-2">
-                            Permit-Aware · Owner-Run · 20+ Years
+                            Owner-Run · Free Estimates · Since 2005
                         </span>
                     </h1>
 

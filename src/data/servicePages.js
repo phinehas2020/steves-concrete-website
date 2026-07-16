@@ -47,12 +47,12 @@ export const servicePages = [
     title: 'Concrete Contractors',
     heroTitle: 'Waco Concrete Contractors',
     heroSubtitle:
-      'Need contractors in Waco TX for driveways, patios, slab work, or repairs? Our team handles residential and light commercial concrete projects across Waco and nearby communities.',
+      'Driveways, patios, slabs, and repairs for homes and businesses around Waco. Owner-run since 2005 — the person who bids your job is the one who pours it.',
     seoTitle: 'Concrete Contractors Waco TX | SLA Concrete Works LLC',
     seoDescription:
-      'Comparing concrete companies Waco TX homeowners trust? We handle driveways, patios, stamped concrete, and commercial pours as full concrete services in Waco TX. Free estimate: (254) 230-3102.',
+      'Owner-run concrete contractor in Waco since 2005. Driveways, patios, stamped concrete, slabs, and repair — with written estimates that show what is included. (254) 230-3102.',
     intro:
-      'If you are comparing concrete companies Waco TX property owners recommend, we provide full concrete services in Waco TX with clear pricing for each phase of your project.',
+      'We pour driveways, patios, slabs, and stamped concrete across Waco and the surrounding towns, and we put every part of the job in writing — demolition, base work, steel, finish, cleanup — so you can compare bids on what is actually included instead of just the bottom number.',
     benefits: baseBenefits,
     process: baseProcess,
     finishes: ['Broom finish', 'Stamped patterns', 'Sealed concrete', 'Slip-resistant options'],
@@ -86,9 +86,9 @@ export const servicePages = [
       'Most concrete projects are estimated and scheduled through a single in-person consult, then move through prep, pour, and cure milestones.',
     faq: [
       {
-        question: 'Are you residential concrete work contractors as well as commercial crews?',
+        question: 'Do you do both residential and commercial work?',
         answer:
-          'Yes. We are residential concrete work contractors and also handle light commercial projects, including walkways, parking areas, slabs, and decorative upgrades.',
+          'Yes. Most of our work is residential — driveways, patios, slabs — but we also handle light commercial projects like walkways, parking areas, and building pads.',
       },
       {
         question: 'What should I compare when choosing concrete companies in Waco TX?',
@@ -101,9 +101,9 @@ export const servicePages = [
           'Yes. We offer full-service concrete installs, replacements, and repair packages so most projects stay with one team.',
       },
       {
-        question: 'Do you serve people searching for concrete contractors near me in Waco?',
+        question: 'What areas do you cover?',
         answer:
-          'Yes. We serve Waco and nearby communities and provide quick estimate follow-up for homeowners and businesses looking for concrete contractors near me.',
+          'Waco and everything around it — Hewitt, Woodway, Robinson, Lorena, McGregor, China Spring, out to Temple and Killeen. If you are within about 50 miles of Waco, call us.',
       },
       {
         question: 'How do you handle heavy summer heat in Waco TX?',
