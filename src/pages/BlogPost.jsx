@@ -6,6 +6,7 @@ import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
 import { renderBlogMarkdown } from '../lib/blogMarkdown'
 import { staticBlogPosts } from '../data/staticBlogPosts'
+import { getBlogSeoTitle } from '../data/blogSeoTitles'
 import {
   useSeo,
   SITE_URL,
@@ -120,7 +121,7 @@ export function BlogPost() {
 
     return {
       ...fallback,
-      title: post.seo_title || `${post.title} | SLA Concrete Works LLC`,
+      title: getBlogSeoTitle(post),
       description,
       image,
       imageAlt: post.title,

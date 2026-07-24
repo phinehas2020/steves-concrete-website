@@ -11,6 +11,7 @@ import { getServiceGalleryImages } from '../src/data/clientProjects.js'
 import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
+import { getBlogSeoTitle } from '../src/data/blogSeoTitles.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
 import {
   fetchPublishedBlogPosts,
@@ -373,7 +374,7 @@ const routeMeta = [
   })),
   ...publishedBlogPosts.map((post) => ({
       path: `/blog/${post.slug}`,
-      title: post.seo_title || `${post.title} | ${SITE_NAME}`,
+      title: getBlogSeoTitle(post),
       description:
         post.excerpt ||
         'Concrete tips, project planning advice, and local Waco-area concrete updates from SLA Concrete Works LLC.',
