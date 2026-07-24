@@ -120,7 +120,7 @@ export function BlogPost() {
 
     return {
       ...fallback,
-      title: `${post.title} | SLA Concrete Works LLC`,
+      title: post.seo_title || `${post.title} | SLA Concrete Works LLC`,
       description,
       image,
       imageAlt: post.title,

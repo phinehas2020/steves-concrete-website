@@ -27,7 +27,12 @@ export function mergePublishedBlogPosts(staticPosts = [], remotePosts = []) {
 
   for (const post of remotePosts) {
     if (isPublishedPost(post)) {
-      bySlug.set(post.slug, post)
+      const staticPost = bySlug.get(post.slug)
+      bySlug.set(post.slug, {
+        ...staticPost,
+        ...post,
+        ...(staticPost?.seo_title ? { seo_title: staticPost.seo_title } : {}),
+      })
     }
   }
 
@@ -40,10 +45,10 @@ export async function fetchPublishedBlogPosts({
 } = {}) {
   const supabaseUrl = envString(env.SUPABASE_URL || env.VITE_SUPABASE_URL)
   const supabaseKey = envString(
-    env.SUPABASE_SERVICE_ROLE_KEY ||
-      env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    env.VITE_SUPABASE_PUBLISHABLE_KEY ||
       env.VITE_SUPABASE_ANON_KEY ||
-      env.SUPABASE_ANON_KEY,
+      env.SUPABASE_ANON_KEY ||
+      env.SUPABASE_SERVICE_ROLE_KEY,
   )
 
   if (!supabaseUrl || !supabaseKey) {

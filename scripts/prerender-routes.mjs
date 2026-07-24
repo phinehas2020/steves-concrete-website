@@ -63,6 +63,13 @@ const homeMeta = {
 await loadLocalEnvFile()
 const remoteBlogPosts = await fetchPublishedBlogPosts()
 const publishedBlogPosts = mergePublishedBlogPosts(staticBlogPosts, remoteBlogPosts)
+const publishedBlogLinks = publishedBlogPosts.map((post) => ({
+  label: post.title,
+  href: `/blog/${post.slug}`,
+  description:
+    post.excerpt ||
+    'Concrete planning advice and project notes from SLA Concrete Works LLC.',
+}))
 
 // Location page content lives in src/data/locationPages.js — single source of
 // truth shared with the React app. (This file used to hold a hand-copied
@@ -366,7 +373,7 @@ const routeMeta = [
   })),
   ...publishedBlogPosts.map((post) => ({
       path: `/blog/${post.slug}`,
-      title: `${post.title} | ${SITE_NAME}`,
+      title: post.seo_title || `${post.title} | ${SITE_NAME}`,
       description:
         post.excerpt ||
         'Concrete tips, project planning advice, and local Waco-area concrete updates from SLA Concrete Works LLC.',
@@ -1298,7 +1305,7 @@ function renderBlogIndexContent() {
     subtitle:
       'Maintenance checklists, design options, and planning guides from the SLA Concrete Works LLC team.',
     introParagraphs: [
-      'Blog posts are loaded dynamically so we can publish new articles quickly. Use the links below to access our highest-value evergreen resources while new posts load.',
+      'Every published article and project update is linked below so customers and search crawlers can reach the full archive without waiting for JavaScript.',
       'Most customers use the blog to compare finish options, understand cracking causes, and plan realistic budgets before requesting a quote.',
     ],
     actionLinks: [
@@ -1317,6 +1324,10 @@ function renderBlogIndexContent() {
       {
         title: 'Local markets we serve',
         links: locationLinks,
+      },
+      {
+        title: 'All concrete articles and project updates',
+        links: publishedBlogLinks,
       },
     ],
   })

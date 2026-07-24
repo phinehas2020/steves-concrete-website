@@ -23,11 +23,30 @@ create table if not exists public.leads (
   service text,
   message text not null,
   status text not null default 'new',
+  lead_quality text not null default 'unreviewed',
   source text default 'website',
   page_url text,
   user_agent text,
   ip text
 );
+
+alter table public.leads
+  add column if not exists lead_quality text not null default 'unreviewed';
+
+do $$
+begin
+  if not exists (
+    select 1
+    from pg_constraint
+    where conname = 'leads_lead_quality_check'
+      and conrelid = 'public.leads'::regclass
+  ) then
+    alter table public.leads
+      add constraint leads_lead_quality_check
+      check (lead_quality in ('unreviewed', 'qualified', 'solicitation', 'spam'));
+  end if;
+end
+$$;
 
 create table if not exists public.admin_users (
   id uuid primary key default gen_random_uuid(),
@@ -182,6 +201,9 @@ create table if not exists public.blog_post_generation_jobs (
 
 create index if not exists idx_leads_created_at
   on public.leads (created_at desc);
+
+create index if not exists idx_leads_quality_created_at
+  on public.leads (lead_quality, created_at desc);
 
 create index if not exists idx_leads_ip_created_at
   on public.leads (ip, created_at desc)

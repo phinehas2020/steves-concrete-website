@@ -15,12 +15,19 @@ import { supabase } from '../lib/supabase'
 import { LinkPreview } from '../components/LinkPreview'
 
 const statusOptions = ['new', 'contacted', 'scheduled', 'won', 'lost']
+const qualityOptions = ['unreviewed', 'qualified', 'solicitation', 'spam']
 const statusStyles = {
   new: 'bg-amber-100 text-amber-700 ring-1 ring-amber-200',
   contacted: 'bg-blue-100 text-blue-700 ring-1 ring-blue-200',
   scheduled: 'bg-purple-100 text-purple-700 ring-1 ring-purple-200',
   won: 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200',
   lost: 'bg-rose-100 text-rose-700 ring-1 ring-rose-200',
+}
+const qualityStyles = {
+  unreviewed: 'bg-stone-100 text-stone-700 ring-1 ring-stone-200',
+  qualified: 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200',
+  solicitation: 'bg-violet-100 text-violet-700 ring-1 ring-violet-200',
+  spam: 'bg-red-100 text-red-700 ring-1 ring-red-200',
 }
 
 const serviceLabels = {
@@ -64,7 +71,8 @@ const getDefaultMessage = (lead) => {
 export function AdminLeads({ accessToken, currentUserEmail }) {
   const [leads, setLeads] = useState([])
   const [loading, setLoading] = useState(true)
-  const [filter, setFilter] = useState('all')
+  const [statusFilter, setStatusFilter] = useState('all')
+  const [qualityFilter, setQualityFilter] = useState('all')
   const [query, setQuery] = useState('')
   const [error, setError] = useState('')
   const [expandedLeadId, setExpandedLeadId] = useState(null)
@@ -92,14 +100,10 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
     setLoading(true)
     setError('')
 
-    let queryBuilder = supabase
+    const queryBuilder = supabase
       .from('leads')
       .select('*')
       .order('created_at', { ascending: false })
-
-    if (filter !== 'all') {
-      queryBuilder = queryBuilder.eq('status', filter)
-    }
 
     const { data, error: fetchError } = await queryBuilder
 
@@ -111,7 +115,7 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
 
     setLeads(data || [])
     setLoading(false)
-  }, [filter])
+  }, [])
 
   useEffect(() => {
     fetchLeads()
@@ -125,12 +129,20 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
       scheduled: 0,
       won: 0,
       lost: 0,
+      unreviewed: 0,
+      qualified: 0,
+      solicitation: 0,
+      spam: 0,
     }
 
     leads.forEach((lead) => {
       const status = lead.status || 'new'
       if (counts[status] !== undefined) {
         counts[status] += 1
+      }
+      const quality = lead.lead_quality || 'unreviewed'
+      if (counts[quality] !== undefined) {
+        counts[quality] += 1
       }
     })
 
@@ -139,9 +151,21 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
 
   const filteredLeads = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
-    if (!normalizedQuery) return leads
-
     return leads.filter((lead) => {
+      if (
+        statusFilter !== 'all' &&
+        (lead.status || 'new') !== statusFilter
+      ) {
+        return false
+      }
+      if (
+        qualityFilter !== 'all' &&
+        (lead.lead_quality || 'unreviewed') !== qualityFilter
+      ) {
+        return false
+      }
+      if (!normalizedQuery) return true
+
       const values = [
         lead.name,
         lead.email,
@@ -155,7 +179,7 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
           value && String(value).toLowerCase().includes(normalizedQuery)
       )
     })
-  }, [leads, query])
+  }, [leads, query, qualityFilter, statusFilter])
 
   const updateStatus = async (id, status) => {
     const { error: updateError } = await supabase
@@ -170,6 +194,24 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
 
     setLeads((prev) =>
       prev.map((lead) => (lead.id === id ? { ...lead, status } : lead))
+    )
+  }
+
+  const updateQuality = async (id, leadQuality) => {
+    const { error: updateError } = await supabase
+      .from('leads')
+      .update({ lead_quality: leadQuality })
+      .eq('id', id)
+
+    if (updateError) {
+      setError('Unable to update lead quality.')
+      return
+    }
+
+    setLeads((prev) =>
+      prev.map((lead) =>
+        lead.id === id ? { ...lead, lead_quality: leadQuality } : lead
+      )
     )
   }
 
@@ -410,7 +452,7 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
           </p>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <div className="bg-white border border-stone-200 rounded-xl p-4">
             <p className="text-xs uppercase tracking-wide text-stone-500">Total</p>
             <p className="text-2xl font-display font-bold text-stone-900 tabular-nums">
@@ -418,15 +460,21 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
             </p>
           </div>
           <div className="bg-white border border-stone-200 rounded-xl p-4">
-            <p className="text-xs uppercase tracking-wide text-stone-500">New</p>
+            <p className="text-xs uppercase tracking-wide text-stone-500">Qualified</p>
             <p className="text-2xl font-display font-bold text-stone-900 tabular-nums">
-              {leadCounts.new}
+              {leadCounts.qualified}
             </p>
           </div>
           <div className="bg-white border border-stone-200 rounded-xl p-4">
-            <p className="text-xs uppercase tracking-wide text-stone-500">Contacted</p>
+            <p className="text-xs uppercase tracking-wide text-stone-500">Unreviewed</p>
             <p className="text-2xl font-display font-bold text-stone-900 tabular-nums">
-              {leadCounts.contacted}
+              {leadCounts.unreviewed}
+            </p>
+          </div>
+          <div className="bg-white border border-stone-200 rounded-xl p-4">
+            <p className="text-xs uppercase tracking-wide text-stone-500">Non-leads</p>
+            <p className="text-2xl font-display font-bold text-stone-900 tabular-nums">
+              {leadCounts.solicitation + leadCounts.spam}
             </p>
           </div>
         </div>
@@ -450,8 +498,8 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
           </label>
           <select
             id="lead-filter"
-            value={filter}
-            onChange={(event) => setFilter(event.target.value)}
+            value={statusFilter}
+            onChange={(event) => setStatusFilter(event.target.value)}
             className="px-3 py-2 border border-stone-200 rounded-lg bg-white text-sm"
           >
             <option value="all">All</option>
@@ -460,6 +508,22 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
               {formatLabel(status)}
             </option>
           ))}
+          </select>
+          <label htmlFor="lead-quality-filter" className="text-sm text-stone-600">
+            Quality
+          </label>
+          <select
+            id="lead-quality-filter"
+            value={qualityFilter}
+            onChange={(event) => setQualityFilter(event.target.value)}
+            className="px-3 py-2 border border-stone-200 rounded-lg bg-white text-sm"
+          >
+            <option value="all">All</option>
+            {qualityOptions.map((quality) => (
+              <option key={quality} value={quality}>
+                {formatLabel(quality)}
+              </option>
+            ))}
           </select>
           <button
             type="button"
@@ -517,6 +581,9 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
             const draft = replyDrafts[lead.id]
             const statusLabel = formatLabel(lead.status || 'new')
             const statusClass = statusStyles[lead.status || 'new'] || statusStyles.new
+            const quality = lead.lead_quality || 'unreviewed'
+            const qualityLabel = formatLabel(quality)
+            const qualityClass = qualityStyles[quality] || qualityStyles.unreviewed
             const isExpanded = expandedLeadId === lead.id
 
             return (
@@ -536,6 +603,11 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
                         >
                           {statusLabel}
                         </span>
+                        <span
+                          className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${qualityClass}`}
+                        >
+                          {qualityLabel}
+                        </span>
                       </div>
                       <p className="text-sm text-stone-500">
                         {lead.created_at
@@ -547,8 +619,27 @@ export function AdminLeads({ accessToken, currentUserEmail }) {
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <label className="sr-only" htmlFor={`lead-quality-${lead.id}`}>
+                        Lead quality
+                      </label>
                       <select
+                        id={`lead-quality-${lead.id}`}
+                        value={quality}
+                        onChange={(event) => updateQuality(lead.id, event.target.value)}
+                        className="px-3 py-2 border border-stone-200 rounded-lg bg-white text-sm"
+                      >
+                        {qualityOptions.map((qualityOption) => (
+                          <option key={qualityOption} value={qualityOption}>
+                            {formatLabel(qualityOption)}
+                          </option>
+                        ))}
+                      </select>
+                      <label className="sr-only" htmlFor={`lead-status-${lead.id}`}>
+                        Lead status
+                      </label>
+                      <select
+                        id={`lead-status-${lead.id}`}
                         value={lead.status || 'new'}
                         onChange={(event) => updateStatus(lead.id, event.target.value)}
                         className="px-3 py-2 border border-stone-200 rounded-lg bg-white text-sm"

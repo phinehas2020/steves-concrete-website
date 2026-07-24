@@ -13,12 +13,16 @@ export function AdminStats() {
       const monthAgo = new Date(now)
       monthAgo.setDate(now.getDate() - 30)
 
-      const [totalLeads, newLeads, recentLeads, publishedPosts] = await Promise.all([
+      const [totalLeads, qualifiedLeads, recentQualifiedLeads, publishedPosts] = await Promise.all([
         supabase.from('leads').select('id', { count: 'exact', head: true }),
-        supabase.from('leads').select('id', { count: 'exact', head: true }).eq('status', 'new'),
         supabase
           .from('leads')
           .select('id', { count: 'exact', head: true })
+          .eq('lead_quality', 'qualified'),
+        supabase
+          .from('leads')
+          .select('id', { count: 'exact', head: true })
+          .eq('lead_quality', 'qualified')
           .gte('created_at', monthAgo.toISOString()),
         supabase
           .from('blog_posts')
@@ -28,15 +32,20 @@ export function AdminStats() {
 
       if (!isMounted) return
 
-      if (totalLeads.error || newLeads.error || recentLeads.error || publishedPosts.error) {
+      if (
+        totalLeads.error ||
+        qualifiedLeads.error ||
+        recentQualifiedLeads.error ||
+        publishedPosts.error
+      ) {
         setError('Unable to load stats.')
         return
       }
 
       setStats({
         totalLeads: totalLeads.count || 0,
-        newLeads: newLeads.count || 0,
-        recentLeads: recentLeads.count || 0,
+        qualifiedLeads: qualifiedLeads.count || 0,
+        recentQualifiedLeads: recentQualifiedLeads.count || 0,
         publishedPosts: publishedPosts.count || 0,
       })
     }
@@ -77,15 +86,15 @@ export function AdminStats() {
           </p>
         </div>
         <div className="bg-white border border-stone-200 rounded-xl p-6">
-          <p className="text-sm text-stone-500">New Leads</p>
+          <p className="text-sm text-stone-500">Qualified Leads</p>
           <p className="text-3xl font-display font-bold text-stone-900 tabular-nums">
-            {stats.newLeads}
+            {stats.qualifiedLeads}
           </p>
         </div>
         <div className="bg-white border border-stone-200 rounded-xl p-6">
-          <p className="text-sm text-stone-500">Last 30 Days</p>
+          <p className="text-sm text-stone-500">Qualified · 30 Days</p>
           <p className="text-3xl font-display font-bold text-stone-900 tabular-nums">
-            {stats.recentLeads}
+            {stats.recentQualifiedLeads}
           </p>
         </div>
         <div className="bg-white border border-stone-200 rounded-xl p-6">
