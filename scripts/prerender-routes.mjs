@@ -58,7 +58,7 @@ const homeMeta = {
   description:
     "Waco's 5-star concrete company for driveways, patios, slabs, foundations, and repair. 500+ projects since 2005. Free estimates: (254) 230-3102.",
   canonical: `${SITE_URL}/`,
-  h1: 'Concrete Contractor Waco TX',
+  h1: 'Concrete Contractors in Waco, TX',
 }
 
 await loadLocalEnvFile()
@@ -605,9 +605,9 @@ function renderPage({
 function renderHomeContent() {
   return renderPage({
     eyebrow: 'Waco Concrete Contractor',
-    title: 'Concrete Contractor Waco TX',
+    title: homeMeta.h1,
     subtitle:
-      'Permit-aware concrete contractor serving Waco and surrounding Central Texas communities since 2005.',
+      'Owner-run concrete work for Waco and surrounding Central Texas communities since 2005.',
     introParagraphs: [
       `${SITE_NAME} builds driveways, patios, stamped concrete, foundations, and repair projects across Waco, Texas designed for black clay soil movement, heavy heat cycles, and daily traffic.`,
       `When people compare concrete companies in Waco TX, they usually need clear pricing, honest timelines, and work that stays level after the first summer. As an owner-run Waco concrete contractor, we start every project with site prep, slope planning, reinforcement, and realistic cure guidance so the finished slab performs for years.`,
@@ -628,9 +628,9 @@ function renderHomeContent() {
         links: serviceLinks,
       },
       {
-        title: 'Dedicated local service pages',
+        title: 'Concrete services for Waco homes and businesses',
         paragraphs: [
-          'These pages target high-intent searches such as foundation repair, house leveling, parking lot concrete, and decorative concrete in Waco.',
+          'Explore project-specific details for foundation repair, house leveling, parking lots, decorative concrete, and other work we complete across the Waco area.',
         ],
         links: seoServiceLinks,
       },
@@ -662,9 +662,9 @@ function renderHomeContent() {
         links: locationLinks,
       },
       {
-        title: 'Sports court coating target areas',
+        title: 'Sports court resurfacing across Texas',
         paragraphs: [
-          'We are expanding sports-court resurfacing coverage with location pages for high-demand Texas markets and nearby metro areas.',
+          'Our Waco-based team resurfaces basketball, tennis, and multi-use courts for schools, churches, neighborhoods, and private properties across Texas.',
         ],
         links: sportsCourtAreaLinks,
       },

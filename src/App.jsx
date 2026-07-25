@@ -25,6 +25,9 @@ const OWNER_PERSON_SCHEMA = {
   jobTitle: 'Owner-Operator',
 }
 
+const GOOGLE_BUSINESS_PROFILE_URL =
+  'https://www.google.com/maps/place/SLA+Concrete+Works/@31.6637838,-97.1149261,17z/data=!3m1!4b1!4m6!3m5!1s0x864f83d5fc2728cf:0x92d8085e5a37fa64!8m2!3d31.6637793!4d-97.1123512!16s%2Fg%2F11gf0qs4j0'
+
 function SectionFallback({ className = 'section-padding bg-white', minHeight = 320 }) {
   return <div className={className} style={{ minHeight }} aria-hidden="true" />
 }
@@ -42,6 +45,7 @@ function HomeLocalBusinessSchema({ reviewRating = '5.0', reviewCount = 47 } = {}
     telephone: '+1-254-230-3102',
     priceRange: '$$',
     founder: OWNER_PERSON_SCHEMA,
+    sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: reviewRating,
@@ -51,9 +55,16 @@ function HomeLocalBusinessSchema({ reviewRating = '5.0', reviewCount = 47 } = {}
     },
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Waco',
+      streetAddress: '1045 W Elm Mott Ln',
+      addressLocality: 'Elm Mott',
       addressRegion: 'TX',
+      postalCode: '76640',
       addressCountry: 'US',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 31.6637793,
+      longitude: -97.1123512,
     },
     areaServed: cityNames.map((name) => ({
       '@type': 'City',
