@@ -3,7 +3,7 @@ import path from 'node:path'
 import { spawn } from 'node:child_process'
 import { setTimeout as delay } from 'node:timers/promises'
 
-const DEFAULT_SITEMAP = 'public/sitemap.xml'
+const DEFAULT_SITEMAP = 'https://www.concretewaco.com/sitemap.xml'
 const DEFAULT_OUTPUT = 'reports/mobile-render-sweep.json'
 const VIEWPORT = { width: 375, height: 812 }
 const DEBUG_PORT = 9223
@@ -15,7 +15,14 @@ function getArg(name, fallback = '') {
 }
 
 async function readSitemapUrls(sitemapPath) {
-  const xml = await fs.readFile(sitemapPath, 'utf8')
+  const xml = /^https?:\/\//i.test(sitemapPath)
+    ? await fetch(sitemapPath).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Sitemap request failed with HTTP ${response.status}: ${sitemapPath}`)
+        }
+        return response.text()
+      })
+    : await fs.readFile(sitemapPath, 'utf8')
   return [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1])
 }
 

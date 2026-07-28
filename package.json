@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-sitemap.mjs && vite build && node scripts/prerender-routes.mjs",
+    "build": "vite build && node scripts/prerender-routes.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test:seo": "node --test scripts/seo-contract.test.mjs",
     "perf:sweep": "node scripts/lighthouse-sweep.mjs",
     "supabase:migrate:hosted": "node scripts/migrate-supabase-project.mjs --use-vercel-source",
     "supabase:migrate:one-shot": "node scripts/migrate-supabase-project.mjs"

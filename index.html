@@ -33,9 +33,9 @@
 
   <!-- Geo Tags for Local SEO -->
   <meta name="geo.region" content="US-TX" />
-  <meta name="geo.placename" content="Waco" />
-  <meta name="geo.position" content="31.5493;-97.1467" />
-  <meta name="ICBM" content="31.5493, -97.1467" />
+  <meta name="geo.placename" content="Elm Mott, TX" />
+  <meta name="geo.position" content="31.6637793;-97.1123512" />
+  <meta name="ICBM" content="31.6637793, -97.1123512" />
 
   <!-- Google tag (gtag.js) loaded after first interaction with fallback -->
   <script>
@@ -122,7 +122,7 @@
   <!-- Theme Color -->
   <meta name="theme-color" content="#1c1917" />
 
-  <!-- Structured Data: LocalBusiness + Services -->
+  <!-- Structured Data: stable business identity; prerender adds the route catalog -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -131,7 +131,7 @@
       "@id": "https://www.concretewaco.com/#organization",
       "name": "SLA Concrete Works LLC",
       "alternateName": "SLA Concrete Works LLC of Waco",
-      "description": "SLA Concrete Works LLC has completed 500+ projects in Waco, Temple, and McLennan County since 2005. We install driveways, patios, stamped, commercial, and repair concrete built for black clay soil and Central Texas heat.",
+      "description": "Concrete contractor serving Waco, McLennan County, and nearby Central Texas communities with driveways, patios, stamped concrete, slabs, repairs, and commercial concrete work.",
       "url": "https://www.concretewaco.com/",
       "logo": "https://www.concretewaco.com/logo.png",
       "image": "https://www.concretewaco.com/og-image.jpg",
@@ -139,6 +139,11 @@
       "email": "slaconcrete@gmail.com",
       "foundingDate": "2005",
       "priceRange": "$$",
+      "founder": {
+        "@type": "Person",
+        "name": "Stephen Alexander",
+        "jobTitle": "Owner-Operator"
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "1045 W Elm Mott Ln",
@@ -165,97 +170,26 @@
         {"@type": "City", "name": "Lorena"},
         {"@type": "City", "name": "McGregor"}
       ],
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "07:00",
-        "closes": "18:00"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Concrete Services",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Stamped Concrete",
-              "description": "Decorative stamped concrete that replicates stone, brick, or tile patterns at a fraction of the cost."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Concrete Driveways",
-              "description": "Durable, professionally finished concrete driveways built to withstand Texas weather."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Concrete Patios",
-              "description": "Custom backyard patios with decorative finishes including exposed aggregate and staining."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Commercial Concrete",
-              "description": "Large-scale concrete work for businesses, parking lots, and industrial applications."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Concrete Repair",
-              "description": "Professional repair of cracks, spalling, and damage to existing concrete surfaces."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Concrete Foundations",
-              "description": "Residential and commercial foundation work built to Texas building codes."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Concrete Slabs",
-              "description": "Garage slabs, shop floors, equipment pads, and utility pads."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Stained Concrete",
-              "description": "Acid and water-based stains for patios, walkways, and floors."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Concrete Sealing",
-              "description": "Protect driveways, patios, and stamped concrete from stains and UV."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Concrete Leveling",
-              "description": "Mudjacking and poly foam to raise sunken slabs."
-            }
-          }
-        ]
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "07:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday"],
+          "opens": "08:00",
+          "closes": "16:00"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "47",
+        "bestRating": "5",
+        "worstRating": "1"
       }
     }
     </script>
