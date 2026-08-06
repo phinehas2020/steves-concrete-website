@@ -6,10 +6,12 @@ export function DeferredSection({
   rootMargin = '320px 0px',
   minHeight = 0,
   anchorId,
+  eager = false,
 }) {
   const containerRef = useRef(null)
   const [shouldRender, setShouldRender] = useState(() => {
     if (typeof window === 'undefined') return false
+    if (eager || anchorId) return true
     return typeof IntersectionObserver === 'undefined'
   })
 
@@ -35,15 +37,19 @@ export function DeferredSection({
     return () => observer.disconnect()
   }, [rootMargin, shouldRender])
 
-  const style = minHeight ? { minHeight } : undefined
+  const style = minHeight || anchorId
+    ? {
+        ...(minHeight ? { minHeight } : {}),
+        ...(anchorId ? { scrollMarginTop: '5rem' } : {}),
+      }
+    : undefined
 
-  // Anchor targets (e.g. #contact) live inside the deferred children, so hash
-  // links would silently no-op before render. Host the id on the placeholder
-  // until the real section takes over.
+  // Keep anchor ownership on this stable wrapper so the target exists before
+  // lazy children load and its top edge does not move when they mount.
   return (
     <div
       ref={containerRef}
-      id={shouldRender ? undefined : anchorId}
+      id={anchorId}
       className={className}
       style={style}
     >

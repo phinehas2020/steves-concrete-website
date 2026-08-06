@@ -66,7 +66,7 @@ const servicePriorityMap = Object.fromEntries(
   servicePriorityOrder.map((slug, index) => [slug, index]),
 )
 
-export function Services() {
+export function Services({ sectionId = 'services' }) {
   const [showAll, setShowAll] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const activeServices = seoServicePages
@@ -92,7 +92,7 @@ export function Services() {
   const hasMore = activeServices.length > initialCount
 
   return (
-    <section id="services" className="section-padding bg-white texture-grain-light">
+    <section id={sectionId || undefined} className="section-padding bg-white texture-grain-light">
       <div className="container-main">
         <div className="max-w-3xl mb-12">
           <motion.span

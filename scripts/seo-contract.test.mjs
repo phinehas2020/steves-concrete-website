@@ -5,6 +5,8 @@ import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 
 import sitemapHandler from '../api/sitemap.xml.js'
+import { fetchPublicJobs, mergePublicJobs } from '../api/_public-jobs.js'
+import { clientProjects } from '../src/data/clientProjects.js'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const expectedBusinessDescription =
@@ -65,8 +67,66 @@ test('the runtime sitemap returns unique canonical URLs', async () => {
   assert.ok(urls.includes('https://www.concretewaco.com/about'))
   assert.ok(urls.includes('https://www.concretewaco.com/jobs'))
   assert.ok(urls.includes('https://www.concretewaco.com/reviews'))
+  clientProjects.forEach((project) => {
+    assert.ok(urls.includes(`https://www.concretewaco.com/jobs/${project.slug}`))
+  })
   assert.ok(!urls.includes('https://www.concretewaco.com/services/concrete-contractors'))
   assert.ok(!urls.includes('https://www.concretewaco.com/concrete-repair-waco-tx'))
+})
+
+test('project routes use clean filesystem URLs before the SPA fallback', async () => {
+  const vercel = await readJson('vercel.json')
+  const jobsFallback = vercel.rewrites.find((rule) => rule.source === '/jobs/:path*')
+
+  assert.equal(vercel.cleanUrls, true)
+  assert.deepEqual(jobsFallback, {
+    source: '/jobs/:path*',
+    destination: '/',
+  })
+  assert.equal(
+    vercel.rewrites.some((rule) => rule.source.startsWith('/jobs/2026-client-')),
+    false,
+  )
+})
+
+test('the public job catalog keeps enriched static content and includes database jobs', () => {
+  const staticProject = clientProjects[0]
+  const merged = mergePublicJobs(
+    [staticProject],
+    [
+      {
+        ...staticProject,
+        title: 'Database title that must not replace enriched copy',
+        images: ['https://images.example.com/current.webp'],
+      },
+      {
+        id: 'database-only',
+        slug: 'database-only-project',
+        title: 'Database-only project',
+        date: '2025-01-15',
+        date_formatted: 'January 2025',
+        images: [],
+      },
+    ],
+  )
+
+  assert.equal(merged.length, 2)
+  assert.equal(merged.find((job) => job.slug === staticProject.slug).title, staticProject.title)
+  assert.deepEqual(
+    merged.find((job) => job.slug === staticProject.slug).images,
+    ['https://images.example.com/current.webp'],
+  )
+  assert.equal(
+    merged.find((job) => job.slug === 'database-only-project').dateFormatted,
+    'January 2025',
+  )
+})
+
+test('production prerender cannot silently omit the public job catalog', async () => {
+  await assert.rejects(
+    fetchPublicJobs({ env: {}, logger: null, required: true }),
+    /requires configured Supabase environment variables/,
+  )
 })
 
 test('the raw homepage business identity matches prerender source language', async () => {

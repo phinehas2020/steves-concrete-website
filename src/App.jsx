@@ -172,7 +172,7 @@ function App() {
         <div className="order-2 md:order-none">
           <DeferredSection anchorId="services" rootMargin="420px 0px" minHeight={480}>
             <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={480} />}>
-              <Services />
+              <Services sectionId={null} />
             </Suspense>
           </DeferredSection>
         </div>
@@ -180,21 +180,21 @@ function App() {
           <ServiceAreas />
         </div>
         <div className="order-4 md:order-none">
-          <DeferredSection rootMargin="420px 0px" minHeight={360}>
+          <DeferredSection rootMargin="420px 0px" minHeight={360} eager>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={360} />}>
               <CostQuickAnswers />
             </Suspense>
           </DeferredSection>
         </div>
         <div className="order-5 md:order-none">
-          <DeferredSection rootMargin="420px 0px" minHeight={420}>
+          <DeferredSection rootMargin="420px 0px" minHeight={420} eager>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-100" minHeight={420} />}>
               <BlogActivityStrip />
             </Suspense>
           </DeferredSection>
         </div>
         <div className="order-6 md:order-none">
-          <DeferredSection rootMargin="520px 0px" minHeight={900}>
+          <DeferredSection rootMargin="520px 0px" minHeight={900} eager>
             <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={900} />}>
               <Gallery />
             </Suspense>
@@ -203,14 +203,14 @@ function App() {
         <div className="order-8 md:order-none">
           <DeferredSection anchorId="faq" rootMargin="520px 0px" minHeight={620}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={620} />}>
-              <FAQ />
+              <FAQ sectionId={null} />
             </Suspense>
           </DeferredSection>
         </div>
         <div className="order-9 md:order-none">
           <DeferredSection anchorId="contact" rootMargin="560px 0px" minHeight={760}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={760} />}>
-              <Contact />
+              <Contact sectionId={null} />
             </Suspense>
           </DeferredSection>
         </div>

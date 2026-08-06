@@ -235,7 +235,7 @@ export function JobGallery() {
               </p>
             </div>
             <a
-              href="#contact"
+              href="/#contact"
               className="inline-flex items-center justify-center px-10 py-5 bg-accent-500 text-white font-bold rounded-xl hover:bg-accent-600 transition-all duration-300 shadow-xl shadow-accent-500/20 whitespace-nowrap"
             >
               Start Your Estimate

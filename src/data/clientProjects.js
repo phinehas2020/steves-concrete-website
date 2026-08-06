@@ -12,6 +12,15 @@ export const clientProjects = [
     dateFormatted: 'April 2026',
     description:
       'Pump-truck placement, reinforced prep, and clean finish work for a high-traffic commercial slab.',
+    highlights: [
+      'Pump-truck placement for slab access and coverage',
+      'Reinforced preparation before concrete placement',
+      'Clean finish intended for high-traffic use',
+    ],
+    relatedLinks: [
+      { label: 'Commercial concrete services', href: '/commercial-concrete-contractor-waco-tx' },
+      { label: 'Concrete slab permit guide', href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx' },
+    ],
     featured: true,
     display_order: -80,
     images: imageSet('2026-client-commercial-pour', 6),
@@ -26,6 +35,15 @@ export const clientProjects = [
     dateFormatted: 'March 2026',
     description:
       'Covered patio and porch concrete finished to meet existing structures with clean transitions and durable edges.',
+    highlights: [
+      'Covered patio and porch flatwork',
+      'Transitions aligned with existing structures',
+      'Finished edges for durable outdoor use',
+    ],
+    relatedLinks: [
+      { label: 'Concrete patio services', href: '/concrete-patios-waco-tx' },
+      { label: 'Waco concrete patio cost guide', href: '/guides/concrete-patio-cost-waco-tx' },
+    ],
     featured: true,
     display_order: -70,
     images: imageSet('2026-client-covered-patio', 6),
@@ -40,6 +58,15 @@ export const clientProjects = [
     dateFormatted: 'March 2026',
     description:
       'Residential driveway and approach pours with broad turning areas, planned slope, and smooth curb appeal.',
+    highlights: [
+      'Residential driveway and approach slabs',
+      'Broad turning and parking layout',
+      'Slope planned across the new concrete',
+    ],
+    relatedLinks: [
+      { label: 'Concrete driveway services', href: '/concrete-driveways-waco-tx' },
+      { label: 'Waco concrete driveway cost guide', href: '/guides/concrete-driveway-cost-waco-tx' },
+    ],
     featured: true,
     display_order: -60,
     images: imageSet('2026-client-driveway-slab', 6),
@@ -54,6 +81,15 @@ export const clientProjects = [
     dateFormatted: 'February 2026',
     description:
       'Straight and curved sidewalk work with tidy forms, accessible transitions, and finished pedestrian surfaces.',
+    highlights: [
+      'Straight and curved walkway layouts',
+      'Accessible transition planning',
+      'Finished pedestrian surfaces',
+    ],
+    relatedLinks: [
+      { label: 'Concrete sidewalk services', href: '/concrete-sidewalks-waco-tx' },
+      { label: 'Concrete slab permit guide', href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx' },
+    ],
     featured: true,
     display_order: -50,
     images: imageSet('2026-client-sidewalk-entry', 6),
@@ -68,6 +104,15 @@ export const clientProjects = [
     dateFormatted: 'March 2026',
     description:
       'Decorative patios and walkways with stamped texture, color contrast, and custom outdoor-living details.',
+    highlights: [
+      'Stamped texture across patios and walkways',
+      'Color contrast and decorative details',
+      'Outdoor-living finish examples',
+    ],
+    relatedLinks: [
+      { label: 'Stamped concrete services', href: '/stamped-concrete-waco-tx' },
+      { label: 'Waco stamped concrete cost guide', href: '/guides/stamped-concrete-cost-waco-tx' },
+    ],
     featured: true,
     display_order: -40,
     images: imageSet('2026-client-stamped-decorative', 6),
@@ -82,6 +127,15 @@ export const clientProjects = [
     dateFormatted: 'March 2026',
     description:
       'Shop and warehouse slab work with interior finishing, wide access bays, and heavy-use surface prep.',
+    highlights: [
+      'Foundation and interior slab concrete',
+      'Wide access-bay layout',
+      'Surface preparation for heavy use',
+    ],
+    relatedLinks: [
+      { label: 'New foundation and slab services', href: '/concrete-foundations-waco-tx' },
+      { label: 'Concrete slab permit guide', href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx' },
+    ],
     featured: true,
     display_order: -30,
     images: imageSet('2026-client-shop-foundation', 6),
@@ -96,6 +150,15 @@ export const clientProjects = [
     dateFormatted: 'March 2026',
     description:
       'Retaining wall concrete with long clean runs, reinforced placement, and site grading around changing elevations.',
+    highlights: [
+      'Long, clean retaining-wall runs',
+      'Reinforced concrete placement',
+      'Site grading around elevation changes',
+    ],
+    relatedLinks: [
+      { label: 'Concrete retaining wall services', href: '/retaining-walls-waco-tx' },
+      { label: 'Waco hardscaping services', href: '/hardscaping-waco-tx' },
+    ],
     featured: true,
     display_order: -20,
     images: imageSet('2026-client-retaining-wall', 6),
@@ -110,6 +173,15 @@ export const clientProjects = [
     dateFormatted: 'March 2026',
     description:
       'Colorful court and play-area concrete with decorative layout, clean borders, and activity-ready surface finish.',
+    highlights: [
+      'Decorative court and play-area surfacing',
+      'Color layout with clean borders',
+      'Activity-ready surface finish',
+    ],
+    relatedLinks: [
+      { label: 'Sports court coating services', href: '/sports-court-coating-waco-tx' },
+      { label: 'View all concrete projects', href: '/jobs' },
+    ],
     featured: true,
     display_order: -10,
     images: imageSet('2026-client-sports-court', 6),

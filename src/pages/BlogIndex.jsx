@@ -50,7 +50,7 @@ export function BlogIndex() {
     const jsonLd = buildJsonLdGraph(itemListJsonLd, breadcrumbsJsonLd)
 
     return {
-      title: 'Concrete Contractor Waco TX | Concrete Tips & Project Ideas | SLA Concrete Works LLC',
+      title: 'Concrete Tips & Project Ideas | SLA Concrete Works LLC',
       description,
       canonical: `${SITE_URL}/blog`,
       url: `${SITE_URL}/blog`,

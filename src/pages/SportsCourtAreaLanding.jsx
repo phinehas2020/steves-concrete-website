@@ -273,7 +273,7 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
 
         <DeferredSection anchorId="contact" rootMargin="520px 0px" minHeight={760}>
           <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
-            <Contact />
+            <Contact sectionId={null} />
           </Suspense>
         </DeferredSection>
       </main>

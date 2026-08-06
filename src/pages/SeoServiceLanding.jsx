@@ -51,10 +51,12 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
   ).slice(0, 4)
 
   const planningStart = ((currentIndex === -1 ? 0 : currentIndex) * 3) % planningLinkPool.length
-  const wacoPlanningLinks = [
-    ...planningLinkPool.slice(planningStart),
-    ...planningLinkPool.slice(0, planningStart),
-  ].slice(0, 5)
+  const wacoPlanningLinks = page.resourceLinks?.length
+    ? page.resourceLinks
+    : [
+        ...planningLinkPool.slice(planningStart),
+        ...planningLinkPool.slice(0, planningStart),
+      ].slice(0, 5)
 
   const serviceJsonLd = {
     '@type': 'Service',
@@ -294,7 +296,7 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
 
         <DeferredSection anchorId="contact" rootMargin="520px 0px" minHeight={760}>
           <Suspense fallback={<div className="section-padding bg-stone-50" style={{ minHeight: 760 }} />}>
-            <Contact />
+            <Contact sectionId={null} />
           </Suspense>
         </DeferredSection>
       </main>

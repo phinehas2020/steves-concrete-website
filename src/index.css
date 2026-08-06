@@ -438,10 +438,12 @@ span a {
 }
 
 /* --- Image Responsiveness --- */
-/* Use :where() so utility classes (e.g. h-full) can override this baseline. */
-:where(img) {
-  max-width: 100%;
-  height: auto;
+/* Keep this in the base layer so Tailwind sizing utilities can override it. */
+@layer base {
+  :where(img) {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* --- Form Input Mobile Optimization --- */
@@ -584,6 +586,12 @@ span a {
 .hero-stagger > *:nth-child(6) { animation-delay: 0.8s; }
 .hero-stagger > *:nth-child(7) { animation-delay: 0.9s; }
 .hero-stagger > *:nth-child(8) { animation-delay: 1.0s; }
+
+/* The primary page heading must be visible at first paint. */
+.hero-stagger > h1 {
+  opacity: 1;
+  animation: none;
+}
 
 .badge-pulse-dot {
   animation: badge-pulse 2s ease-in-out infinite;

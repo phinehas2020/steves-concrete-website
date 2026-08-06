@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 import App from './App.jsx'
 import { NotFound } from './pages/NotFound'
+import { StableHashScroll } from './components/StableHashScroll'
 
 // Lightweight slug-only arrays keep the full data modules (and their image
 // references) out of the main entry chunk. Each landing component lazy-imports
@@ -100,6 +101,7 @@ createRoot(document.getElementById('root')).render(
           ))}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <StableHashScroll />
         <Analytics />
       </Suspense>
     </BrowserRouter>

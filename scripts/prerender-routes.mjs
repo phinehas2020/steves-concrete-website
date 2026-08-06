@@ -7,7 +7,7 @@ import {
 } from '../src/data/servicePages.js'
 import { seoServicePages as seoServicePageData } from '../src/data/seoServicePages.js'
 import { locationPages } from '../src/data/locationPages.js'
-import { getServiceGalleryImages } from '../src/data/clientProjects.js'
+import { clientProjects, getServiceGalleryImages } from '../src/data/clientProjects.js'
 import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
@@ -17,6 +17,7 @@ import {
   fetchPublishedBlogPosts,
   mergePublishedBlogPosts,
 } from '../api/_published-blog-posts.js'
+import { fetchPublicJobs, mergePublicJobs } from '../api/_public-jobs.js'
 import { loadLocalEnvFile } from './load-local-env.mjs'
 
 const projectRoot = process.cwd()
@@ -62,8 +63,19 @@ const homeMeta = {
 }
 
 await loadLocalEnvFile()
-const remoteBlogPosts = await fetchPublishedBlogPosts()
+const [remoteBlogPosts, remoteJobs] = await Promise.all([
+  fetchPublishedBlogPosts(),
+  fetchPublicJobs({
+    required:
+      process.env.VERCEL === '1' || process.env.CONCRETE_REQUIRE_PUBLIC_JOBS === '1',
+  }),
+])
 const publishedBlogPosts = mergePublishedBlogPosts(staticBlogPosts, remoteBlogPosts)
+const publishedProjects = mergePublicJobs(clientProjects, remoteJobs)
+const indexableProjectSlugs = new Set(clientProjects.map((project) => project.slug))
+console.log(
+  `Prerendering ${publishedProjects.length} project routes (${indexableProjectSlugs.size} indexable, ${publishedProjects.length - indexableProjectSlugs.size} legacy noindex).`,
+)
 const publishedBlogLinks = publishedBlogPosts.map((post) => ({
   label: post.title,
   href: `/blog/${post.slug}`,
@@ -167,6 +179,18 @@ const sportsCourtAreaLinks = sportsCourtAreaPageData.map((area) => ({
   description: area.heroSubtitle,
 }))
 
+const clientProjectLinks = publishedProjects.map((project) => ({
+  label: project.title,
+  href: `/jobs/${project.slug}`,
+  description: `${project.dateFormatted} · ${project.location} — ${project.description}`,
+}))
+
+function absoluteProjectImage(image) {
+  if (!image) return DEFAULT_IMAGE
+  if (/^https?:\/\//i.test(image)) return image
+  return `${SITE_URL}${image.startsWith('/') ? image : `/${image}`}`
+}
+
 function buildLocationFaq(location) {
   const defaultFaq = [
     {
@@ -176,7 +200,7 @@ function buildLocationFaq(location) {
     {
       question: `What types of concrete projects do you handle in ${location.city}?`,
       answer:
-        'Driveways, patios, stamped concrete, concrete repair, foundations, slabs, sealing, and leveling projects for residential and light commercial properties.',
+        'Driveways, patios, stamped concrete, concrete repair, new foundations, slabs, and sealing for residential and light commercial properties.',
     },
     {
       question: `How quickly can my ${location.city} project be scheduled?`,
@@ -371,6 +395,28 @@ const routeMeta = [
       { name: guide.title, url: `${SITE_URL}/guides/${guide.slug}` },
     ],
     contentHtml: renderGuideContent(guide),
+  })),
+  ...publishedProjects.map((project) => ({
+    path: `/jobs/${project.slug}`,
+    title: `${project.title} | SLA Concrete Works LLC`,
+    description: project.description,
+    canonical: `${SITE_URL}/jobs/${project.slug}`,
+    h1: project.title,
+    image: absoluteProjectImage(project.images[0]),
+    imageAlt: `${project.title} in ${project.location}`,
+    robots: indexableProjectSlugs.has(project.slug) ? 'index, follow' : 'noindex, follow',
+    schemaKind: 'project',
+    schemaName: project.title,
+    schemaDescription: project.description,
+    publishedTime: project.date,
+    modifiedTime: project.updated_at || project.date,
+    projectImages: project.images.map(absoluteProjectImage),
+    breadcrumbs: [
+      { name: 'Home', url: `${SITE_URL}/` },
+      { name: 'Project Gallery', url: `${SITE_URL}/jobs` },
+      { name: project.title, url: `${SITE_URL}/jobs/${project.slug}` },
+    ],
+    contentHtml: renderClientProjectContent(project),
   })),
   ...publishedBlogPosts.map((post) => ({
       path: `/blog/${post.slug}`,
@@ -630,7 +676,7 @@ function renderHomeContent() {
       {
         title: 'Concrete services for Waco homes and businesses',
         paragraphs: [
-          'Explore project-specific details for foundation repair, house leveling, parking lots, decorative concrete, and other work we complete across the Waco area.',
+          'Explore project-specific details for new foundations, slab repair, parking lots, decorative concrete, and other work we complete across the Waco area.',
         ],
         links: seoServiceLinks,
       },
@@ -794,6 +840,9 @@ function renderSeoServiceContent(service) {
     href: `/${item.slug}`,
     description: item.cardSummary || item.introParagraph,
   }))
+  const planningResourceLinks = service.resourceLinks?.length
+    ? service.resourceLinks
+    : wacoHubResourceLinks
 
   return renderPage({
     eyebrow: 'Service Detail',
@@ -829,8 +878,8 @@ function renderSeoServiceContent(service) {
         links: relatedPages,
       },
       {
-        title: 'Waco contractor hub and blog resources',
-        links: wacoHubResourceLinks,
+        title: 'Project and planning resources',
+        links: planningResourceLinks,
       },
       {
         title: 'Waco and nearby service coverage',
@@ -1341,14 +1390,18 @@ function renderJobsIndexContent() {
     subtitle:
       'Driveways, patios, stamped concrete, slabs, and repair jobs with location-specific notes and finish details.',
     introParagraphs: [
-      'Project photos and details are loaded dynamically from our jobs database so new work can be published quickly.',
-      'For planning and pricing, review the linked service and guide pages below while gallery content loads.',
+      'Browse completed project galleries with dates, service areas, scope notes, and photos from concrete work across Waco and Central Texas.',
+      'Each project links to the most relevant service and planning resource so you can compare a similar scope before requesting an estimate.',
     ],
     actionLinks: [
       { href: '/#contact', label: 'Request project quote' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
     ],
     sections: [
+      {
+        title: 'Recent concrete project galleries',
+        links: clientProjectLinks,
+      },
       {
         title: 'Service pages referenced in recent projects',
         links: serviceLinks,
@@ -1360,6 +1413,58 @@ function renderJobsIndexContent() {
       {
         title: 'Cities where we complete projects',
         links: locationLinks,
+      },
+    ],
+  })
+}
+
+function renderClientProjectContent(project) {
+  const projectImages = project.images.map((src, index) => ({
+    src,
+    alt: `${project.title} project photo ${index + 1} in ${project.location}`,
+    title: `${project.title} — photo ${index + 1}`,
+    location: project.location,
+  }))
+
+  return renderPage({
+    eyebrow: 'Completed Concrete Project',
+    title: project.title,
+    subtitle: project.description,
+    introParagraphs: [
+      `Completed ${project.dateFormatted} in ${project.location}. This gallery documents the visible scope and finish details from the project.`,
+      'Every property has different access, drainage, soil, dimensions, and load requirements. A site visit is needed before using this project as a planning or pricing comparison.',
+    ],
+    actionLinks: [
+      { href: '/#contact', label: 'Request a similar project estimate' },
+      { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
+      { href: '/jobs', label: 'View all projects' },
+    ],
+    sections: [
+      {
+        title: 'Project details',
+        bullets: [
+          `Project type: ${project.category}`,
+          `Service area: ${project.location}`,
+          `Completed: ${project.dateFormatted}`,
+        ],
+      },
+      {
+        title: 'Scope shown in this gallery',
+        bullets: project.highlights || [],
+      },
+      {
+        title: 'Project photos',
+        paragraphs: [
+          'Use the full gallery to compare layout, transitions, finish, and the visible relationship between the concrete and the surrounding property.',
+        ],
+        images: projectImages,
+      },
+      {
+        title: 'Plan a similar concrete project',
+        paragraphs: [
+          'The related service page explains the planning factors we review before estimating this type of work, including base preparation, drainage, reinforcement, finish, access, and cure timing.',
+        ],
+        links: project.relatedLinks || [],
       },
     ],
   })
@@ -1658,6 +1763,23 @@ function articleSchema(meta, canonical) {
     }
   }
 
+  if (meta.schemaKind === 'project') {
+    return {
+      '@type': 'ImageGallery',
+      '@id': `${canonical}#project`,
+      name: meta.schemaName || meta.h1 || meta.title,
+      description: meta.schemaDescription || meta.description,
+      dateCreated: meta.publishedTime,
+      image: meta.projectImages || [],
+      creator: {
+        '@id': ORGANIZATION_ID,
+      },
+      mainEntityOfPage: {
+        '@id': `${canonical}#webpage`,
+      },
+    }
+  }
+
   if (meta.schemaKind !== 'guide') return null
   return {
     '@type': 'Article',
@@ -1727,7 +1849,9 @@ function upsertPrerenderContent(html, contentHtml) {
 
 function applyMeta(html, meta) {
   const canonical = normalizeCanonical(meta.canonical || `${SITE_URL}${meta.path === '/' ? '/' : meta.path}`)
-  const ogType = meta.schemaKind === 'blog' ? 'article' : 'website'
+  const ogType = meta.schemaKind === 'blog' || meta.schemaKind === 'project' ? 'article' : 'website'
+  const socialImage = meta.image || DEFAULT_IMAGE
+  const socialImageAlt = meta.imageAlt || `${SITE_NAME} in Waco, Texas`
   let updated = html
   updated = upsertTitle(updated, meta.title)
   updated = upsertMetaTag(updated, 'description', meta.description)
@@ -1739,12 +1863,12 @@ function applyMeta(html, meta) {
   updated = upsertMetaTag(updated, 'og:site_name', SITE_NAME)
   updated = upsertMetaTag(updated, 'og:locale', 'en_US')
   updated = upsertMetaTag(updated, 'og:url', canonical)
-  updated = upsertMetaTag(updated, 'og:image', DEFAULT_IMAGE)
-  updated = upsertMetaTag(updated, 'og:image:alt', `${SITE_NAME} in Waco, Texas`)
+  updated = upsertMetaTag(updated, 'og:image', socialImage)
+  updated = upsertMetaTag(updated, 'og:image:alt', socialImageAlt)
   updated = upsertMetaTag(updated, 'twitter:card', 'summary_large_image')
   updated = upsertMetaTag(updated, 'twitter:title', meta.title)
   updated = upsertMetaTag(updated, 'twitter:description', meta.description)
-  updated = upsertMetaTag(updated, 'twitter:image', DEFAULT_IMAGE)
+  updated = upsertMetaTag(updated, 'twitter:image', socialImage)
   if (meta.publishedTime) {
     updated = upsertMetaTag(updated, 'article:published_time', meta.publishedTime)
   }
@@ -1760,12 +1884,19 @@ function applyMeta(html, meta) {
 }
 
 async function ensureRouteFile(routePath, htmlTemplate, meta) {
-  const relativePath = routePath === '/' ? 'index.html' : `${routePath.replace(/^\//, '')}/index.html`
-  const filePath = path.join(distDir, relativePath)
-  const parentDir = path.dirname(filePath)
-  await fs.mkdir(parentDir, { recursive: true })
   const html = applyMeta(htmlTemplate, meta)
-  await fs.writeFile(filePath, html, 'utf8')
+  const cleanPath = routePath.replace(/^\//, '')
+  const relativePaths = routePath === '/'
+    ? ['index.html']
+    : [`${cleanPath}/index.html`, `${cleanPath}.html`]
+
+  await Promise.all(
+    relativePaths.map(async (relativePath) => {
+      const filePath = path.join(distDir, relativePath)
+      await fs.mkdir(path.dirname(filePath), { recursive: true })
+      await fs.writeFile(filePath, html, 'utf8')
+    }),
+  )
 }
 
 async function main() {

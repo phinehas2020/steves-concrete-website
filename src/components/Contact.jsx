@@ -8,9 +8,9 @@ const whatToExpect = [
     'Detailed written estimate within 48 hours',
 ]
 
-export function Contact() {
+export function Contact({ sectionId = 'contact' }) {
     return (
-        <section id="contact" className="section-padding bg-stone-50">
+        <section id={sectionId || undefined} className="section-padding bg-stone-50">
             <div className="container-main">
                 <div className="grid gap-10 lg:gap-16 lg:grid-cols-2">
                     {/* Left Column - Info */}

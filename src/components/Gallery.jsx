@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { MapPin, ArrowUpRight } from 'lucide-react'
-import { buildCategoryOptions, fetchJobs } from '../data/jobs'
+import { buildCategoryOptions, fetchJobs, getStaticJobs } from '../data/jobs'
 import { handleImageError } from '../lib/utils'
 
 // Project image component - displays actual project photos
@@ -31,8 +31,11 @@ function ProjectImage({ job }) {
 
 export function Gallery() {
     const [activeCategory, setActiveCategory] = useState('All')
-    const [jobs, setJobs] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [jobs, setJobs] = useState(() =>
+        getStaticJobs()
+            .filter((job) => job.featured)
+            .slice(0, 6)
+    )
     const [error, setError] = useState(null)
 
     useEffect(() => {
@@ -49,8 +52,6 @@ export function Gallery() {
                 console.error('Error loading featured jobs:', err)
                 setError('Failed to load featured projects.')
                 setJobs([])
-            } finally {
-                setLoading(false)
             }
         }
         loadJobs()
@@ -127,9 +128,7 @@ export function Gallery() {
                 </div>
 
                 {/* Projects Grid */}
-                {loading ? (
-                    <div className="text-center py-12 text-stone-500">Loading featured projects...</div>
-                ) : error ? (
+                {error ? (
                     <div className="text-center py-12">
                         <p className="text-red-600 mb-4">{error}</p>
                         <button

@@ -44,11 +44,11 @@ function FAQItem({ question, answer, isOpen, onClick }) {
     )
 }
 
-export function FAQ() {
+export function FAQ({ sectionId = 'faq' }) {
     const [openIndex, setOpenIndex] = useState(0)
 
     return (
-        <section id="faq" className="section-padding bg-stone-50">
+        <section id={sectionId || undefined} className="section-padding bg-stone-50">
             <div className="container-main">
                 <div className="max-w-3xl mx-auto">
                     {/* Section Header */}

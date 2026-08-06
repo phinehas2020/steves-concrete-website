@@ -290,12 +290,27 @@ const baseSeoServicePages = [
       'Concrete patios in Waco — broom finish, stamped, or stained, planned for drainage and shade. Typical patios run $6–12/sq ft, stamped $12–18. Free estimate: (254) 230-3102.',
     introParagraph:
       'A patio is usually the most-used slab on the property, and the mistakes show up fast: water pooling by the back door, a surface too hot to walk on in August, random cracks across the middle. We plan the slope, the shade, and the joint lines before we talk finishes — then help you pick between broom finish, stamped, or stained based on how much upkeep you actually want.',
+    resourceLinks: [
+      { label: 'Covered patio project gallery', href: '/jobs/2026-client-covered-patio-flatwork' },
+      { label: 'Waco concrete patio cost guide', href: '/guides/concrete-patio-cost-waco-tx' },
+      { label: 'Stamped patio ideas for Central Texas', href: '/blog/stamped-concrete-patio-ideas-central-texas' },
+      { label: 'Stamped concrete services', href: '/stamped-concrete-waco-tx' },
+      { label: 'Waco concrete contractor hub', href: '/waco-tx-concrete-contractor' },
+    ],
     sections: [
       {
         heading: 'Patio layout that matches daily movement',
         paragraphs: [
           'We start with a site walk and flow plan. A good patio layout directs water and people naturally, which lowers pooling, reduces slip risk, and protects edges from concentrated load. We map access from entry doors, utility points, and furniture zones before concrete is poured.',
           'In Waco, orientation also matters. We factor sun exposure, shade direction, and wind pockets into edge placements and expansion joint direction. This means your patio stays cooler and more stable in peak summer afternoons while still looking clean and modern.',
+        ],
+      },
+      {
+        heading: 'Extending an existing concrete patio',
+        paragraphs: [
+          'A patio extension has to work with the slab that is already there. We check the existing elevation, crack movement, door thresholds, roof runoff, utilities, and the route water will take after the footprint gets larger. If the old patio is stable, the new section can be planned with a clean joint and a finish that complements it. If the old slab is moving or holding water, we explain whether repair or replacement is the better starting point.',
+          'The estimate separates extension size, access, excavation, base correction, reinforcement, demolition if needed, finish matching, and cleanup. We also plan furniture, grill, step, walkway, and future-cover locations before setting forms so the added space is useful instead of simply larger.',
+          'New and existing concrete will not age into a perfect color match, even when the finish is similar. We set that expectation before the pour and can discuss a deliberate border, joint, stain, or decorative transition when hiding the connection would create a worse result.',
         ],
       },
       {
@@ -342,6 +357,11 @@ const baseSeoServicePages = [
         question: 'Can I install a patio over an old slab?',
         answer:
           'In some cases yes, if the existing slab is stable. If it is heavily cracked or uneven, we recommend replacement for durability.',
+      },
+      {
+        question: 'Can you extend my existing concrete patio?',
+        answer:
+          'Yes, when the existing slab, elevations, access, and drainage support an extension. We inspect the old edge and base conditions, then plan the new joint, slope, reinforcement, and finish transition before quoting the work.',
       },
       {
         question: 'What is the best patio finish for Waco weather?',
@@ -637,6 +657,13 @@ const baseSeoServicePages = [
       'Stamped concrete patios, walkways, and borders in Waco — ashlar slate, stone, and brick patterns that hold up in Texas heat. Runs $12–18/sq ft. Free estimate: (254) 230-3102.',
     introParagraph:
       'Stamped concrete gets you the look of stone, slate, or brick at a fraction of what the real material costs installed — most stamped work here runs $12–18 per square foot. The catch nobody mentions in the sales pitch: stamping is a timing game. In Waco summer heat the window between "too wet to stamp" and "too hard to stamp" gets short, and a rushed stamp job shows forever. We schedule stamped pours around that window, not around convenience.',
+    resourceLinks: [
+      { label: 'Stamped concrete project gallery', href: '/jobs/2026-client-stamped-decorative-concrete' },
+      { label: 'Waco stamped concrete cost guide', href: '/guides/stamped-concrete-cost-waco-tx' },
+      { label: 'Stamped patio ideas for Central Texas', href: '/blog/stamped-concrete-patio-ideas-central-texas' },
+      { label: 'Concrete patio services', href: '/concrete-patios-waco-tx' },
+      { label: 'Customer reviews', href: '/reviews' },
+    ],
     sections: [
       {
         heading: 'Pattern selection and pattern performance',
@@ -707,6 +734,13 @@ const baseSeoServicePages = [
       'Need concrete foundation contractors in Waco TX? We plan and pour garage pads, shop slabs, additions, footings, and support slabs with drainage and reinforcement detail.',
     introParagraph:
       'Concrete foundation work in Waco should start with load, soil, water, and access. Whether you need a garage pad, shop slab, addition footing, equipment pad, or support slab, the plan has to account for black clay movement, drainage, reinforcement, and how the new concrete ties into the rest of the property.',
+    resourceLinks: [
+      { label: 'Shop foundation project gallery', href: '/jobs/2026-client-shop-foundation-interior-slab' },
+      { label: 'Concrete slab permit guide', href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx' },
+      { label: 'Foundation and slab repair guidance', href: '/foundation-repair-waco-tx' },
+      { label: 'Commercial concrete services', href: '/commercial-concrete-contractor-waco-tx' },
+      { label: 'Recent concrete projects', href: '/jobs' },
+    ],
     sections: [
       {
         heading: 'Foundation planning for additions, shops, garages, and pads',
@@ -926,6 +960,13 @@ const baseSeoServicePages = [
       'Foundation repair in Waco TX for cracked, settling, or shifting slabs. Concrete foundation repair, drainage correction, and honest repair-vs-replace guidance. Free estimates: (254) 230-3102.',
     introParagraph:
       'Foundation repair in Waco starts with diagnosis, not guesses. Expansive black clay, roof runoff, poor slope, and older concrete tie-ins can all make slabs crack, settle, or lift. We inspect crack patterns, drainage behavior, slab edges, and access before recommending concrete repair, section replacement, or a structural specialist when the problem goes beyond flatwork.',
+    resourceLinks: [
+      { label: 'New concrete foundations and slabs', href: '/concrete-foundations-waco-tx' },
+      { label: 'Shop foundation project gallery', href: '/jobs/2026-client-shop-foundation-interior-slab' },
+      { label: 'Concrete slab permit guide', href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx' },
+      { label: 'Waco concrete contractor hub', href: '/waco-tx-concrete-contractor' },
+      { label: 'Recent concrete projects', href: '/jobs' },
+    ],
     sections: [
       {
         heading: 'Foundation repair starts with the cause of movement',

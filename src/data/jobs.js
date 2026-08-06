@@ -93,6 +93,7 @@ export async function fetchJobs() {
 
         return {
           ...job,
+          dateFormatted: job.dateFormatted || job.date_formatted,
           images: (images || []).map((img) => img.image_url),
         }
       })

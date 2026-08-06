@@ -21,6 +21,7 @@ export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     return (
+        <>
         <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-stone-200 safe-top">
             <div className="container-main">
                 <div className="flex items-center justify-between h-16 md:h-20">
@@ -30,10 +31,10 @@ export function Header() {
                             src={logoImage}
                             alt="SLA Concrete Works LLC"
                             width={96}
-                            height={60}
+                            height={48}
                             loading="eager"
                             decoding="async"
-                            className="h-12 max-h-12 w-auto object-contain"
+                            className="block h-12 w-24 object-contain"
                         />
                     </a>
 
@@ -131,7 +132,9 @@ export function Header() {
                     </div>
                 </nav>
             </div>
-            <StickyCallBar />
         </header>
+        {/* Keep this outside the filtered fixed header so position:fixed stays viewport-relative. */}
+        <StickyCallBar />
+        </>
     )
 }

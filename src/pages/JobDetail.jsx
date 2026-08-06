@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { ArrowLeft, MapPin, Calendar } from 'lucide-react'
 import { handleImageError } from '../lib/utils'
 import { fetchJobs } from '../data/jobs'
+import { clientProjects } from '../data/clientProjects'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 import { useEffect, useMemo, useState } from 'react'
@@ -47,6 +48,7 @@ export function JobDetail() {
   const seo = useMemo(() => {
     const notFound = !loading && (!job || error)
     const resolvedSlug = job?.slug || slug || ''
+    const isIndexableProject = clientProjects.some((project) => project.slug === resolvedSlug)
     const breadcrumbsJsonLd = buildBreadcrumbs([
       { name: 'Home', url: `${SITE_URL}/` },
       { name: 'Project Gallery', url: `${SITE_URL}/jobs` },
@@ -68,7 +70,11 @@ export function JobDetail() {
       image: DEFAULT_IMAGE,
       imageAlt: 'SLA Concrete Works LLC project gallery',
       type: 'article',
-      robots: notFound ? 'noindex, nofollow' : 'index, follow',
+      robots: notFound
+        ? 'noindex, nofollow'
+        : isIndexableProject
+          ? 'index, follow'
+          : 'noindex, follow',
       jsonLd: buildJsonLdGraph(breadcrumbsJsonLd),
     }
 
@@ -78,6 +84,22 @@ export function JobDetail() {
     const description =
       job.description ||
       `${job.title} concrete project in ${job.location || 'Central Texas'}.`
+    const projectJsonLd = {
+      '@type': 'ImageGallery',
+      '@id': `${SITE_URL}/jobs/${resolvedSlug}#project`,
+      name: job.title,
+      description,
+      dateCreated: job.date,
+      image: (job.images || []).map((item) =>
+        item.startsWith('/') ? `${SITE_URL}${item}` : item
+      ),
+      creator: {
+        '@id': `${SITE_URL}/#organization`,
+      },
+      mainEntityOfPage: {
+        '@id': `${SITE_URL}/jobs/${resolvedSlug}#webpage`,
+      },
+    }
 
     return {
       ...fallback,
@@ -85,6 +107,7 @@ export function JobDetail() {
       description,
       image,
       imageAlt: job.title,
+      jsonLd: buildJsonLdGraph(projectJsonLd, breadcrumbsJsonLd),
     }
   }, [job, slug, loading, error])
 
@@ -236,6 +259,38 @@ export function JobDetail() {
                   {job.description}
                 </p>
               </motion.div>
+
+              {job.highlights?.length > 0 && (
+                <motion.section
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.15 }}
+                  className="mb-12 rounded-2xl border border-stone-200 bg-stone-50 p-6 sm:p-8"
+                >
+                  <h2 className="text-2xl font-bold text-stone-900 mb-4">Project Scope</h2>
+                  <ul className="grid gap-3 sm:grid-cols-3 text-stone-700">
+                    {job.highlights.map((highlight) => (
+                      <li key={highlight} className="flex gap-3">
+                        <span className="mt-2 size-2 shrink-0 rounded-full bg-accent-500" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {job.relatedLinks?.length > 0 && (
+                    <div className="mt-6 flex flex-wrap gap-3 border-t border-stone-200 pt-6">
+                      {job.relatedLinks.map((link) => (
+                        <Link
+                          key={link.href}
+                          to={link.href}
+                          className="inline-flex min-h-11 items-center rounded-lg border border-stone-300 bg-white px-4 py-2 font-semibold text-stone-900 transition-colors hover:border-accent-500 hover:text-accent-700"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </motion.section>
+              )}
 
               {/* Image Gallery */}
               {job.images.length > 1 && (

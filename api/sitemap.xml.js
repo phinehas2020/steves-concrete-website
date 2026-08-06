@@ -6,6 +6,7 @@ import {
 import { seoServicePages } from '../src/data/seoServicePages.js'
 import { guidePages } from '../src/data/guides.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
+import { clientProjects } from '../src/data/clientProjects.js'
 import {
   fetchPublishedBlogPosts,
   mergePublishedBlogPosts,
@@ -130,6 +131,15 @@ export default async function handler(req, res) {
   GUIDE_PAGES.forEach((slug) => {
     urls.push({
       loc: `${SITE_URL}/${slug}`,
+      changefreq: 'monthly',
+      priority: '0.68',
+    })
+  })
+
+  clientProjects.forEach((project) => {
+    urls.push({
+      loc: `${SITE_URL}/jobs/${project.slug}`,
+      lastmod: project.date,
       changefreq: 'monthly',
       priority: '0.68',
     })
