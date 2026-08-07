@@ -4,7 +4,8 @@ import path from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { createClient } from '@supabase/supabase-js'
 
-import { FORMULAIC_BLOG_SLUGS } from '../src/data/indexingControls.js'
+import { REPAIRED_BLOG_SLUGS } from '../src/data/indexingControls.js'
+import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 
 const DEFAULT_BATCH_SIZE = 500
 const BLOG_PHOTO_PROMPT_KEY = 'blog_photo_post'
@@ -20,6 +21,9 @@ If the evidence does not support a detail, omit it. Never fill gaps with a typic
 Do not use bullet points, hashtags, emojis, all caps, or long dashes.
 Output only one concise paragraph with no label or markdown.
 `.trim()
+
+const repairedBlogSlugSet = new Set(REPAIRED_BLOG_SLUGS)
+const repairedSourcePosts = staticBlogPosts.filter((post) => repairedBlogSlugSet.has(post.slug))
 
 const KNOWN_TABLES = [
   'admin_users',
@@ -123,7 +127,7 @@ if (!dryRun) {
   await verifyMigrationCounts()
 }
 
-await enforcePostCopyAuthenticityGuards()
+await restorePostCopyEditorialState()
 
 if (!skipAuth) {
   await migrateAuthUsers()
@@ -198,7 +202,7 @@ async function migratePublicTables() {
   }
 }
 
-async function enforcePostCopyAuthenticityGuards() {
+async function restorePostCopyEditorialState() {
   const protectsPrompt = migrationTableNames.has('blog_ai_prompt_settings')
   const protectsPosts = migrationTableNames.has('blog_posts')
 
@@ -207,11 +211,13 @@ async function enforcePostCopyAuthenticityGuards() {
   }
 
   console.log('')
-  console.log('Reapplying authenticity controls after source-row copy...')
+  console.log('Restoring reviewed editorial state after source-row copy...')
 
   if (dryRun) {
     if (protectsPrompt) console.log('  would restore the evidence-based blog photo prompt')
-    if (protectsPosts) console.log('  would quarantine the audited blog slugs and restore their canonical')
+    if (protectsPosts) {
+      console.log(`  would restore ${repairedSourcePosts.length} repaired source-managed blog posts`)
+    }
     return
   }
 
@@ -232,28 +238,48 @@ async function enforcePostCopyAuthenticityGuards() {
   }
 
   if (protectsPosts) {
-    const { error: quarantineError } = await target
-      .from('blog_posts')
-      .update({
-        seo_status: 'needs_facts',
-        reviewed_by: null,
-        reviewed_at: null,
-      })
-      .in('slug', FORMULAIC_BLOG_SLUGS)
-
-    if (quarantineError) {
-      throw new Error(`Failed quarantining audited blog posts: ${quarantineError.message}`)
+    if (repairedSourcePosts.length !== REPAIRED_BLOG_SLUGS.length) {
+      throw new Error(
+        `Expected ${REPAIRED_BLOG_SLUGS.length} repaired source posts, found ${repairedSourcePosts.length}`,
+      )
     }
 
-    const { error: canonicalError } = await target
-      .from('blog_posts')
-      .update({ canonical_slug: 'circle-k-concrete-flatwork-lacy-lakeview-tx' })
-      .eq('slug', 'for-concrete-or-circle-k-lacy-lake-view')
+    for (const post of repairedSourcePosts) {
+      const publicPost = rewriteUrls
+        ? rewriteSourceOrigin(post, sourceUrl, targetUrl)
+        : post
+      const { data, error } = await target
+        .from('blog_posts')
+        .update({
+          title: publicPost.title,
+          excerpt: publicPost.excerpt || null,
+          content: publicPost.content,
+          cover_image_url: publicPost.cover_image_url || null,
+          published_at: publicPost.published_at || publicPost.created_at || null,
+          updated_at:
+            publicPost.updated_at || publicPost.published_at || publicPost.created_at || null,
+          status: 'published',
+          seo_status: 'approved',
+          author_name: publicPost.author_name || null,
+          reviewed_by: publicPost.reviewed_by || null,
+          reviewed_at: publicPost.reviewed_at || null,
+          source_summary: publicPost.source_summary || null,
+          canonical_slug: null,
+          project_series_id: publicPost.project_series_id || null,
+          series_phase: publicPost.series_phase || null,
+        })
+        .eq('slug', post.slug)
+        .select('slug')
 
-    if (canonicalError) {
-      throw new Error(`Failed restoring the audited blog canonical: ${canonicalError.message}`)
+      if (error) {
+        throw new Error(`Failed restoring repaired blog post ${post.slug}: ${error.message}`)
+      }
+      if (!data?.length) {
+        throw new Error(`Repaired blog post ${post.slug} was missing after source-row copy`)
+      }
     }
-    console.log('  audited blog quarantine and canonical restored')
+
+    console.log(`  ${repairedSourcePosts.length} repaired source-managed blog posts restored`)
   }
 }
 

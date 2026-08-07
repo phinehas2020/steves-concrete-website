@@ -42,9 +42,8 @@ export function BlogPost() {
 
     const fetchPost = async () => {
       const staticPost = staticBlogPosts.find((item) => item.slug === slug)
-      // Source-authored case studies and audit archives are intentionally not
-      // CMS-controlled. Releasing a repaired archive requires removing its
-      // source quarantine in the same deployment that changes its crawler HTML.
+      // Source-authored articles are intentionally released from the repository
+      // so their public copy, canonical, and crawler HTML always change together.
       if (staticPost?.source_managed) {
         setPost(staticPost)
         setLoading(false)

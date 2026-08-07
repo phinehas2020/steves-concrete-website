@@ -1,265 +1,438 @@
-const scopeCards = [
+const concreteAndSpecialistScopes = [
   {
-    title: 'Potential SLA concrete scope',
+    title: 'Concrete-base planning and construction',
     description:
-      'If accepted in writing, SLA may quote site preparation, base, forming, reinforcement, slab placement, joints, slope, drainage, or concrete repair. The proposal controls the exact scope.',
+      'SLA can evaluate and, when accepted in the proposal, quote site preparation, base, forming, reinforcement, slab placement, joints, drainage, concrete repair, or replacement.',
   },
   {
-    title: 'Court-surface specialist scope',
+    title: 'Court-surface system and game lines',
     description:
-      'Athletic coating selection, substrate testing required by that system, texture, color coats, regulation game-line layout, striping, and play-surface approval require a named qualified provider.',
+      'A court-surface specialist should define coating compatibility, surface preparation, texture, colors, game-line layout, cure requirements, and play-surface acceptance.',
   },
   {
-    title: 'Design and other trades',
+    title: 'Design and supporting trades',
     description:
-      'Surveying, engineering, permits, inspections, fencing, lighting and electrical, net systems, equipment, accessibility, shade, and acoustics must be assigned to the appropriate party.',
+      'The project team assigns surveying, engineering, permits, accessibility, fencing, lighting, electrical, net systems, equipment, shade, and other non-concrete work.',
   },
   {
-    title: 'Written scope before scheduling',
+    title: 'One coordinated scope sheet',
     description:
-      'A proposal should identify the plans and specifications being followed, accepted concrete work, exclusions, owner responsibilities, other trades, travel terms, and handoff points.',
+      'Before scheduling, the proposal should identify the controlling plans, accepted concrete work, owner responsibilities, specialist handoffs, exclusions, and travel terms.',
   },
 ]
 
-const inquiryProcess = [
+const baseEstimateProcess = [
   {
-    title: 'Send project evidence',
+    title: 'Choose the starting condition',
     description:
-      'Provide the city, intended sport and use, available dimensions, site or slab photos, access information, drainage concerns, and any drawings or surface-system requirements.',
+      'Tell us whether this is undeveloped ground, a new prepared site, or an existing slab. Existing concrete needs wide photos plus close views of cracks, joints, edges, patches, and low spots.',
   },
   {
-    title: 'Confirm fit and responsibility',
+    title: 'Send a usable site packet',
     description:
-      'SLA must first confirm whether the concrete portion fits its current geography, schedule, and capabilities. A conversation or photo review is not a commitment to travel or perform the work.',
+      'Include the address, intended sport and use, approximate footprint, access route, drainage concerns, target timing, photos, and any survey, layout, engineering, or surface-system requirements already available.',
   },
   {
-    title: 'Document the trade handoff',
+    title: 'Resolve design and trade handoffs',
     description:
-      'Before construction, the written scope must name who owns court design, concrete requirements, coating and striping, equipment, engineering, permits, and final acceptance.',
+      'The court designer or surface specialist supplies the requirements that affect the slab. SLA then identifies the concrete work it can price and the information still needed from other parties.',
+  },
+  {
+    title: 'Review a written concrete scope',
+    description:
+      'The estimate should state dimensions or plan references, preparation, concrete work, drainage responsibilities, finish and cure expectations, access, exclusions, travel, and the handoff to the surface specialist.',
   },
 ]
+
+const sharedFaq = {
+  coating: {
+    question: 'Can SLA include coating and game-line striping in the concrete estimate?',
+    answer:
+      'Do not assume those items are included. SLA prices the accepted concrete scope. Coating, game-line layout, and play-surface approval should be assigned to a named court-surface specialist unless a written proposal explicitly states otherwise.',
+  },
+  estimate: {
+    question: 'What is the fastest way to get a useful estimate review?',
+    answer:
+      'Send the address, intended sport, approximate dimensions, site or slab photos, access information, drainage concerns, target timing, and any plans or surface-system requirements. That is enough to identify the next missing decision without pretending photos are a final site assessment.',
+  },
+}
 
 export const sportsCourtAreaPages = [
   {
     slug: 'texas',
     areaName: 'Texas',
-    indexable: false,
-    evidenceStatus: 'needs_documented_regulation_court_and_travel_policy',
-    badge: 'Waco-based availability page',
-    heroTitle: 'Texas Sports-Court Concrete: Travel Availability',
+    indexable: true,
+    evidenceStatus: 'indexable_planning_resource',
+    pagePurpose: 'texas_coverage_logistics_and_travel_decision_guide',
+    badge: 'Texas coverage & logistics guide',
+    heroTitle: 'Texas Sports-Court Concrete Planning & Travel Review',
     heroSubtitle:
-      'This page explains how an out-of-area concrete inquiry can be reviewed. It does not claim statewide coating crews, regulation-court installations, or routine coverage of every Texas market.',
-    seoTitle: 'Texas Sports-Court Concrete Availability | SLA Concrete Works',
+      'Use this guide to decide whether a Waco-based concrete crew, a local concrete contractor, and a separate court-surface specialist make sense for your site.',
+    seoTitle: 'Texas Sports-Court Concrete Planning & Travel Guide | SLA',
     seoDescription:
-      'SLA Concrete Works is based in Waco. Texas sports-court inquiries are reviewed case by case for concrete scope; coating, striping, design, and other trades require separate providers.',
+      'Plan a Texas sports-court concrete base: compare travel fit, site access, slab requirements, specialist handoffs, permit inputs, and the details needed for a usable estimate.',
     intro:
-      'The current public record does not establish an SLA regulation-court project, athletic coating system, striping credential, statewide travel policy, or named court-surface partner. Until that proof is published, availability is case by case and any accepted work is limited to the concrete items named in a written proposal.',
-    scopeTitle: 'Trade boundaries for a Texas court inquiry',
+      'SLA Concrete Works is based in Waco and reviews out-of-area concrete projects case by case. The useful first decision is not simply “Do you travel?” It is whether the footprint, access, schedule, design readiness, and concrete scope support a coordinated placement from this distance.',
+    scopeTitle: 'Build the project team around the slab requirements',
     scopeIntro:
-      'A court is a multi-trade project. The URL says “coating” because it is an existing route, but the verified business scope presented here is concrete-project review—not a promise that SLA self-performs athletic surfacing or regulation striping.',
-    services: scopeCards,
-    process: inquiryProcess,
+      'A durable court starts with a clear division of responsibility. The court designer or surface specialist defines what the finished playing system needs; the concrete proposal translates those requirements into an accepted base scope.',
+    services: concreteAndSpecialistScopes,
+    process: baseEstimateProcess,
     availability: {
-      title: 'Texas travel is not automatic',
+      title: 'How SLA screens a Texas travel request',
       paragraphs: [
-        'SLA is based in the Waco area. This page does not publish a verified statewide service radius, regional batching policy, travel discount, or minimum project size.',
-        'Location, project size, schedule, access, accepted concrete work, travel charges, and required handoffs must be confirmed before a site visit or proposal is treated as active.',
+        'Projects farther from Waco need enough defined scope to evaluate crew travel, concrete-placement timing, equipment, lodging if applicable, site access, and coordination with local trades. A clear plan makes that decision faster.',
+        'If mobilizing SLA is not practical, this checklist is still useful: it can help an owner compare a local concrete quote against the surface specialist’s actual slab requirements.',
       ],
     },
-    coverageTitle: 'What “Texas availability” means here',
+    coverageTitle: 'Texas travel go/no-go questions',
     coverageIntro:
-      'It means an owner or project team may submit an inquiry from Texas. It does not mean SLA has a local office, completed court, or standing crew in every city.',
+      'Answer these before comparing bids. They reveal whether the project is ready to price and whether travel is likely to add value.',
     coveragePoints: [
-      'Waco is the stated home base',
-      'Dallas and Fort Worth are inquiry pages, not local project claims',
-      'Travel terms and accepted concrete scope must be written into the proposal',
+      'Is the site address, intended sport, approximate footprint, and new-versus-existing condition known?',
+      'Can concrete trucks, pumps if needed, finishing equipment, and crew vehicles reach and stage at the work area?',
+      'Has a court designer or surface specialist supplied slope, finish, cure, joint, moisture, and coating-acceptance requirements?',
+      'Are permits, accessibility review, utilities, drainage design, fencing, lighting, and equipment assigned to specific parties?',
+      'Is the concrete scope large and defined enough to compare local pricing with Waco-based mobilization?',
     ],
     localFocus: [
       {
-        title: 'No blanket service-area promise',
+        title: 'New base or existing slab?',
         description:
-          'A Texas address alone does not establish availability. Distance, access, schedule, concrete scope, and project size must be reviewed.',
+          'New construction starts with layout, grade, drainage, base, and placement requirements. An existing slab starts with movement, ponding, patch, joint, and surface-condition questions before any coating handoff.',
       },
       {
-        title: 'No regulation-court proof claimed',
+        title: 'Local support still matters',
         description:
-          'The decorative play-area gallery is not used as proof of a pickleball, tennis, or basketball court installation.',
+          'Long-distance concrete work may require local material coordination, testing, inspections, specialty trades, or follow-up. Assign those responsibilities before treating a travel quote as complete.',
       },
       {
-        title: 'No undisclosed specialist scope',
+        title: 'Public and commercial sites need an owner-side plan',
         description:
-          'Coating, game-line layout, equipment, design, and other trades are not represented as SLA work unless a future written proposal names the responsible provider.',
+          'The owner or designer should confirm local permits and Texas accessibility obligations for the actual facility and scope. Concrete pricing does not replace that review.',
       },
     ],
-    evidenceRequirements: [
-      'A documented regulation-court project with city, date, dimensions, original photos, and concrete facts',
-      'A named coating and striping performer, product system, and responsibility if those services are advertised',
-      'A Stephen-reviewed travel geography, project minimum, travel policy, and current operating terms',
+    decisionGuide: {
+      title: 'Choose the right delivery model',
+      intro:
+        'There are three workable ways to organize a Texas court base. Pick the one that keeps design authority and field responsibility clear.',
+      items: [
+        {
+          title: 'Waco-area project',
+          description:
+            'Start with SLA’s concrete feasibility review, then connect the accepted slab scope to the owner’s court designer or surface specialist.',
+        },
+        {
+          title: 'Out-of-area project with a defined concrete package',
+          description:
+            'Send the plan set, specifications, footprint, access, schedule, and local coordination plan so SLA can make a case-by-case travel decision.',
+        },
+        {
+          title: 'Out-of-area project still in concept stage',
+          description:
+            'Select the court designer or surface specialist first, establish the base requirements, then compare a qualified local concrete contractor with the cost and logistics of travel.',
+        },
+      ],
+    },
+    checklistTitle: 'Texas estimate-readiness checklist',
+    checklistIntro: 'A useful concrete review starts when these items are known or deliberately assigned.',
+    decisionChecklist: [
+      'Project address and owner contact',
+      'Sport, level of play, and approximate outside dimensions',
+      'New construction, replacement, repair, or uncertain condition',
+      'Photos of the site, access route, drainage path, and existing defects',
+      'Court-surface system requirements or the specialist responsible for providing them',
+      'Survey, civil, structural, accessibility, permit, and inspection responsibilities',
+      'Target construction window and constraints on deliveries, noise, or facility access',
+    ],
+    officialResources: [
+      {
+        label: 'Texas Architectural Barriers program',
+        href: 'https://www.tdlr.texas.gov/AB/index.htm',
+        description:
+          'Official TDLR information for owners and designers evaluating Texas accessibility requirements.',
+      },
     ],
     faq: [
       {
-        question: 'Does SLA serve every part of Texas for sports-court work?',
+        question: 'Does SLA automatically travel anywhere in Texas?',
         answer:
-          'No statewide coverage promise is published. SLA is based in Waco and reviews out-of-area concrete inquiries individually. Location, minimum scope, schedule, and travel terms must be confirmed in writing.',
+          'No blanket radius is promised. Out-of-area work is reviewed using the location, concrete scope, footprint, access, schedule, placement logistics, and specialist coordination. Those details determine whether travel is practical.',
       },
-      {
-        question: 'Does SLA perform court coating and regulation striping?',
-        answer:
-          'The current public project record does not verify those as SLA self-performed services. Do not assume they are included; the proposal must name the qualified performer and exact responsibility.',
-      },
-      {
-        question: 'What should I send before asking for a site visit?',
-        answer:
-          'Send the project city, intended sport and use, clear dimensions, existing-surface photos, access and drainage information, and any plans or selected surface-system requirements.',
-      },
+      sharedFaq.coating,
+      sharedFaq.estimate,
     ],
   },
   {
     slug: 'dallas-tx',
     areaName: 'Dallas, TX',
-    indexable: false,
-    evidenceStatus: 'needs_dallas_regulation_court_project',
-    badge: 'Travel availability—not local proof',
-    heroTitle: 'Do We Take Dallas Sports-Court Concrete Projects?',
+    indexable: true,
+    evidenceStatus: 'indexable_planning_resource',
+    pagePurpose: 'dallas_urban_access_mobilization_and_permit_readiness',
+    badge: 'Dallas site-readiness guide',
+    heroTitle: 'Dallas Sports-Court Concrete Base Planning',
     heroSubtitle:
-      'SLA is based in Waco. Dallas inquiries can be reviewed for a defined concrete scope, but this page does not claim a Dallas court project, Dallas office, coating crew, or standing travel schedule.',
-    seoTitle: 'Dallas Sports-Court Concrete Availability | Waco-Based SLA',
+      'Turn a Dallas court concept into a bid-ready concrete package by resolving access, staging, design, drainage, permits, and the surface-specialist handoff before mobilization.',
+    seoTitle: 'Dallas Sports-Court Concrete Base Planning | SLA Concrete Works',
     seoDescription:
-      'Dallas sports-court concrete inquiries may be reviewed by Waco-based SLA Concrete Works. No Dallas regulation-court project or in-house coating and striping proof is claimed.',
+      'Plan a Dallas sports-court concrete base with a practical checklist for site access, staging, slab specifications, permit inputs, specialist handoffs, and travel review.',
     intro:
-      'No Dallas-area regulation-court case study, original project photo set, local reference, named athletic coating system, or court-surface partner is documented in the current repository. This is therefore an availability page, not evidence that SLA has performed Dallas resurfacing, school, HOA, conversion, or striping work.',
-    scopeTitle: 'What a Dallas inquiry can—and cannot—cover',
+      'For a Dallas inquiry, the biggest early risk is often not the final color—it is whether the site can support demolition or grading, concrete deliveries, equipment, finishing access, drainage work, and a clean handoff to the court-surface crew. SLA reviews the concrete portion from Waco when the project facts support a useful estimate.',
+    scopeTitle: 'Create a bid package that survives mobilization day',
     scopeIntro:
-      'SLA can decide whether to review the concrete portion after receiving the site facts. Court coating, regulation lines, equipment, design, and other specialist work must be assigned separately and cannot be inferred from this page.',
-    services: scopeCards,
-    process: inquiryProcess,
+      'The concrete crew needs buildable site information, while the court specialist needs a base that matches its system. Connecting those two scopes before pricing avoids gaps that become expensive after trucks and crews are scheduled.',
+    services: concreteAndSpecialistScopes,
+    process: [
+      {
+        title: 'Map the footprint and delivery path',
+        description:
+          'Show the proposed court, property lines if available, gates, overhead conflicts, truck route, pump or buggy path, staging area, washout plan, and areas that must remain open.',
+      },
+      {
+        title: 'Resolve owner-side reviews',
+        description:
+          'The owner or design team confirms zoning, permits, accessibility, drainage, utilities, neighborhood or facility restrictions, and any required construction documents with the applicable authorities.',
+      },
+      {
+        title: 'Lock the slab acceptance criteria',
+        description:
+          'Have the court designer or surface specialist identify the required dimensions, slope, drainage, finish profile, joints, cure, moisture limits, and time before surface work.',
+      },
+      {
+        title: 'Price concrete and travel as one mobilization plan',
+        description:
+          'SLA reviews the accepted concrete work, crew and equipment access, placement sequence, schedule, local coordination, travel terms, and exclusions in writing.',
+      },
+    ],
     availability: {
-      title: 'Dallas work is confirmed case by case',
+      title: 'What makes a Dallas inquiry quotable',
       paragraphs: [
-        'This site does not publish a Dallas batching policy, promise no travel charge, or state that Dallas receives the same pricing as Waco. Those earlier claims were removed because no operating record supported them.',
-        'Before anyone schedules travel, SLA must review the location, project size, concrete scope, access, drawings or specifications, current crew schedule, and required specialist handoffs.',
+        'A street address, aerial or site plan, approximate footprint, access photos, intended use, target timing, and selected surface specialist usually reveal the next step quickly.',
+        'A Waco-based crew is considered case by case. Project size alone does not decide fit; constrained access, multiple mobilizations, uncertain design, and incomplete handoffs can matter just as much.',
       ],
     },
-    coverageTitle: 'What this Dallas page establishes',
+    coverageTitle: 'Dallas mobilization worksheet',
     coverageIntro:
-      'It provides a transparent intake path for a Dallas-area owner or project team. It does not establish local presence or completed local work.',
+      'Walk the site with these questions before requesting a concrete number. Each unresolved item can change equipment, sequence, labor, or the usable placement window.',
     coveragePoints: [
-      'SLA is Waco-based, not represented as a Dallas office',
-      'No Dallas regulation-court case study is currently published',
-      'Travel cost, minimum project size, and accepted work require written confirmation',
+      'Where can concrete trucks queue without blocking required access, and is a pump or buggy path needed?',
+      'What must be removed, relocated, protected, or kept operational during demolition and placement?',
+      'Where does water leave the finished slab, and who owns drainage design beyond the concrete edge?',
+      'Are the court footprint, surface-system requirements, utilities, permits, and inspection points documented?',
+      'Can the slab be placed in the planned sequence while preserving the specialist’s slope, joint, finish, and cure requirements?',
     ],
     localFocus: [
       {
-        title: 'Site facts before sales claims',
+        title: 'Access is a pricing input',
         description:
-          'Send dimensions, photos, access, drainage conditions, and project documents before asking SLA to decide whether the concrete portion is a fit.',
+          'Gate width, overhead clearance, truck staging, pump reach, haul-off route, washout, and facility operating hours affect the placement plan. Show them in the first site packet.',
       },
       {
-        title: 'Conversions require specialist input',
+        title: 'Existing paving changes the sequence',
         description:
-          'A tennis-to-pickleball or multi-sport plan involves more than concrete. The responsible court designer or surface specialist must define layout and surfacing requirements.',
+          'Identify demolition limits, buried utilities, tie-ins, curb or drive-approach impacts, and the route for debris and replacement materials before asking for a firm schedule.',
       },
       {
-        title: 'Schools and HOAs are not assumed clients',
+        title: 'Design review belongs ahead of the pour',
         description:
-          'This page does not claim completed school, park, HOA, or private-court work in Dallas without a documented project and permission-safe proof.',
+          'Commercial, school, HOA, park, and shared-use facilities may have owner, city, accessibility, or consultant requirements. The responsible design team should resolve them before concrete dimensions are frozen.',
       },
     ],
-    evidenceRequirements: [
-      'One permission-safe Dallas-area regulation-court project with date, dimensions, scope, and original photos',
-      'Exact SLA-versus-specialist responsibilities, including coating and striping performer and system',
-      'Actual Dallas travel terms, minimum project size, logistics, and a local reference or outcome where permitted',
+    decisionGuide: {
+      title: 'Is the Dallas site ready for a concrete visit?',
+      intro: 'Use these three gates. If one is missing, the next call should solve that gap rather than force a premature bid.',
+      items: [
+        {
+          title: 'Site gate',
+          description:
+            'The work area, truck route, staging, demolition, utilities, drainage path, and facility constraints are visible in photos or a plan.',
+        },
+        {
+          title: 'Design gate',
+          description:
+            'The intended sport, footprint, base requirements, surface system, permits, and accessibility responsibilities have named decision-makers.',
+        },
+        {
+          title: 'Mobilization gate',
+          description:
+            'The concrete scope, placement sequence, target window, local coordination, travel terms, and exclusions are specific enough to price in writing.',
+        },
+      ],
+    },
+    checklistTitle: 'Dallas pre-estimate site packet',
+    checklistIntro: 'Send one organized packet instead of a trail of disconnected photos and text messages.',
+    decisionChecklist: [
+      'Address, site contact, and best access point',
+      'Aerial or plan with footprint and approximate dimensions marked',
+      'Gate, drive, staging, overhead-clearance, and work-area photos',
+      'Existing slab, pavement, structures, drainage, and demolition limits',
+      'Surface specialist’s slab and cure requirements',
+      'Known permit, zoning, accessibility, inspection, HOA, school, or facility approvals',
+      'Target work window and areas that must remain open',
+    ],
+    officialResources: [
+      {
+        label: 'City of Dallas Permit Center',
+        href: 'https://dallascityhall.com/departments/sustainabledevelopment/strategic_business_unit/Pages/permit-center.aspx',
+        description:
+          'Official Dallas starting point for permit, plan-review, zoning, and development questions.',
+      },
+      {
+        label: 'Texas Architectural Barriers program',
+        href: 'https://www.tdlr.texas.gov/AB/index.htm',
+        description:
+          'Official state information for owners and designers evaluating Texas accessibility requirements.',
+      },
     ],
     faq: [
       {
-        question: 'Has SLA published a completed Dallas sports-court project?',
+        question: 'Will SLA review a Dallas project before the court design is complete?',
         answer:
-          'No Dallas-area regulation-court case study is documented in the current public project record. This page should not be read as local project proof.',
+          'Yes, as a feasibility conversation. A firm concrete proposal needs the decisions that control the slab: footprint, access, drainage responsibility, base requirements, finish, joints, cure, and specialist handoff.',
       },
       {
-        question: 'Will SLA travel to Dallas for my project?',
+        question: 'Who determines whether a Dallas permit or accessibility review is required?',
         answer:
-          'Possibly, but there is no blanket promise. SLA must review the concrete scope, project size, location, access, schedule, travel terms, and other-trade handoffs before confirming availability.',
+          'The property owner and design team should confirm requirements for the actual address, use, ownership, funding, and scope with the City of Dallas and applicable state authorities. SLA’s concrete estimate does not replace that determination.',
       },
-      {
-        question: 'Can SLA convert or stripe a Dallas court?',
-        answer:
-          'The current record does not verify conversion design, athletic coating, or regulation striping as SLA self-performed services. Those items require a named qualified specialist in the written project scope.',
-      },
+      sharedFaq.coating,
+      sharedFaq.estimate,
     ],
   },
   {
     slug: 'fort-worth-tx',
     areaName: 'Fort Worth, TX',
-    indexable: false,
-    evidenceStatus: 'needs_fort_worth_regulation_court_project',
-    badge: 'Travel availability—not local proof',
-    heroTitle: 'Fort Worth Sports-Court Concrete Project Availability',
+    indexable: true,
+    evidenceStatus: 'indexable_planning_resource',
+    pagePurpose: 'fort_worth_existing_slab_repair_replacement_and_drainage_planning',
+    badge: 'Fort Worth slab decision guide',
+    heroTitle: 'Fort Worth Court Slab Evaluation & Concrete-Base Planning',
     heroSubtitle:
-      'SLA is based in Waco. Fort Worth inquiries may be reviewed for a defined concrete scope; this page does not claim a Fort Worth court project, local office, coating crew, or regulation striping work.',
-    seoTitle: 'Fort Worth Sports-Court Concrete Availability | SLA',
+      'Decide whether an existing slab needs repair, replacement, drainage correction, or specialist testing—and organize a buildable plan for new concrete when replacement is the better path.',
+    seoTitle: 'Fort Worth Court Slab & Concrete-Base Planning | SLA',
     seoDescription:
-      'Fort Worth sports-court concrete inquiries may be reviewed by Waco-based SLA Concrete Works. No local regulation-court, coating, or striping proof is claimed.',
+      'Evaluate a Fort Worth sports-court slab for repair, replacement, drainage, or a new concrete base, with clear court-specialist and travel handoffs.',
     intro:
-      'The current project record contains no documented Fort Worth regulation court, original local photo set, named athletic surface system, court-surface partner, or local reference. Generic statements about Texas clay or cracking are not a substitute for that evidence.',
-    scopeTitle: 'Scope boundaries for a Fort Worth inquiry',
+      'Existing-court projects fail when a cosmetic scope is chosen before the slab problem is understood. For Fort Worth inquiries, SLA starts the concrete conversation with movement, ponding, patches, joints, edges, drainage, access, and demolition—not with a promise that every slab can be coated.',
+    scopeTitle: 'Separate the concrete condition from the finish decision',
     scopeIntro:
-      'An existing slab may need concrete repair, replacement, drainage correction, or a specialist condition review, but photos alone cannot establish the answer. Any SLA work must be limited to the concrete items it accepts in writing.',
-    services: scopeCards,
-    process: inquiryProcess,
+      'SLA evaluates potential concrete repair, replacement, or new-base work. The court-surface specialist determines whether the resulting substrate can accept its system and what preparation, testing, cure, and opening criteria apply.',
+    services: concreteAndSpecialistScopes,
+    process: [
+      {
+        title: 'Document the entire slab',
+        description:
+          'Send wide views in both directions, then close photos of cracks, joints, patches, edges, drains, low spots, transitions, and areas where water or debris collects.',
+      },
+      {
+        title: 'Sort defects by likely decision',
+        description:
+          'Stable isolated damage may support a repair discussion. Repeated movement, broad settlement, heaving, failed patches, weak edges, or persistent drainage problems can move the conversation toward replacement or professional evaluation.',
+      },
+      {
+        title: 'Get surface-system acceptance criteria',
+        description:
+          'Before finalizing concrete work, the court specialist should state its requirements for crack treatment, flatness or slope, finish profile, joints, moisture, cure, and time before coating.',
+      },
+      {
+        title: 'Plan access, removal, drainage, and travel',
+        description:
+          'The written scope identifies demolition and haul-off, site access, base and concrete work, drainage responsibility, inspections, surface handoff, mobilization, travel, and exclusions.',
+      },
+    ],
     availability: {
-      title: 'Fort Worth travel must be approved first',
+      title: 'How Fort Worth project review works',
       paragraphs: [
-        'This page does not promise routine Fort Worth coverage, regional batching, a standard travel price, or a published minimum project size.',
-        'SLA must review the site location, dimensions, existing condition, access, drainage, project documents, concrete scope, current schedule, and required court-specialist handoff before confirming a visit.',
+        'Start remotely with an address, marked dimensions, a full photo set, defect history if known, access, drainage behavior, intended sport, target timing, and any surface-system documents.',
+        'SLA is based in Waco, so a Fort Worth visit or concrete proposal is confirmed case by case after the information shows what field decision is needed and whether the concrete scope supports travel.',
       ],
     },
-    coverageTitle: 'What this Fort Worth page establishes',
+    coverageTitle: 'Repair, replace, or build new?',
     coverageIntro:
-      'It tells a Fort Worth-area visitor exactly what information is needed to ask about the concrete portion. It does not present an inquiry market as a proven service market.',
+      'This is a screening tool, not a remote diagnosis. It helps send the project to the right next step before money is committed to cosmetic work.',
     coveragePoints: [
-      'SLA is Waco-based, not represented as a Fort Worth office',
-      'No Fort Worth regulation-court case study is currently published',
-      'Travel, scope, project minimum, and specialist roles require written confirmation',
+      'Repair conversation: isolated damage, limited movement indicators, workable drainage, and a surface specialist willing to evaluate the repaired substrate.',
+      'Replacement conversation: widespread displacement, recurring failed patches, extensive edge failure, base loss, or geometry that cannot support the intended layout.',
+      'Drainage-first conversation: standing water, runoff crossing the slab, erosion at edges, or surrounding grades that keep reintroducing moisture and support problems.',
+      'Specialist-testing conversation: concrete appears stable but coating compatibility, moisture, profile, crack treatment, or existing product layers remain uncertain.',
+      'New-base conversation: the site and layout are changing enough that grade, drainage, access, base, and the complete slab package should be planned together.',
     ],
     localFocus: [
       {
-        title: 'Existing-slab claims stay conditional',
+        title: 'Photos show symptoms, not hidden support',
         description:
-          'Cracks, settlement, heaving, ponding, or failed repairs must be evaluated before anyone promises that repair, replacement, or a coating handoff is appropriate.',
+          'A remote review can identify questions and obvious defects. It cannot verify subsurface support, active movement, moisture, or coating compatibility without the field review or testing appropriate to the decision.',
       },
       {
-        title: 'Line repainting is not assumed',
+        title: 'Drainage can control the repair decision',
         description:
-          'The page does not promise standalone restriping, basketball line work, or court conversion without a named qualified surface specialist and documented scope.',
+          'Map where water enters, crosses, ponds beside, and leaves the slab. A repair plan that ignores the surrounding water path can leave the same stress in place.',
       },
       {
-        title: 'Facility work is not implied',
+        title: 'Right-of-way impacts are a separate workstream',
         description:
-          'No club, school, park, HOA, or community-court work in Fort Worth is claimed without a real project record and permission-safe proof.',
+          'If access or construction affects sidewalks, curb ramps, drive approaches, curb and gutter, alleys, or temporary lane use, the owner or design team should check Fort Worth’s current requirements before scheduling.',
       },
     ],
-    evidenceRequirements: [
-      'One permission-safe Fort Worth-area regulation-court project with date, dimensions, scope, and original photos',
-      'Named court-surface performer and product system if coating, resurfacing, or striping is advertised',
-      'Verified travel policy, project minimum, logistics, and actual local operating evidence',
+    decisionGuide: {
+      title: 'Match the symptom to the next investigation',
+      intro: 'Use the pattern—not a single crack—to decide who needs to look next.',
+      items: [
+        {
+          title: 'Movement pattern',
+          description:
+            'Record crack width changes if known, vertical displacement, rocking panels, heaving, settlement, and whether prior patches have reopened.',
+        },
+        {
+          title: 'Water pattern',
+          description:
+            'Photograph the slab after rain when safe, mark ponding and runoff, and show drains, downspouts, surrounding grade, eroded edges, and discharge paths.',
+        },
+        {
+          title: 'Surface-system pattern',
+          description:
+            'Identify existing coatings or repairs and ask the selected court specialist what testing, removal, repair, profile, moisture, and cure conditions it will accept.',
+        },
+      ],
+    },
+    checklistTitle: 'Fort Worth slab-evaluation packet',
+    checklistIntro: 'A consistent photo and fact set makes repair-versus-replacement conversations more useful.',
+    decisionChecklist: [
+      'Address, approximate slab age if known, intended sport, and use level',
+      'Overall dimensions and wide photos from every side',
+      'Close photos with scale at cracks, vertical offsets, patches, joints, edges, and drains',
+      'Notes on ponding, runoff, erosion, prior repairs, and whether defects appear to change',
+      'Access route, demolition path, staging area, overhead limits, and areas that must remain open',
+      'Existing coating information and the selected specialist’s acceptance requirements',
+      'Known permit, inspection, accessibility, right-of-way, or facility approvals',
+    ],
+    officialResources: [
+      {
+        label: 'Fort Worth Development Services',
+        href: 'https://www.fortworthtexas.gov/departments/development-services',
+        description:
+          'Official permit-assist, zoning, development, inspection, and application resources for project-specific review.',
+      },
+      {
+        label: 'Fort Worth Infrastructure and parkway guidance',
+        href: 'https://www.fortworthtexas.gov/departments/development-services/infrastructure-division',
+        description:
+          'Official guidance for work that may affect sidewalks, curbs, drive approaches, alleys, or other parkway areas.',
+      },
     ],
     faq: [
       {
-        question: 'Has SLA published a completed Fort Worth sports-court project?',
+        question: 'Can photos determine whether my Fort Worth slab should be repaired or replaced?',
         answer:
-          'No Fort Worth-area regulation-court case study is documented in the current public project record. This page is an availability and intake page only.',
+          'Photos can organize the first review and reveal visible patterns, but they do not prove subsurface support, active movement, moisture, or coating compatibility. The next step may be an SLA site review, court-specialist testing, engineering input, or a written repair or replacement scope depending on the symptoms.',
       },
       {
-        question: 'Can SLA inspect an existing Fort Worth court from photos?',
+        question: 'Should I hire the coating specialist before repairing the slab?',
         answer:
-          'Photos can support an initial conversation, but they do not establish structural condition, drainage performance, coating compatibility, or project acceptance. A written scope follows only if SLA confirms the concrete work is a fit.',
+          'It is useful to identify the specialist and its substrate requirements before finalizing repairs. That lets the concrete scope address the defects it can reasonably correct while the specialist retains responsibility for accepting the substrate and installing the surface system.',
       },
-      {
-        question: 'Does SLA offer standalone coating or restriping in Fort Worth?',
-        answer:
-          'The current public record does not verify those as SLA self-performed services. A written proposal would need to name the qualified specialist, system, and exact responsibility before either service is represented as available.',
-      },
+      sharedFaq.coating,
+      sharedFaq.estimate,
     ],
   },
 ]
@@ -268,5 +441,5 @@ export const sportsCourtAreaLinks = sportsCourtAreaPages.map((page) => ({
   slug: page.slug,
   areaName: page.areaName,
   href: `/sports-court-coating/${page.slug}`,
-  label: `${page.areaName} court-project availability`,
+  label: `${page.areaName} sports-court planning guide`,
 }))

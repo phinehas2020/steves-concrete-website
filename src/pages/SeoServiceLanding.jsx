@@ -52,6 +52,11 @@ function SeoServiceLandingPage({ page }) {
     evidenceNote,
     scopeBoundary,
     showGallery = true,
+    pageBadge,
+    ctaLabel,
+    decisionGuide,
+    planningChecklist = [],
+    officialResources = [],
   } = page
   const resolvedHeroImage = heroImage || serviceHeroImages[slug]
   const galleryImages = showGallery ? getServiceGalleryImages(slug, title) : []
@@ -122,7 +127,7 @@ function SeoServiceLandingPage({ page }) {
             <div className={`grid gap-12 lg:items-center ${resolvedHeroImage ? 'lg:grid-cols-2' : ''}`}>
               <div className="max-w-3xl">
                 <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
-                  Service Detail
+                  {pageBadge || 'Service Detail'}
                 </span>
                 <h1 className="mt-5 font-display font-bold text-balance leading-tight" style={{ fontSize: 'clamp(2.4rem, 1.6rem + 3vw, 4rem)' }}>
                   {title}
@@ -135,7 +140,7 @@ function SeoServiceLandingPage({ page }) {
                     href="#contact"
                     className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
                   >
-                    Get Free Estimate
+                    {ctaLabel || 'Get Free Estimate'}
                   </a>
                   <a
                     href="tel:254-230-3102"
@@ -210,6 +215,33 @@ function SeoServiceLandingPage({ page }) {
                     ))}
                   </ul>
                 </article>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {decisionGuide?.items?.length > 0 && (
+          <section className="section-padding bg-accent-50/60 border-y border-accent-100">
+            <div className="container-main">
+              <div className="max-w-3xl mb-8">
+                <span className="inline-block px-3 py-1 mb-4 rounded-full bg-white text-accent-700 font-semibold text-sm tracking-wide uppercase border border-accent-200">
+                  Project Decision Guide
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                  {decisionGuide.title}
+                </h2>
+                <p className="text-lg text-stone-600 text-pretty">{decisionGuide.intro}</p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-3">
+                {decisionGuide.items.map((item, index) => (
+                  <article key={item.title} className="rounded-2xl border border-accent-100 bg-white p-6 shadow-sm">
+                    <p className="text-xs uppercase tracking-wide text-accent-700 font-semibold mb-3">
+                      Starting point {index + 1}
+                    </p>
+                    <h3 className="font-display font-semibold text-xl text-stone-900 mb-3">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-stone-600 text-pretty">{item.description}</p>
+                  </article>
+                ))}
               </div>
             </div>
           </section>
@@ -301,6 +333,65 @@ function SeoServiceLandingPage({ page }) {
                     </figcaption>
                   </figure>
                 ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {(planningChecklist.length > 0 || officialResources.length > 0) && (
+          <section className="section-padding bg-white">
+            <div className="container-main">
+              <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+                {planningChecklist.length > 0 && (
+                  <div className="rounded-2xl border border-stone-200 bg-stone-50 p-6 sm:p-8">
+                    <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                      Estimate Checklist
+                    </span>
+                    <h2 className="font-display font-bold text-3xl text-stone-900 text-balance mb-4">
+                      Send one useful project packet
+                    </h2>
+                    <p className="text-stone-600 text-pretty mb-6">
+                      These details make the first concrete review faster and reveal which design or site decision comes next.
+                    </p>
+                    <ul className="space-y-4 text-stone-700">
+                      {planningChecklist.map((item) => (
+                        <li key={item} className="flex gap-3">
+                          <span className="mt-2 size-2 shrink-0 rounded-full bg-accent-500" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {officialResources.length > 0 && (
+                  <div className="rounded-2xl bg-stone-900 p-6 text-white sm:p-8">
+                    <span className="inline-block text-accent-300 font-semibold text-sm uppercase tracking-wide mb-3">
+                      Official Planning Links
+                    </span>
+                    <h2 className="font-display font-bold text-3xl text-white text-balance mb-4">
+                      Verify the actual site and scope
+                    </h2>
+                    <p className="text-stone-300 text-pretty mb-6">
+                      Requirements depend on the address, ownership, use, funding, and work proposed. Confirm current project-specific requirements before construction.
+                    </p>
+                    <div className="space-y-4">
+                      {officialResources.map((resource) => (
+                        <a
+                          key={resource.href}
+                          href={resource.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block rounded-xl border border-stone-700 bg-stone-800 p-5 hover:border-accent-400 transition-colors"
+                        >
+                          <h3 className="font-display font-semibold text-lg text-white">{resource.label}</h3>
+                          <p className="mt-2 text-sm leading-relaxed text-stone-300">{resource.description}</p>
+                          <span className="mt-3 inline-flex text-sm font-semibold text-accent-300">Open official resource →</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </section>

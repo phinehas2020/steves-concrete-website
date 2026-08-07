@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { FORMULAIC_BLOG_SLUGS } from '../data/indexingControls'
 import { isSourceManagedBlogSlug } from '../data/staticBlogPosts'
 import { BlogPhotoStudio } from './BlogPhotoStudio'
 
@@ -37,8 +36,6 @@ const seoStatusOptions = [
   { value: 'approved', label: 'SEO approved' },
   { value: 'noindex', label: 'Public archive (noindex)' },
 ]
-const authenticityArchiveSlugSet = new Set(FORMULAIC_BLOG_SLUGS)
-
 function factsFromTextarea(value) {
   return String(value || '')
     .split('\n')
@@ -183,10 +180,7 @@ export function AdminBlog({ currentUserEmail, accessToken }) {
     }
 
     const normalizedSlug = formData.slug.trim().toLowerCase()
-    if (
-      isSourceManagedBlogSlug(normalizedSlug) &&
-      !authenticityArchiveSlugSet.has(normalizedSlug)
-    ) {
+    if (isSourceManagedBlogSlug(normalizedSlug)) {
       setMessage(
         'That slug belongs to a source-managed article. Update it in the repository so its content and crawler HTML ship together.',
       )

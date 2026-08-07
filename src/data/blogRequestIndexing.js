@@ -137,8 +137,9 @@ export async function resolveBlogRequestIndexing(
   if (!route) return null
 
   const staticRecord = staticPostBySlug.get(route.slug)
-  // Source-authored articles and exact audit archives are immutable from the
-  // CMS. Their page content, canonical, and robots state ship in one release.
+  // Source-managed articles are immutable from the CMS. Their page content,
+  // editorial approval, canonical, and robots state ship in one release, so a
+  // stale database row cannot re-block or redirect the released source record.
   if (staticRecord?.source_managed) {
     return getRouteIndexingState(route.path, staticRecord)
   }

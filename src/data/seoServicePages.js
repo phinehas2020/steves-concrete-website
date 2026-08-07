@@ -72,88 +72,155 @@ const baseSeoServicePages = [
   },
   {
     slug: 'sports-court-coating-waco-tx',
-    title: 'Sports Court Concrete Project Review in Waco, TX',
+    title: 'Sports Court Concrete Base Planning in Waco, TX',
+    indexable: true,
+    evidenceStatus: 'indexable_planning_resource',
+    pagePurpose: 'waco_concrete_base_feasibility_scope_and_partner_coordination',
     showGallery: false,
+    pageBadge: 'Waco concrete-base planning',
+    ctaLabel: 'Plan My Court Base',
     cardSummary:
-      'Review the concrete portion of a proposed sports-court project and separate it from surfacing, striping, equipment, design, and other specialist work.',
-    metaTitle: 'Sports Court Concrete Project Review | Waco, TX',
+      'Plan a new court base or evaluate an existing slab around access, drainage, concrete scope, and the handoff to a qualified court-surface specialist.',
+    metaTitle: 'Sports Court Concrete Base Planning in Waco, TX | SLA',
     metaDescription:
-      'Ask SLA Concrete Works about the concrete portion of a Waco sports-court project. Court coating, regulation striping, design, and other trades must be assigned in writing.',
+      'Plan a Waco sports-court concrete base or slab repair with a clear site checklist, concrete scope, drainage decisions, and court-surface specialist handoff.',
     introParagraph:
-      'SLA Concrete Works is a concrete contractor. For a sports-court inquiry, we can review whether the concrete portion fits our scope and current schedule. This page does not claim that SLA has completed a regulation court, applies an athletic coating system, or performs regulation line striping.',
-    evidenceNote:
-      'Current proof boundary: the public project gallery includes decorative play-area concrete, not a documented regulation pickleball, tennis, or basketball court. It is not used as sports-court installation proof on this page.',
+      'A sports court needs more than a colored finish. SLA helps Waco owners organize the concrete-base decision: site access, grade, drainage, base preparation, slab work, repair or replacement, and the handoff to the court designer or surface specialist who controls the playing-system requirements.',
     scopeBoundary: {
-      slaTitle: 'Concrete work SLA may quote',
+      slaTitle: 'Concrete-base scope SLA can evaluate',
       slaItems: [
-        'Site access, existing-slab condition, drainage, and concrete feasibility review',
-        'Subgrade, base, forming, reinforcement, placement, joints, slope, and finish only when those items are accepted in the written proposal',
-        'Concrete repair or replacement work that is specifically identified after a site review',
+        'Site access, work limits, existing-slab condition, grade, and drainage feasibility',
+        'Accepted site preparation, base, forming, reinforcement, placement, joints, slope, concrete finish, and cure responsibilities',
+        'Defined concrete repair, partial replacement, full replacement, or new-base work after the appropriate site review',
       ],
-      specialistTitle: 'Specialist or other-trade work',
+      specialistTitle: 'Court specialist and project-team scope',
       specialistItems: [
-        'Court design, regulation dimensions, athletic-surface specifications, color coating, and game-line layout or verification',
-        'Surveying, engineering, permits, inspections, accessibility design, and any required moisture or system testing',
-        'Fencing, lighting and electrical, net systems, equipment, shade, spectator features, and acoustics',
+        'Court layout, sport dimensions, surface-system specifications, coating, texture, color, game lines, and play-surface acceptance',
+        'Surveying, engineering, permits, inspections, accessibility design, moisture or system testing, and manufacturer requirements',
+        'Fencing, lighting, electrical, net systems, equipment, shade, spectator features, landscaping, and other non-concrete work',
       ],
     },
+    decisionGuide: {
+      title: 'Which concrete conversation do you need?',
+      intro:
+        'Pick the starting condition below. It determines what SLA needs to see and when the court-surface specialist should enter the process.',
+      items: [
+        {
+          title: 'New court base',
+          description:
+            'Start with the address, intended sport, approximate footprint, survey or layout if available, access, grade, drainage path, and the surface specialist’s concrete requirements.',
+        },
+        {
+          title: 'Existing slab with visible problems',
+          description:
+            'Document movement, cracks, offsets, failed patches, edges, joints, ponding, and runoff. The next step may be concrete repair, replacement, drainage work, testing, or professional evaluation.',
+        },
+        {
+          title: 'Stable slab needing a playing surface',
+          description:
+            'Choose the court-surface specialist first. That provider should inspect or test the substrate and define preparation, profile, crack treatment, moisture, cure, coating, and line requirements.',
+        },
+      ],
+    },
+    planningChecklist: [
+      'Waco-area address, owner contact, intended sport, and expected use',
+      'Approximate outside dimensions plus a sketch, survey, aerial, or site plan',
+      'Photos of the work area, truck route, gates, overhead conflicts, staging, drainage, and existing concrete',
+      'New construction, repair, partial replacement, full replacement, or condition still unknown',
+      'Court designer or surface specialist and its slab, finish, joint, cure, and moisture requirements',
+      'Known permit, inspection, accessibility, utility, HOA, school, or facility responsibilities',
+      'Target construction window and any access, noise, event, or operating-hour constraints',
+    ],
+    officialResources: [
+      {
+        label: 'City of Waco construction permits',
+        href: 'https://www.waco-texas.com/Departments/Development-Services/Inspection-Services/Commercial-Construction-Permits',
+        description:
+          'Official Waco permit, contractor-registration, portal, and inspection information for project-specific review.',
+      },
+      {
+        label: 'Texas Architectural Barriers program',
+        href: 'https://www.tdlr.texas.gov/AB/index.htm',
+        description:
+          'Official TDLR information for owners and designers evaluating Texas accessibility requirements.',
+      },
+    ],
+    resourceLinks: [
+      { label: 'Texas travel and logistics guide', href: '/sports-court-coating/texas' },
+      { label: 'Dallas site-readiness guide', href: '/sports-court-coating/dallas-tx' },
+      { label: 'Fort Worth slab decision guide', href: '/sports-court-coating/fort-worth-tx' },
+      { label: 'Recent concrete project gallery', href: '/jobs' },
+      { label: 'Waco concrete contractor hub', href: '/waco-tx-concrete-contractor' },
+    ],
     sections: [
       {
-        heading: 'Start with a written division of responsibility',
+        heading: 'Start with use, layout, and the project team',
         paragraphs: [
-          'A complete athletic court can involve sitework, concrete, court-surface design, coating, line layout, fencing, lighting, equipment, accessibility, and permits. Those are not automatically one contractor\'s scope. Before work is scheduled, the proposal should name who supplies the plans and who performs each part.',
-          'SLA should only be treated as responsible for the concrete items listed in its written proposal. No coating manufacturer, court-surface partner, installer credential, regulation layout service, or completed regulation-court case study is currently documented on this site.',
+          'A backyard practice area, private pickleball court, school play court, and shared commercial facility can require very different dimensions, drainage, access, equipment, accessibility, and documentation. Tell us the intended sport, level of use, rough footprint, and who will define the playing layout before concrete dimensions are treated as final.',
+          'The court designer or surface specialist should supply the requirements that affect the base. SLA turns the accepted concrete portion into a written scope. The owner or project manager assigns design, permits, fencing, lighting, equipment, accessibility, coating, and other non-concrete work to the appropriate parties.',
         ],
       },
       {
-        heading: 'Concrete requirements come from the project documents',
+        heading: 'New concrete bases begin with access, grade, and drainage',
         paragraphs: [
-          'Slab size, thickness, reinforcement, joint layout, slope, drainage, finish profile, cure, and moisture requirements vary with the site, the selected surface system, and any engineered plans. This page does not publish a universal court specification.',
-          'The owner, designer, engineer, or court-surface specialist should provide the controlling requirements. If SLA accepts the concrete portion, those requirements must be incorporated into the proposal before forming or placement begins.',
+          'Before pricing a new base, show how trucks and equipment reach the work area, where materials and spoils can stage, what must stay protected, and where water will go after it leaves the slab. Tight gates, overhead obstacles, soft routes, long pump reaches, demolition, and occupied facilities all affect sequence and cost.',
+          'Grade and drainage need to work with the court system, adjacent property, and surrounding improvements. The controlling plans or specialist requirements should establish the footprint, slope, finish, joint approach, cure, and other acceptance criteria. SLA’s proposal then states the concrete work it accepts and the information supplied by others.',
         ],
       },
       {
-        heading: 'Existing slabs need a condition decision before cosmetic work',
+        heading: 'Existing slabs need a repair-versus-replacement screen',
         paragraphs: [
-          'Photos can start a conversation, but they cannot establish that an existing slab is suitable for an athletic coating. Moving cracks, settlement, heaving, weak edges, failed repairs, and standing water may point to concrete repair, replacement, drainage work, or specialist review.',
-          'A coating is not a structural repair. The accepted concrete scope and the court specialist\'s surface-preparation requirements should be resolved before anyone promises a resurfacing result.',
+          'Photograph the whole slab first, then cracks, vertical offsets, rocking or settled panels, heaving, patches, joints, edges, drains, and ponding areas. Note whether defects have changed, whether previous repairs reopened, and where runoff reaches or leaves the slab. That pattern is more useful than one close-up crack photo.',
+          'Stable isolated damage may support a repair conversation. Widespread movement, recurring patch failure, broad settlement, edge support loss, or persistent drainage problems may make replacement or additional professional evaluation the better next step. A court-surface specialist still decides whether the repaired or new substrate meets its system requirements.',
         ],
       },
       {
-        heading: 'Information needed for an honest project review',
+        heading: 'Build the concrete estimate around defined decisions',
         paragraphs: [
-          'Send the project city, intended sport and use, available dimensions, site or slab photos, access information, known drainage concerns, and any drawings or surface-system requirements you already have. For an existing slab, include close views of cracks, edges, joints, patches, and low spots.',
-          'SLA can then confirm whether it is willing to review or quote the concrete portion. Travel, minimum project size, schedule, concrete scope, exclusions, and required handoffs are not promised until they appear in a written proposal.',
+          'A useful estimate identifies the plan or dimensions being followed, demolition, haul-off, site preparation, base, forming, reinforcement, concrete placement, finish, joints, cure responsibilities, drainage boundaries, access, cleanup, exclusions, and the handoff condition for the surface specialist.',
+          'If any of those decisions belong to an engineer, designer, manufacturer, inspector, or specialist, name that party instead of burying the gap in an allowance. Clear handoffs make competing bids easier to compare and reduce changes after the pour is scheduled.',
         ],
       },
       {
-        heading: 'Surfacing and regulation work require separate proof',
+        heading: 'Coordinate the coating handoff before concrete placement',
         paragraphs: [
-          'If a court-surface specialist is selected, ask for the named product system, substrate requirements, installer responsibility, color and texture build-up, line-layout method, cure or opening criteria, and maintenance instructions. Those details should come from that specialist and the current manufacturer documents.',
-          'SLA does not use the decorative play-area gallery as evidence of regulation court dimensions, athletic coating installation, certified striping, or sanctioned-play suitability.',
+          'Ask the selected court-surface provider for the named product system, required concrete finish or profile, slope and drainage criteria, joint and crack-treatment approach, moisture limits, cure time, preparation, coating build-up, line-layout responsibility, opening criteria, and maintenance instructions.',
+          'Those requirements should be reviewed while the concrete scope can still respond to them. SLA remains responsible for only the concrete items accepted in its proposal; the surface specialist remains responsible for substrate acceptance, its installed system, game lines, and play-surface results.',
+        ],
+      },
+      {
+        heading: 'Use one site packet to start the Waco estimate review',
+        paragraphs: [
+          'Send the address, intended sport, approximate footprint, new-versus-existing condition, target timing, a site sketch or aerial, and photos of the work area, access route, drainage, existing defects, and nearby improvements. Include any survey, plans, engineering, or court-surface documents already available.',
+          'SLA can use that packet to identify whether the next step is a feasibility call, site review, missing design input, concrete repair or replacement discussion, or a proposal for a defined concrete base. You get a useful next decision instead of a generic square-foot number disconnected from the site.',
         ],
       },
     ],
     faq: [
       {
-        question: 'Does SLA apply acrylic sport coatings or regulation game lines?',
+        question: 'Can SLA plan or quote the concrete base for a Waco sports court?',
         answer:
-          'The current public project record does not verify those as SLA self-performed services. They should not be assumed to be included. Any proposal must name the coating or striping performer, system, and responsibility; otherwise plan to use a qualified court-surface specialist.',
+          'Yes, SLA can review a proposed new base, repair, or replacement and define the concrete work it is willing to quote. Send the site packet first so access, grade, drainage, slab requirements, and the surface-specialist handoff can be addressed in the proposal.',
       },
       {
-        question: 'Does SLA build a complete pickleball, tennis, or basketball court?',
+        question: 'Who handles sports coating and game-line striping?',
         answer:
-          'This page describes only a possible concrete scope. A complete court may also require design, engineering, court surfacing, regulation line layout, fencing, lighting, equipment, accessibility work, and permits by other qualified parties.',
+          'Plan on a qualified court-surface specialist for coating selection, substrate acceptance, preparation, color coats, texture, game-line layout, cure, and play-surface approval unless a written proposal explicitly assigns those items to a named provider.',
       },
       {
-        question: 'Can SLA quote the concrete base or concrete repair?',
+        question: 'Can an existing Waco slab be repaired and coated?',
         answer:
-          'Send the location, dimensions, site or slab photos, access details, drainage concerns, and any plans or surface-system specifications. SLA can review whether the concrete portion fits its current scope and schedule, then define accepted work and exclusions in writing.',
+          'Possibly, but the decision depends on the movement pattern, settlement, edges, patches, joints, drainage, and the selected surface system. SLA can evaluate concrete repair or replacement; the court specialist determines whether the resulting substrate is acceptable for its coating system.',
       },
       {
-        question: 'Is the decorative play-area project a regulation court case study?',
+        question: 'What should I send for a Waco court-base estimate?',
         answer:
-          'No. It documents a decorative outdoor play-area surface. The available record does not establish regulation court dimensions, sport-specific lines, an athletic coating system, or court certification.',
+          'Send the address, sport and use, approximate footprint, site or slab photos, access route, drainage concerns, target timing, new-versus-existing condition, and any survey, plans, engineering, or surface-system requirements. Mark problem areas and dimensions directly on the photos when helpful.',
+      },
+      {
+        question: 'Who confirms permits and accessibility requirements?',
+        answer:
+          'The property owner and design team should confirm the requirements for the actual address, ownership, funding, use, and scope with the City of Waco and applicable state authorities. SLA’s concrete proposal identifies its accepted work but does not replace project-specific design or regulatory review.',
       },
     ],
   },

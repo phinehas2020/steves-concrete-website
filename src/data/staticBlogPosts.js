@@ -1,4 +1,4 @@
-import { FORMULAIC_BLOG_SLUGS } from './indexingControls.js'
+import { repairedBlogPosts } from './repairedBlogPosts.js'
 
 const editorialStaticBlogPosts = [
   {
@@ -600,33 +600,9 @@ const editorialStaticBlogPosts = [
   },
 ]
 
-const authenticityAuditArchivePosts = FORMULAIC_BLOG_SLUGS.map((slug) => ({
-  id: `authenticity-audit-archive-${slug}`,
-  created_at: null,
-  updated_at: null,
-  published_at: null,
-  title: 'Archived Project Note Pending Source Review',
-  slug,
-  excerpt:
-    'This older project note remains available to direct visitors while its job record, first-hand facts, and photo captions are reviewed.',
-  status: 'published',
-  seo_status: 'needs_facts',
-  source_summary:
-    'No approved public source packet is attached yet. This archive is not used as verified service proof or submitted for search indexing.',
-  canonical_slug:
-    slug === 'for-concrete-or-circle-k-lacy-lake-view'
-      ? 'circle-k-concrete-flatwork-lacy-lakeview-tx'
-      : null,
-  content: [
-    'This URL is being preserved as a public archive while the original job is identified and checked against source records.',
-    'Before this note can be approved, it needs a job or source ID, Stephen’s first-hand observation, at least three job-specific facts, the actual SLA and other-trade scope, and useful captions for every photo.',
-    'Until that review is complete, the page remains out of the sitemap and is not presented as proof of a service, location, product, quantity, schedule, or outcome.',
-  ].join('\n\n'),
-}))
-
 export const staticBlogPosts = [
   ...editorialStaticBlogPosts,
-  ...authenticityAuditArchivePosts,
+  ...repairedBlogPosts,
 ].map((post) => Object.freeze({ ...post, source_managed: true }))
 
 const sourceManagedBlogSlugSet = new Set(staticBlogPosts.map((post) => post.slug))

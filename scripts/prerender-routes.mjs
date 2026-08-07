@@ -390,12 +390,12 @@ const routeMeta = [
     h1: area.heroTitle,
     schemaKind: 'static',
     schemaName: area.heroTitle,
-    schemaServiceType: 'Sports court coating',
+    schemaServiceType: 'Sports court concrete-base planning',
     schemaDescription: area.seoDescription || area.heroSubtitle || area.intro,
     faq: area.faq || [],
     breadcrumbs: [
       { name: 'Home', url: `${SITE_URL}/` },
-      { name: 'Sports Court Concrete Project Review', url: `${SITE_URL}/sports-court-coating-waco-tx` },
+      { name: 'Sports Court Concrete Base Planning', url: `${SITE_URL}/sports-court-coating-waco-tx` },
       { name: area.areaName, url: `${SITE_URL}/sports-court-coating/${area.slug}` },
     ],
     contentHtml: renderSportsCourtAreaContent(area),
@@ -868,6 +868,33 @@ function renderSeoServiceContent(service) {
     title: section.heading,
     paragraphs: section.paragraphs || [],
   }))
+  const decisionGuideSections = service.decisionGuide
+    ? [
+        {
+          title: service.decisionGuide.title,
+          paragraphs: service.decisionGuide.intro ? [service.decisionGuide.intro] : [],
+          bullets: (service.decisionGuide.items || []).map(
+            (item) => `${item.title}: ${item.description}`,
+          ),
+        },
+      ]
+    : []
+  const planningChecklistSections = service.planningChecklist?.length
+    ? [
+        {
+          title: service.checklistTitle || 'Project decision checklist',
+          bullets: service.planningChecklist,
+        },
+      ]
+    : []
+  const officialResourceSections = service.officialResources?.length
+    ? [
+        {
+          title: 'Official planning resources',
+          links: service.officialResources,
+        },
+      ]
+    : []
   const galleryImages =
     service.showGallery === false ? [] : getServiceGalleryImages(service.slug, service.title)
   const boundarySections = service.scopeBoundary
@@ -932,8 +959,11 @@ function renderSeoServiceContent(service) {
             },
           ]
         : []),
+      ...decisionGuideSections,
+      ...planningChecklistSections,
       ...boundarySections,
       ...serviceSections,
+      ...officialResourceSections,
       ...(galleryImages.length > 0
         ? [
             {
@@ -1045,6 +1075,9 @@ function renderSportsCourtAreaContent(area) {
   const localFocusBullets = (area.localFocus || []).map(
     (item) => `${item.title}: ${item.description}`,
   )
+  const decisionGuideBullets = (area.decisionGuide?.items || []).map(
+    (item) => `${item.title}: ${item.description}`,
+  )
   const availabilityParagraphs = area.availability?.paragraphs || []
 
   return renderPage({
@@ -1068,7 +1101,17 @@ function renderSportsCourtAreaContent(area) {
         orderedBullets: true,
       },
       {
-        title: `${area.areaName} planning and proof limits`,
+        title: area.decisionGuide?.title || `${area.areaName} project decision guide`,
+        paragraphs: area.decisionGuide?.intro ? [area.decisionGuide.intro] : [],
+        bullets: decisionGuideBullets,
+      },
+      {
+        title: area.checklistTitle || `${area.areaName} estimate-readiness checklist`,
+        paragraphs: area.checklistIntro ? [area.checklistIntro] : [],
+        bullets: area.decisionChecklist || [],
+      },
+      {
+        title: `${area.areaName} project-planning considerations`,
         bullets: localFocusBullets,
       },
       {
@@ -1080,10 +1123,14 @@ function renderSportsCourtAreaContent(area) {
         paragraphs: area.coverageIntro ? [area.coverageIntro] : [],
         bullets: area.coveragePoints || [],
       },
-      {
-        title: 'Evidence required before this becomes a local proof page',
-        bullets: area.evidenceRequirements || [],
-      },
+      ...(area.officialResources?.length
+        ? [
+            {
+              title: 'Official planning resources',
+              links: area.officialResources,
+            },
+          ]
+        : []),
       {
         title: 'Waco contractor hub and blog resources',
         links: wacoHubResourceLinks,

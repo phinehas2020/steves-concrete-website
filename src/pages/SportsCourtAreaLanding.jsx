@@ -40,7 +40,11 @@ function SportsCourtAreaLandingPage({ page }) {
     coverageTitle,
     coverageIntro,
     coveragePoints = [],
-    evidenceRequirements = [],
+    decisionGuide,
+    checklistTitle,
+    checklistIntro,
+    decisionChecklist = [],
+    officialResources = [],
     faq = [],
   } = page
 
@@ -54,7 +58,7 @@ function SportsCourtAreaLandingPage({ page }) {
     description: seoDescription,
     about: {
       '@type': 'Thing',
-      name: `Sports-court concrete project availability for ${areaName}`,
+      name: `Sports-court concrete-base planning for ${areaName}`,
     },
     publisher: {
       '@id': ORGANIZATION_ID,
@@ -64,19 +68,19 @@ function SportsCourtAreaLandingPage({ page }) {
   const faqJsonLd = buildFaqPage(faq)
   const breadcrumbsJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `${SITE_URL}/` },
-    { name: 'Sports Court Concrete Project Review', url: `${SITE_URL}/sports-court-coating-waco-tx` },
-    { name: `${areaName} Availability`, url: canonicalUrl },
+    { name: 'Sports Court Concrete Base Planning', url: `${SITE_URL}/sports-court-coating-waco-tx` },
+    { name: `${areaName} Planning Guide`, url: canonicalUrl },
   ])
 
   useSeo({
     title: seoTitle || `${heroTitle} | SLA Concrete Works`,
     description:
       seoDescription ||
-      `Review availability and concrete-scope boundaries for a sports-court inquiry in ${areaName}.`,
+      `Plan a sports-court concrete base, specialist handoff, and estimate review for ${areaName}.`,
     canonical: canonicalUrl,
     url: canonicalUrl,
     image: DEFAULT_IMAGE,
-    imageAlt: `Sports-court concrete project availability for ${areaName}`,
+    imageAlt: `Sports-court concrete-base planning for ${areaName}`,
     type: 'website',
     jsonLd: buildJsonLdGraph(webPageJsonLd, faqJsonLd, breadcrumbsJsonLd),
   })
@@ -124,7 +128,7 @@ function SportsCourtAreaLandingPage({ page }) {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <div>
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Scope Boundaries
+                  Project Roles
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
                   {scopeTitle || `Trade boundaries for a ${areaName} court inquiry`}
@@ -162,15 +166,42 @@ function SportsCourtAreaLandingPage({ page }) {
           </div>
         </section>
 
+        {decisionGuide?.items?.length > 0 && (
+          <section className="section-padding bg-accent-50/60 border-y border-accent-100">
+            <div className="container-main">
+              <div className="max-w-3xl mb-8">
+                <span className="inline-block text-accent-700 font-semibold text-sm uppercase tracking-wide mb-3">
+                  Decision Guide
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                  {decisionGuide.title}
+                </h2>
+                <p className="text-lg text-stone-600 text-pretty">{decisionGuide.intro}</p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-3">
+                {decisionGuide.items.map((item, index) => (
+                  <article key={item.title} className="rounded-2xl border border-accent-100 bg-white p-6 shadow-sm">
+                    <p className="text-xs uppercase tracking-wide text-accent-700 font-semibold mb-3">
+                      Decision {index + 1}
+                    </p>
+                    <h3 className="font-display font-semibold text-xl text-stone-900 mb-3">{item.title}</h3>
+                    <p className="text-sm leading-relaxed text-stone-600 text-pretty">{item.description}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="section-padding bg-stone-50">
           <div className="container-main">
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <div>
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Inquiry Process
+                  Estimate Process
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  How an inquiry becomes an accepted scope
+                  How a concept becomes a buildable concrete scope
                 </h2>
                 <div className="space-y-4">
                   {process.map((step, index) => (
@@ -197,7 +228,8 @@ function SportsCourtAreaLandingPage({ page }) {
                     <a href="sms:+12542303102" className="font-semibold text-accent-600 hover:underline">
                       (254) 230-3102
                     </a>{' '}
-                    for an initial concrete-scope review. A reply is not a travel or service commitment.
+                    for an initial concrete-scope review. The first review identifies the next decision,
+                    missing document, or site step needed for a useful estimate.
                   </p>
                 </div>
               </div>
@@ -210,7 +242,7 @@ function SportsCourtAreaLandingPage({ page }) {
             <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
               <div>
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Availability
+                  Planning Checklist
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
                   {coverageTitle || `What availability means for ${areaName}`}
@@ -229,13 +261,13 @@ function SportsCourtAreaLandingPage({ page }) {
               </div>
               <div className="bg-stone-900 text-white rounded-2xl p-8">
                 <h3 className="font-display font-semibold text-2xl mb-3">
-                  Evidence required before this becomes a local proof page
+                  {checklistTitle || 'Estimate-readiness checklist'}
                 </h3>
                 <p className="text-stone-300 mb-6">
-                  This route stays an availability page until the business can document real local work and exact trade responsibility.
+                  {checklistIntro || 'Bring these facts together before requesting a firm concrete proposal.'}
                 </p>
                 <ul className="space-y-4 text-stone-200">
-                  {evidenceRequirements.map((requirement) => (
+                  {decisionChecklist.map((requirement) => (
                     <li key={requirement} className="flex gap-3">
                       <span className="mt-2 size-2 shrink-0 rounded-full bg-accent-400" />
                       <span>{requirement}</span>
@@ -247,6 +279,41 @@ function SportsCourtAreaLandingPage({ page }) {
           </div>
         </section>
 
+        {officialResources.length > 0 && (
+          <section className="section-padding bg-stone-50">
+            <div className="container-main">
+              <div className="max-w-3xl mb-8">
+                <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
+                  Official Planning Links
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
+                  Verify requirements for the actual site and scope
+                </h2>
+                <p className="text-lg text-stone-600 text-pretty">
+                  Permit and accessibility decisions belong to the owner and design team. These official resources are useful starting points; confirm current project-specific requirements before construction.
+                </p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {officialResources.map((resource) => (
+                  <a
+                    key={resource.href}
+                    href={resource.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group rounded-2xl border border-stone-200 bg-white p-6 hover:border-accent-400 hover:shadow-sm transition-all"
+                  >
+                    <h3 className="font-display font-semibold text-xl text-stone-900 group-hover:text-accent-700 transition-colors">
+                      {resource.label}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-stone-600 text-pretty">{resource.description}</p>
+                    <span className="mt-4 inline-flex text-sm font-semibold text-accent-700">Open official resource →</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {faq.length > 0 && (
           <section className="section-padding bg-stone-50">
             <div className="container-main max-w-3xl">
@@ -255,10 +322,10 @@ function SportsCourtAreaLandingPage({ page }) {
                   FAQs
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Project availability questions for {areaName}
+                  Sports-court planning questions for {areaName}
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty">
-                  Clear answers before anyone treats an inquiry as accepted work.
+                  Clear answers for organizing the concrete scope, specialist handoff, and estimate review.
                 </p>
               </div>
               <div className="space-y-4">

@@ -18,17 +18,17 @@ const featuredServices = [
   },
   {
     slug: 'sports-court-coating-waco-tx',
-    title: 'Sports Court Concrete Review',
-    tag: 'Scope Review',
+    title: 'Sports Court Concrete Base Planning',
+    tag: 'Project Planning',
     icon: Trophy,
     description:
-      'Start with the concrete question, then assign court surfacing, regulation lines, design, equipment, and other trades in writing. SLA is not presented as a coating or striping specialist without project proof.',
+      'Plan a new court base or evaluate an existing slab around access, drainage, concrete scope, and the handoff to the court designer or surface specialist.',
     bullets: [
-      'Concrete-base or slab-repair scope reviewed separately',
-      'Court coating and line layout assigned to a specialist',
-      'Travel and accepted work confirmed before scheduling',
+      'New-base and repair-versus-replacement decision guides',
+      'Seven-item estimate-readiness checklist',
+      'Concrete work and court-specialist handoff defined separately',
     ],
-    cta: 'Review court project scope',
+    cta: 'Plan a court base',
   },
 ]
 

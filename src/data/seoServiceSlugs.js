@@ -31,7 +31,7 @@ export const servicePageLinks = [
     slug: 'concrete-resurfacing-waco-tx',
   },
   {
-    label: 'Sports Court Concrete Project Review in Waco, TX',
+    label: 'Sports Court Concrete Base Planning in Waco, TX',
     slug: 'sports-court-coating-waco-tx',
   },
   {

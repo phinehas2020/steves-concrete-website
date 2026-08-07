@@ -21,19 +21,49 @@ import { guidePages } from '../src/data/guides.js'
 import { locationPages } from '../src/data/locationPages.js'
 import { seoServicePages } from '../src/data/seoServicePages.js'
 import { servicePages } from '../src/data/servicePages.js'
+import { sportsCourtAreaPages } from '../src/data/sportsCourtAreaPages.js'
+import { repairedBlogPosts } from '../src/data/repairedBlogPosts.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 import {
-  AUTHENTICITY_NOINDEX_CONTROLS,
-  FORMULAIC_BLOG_SLUGS,
+  REPAIRED_BLOG_SLUGS,
   getRouteIndexingState,
+  isRoutePubliclyDiscoverable,
 } from '../src/data/indexingControls.js'
+import {
+  REPAIRED_BLOG_MIGRATION_COLUMNS,
+  renderRepairedBlogMigration,
+} from './render-repaired-blog-migration.mjs'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const expectedBusinessDescription =
   'Concrete contractor serving Waco, McLennan County, and nearby Central Texas communities with driveways, patios, stamped concrete, slabs, repairs, and commercial concrete work.'
+const REPAIRED_SPORTS_PATHS = [
+  '/sports-court-coating/texas',
+  '/sports-court-coating/dallas-tx',
+  '/sports-court-coating/fort-worth-tx',
+  '/sports-court-coating-waco-tx',
+]
+const REPAIRED_BLOG_PATHS = REPAIRED_BLOG_SLUGS.map((slug) => `/blog/${slug}`)
+const REPAIRED_ROUTE_PATHS = [...REPAIRED_BLOG_PATHS, ...REPAIRED_SPORTS_PATHS]
 
 async function readJson(relativePath) {
   return JSON.parse(await fs.readFile(path.join(projectRoot, relativePath), 'utf8'))
+}
+
+function publicWordCount(value) {
+  return (
+    String(value || '')
+      .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+      .replace(/\[[^\]]+\]\([^)]*\)/g, ' ')
+      .match(/[A-Za-z0-9]+(?:[’'-][A-Za-z0-9]+)*/g) || []
+  ).length
+}
+
+function normalizePublicCopy(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
 }
 
 async function invokeSitemapHandler() {
@@ -100,42 +130,199 @@ test('the runtime sitemap returns unique canonical URLs', async () => {
   })
   assert.ok(!urls.includes('https://www.concretewaco.com/services/concrete-contractors'))
   assert.ok(!urls.includes('https://www.concretewaco.com/concrete-repair-waco-tx'))
-  AUTHENTICITY_NOINDEX_CONTROLS.forEach((control) => {
-    assert.ok(!urls.includes(`https://www.concretewaco.com${control.path}`))
+  REPAIRED_ROUTE_PATHS.forEach((routePath) => {
+    assert.ok(
+      urls.includes(`https://www.concretewaco.com${routePath}`),
+      `${routePath} must be restored to the runtime sitemap`,
+    )
   })
 })
 
-test('authenticity controls keep red routes public but out of Search', () => {
-  assert.equal(AUTHENTICITY_NOINDEX_CONTROLS.length, 23)
-  assert.equal(FORMULAIC_BLOG_SLUGS.length, 19)
+test('the 23 repaired routes are indexable, discoverable, and self-canonical', () => {
+  assert.equal(REPAIRED_BLOG_SLUGS.length, 19)
+  assert.equal(REPAIRED_ROUTE_PATHS.length, 23)
 
-  AUTHENTICITY_NOINDEX_CONTROLS.forEach((control) => {
-    const state = getRouteIndexingState(control.path, { seo_status: 'approved' })
-    assert.equal(state.indexable, false, control.path)
-    assert.equal(state.includeInSitemap, false, control.path)
-    assert.equal(state.robots, 'noindex, follow', control.path)
-    assert.equal(state.canonicalPath, control.path, control.path)
+  REPAIRED_BLOG_SLUGS.forEach((slug) => {
+    const post = staticBlogPosts.find((candidate) => candidate.slug === slug)
+    const routePath = `/blog/${slug}`
+    assert.ok(post, slug)
+    assert.equal(post.source_managed, true, slug)
+    assert.equal(post.status, 'published', slug)
+    assert.equal(post.seo_status, 'approved', slug)
+
+    const state = getRouteIndexingState(routePath, post)
+    assert.equal(state.indexable, true, routePath)
+    assert.equal(state.includeInSitemap, true, routePath)
+    assert.equal(state.robots, 'index, follow', routePath)
+    assert.equal(state.canonicalPath, routePath, routePath)
+    assert.equal(isRoutePubliclyDiscoverable(routePath, post), true, routePath)
   })
 
-  assert.equal(
-    getRouteIndexingState('/jobs/2026-client-decorative-court-surfacing').indexable,
-    true,
-  )
-
-  FORMULAIC_BLOG_SLUGS.forEach((slug) => {
-    const archive = staticBlogPosts.find((post) => post.slug === slug)
-    assert.ok(archive, slug)
-    assert.equal(archive.status, 'published', slug)
-    assert.equal(archive.seo_status, 'needs_facts', slug)
-    assert.match(archive.source_summary, /not used as verified service proof/i, slug)
+  REPAIRED_SPORTS_PATHS.forEach((routePath) => {
+    const state = getRouteIndexingState(routePath)
+    assert.equal(state.indexable, true, routePath)
+    assert.equal(state.includeInSitemap, true, routePath)
+    assert.equal(state.robots, 'index, follow', routePath)
+    assert.equal(state.canonicalPath, routePath, routePath)
+    assert.equal(isRoutePubliclyDiscoverable(routePath), true, routePath)
   })
+})
 
+test('repaired blog posts are useful source-managed articles, not hollow unblocks', () => {
+  const repairedPosts = REPAIRED_BLOG_SLUGS.map((slug) => {
+    const post = staticBlogPosts.find((candidate) => candidate.slug === slug)
+    assert.ok(post, slug)
+    return post
+  })
+  const retiredBoilerplate =
+    /Archived Project Note Pending Source Review|This older project note remains available|not used as verified service proof|SLA Concrete Works handles[^.\n]{70,}(?:across|around) (?:Waco|Central Texas)|\b(?:request|get|schedule) (?:a )?free estimate\b/i
+
+  assert.equal(new Set(repairedPosts.map((post) => post.title)).size, repairedPosts.length)
   assert.equal(
-    staticBlogPosts.find(
-      (post) => post.slug === 'for-concrete-or-circle-k-lacy-lake-view',
-    )?.canonical_slug,
-    'circle-k-concrete-flatwork-lacy-lakeview-tx',
+    new Set(repairedPosts.map((post) => normalizePublicCopy(post.content))).size,
+    repairedPosts.length,
   )
+
+  repairedPosts.forEach((post) => {
+    const headings = String(post.content || '').match(/^#{2,3}\s+\S.+$/gm) || []
+    const hasMedia =
+      /^\/blog-images\/|^https:\/\//i.test(String(post.cover_image_url || '')) ||
+      /!\[[^\]]+\]\([^)]+\)/.test(String(post.content || ''))
+    const hasSourceRecord =
+      String(post.source_summary || '').trim().length >= 60 &&
+      !/no approved|pending|not used|source review/i.test(post.source_summary)
+
+    assert.match(post.title, /[A-Za-z]{3}/, post.slug)
+    assert.ok(post.title.length >= 12 && post.title.length <= 95, post.slug)
+    assert.doesNotMatch(post.title, /archived|pending|for concrete or|texas texas/i, post.slug)
+    assert.ok(publicWordCount(post.content) >= 180, `${post.slug} needs useful depth`)
+    assert.ok(headings.length >= 2, `${post.slug} needs multiple scannable sections`)
+    assert.ok(hasMedia || hasSourceRecord, `${post.slug} needs media or a public source record`)
+    assert.doesNotMatch(post.content, retiredBoilerplate, post.slug)
+    assert.doesNotMatch(post.excerpt, retiredBoilerplate, post.slug)
+  })
+})
+
+test('sports planning routes have distinct indexable purposes and decision guides', () => {
+  const waco = seoServicePages.find(
+    (page) => page.slug === 'sports-court-coating-waco-tx',
+  )
+  assert.ok(waco)
+  assert.ok(waco.scopeBoundary?.slaItems?.length >= 3)
+  assert.ok(waco.scopeBoundary?.specialistItems?.length >= 3)
+  assert.ok(waco.planningChecklist?.length >= 5)
+  assert.ok(waco.officialResources?.length >= 2)
+
+  const records = [
+    ...sportsCourtAreaPages.map((page) => ({
+      routePath: `/sports-court-coating/${page.slug}`,
+      record: page,
+      publicCopy: [
+        page.heroSubtitle,
+        page.intro,
+        page.scopeIntro,
+        page.decisionGuide?.intro,
+        ...(page.decisionGuide?.items || []).flatMap((item) => [item.title, item.description]),
+      ].join(' '),
+    })),
+    {
+      routePath: '/sports-court-coating-waco-tx',
+      record: waco,
+      publicCopy: [
+        waco.cardSummary,
+        waco.introParagraph,
+        waco.decisionGuide?.intro,
+        ...(waco.decisionGuide?.items || []).flatMap((item) => [item.title, item.description]),
+        ...(waco.sections || []).flatMap((section) => [
+          section.heading,
+          ...(section.paragraphs || []),
+        ]),
+      ].join(' '),
+    },
+  ]
+
+  assert.equal(records.length, 4)
+  assert.equal(new Set(records.map(({ record }) => record.pagePurpose)).size, 4)
+  assert.equal(
+    new Set(
+      records.map(({ record }) =>
+        normalizePublicCopy(
+          (record.decisionGuide?.items || [])
+            .flatMap((item) => [item.title, item.description])
+            .join(' '),
+        ),
+      ),
+    ).size,
+    4,
+  )
+
+  records.forEach(({ routePath, record, publicCopy }) => {
+    assert.equal(record.indexable, true, routePath)
+    assert.equal(record.evidenceStatus, 'indexable_planning_resource', routePath)
+    assert.match(record.pagePurpose, /^[a-z0-9]+(?:_[a-z0-9]+){2,}$/, routePath)
+    assert.ok(record.decisionGuide?.title, routePath)
+    assert.ok(record.decisionGuide?.intro, routePath)
+    assert.ok(record.decisionGuide?.items?.length >= 3, routePath)
+    assert.ok(publicWordCount(publicCopy) >= 140, `${routePath} needs decision-useful copy`)
+  })
+})
+
+test('the repaired routes are covered by raw prerender generation', async (context) => {
+  const prerenderSource = await fs.readFile(
+    path.join(projectRoot, 'scripts/prerender-routes.mjs'),
+    'utf8',
+  )
+  assert.match(prerenderSource, /\.\.\.publishedBlogPosts\.map\(\(post\) =>/)
+  assert.match(prerenderSource, /\.\.\.sportsCourtAreaPageData\.map\(\(area\) =>/)
+
+  try {
+    await fs.access(path.join(projectRoot, 'dist', 'index.html'))
+  } catch {
+    context.skip('Run npm run build to verify generated raw HTML artifacts')
+    return
+  }
+
+  for (const routePath of REPAIRED_ROUTE_PATHS) {
+    const html = await fs.readFile(
+      path.join(projectRoot, 'dist', routePath.replace(/^\//, ''), 'index.html'),
+      'utf8',
+    )
+    const canonical = `https://www.concretewaco.com${routePath}`
+
+    assert.match(html, /<meta[^>]+name=["']robots["'][^>]+content=["']index, follow["'][^>]*>/i, routePath)
+    assert.ok(
+      html.includes(`<link rel="canonical" href="${canonical}" />`),
+      `${routePath} needs a self-canonical in raw HTML`,
+    )
+    assert.match(html, /data-prerender-content=["']true["']/, routePath)
+    assert.doesNotMatch(html, /Archive under source review|kept out of Search/i, routePath)
+  }
+
+  const waco = seoServicePages.find(
+    (page) => page.slug === 'sports-court-coating-waco-tx',
+  )
+  const sportsRecords = [
+    ...sportsCourtAreaPages.map((record) => ({
+      routePath: `/sports-court-coating/${record.slug}`,
+      record,
+    })),
+    { routePath: '/sports-court-coating-waco-tx', record: waco },
+  ]
+  for (const { routePath, record } of sportsRecords) {
+    const html = await fs.readFile(
+      path.join(projectRoot, 'dist', routePath.replace(/^\//, ''), 'index.html'),
+      'utf8',
+    )
+    assert.ok(html.includes(record.decisionGuide.title), routePath)
+    assert.doesNotMatch(
+      html,
+      /planning and proof limits|Evidence required before this becomes a local proof page/i,
+      routePath,
+    )
+    record.officialResources.forEach((resource) => {
+      assert.ok(html.includes(resource.href), `${routePath} needs ${resource.label}`)
+    })
+  }
 })
 
 test('blog editorial state controls robots, listings, sitemap, and canonical targets', () => {
@@ -171,20 +358,38 @@ test('blog editorial state controls robots, listings, sitemap, and canonical tar
     [{ ...approved, title: 'Database overwrite', status: 'published' }],
   )
   assert.equal(sourceManaged.title, 'Source title')
+
+  const repairedSource = staticBlogPosts.find(
+    (post) => post.slug === 'project-update-2026-02-25',
+  )
+  const [repairedMerged] = mergePublishedBlogPosts(
+    [repairedSource],
+    [{
+      ...repairedSource,
+      title: 'Stale database archive title',
+      seo_status: 'needs_facts',
+      canonical_slug: 'unrelated-database-canonical',
+      source_managed: false,
+    }],
+  )
+  assert.equal(repairedMerged.title, repairedSource.title)
+  assert.equal(repairedMerged.seo_status, 'approved')
+  assert.equal(repairedMerged.canonical_slug ?? null, null)
+  assert.equal(getRouteIndexingState(`/blog/${repairedMerged.slug}`, repairedMerged).indexable, true)
 })
 
-test('request-time blog headers fail closed when prerender or database state is stale', async () => {
-  let redFetchCalled = false
-  const red = await resolveBlogRequestIndexing('/blog/project-update-2026-02-25', {
+test('request-time headers trust approved source records and fail closed for stale dynamic posts', async () => {
+  let repairedFetchCalled = false
+  const repaired = await resolveBlogRequestIndexing('/blog/project-update-2026-02-25', {
     env: {},
     fetchImpl: async () => {
-      redFetchCalled = true
-      throw new Error('should not fetch')
+      repairedFetchCalled = true
+      throw new Error('source-managed repaired posts should not fetch')
     },
   })
-  assert.equal(redFetchCalled, false)
-  assert.deepEqual(blogIndexingResponseHeaders(red), {
-    'X-Robots-Tag': 'noindex, follow',
+  assert.equal(repairedFetchCalled, false)
+  assert.deepEqual(blogIndexingResponseHeaders(repaired), {
+    'X-Robots-Tag': 'index, follow',
   })
 
   const approvedRecord = {
@@ -400,7 +605,6 @@ test('yellow project galleries expose structured proof gaps without inventing fa
 
 test('unproven specialty services have visible boundaries and no unrelated preview proof', () => {
   const boundarySlugs = [
-    'sports-court-coating-waco-tx',
     'foundation-repair-waco-tx',
     'concrete-demolition-waco-tx',
     'concrete-sawing-waco-tx',
@@ -510,22 +714,98 @@ test('fresh schema snapshots preserve editorial fields and private review data',
   })
 })
 
-test('project migration reapplies authenticity guards after copying source rows', async () => {
-  const source = await fs.readFile(
-    path.join(projectRoot, 'scripts/migrate-supabase-project.mjs'),
-    'utf8',
-  )
+test('project migrations restore repaired posts while future unreviewed posts stay gated', async () => {
+  const [source, restoreMigration] = await Promise.all([
+    fs.readFile(path.join(projectRoot, 'scripts/migrate-supabase-project.mjs'), 'utf8'),
+    fs.readFile(
+      path.join(
+        projectRoot,
+        'supabase/migrations/20260807130000_restore_rehabilitated_blog_indexing.sql',
+      ),
+      'utf8',
+    ),
+  ])
   const copyCall = source.indexOf('await migratePublicTables()')
-  const guardCall = source.indexOf('await enforcePostCopyAuthenticityGuards()')
+  const restoreCall = source.indexOf('await restorePostCopyEditorialState()')
   const authCall = source.indexOf('await migrateAuthUsers()')
 
   assert.ok(copyCall >= 0)
-  assert.ok(guardCall > copyCall)
-  assert.ok(authCall > guardCall)
+  assert.ok(restoreCall > copyCall)
+  assert.ok(authCall > restoreCall)
   assert.match(source, /Evidence-Based Blog Photo Draft/)
   assert.match(source, /Do not target a word count\./)
-  assert.match(source, /\.in\('slug', FORMULAIC_BLOG_SLUGS\)/)
-  assert.match(source, /circle-k-concrete-flatwork-lacy-lakeview-tx/)
+  assert.match(source, /REPAIRED_BLOG_SLUGS/)
+  assert.match(source, /repairedSourcePosts/)
+  assert.match(source, /seo_status: 'approved'/)
+  assert.match(source, /canonical_slug: null/)
+  assert.match(restoreMigration, /insert into public\.blog_posts/)
+  assert.match(restoreMigration, /on conflict \(slug\) do update/)
+  assert.match(restoreMigration, /seo_status = excluded\.seo_status/)
+  assert.match(restoreMigration, /canonical_slug = excluded\.canonical_slug/)
+  REPAIRED_BLOG_SLUGS.forEach((slug) => {
+    assert.ok(restoreMigration.includes(`'${slug}'`), slug)
+  })
+})
+
+test('the forward SQL migration is an exact static snapshot of all 19 repaired source records', async () => {
+  const migration = await fs.readFile(
+    path.join(
+      projectRoot,
+      'supabase/migrations/20260807130000_restore_rehabilitated_blog_indexing.sql',
+    ),
+    'utf8',
+  )
+  const expectedColumns = [
+    'slug',
+    'title',
+    'excerpt',
+    'content',
+    'cover_image_url',
+    'created_at',
+    'updated_at',
+    'published_at',
+    'status',
+    'seo_status',
+    'author_name',
+    'reviewed_by',
+    'reviewed_at',
+    'source_summary',
+    'canonical_slug',
+    'project_series_id',
+    'series_phase',
+  ]
+
+  assert.deepEqual(REPAIRED_BLOG_MIGRATION_COLUMNS, expectedColumns)
+  assert.deepEqual(
+    repairedBlogPosts.map((post) => post.slug),
+    REPAIRED_BLOG_SLUGS,
+  )
+  assert.equal(repairedBlogPosts.length, 19)
+  assert.equal((migration.match(/^  \($/gm) || []).length, 19)
+  assert.equal(migration, renderRepairedBlogMigration())
+
+  REPAIRED_BLOG_SLUGS.forEach((slug) => {
+    const escapedSlug = slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    assert.equal(
+      (migration.match(new RegExp(`^    '${escapedSlug}',$`, 'gm')) || []).length,
+      1,
+      slug,
+    )
+  })
+
+  expectedColumns
+    .filter((column) => column !== 'slug')
+    .forEach((column) => {
+      assert.match(migration, new RegExp(`^  ${column} = excluded\\.${column}[,;]$`, 'm'))
+    })
+
+  assert.match(migration, /SLA’s original record identifies the slab as approximately 9,600/)
+  assert.match(migration, /The legacy record does not identify the job, location, use/)
+  const apostropheFixture = repairedBlogPosts.map((post, index) =>
+    index === 0 ? { ...post, title: "Owner's source record" } : post,
+  )
+  assert.match(renderRepairedBlogMigration(apostropheFixture), /Owner''s source record/)
+  assert.doesNotMatch(migration, /\bexecute\s+|\bformat\s*\(|\bdo\s+\$\$/i)
 })
 
 test('production prerender cannot silently omit the public job catalog', async () => {

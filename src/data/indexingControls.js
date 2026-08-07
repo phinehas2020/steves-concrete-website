@@ -1,6 +1,8 @@
-const AUDIT_SOURCE = 'SLA Concrete Authenticity and Spam Risk Audit (2026-08-07)'
-
-export const FORMULAIC_BLOG_SLUGS = [
+// These slugs were repaired after the 2026 authenticity review. The list is
+// retained as a content-workflow boundary for the admin/migration code, not as
+// an indexing denylist. Indexing is decided only by each record's editorial
+// status and canonical target below.
+export const REPAIRED_BLOG_SLUGS = Object.freeze([
   'morton-building-barn-dominium-in-chappell-hill-texas',
   'finished-the-burnet-shop-foundation-9600-ft',
   'for-concrete-or-circle-k-lacy-lake-view',
@@ -20,44 +22,7 @@ export const FORMULAIC_BLOG_SLUGS = [
   'poured-another-rv-pad-today-in-china-springs',
   'work-completed-today-at-magnolia-rv',
   'adding-handicap-parking-for-melody-grove-housing-in-waco',
-]
-
-const SPORTS_DOORWAY_PATHS = [
-  '/sports-court-coating/texas',
-  '/sports-court-coating/dallas-tx',
-  '/sports-court-coating/fort-worth-tx',
-]
-
-const explicitControls = [
-  ...FORMULAIC_BLOG_SLUGS.map((slug) => ({
-    path: `/blog/${slug}`,
-    reason: 'scaled-content-needs-first-hand-facts',
-  })),
-  ...SPORTS_DOORWAY_PATHS.map((path) => ({
-    path,
-    reason: 'doorway-page-needs-local-project-proof',
-  })),
-  {
-    path: '/sports-court-coating-waco-tx',
-    reason: 'service-claims-need-verified-court-proof',
-  },
-]
-
-export const AUTHENTICITY_NOINDEX_CONTROLS = Object.freeze(
-  explicitControls.map((control) =>
-    Object.freeze({
-      ...control,
-      source: AUDIT_SOURCE,
-      indexable: false,
-      includeInSitemap: false,
-      robots: 'noindex, follow',
-    }),
-  ),
-)
-
-const CONTROL_BY_PATH = new Map(
-  AUTHENTICITY_NOINDEX_CONTROLS.map((control) => [control.path, control]),
-)
+])
 
 export function normalizeRoutePath(value) {
   let path = String(value || '/').trim()
@@ -95,17 +60,17 @@ function normalizeCanonicalSlug(record = {}) {
 
 export function getRouteIndexingState(pathname, record = {}) {
   const path = normalizeRoutePath(pathname)
-  const explicitControl = CONTROL_BY_PATH.get(path)
   const seoStatus = normalizeSeoStatus(record)
   const canonicalSlug = path.startsWith('/blog/') ? normalizeCanonicalSlug(record) : ''
   const canonicalPath = canonicalSlug ? `/blog/${canonicalSlug}` : path
   const hasAlternateCanonical = canonicalPath !== path
 
-  // Legacy rows predate the editorial workflow. Keep them indexable unless an
-  // exact-path audit control says otherwise. Any new non-empty status must be
-  // explicitly approved before it can enter Search.
+  // Legacy rows predate the editorial workflow. Keep them indexable. Any new
+  // non-empty status must be explicitly approved before it can enter Search.
+  // Do not add path-based deny lists here: repaired source records must be able
+  // to move back to Search by becoming approved and self-canonical.
   const isEditoriallyApproved = !seoStatus || seoStatus === 'approved'
-  const indexable = explicitControl ? false : isEditoriallyApproved && !hasAlternateCanonical
+  const indexable = isEditoriallyApproved && !hasAlternateCanonical
 
   return {
     path,
@@ -116,10 +81,9 @@ export function getRouteIndexingState(pathname, record = {}) {
     includeInSitemap: indexable && !hasAlternateCanonical,
     robots: indexable ? 'index, follow' : 'noindex, follow',
     reason:
-      explicitControl?.reason ||
       (!isEditoriallyApproved ? `seo-status-${seoStatus}` : null) ||
       (hasAlternateCanonical ? 'alternate-canonical' : null),
-    source: explicitControl?.source || (seoStatus ? 'blog editorial workflow' : null),
+    source: seoStatus ? 'blog editorial workflow' : null,
   }
 }
 
