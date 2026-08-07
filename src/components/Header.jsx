@@ -31,10 +31,10 @@ export function Header() {
                             src={logoImage}
                             alt="SLA Concrete Works LLC"
                             width={96}
-                            height={48}
+                            height={60}
                             loading="eager"
                             decoding="async"
-                            className="block h-12 w-24 object-contain"
+                            className="block h-12 w-auto object-contain"
                         />
                     </a>
 
