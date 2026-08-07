@@ -47,6 +47,11 @@ const wacoPlanningLinks = [
 export function ServiceLanding({ page: pageProp, slug: slugProp }) {
   const page = pageProp || servicePages.find((p) => p.slug === slugProp)
   if (!page) return null
+
+  return <ServiceLandingPage page={page} />
+}
+
+function ServiceLandingPage({ page }) {
   const {
     slug,
     title,
@@ -63,6 +68,9 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
     timeline,
     faq = [],
     pricingGuide,
+    evidenceNotice,
+    proofRequirements = [],
+    coverageNote,
   } = page
 
   const resolvedTitle = seoTitle || `${title} Waco TX | Free Estimate (254) 230-3102`
@@ -175,6 +183,29 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
             </div>
           </div>
         </section>
+
+        {evidenceNotice && (
+          <section className="border-y border-amber-200 bg-amber-50">
+            <div className="container-main py-8 sm:py-10">
+              <div className="max-w-4xl">
+                <span className="text-xs font-semibold uppercase tracking-wide text-amber-800">
+                  Current proof status
+                </span>
+                <p className="mt-3 text-stone-700 leading-relaxed">{evidenceNotice}</p>
+                {proofRequirements.length > 0 && (
+                  <ul className="mt-5 grid gap-3 md:grid-cols-2 text-sm text-stone-700">
+                    {proofRequirements.map((requirement) => (
+                      <li key={requirement} className="flex gap-3">
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-amber-600" />
+                        <span>{requirement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section-padding bg-stone-50">
           <div className="container-main">
@@ -308,7 +339,8 @@ export function ServiceLanding({ page: pageProp, slug: slugProp }) {
                   Service areas
                 </h3>
                 <p className="text-stone-600 text-pretty mb-6">
-                  We provide {title.toLowerCase()} across {serviceAreaText} and surrounding Central Texas communities.
+                  {coverageNote ||
+                    `We provide ${title.toLowerCase()} across ${serviceAreaText} and surrounding Central Texas communities.`}
                 </p>
                 <div className="flex flex-col gap-3">
                   {locationLinks.map((location) => (

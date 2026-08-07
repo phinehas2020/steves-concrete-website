@@ -31,7 +31,7 @@ export const servicePageLinks = [
     slug: 'concrete-resurfacing-waco-tx',
   },
   {
-    label: 'Sports Court Coating in Waco, TX',
+    label: 'Sports Court Concrete Project Review in Waco, TX',
     slug: 'sports-court-coating-waco-tx',
   },
   {
@@ -95,7 +95,7 @@ export const servicePageLinks = [
     slug: 'concrete-deck-contractors',
   },
   {
-    label: 'Contractors in Waco, TX (Concrete Focus)',
+    label: 'How to Compare Concrete Bids in Waco, TX',
     slug: 'contractors-in-waco-tx',
   },
   {

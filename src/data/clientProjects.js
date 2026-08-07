@@ -1,7 +1,7 @@
 const imageSet = (slug, count) =>
   Array.from({ length: count }, (_, index) => `/jobs/${slug}-${index + 1}.webp`)
 
-export const clientProjects = [
+const baseClientProjects = [
   {
     id: 'client-commercial-pour-2026',
     title: 'Commercial Slab Pour',
@@ -165,21 +165,26 @@ export const clientProjects = [
   },
   {
     id: 'client-sports-court-2026',
-    title: 'Decorative Court Surfacing',
+    title: 'Decorative Play-Area Surfacing',
     slug: '2026-client-decorative-court-surfacing',
-    category: 'Sports Courts',
+    category: 'Decorative Concrete',
     location: 'Central Texas',
     date: '2026-03-18',
     dateFormatted: 'March 2026',
     description:
-      'Colorful court and play-area concrete with decorative layout, clean borders, and activity-ready surface finish.',
+      'Geometric color fields across a shaded outdoor play area with curved paths, planters, and seating features. The available record does not document a regulation sports-court layout.',
     highlights: [
-      'Decorative court and play-area surfacing',
-      'Color layout with clean borders',
-      'Activity-ready surface finish',
+      'Decorative geometric color layout',
+      'Outdoor play-area surface under shade structures',
+      'No regulation game-line specification documented',
     ],
+    scopeBoundary:
+      'This gallery documents decorative play-area surfacing. It is not evidence of pickleball, tennis, or basketball court construction, regulation striping, an athletic coating system, installer certification, or sanctioned-play suitability.',
+    proofStatus: 'scope_limited',
+    proofNotice:
+      'The photo set supports a decorative play-area classification. The exact city, project date, dimensions, products, trade roles, and field decisions still need Stephen’s source-packet review before they are presented as project facts.',
     relatedLinks: [
-      { label: 'Sports court coating services', href: '/sports-court-coating-waco-tx' },
+      { label: 'Decorative concrete services', href: '/decorative-concrete-waco' },
       { label: 'View all concrete projects', href: '/jobs' },
     ],
     featured: true,
@@ -188,27 +193,68 @@ export const clientProjects = [
   },
 ]
 
+const emptyProjectAuthenticity = {
+  publicSafeIdentity: null,
+  exactCity: null,
+  projectDates: null,
+  dimensions: null,
+  measuredArea: null,
+  intendedUseAndLoads: null,
+  base: null,
+  slabOrWallThickness: null,
+  mixAndConcreteQuantity: null,
+  reinforcement: null,
+  jointsAndTransitions: null,
+  drainage: null,
+  finishAndProducts: null,
+  challenge: null,
+  stephenDecision: null,
+  result: null,
+  partnerRoles: null,
+  permissionRecord: null,
+}
+
+const defaultProofRequirements = [
+  'Public-safe project identity, exact city, and verified project dates',
+  'Dimensions, measured area, intended use, and design or load source',
+  'Base, thickness, mix or tickets, reinforcement, joints, drainage, and finish',
+  'The site challenge, Stephen’s field decision, and the observed result',
+  'SLA scope, designer or engineer role, other-trade handoffs, and permission record',
+  'Useful, project-specific captions reviewed for every image',
+]
+
+export const clientProjects = baseClientProjects.map((project) => ({
+  ...project,
+  proofStatus: project.proofStatus || 'needs_source_packet',
+  proofNotice:
+    project.proofNotice ||
+    'This repository gallery contains a project photo set, but its public source packet has not been completed. The broad labels below are not a substitute for verified dimensions, materials, trade roles, field decisions, or outcomes.',
+  proofRequirements: project.proofRequirements || defaultProofRequirements,
+  authenticity: {
+    ...emptyProjectAuthenticity,
+    ...(project.authenticity || {}),
+  },
+  imageCaptions: project.images.map((src) => ({
+    src,
+    caption: null,
+    reviewed: false,
+  })),
+}))
+
 export const servicePreviewImages = {
   'concrete-driveways-waco-tx': '/jobs/2026-client-driveway-slab-4.webp',
   'concrete-patios-waco-tx': '/jobs/2026-client-covered-patio-1.webp',
   'concrete-sidewalks-waco-tx': '/jobs/2026-client-sidewalk-entry-3.webp',
   'commercial-concrete-contractor-waco-tx': '/jobs/2026-client-commercial-pour-1.webp',
   'residential-concrete-contractor-waco-tx': '/jobs/2026-client-driveway-slab-1.webp',
-  'concrete-repair-waco-tx': '/jobs/2026-client-retaining-wall-2.webp',
-  'foundation-repair-waco-tx': '/jobs/2026-client-retaining-wall-5.webp',
-  'concrete-demolition-waco-tx': '/jobs/2026-client-commercial-pour-5.webp',
   'stamped-concrete-waco-tx': '/jobs/2026-client-stamped-decorative-4.webp',
   'decorative-concrete-waco': '/jobs/2026-client-stamped-decorative-6.webp',
   'concrete-foundations-waco-tx': '/jobs/2026-client-shop-foundation-4.webp',
   'concrete-parking-lots-waco-tx': '/jobs/2026-client-commercial-pour-3.webp',
   'parking-lot-concrete-waco': '/jobs/2026-client-commercial-pour-6.webp',
   'retaining-walls-waco-tx': '/jobs/2026-client-retaining-wall-1.webp',
-  'hardscaping-waco-tx': '/jobs/2026-client-stamped-decorative-5.webp',
-  'concrete-deck-contractors': '/jobs/2026-client-covered-patio-4.webp',
   'contractors-in-waco-tx': '/jobs/2026-client-shop-foundation-5.webp',
   'general-contractor-waco-tx': '/jobs/2026-client-commercial-pour-2.webp',
-  'concrete-resurfacing-waco-tx': '/jobs/2026-client-covered-patio-5.webp',
-  'sports-court-coating-waco-tx': '/jobs/2026-client-sports-court-6.webp',
   'sidewalks-driveways': '/jobs/2026-client-sidewalk-entry-5.webp',
   'parking-lots': '/jobs/2026-client-commercial-pour-3.webp',
   'stamped-concrete': '/jobs/2026-client-stamped-decorative-2.webp',
@@ -243,16 +289,9 @@ const serviceGalleryProjectIds = {
   'stamped-concrete-waco-tx': ['client-stamped-decorative-2026', 'client-covered-patio-2026'],
   'concrete-foundations-waco-tx': ['client-shop-foundation-2026', 'client-commercial-pour-2026'],
   'parking-lot-concrete-waco': ['client-commercial-pour-2026', 'client-shop-foundation-2026'],
-  'foundation-repair-waco-tx': ['client-retaining-wall-2026', 'client-shop-foundation-2026'],
-  'concrete-demolition-waco-tx': ['client-commercial-pour-2026', 'client-shop-foundation-2026'],
-  'concrete-sawing-waco-tx': ['client-commercial-pour-2026', 'client-sidewalk-entry-2026'],
   'retaining-walls-waco-tx': ['client-retaining-wall-2026', 'client-commercial-pour-2026'],
   'decorative-concrete-waco': ['client-stamped-decorative-2026', 'client-covered-patio-2026'],
-  'hardscaping-waco-tx': ['client-stamped-decorative-2026', 'client-retaining-wall-2026'],
-  'concrete-deck-contractors': ['client-covered-patio-2026', 'client-stamped-decorative-2026'],
   'contractors-in-waco-tx': ['client-shop-foundation-2026', 'client-commercial-pour-2026'],
-  'concrete-resurfacing-waco-tx': ['client-covered-patio-2026', 'client-stamped-decorative-2026'],
-  'sports-court-coating-waco-tx': ['client-sports-court-2026', 'client-stamped-decorative-2026'],
 }
 
 const projectById = new Map(clientProjects.map((project) => [project.id, project]))

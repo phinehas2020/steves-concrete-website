@@ -66,8 +66,54 @@ create table if not exists public.blog_posts (
   content text,
   status text not null default 'draft',
   cover_image_url text,
-  author_email text
+  author_email text,
+  seo_status text not null default 'needs_facts',
+  author_name text,
+  reviewed_by text,
+  reviewed_at timestamptz,
+  source_notes text,
+  source_summary text,
+  canonical_slug text,
+  project_series_id text,
+  series_phase integer,
+  authenticity_data jsonb not null default '{}'::jsonb
 );
+
+alter table public.blog_posts
+  add column if not exists seo_status text not null default 'needs_facts',
+  add column if not exists author_name text,
+  add column if not exists reviewed_by text,
+  add column if not exists reviewed_at timestamptz,
+  add column if not exists source_notes text,
+  add column if not exists source_summary text,
+  add column if not exists canonical_slug text,
+  add column if not exists project_series_id text,
+  add column if not exists series_phase integer,
+  add column if not exists authenticity_data jsonb not null default '{}'::jsonb;
+
+do $$
+begin
+  if not exists (
+    select 1 from pg_constraint
+    where conname = 'blog_posts_seo_status_check'
+      and conrelid = 'public.blog_posts'::regclass
+  ) then
+    alter table public.blog_posts
+      add constraint blog_posts_seo_status_check
+      check (seo_status in ('needs_facts', 'review', 'approved', 'noindex'));
+  end if;
+
+  if not exists (
+    select 1 from pg_constraint
+    where conname = 'blog_posts_series_phase_check'
+      and conrelid = 'public.blog_posts'::regclass
+  ) then
+    alter table public.blog_posts
+      add constraint blog_posts_series_phase_check
+      check (series_phase is null or series_phase > 0);
+  end if;
+end
+$$;
 
 create table if not exists public.jobs (
   id uuid primary key default gen_random_uuid(),
@@ -234,6 +280,11 @@ create unique index if not exists idx_blog_photos_album_guid
 create index if not exists idx_blog_post_photos_post_order on public.blog_post_photos(post_id, image_order);
 create index if not exists idx_blog_ai_prompt_settings_key
   on public.blog_ai_prompt_settings(key);
+create index if not exists idx_blog_posts_status_seo_status_published_at
+  on public.blog_posts(status, seo_status, published_at desc);
+create index if not exists idx_blog_posts_project_series
+  on public.blog_posts(project_series_id, series_phase)
+  where project_series_id is not null;
 create index if not exists idx_blog_post_generation_jobs_status_created
   on public.blog_post_generation_jobs(status, created_at);
 create index if not exists idx_blog_post_generation_jobs_requester_created
@@ -335,7 +386,31 @@ create policy "Super admins can delete admins"
 drop policy if exists "Public can read published posts" on public.blog_posts;
 create policy "Public can read published posts"
   on public.blog_posts for select
+  to anon
   using (status = 'published');
+
+revoke select on table public.blog_posts from anon;
+
+grant select (
+  id,
+  created_at,
+  updated_at,
+  published_at,
+  title,
+  slug,
+  excerpt,
+  content,
+  status,
+  cover_image_url,
+  seo_status,
+  author_name,
+  reviewed_by,
+  reviewed_at,
+  source_summary,
+  canonical_slug,
+  project_series_id,
+  series_phase
+) on table public.blog_posts to anon;
 
 drop policy if exists "Admins can read posts" on public.blog_posts;
 create policy "Admins can read posts"

@@ -2,6 +2,13 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Plus, Trash2, Mail, CheckCircle, XCircle } from 'lucide-react'
 
+function queryRecipients() {
+  return supabase
+    .from('email_recipients')
+    .select('*')
+    .order('created_at', { ascending: false })
+}
+
 export function AdminEmailRecipients() {
   const [recipients, setRecipients] = useState([])
   const [loading, setLoading] = useState(true)
@@ -13,10 +20,7 @@ export function AdminEmailRecipients() {
   const fetchRecipients = async () => {
     setLoading(true)
     setError('')
-    const { data, error: fetchError } = await supabase
-      .from('email_recipients')
-      .select('*')
-      .order('created_at', { ascending: false })
+    const { data, error: fetchError } = await queryRecipients()
 
     if (fetchError) {
       setError('Unable to load email recipients.')
@@ -29,7 +33,22 @@ export function AdminEmailRecipients() {
   }
 
   useEffect(() => {
-    fetchRecipients()
+    let cancelled = false
+
+    void queryRecipients().then(({ data, error: fetchError }) => {
+      if (cancelled) return
+
+      if (fetchError) {
+        setError('Unable to load email recipients.')
+      } else {
+        setRecipients(data || [])
+      }
+      setLoading(false)
+    })
+
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   const addRecipient = async (event) => {

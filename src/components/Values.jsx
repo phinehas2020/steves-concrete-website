@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from 'motion/react'
+import { motion as Motion, useInView, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
 
 const processSteps = [
@@ -15,12 +15,12 @@ const processSteps = [
     {
         number: '03',
         title: 'The Pour',
-        description: '4,000 PSI concrete mixed for Texas heat, poured and worked quickly before the sun affects the finish.',
+        description: 'The project-specified mix is placed and finished around the access, weather, and placement plan.',
     },
     {
         number: '04',
         title: 'Stamp & Cure',
-        description: 'Patterns pressed at exactly the right time, then controlled curing for 28 days to full strength.',
+        description: 'Finish timing and early cure protection follow the selected mix, weather, and project requirements.',
     },
 ]
 
@@ -29,7 +29,7 @@ function StepCard({ step, index }) {
     const isInView = useInView(ref, { once: true, margin: "-50px" })
 
     return (
-        <motion.div
+        <Motion.div
             ref={ref}
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
@@ -49,7 +49,7 @@ function StepCard({ step, index }) {
                     </p>
                 </div>
             </div>
-        </motion.div>
+        </Motion.div>
     )
 }
 
@@ -66,13 +66,13 @@ export function Values() {
     return (
         <section ref={sectionRef} className="section-padding bg-stone-950 texture-grain-dark relative overflow-hidden">
             {/* Background Decorative Element */}
-            <motion.div 
+            <Motion.div
                 className="absolute inset-0 opacity-[0.03] pointer-events-none"
                 style={{ y: bgY }}
             >
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent-500/30 blur-[150px] rounded-full -mr-96 -mt-96" />
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-stone-500/20 blur-[120px] rounded-full -ml-48 -mb-48" />
-            </motion.div>
+            </Motion.div>
 
             {/* Subtle Waco skyline silhouette */}
             <div className="absolute bottom-0 left-0 right-0 h-48 opacity-[0.03] pointer-events-none">
@@ -84,7 +84,7 @@ export function Values() {
             <div className="container-main relative z-10">
                 <div className="grid gap-16 lg:gap-24 lg:grid-cols-2 items-center">
                     {/* Left - Story */}
-                    <motion.div
+                    <Motion.div
                         initial={{ opacity: 0, x: -40 }}
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
                         transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
@@ -102,26 +102,26 @@ export function Values() {
                                 poor drainage, or somebody pretending the black clay underneath would stay put.
                             </p>
                             <p>
-                                He has spent the last 20 years figuring out what actually holds up here. That means
-                                taking the base seriously, paying attention to slope and water, and not rushing the
-                                timing just because the truck is on site.
+                                His approach is to take the base seriously, pay attention to slope and water, and not
+                                rush the timing just because the truck is on site.
                             </p>
                         </div>
 
                         {/* Founder Quote */}
                         <div className="mt-10 pl-6 border-l-2 border-accent-500/30">
                             <p className="text-stone-300 italic text-lg mb-2">
-                                "If it cracks in five years, I didn't do my job. That's how I see it."
+                                Steve’s rule is simple: explain the prep, drainage, reinforcement, finish, and cure plan
+                                before asking the customer to approve the work.
                             </p>
                             <p className="text-accent-400 text-sm font-bold uppercase tracking-widest">
                                 — Stephen Alexander, Owner
                             </p>
                         </div>
-                    </motion.div>
+                    </Motion.div>
 
                     {/* Right - Process */}
                     <div className="relative">
-                        <motion.div
+                        <Motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.6, delay: 0.2 }}
@@ -131,7 +131,7 @@ export function Values() {
                                 How he runs a job
                             </h3>
                             <div className="h-1 w-20 bg-accent-500" />
-                        </motion.div>
+                        </Motion.div>
 
                         <div className="grid gap-4">
                             {processSteps.map((step, index) => (

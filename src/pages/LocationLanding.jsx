@@ -18,6 +18,11 @@ import { locationPages, locationLinks } from '../data/locationPages'
 export function LocationLanding({ page: pageProp, slug: slugProp }) {
   const page = pageProp || locationPages.find((p) => p.slug === slugProp)
   if (!page) return null
+
+  return <LocationLandingPage page={page} />
+}
+
+function LocationLandingPage({ page }) {
   const {
     city,
     slug,
@@ -33,6 +38,7 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
     seoDescription,
     planningSections = [],
     localSearchLinks = [],
+    proofNotice,
   } = page
 
   const resolvedTitle = seoTitle || `${heroTitle} | Free Estimate (254) 230-3102`
@@ -85,11 +91,10 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
     '@type': ['LocalBusiness', 'Contractor'],
     '@id': `${SITE_URL}/${slug}#local-business`,
     additionalType: 'https://schema.org/ConcreteContractor',
-    name: `SLA Concrete Works LLC - ${city}`,
+    name: 'SLA Concrete Works LLC',
     url: `${SITE_URL}/${slug}`,
     image: DEFAULT_IMAGE,
     telephone: '+1-254-230-3102',
-    priceRange: '$$',
     founder: {
       '@type': 'Person',
       name: 'Stephen Alexander',
@@ -120,7 +125,12 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
     image: DEFAULT_IMAGE,
     imageAlt: `Concrete work in ${city}, Texas`,
     type: 'website',
-    jsonLd: buildJsonLdGraph(serviceJsonLd, localBusinessJsonLd, faqJsonLd, breadcrumbsJsonLd),
+    jsonLd: buildJsonLdGraph(
+      proofNotice ? null : serviceJsonLd,
+      proofNotice ? null : localBusinessJsonLd,
+      faqJsonLd,
+      breadcrumbsJsonLd,
+    ),
   })
 
   return (
@@ -131,7 +141,7 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
           <div className="container-main py-16 sm:py-20 md:py-24">
             <div className="max-w-3xl">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
-                Serving Central Texas since 2005
+                Owner-run concrete work in Central Texas
               </span>
               <h1 className="mt-5 font-display font-bold text-white text-balance leading-tight" style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4rem)' }}>
                 {heroTitle}
@@ -156,6 +166,11 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
               <p className="mt-6 text-sm text-stone-400">
                 {intro}
               </p>
+              {proofNotice && (
+                <p className="mt-5 max-w-2xl border-l-2 border-accent-500 pl-4 text-sm text-stone-300">
+                  {proofNotice}
+                </p>
+              )}
             </div>
           </div>
         </section>
@@ -165,13 +180,17 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <div>
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Services in {city}
+                  {proofNotice ? `Scopes to confirm for ${city}` : `Services in ${city}`}
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Concrete work tailored to {city} properties
+                  {proofNotice
+                    ? 'Concrete inquiries are reviewed case by case'
+                    : `Concrete work tailored to ${city} properties`}
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty mb-6">
-                  From new pours to repairs, we design every project for Central Texas soil conditions and day-to-day use.
+                  {proofNotice
+                    ? 'These links explain possible concrete scopes. The address, travel, accepted work, project minimum, and schedule still need written confirmation.'
+                    : 'From new pours to repairs, we plan each project around the actual site, written scope, and day-to-day use.'}
                 </p>
                 <div className="grid gap-3 sm:grid-cols-2">
                   {services.map((service) => (
@@ -188,7 +207,7 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
               </div>
               <div className="bg-stone-50 rounded-2xl border border-stone-200 p-6">
                 <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
-                  Why {city} homeowners choose us
+                  What SLA checks for a {city} request
                 </h3>
                 <div className="space-y-4">
                   {highlights.map((item) => (
@@ -211,7 +230,9 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
                   {city} planning details
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Concrete planned for soil, heat, drainage, and daily use
+                  {proofNotice
+                    ? 'Facts the written estimate should resolve'
+                    : 'Concrete planned for soil, heat, drainage, and daily use'}
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty">
                   A useful estimate should explain how the slab will be built, not only what the finished surface will look like.
@@ -239,14 +260,14 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
           <div className="container-main">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                Recent Projects
+                Regional Project Examples
               </span>
               <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                Recent work across Central Texas
+                Concrete examples from across Central Texas
               </h2>
               <p className="text-lg text-stone-600 text-pretty">
-                The same finishes and prep standards come to every {city} project — here is what
-                that looks like on real jobs.
+                These regional examples are not proof that each project happened in {city}. A city-specific
+                case study is labeled as local only after its facts and exact photos are verified.
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
@@ -295,10 +316,11 @@ export function LocationLanding({ page: pageProp, slug: slugProp }) {
                   Service Area
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Serving {city} and nearby communities
+                  Request coverage for {city} and nearby communities
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty mb-6">
-                  We regularly work throughout the {city} area. If your neighborhood is nearby, we can schedule a site visit.
+                  SLA is based near Waco. Send the address and scope so the team can confirm current routing,
+                  project fit, and whether a site visit can be scheduled.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {nearbyAreas.map((area) => (

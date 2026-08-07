@@ -1,12 +1,11 @@
 import { Phone, Mail, MapPin } from 'lucide-react'
 import { locationLinks } from '../data/locationPages'
-import { sportsCourtAreaLinks } from '../data/sportsCourtAreaPages'
 import { servicePageLinks } from '../data/seoServicePages'
 
 const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/#services' },
-    { label: 'Sports Courts', href: '/sports-court-coating/texas' },
+    { label: 'Court Project Scope', href: '/sports-court-coating-waco-tx' },
     { label: 'Gallery', href: '/jobs' },
     { label: 'About', href: '/about' },
     { label: 'FAQ', href: '/#faq' },
@@ -60,13 +59,13 @@ export function Footer() {
                             </div>
                         </div>
                         <p className="text-pretty text-stone-400 text-lg leading-relaxed mb-8 max-w-md font-light">
-                            Mastering McLennan County's black clay soil for over 20 years. 
-                            We specialize in decorative and structural concrete that handles 
-                            the brutal Texas heat.
+                            Planning concrete around McLennan County clay, drainage, access, and daily use.
+                            Concrete flatwork, decorative finishes, and specialist handoffs are defined
+                            in the written project scope.
                         </p>
                         <p className="text-sm leading-relaxed text-stone-500 mb-6 max-w-md">
-                            Texas residential concrete flatwork does not use one statewide contractor license.
-                            Permit needs, scope documentation, and project-risk questions are reviewed during estimate.
+                            Licensing, insurance, permits, design, inspections, and other-trade requirements
+                            are confirmed for the actual project and written scope.
                         </p>
                         <div className="flex gap-4">
                             <a href="/#contact" className="px-6 py-2 bg-white/5 border border-white/10 rounded-lg text-sm font-bold text-white hover:bg-white/10 transition-colors">
@@ -106,13 +105,13 @@ export function Footer() {
                                     </a>
                                 </li>
                             ))}
-                            <li><a href="/sports-court-coating/texas" className="hover:text-white transition-colors">Sports Court Coating</a></li>
+                            <li><a href="/sports-court-coating-waco-tx" className="hover:text-white transition-colors">Sports Court Concrete Review</a></li>
                         </ul>
                     </div>
 
                     {/* Service Areas */}
                     <div>
-                        <h3 className="font-display font-bold text-white uppercase tracking-widest text-xs mb-6">Service Areas</h3>
+                        <h3 className="font-display font-bold text-white uppercase tracking-widest text-xs mb-6">Coverage & Inquiry Pages</h3>
                         <ul className="space-y-3 text-stone-500 text-sm font-medium">
                             {locationLinks.map((location) => (
                                 <li key={location.slug}>
@@ -125,21 +124,6 @@ export function Footer() {
                                 </li>
                             ))}
                         </ul>
-                        <div className="mt-6 pt-5 border-t border-white/10">
-                            <h4 className="font-display font-bold text-white uppercase tracking-widest text-[10px] mb-3">Sports Court Areas</h4>
-                            <ul className="space-y-2 text-stone-500 text-sm font-medium">
-                                {sportsCourtAreaLinks.map((area) => (
-                                    <li key={area.slug}>
-                                        <a
-                                            href={area.href}
-                                            className="hover:text-white transition-colors"
-                                        >
-                                            {area.areaName}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
                     </div>
 
                     {/* Contact */}
@@ -185,7 +169,7 @@ export function Footer() {
                     </p>
                     <div className="flex gap-8">
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Owner-Run</span>
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Since 2005</span>
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Central Texas</span>
                         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-700">Local</span>
                         <a
                             href="/privacy-policy"

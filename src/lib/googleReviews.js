@@ -99,15 +99,13 @@ export function useGoogleReviews(limit = 5) {
   const safeLimit = Number.isFinite(limit)
     ? Math.min(Math.max(Math.round(limit), 1), 10)
     : 5
-  const [state, setState] = useState(INITIAL_STATE)
+  const [snapshot, setSnapshot] = useState(() => ({
+    data: INITIAL_STATE,
+    requestLimit: null,
+  }))
 
   useEffect(() => {
     let cancelled = false
-
-    setState((current) => ({
-      ...current,
-      status: 'loading',
-    }))
 
     async function loadReviews() {
       try {
@@ -117,7 +115,7 @@ export function useGoogleReviews(limit = 5) {
         if (!cancelled && response.ok && payload?.ok) {
           const nextState = shapeResponse(payload, safeLimit)
           if (nextState.reviews.length > 0) {
-            setState(nextState)
+            setSnapshot({ data: nextState, requestLimit: safeLimit })
             return
           }
         }
@@ -126,9 +124,12 @@ export function useGoogleReviews(limit = 5) {
       }
 
       if (!cancelled) {
-        setState((current) => ({
-          ...current,
-          status: 'unavailable',
+        setSnapshot((current) => ({
+          data: {
+            ...current.data,
+            status: 'unavailable',
+          },
+          requestLimit: safeLimit,
         }))
       }
     }
@@ -140,5 +141,7 @@ export function useGoogleReviews(limit = 5) {
     }
   }, [safeLimit])
 
-  return state
+  return snapshot.requestLimit === safeLimit
+    ? snapshot.data
+    : { ...snapshot.data, status: 'loading' }
 }

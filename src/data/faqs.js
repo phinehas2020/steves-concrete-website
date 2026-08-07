@@ -2,22 +2,22 @@ export const FAQ_ITEMS = [
   {
     question: 'How much does a concrete driveway cost in the Waco area?',
     answer:
-      'Standard concrete runs $6-12 per square foot. Stamped or decorative finishes are $12-18 per square foot. A typical two-car driveway (600 sq ft) runs $3,600-$10,800 depending on finish, site prep needs, and access. We provide free, detailed estimates — no surprises.',
+      'Price depends on measured area, removal, base correction, drainage, thickness, reinforcement, access, finish, and what the written scope includes. Generic per-square-foot ranges were removed until recent SLA estimates can be anonymized and reviewed; the site-specific estimate is the current price source.',
   },
   {
     question: 'Why does concrete crack in Central Texas?',
     answer:
-      'Two main reasons: our black clay soil expands when wet and shrinks when dry, putting stress on the slab; and summer heat causes rapid curing if not managed. We prevent this with proper base prep, control joints cut at the right spacing, and curing compounds that slow moisture loss.',
+      'Expansive clay, changing moisture, drainage, support, loads, joints, concrete design, placement, and curing can all contribute. Base preparation, drainage, joints, reinforcement, placement, and cure planning manage risk, but no contractor should promise crack-free concrete.',
   },
   {
     question: 'How long before I can drive on my new driveway?',
     answer:
-      'Light foot traffic in 24 hours. Vehicles should stay off for 7 days. Full cure strength takes 28 days, but by day 7 the concrete has reached about 70% strength — enough for normal vehicle use. We will give you specific guidance based on your mix and weather conditions.',
+      'Opening time depends on the project-specified concrete, thickness, weather, cure method, vehicle or equipment load, and any designer or supplier requirements. The written project handoff should give the actual foot-traffic and vehicle dates instead of relying on one site-wide rule.',
   },
   {
     question: 'What areas do you serve?',
     answer:
-      'We work within approximately 50 miles of Waco, including Temple, Killeen, Hewitt, Woodway, Robinson, Lorena, McGregor, and surrounding communities in McLennan, Bell, and Coryell counties.',
+      'SLA is based in Elm Mott and reviews Central Texas inquiries by location, scope, crew travel, and schedule. Send the project city and details so coverage and any practical job minimum can be confirmed before scheduling.',
   },
   {
     question: 'How do I compare concrete companies in Waco, TX before hiring?',
@@ -42,11 +42,11 @@ export const FAQ_ITEMS = [
   {
     question: "What's the difference between stamped and regular concrete?",
     answer:
-      'Stamped concrete has patterns pressed into the surface while it is still wet — replicating stone, brick, or slate. It costs 30-50% less than natural stone but requires sealing every 2-3 years. Regular broom-finished concrete is more utilitarian, lower cost, and needs less maintenance.',
+      'Stamped concrete adds a patterned and usually colored finish to the slab. It requires product-specific color, release, sealing, traction, cleaning, and maintenance decisions. Broom-finished concrete has a simpler texture and different upkeep; compare the complete written scopes rather than relying on a universal price or resealing interval.',
   },
   {
     question: 'Do you offer warranties?',
     answer:
-      'We stand behind our work. Structural issues due to our installation are covered for 2 years. Cracking from soil movement — which no contractor can fully control in this area — is not covered, but we design our joints and reinforcement to minimize it. We will explain exactly what to expect before we start.',
+      'Only the warranty terms written into the project agreement apply. The estimate should state the covered work, duration, exclusions, notice process, and responsible party; this site does not publish a universal structural warranty.',
   },
 ]

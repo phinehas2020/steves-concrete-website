@@ -12,9 +12,21 @@ import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 import { getBlogSeoTitle } from '../src/data/blogSeoTitles.js'
+import { getPublicBlogEditorialMeta } from '../src/data/blogEditorial.js'
+import {
+  BLOG_BUILD_MANIFEST_PATH,
+  createBlogBuildManifest,
+} from '../src/data/blogBuildManifest.js'
+import {
+  getRouteIndexingState,
+  isRoutePubliclyDiscoverable,
+  resolveRobotsDirective,
+} from '../src/data/indexingControls.js'
 import { FAQ_ITEMS } from '../src/data/faqs.js'
 import {
   fetchPublishedBlogPosts,
+  getBlogPostIndexingState,
+  isBlogPostListingEligible,
   mergePublishedBlogPosts,
 } from '../api/_published-blog-posts.js'
 import { fetchPublicJobs, mergePublicJobs } from '../api/_public-jobs.js'
@@ -35,6 +47,7 @@ const GOOGLE_BUSINESS_PROFILE_URL =
 const PHONE_DISPLAY = '(254) 230-3102'
 const PHONE_HREF = 'tel:254-230-3102'
 const PHONE_SCHEMA = '+1-254-230-3102'
+const VERIFIED_SERVICE_AREA_CITIES = ['Waco', 'Temple', 'Hewitt']
 const BUSINESS_ADDRESS = {
   streetAddress: '1045 W Elm Mott Ln',
   addressLocality: 'Elm Mott',
@@ -57,7 +70,7 @@ const MCLENNAN_COUNTY_POLYGON =
 const homeMeta = {
   title: 'Concrete Contractors Waco TX | SLA Concrete Works LLC',
   description:
-    "Waco's 5-star concrete company for driveways, patios, slabs, foundations, and repair. 500+ projects since 2005. Free estimates: (254) 230-3102.",
+    'Owner-run Waco concrete contractor for driveways, patios, slabs, foundations, repair, and commercial flatwork. Free estimates: (254) 230-3102.',
   canonical: `${SITE_URL}/`,
   h1: 'Concrete Contractors in Waco, TX',
 }
@@ -76,13 +89,15 @@ const indexableProjectSlugs = new Set(clientProjects.map((project) => project.sl
 console.log(
   `Prerendering ${publishedProjects.length} project routes (${indexableProjectSlugs.size} indexable, ${publishedProjects.length - indexableProjectSlugs.size} legacy noindex).`,
 )
-const publishedBlogLinks = publishedBlogPosts.map((post) => ({
-  label: post.title,
-  href: `/blog/${post.slug}`,
-  description:
-    post.excerpt ||
-    'Concrete planning advice and project notes from SLA Concrete Works LLC.',
-}))
+const publishedBlogLinks = publishedBlogPosts
+  .filter(isBlogPostListingEligible)
+  .map((post) => ({
+    label: post.title,
+    href: `/blog/${post.slug}`,
+    description:
+      post.excerpt ||
+      'Concrete planning advice and project notes from SLA Concrete Works LLC.',
+  }))
 
 // Location page content lives in src/data/locationPages.js — single source of
 // truth shared with the React app. (This file used to hold a hand-copied
@@ -117,15 +132,15 @@ const staticRoutes = [
     path: '/about',
     title: 'About SLA Concrete Works | Owner-Run Waco Concrete Contractor',
     description:
-      'Meet Steve Alexander, owner of SLA Concrete Works LLC. 20+ years of Waco concrete experience, 500+ projects, and a 5-star Google rating. Call (254) 230-3102.',
+      'Meet Stephen Alexander, owner-operator of SLA Concrete Works LLC, and learn how the crew plans concrete projects for Waco-area soil, drainage, access, and use.',
     h1: 'About SLA Concrete Works LLC',
     renderContent: renderAboutContent,
   },
   {
     path: '/reviews',
-    title: 'Reviews | 5-Star Waco Concrete Contractor | SLA Concrete Works',
+    title: 'Customer Reviews | Waco Concrete Contractor | SLA Concrete Works',
     description:
-      'See why Waco homeowners rate SLA Concrete Works 5 stars on Google. Real reviews from driveway, patio, stamped concrete, and repair projects. Free estimates: (254) 230-3102.',
+      'Read customer feedback about driveway, patio, stamped concrete, repair, and other Waco-area projects completed by SLA Concrete Works LLC.',
     h1: 'Customer Reviews',
     renderContent: renderReviewsContent,
   },
@@ -173,16 +188,22 @@ const locationLinks = locationPages.map((location) => ({
   description: location.intro,
 }))
 
-const sportsCourtAreaLinks = sportsCourtAreaPageData.map((area) => ({
-  label: `Sports court coating in ${area.areaName}`,
-  href: `/sports-court-coating/${area.slug}`,
-  description: area.heroSubtitle,
-}))
+const sportsCourtAreaLinks = sportsCourtAreaPageData
+  .filter((area) =>
+    isRoutePubliclyDiscoverable(`/sports-court-coating/${area.slug}`, area),
+  )
+  .map((area) => ({
+    label: `Sports-court project availability in ${area.areaName}`,
+    href: `/sports-court-coating/${area.slug}`,
+    description: area.heroSubtitle,
+  }))
 
 const clientProjectLinks = publishedProjects.map((project) => ({
   label: project.title,
   href: `/jobs/${project.slug}`,
-  description: `${project.dateFormatted} · ${project.location} — ${project.description}`,
+  description: project.proofStatus
+    ? `Source packet pending · ${project.description}`
+    : `${project.dateFormatted} · ${project.location} — ${project.description}`,
 }))
 
 function absoluteProjectImage(image) {
@@ -210,7 +231,7 @@ function buildLocationFaq(location) {
   ]
 
   const customFaq = Array.isArray(location.faq) ? location.faq : []
-  const merged = [...customFaq, ...defaultFaq]
+  const merged = location.proofNotice ? customFaq : [...customFaq, ...defaultFaq]
 
   return merged.filter(
     (item, index, allItems) =>
@@ -330,7 +351,7 @@ const routeMeta = [
     description: service.metaDescription,
     canonical: `${SITE_URL}/${service.slug}`,
     h1: service.title,
-    schemaKind: 'service',
+    schemaKind: service.scopeBoundary ? 'static' : 'service',
     schemaName: service.title,
     schemaServiceType: service.title,
     schemaDescription: service.metaDescription || service.cardSummary || service.introParagraph,
@@ -349,8 +370,8 @@ const routeMeta = [
       location.seoDescription ||
       `${location.city} concrete contractor for driveways, patios, stamped concrete, and slab work. Free estimate: ${PHONE_DISPLAY}.`,
     canonical: `${SITE_URL}/${location.slug}`,
-    h1: `${location.city}, TX Concrete Contractor`,
-    schemaKind: 'location',
+    h1: location.heroTitle || `${location.city}, TX Concrete Contractor`,
+    schemaKind: location.proofNotice ? 'static' : 'location',
     schemaName: `${location.city}, TX Concrete Contractor`,
     schemaDescription: location.intro,
     faq: buildLocationFaq(location),
@@ -367,14 +388,14 @@ const routeMeta = [
     description: area.seoDescription,
     canonical: `${SITE_URL}/sports-court-coating/${area.slug}`,
     h1: area.heroTitle,
-    schemaKind: 'service',
+    schemaKind: 'static',
     schemaName: area.heroTitle,
     schemaServiceType: 'Sports court coating',
     schemaDescription: area.seoDescription || area.heroSubtitle || area.intro,
     faq: area.faq || [],
     breadcrumbs: [
       { name: 'Home', url: `${SITE_URL}/` },
-      { name: 'Sports Court Coating', url: `${SITE_URL}/sports-court-coating-waco-tx` },
+      { name: 'Sports Court Concrete Project Review', url: `${SITE_URL}/sports-court-coating-waco-tx` },
       { name: area.areaName, url: `${SITE_URL}/sports-court-coating/${area.slug}` },
     ],
     contentHtml: renderSportsCourtAreaContent(area),
@@ -388,6 +409,8 @@ const routeMeta = [
     schemaKind: 'guide',
     schemaName: guide.title,
     schemaDescription: guide.seoDescription || guide.summary,
+    modifiedTime: guide.lastReviewed,
+    guideSources: (guide.sources || []).map((source) => source.href),
     faq: guide.faq || [],
     breadcrumbs: [
       { name: 'Home', url: `${SITE_URL}/` },
@@ -408,7 +431,7 @@ const routeMeta = [
     schemaKind: 'project',
     schemaName: project.title,
     schemaDescription: project.description,
-    publishedTime: project.date,
+    publishedTime: project.proofStatus ? undefined : project.date,
     modifiedTime: project.updated_at || project.date,
     projectImages: project.images.map(absoluteProjectImage),
     breadcrumbs: [
@@ -418,26 +441,31 @@ const routeMeta = [
     ],
     contentHtml: renderClientProjectContent(project),
   })),
-  ...publishedBlogPosts.map((post) => ({
+  ...publishedBlogPosts.map((post) => {
+    const indexing = getBlogPostIndexingState(post)
+    return {
       path: `/blog/${post.slug}`,
       title: getBlogSeoTitle(post),
       description:
         post.excerpt ||
         'Concrete tips, project planning advice, and local Waco-area concrete updates from SLA Concrete Works LLC.',
-      canonical: `${SITE_URL}/blog/${post.slug}`,
+      canonical: `${SITE_URL}${indexing.canonicalPath}`,
+      robots: indexing.robots,
       h1: post.title,
       schemaKind: 'blog',
       schemaName: post.title,
       schemaDescription: post.excerpt,
+      blogPost: post,
       publishedTime: post.published_at || post.created_at,
       modifiedTime: post.updated_at || post.published_at || post.created_at,
       breadcrumbs: [
         { name: 'Home', url: `${SITE_URL}/` },
         { name: 'Blog', url: `${SITE_URL}/blog` },
-        { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
+        { name: post.title, url: `${SITE_URL}${indexing.canonicalPath}` },
       ],
       contentHtml: renderStaticBlogPostContent(post),
-    })),
+    }
+  }),
   ...staticRoutes.map((route) => ({
     path: route.path,
     title: route.title,
@@ -653,11 +681,11 @@ function renderHomeContent() {
     eyebrow: 'Waco Concrete Contractor',
     title: homeMeta.h1,
     subtitle:
-      'Owner-run concrete work for Waco and surrounding Central Texas communities since 2005.',
+      'Owner-run concrete work for Waco and surrounding Central Texas communities.',
     introParagraphs: [
       `${SITE_NAME} builds driveways, patios, stamped concrete, foundations, and repair projects across Waco, Texas designed for black clay soil movement, heavy heat cycles, and daily traffic.`,
       `When people compare concrete companies in Waco TX, they usually need clear pricing, honest timelines, and work that stays level after the first summer. As an owner-run Waco concrete contractor, we start every project with site prep, slope planning, reinforcement, and realistic cure guidance so the finished slab performs for years.`,
-      `Call ${PHONE_DISPLAY} for a free estimate. Most leads get a same-day response and a clear next-step plan for site visit, scope, and scheduling.`,
+      `Call ${PHONE_DISPLAY} for a free estimate and a clear next-step conversation about site conditions, scope, and scheduling.`,
     ],
     includeCompanyResourceLinks: false,
     actionLinks: [
@@ -707,13 +735,17 @@ function renderHomeContent() {
         ],
         links: locationLinks,
       },
-      {
-        title: 'Sports court resurfacing across Texas',
-        paragraphs: [
-          'Our Waco-based team resurfaces basketball, tennis, and multi-use courts for schools, churches, neighborhoods, and private properties across Texas.',
-        ],
-        links: sportsCourtAreaLinks,
-      },
+      ...(sportsCourtAreaLinks.length > 0
+        ? [
+            {
+              title: 'Sports-court concrete project availability',
+              paragraphs: [
+                'These reviewed pages explain accepted concrete scope, travel boundaries, and specialist handoffs for documented markets.',
+              ],
+              links: sportsCourtAreaLinks,
+            },
+          ]
+        : []),
       {
         title: 'Common questions from homeowners and property managers',
         faq: FAQ_ITEMS,
@@ -766,7 +798,9 @@ function renderServiceContent(service) {
     subtitle: service.heroSubtitle,
     introParagraphs: [
       service.intro,
-      `Our ${service.title.toLowerCase()} work is scoped for Central Texas conditions and backed by clear communication from estimate through final walkthrough.`,
+      service.evidenceNotice
+        ? 'This page is a scope checklist while the exact source packet and completed-project proof identified below are collected and reviewed.'
+        : `Our ${service.title.toLowerCase()} work is scoped for Central Texas conditions and backed by clear communication from estimate through final walkthrough.`,
     ],
     actionLinks: [
       { href: '/#contact', label: 'Request estimate' },
@@ -775,6 +809,15 @@ function renderServiceContent(service) {
       ...(service.pricingGuide ? [{ href: service.pricingGuide.href, label: 'View pricing guide' }] : []),
     ],
     sections: [
+      ...(service.evidenceNotice
+        ? [
+            {
+              title: 'Current proof status',
+              paragraphs: [service.evidenceNotice],
+              bullets: service.proofRequirements || [],
+            },
+          ]
+        : []),
       {
         title: `What is included in ${service.title.toLowerCase()}`,
         bullets: service.benefits || [],
@@ -825,7 +868,27 @@ function renderSeoServiceContent(service) {
     title: section.heading,
     paragraphs: section.paragraphs || [],
   }))
-  const galleryImages = getServiceGalleryImages(service.slug, service.title)
+  const galleryImages =
+    service.showGallery === false ? [] : getServiceGalleryImages(service.slug, service.title)
+  const boundarySections = service.scopeBoundary
+    ? [
+        {
+          title: service.scopeBoundary.slaTitle,
+          bullets: service.scopeBoundary.slaItems || [],
+        },
+        {
+          title: service.scopeBoundary.specialistTitle,
+          bullets: service.scopeBoundary.specialistItems || [],
+        },
+      ]
+    : [
+        {
+          title: `What to expect with ${service.title.toLowerCase()}`,
+          paragraphs: [
+            `${SITE_NAME} plans each ${service.title.toLowerCase()} project around site access, drainage, soil movement, finish expectations, and the way the slab will be used after installation.`,
+          ],
+        },
+      ]
 
   // Rotate the related list around the current page so every page links to a
   // distinct set of neighbors instead of the same first eight entries.
@@ -856,23 +919,32 @@ function renderSeoServiceContent(service) {
       { href: '/#contact', label: 'Request estimate' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
       { href: '/guides', label: 'View all planning guides' },
-      { href: '/jobs', label: 'View recent projects' },
+      ...(service.showGallery === false
+        ? []
+        : [{ href: '/jobs', label: 'View recent projects' }]),
     ],
     sections: [
-      {
-        title: `What to expect with ${service.title.toLowerCase()}`,
-        paragraphs: [
-          `${SITE_NAME} plans each ${service.title.toLowerCase()} project around site access, drainage, soil movement, finish expectations, and the way the slab will be used after installation.`,
-        ],
-      },
+      ...(service.evidenceNote
+        ? [
+            {
+              title: 'Current proof boundary',
+              paragraphs: [service.evidenceNote],
+            },
+          ]
+        : []),
+      ...boundarySections,
       ...serviceSections,
-      {
-        title: 'Recent project photos for planning',
-        paragraphs: [
-          'These project photos show the type of prep, forming, finish, access, and cleanup details customers often compare before requesting an estimate.',
-        ],
-        images: galleryImages,
-      },
+      ...(galleryImages.length > 0
+        ? [
+            {
+              title: 'Recent project photos for planning',
+              paragraphs: [
+                'These project photos show the type of prep, forming, finish, access, and cleanup details customers often compare before requesting an estimate.',
+              ],
+              images: galleryImages,
+            },
+          ]
+        : []),
       {
         title: 'Related service pages',
         links: relatedPages,
@@ -908,21 +980,33 @@ function renderLocationContent(location) {
 
   return renderPage({
     eyebrow: `${location.city} Service Area`,
-    title: `${location.city}, TX Concrete Contractor`,
-    subtitle: `Concrete driveways, patios, stamped finishes, repairs, and slab work in ${location.city} and surrounding areas.`,
-    introParagraphs: [location.intro],
+    title: location.heroTitle || `${location.city}, TX Concrete Contractor`,
+    subtitle:
+      location.heroSubtitle ||
+      `Concrete driveways, patios, stamped finishes, repairs, and slab work in ${location.city} and surrounding areas.`,
+    introParagraphs: [location.intro, location.proofNotice].filter(Boolean),
     actionLinks: [
       { href: '/#contact', label: `Request ${location.city} estimate` },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
     ],
     sections: [
+      ...(location.proofNotice
+        ? [
+            {
+              title: 'Current local-proof status',
+              paragraphs: [location.proofNotice],
+            },
+          ]
+        : []),
       ...(location.planningSections || []).map((section) => ({
         title: section.title,
         paragraphs: section.paragraphs,
       })),
       ...localSearchSections,
       {
-        title: `Concrete services available in ${location.city}`,
+        title: location.proofNotice
+          ? `Concrete scopes to confirm for a ${location.city} inquiry`
+          : `Concrete services available in ${location.city}`,
         links: cityServiceLinks,
       },
       {
@@ -952,10 +1036,6 @@ function renderLocationContent(location) {
 }
 
 function renderSportsCourtAreaContent(area) {
-  const relatedAreaLinks = sportsCourtAreaLinks
-    .filter((item) => item.href !== `/sports-court-coating/${area.slug}`)
-    .slice(0, 6)
-
   const serviceBullets = (area.services || []).map(
     (service) => `${service.title}: ${service.description}`,
   )
@@ -965,42 +1045,44 @@ function renderSportsCourtAreaContent(area) {
   const localFocusBullets = (area.localFocus || []).map(
     (item) => `${item.title}: ${item.description}`,
   )
-  const nearbyAreaBullets = (area.nearbyAreas || []).map((nearby) => `${nearby}, service coverage available`)
+  const availabilityParagraphs = area.availability?.paragraphs || []
 
   return renderPage({
-    eyebrow: 'Sports Court Coating Area',
+    eyebrow: area.badge || 'Sports-Court Project Availability',
     title: area.heroTitle,
     subtitle: area.heroSubtitle,
-    introParagraphs: [
-      area.intro,
-      `Property owners in ${area.areaName} often prioritize traction, line clarity, and coating longevity. Our resurfacing process is structured around those outcomes.`,
-    ],
+    introParagraphs: [area.intro],
     actionLinks: [
-      { href: '/#contact', label: `Request ${area.areaName} quote` },
+      { href: '/#contact', label: 'Send project details' },
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
-      { href: '/jobs', label: 'View project gallery' },
     ],
     sections: [
       {
-        title: `Sports court services in ${area.areaName}`,
+        title: area.scopeTitle || `Trade boundaries for a ${area.areaName} court inquiry`,
+        paragraphs: area.scopeIntro ? [area.scopeIntro] : [],
         bullets: serviceBullets,
       },
       {
-        title: 'How the resurfacing process works',
+        title: 'How an inquiry becomes an accepted scope',
         bullets: processBullets,
         orderedBullets: true,
       },
       {
-        title: `${area.areaName} planning considerations`,
+        title: `${area.areaName} planning and proof limits`,
         bullets: localFocusBullets,
       },
       {
-        title: `Nearby communities around ${area.areaName}`,
-        bullets: nearbyAreaBullets,
+        title: area.availability?.title || 'Availability must be confirmed',
+        paragraphs: availabilityParagraphs,
       },
       {
-        title: 'More sports court coating areas',
-        links: relatedAreaLinks,
+        title: area.coverageTitle || `What availability means for ${area.areaName}`,
+        paragraphs: area.coverageIntro ? [area.coverageIntro] : [],
+        bullets: area.coveragePoints || [],
+      },
+      {
+        title: 'Evidence required before this becomes a local proof page',
+        bullets: area.evidenceRequirements || [],
       },
       {
         title: 'Waco contractor hub and blog resources',
@@ -1059,7 +1141,7 @@ function renderAboutContent() {
       'The person answering the call, walking the site, and staying involved through the job.',
     introParagraphs: [
       'If you call SLA Concrete Works LLC, you are usually talking to Steve. He is the one asking what is wrong, what you want built, and what the site looks like before he starts talking price.',
-      'He has been pouring concrete around Waco for more than 20 years. People like that he is direct, stays involved, and does not try to dress every job up like a sales pitch.',
+      'People value that Steve is direct, stays involved, and does not try to dress every job up like a sales pitch.',
     ],
     includeCompanyResourceLinks: false,
     actionLinks: [
@@ -1284,6 +1366,22 @@ function renderGuideContent(guide) {
   const notes = (guide.localNotes || []).map((note) => `${note.title}: ${note.description}`)
   const isPricingGuide = ranges.length > 0
   const sections = [
+    guide.evidenceNotice || guide.notQuote || guide.lastReviewed || guide.reviewedBy
+      ? {
+          title: 'Evidence, review, and limits',
+          paragraphs: [
+            guide.evidenceNotice,
+            guide.notQuote,
+            guide.lastReviewed ? `Last fact-check: ${formatPublicDate(guide.lastReviewed)}` : '',
+            guide.reviewedBy ? `Review: ${guide.reviewedBy}` : '',
+          ].filter(Boolean),
+          links: (guide.sources || []).map((source) => ({
+            label: source.label,
+            href: source.href,
+            description: 'Official source used for this guide.',
+          })),
+        }
+      : null,
     {
       title: isPricingGuide ? 'Quick pricing stats' : 'Quick planning checkpoints',
       bullets: (guide.quickStats || []).map((stat) => `${stat.label}: ${stat.value}`),
@@ -1421,17 +1519,25 @@ function renderJobsIndexContent() {
 function renderClientProjectContent(project) {
   const projectImages = project.images.map((src, index) => ({
     src,
-    alt: `${project.title} project photo ${index + 1} in ${project.location}`,
-    title: `${project.title} — photo ${index + 1}`,
+    alt:
+      project.imageCaptions?.[index]?.caption ||
+      (project.proofStatus
+        ? 'Field caption pending source review; no technical detail is inferred from this image.'
+        : `${project.title} project image ${index + 1} in ${project.location}`),
+    title:
+      project.imageCaptions?.[index]?.caption ||
+      (project.proofStatus ? 'Caption pending source review' : `${project.title} — image ${index + 1}`),
     location: project.location,
   }))
 
   return renderPage({
-    eyebrow: 'Completed Concrete Project',
+    eyebrow: project.proofStatus ? 'Project Gallery · Source Review Pending' : 'Completed Concrete Project',
     title: project.title,
     subtitle: project.description,
     introParagraphs: [
-      `Completed ${project.dateFormatted} in ${project.location}. This gallery documents the visible scope and finish details from the project.`,
+      project.proofStatus
+        ? project.proofNotice
+        : `Completed ${project.dateFormatted} in ${project.location}. This gallery documents the visible scope and finish details from the project.`,
       'Every property has different access, drainage, soil, dimensions, and load requirements. A site visit is needed before using this project as a planning or pricing comparison.',
     ],
     actionLinks: [
@@ -1445,9 +1551,19 @@ function renderClientProjectContent(project) {
         bullets: [
           `Project type: ${project.category}`,
           `Service area: ${project.location}`,
-          `Completed: ${project.dateFormatted}`,
+          project.proofStatus
+            ? `Repository gallery record: ${project.dateFormatted}; exact project date pending review`
+            : `Completed: ${project.dateFormatted}`,
         ],
       },
+      ...(project.proofRequirements?.length
+        ? [
+            {
+              title: 'Facts required before this becomes a verified case study',
+              bullets: project.proofRequirements,
+            },
+          ]
+        : []),
       {
         title: 'Scope shown in this gallery',
         bullets: project.highlights || [],
@@ -1455,7 +1571,9 @@ function renderClientProjectContent(project) {
       {
         title: 'Project photos',
         paragraphs: [
-          'Use the full gallery to compare layout, transitions, finish, and the visible relationship between the concrete and the surrounding property.',
+          project.proofStatus
+            ? 'These source images remain visible, but their field captions and technical interpretation are pending Stephen’s review.'
+            : 'Use the full gallery to compare layout, transitions, finish, and the visible relationship between the concrete and the surrounding property.',
         ],
         images: projectImages,
       },
@@ -1470,12 +1588,62 @@ function renderClientProjectContent(project) {
   })
 }
 
+function formatPublicDate(value) {
+  if (!value) return ''
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return String(value)
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  })
+}
+
+function renderBlogEditorialDetails(post) {
+  const editorial = getPublicBlogEditorialMeta(post)
+  const indexing = getRouteIndexingState(`/blog/${post.slug}`, post)
+  const reviewedDate = formatPublicDate(editorial.reviewedAt)
+  const reviewParts = [
+    editorial.reviewedBy ? `Fact-checked by ${editorial.reviewedBy}` : '',
+    reviewedDate ? `Last fact-check: ${reviewedDate}` : '',
+  ].filter(Boolean)
+  const seriesParts = [
+    editorial.projectSeriesId ? `Project series: ${editorial.projectSeriesId}` : '',
+    editorial.seriesPhase ? `Series phase: ${editorial.seriesPhase}` : '',
+  ].filter(Boolean)
+
+  const archiveNotice = !indexing.indexable
+    ? '<aside style="margin:0 0 20px;padding:16px;border:1px solid #fcd34d;border-radius:12px;background:#fffbeb;"><h2 style="margin:0 0 6px;font-size:1.05rem;color:#1c1917;">Archive under source review</h2><p style="margin:0;color:#57534e;font-size:0.92rem;">This older project note remains available to direct visitors, but its job facts and photo captions have not passed the current approval checklist. It is kept out of Search and is not used as verified service proof until that review is complete.</p></aside>'
+    : ''
+
+  return `${archiveNotice}<div style="margin:0 0 20px;padding:14px 0;border-top:1px solid #e7e5e4;border-bottom:1px solid #e7e5e4;color:#57534e;font-size:0.92rem;"><p style="margin:0;">By <strong style="color:#292524;">${escapeHtml(
+    editorial.authorName,
+  )}</strong></p>${
+    reviewParts.length > 0
+      ? `<p style="margin:4px 0 0;">${escapeHtml(reviewParts.join(' · '))}</p>`
+      : ''
+  }${
+    seriesParts.length > 0
+      ? `<p style="margin:4px 0 0;">${escapeHtml(seriesParts.join(' · '))}</p>`
+      : ''
+  }</div>${
+    editorial.sourceSummary
+      ? `<aside style="margin:0 0 20px;padding:16px;border:1px solid #e7e5e4;border-radius:12px;background:#f5f5f4;"><h2 style="margin:0 0 6px;font-size:1.05rem;color:#1c1917;">Source note</h2><p style="margin:0;color:#57534e;font-size:0.92rem;">${escapeHtml(
+          editorial.sourceSummary,
+        )}</p></aside>`
+      : ''
+  }`
+}
+
 function renderStaticBlogPostContent(post) {
   return `<main data-prerender-content="true" style="max-width:860px;margin:0 auto;padding:96px 20px 64px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.65;background:#fafaf9;color:#1c1917;"><p style="margin:0 0 8px;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:#ea580c;font-weight:700;">Concrete Blog</p><h1 style="margin:0 0 14px;font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;color:#1c1917;">${escapeHtml(
     post.title,
   )}</h1><p style="margin:0 0 20px;color:#44403c;font-size:1.05rem;">${escapeHtml(
     post.excerpt || 'Concrete planning advice from SLA Concrete Works LLC.',
-  )}</p><article style="background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:24px;">${renderSimpleMarkdown(
+  )}</p>${renderBlogEditorialDetails(
+    post,
+  )}<article style="background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:24px;">${renderSimpleMarkdown(
     post.content,
   )}</article>${renderSection({
     title: 'Keep planning your concrete project',
@@ -1574,8 +1742,6 @@ function localBusinessSchema({ includeOfferCatalog = false } = {}) {
     image: DEFAULT_IMAGE,
     telephone: PHONE_SCHEMA,
     email: 'slaconcrete@gmail.com',
-    foundingDate: '2005',
-    priceRange: '$$',
     founder: OWNER_PERSON_SCHEMA,
     sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
     address: {
@@ -1603,15 +1769,8 @@ function localBusinessSchema({ includeOfferCatalog = false } = {}) {
     ],
     areaServed: [
       { '@id': SERVICE_AREA_ID },
-      ...locationPages.map((location) => cityArea(location.city)),
+      ...VERIFIED_SERVICE_AREA_CITIES.map(cityArea),
     ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '5.0',
-      reviewCount: '47',
-      bestRating: '5',
-      worstRating: '1',
-    },
   }
 
   if (includeOfferCatalog) {
@@ -1744,6 +1903,17 @@ function locationPlaceSchema(meta, canonical) {
 
 function articleSchema(meta, canonical) {
   if (meta.schemaKind === 'blog') {
+    const editorial = getPublicBlogEditorialMeta(meta.blogPost || {})
+    const author =
+      editorial.authorType === 'Person'
+        ? {
+            '@type': 'Person',
+            name: editorial.authorName,
+          }
+        : {
+            '@id': ORGANIZATION_ID,
+          }
+
     return {
       '@type': 'BlogPosting',
       '@id': `${canonical}#article`,
@@ -1754,9 +1924,7 @@ function articleSchema(meta, canonical) {
       mainEntityOfPage: {
         '@id': `${canonical}#webpage`,
       },
-      author: {
-        '@id': ORGANIZATION_ID,
-      },
+      author,
       publisher: {
         '@id': ORGANIZATION_ID,
       },
@@ -1786,6 +1954,8 @@ function articleSchema(meta, canonical) {
     '@id': `${canonical}#article`,
     headline: meta.schemaName || meta.h1 || meta.title,
     description: meta.schemaDescription || meta.description,
+    dateModified: meta.modifiedTime,
+    citation: meta.guideSources || [],
     mainEntityOfPage: {
       '@id': `${canonical}#webpage`,
     },
@@ -1849,13 +2019,18 @@ function upsertPrerenderContent(html, contentHtml) {
 
 function applyMeta(html, meta) {
   const canonical = normalizeCanonical(meta.canonical || `${SITE_URL}${meta.path === '/' ? '/' : meta.path}`)
+  const robots = resolveRobotsDirective(
+    meta.path,
+    meta.robots || 'index, follow',
+    meta.blogPost || {},
+  )
   const ogType = meta.schemaKind === 'blog' || meta.schemaKind === 'project' ? 'article' : 'website'
   const socialImage = meta.image || DEFAULT_IMAGE
   const socialImageAlt = meta.imageAlt || `${SITE_NAME} in Waco, Texas`
   let updated = html
   updated = upsertTitle(updated, meta.title)
   updated = upsertMetaTag(updated, 'description', meta.description)
-  updated = upsertMetaTag(updated, 'robots', 'index, follow')
+  updated = upsertMetaTag(updated, 'robots', robots)
   updated = upsertCanonical(updated, canonical)
   updated = upsertMetaTag(updated, 'og:title', meta.title)
   updated = upsertMetaTag(updated, 'og:description', meta.description)
@@ -1877,9 +2052,6 @@ function applyMeta(html, meta) {
   }
   updated = upsertJsonLd(updated, meta, canonical)
   updated = upsertPrerenderContent(updated, meta.contentHtml || renderNotFoundContent())
-  if (meta.robots && meta.robots !== 'index, follow') {
-    updated = upsertMetaTag(updated, 'robots', meta.robots)
-  }
   return updated
 }
 
@@ -1919,6 +2091,16 @@ async function main() {
   notFoundHtml = removeMetaTag(notFoundHtml, 'article:published_time')
   notFoundHtml = removeMetaTag(notFoundHtml, 'article:modified_time')
   await fs.writeFile(notFoundPath, notFoundHtml, 'utf8')
+
+  const blogManifestPath = path.join(
+    distDir,
+    BLOG_BUILD_MANIFEST_PATH.replace(/^\//, ''),
+  )
+  await fs.writeFile(
+    blogManifestPath,
+    `${JSON.stringify(createBlogBuildManifest(publishedBlogPosts), null, 2)}\n`,
+    'utf8',
+  )
 }
 
 main().catch((error) => {

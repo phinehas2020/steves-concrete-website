@@ -1,4 +1,3 @@
-/* global process */
 import { createClient } from '@supabase/supabase-js'
 import {
   sanitizePlainTextInline,
@@ -11,8 +10,12 @@ const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const openAiApiKey = process.env.OPENAI_API_KEY
 const OPENAI_RESPONSES_URL = 'https://api.openai.com/v1/responses'
 const OPENAI_MODEL = 'gpt-5-mini-2025-08-07'
-const VALID_STATUSES = new Set(['draft', 'published'])
 const BLOG_AI_PROMPT_KEY = 'blog_photo_post'
+const BLOG_SOURCE_PACKET_SCHEMA = 'sla_blog_source_packet_v1'
+const GENERATED_BLOG_STATUS = 'draft'
+const GENERATED_BLOG_DEFAULT_SEO_STATUS = 'needs_facts'
+const GENERATED_BLOG_REVIEW_SEO_STATUS = 'review'
+const UNCAPTIONED_PHOTO_ALT = 'Uncaptioned field photo - add job-specific context before review'
 const DEFAULT_JOB_LISTING_SYSTEM_PROMPT = [
   'You write short job listing copy for a concrete contractor in Waco, Texas.',
   'Return valid JSON only: {"title":"...","description":"..."}.',
@@ -21,14 +24,16 @@ const DEFAULT_JOB_LISTING_SYSTEM_PROMPT = [
   'Do not invent facts. Use only provided context and visible photo details.',
   'No hashtags, no emojis, no bullet points, no markdown.',
 ].join('\n')
-const DEFAULT_BLOG_SYSTEM_PROMPT = [
-  'You write short blog intro paragraphs for a concrete contractor in Waco, Texas.',
-  'Return exactly one paragraph between 90 and 130 words.',
-  'Tone: practical, honest, and down-to-earth.',
-  'Use local SEO naturally where it fits, including some of: concrete contractor Waco TX, concrete driveway, concrete patio, concrete repair, free estimate.',
-  'Mention visible concrete work details and craftsmanship quality.',
+export const DEFAULT_BLOG_SYSTEM_PROMPT = [
+  'You turn verified field evidence into a concise project-note draft for SLA Concrete Works.',
+  'Use only the supplied job/source packet, Stephen observation, verified facts, and photo captions.',
+  'Let the amount of verified evidence determine the length. Do not target a word count.',
+  'Write in practical, plain language. Prefer a useful field detail or decision over promotional copy.',
+  'Do not add search phrases, calls to action, sales claims, rankings, ratings, or offers.',
+  'Do not infer dimensions, quantities, materials, mix design, finish, location, client identity, code compliance, permits, warranty, schedule, or outcome from a photo.',
+  'If the evidence does not support a detail, omit it. Never fill gaps with a typical concrete-work assumption.',
   'Do not use bullet points, hashtags, emojis, all caps, or long dashes.',
-  'Do not invent facts. Output only the paragraph.',
+  'Output only one concise paragraph with no label or markdown.',
 ].join('\n')
 
 function createHttpError(message, statusCode, details) {
@@ -103,6 +108,25 @@ function shortText(value, max = 120) {
   return `${clean.slice(0, max - 3).trim()}...`
 }
 
+export function containsLegacyBlogFormulaPrompt(value) {
+  const prompt = toTrimmedString(value)
+  if (!prompt) return false
+
+  return (
+    /\b90\s*(?:-|to|and)\s*130\s+words?\b/i.test(prompt) ||
+    /\bconcrete contractor waco tx\b/i.test(prompt) ||
+    /\bfree estimate\b/i.test(prompt)
+  )
+}
+
+function safeBlogSystemPrompt(value) {
+  const prompt = toTrimmedString(value)
+  if (!prompt || containsLegacyBlogFormulaPrompt(prompt)) {
+    return DEFAULT_BLOG_SYSTEM_PROMPT
+  }
+  return prompt
+}
+
 function isGenericPhotoLabel(value) {
   const text = toTrimmedString(value)
     .replace(/\s+/g, ' ')
@@ -131,6 +155,159 @@ function getMeaningfulPhotoText(photo) {
   }
 
   return ''
+}
+
+function isGenericProjectTitle(value) {
+  const title = toTrimmedString(value).replace(/\s+/g, ' ').trim().toLowerCase()
+  if (!title) return true
+
+  return (
+    /^project update(?:\s+\d{4}(?:-\d{2})?(?:-\d{2})?)?$/.test(title) ||
+    /^concrete project update(?:\s+\d{4}(?:-\d{2})?(?:-\d{2})?)?$/.test(title) ||
+    /^field draft(?:\s+\d{4}(?:-\d{2})?(?:-\d{2})?)?$/.test(title) ||
+    /^untitled(?:\s+(?:project|post|draft))?$/.test(title)
+  )
+}
+
+function normalizeStringList(value) {
+  const items = Array.isArray(value)
+    ? value
+    : typeof value === 'string'
+      ? value.split(/\r?\n/)
+      : []
+
+  const seen = new Set()
+  const normalized = []
+  for (const item of items) {
+    const clean = sanitizePlainTextInline(String(item || '').replace(/^[-*\d.)\s]+/, ''), 240)
+    const key = clean.toLowerCase()
+    if (!clean || seen.has(key)) continue
+    seen.add(key)
+    normalized.push(clean)
+  }
+  return normalized
+}
+
+function parseSourcePacketPrompt(value) {
+  const prompt = toTrimmedString(value)
+  if (!prompt || !prompt.startsWith('{')) return null
+
+  try {
+    const parsed = JSON.parse(prompt)
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return null
+    if (parsed.schema && parsed.schema !== BLOG_SOURCE_PACKET_SCHEMA) return null
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+export function evaluateBlogGenerationEvidence({ body = {}, photos = [], title = '' } = {}) {
+  const normalizedBody = normalizeBody(body)
+  const parsedPromptPacket = parseSourcePacketPrompt(normalizedBody.prompt)
+  const embeddedPacket = parsedPromptPacket || {}
+  const explicitPacket =
+    normalizedBody.sourcePacket && typeof normalizedBody.sourcePacket === 'object'
+      ? normalizedBody.sourcePacket
+      : normalizedBody.source_packet && typeof normalizedBody.source_packet === 'object'
+        ? normalizedBody.source_packet
+        : {}
+  const packet = { ...embeddedPacket, ...explicitPacket }
+
+  const sourcePacketId = sanitizePlainTextInline(
+    normalizedBody.sourcePacketId ??
+      normalizedBody.source_packet_id ??
+      packet.sourcePacketId ??
+      packet.source_packet_id,
+    120
+  )
+  const stephenObservation = sanitizePlainTextParagraph(
+    normalizedBody.stephenObservation ??
+      normalizedBody.stephen_observation ??
+      packet.stephenObservation ??
+      packet.stephen_observation
+  )
+  const projectContext = sanitizePlainTextParagraph(
+    normalizedBody.projectContext ??
+      normalizedBody.project_context ??
+      packet.projectContext ??
+      packet.project_context ??
+      (parsedPromptPacket ? '' : normalizedBody.prompt)
+  )
+  const uniqueFacts = normalizeStringList(
+    normalizedBody.uniqueFacts ??
+      normalizedBody.unique_facts ??
+      packet.uniqueFacts ??
+      packet.unique_facts
+  )
+  const scopeBoundary = sanitizePlainTextParagraph(
+    normalizedBody.scopeBoundary ??
+      normalizedBody.scope_boundary ??
+      packet.scopeBoundary ??
+      packet.scope_boundary
+  )
+  const localDecision = sanitizePlainTextParagraph(
+    normalizedBody.localDecision ??
+      normalizedBody.local_decision ??
+      packet.localDecision ??
+      packet.local_decision
+  )
+
+  const requestedSeoStatus = toTrimmedString(
+    normalizedBody.seoStatus ??
+      normalizedBody.seo_status ??
+      packet.requestedSeoStatus ??
+      packet.requested_seo_status
+  ).toLowerCase()
+  const meaningfulCaptions = photos.map((photo) => getMeaningfulPhotoText(photo)).filter(Boolean)
+  const missingCaptionCount = Math.max(photos.length - meaningfulCaptions.length, 0)
+
+  const missingReviewEvidence = []
+  if (!sourcePacketId) missingReviewEvidence.push('job/source packet ID')
+  if (!stephenObservation) missingReviewEvidence.push("Stephen's first-hand observation")
+  if (uniqueFacts.length < 3) missingReviewEvidence.push('three verified facts unique to this job')
+  if (!photos.length || missingCaptionCount > 0) {
+    missingReviewEvidence.push('a useful job-specific caption for every selected photo')
+  }
+  if (isGenericProjectTitle(title)) missingReviewEvidence.push('a job-specific title')
+
+  const reviewRequested = requestedSeoStatus === GENERATED_BLOG_REVIEW_SEO_STATUS
+  const seoStatus =
+    reviewRequested && missingReviewEvidence.length === 0
+      ? GENERATED_BLOG_REVIEW_SEO_STATUS
+      : GENERATED_BLOG_DEFAULT_SEO_STATUS
+
+  const sourceNotes = [
+    sourcePacketId ? `Job/source packet ID: ${sourcePacketId}` : '',
+    projectContext ? `Project context: ${projectContext}` : '',
+    stephenObservation ? `Stephen field observation: ${stephenObservation}` : '',
+    uniqueFacts.length ? `Verified facts:\n- ${uniqueFacts.join('\n- ')}` : '',
+    meaningfulCaptions.length ? `Photo captions:\n- ${meaningfulCaptions.join('\n- ')}` : '',
+  ]
+    .filter(Boolean)
+    .join('\n')
+
+  const sourceSummary =
+    missingReviewEvidence.length === 0
+      ? `Draft assembled from the internal job record, Stephen Alexander's field observation, and ${meaningfulCaptions.length} captioned field photo${meaningfulCaptions.length === 1 ? '' : 's'}.`
+      : 'Draft assembled from selected field photos; first-hand source verification is still incomplete.'
+
+  return {
+    schema: BLOG_SOURCE_PACKET_SCHEMA,
+    sourcePacketId,
+    stephenObservation,
+    projectContext,
+    uniqueFacts,
+    scopeBoundary,
+    localDecision,
+    meaningfulCaptions,
+    missingCaptionCount,
+    missingReviewEvidence,
+    requestedSeoStatus,
+    seoStatus,
+    sourceNotes,
+    sourceSummary,
+  }
 }
 
 function chooseLeadPhoto(photos) {
@@ -220,7 +397,7 @@ async function loadSelectedPhotosForGeneration(supabase, requestedPhotoIds) {
 
 function buildTitle(photos, requestedTitle, leadPhoto) {
   const provided = toTrimmedString(requestedTitle)
-  if (provided) return provided
+  if (provided && !isGenericProjectTitle(provided)) return provided
 
   const titleCandidates = [leadPhoto, ...photos]
     .filter(Boolean)
@@ -234,7 +411,7 @@ function buildTitle(photos, requestedTitle, leadPhoto) {
   }
 
   const dateLabel = new Date().toISOString().slice(0, 10)
-  return `Project Update ${dateLabel}`
+  return `Field Draft ${dateLabel}`
 }
 
 function textFromArray(value) {
@@ -289,6 +466,9 @@ export function sanitizeAiParagraph(value) {
     /\bwe\s+decided\b[^.!?;]*[.!?;]?/gi,
     /\bit\s+felt\b[^.!?;]*[.!?;]?/gi,
     /\blooks\s+like\b/gi,
+    /\bconcrete contractor waco tx\b/gi,
+    /\b[^.!?;]*(?:call|contact|request|schedule)[^.!?;]*\bfree estimate\b[^.!?;]*[.!?;]?/gi,
+    /\bfree estimate\b/gi,
   ]
 
   let paragraph = sanitizePlainTextParagraph(value)
@@ -297,25 +477,33 @@ export function sanitizeAiParagraph(value) {
     paragraph = paragraph.replace(pattern, '')
   }
 
+  paragraph = paragraph
+    .replace(/\s+([.!?])/g, '$1')
+    .replace(/(?:\.\s*){2,}/g, '. ')
   paragraph = sanitizePlainTextParagraph(paragraph)
   if (!paragraph) return ''
 
   return paragraph
 }
 
-function buildFallbackParagraph({ title, prompt, photo }) {
-  const promptText = toTrimmedString(prompt)
-  const photoText =
-    getMeaningfulPhotoText(photo) ||
-    toTrimmedString(photo?.source_caption || photo?.alt_text)
-  const locationText = /waco|central texas|mclennan/i.test(`${title} ${photoText}`)
-    ? ''
-    : ' for Waco and Central Texas homeowners'
+function buildFallbackParagraph({ title, evidence, photo }) {
+  const facts = Array.isArray(evidence?.uniqueFacts) ? evidence.uniqueFacts.slice(0, 3) : []
+  const photoText = getMeaningfulPhotoText(photo)
+  const parts = []
 
-  const opening = promptText || `Concrete project update${locationText}`
-  const detail = photoText || 'fresh field photos from a recent pour and finish'
+  if (facts.length) parts.push(facts.join(' '))
+  if (evidence?.stephenObservation) {
+    parts.push(`Stephen's field note: ${evidence.stephenObservation}`)
+  }
+  if (photoText && !facts.some((fact) => fact.toLowerCase() === photoText.toLowerCase())) {
+    parts.push(`Photo context: ${photoText}`)
+  }
 
-  return `${opening}: ${detail}. We focus on prep, proper mix, and a clean finish so the slab looks good and holds up in Texas heat.`
+  if (!parts.length) {
+    return `Draft for ${title}. Add the internal job record, Stephen's field observation, and job-specific photo captions before review.`
+  }
+
+  return sanitizePlainTextParagraph(parts.join(' '))
 }
 
 async function loadStoredBlogSystemPrompt(supabase) {
@@ -337,16 +525,16 @@ async function resolveBlogSystemPrompt(supabase, overridePrompt) {
   const override = toTrimmedString(overridePrompt)
   if (override) {
     return {
-      systemPrompt: override,
-      source: 'request',
+      systemPrompt: safeBlogSystemPrompt(override),
+      source: containsLegacyBlogFormulaPrompt(override) ? 'request-safety-fallback' : 'request',
     }
   }
 
   const storedPrompt = await loadStoredBlogSystemPrompt(supabase)
   if (storedPrompt) {
     return {
-      systemPrompt: storedPrompt,
-      source: 'database',
+      systemPrompt: safeBlogSystemPrompt(storedPrompt),
+      source: containsLegacyBlogFormulaPrompt(storedPrompt) ? 'database-safety-fallback' : 'database',
     }
   }
 
@@ -358,7 +546,7 @@ async function resolveBlogSystemPrompt(supabase, overridePrompt) {
 
 async function requestSeoParagraph({
   title,
-  prompt,
+  evidence,
   photo,
   includeImage,
   systemPrompt,
@@ -369,15 +557,30 @@ async function requestSeoParagraph({
   }
 
   const promptParts = [
-    'Create one SEO-friendly blog paragraph from this project update.',
-    'Use only what is supported by the title, photo details, and optional context.',
+    'Create one evidence-backed field-note paragraph for this draft.',
+    'Use only the labeled evidence below. Do not add keywords, a sales offer, or a call to action.',
+    'A visible detail is not proof of a dimension, material, client, location, compliance result, or completed scope.',
     'Return only the paragraph with no extra labels or markdown.',
     `Title: ${title}`,
   ]
 
-  const promptText = toTrimmedString(prompt)
-  if (promptText) {
-    promptParts.push(`Extra context: ${promptText}`)
+  if (evidence?.sourcePacketId) {
+    promptParts.push(`Internal job/source packet ID: ${evidence.sourcePacketId}`)
+  }
+  if (evidence?.projectContext) {
+    promptParts.push(`Verified project context: ${evidence.projectContext}`)
+  }
+  if (Array.isArray(evidence?.uniqueFacts) && evidence.uniqueFacts.length) {
+    promptParts.push(`Verified job facts: ${evidence.uniqueFacts.join(' | ')}`)
+  }
+  if (evidence?.stephenObservation) {
+    promptParts.push(`Stephen's first-hand observation: ${evidence.stephenObservation}`)
+  }
+  if (evidence?.scopeBoundary) {
+    promptParts.push(`Verified scope boundary: ${evidence.scopeBoundary}`)
+  }
+  if (evidence?.localDecision) {
+    promptParts.push(`Verified local decision: ${evidence.localDecision}`)
   }
 
   const photoContext =
@@ -419,7 +622,7 @@ async function requestSeoParagraph({
     },
     body: JSON.stringify({
       model: OPENAI_MODEL,
-      instructions: toTrimmedString(systemPrompt) || DEFAULT_BLOG_SYSTEM_PROMPT,
+      instructions: safeBlogSystemPrompt(systemPrompt),
       input: [
         {
           role: 'user',
@@ -457,7 +660,7 @@ async function requestSeoParagraph({
 
 async function generateSeoParagraphWithPhoto({
   title,
-  prompt,
+  evidence,
   photo,
   systemPrompt,
   photoComments,
@@ -465,7 +668,7 @@ async function generateSeoParagraphWithPhoto({
   try {
     return await requestSeoParagraph({
       title,
-      prompt,
+      evidence,
       photo,
       includeImage: true,
       systemPrompt,
@@ -477,7 +680,7 @@ async function generateSeoParagraphWithPhoto({
     if (/image|url|download|fetch|invalid_image/i.test(message)) {
       return requestSeoParagraph({
         title,
-        prompt,
+        evidence,
         photo,
         includeImage: false,
         systemPrompt,
@@ -662,22 +865,19 @@ async function generateJobListingCopyWithPhoto({ leadPhoto, comments, category, 
 }
 
 export function buildGeneratedContent({ photos, title, introParagraph }) {
-  const safeTitle = sanitizePlainTextInline(title, 95) || 'Concrete project update'
+  const safeTitle = sanitizePlainTextInline(title, 95) || 'Untitled field draft'
   const introLine =
     sanitizePlainTextParagraph(introParagraph) ||
-    sanitizePlainTextParagraph(`Concrete project update: ${safeTitle}`)
+    sanitizePlainTextParagraph(`Draft for ${safeTitle}. Add verified field context before review`)
 
   const markdownImages = photos
-    .map((photo, index) => {
+    .map((photo) => {
       const imageUrl = toSafeMarkdownImageUrl(photo?.image_url)
       if (!imageUrl) return ''
 
       const altSource =
-        getMeaningfulPhotoText(photo) ||
-        photo.alt_text ||
-        photo.source_caption ||
-        `${safeTitle} photo ${index + 1}`
-      const alt = shortText(sanitizePlainTextInline(altSource), 80) || `Project photo ${index + 1}`
+        getMeaningfulPhotoText(photo) || UNCAPTIONED_PHOTO_ALT
+      const alt = shortText(sanitizePlainTextInline(altSource), 100) || UNCAPTIONED_PHOTO_ALT
 
       return `![${alt}](${imageUrl})`
     })
@@ -719,7 +919,7 @@ async function requireAdminUser(req, supabase) {
 }
 
 async function createUniqueSlug(supabase, title, preferredSlug) {
-  const base = toTrimmedString(preferredSlug) || slugify(title) || 'project-update'
+  const base = toTrimmedString(preferredSlug) || slugify(title) || 'field-draft'
 
   for (let attempt = 0; attempt < 6; attempt += 1) {
     const candidate = attempt === 0 ? base : `${base}-${attempt + 1}`
@@ -789,13 +989,6 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
     throw createHttpError('photoIds is required.', 400)
   }
 
-  const statusInput = toTrimmedString(normalizedBody.status || '').toLowerCase()
-  const status = toBoolean(normalizedBody.publish, false)
-    ? 'published'
-    : VALID_STATUSES.has(statusInput)
-      ? statusInput
-      : 'draft'
-
   const {
     photoMap,
     leadPhoto,
@@ -804,6 +997,11 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
   } = await loadSelectedPhotosForGeneration(supabase, requestedPhotoIds)
 
   const title = buildTitle(prioritizedPhotos, normalizedBody.title, leadPhoto)
+  const evidence = evaluateBlogGenerationEvidence({
+    body: normalizedBody,
+    photos: prioritizedPhotos,
+    title,
+  })
   const slug = await createUniqueSlug(supabase, title, normalizedBody.slug)
   const primaryPhoto = leadPhoto || prioritizedPhotos[0]
 
@@ -811,7 +1009,7 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
   let aiMeta = { enabled: false, model: null, responseId: null, systemPromptSource: null }
   let introParagraph = buildFallbackParagraph({
     title,
-    prompt: normalizedBody.prompt,
+    evidence,
     photo: primaryPhoto,
   })
 
@@ -822,7 +1020,7 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
     )
     const aiResult = await generateSeoParagraphWithPhoto({
       title,
-      prompt: normalizedBody.prompt,
+      evidence,
       photo: primaryPhoto,
       systemPrompt,
       photoComments,
@@ -849,17 +1047,33 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
     slug,
     excerpt,
     content,
-    status,
+    status: GENERATED_BLOG_STATUS,
+    seo_status: evidence.seoStatus,
     cover_image_url: coverImageUrl,
     author_email: toTrimmedString(adminEmail) || null,
-    published_at: status === 'published' ? new Date().toISOString() : null,
+    source_notes: evidence.sourceNotes || null,
+    source_summary: evidence.sourceSummary,
+    authenticity_data: {
+      unique_facts: evidence.uniqueFacts,
+      first_hand_observation: evidence.stephenObservation,
+      scope_boundary: evidence.scopeBoundary,
+      local_decision: evidence.localDecision,
+      exact_project_photos: false,
+      photo_captions_reviewed: evidence.missingCaptionCount === 0,
+      claims_verified: false,
+      client_permission_checked: false,
+      generator_source_packet_id: evidence.sourcePacketId || null,
+      generator_schema: evidence.schema,
+      generator_missing_review_evidence: evidence.missingReviewEvidence,
+    },
+    published_at: null,
     updated_at: new Date().toISOString(),
   }
 
   const { data: savedPost, error: saveError } = await supabase
     .from('blog_posts')
     .insert(payload)
-    .select('id, title, slug, status, cover_image_url, published_at, updated_at')
+    .select('id, title, slug, status, seo_status, cover_image_url, published_at, updated_at')
     .single()
 
   if (saveError) {
@@ -871,8 +1085,8 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
     photo_id: photo.id,
     image_order: index,
     is_cover: index === 0,
-    caption: photo.source_caption || null,
-    alt_text: photo.alt_text || null,
+    caption: getMeaningfulPhotoText(photo) || null,
+    alt_text: getMeaningfulPhotoText(photo) || null,
   }))
 
   const { error: linkError } = await supabase.from('blog_post_photos').insert(linkRows)
@@ -887,6 +1101,13 @@ export async function generateBlogPostFromPhotoSelection({ supabase, adminEmail,
     leadPhotoId: prioritizedPhotos[0]?.id || null,
     photoCommentsUsed: photoComments.length,
     missingPhotoIds: requestedPhotoIds.filter((id) => !photoMap.has(id)),
+    editorial: {
+      status: GENERATED_BLOG_STATUS,
+      seoStatus: evidence.seoStatus,
+      requestedSeoStatus: evidence.requestedSeoStatus || GENERATED_BLOG_DEFAULT_SEO_STATUS,
+      sourcePacketId: evidence.sourcePacketId || null,
+      missingReviewEvidence: evidence.missingReviewEvidence,
+    },
     ai: aiMeta,
   }
 }

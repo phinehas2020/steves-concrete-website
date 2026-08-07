@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Seed blog posts into Supabase.
+ * Seed legacy blog examples into Supabase as needs-facts drafts.
  * Run with: SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... node scripts/seed-blog-posts.mjs
  */
 
@@ -19,80 +19,79 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 const posts = [
   {
     slug: 'concrete-driveway-cost-waco-tx-2025',
-    title: 'How Much Does a Concrete Driveway Cost in Waco, TX? (2025 Guide)',
+    title: 'Concrete Driveway Estimate Factors in Waco, TX',
     excerpt:
-      'A clear breakdown of concrete driveway pricing in Waco and Central Texas. Per-square-foot ranges, cost drivers, and how to plan your estimate.',
+      'A needs-facts draft covering the inputs that belong in a Waco driveway estimate. No planning range is approved until recent SLA scopes are reviewed.',
     content: `## What Drives Driveway Cost?
 
-Concrete driveway cost in Waco depends on square footage, thickness, base prep, and finish. Standard broom-finished driveways typically run **$6–12 per square foot**. Stamped or decorative finishes run **$12–18 per square foot**.
+Concrete driveway pricing depends on the measured footprint and the work included in the written scope.
 
-### Typical Ranges
+### Scope Items to Compare
 
-- **Standard broom finish:** $6–12 per sq ft  
-- **Stamped or decorative:** $12–18 per sq ft  
-- **Typical two-car driveway (600 sq ft):** $3,600–$10,800
+- Existing-concrete removal and disposal
+- Excavation, base correction, and drainage
+- Thickness, reinforcement, joints, and edge details
+- Access, placement, finish, cure, and cleanup
 
 ### Cost Factors
 
 1. **Square footage** — Larger driveways cost more overall but may have lower per-sq-ft rates.
-2. **Base prep** — McLennan County black clay often needs deeper base work to handle expansion.
-3. **Reinforcement** — Rebar or mesh adds cost but extends lifespan.
-4. **Finish** — Broom is lowest; stamped, stained, or exposed aggregate cost more.
+2. **Base prep** — Existing support, fill, moisture, drainage, and responsible design inputs can change the work.
+3. **Reinforcement** — The estimate should state what is included and the design source.
+4. **Finish** — Each finish adds different product, timing, traction, cleaning, and maintenance requirements.
 5. **Removal** — Replacing old concrete adds removal and disposal costs.
 
 ### Waco-Specific Notes
 
-Our black clay soil expands when wet and shrinks when dry. We plan base depth, control joints, and reinforcement to minimize movement and cracking. Proper drainage and slope also affect long-term durability.
+Expansive clay, moisture changes, drainage, support, loads, joints, placement, and curing can affect performance. The actual project scope should state how those conditions are addressed without promising crack-free concrete.
 
 ### Get a Free Estimate
 
 Every project is different. [Request a free estimate](/contact) or call **(254) 230-3102** for a site-specific quote.
 
 ---
-*Updated February 2026*`,
-    status: 'published',
+*Needs source review before SEO approval*`,
+    status: 'draft',
+    seo_status: 'needs_facts',
   },
   {
     slug: 'stamped-vs-stained-concrete-waco-patio',
     title: 'Stamped vs Stained Concrete: Which Is Right for Your Waco Patio?',
     excerpt:
-      'Stamped and stained concrete both add style to patios. Here’s how they differ in look, cost, and maintenance for Central Texas homeowners.',
+      'A needs-facts comparison checklist for pattern, color, slab condition, product, traction, and maintenance. Product and project claims require source review.',
     content: `## Stamped vs Stained: What's the Difference?
 
 **Stamped concrete** has patterns pressed into the surface while wet — replicating stone, brick, or slate. It’s done during the pour.
 
-**Stained concrete** uses acid or water-based color applied to hardened concrete. It can be done on new or existing slabs.
+**Stained concrete** uses a selected color system on a prepared slab. Existing condition and a test area affect whether the proposed system is suitable.
 
 ### Stamped Concrete
 
 - **Look:** 3D texture, stone/brick patterns  
-- **Cost:** $12–18 per sq ft typically  
-- **Best for:** Patios, walkways, pool decks  
-- **Maintenance:** Reseal every 2–3 years  
-- **Pro:** Dramatic look, lower cost than real stone  
+- **Scope:** Base slab, pattern, color, release, washing, sealer, traction, cure, and maintenance
+- **Evidence needed:** Named products, a real SLA project, field photos, and reviewed results
 
 ### Stained Concrete
 
 - **Look:** Rich, variegated color; subtle texture  
-- **Cost:** $5–12 per sq ft (existing) or added to new pour  
-- **Best for:** Patios, indoor floors, existing concrete  
-- **Maintenance:** Reseal every 2–3 years  
-- **Pro:** Works on existing slabs; many color options  
+- **Scope:** Slab review, preparation, test area, named stain and sealer, traction, cure, and maintenance
+- **Evidence needed:** Named products, a real SLA project, before-and-after photos, and reviewed results
 
 ### Which Is Right for You?
 
-- **New patio?** Either works. Stamped = more texture; stained = more color focus.
-- **Existing concrete?** Staining is often the better fit.
-- **Budget?** Stained on existing is usually lower cost than stamped new.
-- **Texas heat?** Both need UV-resistant sealers in Central Texas.
+- **New slab?** Compare the entire slab and finish scope, not just the decorative layer.
+- **Existing concrete?** Record condition, repairs, coatings, contamination, moisture, and test results first.
+- **Wet exposure?** Put traction and cleaning requirements in writing.
+- **Maintenance?** Follow the selected manufacturer and observed wear rather than one site-wide interval.
 
 ### Get Advice
 
-We’ve done both across Waco, Temple, and Killeen. [Contact us](/contact) or call **(254) 230-3102** for a free consultation.
+This draft does not claim a completed stain or stamped project in a specific city. Add only source-reviewed SLA records, products, captions, and Stephen’s field note before approval.
 
 ---
-*Updated February 2026*`,
-    status: 'published',
+*Needs source review before SEO approval*`,
+    status: 'draft',
+    seo_status: 'needs_facts',
   },
   {
     slug: 'black-clay-soil-concrete-foundations-waco',
@@ -126,7 +125,8 @@ No contractor can fully prevent cracks in expansive soil. We design to minimize 
 
 ---
 *Updated February 2026*`,
-    status: 'published',
+    status: 'draft',
+    seo_status: 'needs_facts',
   },
 ]
 

@@ -3,54 +3,6 @@ import { Footer } from '../components/Footer'
 import { useSeo, SITE_URL, DEFAULT_IMAGE, buildJsonLdGraph, buildBreadcrumbs } from '../lib/seo'
 import { FALLBACK_GOOGLE_REVIEW_URL, useGoogleReviews } from '../lib/googleReviews'
 
-const fallbackTestimonials = [
-  {
-    firstName: 'Maria',
-    city: 'Waco',
-    service: 'Concrete Driveways',
-    review:
-      "Our driveway was poured in one week with perfect grading, and Steve’s team explained each step. The finish stayed clean and the edges around our gate are still aligned after heavy rain.",
-    rating: 5,
-    date: '2025-11-14',
-  },
-  {
-    firstName: 'Dane',
-    city: 'Temple',
-    service: 'Concrete Patios',
-    review:
-      'I wanted a low-maintenance patio for weekend evenings. The team listened to my plan, corrected access issues, and finished faster than expected. I recommend this company for thoughtful project planning.',
-    rating: 5,
-    date: '2025-10-04',
-  },
-  {
-    firstName: 'Lena',
-    city: 'Hewitt',
-    service: 'Concrete Sidewalks',
-    review:
-      'Our front walk had cracking and drainage problems. The sidewalks look safer and the team made smart calls on slope and joint placement for long-term stability. Solid value.',
-    rating: 5,
-    date: '2025-09-22',
-  },
-  {
-    firstName: 'Aaron',
-    city: 'Killeen',
-    service: 'Concrete Repair',
-    review:
-      'We had a settling edge and spalling near the garage. The repair crew found the root issue, fixed the slab transition, and explained maintenance steps clearly.',
-    rating: 5,
-    date: '2025-08-11',
-  },
-  {
-    firstName: 'Whitney',
-    city: 'Robinson',
-    service: 'Stamped Concrete',
-    review:
-      "The stamped concrete finish is exactly what we wanted and has held up well through summer heat. Great communication, clear estimate, and clean installation by the end of the job.",
-    rating: 4,
-    date: '2025-07-03',
-  },
-]
-
 const localBusiness = {
   '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
   '@id': `${SITE_URL}/#organization`,
@@ -64,8 +16,10 @@ const localBusiness = {
   },
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Waco',
+    streetAddress: '1045 W Elm Mott Ln',
+    addressLocality: 'Elm Mott',
     addressRegion: 'TX',
+    postalCode: '76640',
     addressCountry: 'US',
   },
   telephone: '+1-254-230-3102',
@@ -74,17 +28,6 @@ const localBusiness = {
     name: 'Waco',
     addressRegion: 'TX',
   },
-}
-
-function formatFallbackDate(value) {
-  const date = new Date(`${value}T12:00:00Z`)
-  if (Number.isNaN(date.getTime())) return value
-
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(date)
 }
 
 export function Reviews() {
@@ -102,32 +45,25 @@ export function Reviews() {
         authorUri: review.authorUri,
         authorPhotoUri: review.authorPhotoUri,
       }))
-    : fallbackTestimonials.map((testimonial) => ({
-        id: `${testimonial.firstName}-${testimonial.date}`,
-        heading: `${testimonial.firstName} — ${testimonial.city}`,
-        meta: `Service used: ${testimonial.service}`,
-        review: testimonial.review,
-        rating: testimonial.rating,
-        date: formatFallbackDate(testimonial.date),
-        authorUri: '',
-        authorPhotoUri: '',
-      }))
-  const ratingValue =
-    hasLiveReviews && googleReviewsData.rating ? googleReviewsData.rating.toFixed(1) : '4.9'
-  const ratingCount =
-    hasLiveReviews && googleReviewsData.userRatingCount
-      ? String(googleReviewsData.userRatingCount)
-      : '38'
-  const aggregateRating = {
-    '@type': 'AggregateRating',
-    '@id': `${SITE_URL}/reviews#aggregate-rating`,
-    itemReviewed: localBusiness,
-    ratingValue,
-    bestRating: '5',
-    worstRating: '1',
-    ratingCount,
-    reviewCount: hasLiveReviews ? ratingCount : String(fallbackTestimonials.length),
-  }
+    : []
+  const ratingValue = hasLiveReviews && googleReviewsData.rating
+    ? googleReviewsData.rating.toFixed(1)
+    : ''
+  const ratingCount = hasLiveReviews && googleReviewsData.userRatingCount
+    ? String(googleReviewsData.userRatingCount)
+    : ''
+  const aggregateRating = hasLiveReviews && ratingValue && ratingCount
+    ? {
+        '@type': 'AggregateRating',
+        '@id': `${SITE_URL}/reviews#aggregate-rating`,
+        itemReviewed: localBusiness,
+        ratingValue,
+        bestRating: '5',
+        worstRating: '1',
+        ratingCount,
+        reviewCount: ratingCount,
+      }
+    : null
   const reviewNodes = hasLiveReviews
     ? googleReviewsData.reviews.map((review) => ({
         '@type': 'Review',
@@ -145,22 +81,7 @@ export function Reviews() {
           worstRating: '1',
         },
       }))
-    : fallbackTestimonials.map((testimonial) => ({
-        '@type': 'Review',
-        itemReviewed: localBusiness,
-        author: {
-          '@type': 'Person',
-          name: testimonial.firstName,
-        },
-        reviewBody: `${testimonial.review} (${testimonial.firstName} in ${testimonial.city}, used: ${testimonial.service})`,
-        datePublished: testimonial.date,
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: String(testimonial.rating),
-          bestRating: '5',
-          worstRating: '1',
-        },
-      }))
+    : []
   const breadcrumbsJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `${SITE_URL}/` },
     { name: 'Reviews', url: `${SITE_URL}/reviews` },
@@ -172,9 +93,9 @@ export function Reviews() {
     FALLBACK_GOOGLE_REVIEW_URL
 
   useSeo({
-    title: 'Reviews | 5-Star Waco Concrete Contractor | SLA Concrete Works',
+    title: 'Customer Reviews | SLA Concrete Works in Waco, TX',
     description:
-      'See why Waco homeowners rate SLA Concrete Works 5 stars on Google. Real reviews from driveway, patio, stamped concrete, and repair projects. Free estimates: (254) 230-3102.',
+      'Read current customer feedback for SLA Concrete Works from its Google Business Profile and review the source directly.',
     canonical: `${SITE_URL}/reviews`,
     url: `${SITE_URL}/reviews`,
     image: DEFAULT_IMAGE,
@@ -196,11 +117,12 @@ export function Reviews() {
             <p className="text-lg text-stone-600 text-pretty mb-10">
               {hasLiveReviews
                 ? 'Live Google reviews from homeowners and business owners around Waco and the surrounding area.'
-                : 'Real feedback from homeowners and business owners in Waco and surrounding Central Texas communities.'}
+                : 'The live review feed is unavailable right now. Use the Google Business Profile link below to see the current source reviews.'}
             </p>
           </div>
 
-          <div className="mb-8 grid gap-4 sm:grid-cols-3">
+          {hasLiveReviews ? (
+            <div className="mb-8 grid gap-4 sm:grid-cols-3">
             <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
               <div className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">Average rating</div>
               <div className="mt-2 font-display text-4xl font-bold text-stone-900">{ratingValue}</div>
@@ -212,10 +134,15 @@ export function Reviews() {
             <div className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm">
               <div className="text-sm font-semibold uppercase tracking-[0.2em] text-stone-500">Source</div>
               <div className="mt-2 text-lg font-semibold text-stone-900">
-                {hasLiveReviews ? 'Google Business Profile' : 'Local fallback reviews'}
+                Google Business Profile
               </div>
             </div>
-          </div>
+            </div>
+          ) : (
+            <div className="mb-8 rounded-2xl border border-stone-200 bg-white p-6 text-stone-600">
+              No rating or review total is shown until the live Google source loads.
+            </div>
+          )}
 
           <div className="grid gap-6">
             {reviewCards.map((testimonial) => (

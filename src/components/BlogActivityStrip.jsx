@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, CalendarClock } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { mergeBlogRecordsWithSourcePrecedence } from '../data/blogPostMerge'
+import { isRoutePubliclyDiscoverable } from '../data/indexingControls'
+import { staticBlogPosts } from '../data/staticBlogPosts'
 
 function formatDate(value) {
   if (!value) return 'Draft'
@@ -53,28 +56,57 @@ function BlogCard({ post }) {
 export function BlogActivityStrip() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const error = ''
 
   useEffect(() => {
     let isMounted = true
 
     const fetchPosts = async () => {
-      const { data, error: fetchError } = await supabase
+      let result = await supabase
         .from('blog_posts')
-        .select('id, title, slug, excerpt, published_at, cover_image_url')
+        .select(
+          'id, title, slug, excerpt, published_at, cover_image_url, seo_status, canonical_slug',
+        )
         .eq('status', 'published')
         .order('published_at', { ascending: false })
-        .limit(3)
+        .limit(50)
+
+      if (result.error) {
+        result = await supabase
+          .from('blog_posts')
+          .select('id, title, slug, excerpt, published_at, cover_image_url')
+          .eq('status', 'published')
+          .order('published_at', { ascending: false })
+          .limit(50)
+      }
 
       if (!isMounted) return
 
-      if (fetchError) {
-        setError('Blog activity is temporarily unavailable.')
+      if (result.error) {
+        setPosts(
+          mergeBlogRecordsWithSourcePrecedence(staticBlogPosts)
+            .filter((post) => isRoutePubliclyDiscoverable(`/blog/${post.slug}`, post))
+            .sort(
+              (a, b) =>
+                (Date.parse(b?.published_at || b?.created_at || '') || 0) -
+                (Date.parse(a?.published_at || a?.created_at || '') || 0),
+            )
+            .slice(0, 3),
+        )
         setLoading(false)
         return
       }
 
-      setPosts(data || [])
+      setPosts(
+        mergeBlogRecordsWithSourcePrecedence(staticBlogPosts, result.data || [])
+          .filter((post) => isRoutePubliclyDiscoverable(`/blog/${post.slug}`, post))
+          .sort(
+            (a, b) =>
+              (Date.parse(b?.published_at || b?.created_at || '') || 0) -
+              (Date.parse(a?.published_at || a?.created_at || '') || 0),
+          )
+          .slice(0, 3),
+      )
       setLoading(false)
     }
 

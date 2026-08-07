@@ -1,11 +1,9 @@
-/* global process, Buffer */
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const MAX_GUIDS_PER_REQUEST = 150
 const MAX_SYNC_PHOTOS = Number.parseInt(process.env.ICLOUD_SYNC_MAX_PHOTOS || '120', 10)
-const VALID_STATUSES = new Set(['draft', 'published'])
 const BLOG_IMAGE_BUCKET = process.env.BLOG_IMAGES_BUCKET || 'blog-images'
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024
 const ALLOWED_IMAGE_MIME_TYPES = new Set([
@@ -15,6 +13,17 @@ const ALLOWED_IMAGE_MIME_TYPES = new Set([
   'image/webp',
   'image/gif',
 ])
+
+export function applyBlogContentReviewGate(payload = {}) {
+  return {
+    ...payload,
+    status: 'draft',
+    seo_status: 'needs_facts',
+    published_at: null,
+    reviewed_by: null,
+    reviewed_at: null,
+  }
+}
 
 function normalizeBody(body) {
   if (!body) return {}
@@ -650,7 +659,6 @@ async function upsertAlbumRecord(supabase, albumInput) {
 async function createOrUpdatePostForBatch(supabase, {
   batch,
   photos,
-  status,
   authorEmail,
 }) {
   const titleSlug = slugify(batch.title) || 'project-update'
@@ -662,22 +670,20 @@ async function createOrUpdatePostForBatch(supabase, {
     photos,
   })
 
-  const payload = {
+  const payload = applyBlogContentReviewGate({
     title: batch.title,
     slug,
     excerpt: batch.excerpt || buildExcerpt(content),
     content,
-    status,
     cover_image_url: photos[0]?.image_url || null,
     author_email: authorEmail,
-    published_at: status === 'published' ? new Date().toISOString() : null,
     updated_at: new Date().toISOString(),
-  }
+  })
 
   const { data: savedPost, error: saveError } = await supabase
     .from('blog_posts')
     .upsert(payload, { onConflict: 'slug' })
-    .select('id, title, slug, status, cover_image_url, published_at, updated_at')
+    .select('id, title, slug, status, seo_status, cover_image_url, published_at, updated_at')
     .single()
 
   if (saveError) {
@@ -801,11 +807,11 @@ async function repairLinkedBlogPostsAfterPhotoMirror(supabase, savedPhotos, exis
 
     const { error: updateError } = await supabase
       .from('blog_posts')
-      .update({
+      .update(applyBlogContentReviewGate({
         content: nextContent,
         cover_image_url: nextCover,
         updated_at: new Date().toISOString(),
-      })
+      }))
       .eq('id', post.id)
 
     if (updateError) {
@@ -1178,13 +1184,9 @@ async function syncIcloudAlbumToLibrary({ supabase, actorUser, body, albumRecord
         .filter(Boolean)
 
       if (batchPhotos.length > 0) {
-        const statusInput = toTrimmedString(body.postStatus || body.post_status || body.status).toLowerCase()
-        const status = VALID_STATUSES.has(statusInput) ? statusInput : 'published'
-
         generatedPost = await createOrUpdatePostForBatch(supabase, {
           batch: newestBatch,
           photos: batchPhotos,
-          status,
           authorEmail: actorUser.email,
         })
       }

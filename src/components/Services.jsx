@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion as Motion, AnimatePresence } from 'motion/react'
 import {
   Truck,
   Umbrella,
@@ -95,15 +95,15 @@ export function Services({ sectionId = 'services' }) {
     <section id={sectionId || undefined} className="section-padding bg-white texture-grain-light">
       <div className="container-main">
         <div className="max-w-3xl mb-12">
-          <motion.span
+          <Motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wider mb-4"
           >
             Our Expertise
-          </motion.span>
-          <motion.h2
+          </Motion.span>
+          <Motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -111,18 +111,18 @@ export function Services({ sectionId = 'services' }) {
             className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-stone-900 mb-6"
           >
             Professional Concrete Services in Waco, TX
-          </motion.h2>
-          <motion.p
+          </Motion.h2>
+          <Motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="text-lg text-stone-600 text-pretty"
           >
-            From residential driveways to commercial slabs, we bring 20+ years of Waco-area
-            concrete experience to every project. We plan for Central Texas soil movement,
+            From residential driveways to commercial slabs, we plan each Waco-area project around
+            the actual site and intended use. We account for Central Texas soil movement,
             drainage, and heat so your concrete performs long after install.
-          </motion.p>
+          </Motion.p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -131,7 +131,7 @@ export function Services({ sectionId = 'services' }) {
               const Icon = iconMap[service.slug] || Layout
               const previewImage = getServicePreviewImage(service.slug)
               return (
-                <motion.div
+                <Motion.div
                   key={service.slug}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -175,7 +175,7 @@ export function Services({ sectionId = 'services' }) {
                       <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
-                </motion.div>
+                </Motion.div>
               )
             })}
           </AnimatePresence>
@@ -183,7 +183,7 @@ export function Services({ sectionId = 'services' }) {
 
         {/* See More Button */}
         {hasMore && (
-          <motion.div
+          <Motion.div
             className="flex justify-center mt-10"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -196,7 +196,7 @@ export function Services({ sectionId = 'services' }) {
               {showAll ? 'Show Less' : 'See More Services'}
               <ChevronDown className={`size-5 transition-transform duration-300 ${showAll ? 'rotate-180' : ''}`} />
             </button>
-          </motion.div>
+          </Motion.div>
         )}
       </div>
     </section>

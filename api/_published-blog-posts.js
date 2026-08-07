@@ -1,7 +1,20 @@
 import { createClient } from '@supabase/supabase-js'
+import { mergeBlogRecordsWithSourcePrecedence } from '../src/data/blogPostMerge.js'
+import { getRouteIndexingState } from '../src/data/indexingControls.js'
 
-const BLOG_POST_FIELDS =
+const LEGACY_BLOG_POST_FIELDS =
   'id, title, slug, excerpt, content, cover_image_url, published_at, updated_at, created_at, status'
+const EDITORIAL_BLOG_POST_FIELDS = [
+  LEGACY_BLOG_POST_FIELDS,
+  'seo_status',
+  'author_name',
+  'reviewed_by',
+  'reviewed_at',
+  'source_summary',
+  'canonical_slug',
+  'project_series_id',
+  'series_phase',
+].join(', ')
 
 function envString(value) {
   if (typeof value !== 'string') return ''
@@ -16,27 +29,40 @@ function isPublishedPost(post) {
   return Boolean(post?.slug && (!post.status || post.status === 'published'))
 }
 
+function isMissingEditorialColumn(error) {
+  const message = String(error?.message || '')
+  return (
+    error?.code === '42703' ||
+    error?.code === 'PGRST204' ||
+    /column|schema cache/i.test(message) &&
+      /seo_status|author_name|reviewed_by|source_summary|canonical_slug|authenticity_data/i.test(
+        message,
+      )
+  )
+}
+
+export function getBlogPostIndexingState(post = {}) {
+  return getRouteIndexingState(`/blog/${post.slug || ''}`, post)
+}
+
+export function isBlogPostIndexable(post = {}) {
+  return getBlogPostIndexingState(post).indexable
+}
+
+export function isBlogPostListingEligible(post = {}) {
+  return getBlogPostIndexingState(post).includeInSitemap
+}
+
 export function mergePublishedBlogPosts(staticPosts = [], remotePosts = []) {
-  const bySlug = new Map()
+  const publishedStatic = staticPosts.filter(isPublishedPost)
+  const publishedRemote = remotePosts.filter(isPublishedPost)
 
-  for (const post of staticPosts) {
-    if (isPublishedPost(post)) {
-      bySlug.set(post.slug, post)
-    }
-  }
-
-  for (const post of remotePosts) {
-    if (isPublishedPost(post)) {
-      const staticPost = bySlug.get(post.slug)
-      bySlug.set(post.slug, {
-        ...staticPost,
-        ...post,
-        ...(staticPost?.seo_title ? { seo_title: staticPost.seo_title } : {}),
-      })
-    }
-  }
-
-  return [...bySlug.values()].sort((a, b) => postTimestamp(b) - postTimestamp(a))
+  return mergeBlogRecordsWithSourcePrecedence(publishedStatic, publishedRemote)
+    .map((post) => {
+      const staticPost = publishedStatic.find((candidate) => candidate.slug === post.slug)
+      return staticPost?.seo_title ? { ...post, seo_title: staticPost.seo_title } : post
+    })
+    .sort((a, b) => postTimestamp(b) - postTimestamp(a))
 }
 
 export async function fetchPublishedBlogPosts({
@@ -63,12 +89,22 @@ export async function fetchPublishedBlogPosts({
     },
   })
 
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .select(BLOG_POST_FIELDS)
-    .eq('status', 'published')
-    .not('slug', 'is', null)
-    .order('published_at', { ascending: false })
+  const selectPublishedPosts = (fields) =>
+    supabase
+      .from('blog_posts')
+      .select(fields)
+      .eq('status', 'published')
+      .not('slug', 'is', null)
+      .order('published_at', { ascending: false })
+
+  let { data, error } = await selectPublishedPosts(EDITORIAL_BLOG_POST_FIELDS)
+
+  if (error && isMissingEditorialColumn(error)) {
+    logger?.warn?.(
+      'Blog editorial columns are not available yet; retrying with the legacy published-post fields.',
+    )
+    ;({ data, error } = await selectPublishedPosts(LEGACY_BLOG_POST_FIELDS))
+  }
 
   if (error) {
     logger?.warn?.(`Skipping Supabase blog post fetch: ${error.message}`)

@@ -1,4 +1,6 @@
-export const staticBlogPosts = [
+import { FORMULAIC_BLOG_SLUGS } from './indexingControls.js'
+
+const editorialStaticBlogPosts = [
   {
     id: 'static-melody-grove-waco-case-study-2026-07-24',
     created_at: '2026-07-24T15:00:00.000Z',
@@ -11,7 +13,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/melody-grove-parking-lot-pour-waco-tx/01-6087acf7-d92f-4bfe-9e5e-37b58e531594.jpg',
-    author_email: 'site-content@system.local',
     content: [
       'The Melody Grove housing project is a useful example of why larger concrete jobs are better understood as a sequence, not a single pour. SLA Concrete Works documented several phases at this Waco site: paving and sidewalk preparation, parking-area placement, curb and edge work, and accessible parking flatwork around occupied buildings.',
       '## Project scope shown in the field updates',
@@ -43,7 +44,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/magnolia-rv-concrete-pads-waco/02-7971d590-a297-486d-bc2b-5feb78fcb309.jpg',
-    author_email: 'site-content@system.local',
     content: [
       'The Magnolia RV site in Waco shows the practical side of repetitive commercial flatwork. A run of concrete pads may look simple from a distance, but every space has to line up with covered structures, posts, utilities, gravel drives, and the overall drainage plan.',
       '## What the project photos verify',
@@ -75,7 +75,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/burnet-shop-foundation-finish/01-8faae271-6a79-482b-ba6c-feb80d76a10c.jpg',
-    author_email: 'site-content@system.local',
     content: [
       'This Burnet project documents the finished surface of an approximately 9,600-square-foot shop foundation. The available photos are from after placement and finishing, so this case study separates what is visible in the record from the planning requirements that should be resolved before any large shop slab is poured.',
       '## What the project record shows',
@@ -105,7 +104,6 @@ export const staticBlogPosts = [
       'How Waco homeowners can tell whether a cracked concrete driveway needs a repair, a resurface, or a full replacement — and the questions to ask before paying for either.',
     status: 'published',
     cover_image_url: '/images/gallery-stamped-driveway.webp',
-    author_email: 'slaconcrete@gmail.com',
     content: [
       'Cracked driveways are one of the most common calls we get in Waco, and the first question is almost always the same: can this be repaired, or does it need to come out? The honest answer depends on why the concrete cracked, not just how the crack looks.',
       '## When a repair makes sense',
@@ -121,7 +119,7 @@ export const staticBlogPosts = [
       'One warning worth repeating: a low bid that skips base repair on a failed slab is not a cheaper version of the same fix — it is a different, shorter-lived project. Ask every contractor what happens under the concrete, not just on top of it.',
       '## How to get a fast, honest answer',
       'Send us a few photos: a wide shot of the whole driveway, close-ups of the worst cracks, and a picture of where water sits after rain. With those and rough dimensions we can usually tell you which direction makes sense before a site visit. If the cracking connects to slab or [foundation movement](/foundation-repair-waco-tx), we will say so and explain what needs review first.',
-      'SLA Concrete Works has handled driveway repair and replacement across Waco, Hewitt, Woodway, Robinson, Temple, and the surrounding area since 2005. Call (254) 230-3102 for a free estimate — we will tell you plainly if a repair is enough.',
+      'SLA Concrete Works handles driveway repair and replacement across Waco and nearby Central Texas communities. Call (254) 230-3102 for a written estimate — we will tell you plainly if a repair is enough.',
     ].join('\n\n'),
   },
   {
@@ -136,8 +134,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/georgetown-tx-shop-foundation-concrete/01-7d3b1d9f-4feb-497b-b62f-2ed1928db297.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1v3ap60',
     content: [
       'This update is from a Georgetown, Texas concrete job with a shop foundation slab and retaining wall work on the same property. The photos show fresh concrete down, forms still in place, crew members working the finish, and the wall cleaned up after placement.',
       'A shop slab like this has to start with the right base and layout. The forms set the shape, the steel and vapor barrier need to be ready before the truck gets there, and the finish has to be worked while the concrete is still in the right window.',
@@ -165,8 +161,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/temple-drainage-channel-concrete/01-392fac0d-4c5f-49f7-a09d-7575eba39cba.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1yxrm2z',
     content: [
       'This update is from a drainage channel job in Temple, Texas. The photos show a long narrow run between fence lines, with forms set, steel in place, and the crew working the concrete into a tight area.',
       'This kind of concrete work is not about making a big open slab look pretty. The channel has to move water, hold its shape, and stay lined up in a space where there is not much room for equipment or extra material.',
@@ -190,8 +184,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/melody-grove-handicap-parking-waco/01-410ab6b1-7da4-47ef-8cb6-f67dc461dfdd.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: 'wf9qd4',
     content: [
       'This update is from Melody Grove housing in Waco, Texas. The photos show prep work for handicap parking and nearby flatwork, with forms going in, base material shaped, and the crew working through the layout around the buildings.',
       'This part of a concrete job does not look finished yet, but it is where a lot of the important work happens. The forms need to hold the right line, the base needs to be firm, and the grade has to make sense before any concrete truck shows up.',
@@ -215,8 +207,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/hubbard-tx-concrete-resurfacing/01-2bcefc4d-7b57-4765-bf85-55cfbd1f2df9.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: 'qloi2f',
     content: [
       'This update is from a concrete resurfacing job in Hubbard, Texas. The batch notes called out about 1,600 square feet of old concrete, and the photos show the finished work around a shop, porch, covered patio, walkways, and gravel edges.',
       'Resurfacing is not just spreading a new coat and walking away. The old concrete has to be cleaned up, the weak spots need attention, and the new surface has to meet the doors, posts, steps, and existing edges without leaving awkward lips or low spots.',
@@ -246,8 +236,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/melody-grove-parking-lot-pour-waco-tx/01-6087acf7-d92f-4bfe-9e5e-37b58e531594.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1848605',
     content: [
       'This update is from the Melody Grove housing complex in Waco, Texas. The photos show a new concrete parking lot section after the pour, with curb work, forms, cleanup, and equipment still on site.',
       'Parking lot concrete has to do more than look flat. It needs the right slope so water moves off the slab, the edges have to line up with the walks and drive lanes, and the finish has to hold up to regular traffic without turning slick.',
@@ -272,8 +260,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/hewitt-tx-concrete-pour/01-570e0b01-242a-4f49-8eab-24604ba9a5b4.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1fyf7w8',
     content: [
       'This update is from a concrete pour in Hewitt, Texas, just south of Waco. The photos show a fresh rectangular slab with the forms still holding the edges, the crew working the surface, and cleanup starting around the pour area.',
       'On a slab like this, the finish depends on what happened before the truck showed up. The base has to be shaped, the forms need to stay straight, and the grade around the slab has to make sense so water does not sit against the concrete after the job is done.',
@@ -296,8 +282,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/cameron-park-zoo-concrete-pour/01-d80ac1cf-acab-4fbe-bf0c-82e055789599.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: 'zf1jdt',
     content: [
       'This update is from a concrete pour at Cameron Park Zoo in Waco. The photos show a new walkway section in place, running through a tight area with fencing, trees, exhibit walls, and existing paths close by.',
       'Zoo work is not the same as pouring an open driveway. Access is tighter, the edges have to meet what is already there, and the finish has to be useful for steady foot traffic. A clean broom finish matters here because this walkway needs traction and drainage, not a slick surface.',
@@ -321,8 +305,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/city-of-waco-sidewalk-concrete-pour/01-bd3fce5d-158e-4f58-a3a1-bef64ddf444a.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1jcd0ic',
     content: [
       'This update is from a City of Waco sidewalk pour. The photos show fresh sidewalk concrete going in, with forms set, the crew working the surface, and the walkway being tied back into the surrounding area.',
       'Sidewalk work looks simple from the street, but the details still matter. The base has to be firm, the forms need to hold a clean line, and the concrete needs the right slope so water does not sit on the walk or run back where it should not.',
@@ -347,8 +329,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/magnolia-rv-concrete-pads-waco/02-7971d590-a297-486d-bc2b-5feb78fcb309.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1jftw2g',
     content: [
       'This update is from the Magnolia RV site in Waco. The photos show a run of concrete RV pads and covered parking areas, with several slabs already down and more forming, grading, and cleanup still happening around the site.',
       'On a job like this, the concrete has to be useful every day. RV pads need straight layout, the right slope, clean edges, and enough room around posts, utilities, and drive lanes. If the grade is wrong or the forms wander, it shows up fast once vehicles start moving through.',
@@ -378,8 +358,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/mount-calm-shop-foundation-concrete/02-1bbd06bd-b7b6-4bbb-b5ce-a8ea998a3f86.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1v8ehd3',
     content: [
       'This update is from a 2,500 square foot shop foundation for a Morton building in Mount Calm, northeast of Waco. The photos show the slab before the pour, the layout from above, and the finished concrete inside the building after the crew worked it down.',
       'A shop foundation like this is not the place to guess. The forms set the footprint, the vapor barrier helps control moisture, and the steel has to be in place before the trucks show up. Once concrete starts hitting the ground, there is not much time to fix missed prep.',
@@ -403,8 +381,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/river-walk-shotcrete-bank-stabilization/01-d786aead-b08a-4ab0-8499-29978a3fac31.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '121waaq',
     content: [
       'This update is from the River Walk development project in Waco. The photo shows the bank opened up and cleaned back before shotcrete stabilization, with the slope exposed, fencing above it, and the work area ready for the next pass.',
       'Bank work like this is not the same as pouring a driveway or a flat slab. The main job is holding the soil in place, getting the loose material cleaned out, and giving the slope something solid so rain and runoff do not keep cutting it back.',
@@ -423,7 +399,6 @@ export const staticBlogPosts = [
     excerpt:
       'What affects driveway pricing in Waco, from square footage and base prep to finish type, access, and repair-versus-replacement decisions.',
     status: 'published',
-    author_email: 'site-content@system.local',
     content: [
       '# Concrete Driveway Cost Factors in Waco, TX',
       'If you are planning a new driveway in Waco, the final price depends on a few big decisions and site conditions. This guide explains what drives cost, how to plan a realistic budget, and when it is smart to repair versus replace.',
@@ -451,7 +426,6 @@ export const staticBlogPosts = [
     excerpt:
       'Stamped concrete pattern, color, border, drainage, and sealing ideas for Waco, Temple, Killeen, Hewitt, and Central Texas patios.',
     status: 'published',
-    author_email: 'site-content@system.local',
     content: [
       '# Stamped Concrete Patio Ideas for Central Texas Backyards',
       'Stamped concrete is a popular choice across Central Texas because it blends durability with the look of stone or brick. If you are planning a patio upgrade, these design ideas work well in the Waco, Temple, Killeen, Hewitt, and Woodway areas.',
@@ -481,8 +455,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/hillcrest-hospital-front-entrance-concrete-replacement/01-b1e81ab8-1e08-44ae-85a7-d66b579bc963.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1eu2d0a',
     content: [
       'This update is from the front entrance at Baylor Scott & White Hillcrest Hospital in Waco. The batch shows the demo and replacement work wrapped up at the main entry area, with the new concrete back in place around the columns, doors, trench drain, and pedestrian path.',
       'Entrance concrete like this has to be handled cleanly because people are still moving around the building. The work area has to stay blocked off, the edges have to meet the existing pavers and drainage, and the finish has to be useful for steady foot traffic instead of just looking good in a photo.',
@@ -505,8 +477,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/melody-grove-parking-area-sidewalk/01-1a65e0b6-f1a3-429e-8a42-02ec211611a6.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '10lbecr',
     content: [
       'This update is from the Melody Grove housing community in Waco. The batch shows new concrete parking area work, sidewalk sections, curb lines, and flatwork getting tied into the buildings and site access.',
       'This kind of job is not just about getting concrete on the ground. The parking area has to drain, the sidewalk needs to meet doors and walking paths cleanly, and the edges have to work with landscaping, utilities, and the next phase of construction.',
@@ -531,8 +501,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/central-texas-commercial-canopy-slab-finish/01-c2147a10-519c-4bdd-b085-e51bf8859ef7.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '0D9F6DE2-5524-46AD-8A94-34F38441F746',
     content: [
       'This update is from a commercial canopy slab in Central Texas. The photos show the concrete after the finish work, with the slab tied into the building, the canopy columns, and the outside edge forms still visible around the pour.',
       'Work like this has to be useful first. The slab needs the right slope, clean transitions at the building, room for equipment and traffic, and edges that do not fight the next phase of the job. The finish matters, but it only looks right when the layout and prep were right before the truck arrived.',
@@ -554,8 +522,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/burnet-shop-foundation-finish/01-8faae271-6a79-482b-ba6c-feb80d76a10c.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1uk8nh2',
     content: [
       'This update is from a shop foundation in Burnet, Texas. The slab is about 9,600 square feet, and these photos show the concrete after the main pour and finish work were done.',
       'There is nothing fancy to dress up here. On a shop foundation this size, the important parts are straight edges, the right elevation, a clean finish, and enough planning before the trucks show up. Once the concrete starts coming, the crew has to keep placement, screeding, floating, and timing moving together.',
@@ -578,8 +544,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/melody-grove-concrete-paving-prep/01-bf3b202e-bfc8-4345-9c93-5152dda2d1b3.jpg',
-    author_email: 'photo-studio-cron@system.local',
-    source_batch_key: '1gvcf8h',
     content: [
       'This batch is from the Melody Grove housing project in Waco, where the crew was getting ready for more concrete paving and sidewalk work. The photos show the job before the pour: forms set, rebar in place, grade work cleaned up, and the crew checking the layout before concrete placement.',
       'That prep is not the shiny part of the job, but it is what makes the finished concrete hold up. On a housing project like this, the paving and sidewalks have to line up with doors, walks, drainage, parking areas, and everyday foot traffic. If the forms are off or the base is loose, the problem shows up after the slab is already down.',
@@ -602,7 +566,6 @@ export const staticBlogPosts = [
     excerpt:
       'A practical look at what needs to happen before a shop slab pour in Central Texas, from subgrade and forms to steel, vapor barrier, and finish timing.',
     status: 'published',
-    author_email: 'photo-studio-cron@system.local',
     content: [
       'After a run of shop slab and foundation jobs around Waco this season, the same lesson kept coming up on every single one: the slab only performs as well as the prep under it. So instead of another project recap, here is the practical version of what that means.',
       'For a shop slab near Waco, the first question is not just how smooth the finish will look. The important work starts with subgrade prep. Soft spots need to be cut out, low areas need to be built back up correctly, and the base needs to be compacted so the slab is not sitting on loose material.',
@@ -625,7 +588,6 @@ export const staticBlogPosts = [
     status: 'published',
     cover_image_url:
       '/blog-images/lacy-lake-view-circle-k-concrete-flatwork/01-a43f360c-8c37-4e38-9619-0409f1c9eda9.jpg',
-    author_email: 'photo-studio-cron@system.local',
     content: [
       'This batch is from the Circle K work in Lacy Lakeview, just north of Waco. The crew had fresh concrete flatwork down under the fuel canopy and around the pump lanes. This is the kind of commercial concrete work where the finish has to be clean, but the bigger deal is keeping the grades right so water moves the way it should and the traffic areas hold up.',
       'There was still cleanup and detail work going on around the edges when these photos were taken. Forms, tools, and construction fencing were still on site, so this was not the finished handoff. It was a real jobsite update: new concrete in place, sections curing, and the crew working through the next pass.',
@@ -637,3 +599,38 @@ export const staticBlogPosts = [
     ].join('\n\n'),
   },
 ]
+
+const authenticityAuditArchivePosts = FORMULAIC_BLOG_SLUGS.map((slug) => ({
+  id: `authenticity-audit-archive-${slug}`,
+  created_at: null,
+  updated_at: null,
+  published_at: null,
+  title: 'Archived Project Note Pending Source Review',
+  slug,
+  excerpt:
+    'This older project note remains available to direct visitors while its job record, first-hand facts, and photo captions are reviewed.',
+  status: 'published',
+  seo_status: 'needs_facts',
+  source_summary:
+    'No approved public source packet is attached yet. This archive is not used as verified service proof or submitted for search indexing.',
+  canonical_slug:
+    slug === 'for-concrete-or-circle-k-lacy-lake-view'
+      ? 'circle-k-concrete-flatwork-lacy-lakeview-tx'
+      : null,
+  content: [
+    'This URL is being preserved as a public archive while the original job is identified and checked against source records.',
+    'Before this note can be approved, it needs a job or source ID, Stephen’s first-hand observation, at least three job-specific facts, the actual SLA and other-trade scope, and useful captions for every photo.',
+    'Until that review is complete, the page remains out of the sitemap and is not presented as proof of a service, location, product, quantity, schedule, or outcome.',
+  ].join('\n\n'),
+}))
+
+export const staticBlogPosts = [
+  ...editorialStaticBlogPosts,
+  ...authenticityAuditArchivePosts,
+].map((post) => Object.freeze({ ...post, source_managed: true }))
+
+const sourceManagedBlogSlugSet = new Set(staticBlogPosts.map((post) => post.slug))
+
+export function isSourceManagedBlogSlug(slug) {
+  return sourceManagedBlogSlugSet.has(String(slug || '').trim().toLowerCase())
+}

@@ -42,7 +42,7 @@ export function ContactModal({ open, onClose, source = 'website' }) {
                 Tell us about your project
               </h2>
               <p className="text-stone-600 text-pretty mt-2">
-                We respond within 24 hours with next steps.
+                We’ll review the details and follow up with the next practical step.
               </p>
             </div>
             <button

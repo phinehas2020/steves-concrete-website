@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { motion as Motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { MapPin, ArrowUpRight } from 'lucide-react'
 import { fadeInUp, viewportConfig } from '../lib/animations'
@@ -8,12 +8,6 @@ import { useEffect, useState } from 'react'
 
 function ProjectImage({ job }) {
   const mainImage = job.images[0] || '/src/assets/images/gallery-driveway-custom.jpeg'
-  
-  // Handle image loading errors
-  const handleError = (e) => {
-    // Fallback to a default image if the job image fails to load
-    e.target.src = '/src/assets/images/gallery-driveway-custom.jpeg'
-  }
   
   return (
     <div className="absolute inset-0 z-0 overflow-hidden">
@@ -52,7 +46,7 @@ export function FeaturedJobs() {
     <section id="gallery" className="section-padding bg-white texture-concrete relative">
       <div className="container-main relative z-10">
         {/* Section Header */}
-        <motion.div
+        <Motion.div
           className="max-w-2xl mb-16"
           variants={fadeInUp}
           initial="hidden"
@@ -76,7 +70,7 @@ export function FeaturedJobs() {
             View All Projects
             <ArrowUpRight className="size-4" />
           </Link>
-        </motion.div>
+        </Motion.div>
 
         {/* Projects Grid - Show 3-4 */}
         {loading ? (
@@ -86,7 +80,7 @@ export function FeaturedJobs() {
             No featured projects yet. Check back soon!
           </div>
         ) : (
-          <motion.div
+          <Motion.div
             className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
             variants={fadeInUp}
             initial="hidden"
@@ -94,7 +88,7 @@ export function FeaturedJobs() {
             viewport={viewportConfig}
           >
             {featuredJobs.slice(0, 3).map((job, index) => (
-            <motion.article
+            <Motion.article
               key={job.id}
               className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
               variants={fadeInUp}
@@ -137,9 +131,9 @@ export function FeaturedJobs() {
                   </div>
                 </div>
               </div>
-            </motion.article>
+            </Motion.article>
             ))}
-          </motion.div>
+          </Motion.div>
         )}
       </div>
     </section>

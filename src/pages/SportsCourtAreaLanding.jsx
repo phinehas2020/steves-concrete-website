@@ -12,40 +12,51 @@ import {
   buildBreadcrumbs,
   buildJsonLdGraph,
 } from '../lib/seo'
-import { sportsCourtAreaPages, sportsCourtAreaLinks } from '../data/sportsCourtAreaPages'
+import { sportsCourtAreaPages } from '../data/sportsCourtAreaPages'
 
 export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
   const page = pageProp || sportsCourtAreaPages.find((p) => p.slug === slugProp)
   if (!page) return null
+
+  return <SportsCourtAreaLandingPage page={page} />
+}
+
+function SportsCourtAreaLandingPage({ page }) {
   const {
     slug,
     areaName,
     heroTitle,
     heroSubtitle,
     intro,
+    badge,
     seoTitle,
     seoDescription,
+    scopeTitle,
+    scopeIntro,
     localFocus = [],
     services = [],
     process = [],
-    nearbyAreas = [],
+    availability,
+    coverageTitle,
+    coverageIntro,
+    coveragePoints = [],
+    evidenceRequirements = [],
     faq = [],
   } = page
 
   const canonicalUrl = `${SITE_URL}/sports-court-coating/${slug}`
-  const relatedAreas = sportsCourtAreaLinks.filter((item) => item.slug !== slug).slice(0, 4)
 
-  const serviceJsonLd = {
-    '@type': 'Service',
-    '@id': `${canonicalUrl}#service`,
-    name: `Sports Court Coating in ${areaName}`,
-    serviceType: 'Sports court resurfacing and acrylic coating',
-    areaServed: {
-      '@type': 'AdministrativeArea',
-      name: areaName,
-      addressCountry: 'US',
+  const webPageJsonLd = {
+    '@type': 'WebPage',
+    '@id': `${canonicalUrl}#webpage`,
+    url: canonicalUrl,
+    name: seoTitle || heroTitle,
+    description: seoDescription,
+    about: {
+      '@type': 'Thing',
+      name: `Sports-court concrete project availability for ${areaName}`,
     },
-    provider: {
+    publisher: {
       '@id': ORGANIZATION_ID,
     },
   }
@@ -53,21 +64,21 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
   const faqJsonLd = buildFaqPage(faq)
   const breadcrumbsJsonLd = buildBreadcrumbs([
     { name: 'Home', url: `${SITE_URL}/` },
-    { name: 'Sports Court Coating', url: `${SITE_URL}/sports-court-coating/texas` },
-    { name: areaName, url: canonicalUrl },
+    { name: 'Sports Court Concrete Project Review', url: `${SITE_URL}/sports-court-coating-waco-tx` },
+    { name: `${areaName} Availability`, url: canonicalUrl },
   ])
 
   useSeo({
-    title: seoTitle || `${heroTitle} | Sports Court Resurfacing`,
+    title: seoTitle || `${heroTitle} | SLA Concrete Works`,
     description:
       seoDescription ||
-      `Sports court coating in ${areaName} for pickleball, tennis, and basketball surfaces.`,
+      `Review availability and concrete-scope boundaries for a sports-court inquiry in ${areaName}.`,
     canonical: canonicalUrl,
     url: canonicalUrl,
     image: DEFAULT_IMAGE,
-    imageAlt: `Sports court coating services in ${areaName}`,
+    imageAlt: `Sports-court concrete project availability for ${areaName}`,
     type: 'website',
-    jsonLd: buildJsonLdGraph(serviceJsonLd, faqJsonLd, breadcrumbsJsonLd),
+    jsonLd: buildJsonLdGraph(webPageJsonLd, faqJsonLd, breadcrumbsJsonLd),
   })
 
   return (
@@ -78,7 +89,7 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
           <div className="container-main py-16 sm:py-20 md:py-24">
             <div className="max-w-3xl">
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
-                Sports Surface Specialists
+                {badge || 'Waco-based project availability'}
               </span>
               <h1
                 className="mt-5 font-display font-bold text-white text-balance leading-tight"
@@ -94,7 +105,7 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
                   href="#contact"
                   className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
                 >
-                  Request Quote
+                  Send Project Details
                 </a>
                 <a
                   href="tel:254-230-3102"
@@ -113,14 +124,14 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <div>
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Core Services
+                  Scope Boundaries
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Sports court resurfacing in {areaName}
+                  {scopeTitle || `Trade boundaries for a ${areaName} court inquiry`}
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty mb-6">
-                  We restore worn courts with a prep-first workflow and acrylic coating systems
-                  designed for long-term playability.
+                  {scopeIntro ||
+                    'Concrete, athletic surfacing, striping, design, and other trades are separate responsibilities.'}
                 </p>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {services.map((service) => (
@@ -156,10 +167,10 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
               <div>
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Process
+                  Inquiry Process
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  How we resurface sport courts
+                  How an inquiry becomes an accepted scope
                 </h2>
                 <div className="space-y-4">
                   {process.map((step, index) => (
@@ -175,20 +186,20 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
               </div>
               <div className="bg-white border border-stone-200 rounded-2xl p-6">
                 <h3 className="font-display font-semibold text-2xl text-stone-900 mb-4">
-                  Based in Waco, working the I-35 corridor
+                  {availability?.title || 'Availability must be confirmed'}
                 </h3>
-                <p className="text-stone-600 text-pretty mb-3">
-                  Our crew is based in Waco and takes court projects up and down I-35 — {areaName}{' '}
-                  work gets scheduled in batches so travel does not inflate your price.
-                </p>
-                <p className="text-stone-600 text-pretty">
-                  Send photos of your court and its dimensions to{' '}
-                  <a href="sms:+12542303102" className="font-semibold text-accent-600 hover:underline">
-                    (254) 230-3102
-                  </a>{' '}
-                  and we will tell you honestly whether it needs a recoat, crack repair first, or
-                  full resurfacing.
-                </p>
+                <div className="space-y-3 text-stone-600 text-pretty">
+                  {(availability?.paragraphs || []).map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                  <p>
+                    Send project facts to{' '}
+                    <a href="sms:+12542303102" className="font-semibold text-accent-600 hover:underline">
+                      (254) 230-3102
+                    </a>{' '}
+                    for an initial concrete-scope review. A reply is not a travel or service commitment.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -196,48 +207,41 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
 
         <section className="section-padding bg-white">
           <div className="container-main">
-            <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+            <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start">
               <div>
                 <span className="inline-block text-accent-600 font-semibold text-sm uppercase tracking-wide mb-3">
-                  Coverage
+                  Availability
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Nearby service coverage from {areaName}
+                  {coverageTitle || `What availability means for ${areaName}`}
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty mb-6">
-                  We coordinate projects across neighboring communities and can confirm scheduling
-                  options during your estimate call.
+                  {coverageIntro}
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {nearbyAreas.map((area) => (
-                    <span
-                      key={area}
-                      className="px-3 py-1.5 bg-stone-100 text-stone-700 rounded-full text-sm font-medium"
-                    >
-                      {area}
-                    </span>
+                <ul className="space-y-3 text-stone-700">
+                  {coveragePoints.map((point) => (
+                    <li key={point} className="flex gap-3">
+                      <span className="mt-2 size-2 shrink-0 rounded-full bg-accent-500" />
+                      <span>{point}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
               <div className="bg-stone-900 text-white rounded-2xl p-8">
                 <h3 className="font-display font-semibold text-2xl mb-3">
-                  Explore more sports court areas
+                  Evidence required before this becomes a local proof page
                 </h3>
                 <p className="text-stone-300 mb-6">
-                  Compare nearby market pages to align your project scope and resurfacing plan.
+                  This route stays an availability page until the business can document real local work and exact trade responsibility.
                 </p>
-                <div className="space-y-3">
-                  {relatedAreas.map((item) => (
-                    <a
-                      key={item.slug}
-                      href={item.href}
-                      className="flex items-center justify-between px-4 py-3 bg-stone-800 rounded-lg hover:bg-stone-700 transition-colors"
-                    >
-                      <span className="font-semibold text-white">{item.areaName}</span>
-                      <span className="text-xs uppercase tracking-wide text-stone-300">View</span>
-                    </a>
+                <ul className="space-y-4 text-stone-200">
+                  {evidenceRequirements.map((requirement) => (
+                    <li key={requirement} className="flex gap-3">
+                      <span className="mt-2 size-2 shrink-0 rounded-full bg-accent-400" />
+                      <span>{requirement}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           </div>
@@ -251,10 +255,10 @@ export function SportsCourtAreaLanding({ page: pageProp, slug: slugProp }) {
                   FAQs
                 </span>
                 <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-                  Sports court coating questions in {areaName}
+                  Project availability questions for {areaName}
                 </h2>
                 <p className="text-lg text-stone-600 text-pretty">
-                  Quick answers property owners ask before scheduling resurfacing work.
+                  Clear answers before anyone treats an inquiry as accepted work.
                 </p>
               </div>
               <div className="space-y-4">

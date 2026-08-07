@@ -7,6 +7,8 @@ import { ContactModal } from '../components/ContactModal'
 import { renderBlogMarkdown } from '../lib/blogMarkdown'
 import { staticBlogPosts } from '../data/staticBlogPosts'
 import { getBlogSeoTitle } from '../data/blogSeoTitles'
+import { getPublicBlogEditorialMeta } from '../data/blogEditorial'
+import { getRouteIndexingState } from '../data/indexingControls'
 import {
   useSeo,
   SITE_URL,
@@ -15,6 +17,18 @@ import {
   buildBreadcrumbs,
   buildJsonLdGraph,
 } from '../lib/seo'
+
+function formatEditorialDate(value) {
+  if (!value) return ''
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return String(value)
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    timeZone: 'UTC',
+  })
+}
 
 export function BlogPost() {
   const { slug } = useParams()
@@ -28,16 +42,54 @@ export function BlogPost() {
 
     const fetchPost = async () => {
       const staticPost = staticBlogPosts.find((item) => item.slug === slug)
-      const { data, error: fetchError } = await supabase
-        .from('blog_posts')
-        .select('*')
-        .eq('slug', slug)
-        .eq('status', 'published')
-        .single()
+      // Source-authored case studies and audit archives are intentionally not
+      // CMS-controlled. Releasing a repaired archive requires removing its
+      // source quarantine in the same deployment that changes its crawler HTML.
+      if (staticPost?.source_managed) {
+        setPost(staticPost)
+        setLoading(false)
+        return
+      }
+
+      const selectPost = (fields) =>
+        supabase
+          .from('blog_posts')
+          .select(fields)
+          .eq('slug', slug)
+          .eq('status', 'published')
+          .single()
+      let result = await selectPost(
+        [
+          'id',
+          'title',
+          'slug',
+          'excerpt',
+          'content',
+          'cover_image_url',
+          'published_at',
+          'updated_at',
+          'created_at',
+          'status',
+          'seo_status',
+          'author_name',
+          'reviewed_by',
+          'reviewed_at',
+          'source_summary',
+          'canonical_slug',
+          'project_series_id',
+          'series_phase',
+        ].join(', '),
+      )
+
+      if (result.error) {
+        result = await selectPost(
+          'id, title, slug, excerpt, content, cover_image_url, published_at, updated_at, created_at, status',
+        )
+      }
 
       if (!isMounted) return
 
-      if (fetchError || !data) {
+      if (result.error || !result.data) {
         if (staticPost) {
           setPost(staticPost)
           setLoading(false)
@@ -49,7 +101,16 @@ export function BlogPost() {
         return
       }
 
-      setPost(data)
+      setPost(
+        staticPost
+          ? {
+              ...staticPost,
+              ...result.data,
+              seo_status: result.data.seo_status || staticPost.seo_status,
+              canonical_slug: result.data.canonical_slug || staticPost.canonical_slug,
+            }
+          : result.data,
+      )
       setLoading(false)
     }
 
@@ -62,6 +123,8 @@ export function BlogPost() {
 
   const seo = useMemo(() => {
     const notFound = Boolean(error)
+    const indexing = getRouteIndexingState(`/blog/${slug}`, post || {})
+    const canonicalUrl = `${SITE_URL}${indexing.canonicalPath}`
     const fallback = {
       title: notFound
         ? 'Post Not Found | SLA Concrete Works LLC'
@@ -69,12 +132,13 @@ export function BlogPost() {
       description: notFound
         ? 'This post could not be found.'
         : 'Concrete tips, maintenance checklists, and design inspiration for Waco and Central Texas concrete projects.',
-      canonical: `${SITE_URL}/blog/${slug}`,
-      url: `${SITE_URL}/blog/${slug}`,
+      canonical: canonicalUrl,
+      url: canonicalUrl,
       image: DEFAULT_IMAGE,
       imageAlt: 'SLA Concrete Works LLC blog',
       type: 'article',
-      robots: notFound ? 'noindex, nofollow' : 'index, follow',
+      robots: notFound ? 'noindex, nofollow' : indexing.robots,
+      indexingRecord: post || undefined,
     }
 
     if (!post) return fallback
@@ -83,6 +147,18 @@ export function BlogPost() {
     const updatedAt = post.updated_at || post.published_at || null
     const description = post.excerpt || fallback.description
     const image = post.cover_image_url || DEFAULT_IMAGE
+    const editorial = getPublicBlogEditorialMeta(post)
+    const author =
+      editorial.authorType === 'Person'
+        ? {
+            '@type': 'Person',
+            name: editorial.authorName,
+          }
+        : {
+            '@type': 'Organization',
+            '@id': ORGANIZATION_ID,
+            name: editorial.authorName,
+          }
 
     const blogPostingJsonLd = post
       ? {
@@ -92,11 +168,7 @@ export function BlogPost() {
           image: [image],
           datePublished: publishedAt,
           dateModified: updatedAt,
-          author: {
-            '@type': 'Organization',
-            '@id': ORGANIZATION_ID,
-            name: 'SLA Concrete Works LLC',
-          },
+          author,
           publisher: {
             '@type': 'Organization',
             '@id': ORGANIZATION_ID,
@@ -108,7 +180,7 @@ export function BlogPost() {
           },
           mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `${SITE_URL}/blog/${post.slug}`,
+            '@id': canonicalUrl,
           },
         }
       : null
@@ -116,7 +188,7 @@ export function BlogPost() {
     const breadcrumbsJsonLd = buildBreadcrumbs([
       { name: 'Home', url: `${SITE_URL}/` },
       { name: 'Blog', url: `${SITE_URL}/blog` },
-      { name: post?.title || 'Post', url: `${SITE_URL}/blog/${slug}` },
+      { name: post?.title || 'Post', url: canonicalUrl },
     ])
 
     return {
@@ -212,6 +284,11 @@ export function BlogPost() {
     return container.innerHTML
   }, [post])
 
+  const editorial = getPublicBlogEditorialMeta(post || {})
+  const reviewedDate = formatEditorialDate(editorial.reviewedAt)
+  const indexingState = getRouteIndexingState(`/blog/${slug}`, post || {})
+  const isPendingArchive = Boolean(post && !indexingState.indexable)
+
   return (
     <div className="min-h-dvh flex flex-col bg-white">
       <Header transparent={false} />
@@ -258,15 +335,65 @@ export function BlogPost() {
                   <p className="text-xs uppercase tracking-wide text-stone-500 mb-3">
                     {post.published_at
                       ? new Date(post.published_at).toLocaleDateString()
-                      : 'Draft'}
+                      : isPendingArchive
+                        ? 'Archive · source review pending'
+                        : 'Draft'}
                   </p>
                   <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-stone-900 text-balance mb-6">
                     {post.title}
                   </h1>
+                  <div className="mb-6 border-y border-stone-200 py-4 text-sm text-stone-600 space-y-1">
+                    <p>
+                      By <span className="font-semibold text-stone-800">{editorial.authorName}</span>
+                    </p>
+                    {(editorial.reviewedBy || reviewedDate) && (
+                      <p>
+                        {editorial.reviewedBy && (
+                          <>
+                            Fact-checked by{' '}
+                            <span className="font-semibold text-stone-800">
+                              {editorial.reviewedBy}
+                            </span>
+                          </>
+                        )}
+                        {editorial.reviewedBy && reviewedDate ? ' · ' : ''}
+                        {reviewedDate && `Last fact-check: ${reviewedDate}`}
+                      </p>
+                    )}
+                    {(editorial.projectSeriesId || editorial.seriesPhase) && (
+                      <p>
+                        Project series: {editorial.projectSeriesId || 'Unassigned'}
+                        {editorial.seriesPhase ? ` · Series phase: ${editorial.seriesPhase}` : ''}
+                      </p>
+                    )}
+                  </div>
+                  {isPendingArchive && (
+                    <aside className="mb-8 rounded-xl border border-amber-200 bg-amber-50 p-5">
+                      <h2 className="font-display font-semibold text-lg text-stone-900 mb-2">
+                        Archive under source review
+                      </h2>
+                      <p className="text-sm text-stone-700 text-pretty">
+                        This older project note remains available to direct visitors, but its
+                        job facts and photo captions have not passed the current approval
+                        checklist. It is kept out of Search and is not used as verified service
+                        proof until that review is complete.
+                      </p>
+                    </aside>
+                  )}
                   {post.excerpt && (
                     <p className="text-lg text-stone-600 text-pretty mb-8">
                       {post.excerpt}
                     </p>
+                  )}
+                  {editorial.sourceSummary && (
+                    <aside className="mb-8 rounded-xl border border-stone-200 bg-stone-50 p-5">
+                      <h2 className="font-display font-semibold text-lg text-stone-900 mb-2">
+                        Source note
+                      </h2>
+                      <p className="text-sm text-stone-600 text-pretty">
+                        {editorial.sourceSummary}
+                      </p>
+                    </aside>
                   )}
                   <div
                     className="blog-content"

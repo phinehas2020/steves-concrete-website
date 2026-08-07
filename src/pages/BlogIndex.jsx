@@ -5,6 +5,8 @@ import { Header } from '../components/Header'
 import { BlogFooter } from '../components/BlogFooter'
 import { ContactModal } from '../components/ContactModal'
 import { staticBlogPosts } from '../data/staticBlogPosts'
+import { mergeBlogRecordsWithSourcePrecedence } from '../data/blogPostMerge'
+import { isRoutePubliclyDiscoverable } from '../data/indexingControls'
 import {
   useSeo,
   SITE_URL,
@@ -16,7 +18,7 @@ import {
 export function BlogIndex() {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const error = ''
   const [contactOpen, setContactOpen] = useState(false)
 
   const seo = useMemo(() => {
@@ -64,39 +66,44 @@ export function BlogIndex() {
   useSeo(seo)
 
   const mergePosts = (remotePosts = []) => {
-    const bySlug = new Map()
-
-    for (const post of [...staticBlogPosts, ...remotePosts]) {
-      if (!post?.slug || bySlug.has(post.slug)) continue
-      bySlug.set(post.slug, post)
-    }
-
-    return [...bySlug.values()].sort((a, b) => {
-      const aTime = Date.parse(a?.published_at || a?.created_at || '') || 0
-      const bTime = Date.parse(b?.published_at || b?.created_at || '') || 0
-      return bTime - aTime
-    })
+    return mergeBlogRecordsWithSourcePrecedence(staticBlogPosts, remotePosts)
+      .filter((post) => isRoutePubliclyDiscoverable(`/blog/${post.slug}`, post))
+      .sort((a, b) => {
+        const aTime = Date.parse(a?.published_at || a?.created_at || '') || 0
+        const bTime = Date.parse(b?.published_at || b?.created_at || '') || 0
+        return bTime - aTime
+      })
   }
 
   useEffect(() => {
     let isMounted = true
 
     const fetchPosts = async () => {
-      const { data, error: fetchError } = await supabase
+      let result = await supabase
         .from('blog_posts')
-        .select('id, title, slug, excerpt, cover_image_url, published_at')
+        .select(
+          'id, title, slug, excerpt, cover_image_url, published_at, created_at, seo_status, canonical_slug',
+        )
         .eq('status', 'published')
         .order('published_at', { ascending: false })
 
+      if (result.error) {
+        result = await supabase
+          .from('blog_posts')
+          .select('id, title, slug, excerpt, cover_image_url, published_at, created_at')
+          .eq('status', 'published')
+          .order('published_at', { ascending: false })
+      }
+
       if (!isMounted) return
 
-      if (fetchError) {
+      if (result.error) {
         setPosts(mergePosts())
         setLoading(false)
         return
       }
 
-      setPosts(mergePosts(data || []))
+      setPosts(mergePosts(result.data || []))
       setLoading(false)
     }
 
@@ -126,16 +133,16 @@ export function BlogIndex() {
                 </h1>
                 <p className="text-lg text-stone-600 text-pretty">
                   Straightforward advice, design inspiration, and maintenance tips from the
-                  crew behind 500+ concrete installs.
+                  owner-run Waco concrete crew.
                 </p>
               </div>
               <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm">
                 <p className="text-sm text-stone-500 uppercase tracking-wide mb-2">Need a quote?</p>
                 <h2 className="font-display font-semibold text-2xl text-stone-900 mb-3 text-balance">
-                  Get a free estimate in 24 hours
+                  Get a clear next step for your project
                 </h2>
                 <p className="text-stone-600 text-pretty mb-5">
-                  Tell us about your project and we’ll respond fast with next steps.
+                  Tell us about your project and we’ll follow up with the questions needed to plan a site visit.
                 </p>
                 <button
                   type="button"

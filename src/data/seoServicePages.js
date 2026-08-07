@@ -72,72 +72,88 @@ const baseSeoServicePages = [
   },
   {
     slug: 'sports-court-coating-waco-tx',
-    title: 'Sports Court Coating in Waco, TX',
-    heroImage: '/seo-images/sports-court-coating.webp',
+    title: 'Sports Court Concrete Project Review in Waco, TX',
+    showGallery: false,
     cardSummary:
-      'Professional resurfacing and acrylic coating for pickleball, tennis, and basketball courts in Waco with crack prep and precision striping.',
-    metaTitle: 'Sports Court Coating in Waco, TX | SLA Concrete Works LLC',
+      'Review the concrete portion of a proposed sports-court project and separate it from surfacing, striping, equipment, design, and other specialist work.',
+    metaTitle: 'Sports Court Concrete Project Review | Waco, TX',
     metaDescription:
-      'Sports court coating in Waco, TX for pickleball, tennis, and basketball courts. Acrylic resurfacing, crack prep, color coating, and line striping.',
+      'Ask SLA Concrete Works about the concrete portion of a Waco sports-court project. Court coating, regulation striping, design, and other trades must be assigned in writing.',
     introParagraph:
-      'Sports court coating in Waco requires more than fresh paint. We start with crack and surface prep, then install acrylic systems built for traction, color retention, and reliable play in Central Texas heat.',
+      'SLA Concrete Works is a concrete contractor. For a sports-court inquiry, we can review whether the concrete portion fits our scope and current schedule. This page does not claim that SLA has completed a regulation court, applies an athletic coating system, or performs regulation line striping.',
+    evidenceNote:
+      'Current proof boundary: the public project gallery includes decorative play-area concrete, not a documented regulation pickleball, tennis, or basketball court. It is not used as sports-court installation proof on this page.',
+    scopeBoundary: {
+      slaTitle: 'Concrete work SLA may quote',
+      slaItems: [
+        'Site access, existing-slab condition, drainage, and concrete feasibility review',
+        'Subgrade, base, forming, reinforcement, placement, joints, slope, and finish only when those items are accepted in the written proposal',
+        'Concrete repair or replacement work that is specifically identified after a site review',
+      ],
+      specialistTitle: 'Specialist or other-trade work',
+      specialistItems: [
+        'Court design, regulation dimensions, athletic-surface specifications, color coating, and game-line layout or verification',
+        'Surveying, engineering, permits, inspections, accessibility design, and any required moisture or system testing',
+        'Fencing, lighting and electrical, net systems, equipment, shade, spectator features, and acoustics',
+      ],
+    },
     sections: [
       {
-        heading: 'Court resurfacing built for Texas climate',
+        heading: 'Start with a written division of responsibility',
         paragraphs: [
-          'Outdoor courts in Waco take constant UV exposure and fast temperature swings. We use coating systems selected for heat resistance and color stability so your court stays playable and visually sharp.',
-          'Our resurfacing approach protects against early wear by correcting surface defects first. That prep helps coatings bond correctly and reduces peeling in high-use zones.',
+          'A complete athletic court can involve sitework, concrete, court-surface design, coating, line layout, fencing, lighting, equipment, accessibility, and permits. Those are not automatically one contractor\'s scope. Before work is scheduled, the proposal should name who supplies the plans and who performs each part.',
+          'SLA should only be treated as responsible for the concrete items listed in its written proposal. No coating manufacturer, court-surface partner, installer credential, regulation layout service, or completed regulation-court case study is currently documented on this site.',
         ],
       },
       {
-        heading: 'Pickleball, tennis, and basketball configurations',
+        heading: 'Concrete requirements come from the project documents',
         paragraphs: [
-          'We resurface single-sport and multi-sport courts depending on your property goals. From private residences to HOA and school courts, we adapt line layout and color zones to your preferred format.',
-          'If your court needs a conversion or updated striping plan, we map dimensions before coating so final game lines are clean, clear, and regulation-aware.',
+          'Slab size, thickness, reinforcement, joint layout, slope, drainage, finish profile, cure, and moisture requirements vary with the site, the selected surface system, and any engineered plans. This page does not publish a universal court specification.',
+          'The owner, designer, engineer, or court-surface specialist should provide the controlling requirements. If SLA accepts the concrete portion, those requirements must be incorporated into the proposal before forming or placement begins.',
         ],
       },
       {
-        heading: 'Crack repair and substrate prep first',
+        heading: 'Existing slabs need a condition decision before cosmetic work',
         paragraphs: [
-          'Long-lasting court coatings depend on substrate condition. We inspect cracks, low spots, and drainage behavior before applying acrylic layers.',
-          'By correcting problem areas first, we help reduce bounce inconsistency, puddling, and finish failures that can happen when courts are coated too quickly.',
+          'Photos can start a conversation, but they cannot establish that an existing slab is suitable for an athletic coating. Moving cracks, settlement, heaving, weak edges, failed repairs, and standing water may point to concrete repair, replacement, drainage work, or specialist review.',
+          'A coating is not a structural repair. The accepted concrete scope and the court specialist\'s surface-preparation requirements should be resolved before anyone promises a resurfacing result.',
         ],
       },
       {
-        heading: 'Coating process and schedule',
+        heading: 'Information needed for an honest project review',
         paragraphs: [
-          'Most sports court coating projects include cleaning and prep, crack treatment, color coating, then line striping after cure milestones are met.',
-          'Timeline depends on weather and square footage, but many residential projects are completed within a focused multi-day window with clear reopening guidance.',
+          'Send the project city, intended sport and use, available dimensions, site or slab photos, access information, known drainage concerns, and any drawings or surface-system requirements you already have. For an existing slab, include close views of cracks, edges, joints, patches, and low spots.',
+          'SLA can then confirm whether it is willing to review or quote the concrete portion. Travel, minimum project size, schedule, concrete scope, exclusions, and required handoffs are not promised until they appear in a written proposal.',
         ],
       },
       {
-        heading: 'Maintenance planning for longer court life',
+        heading: 'Surfacing and regulation work require separate proof',
         paragraphs: [
-          'After resurfacing, regular cleaning and periodic inspection help preserve traction and color. We share a simple maintenance routine based on court type and usage.',
-          'If heavy wear or minor cracking appears later, early touch-ups are usually far more cost-effective than waiting for major resurfacing needs.',
+          'If a court-surface specialist is selected, ask for the named product system, substrate requirements, installer responsibility, color and texture build-up, line-layout method, cure or opening criteria, and maintenance instructions. Those details should come from that specialist and the current manufacturer documents.',
+          'SLA does not use the decorative play-area gallery as evidence of regulation court dimensions, athletic coating installation, certified striping, or sanctioned-play suitability.',
         ],
       },
     ],
     faq: [
       {
-        question: 'Do you coat pickleball courts in Waco, TX?',
+        question: 'Does SLA apply acrylic sport coatings or regulation game lines?',
         answer:
-          'Yes. We resurface and coat pickleball courts with texture and line striping tailored for outdoor play.',
+          'The current public project record does not verify those as SLA self-performed services. They should not be assumed to be included. Any proposal must name the coating or striping performer, system, and responsibility; otherwise plan to use a qualified court-surface specialist.',
       },
       {
-        question: 'Can you repaint and stripe an existing basketball court?',
+        question: 'Does SLA build a complete pickleball, tennis, or basketball court?',
         answer:
-          'Yes. We handle crack prep, color coating, and accurate game-line striping for basketball courts.',
+          'This page describes only a possible concrete scope. A complete court may also require design, engineering, court surfacing, regulation line layout, fencing, lighting, equipment, accessibility work, and permits by other qualified parties.',
       },
       {
-        question: 'How often should sports courts be resurfaced?',
+        question: 'Can SLA quote the concrete base or concrete repair?',
         answer:
-          'Many outdoor courts need resurfacing every 4 to 8 years depending on traffic, drainage, and weather exposure.',
+          'Send the location, dimensions, site or slab photos, access details, drainage concerns, and any plans or surface-system specifications. SLA can review whether the concrete portion fits its current scope and schedule, then define accepted work and exclusions in writing.',
       },
       {
-        question: 'Do you serve properties outside Waco?',
+        question: 'Is the decorative play-area project a regulation court case study?',
         answer:
-          'Yes. We serve Waco and nearby Central Texas communities, and we can confirm service area coverage during your estimate call.',
+          'No. It documents a decorative outdoor play-area surface. The available record does not establish regulation court dimensions, sport-specific lines, an athletic coating system, or court certification.',
       },
     ],
   },
@@ -148,7 +164,7 @@ const baseSeoServicePages = [
       'Plan a driveway that handles Central Texas heat, drainage swings, and traffic demands with a clear process and honest pricing.',
     metaTitle: 'Concrete Driveways in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
-      'Concrete driveways in Waco built for black clay soil: real base prep, reinforcement, and drainage planning. Most driveways run $6–12/sq ft. Free estimate: (254) 230-3102.',
+      'Concrete driveway planning in Waco around removal, base, drainage, thickness, reinforcement, access, finish, and a written site-specific estimate.',
     introParagraph:
       'The first thing to know about pouring a driveway in Waco is that the black clay under it moves — it swells after rain and shrinks through the long dry stretches. A driveway that skips base prep to hit a low price will crack at the edges within a few years. We start with the subgrade, the slope, and the joint layout, because that is what decides how the driveway looks in year ten.',
     sections: [
@@ -231,7 +247,7 @@ const baseSeoServicePages = [
       {
         question: 'How long does it take to install a concrete driveway in Waco?',
         answer:
-          'Standard replacement projects are often completed in 1 to 2 days for prep and pour, with vehicle access usually returning after cure milestones are met.',
+          'Replacement and vehicle-opening timing depend on removal, support correction, size, access, placement sequence, concrete specification, weather, cure method, and actual loads.',
       },
       {
         question: 'How thick should a concrete driveway be?',
@@ -287,7 +303,7 @@ const baseSeoServicePages = [
       'Create a patio that looks custom and performs in heat, with practical layout, drainage, and finish options optimized for Waco.',
     metaTitle: 'Concrete Patios in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
-      'Concrete patios in Waco — broom finish, stamped, or stained, planned for drainage and shade. Typical patios run $6–12/sq ft, stamped $12–18. Free estimate: (254) 230-3102.',
+      'Concrete patio planning in Waco around doors, grade, drainage, access, layout, finish, cover or kitchen coordination, and a written site-specific estimate.',
     introParagraph:
       'A patio is usually the most-used slab on the property, and the mistakes show up fast: water pooling by the back door, a surface too hot to walk on in August, random cracks across the middle. We plan the slope, the shade, and the joint lines before we talk finishes — then help you pick between broom finish, stamped, or stained based on how much upkeep you actually want.',
     resourceLinks: [
@@ -468,7 +484,7 @@ const baseSeoServicePages = [
       {
         heading: 'Built for the loads it will actually carry',
         paragraphs: [
-          'A sidewalk, a customer parking stall, and a dumpster approach that takes a loaded garbage truck twice a week are three different designs. Thickness, reinforcement, and base depth get sized to the traffic — most commercial flatwork runs 3,000 to 4,000 PSI, with thicker sections and heavier steel where trucks turn or park.',
+          'A sidewalk, customer parking stall, dumpster approach, and truck lane can have different design inputs. The responsible plans or written scope should state support, thickness, reinforcement, concrete specification, joints, edges, and traffic loads for each area.',
           'Joint layout matters more on big sections than anywhere else. Concrete moves on Central Texas clay no matter who pours it — the joints decide where it cracks. We lay them out on purpose instead of letting the slab decide.',
         ],
       },
@@ -484,7 +500,7 @@ const baseSeoServicePages = [
       {
         question: 'Can you pour without shutting the business down?',
         answer:
-          'Almost always. We stage the work in sections so an entrance and part of the parking stay open, and each section reopens as soon as it can carry traffic.',
+          'Phasing may preserve some access when the site, safety plan, traffic pattern, placement sequence, and cure criteria allow it. The proposal should show closures and reopening responsibility; uninterrupted access is not promised.',
       },
       {
         question: 'What commercial concrete work do you take on?',
@@ -494,12 +510,12 @@ const baseSeoServicePages = [
       {
         question: 'How long before new concrete can take vehicle traffic?',
         answer:
-          'Cars can usually drive on it after about 7 days; heavy trucks need longer. It depends on thickness, mix, and weather, so we give you real dates for your pour rather than a guess.',
+          'Vehicle opening depends on the project concrete, thickness, weather, cure method, design requirements, and actual loads. The handoff should give the approved dates or criteria for each traffic class.',
       },
       {
         question: 'How do summer pours work in Waco heat?',
         answer:
-          'We pour early, adjust the mix, and keep water on the cure. Hot-weather pours are routine here — it just takes planning the schedule around the forecast.',
+          'A hot-weather plan should identify forecast limits, concrete-supplier input, placement timing, evaporation controls, finishing, cure method, testing or inspection responsibility, and stop-work criteria for the actual pour.',
       },
     ],
   },
@@ -510,7 +526,7 @@ const baseSeoServicePages = [
       'Driveways, patios, sidewalks, garage slabs, and repairs for Waco-area homes — one estimate, one crew, no surprises.',
     metaTitle: 'Residential Concrete Contractors Waco TX | SLA Concrete Works LLC',
     metaDescription:
-      'Driveways, patios, sidewalks, garage slabs, and concrete repair for Waco-area homes. Owner-run since 2005, free written estimates. Call or text (254) 230-3102.',
+      'Driveways, patios, sidewalks, garage slabs, and concrete repair for Waco-area homes. Ask for a written, site-specific estimate. Call or text (254) 230-3102.',
     introParagraph:
       'Most of what we pour is for homeowners: driveways, patios, sidewalks, garage and shop slabs, steps, and repairs. Stephen does the site visit himself, measures it, and gives you a written price. If something does not need to be torn out yet, he will tell you that too — plenty of estimates end with "keep an eye on it and call me in a couple of years."',
     sections: [
@@ -531,7 +547,7 @@ const baseSeoServicePages = [
       {
         heading: 'Finish options, honestly ranked',
         paragraphs: [
-          'A standard broom finish is the workhorse: good traction, easy to maintain, cheapest per foot. Stamped and stained concrete look great and cost more — both in the pour and in resealing every 2 to 3 years. We will tell you which one actually fits how much maintenance you want to do, not just which one costs more.',
+          'Broom, stamped, stained, exposed-aggregate, and other finishes have different preparation, texture, appearance, traction, product, cleaning, and maintenance requirements. Compare the complete written systems rather than a generic unit price or fixed resealing interval.',
           'If you want detail without the full stamped price, a plain field with a stamped or colored border is a common middle ground on Waco patios.',
         ],
       },
@@ -567,7 +583,7 @@ const baseSeoServicePages = [
       {
         question: 'How soon can we use the new concrete?',
         answer:
-          'Foot traffic in a day or two, vehicles at about 7 days, full strength at 28. Weather shifts those numbers, so we give you exact dates for your pour.',
+          'Foot traffic, vehicles, and other loads should follow the project-specific handoff based on concrete, thickness, weather, cure method, finish, and design or supplier requirements.',
       },
     ],
   },
@@ -654,9 +670,9 @@ const baseSeoServicePages = [
       'Use stamped concrete for elegant texture, color, and durable outdoor surfaces that perform in Waco weather.',
     metaTitle: 'Stamped Concrete in Waco, TX | SLA Concrete Works LLC',
     metaDescription:
-      'Stamped concrete patios, walkways, and borders in Waco — ashlar slate, stone, and brick patterns that hold up in Texas heat. Runs $12–18/sq ft. Free estimate: (254) 230-3102.',
+      'Stamped-concrete planning in Waco around the base slab, pattern, color system, borders, release, sealing, traction, access, and maintenance requirements.',
     introParagraph:
-      'Stamped concrete gets you the look of stone, slate, or brick at a fraction of what the real material costs installed — most stamped work here runs $12–18 per square foot. The catch nobody mentions in the sales pitch: stamping is a timing game. In Waco summer heat the window between "too wet to stamp" and "too hard to stamp" gets short, and a rushed stamp job shows forever. We schedule stamped pours around that window, not around convenience.',
+      'Stamped concrete can create stone, slate, or brick patterns, but its full scope includes the base slab, pattern timing, color system, release, washing, sealing, traction, and maintenance. Hot-weather conditions affect placement and texturing, so the actual sequence and selected products belong in the written project plan.',
     resourceLinks: [
       { label: 'Stamped concrete project gallery', href: '/jobs/2026-client-stamped-decorative-concrete' },
       { label: 'Waco stamped concrete cost guide', href: '/guides/stamped-concrete-cost-waco-tx' },
@@ -705,7 +721,7 @@ const baseSeoServicePages = [
       {
         question: 'How long does stamped concrete last in Waco?',
         answer:
-          'When installed on a stable base and maintained with proper sealing, stamped concrete can last for decades.',
+          'Service life depends on support, slab design, exposure, traffic, products, drainage, installation, cleaning, and maintenance. The selected system and written project record should control expectations.',
       },
       {
         question: 'Can stamped concrete be slippery when wet?',
@@ -910,7 +926,7 @@ const baseSeoServicePages = [
       {
         heading: 'Keeping the business open while we pour',
         paragraphs: [
-          'Lots get poured in sections. Customers keep an entrance and part of the parking the whole time, and each section reopens once it can carry traffic — cars at roughly a week, heavy trucks later. You get the phase map before we start, so you can tell staff and customers exactly what is blocked and when.',
+          'When phasing is feasible, the traffic plan should identify closures, safe access, placement sequence, cure criteria, and reopening approval for each panel. Actual vehicle and heavy-load timing must follow the project concrete, weather, design, and written handoff.',
         ],
       },
       {
@@ -923,7 +939,7 @@ const baseSeoServicePages = [
       {
         heading: 'Concrete or asphalt for a Waco lot?',
         paragraphs: [
-          'Asphalt costs less up front; concrete costs less over its life. In Waco heat, asphalt softens, ruts under dumpsters and truck lanes, and needs sealcoating every few years, while concrete shrugs off the summer and lasts decades with joint maintenance. For high-heat, heavy-load spots — dumpster pads, truck aprons, drive-thru lanes — concrete wins even on lots that stay asphalt everywhere else.',
+          'Concrete and asphalt should be compared by site support, loads, heat exposure, drainage, construction phasing, maintenance plan, repairability, and current life-cycle estimates from the responsible pavement designer or supplier. This page does not publish a universal cost or service-life winner.',
         ],
       },
     ],
@@ -936,7 +952,7 @@ const baseSeoServicePages = [
       {
         question: 'How long before a parking lot can reopen?',
         answer:
-          'Sections reopen to cars at about 7 days depending on weather and thickness; truck lanes need longer. Because we pour in phases, part of your lot is open the entire time.',
+          'Each phase needs written closure, cure, testing or inspection, and reopening criteria based on the project concrete, weather, design, and traffic loads. Partial access is available only when the approved site and safety plan support it.',
       },
       {
         question: 'Can you replace just the broken sections of our lot?',
@@ -1291,7 +1307,7 @@ const baseSeoServicePages = [
       {
         heading: 'The four finishes, with the trade-offs',
         paragraphs: [
-          'Stamped runs $12–18 per square foot and gives you the stone or slate look — it needs resealing every 2–3 years or the color dulls. Stained is cheaper and works on existing concrete, but the color rides on the surface, so wear shows in traffic paths. Exposed aggregate is the most forgiving decorative finish for Texas sun — the texture is the stone itself, so there is no pattern to wear off — and it gives the best traction around pools. Textured broom variations and colored concrete are the budget end: color mixed through the pour that never peels.',
+          'Stamped, stained, exposed-aggregate, textured-broom, and integrally colored finishes have different preparation, appearance, traction, product, cleaning, and maintenance requirements. The proposal should name the actual system and manufacturer guidance; this page does not assign a universal price, service life, or resealing interval.',
           'On a driveway, we steer most people toward exposed aggregate or integral color over a full stamped field. Stamped driveways look great but take the most maintenance in the one spot you least want to maintain.',
         ],
       },
@@ -1311,7 +1327,7 @@ const baseSeoServicePages = [
       {
         heading: 'The maintenance schedule, up front',
         paragraphs: [
-          'Stamped and stained surfaces want resealing every 2–3 years — a morning of work with a roller, or a modest bill if we do it. Exposed aggregate and integral color can go longer. We put the schedule for your specific finish in writing at handoff, because the difference between a decorative patio that looks good in year ten and one that looks tired in year four is almost always the sealer.',
+          'Inspection and resealing depend on the named product, preparation, exposure, traffic, cleaning, traction, appearance, and observed wear. The project handoff should use manufacturer guidance and a future compatibility or recoat check rather than promise one interval.',
         ],
       },
     ],
@@ -1475,76 +1491,83 @@ const baseSeoServicePages = [
   },
   {
     slug: 'contractors-in-waco-tx',
-    title: 'Contractors in Waco, TX (Concrete Focus)',
+    title: 'How to Compare Concrete Bids in Waco, TX',
     cardSummary:
-      'Searching for contractors in Waco TX? Work with a local concrete-first team for driveways, patios, foundations, and repairs.',
-    metaTitle: 'Contractors in Waco TX | 5-Star Concrete Team | SLA Concrete Works',
+      'A practical checklist for comparing demolition, base, reinforcement, drainage, finish, joints, cure, cleanup, and change-order terms.',
+    metaTitle: 'How to Compare Concrete Bids in Waco, TX | SLA Concrete Works',
     metaDescription:
-      'Comparing contractors in Waco? Owner-run concrete crew, 5.0 stars, 500+ local projects since 2005 — and estimates that show exactly what is included, line by line. (254) 230-3102.',
+      'Compare Waco concrete bids by written scope: demolition, base, thickness, reinforcement, drainage, joints, finish, cure, cleanup, exclusions, and change orders.',
     introParagraph:
-      'If you are comparing contractors in Waco TX for a concrete project, the most important details are usually hidden before the pour. Base prep, drainage, reinforcement, joint layout, access, cleanup, and cure timing all affect whether the finished concrete keeps performing after the crew leaves.',
+      'A total price is not enough to compare concrete contractors. Put every bid against the same footprint, use, demolition, base, drainage, slab, finish, cure, and cleanup assumptions. This page is a scope checklist; it does not rely on an unverified star rating, review count, project count, or “since” claim.',
     sections: [
       {
-        heading: 'How to compare concrete contractors in Waco',
+        heading: 'Give every bidder the same starting information',
         paragraphs: [
-          'Start by asking each contractor to explain what is included in writing. The estimate should identify demolition or haul-off, base correction, reinforcement, finish, drainage work, control joints, cleanup, and when the concrete can be used.',
-          'If one bid is much lower, check whether it leaves out the work you cannot see after the slab is finished. Cheap concrete often gets expensive when the base, drainage, or edges were not handled correctly.',
+          'Write down the project address, measured footprint, intended use and vehicle loads, existing surface, access limits, known drainage problem, desired finish, and any drawings or authority requirements. Share the same packet with every contractor.',
+          'If bidders are pricing different footprints, slab uses, or finish assumptions, the totals are not comparable. Ask each one to state measurements, assumptions, exclusions, and alternate options instead of filling in the gaps yourself.',
         ],
       },
       {
-        heading: 'Concrete services most requested in Waco',
+        heading: 'Compare the hidden work line by line',
         paragraphs: [
-          'Top requests include driveways, patios, parking lots, slab repairs, shop pads, foundation-related concrete work, sidewalks, retaining wall tie-ins, and concrete demolition before replacement.',
-          'We support residential and light commercial properties with one coordinated team, which helps keep scheduling and communication simpler from first call to cleanup.',
+          'Ask each bid to identify demolition, haul-off, excavation, base material and depth, compaction, forms, slab thickness, thickened edges, reinforcement, concrete or plan specification, placement method, finish, slope and drainage, control and isolation joints, curing, protection, cleanup, and reopening criteria.',
+          'A lower total may be a good value, or it may cover less work. The written line items tell you which. Do not assume base correction, disposal, pumping, sealing, permits, testing, or traffic control are included unless the proposal says so.',
         ],
       },
       {
-        heading: 'Local execution standards',
+        heading: 'Use a three-column comparison sheet',
         paragraphs: [
-          'Waco projects need heat-aware curing, clay-soil planning, and drainage control to reduce preventable cracking and movement.',
-          'Our process is built around those conditions. We look at how water moves, where loads concentrate, how the slab ties into existing concrete, and what the customer needs to use the space for after the pour.',
+          'For each line item, record “included,” “excluded,” or “not stated,” then copy the contractor\'s quantity or specification beside it. Do the same for price allowances, owner-supplied work, deposit, payment milestones, start window, weather delays, cure restrictions, and any written warranty.',
+          'The most useful follow-up question is usually: “What would make this price change?” Ask for the answer in writing. Unknown subgrade, concealed reinforcement, utility conflicts, access changes, extra depth, and owner-requested finish changes should have a documented approval path.',
         ],
       },
       {
-        heading: 'Estimate and scheduling process',
+        heading: 'Set change-order rules before demolition',
         paragraphs: [
-          'Most projects begin with a site walk, scope confirmation, measurements, photos, and a realistic schedule.',
-          'You receive clear next steps for prep, pour window, finish expectations, cure milestones, and any weather or access issues that could affect timing.',
+          'The agreement should say who can approve a change, how labor and material changes are priced, whether unit prices apply, and whether work pauses until the owner approves the added cost. Verbal field changes are hard to compare and easy to dispute later.',
+          'Ask what happens if demolition reveals weak base, unexpected thickness, buried work, or water. A contractor cannot know every concealed condition in advance, but the decision and price process can still be clear before the slab is opened.',
         ],
       },
       {
-        heading: 'Questions worth asking before you hire',
+        heading: 'Verify permits, insurance, design, and trade boundaries',
         paragraphs: [
-          'Ask who will be on site, how changes are handled after demolition, what happens if rain shifts the pour, whether cleanup is included, and what the contractor expects from you before the crew arrives.',
-          'A good contractor should be comfortable answering those questions because they are normal parts of a concrete job, not surprises.',
+          'Ask who checks permits and right-of-way requirements, requests utility locates, supplies engineering or stamped plans, coordinates inspections, protects adjacent property, and handles work outside the concrete trade. Verify current insurance documentation directly rather than relying on a webpage statement.',
+          'For structural, accessibility, drainage, electrical, fencing, paving, or specialist surface work, the proposal should say whether the concrete contractor performs it, subcontracts it, coordinates with an owner-selected trade, or excludes it.',
+        ],
+      },
+      {
+        heading: 'Red flags that prevent a clean comparison',
+        paragraphs: [
+          'Pause when a price has no measured scope, slab thickness or reinforcement is unclear, drainage is ignored, disposal and cleanup are missing, the use date is promised without a project-specific cure plan, or a large extra is described only as “as needed.”',
+          'Do not treat a star rating, project count, years-in-business phrase, search ranking, or polished gallery as a substitute for the actual proposal. Verify the current records that matter to your decision and compare the work being purchased.',
         ],
       },
     ],
     faq: [
       {
-        question: 'Do you provide free estimates for concrete projects in Waco?',
+        question: 'Is the lowest concrete bid automatically the wrong choice?',
         answer:
-          'Yes. We provide no-obligation estimates for residential and light commercial concrete projects.',
+          'No. A lower bid can be a good value when it covers the same measured scope and requirements. First compare inclusions, quantities, specifications, exclusions, schedule, and change-order terms.',
       },
       {
-        question: 'How do you handle permits, documentation, and insurance questions?',
+        question: 'What should every concrete proposal identify?',
         answer:
-          'We review permit needs by project, provide clear scope documentation, and discuss insurance or risk questions during the estimate.',
+          'At minimum: property and work area, dimensions, demolition and disposal, base work, slab details, reinforcement, finish, slope and drainage, joints, curing, cleanup, price, exclusions, payment terms, schedule assumptions, and change-order process.',
       },
       {
-        question: 'Can you handle both small and large concrete jobs?',
+        question: 'How should I compare permit and insurance answers?',
         answer:
-          'Yes. We handle small residential scopes and larger light commercial jobs across the Waco area.',
+          'Ask each bidder who verifies permit, right-of-way, utility, inspection, and design requirements. Request current insurance documentation from the contractor or insurer and confirm that the named entity and project scope match.',
       },
       {
-        question: 'What should I compare when choosing a contractor?',
+        question: 'What if two bids describe different slab details?',
         answer:
-          'Compare prep quality, drainage planning, reinforcement details, demolition or haul-off, finish scope, timeline clarity, cleanup, and communication process.',
+          'Ask each bidder to explain the basis for thickness, reinforcement, base, joints, drainage, and finish. If plans or engineering control the work, both bids should reference the same documents and revision.',
       },
       {
-        question: 'Why should I avoid choosing only by the lowest bid?',
+        question: 'What should be written before work begins?',
         answer:
-          'The lowest bid may skip base work, reinforcement, drainage corrections, thickened edges, sealing, or cleanup. Compare what is included before deciding.',
+          'The final scope, exclusions, price, payment milestones, approximate schedule, owner responsibilities, change-order method, other-trade handoffs, and any warranty terms that actually apply should be documented before work begins.',
       },
     ],
   },
@@ -1628,25 +1651,25 @@ const baseSeoServicePages = [
     metaDescription:
       'Small concrete jobs in Waco — steps, sidewalk sections, AC and shed pads, small patios, short pours. Yes, we actually call back. Text photos to (254) 230-3102 for a quick quote.',
     introParagraph:
-      'If you have called three contractors about a cracked sidewalk section or a 10x10 shed pad and nobody called back, you already know the problem: a lot of crews only want the big pours. We take small jobs and slot them in between the big ones. Text us a couple of photos and rough dimensions at (254) 230-3102 and you will usually have a ballpark the same day.',
+      'For a small concrete inquiry, text wide and close photos, rough dimensions, project use, city, access, and timing to (254) 230-3102. SLA will review whether the scope, crew travel, concrete quantity, and schedule fit before offering a ballpark or site visit.',
     sections: [
       {
         heading: 'What counts as a small job',
         paragraphs: [
-          'Steps and stoops. One or two buckled sidewalk panels. A pad for an AC unit, generator, hot tub, or shed. A trash-can pad by the gate. Extending a patio a few feet. Replacing the section of driveway that cracked — not the whole driveway. If it is under a truckload of concrete, it is a small job, and we do them every week.',
+          'Steps and stoops, isolated sidewalk panels, equipment or shed pads, small patio extensions, and partial driveway replacement are examples of small-scope inquiries. SLA confirms the actual use, dimensions, support, access, concrete quantity, schedule, and accepted scope before representing the job as available.',
           'Small does not mean careless. A shed pad still gets a compacted base and the right thickness, because a pad that tilts in two years was not cheap — it was wasted.',
         ],
       },
       {
-        heading: 'Why small jobs cost more per square foot — the honest math',
+        heading: 'Why mobilization matters on a small scope',
         paragraphs: [
-          'Concrete plants charge a short-load fee when a truck rolls out less than full, and a crew day has a floor cost whether we pour 80 feet or 800. That is why a small pad costs more per square foot than a driveway, and why some outfits quote small jobs silly-high hoping you will go away. We keep it fair by batching small jobs in the same area — if we are already pouring in your part of town, your job rides on that mobilization.',
+          'Small scopes still require review, mobilization, crew time, equipment, concrete supply, placement, finish, and cleanup. The estimate should show those assumptions clearly instead of hiding them inside a generic unit price or promising that another project will absorb the mobilization.',
         ],
       },
       {
         heading: 'How scheduling works',
         paragraphs: [
-          'Small jobs fill the gaps between larger pours, which usually means we can get to yours faster than a big project — often the same week or the one after. Weather moves everything in this business, but a small pour is the easiest thing on the calendar to slide into a good morning.',
+          'Scheduling depends on scope, location, crew travel, concrete supply, access, weather, and nearby work. Availability is confirmed after review; this page does not promise a same-week slot.',
         ],
       },
       {
@@ -1675,17 +1698,398 @@ const baseSeoServicePages = [
       {
         question: 'How fast can a small job get scheduled?',
         answer:
-          'Usually faster than a big one — small pours slot between larger projects, often within a week or two depending on weather and where you are.',
+          'Scheduling depends on scope, location, crew travel, concrete supply, access, weather, and nearby work. Availability is confirmed after review rather than promised from the page.',
       },
     ],
   },
 ]
 
+const authenticityServiceOverrides = {
+  'concrete-resurfacing-waco-tx': {
+    title: 'Concrete Resurfacing Evaluation in Waco, TX',
+    cardSummary:
+      'A repair-versus-replacement evaluation for worn concrete, with any overlay product and preparation method identified in the written scope.',
+    metaTitle: 'Concrete Resurfacing Evaluation Waco TX | SLA Concrete Works',
+    metaDescription:
+      'Evaluate worn Waco concrete before choosing an overlay or replacement. The written scope should name the system, preparation, limits, cure, and exclusions.',
+    introParagraph:
+      'SLA will not promise an overlay from a photo alone. The slab condition, movement, moisture, drainage, contamination, edges, and intended use need review first. If resurfacing is proposed, the written estimate must name the actual system and preparation rather than relying on a generic “resurface” label.',
+    evidenceNote:
+      'The repository includes a Hubbard project described as 1,600 square feet of “resurfacing,” but it does not identify whether that meant an overlay, bonded topping, grind-and-coat system, or replacement. That job is not used as system proof until its records are reviewed.',
+    scopeBoundary: {
+      slaTitle: 'What SLA can evaluate and document',
+      slaItems: [
+        'Visible slab condition, cracks, movement, drainage, edges, access, and intended use',
+        'Repair-versus-removal questions and concrete replacement where included in the estimate',
+        'A written scope that names the proposed product, preparation, thickness, cure, and limits before approval',
+      ],
+      specialistTitle: 'What is not claimed without verified system proof',
+      specialistItems: [
+        'A specific overlay, coating, or bonding system not named in the project record',
+        'Universal crack bridging, moisture tolerance, service life, or warranty promises',
+        'Specialist surface preparation or coating work unless the performing trade is identified',
+      ],
+    },
+    showGallery: false,
+    sections: [
+      {
+        heading: 'Start with why the surface failed',
+        paragraphs: [
+          'Stains and light wear are different from active cracks, settlement, heaving, delamination, or water moving through the slab. Covering active movement does not remove it.',
+          'The estimate should record what was observed and why resurfacing, localized repair, or replacement is being considered.',
+        ],
+      },
+      {
+        heading: 'Require a named preparation and product system',
+        paragraphs: [
+          'A useful proposal identifies cleaning or profiling, crack treatment, weak-area removal, moisture checks, primer or bonding steps, material layers, thickness, finish, cure restrictions, and maintenance.',
+          'If those details are still unknown, the page and estimate should say review is pending instead of predicting performance.',
+        ],
+      },
+      {
+        heading: 'Know when replacement is the safer scope',
+        paragraphs: [
+          'Panels that continue to move, hold water, rock, or break apart may need removal and base correction. Product selection cannot compensate for an unstable supporting slab.',
+          'SLA should explain that decision in writing and separate verified concrete work from any specialist coating scope.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Does SLA publish one resurfacing system for every slab?',
+        answer:
+          'No. The existing slab and the selected product requirements must be reviewed first. Any quoted system should be named in the written scope.',
+      },
+      {
+        question: 'Is the Hubbard project proof of an overlay system?',
+        answer:
+          'Not yet. The available repository record does not identify what “resurfacing” meant, so the project is not used as product or installation proof until its source records are checked.',
+      },
+      {
+        question: 'What should a resurfacing estimate include?',
+        answer:
+          'Observed condition, preparation, crack and moisture limits, named product, layers or thickness, finish, cure, use restrictions, maintenance, exclusions, and the responsible trade.',
+      },
+    ],
+  },
+  'foundation-repair-waco-tx': {
+    title: 'Concrete Slab and Foundation-Adjacent Repair in Waco, TX',
+    cardSummary:
+      'Concrete section replacement, flatwork tie-ins, and drainage review around foundations—with structural stabilization assigned to an engineer or foundation specialist.',
+    metaTitle: 'Slab & Foundation-Adjacent Concrete Repair Waco TX | SLA',
+    metaDescription:
+      'Concrete slab and foundation-adjacent repair in Waco. SLA handles concrete flatwork and section replacement; engineers and foundation specialists handle piers and leveling.',
+    introParagraph:
+      'SLA evaluates visible concrete and drainage around a foundation, but does not present flatwork repair as structural stabilization. Piers, house leveling, structural design, and movement diagnosis belong to a qualified foundation specialist or engineer before related concrete is replaced.',
+    evidenceNote:
+      'No foundation-repair case study in the repository currently documents structural stabilization by SLA. The unrelated retaining-wall gallery is not used as foundation-repair proof.',
+    scopeBoundary: {
+      slaTitle: 'SLA concrete scope',
+      slaItems: [
+        'Exterior flatwork and failed concrete-section removal or replacement when included',
+        'Porch, walk, drive, apron, or slab-edge tie-ins based on the approved scope',
+        'Surface-drainage observations and coordination around concrete work',
+      ],
+      specialistTitle: 'Engineer or foundation-specialist scope',
+      specialistItems: [
+        'Structural movement diagnosis and stamped repair design',
+        'House leveling, piers, underpinning, or pier-and-beam work',
+        'Geotechnical conclusions, structural certification, and stabilization warranties',
+      ],
+    },
+    showGallery: false,
+    resourceLinks: [
+      { label: 'New concrete foundations and slabs', href: '/concrete-foundations-waco-tx' },
+      { label: 'Concrete slab permit guide', href: '/guides/do-i-need-a-permit-to-pour-a-concrete-slab-waco-tx' },
+      { label: 'Recent concrete projects', href: '/jobs' },
+    ],
+  },
+  'concrete-demolition-waco-tx': {
+    title: 'Concrete Removal Within Replacement Work in Waco, TX',
+    cardSummary:
+      'Tear-out planning for concrete replacement, with access, utility, cut limits, reinforcement, disposal, dust, and cleanup stated in the written estimate.',
+    metaTitle: 'Concrete Removal for Replacement Work Waco TX | SLA',
+    metaDescription:
+      'Plan concrete removal in Waco as part of a replacement scope. Confirm access, utilities, cuts, reinforcement, haul-off, disposal, dust, cleanup, and exclusions.',
+    introParagraph:
+      'Concrete removal is commonly one phase of a replacement project. The written scope should identify what comes out, what stays, who locates utilities, how edges are isolated, what equipment can access the site, where debris goes, and who leaves the area ready for the next step.',
+    evidenceNote:
+      'A dedicated source-verified demolition sequence with equipment, disposal records, and before/after photos has not yet been published. Finished-pour photos are not used as demolition proof.',
+    scopeBoundary: {
+      slaTitle: 'Concrete-removal scope to put in writing',
+      slaItems: [
+        'Removal limits, access assumptions, adjacent surfaces to protect, and replacement handoff',
+        'Saw-cut, break-out, reinforcement, loading, haul-off, and cleanup items actually included',
+        'Disposal destination or on-site retention only when the estimate and site allow it',
+      ],
+      specialistTitle: 'Items requiring separate confirmation',
+      specialistItems: [
+        'Utility locating, scanning, hazardous-material review, shoring, or engineered demolition',
+        'Specialty wall sawing, core drilling, deep structural cutting, or inaccessible removal',
+        'Traffic control, permits, recycling claims, or other-trade work not written into the scope',
+      ],
+    },
+    showGallery: false,
+    sections: [
+      {
+        heading: 'Define the removal boundary before work starts',
+        paragraphs: [
+          'Measure the section, mark what remains, identify walls, doors, utilities, landscaping, and occupied access, and state how the new work will meet existing concrete.',
+          'The estimate should not assume every slab has the same thickness, reinforcement, access, or disposal path.',
+        ],
+      },
+      {
+        heading: 'Treat concealed conditions as a written decision',
+        paragraphs: [
+          'Unknown thickness, buried reinforcement, weak base, water, or hidden utilities can change the scope after removal begins.',
+          'The change-order method and stopping point should be agreed before the slab is opened.',
+        ],
+      },
+      {
+        heading: 'Document the handoff',
+        paragraphs: [
+          'The proposal should say whether SLA proceeds into base correction and replacement, or leaves a defined condition for another trade.',
+          'Haul-off, final cleanup, dust or slurry control, and disposal responsibilities belong in the same written scope.',
+        ],
+      },
+    ],
+  },
+  'concrete-sawing-waco-tx': {
+    title: 'Saw Cutting for Concrete Repair and Removal in Waco, TX',
+    cardSummary:
+      'Saw cutting used within SLA repair and removal scopes, with tool capacity, utility boundaries, slurry control, and specialist cuts confirmed per project.',
+    metaTitle: 'Saw Cutting for Concrete Repair Waco TX | SLA Concrete Works',
+    metaDescription:
+      'Saw cutting within Waco concrete repair and removal work. Confirm cut depth, tool access, utilities, scanning, dust or slurry control, and specialist exclusions.',
+    introParagraph:
+      'SLA uses saw cutting when it is part of an approved concrete repair or removal scope. This page does not claim a standalone specialty-sawing operation, core drilling, wall sawing, subsurface scanning, or unlimited cut capacity.',
+    evidenceNote:
+      'The repository does not yet document saw models, verified cut capacities, a scanning process, or a dedicated standalone sawing job. Those details must be confirmed before quoting a specialty cut.',
+    scopeBoundary: {
+      slaTitle: 'SLA repair/removal cutting scope',
+      slaItems: [
+        'Layout and isolation cuts included in a written concrete repair or removal proposal',
+        'Tool access, cut limits, nearby surfaces, water use, slurry or dust, and cleanup confirmed per job',
+        'Coordination with the trade that owns the opening or utility work',
+      ],
+      specialistTitle: 'Not represented as SLA scope without proof',
+      specialistItems: [
+        'Core drilling, wall sawing, wire sawing, deep structural cuts, or engineered openings',
+        'Subsurface scanning, utility locating, structural design, or penetration approval',
+        'A standalone cut before tool, depth, reinforcement, access, and containment are confirmed',
+      ],
+    },
+    showGallery: false,
+    sections: [
+      {
+        heading: 'Start with the reason for the cut',
+        paragraphs: [
+          'A removal boundary, control joint, plumbing opening, and structural penetration are different scopes. The responsible trade and approved layout need to be clear first.',
+          'SLA should only quote the cut after access, concrete thickness, reinforcement, utilities, nearby finishes, and cleanup requirements are understood.',
+        ],
+      },
+      {
+        heading: 'Write down cut and containment limits',
+        paragraphs: [
+          'The estimate should identify approximate length and depth, wet or dry method, water and power access, slurry or dust collection, debris, edge condition, and exclusions.',
+          'If the required tool or scan is outside the verified scope, a specialty cutting contractor should perform or review it.',
+        ],
+      },
+    ],
+  },
+  'retaining-walls-waco-tx': {
+    title: 'Concrete Retaining Wall Scope Review in Waco, TX',
+    cardSummary:
+      'Concrete retaining-wall work planned from site-specific design, drainage, excavation, reinforcement, placement, backfill, and trade responsibilities.',
+    metaTitle: 'Concrete Retaining Wall Scope Review Waco TX | SLA',
+    metaDescription:
+      'Review a Waco concrete retaining-wall scope around design responsibility, dimensions, footing, steel, drainage, excavation, placement, backfill, inspections, and handoffs.',
+    introParagraph:
+      'A retaining wall carries soil and water loads, so a gallery photo cannot establish the correct wall. The project must identify the design source, retained height, footing and wall dimensions, reinforcement, drainage, excavation, access, placement, backfill, inspections, and responsible trades before construction is represented as a repeatable SLA service.',
+    evidenceNote:
+      'The repository contains a retaining-wall photo gallery and references a Riesel infrastructure job, but the public record does not yet verify wall dimensions, footing, steel, design and inspection responsibility, drainage, concrete quantity, dates, permission, or Stephen’s field decision. Those details are not inferred from the images.',
+    scopeBoundary: {
+      slaTitle: 'Concrete scope SLA can price when documented',
+      slaItems: [
+        'Forming, reinforcement, placement, finish, cure, and concrete cleanup expressly included in the estimate',
+        'Excavation, footing, drainage components, and backfill only when the approved plans and written scope assign them to SLA',
+        'Access, placement sequence, joints, adjacent-flatwork tie-ins, and inspection hold points confirmed for the actual site',
+      ],
+      specialistTitle: 'Design and other-trade scope to assign separately',
+      specialistItems: [
+        'Structural, geotechnical, retaining-system, surcharge, global-stability, or stamped design',
+        'Survey, drainage design, permits, inspections, utility work, shoring, or safety design unless assigned to a qualified named party',
+        'Landscape, irrigation, fencing, waterproofing, specialty wall systems, excavation, or backfill not written into SLA’s estimate',
+      ],
+    },
+    sections: [
+      {
+        heading: 'Start with the design source and retained condition',
+        paragraphs: [
+          'Record retained height, grades, slopes, structures, vehicle or other surcharges, property lines, utilities, groundwater or runoff, soil information, and who determines the wall system.',
+          'SLA should build from approved project information; this page does not provide retaining-wall engineering or a universal detail.',
+        ],
+      },
+      {
+        heading: 'Put drainage, excavation, and backfill in the scope',
+        paragraphs: [
+          'The proposal should identify excavation limits, support of adjacent property, footing preparation, drainage components and outlet, backfill material and placement, erosion protection, access, haul-off, and responsible parties.',
+          'If those items belong to an engineer, excavator, landscaper, civil contractor, or owner, that handoff should be visible before concrete work begins.',
+        ],
+      },
+      {
+        heading: 'Document the concrete and inspection sequence',
+        paragraphs: [
+          'Approved dimensions, steel, embeds, joints, concrete specification, placement sequence, finish, cure, testing, inspection points, protection, and handoff belong in the project record.',
+          'A future case study should publish only the permission-safe facts and photos Stephen and the responsible designer or inspector have reviewed.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Does SLA provide retaining-wall engineering?',
+        answer:
+          'No engineering capability is claimed by this page. Any required structural, geotechnical, drainage, or stamped design must come from the qualified party identified for the project.',
+      },
+      {
+        question: 'Does the current gallery prove the wall design and drainage details?',
+        answer:
+          'No. The images show a retaining-wall project category, but the public source packet does not yet document dimensions, design responsibility, reinforcement, drainage, inspections, quantity, or result.',
+      },
+      {
+        question: 'What should a retaining-wall proposal identify?',
+        answer:
+          'Design source, grades and retained height, wall and footing dimensions, steel, drainage and outlet, excavation, backfill, access, concrete specification, placement, cure, inspections, exclusions, and each trade’s responsibility.',
+      },
+    ],
+  },
+  'hardscaping-waco-tx': {
+    title: 'Concrete Hardscaping in Waco, TX',
+    cardSummary:
+      'Concrete patios, walks, steps, pads, retaining-wall tie-ins, and drainage transitions—without implying unverified stone or paver installation.',
+    metaTitle: 'Concrete Hardscaping Waco TX | Patios, Walks & Steps',
+    metaDescription:
+      'Concrete hardscaping in Waco for patios, walks, steps, pads, retaining-wall tie-ins, and drainage transitions. Other materials require a disclosed trade.',
+    introParagraph:
+      'SLA’s documented lane is concrete. A hardscape estimate can coordinate concrete patios, walks, steps, pads, wall tie-ins, and drainage transitions. Stone, pavers, landscaping, irrigation, lighting, or other materials should only be included when the performing trade and exact scope are named.',
+    evidenceNote:
+      'The repository does not currently prove a complete SLA-installed stone or paver project. This page is therefore limited to concrete hardscaping and explicit trade handoffs.',
+    scopeBoundary: {
+      slaTitle: 'Concrete hardscaping scope',
+      slaItems: [
+        'Concrete patios, walks, steps, pads, edges, and tie-ins included in the estimate',
+        'Grade, runoff, doors, gates, access, daily use, and future-phase transitions',
+        'Concrete finish and maintenance requirements tied to the selected system',
+      ],
+      specialistTitle: 'Separate or disclosed trade scope',
+      specialistItems: [
+        'Stone, unit pavers, planting, irrigation, electrical, lighting, fencing, and outdoor-kitchen systems',
+        'Structural retaining-wall design, landscape architecture, or stamped drainage design',
+        'Any material or installation not specifically identified in SLA’s written estimate',
+      ],
+    },
+    showGallery: false,
+    sections: [
+      {
+        heading: 'Plan the concrete around how the property works',
+        paragraphs: [
+          'Doors, gates, seating, vehicle routes, roof runoff, yard slope, utilities, and future structures establish the useful layout.',
+          'The concrete scope should solve access and drainage first, then choose the finish and details.',
+        ],
+      },
+      {
+        heading: 'Coordinate—not imply—other materials',
+        paragraphs: [
+          'If stone, pavers, landscaping, lighting, or another feature meets the concrete, the elevation and handoff should be shown in the scope.',
+          'The proposal should name who supplies and installs each non-concrete element.',
+        ],
+      },
+      {
+        heading: 'Design future phases into the edge conditions',
+        paragraphs: [
+          'Phased work needs intentional grades, joints, terminations, and access so the next section can connect without trapping water or creating a trip point.',
+          'The written estimate should distinguish today’s concrete from future or owner-supplied work.',
+        ],
+      },
+    ],
+  },
+  'concrete-deck-contractors': {
+    title: 'Pool-Adjacent and Patio Concrete Planning in Waco, TX',
+    cardSummary:
+      'Planning questions for pool-adjacent and patio concrete, with coping, drainage, traction, products, and specialist roles confirmed before work.',
+    metaTitle: 'Pool-Adjacent Concrete Planning Waco TX | SLA Concrete Works',
+    metaDescription:
+      'Plan pool-adjacent or patio concrete in Waco around coping, drainage, traction, heat, joints, products, and trade boundaries. No elevated-deck claim.',
+    introParagraph:
+      'The repository does not yet contain a source-verified SLA pool-deck case study, so this page is a scope and fit guide—not a claim of elevated-deck, pool-coping, or resurfacing expertise. Any proposal must identify the exact slab work, selected finish, drainage, pool-builder handoff, and responsible trades.',
+    evidenceNote:
+      'No Waco-area pool-deck project in the current repository documents coping joints, slope, product, traction choice, drainage, or SLA’s exact role. The unrelated patio gallery is not used as pool-deck proof.',
+    scopeBoundary: {
+      slaTitle: 'Concrete scope to confirm with SLA',
+      slaItems: [
+        'Ground-supported patio or pool-adjacent slab work specifically written into the estimate',
+        'Grade, runoff, access, joints, finish, cure, and tie-ins reviewed for the actual site',
+        'Coordination points with the pool builder, owner, and selected finish system',
+      ],
+      specialistTitle: 'Not claimed without a qualified trade and records',
+      specialistItems: [
+        'Elevated structural decks, structural design, waterproof assemblies, or pool-shell work',
+        'Coping, specialty overlays, coatings, or slip classifications not named and documented',
+        'Pool equipment, electrical, fencing, code compliance, or engineering by SLA',
+      ],
+    },
+    showGallery: false,
+    sections: [
+      {
+        heading: 'Confirm the structure and trade boundary first',
+        paragraphs: [
+          'A ground-supported patio, pool surround, elevated deck, coping repair, and surface overlay are not interchangeable scopes.',
+          'The owner, pool builder, engineer, and concrete contractor should agree on elevations, joints, drainage, openings, protection, and handoffs before pricing.',
+        ],
+      },
+      {
+        heading: 'Choose the finish from documented requirements',
+        paragraphs: [
+          'Traction, color, heat, water exposure, cleaning, chemical exposure, and maintenance all matter near a pool.',
+          'The proposal should name the finish or product and its preparation, cure, use restrictions, and maintenance rather than promise a universal result.',
+        ],
+      },
+      {
+        heading: 'Do not hide drainage and movement details',
+        paragraphs: [
+          'The site plan should show where rain and splash water go, how concrete meets coping or structures, and where movement is isolated.',
+          'Those decisions require actual elevations and responsible-party review; a gallery image cannot prove them.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Does this page prove SLA has completed a Waco pool deck?',
+        answer:
+          'No. A source-verified pool-deck case study has not yet been published, so this page is limited to planning questions and scope boundaries.',
+      },
+      {
+        question: 'Does SLA build elevated concrete decks?',
+        answer:
+          'No elevated-deck capability is claimed here. Structural or elevated work requires project-specific engineering and a qualified, identified trade.',
+      },
+      {
+        question: 'What should a pool-adjacent concrete proposal identify?',
+        answer:
+          'Slab support, elevations, drainage, joints, coping and structure handoffs, finish or product, traction and maintenance requirements, cure restrictions, exclusions, and responsible trades.',
+      },
+    ],
+  },
+}
+
 // NOTE: these pages used to get four templated "depth" sections and six
 // templated FAQs auto-appended per page. That stamped near-identical blocks
 // across ~17 URLs — an obvious duplicate-content footprint — so the injection
 // was removed. Depth now lives in each page's own copy.
-export const seoServicePages = baseSeoServicePages
+export const seoServicePages = baseSeoServicePages.map((page) => ({
+  ...page,
+  ...(authenticityServiceOverrides[page.slug] || {}),
+}))
 
 export const servicePageLinks = seoServicePages
   .filter((service) => !service.redirectTo)

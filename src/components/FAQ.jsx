@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion as Motion, AnimatePresence } from 'motion/react'
 import { ChevronDown } from 'lucide-react'
 import { fadeInUp, viewportConfig } from '../lib/animations'
 import { FAQ_ITEMS } from '../data/faqs'
@@ -15,7 +15,7 @@ function FAQItem({ question, answer, isOpen, onClick }) {
                 <span className="font-display font-semibold text-lg text-stone-900 pr-4 group-hover:text-accent-600 transition-colors text-left">
                     {question}
                 </span>
-                <motion.div
+                <Motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                 >
@@ -23,11 +23,11 @@ function FAQItem({ question, answer, isOpen, onClick }) {
                         className="size-5 text-stone-400 flex-shrink-0"
                         aria-hidden="true"
                     />
-                </motion.div>
+                </Motion.div>
             </button>
             <AnimatePresence initial={false}>
                 {isOpen && (
-                    <motion.div
+                    <Motion.div
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
@@ -37,7 +37,7 @@ function FAQItem({ question, answer, isOpen, onClick }) {
                         <p className="text-stone-600 leading-relaxed text-pretty pb-5">
                             {answer}
                         </p>
-                    </motion.div>
+                    </Motion.div>
                 )}
             </AnimatePresence>
         </div>
@@ -52,7 +52,7 @@ export function FAQ({ sectionId = 'faq' }) {
             <div className="container-main">
                 <div className="max-w-3xl mx-auto">
                     {/* Section Header */}
-                    <motion.div
+                    <Motion.div
                         className="mb-10"
                         variants={fadeInUp}
                         initial="hidden"
@@ -67,12 +67,12 @@ export function FAQ({ sectionId = 'faq' }) {
                         </h2>
                         <p className="text-lg text-stone-600 text-pretty">
                             No sales pitch — just honest answers about concrete work in Central Texas, 
-                            based on 20+ years of dealing with our soil and climate.
+                            grounded in the site, selected materials, soil, drainage, and weather.
                         </p>
-                    </motion.div>
+                    </Motion.div>
 
                     {/* FAQ List */}
-                    <motion.div
+                    <Motion.div
                         className="bg-white rounded-xl shadow-sm p-6 md:p-8"
                         variants={fadeInUp}
                         initial="hidden"
@@ -88,10 +88,10 @@ export function FAQ({ sectionId = 'faq' }) {
                                 onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
                             />
                         ))}
-                    </motion.div>
+                    </Motion.div>
 
                     {/* CTA */}
-                    <motion.div
+                    <Motion.div
                         className="mt-10 bg-stone-900 rounded-xl p-6 md:p-8 text-center"
                         variants={fadeInUp}
                         initial="hidden"
@@ -118,7 +118,7 @@ export function FAQ({ sectionId = 'faq' }) {
                                 Send a Message
                             </a>
                         </div>
-                    </motion.div>
+                    </Motion.div>
                 </div>
             </div>
         </section>

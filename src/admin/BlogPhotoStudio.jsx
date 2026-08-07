@@ -8,19 +8,49 @@ const emptyAlbumForm = {
   url: '',
 }
 const BLOG_AI_PROMPT_KEY = 'blog_photo_post'
+const BLOG_SOURCE_PACKET_SCHEMA = 'sla_blog_source_packet_v1'
 const DEFAULT_BLOG_SYSTEM_PROMPT = [
-  'You write short blog intro paragraphs for a concrete contractor in Waco, Texas.',
-  'Return exactly one paragraph between 90 and 130 words.',
-  'Tone: practical, honest, and down-to-earth.',
-  'Use local SEO naturally where it fits, including some of: concrete contractor Waco TX, concrete driveway, concrete patio, concrete repair, free estimate.',
-  'Mention visible concrete work details and craftsmanship quality.',
+  'You turn verified field evidence into a concise project-note draft for SLA Concrete Works.',
+  'Use only the supplied job/source packet, Stephen observation, verified facts, and photo captions.',
+  'Let the amount of verified evidence determine the length. Do not target a word count.',
+  'Write in practical, plain language. Prefer a useful field detail or decision over promotional copy.',
+  'Do not add search phrases, calls to action, sales claims, rankings, ratings, or offers.',
+  'Do not infer dimensions, quantities, materials, mix design, finish, location, client identity, code compliance, permits, warranty, schedule, or outcome from a photo.',
+  'If the evidence does not support a detail, omit it. Never fill gaps with a typical concrete-work assumption.',
   'Do not use bullet points, hashtags, emojis, all caps, or long dashes.',
-  'Do not invent facts. Output only the paragraph.',
+  'Output only one concise paragraph with no label or markdown.',
 ].join('\n')
 
 function toTrimmedString(value) {
   if (typeof value !== 'string') return ''
   return value.trim()
+}
+
+function containsLegacyBlogFormulaPrompt(value) {
+  const prompt = toTrimmedString(value)
+  if (!prompt) return false
+  return (
+    /\b90\s*(?:-|to|and)\s*130\s+words?\b/i.test(prompt) ||
+    /\bconcrete contractor waco tx\b/i.test(prompt) ||
+    /\bfree estimate\b/i.test(prompt)
+  )
+}
+
+function splitVerifiedFacts(value) {
+  return String(value || '')
+    .split(/\r?\n/)
+    .map((fact) => fact.replace(/^[-*\d.)\s]+/, '').trim())
+    .filter(Boolean)
+}
+
+function isGenericProjectTitle(value) {
+  const title = toTrimmedString(value).replace(/\s+/g, ' ').toLowerCase()
+  return (
+    !title ||
+    /^project update(?:\s+\d{4}(?:-\d{2})?(?:-\d{2})?)?$/.test(title) ||
+    /^concrete project update(?:\s+\d{4}(?:-\d{2})?(?:-\d{2})?)?$/.test(title) ||
+    /^untitled(?:\s+(?:project|post|draft))?$/.test(title)
+  )
 }
 
 function parseAlbumToken(value) {
@@ -106,6 +136,11 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
   const [recentJobs, setRecentJobs] = useState([])
   const [systemPrompt, setSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
   const [savedSystemPrompt, setSavedSystemPrompt] = useState(DEFAULT_BLOG_SYSTEM_PROMPT)
+  const [projectTitle, setProjectTitle] = useState('')
+  const [sourcePacketId, setSourcePacketId] = useState('')
+  const [stephenObservation, setStephenObservation] = useState('')
+  const [verifiedFacts, setVerifiedFacts] = useState('')
+  const [projectContext, setProjectContext] = useState('')
   const [syncing, setSyncing] = useState(false)
   const [generating, setGenerating] = useState(false)
   const [savingPrompt, setSavingPrompt] = useState(false)
@@ -149,6 +184,37 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     () => visiblePhotos.filter((photo) => selectedPhotos.has(photo.id)).length,
     [visiblePhotos, selectedPhotos]
   )
+
+  const selectedPhotoRecords = useMemo(
+    () => photos.filter((photo) => selectedPhotos.has(photo.id)),
+    [photos, selectedPhotos]
+  )
+  const selectedPhotosMissingCaptions = useMemo(
+    () => selectedPhotoRecords.filter((photo) => previewCaption(photo) === 'No caption yet.'),
+    [selectedPhotoRecords]
+  )
+  const verifiedFactList = useMemo(() => splitVerifiedFacts(verifiedFacts), [verifiedFacts])
+  const reviewEvidenceMissing = useMemo(() => {
+    if (targetType !== 'blog_post') return []
+    return [
+      isGenericProjectTitle(projectTitle) && 'a job-specific title',
+      !toTrimmedString(sourcePacketId) && 'job/source packet ID',
+      !toTrimmedString(stephenObservation) && "Stephen's first-hand observation",
+      verifiedFactList.length < 3 && 'three verified job facts',
+      selectedPhotoRecords.length === 0 && 'at least one selected photo',
+      selectedPhotosMissingCaptions.length > 0 &&
+        `useful captions for ${selectedPhotosMissingCaptions.length} selected photo${selectedPhotosMissingCaptions.length === 1 ? '' : 's'}`,
+    ].filter(Boolean)
+  }, [
+    targetType,
+    projectTitle,
+    sourcePacketId,
+    stephenObservation,
+    verifiedFactList,
+    selectedPhotoRecords,
+    selectedPhotosMissingCaptions,
+  ])
+  const reviewEvidenceReady = targetType === 'blog_post' && reviewEvidenceMissing.length === 0
 
   const loadAlbums = async () => {
     setLoadingAlbums(true)
@@ -231,7 +297,16 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
       return
     }
 
-    const promptText = toTrimmedString(data?.system_prompt) || DEFAULT_BLOG_SYSTEM_PROMPT
+    const storedPrompt = toTrimmedString(data?.system_prompt)
+    if (containsLegacyBlogFormulaPrompt(storedPrompt)) {
+      setSystemPrompt(DEFAULT_BLOG_SYSTEM_PROMPT)
+      setSavedSystemPrompt(storedPrompt)
+      setPromptMessage('The legacy formula prompt was disabled. Save the evidence-based prompt to replace it.')
+      setLoadingPrompt(false)
+      return
+    }
+
+    const promptText = storedPrompt || DEFAULT_BLOG_SYSTEM_PROMPT
     setSystemPrompt(promptText)
     setSavedSystemPrompt(promptText)
     setLoadingPrompt(false)
@@ -280,6 +355,10 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     const promptText = toTrimmedString(systemPrompt)
     if (!promptText) {
       setPromptMessage('System prompt cannot be empty.')
+      return
+    }
+    if (containsLegacyBlogFormulaPrompt(promptText)) {
+      setPromptMessage('Remove fixed word counts, exact-match search phrases, and free-estimate instructions before saving.')
       return
     }
 
@@ -451,7 +530,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
     setSelectedPhotos(new Set())
   }
 
-  const createPostFromSelection = async (status) => {
+  const createPostFromSelection = async (status, requestedSeoStatus = 'needs_facts') => {
     if (!accessToken) {
       setMessage('Missing admin session token. Please sign out and back in.')
       return
@@ -468,6 +547,28 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
       return
     }
 
+    if (targetType === 'blog_post' && containsLegacyBlogFormulaPrompt(promptText)) {
+      setMessage('The blog prompt still contains the retired formula instructions. Reset or save the evidence-based prompt first.')
+      return
+    }
+
+    if (targetType === 'blog_post' && requestedSeoStatus === 'review' && !reviewEvidenceReady) {
+      setMessage(`Review draft still needs: ${reviewEvidenceMissing.join(', ')}.`)
+      return
+    }
+
+    const sourcePacketPrompt =
+      targetType === 'blog_post'
+        ? JSON.stringify({
+          schema: BLOG_SOURCE_PACKET_SCHEMA,
+          requestedSeoStatus,
+          sourcePacketId: toTrimmedString(sourcePacketId),
+          stephenObservation: toTrimmedString(stephenObservation),
+          uniqueFacts: verifiedFactList,
+          projectContext: toTrimmedString(projectContext),
+        })
+        : null
+
     setGenerating(true)
 
     try {
@@ -478,10 +579,12 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          status,
+          status: targetType === 'blog_post' ? 'draft' : status,
           targetType,
           jobCategory: targetType === 'job_listing' ? jobCategory : null,
           photoIds: Array.from(selectedPhotos),
+          title: targetType === 'blog_post' ? toTrimmedString(projectTitle) || null : null,
+          prompt: sourcePacketPrompt,
           systemPrompt: targetType === 'blog_post' ? promptText : null,
         }),
       })
@@ -497,6 +600,13 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
           `Generation queued. Job ${payload?.job?.id || ''} will continue in the background even if you leave this page.`
       )
       setSelectedPhotos(new Set())
+      if (targetType === 'blog_post') {
+        setProjectTitle('')
+        setSourcePacketId('')
+        setStephenObservation('')
+        setVerifiedFacts('')
+        setProjectContext('')
+      }
       await loadRecentJobs()
     } catch (error) {
       setMessage(error.message || 'Unable to queue post generation.')
@@ -564,7 +674,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
       <div>
         <h3 className="font-semibold text-stone-900">Photo Studio</h3>
         <p className="text-sm text-stone-600 mt-1">
-          Sync iCloud album photos into your blog library, then select images to auto-build posts.
+          Sync iCloud album photos into your blog library, then select images to build evidence-backed drafts.
         </p>
       </div>
 
@@ -633,7 +743,7 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
               className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-lg hover:bg-black transition-colors disabled:opacity-50"
             >
               <WandSparkles className="size-4" />
-              Sync + Auto Post
+              Sync + Auto Draft
             </button>
           </div>
 
@@ -733,6 +843,78 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
             )}
           </div>
 
+          {targetType === 'blog_post' && (
+            <div className="mb-4 space-y-3 rounded-lg border border-stone-200 bg-white p-3">
+              <div>
+                <h4 className="text-sm font-semibold text-stone-900">Draft evidence packet</h4>
+                <p className="mt-1 text-xs text-stone-500">
+                  Generation never grants SEO approval. A review draft needs a real job record,
+                  Stephen's field note, three verified facts, and a useful caption on every selected photo.
+                </p>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1 block text-xs font-medium text-stone-600">Job-specific title</label>
+                  <input
+                    value={projectTitle}
+                    onChange={(event) => setProjectTitle(event.target.value)}
+                    className="w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                    placeholder="Burnet shop foundation - pre-pour setup"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs font-medium text-stone-600">Job / source packet ID</label>
+                  <input
+                    value={sourcePacketId}
+                    onChange={(event) => setSourcePacketId(event.target.value)}
+                    className="w-full rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                    placeholder="Internal job, folder, invoice, or pour-ticket reference"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1 block text-xs font-medium text-stone-600">Stephen's observation or decision</label>
+                <textarea
+                  value={stephenObservation}
+                  onChange={(event) => setStephenObservation(event.target.value)}
+                  className="w-full resize-y rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                  rows={3}
+                  placeholder="Record Stephen's actual field observation. Do not infer it from the photos."
+                />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-xs font-medium text-stone-600">Verified facts, one per line</label>
+                <textarea
+                  value={verifiedFacts}
+                  onChange={(event) => setVerifiedFacts(event.target.value)}
+                  className="w-full resize-y rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                  rows={4}
+                  placeholder={'Project date\nMeasured dimensions\nTicketed concrete quantity'}
+                />
+              </div>
+
+              <div>
+                <label className="mb-1 block text-xs font-medium text-stone-600">Additional verified context (optional)</label>
+                <textarea
+                  value={projectContext}
+                  onChange={(event) => setProjectContext(event.target.value)}
+                  className="w-full resize-y rounded-lg border border-stone-200 bg-white px-3 py-2 text-sm"
+                  rows={3}
+                  placeholder="Scope boundary, access issue, drainage decision, timeline, or other record-backed context"
+                />
+              </div>
+
+              <div className={`rounded-lg border px-3 py-2 text-xs ${reviewEvidenceReady ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-amber-200 bg-amber-50 text-amber-900'}`}>
+                {reviewEvidenceReady
+                  ? 'Ready to queue as a review draft. Final SEO approval still happens in the Blog editor after the full checklist.'
+                  : `Review draft still needs: ${reviewEvidenceMissing.join(', ') || 'select photos and add evidence'}. You can save a needs-facts draft now.`}
+              </div>
+            </div>
+          )}
+
           <div className="flex flex-wrap items-center gap-2">
             {targetType === 'job_listing' ? (
               <button
@@ -748,20 +930,20 @@ export function BlogPhotoStudio({ accessToken, onPostCreated }) {
               <>
                 <button
                   type="button"
-                  onClick={() => createPostFromSelection('draft')}
+                  onClick={() => createPostFromSelection('draft', 'needs_facts')}
                   disabled={selectedPhotos.size === 0 || generating}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-accent-500 text-white rounded-lg hover:bg-accent-600 transition-colors disabled:opacity-50"
                 >
                   <WandSparkles className="size-4" />
-                  Queue Draft Blog from Selected
+                  Queue Needs-Facts Draft
                 </button>
                 <button
                   type="button"
-                  onClick={() => createPostFromSelection('published')}
-                  disabled={selectedPhotos.size === 0 || generating}
+                  onClick={() => createPostFromSelection('draft', 'review')}
+                  disabled={!reviewEvidenceReady || generating}
                   className="inline-flex items-center gap-2 px-4 py-2 bg-stone-900 text-white rounded-lg hover:bg-black transition-colors disabled:opacity-50"
                 >
-                  Queue Publish Blog from Selected
+                  Queue Review Draft
                 </button>
               </>
             )}

@@ -45,8 +45,7 @@ const baseProjects = () => [
     alt: 'Stamped concrete driveway with ashlar slate pattern and charcoal accents in Central Texas',
     stats: [
       { label: 'Pattern', value: 'Ashlar slate' },
-      { label: 'Mix', value: '4,000 PSI' },
-      { label: 'Finish', value: 'Stamped + sealed' },
+      { label: 'Gallery scope', value: 'Regional example' },
     ],
   },
   {
@@ -57,7 +56,7 @@ const baseProjects = () => [
     stats: [
       { label: 'Finish', value: 'Exposed aggregate' },
       { label: 'Border', value: 'Smooth trowel' },
-      { label: 'Traction', value: 'Barefoot-friendly' },
+      { label: 'Gallery scope', value: 'Regional example' },
     ],
   },
   {
@@ -68,12 +67,12 @@ const baseProjects = () => [
     stats: [
       { label: 'Use', value: 'Light industrial' },
       { label: 'Joints', value: 'Sawcut layout' },
-      { label: 'Mix', value: '4,000 PSI' },
+      { label: 'Gallery scope', value: 'Regional example' },
     ],
   },
 ]
 
-export const locationPages = [
+const rawLocationPages = [
   {
     slug: 'waco-tx-concrete-contractor',
     city: 'Waco',
@@ -82,7 +81,7 @@ export const locationPages = [
     heroSubtitle:
       'Driveways, patios, stamped concrete, and slab work for Waco homes and businesses. Free estimate: (254) 230-3102.',
     seoDescription:
-      'Waco concrete contractors for driveways, patios, stamped concrete, foundations, and repairs. Owner-run, 5.0 stars, 500+ local projects since 2005. Call (254) 230-3102.',
+      'Owner-run Waco concrete work for driveways, patios, stamped concrete, foundations, and repairs, with written scope and site-specific planning. Call (254) 230-3102.',
     intro:
       'We design concrete for black clay movement, summer heat, and the drainage issues common in McLennan County neighborhoods — clean prep, crisp finishing, and a written scope you can hold us to.',
     planningSections: [
@@ -798,6 +797,82 @@ export const locationPages = [
     ],
   },
 ]
+
+const proofPendingCities = new Set(['Killeen', 'Woodway', 'Robinson', 'Lorena', 'McGregor'])
+
+function proofPendingLocationPage(page) {
+  if (!proofPendingCities.has(page.city)) return page
+
+  return {
+    ...page,
+    heroSubtitle: `SLA is based near Waco and reviews ${page.city}-area concrete requests based on project scope, route, access, and schedule.`,
+    seoDescription: `${page.city}, TX concrete planning information from a Waco-area contractor. Review service scope, site questions, and how to confirm current coverage.`,
+    intro:
+      `This page explains how SLA evaluates a ${page.city} request. A source-verified ${page.city} case study has not yet been published, so regional photos on this page are not presented as local project proof.`,
+    proofStatus: 'local-case-study-pending',
+    proofNotice:
+      `Local proof status: SLA has not yet published a source-verified ${page.city} project with exact facts and photos. Confirm current travel availability and project minimums before relying on this page as a service commitment.`,
+    planningSections: [
+      {
+        title: `What SLA confirms for a ${page.city} request`,
+        paragraphs: [
+          `SLA is based near Waco. Before accepting work in ${page.city}, the team needs the address, approximate dimensions, project type, desired timing, access details, and photos to confirm whether the route and scope make sense.`,
+          'Availability, travel, and any project minimum belong in the written estimate. This page does not substitute for that confirmation.',
+        ],
+      },
+      {
+        title: 'Site facts that shape the concrete scope',
+        paragraphs: [
+          'The estimate should address existing concrete, demolition, subgrade, base, slab use, expected loads, reinforcement, joints, drainage, finish, access, cure restrictions, and cleanup.',
+          'Soil and runoff vary from lot to lot. SLA should make those decisions from the actual site rather than using city-wide assumptions as proof.',
+        ],
+      },
+      {
+        title: 'How to compare the written estimate',
+        paragraphs: [
+          'Compare what is included, excluded, or still unknown: measurements, tear-out, haul-off, base correction, concrete specification, reinforcement, finish, drainage, permits or engineering, other-trade handoffs, schedule assumptions, and change orders.',
+          'A city landing page cannot verify those project facts. The signed scope, site records, and project photos are the evidence that matters.',
+        ],
+      },
+    ],
+    highlights: [
+      {
+        title: 'Coverage confirmation',
+        description:
+          'The address, route, scope, project size, access, and current schedule are reviewed before a site visit or service commitment.',
+      },
+      {
+        title: 'Site-specific facts',
+        description:
+          'Support, loads, drainage, design inputs, finish, cure, and other-trade roles come from the actual project rather than city-wide assumptions.',
+      },
+      {
+        title: 'Local proof boundary',
+        description:
+          `Regional photos are not labeled as ${page.city} work. A local case study requires its own reviewed source packet and exact images.`,
+      },
+    ],
+    localSearchLinks: [],
+    projects: baseProjects(),
+    faq: [
+      {
+        question: `Does SLA currently take projects in ${page.city}?`,
+        answer: `SLA reviews ${page.city}-area requests case by case. Send the address, rough dimensions, photos, and timing so the team can confirm the current route, scope, and any minimum before scheduling a visit.`,
+      },
+      {
+        question: `Are the regional gallery photos from ${page.city}?`,
+        answer: `Not necessarily. They are labeled as Central Texas examples and are not used as proof of a ${page.city} job. A local case study will be added only after its source record and exact photos are reviewed.`,
+      },
+      {
+        question: 'What should a concrete estimate state?',
+        answer:
+          'It should state measurements, demolition, base, thickness or design source, reinforcement, finish, drainage, access, cleanup, cure restrictions, exclusions, and any work assigned to another trade.',
+      },
+    ],
+  }
+}
+
+export const locationPages = rawLocationPages.map(proofPendingLocationPage)
 
 export const locationLinks = locationPages.map((page) => ({
   slug: page.slug,

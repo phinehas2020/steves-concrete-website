@@ -3,33 +3,28 @@ import { getCanonicalServicePath } from './servicePages.js'
 export const guidePages = [
   {
     slug: 'concrete-driveway-cost-waco-tx',
-    title: 'Concrete Driveway Cost in Waco, TX',
-    heroTitle: 'Concrete Driveway Cost in Waco, TX',
+    title: 'Concrete Driveway Cost Factors in Waco, TX',
+    heroTitle: 'What Changes a Concrete Driveway Estimate in Waco?',
     heroSubtitle:
       'A clear, local guide to driveway pricing, options, and what actually drives your estimate.',
-    seoTitle: 'Concrete Driveway Cost Waco TX | SLA Concrete Works LLC',
+    seoTitle: 'Waco Concrete Driveway Cost Factors | SLA Concrete Works',
     seoDescription:
-      'Concrete driveway cost in Waco, TX. Typical per-square-foot ranges, what affects pricing, and how to plan your estimate. Updated February 2026.',
+      'Plan a Waco concrete driveway estimate by comparing demolition, base, thickness, reinforcement, access, drainage, and finish. Reviewed August 2026.',
     summary:
-      'Driveway pricing depends on square footage, base prep, reinforcement, and finish. In Waco, standard concrete commonly runs $6-$12 per square foot, while stamped or decorative finishes run $12-$18 per square foot (ranges updated February 2026). A typical two-car driveway (around 600 sq ft) often lands between $3,600 and $10,800 depending on site conditions.',
+      'Driveway pricing depends on measured area, demolition, base correction, thickness, reinforcement, access, drainage, and finish. SLA is reviewing recent estimate records before publishing a local price range; a site-specific written estimate is the current source of truth.',
+    lastReviewed: '2026-08-07',
+    reviewedBy: 'SLA Concrete Works editorial review',
+    evidenceNotice:
+      'The earlier generic per-square-foot range was removed because it was not tied to three current SLA estimates. Exact planning ranges will return after recent scopes are anonymized and reviewed.',
+    notQuote:
+      'This guide explains scope and cost drivers. It is not a quote, and no price applies until the site, measurements, access, and included work are confirmed in writing.',
     quickStats: [
-      { label: 'Standard range', value: '$6-$12 / sq ft' },
-      { label: 'Stamped range', value: '$12-$18 / sq ft' },
-      { label: 'Typical size', value: '600 sq ft' },
-      { label: 'Vehicle access', value: '7 days' },
+      { label: 'Start with', value: 'Measured area' },
+      { label: 'Largest variables', value: 'Removal + base' },
+      { label: 'Compare bids by', value: 'Included scope' },
+      { label: 'Current price source', value: 'Written estimate' },
     ],
-    costRanges: [
-      {
-        label: 'Standard broom finish',
-        range: '$6-$12 / sq ft',
-        detail: 'Most common option for residential driveways in Waco.',
-      },
-      {
-        label: 'Stamped or decorative',
-        range: '$12-$18 / sq ft',
-        detail: 'Patterned finish with color blends and sealing.',
-      },
-    ],
+    costRanges: [],
     factors: [
       'Square footage and slab thickness',
       'Base prep, grading, and drainage corrections',
@@ -80,7 +75,7 @@ export const guidePages = [
       {
         question: 'How thick should a driveway be in Waco?',
         answer:
-          'Most residential driveways are poured 4-5 inches thick with reinforcement based on soil and vehicle load.',
+          'Thickness and reinforcement should follow the actual vehicle loads, support conditions, edge details, plans, and written project scope rather than one site-wide rule.',
       },
       {
         question: 'Can you pour over an old driveway?',
@@ -90,39 +85,34 @@ export const guidePages = [
       {
         question: 'When can I drive on new concrete?',
         answer:
-          'Plan for 7 days before vehicle traffic and 28 days for full cure strength.',
+          'Vehicle-opening guidance should come from the project concrete, thickness, weather, cure method, loads, and any designer or supplier requirements stated at handoff.',
       },
     ],
   },
   {
     slug: 'stamped-concrete-cost-waco-tx',
-    title: 'Stamped Concrete Pricing in Waco, TX',
-    heroTitle: 'Stamped Concrete Pricing in Waco, TX',
+    title: 'Stamped Concrete Cost Factors in Waco, TX',
+    heroTitle: 'What Changes a Stamped Concrete Estimate in Waco?',
     heroSubtitle:
       'Patterns, color blends, and what drives the price of stamped concrete in Central Texas.',
-    seoTitle: 'Stamped Concrete Cost Waco TX | SLA Concrete Works LLC',
+    seoTitle: 'Waco Stamped Concrete Cost Factors | SLA Concrete Works',
     seoDescription:
-      'Stamped concrete cost in Waco, TX. Pricing factors, pattern options, sealing guidance, and local considerations. Updated February 2026.',
+      'Compare the pattern, color, border, access, preparation, and sealer choices that affect a Waco stamped concrete estimate. Reviewed August 2026.',
     summary:
-      'Stamped concrete is priced higher than standard broom finish because of pattern work, coloring, and sealing. In Waco, typical stamped ranges run $12-$18 per square foot (updated February 2026). The final total depends on pattern complexity, borders, color blends, and site prep.',
+      'Stamped concrete adds pattern timing, coloring, borders, release, washing, and sealing to the base concrete scope. SLA is reviewing recent job records before publishing a local price range; the written scope and estimate remain the current source of truth.',
+    lastReviewed: '2026-08-07',
+    reviewedBy: 'SLA Concrete Works editorial review',
+    evidenceNotice:
+      'The earlier generic per-square-foot range was removed because it was not connected to named recent SLA scopes, product choices, and access conditions.',
+    notQuote:
+      'This guide is a planning checklist, not a quote. Pattern, color system, slab preparation, access, and sealing must be confirmed for the actual project.',
     quickStats: [
-      { label: 'Typical range', value: '$12-$18 / sq ft' },
-      { label: 'Sealing cadence', value: 'Every 2-3 years' },
-      { label: 'Popular patterns', value: 'Ashlar, flagstone' },
-      { label: 'Best use', value: 'Patios + walkways' },
+      { label: 'Start with', value: 'Plain concrete scope' },
+      { label: 'Added variables', value: 'Pattern + color' },
+      { label: 'Maintenance', value: 'Product-specific' },
+      { label: 'Current price source', value: 'Written estimate' },
     ],
-    costRanges: [
-      {
-        label: 'Single pattern + color',
-        range: '$12-$15 / sq ft',
-        detail: 'Simpler layouts with minimal border work.',
-      },
-      {
-        label: 'Multi-color + borders',
-        range: '$15-$18 / sq ft',
-        detail: 'Higher detail, color blends, and custom edges.',
-      },
-    ],
+    costRanges: [],
     factors: [
       'Pattern complexity and border work',
       'Color blends, integral color, and release powder',
@@ -152,7 +142,7 @@ export const guidePages = [
       'Choose a base color and accent blend.',
       'Decide where stamped concrete will be used.',
       'Confirm drainage and slope needs.',
-      'Plan for resealing every 2-3 years.',
+      'Ask for the selected sealer product and its maintenance instructions.',
     ],
     relatedServices: [
       {
@@ -174,7 +164,7 @@ export const guidePages = [
       {
         question: 'How long does stamped concrete last?',
         answer:
-          'With good base prep and resealing, stamped concrete lasts decades.',
+          'Service life depends on the slab, traffic, exposure, coating products, and maintenance. The estimate should identify the selected system rather than promise a universal lifespan.',
       },
       {
         question: 'Can you match existing stamped concrete?',
@@ -185,33 +175,28 @@ export const guidePages = [
   },
   {
     slug: 'concrete-patio-cost-waco-tx',
-    title: 'Concrete Patio Cost in Waco, TX',
-    heroTitle: 'Concrete Patio Cost in Waco, TX',
+    title: 'Concrete Patio Cost Factors in Waco, TX',
+    heroTitle: 'What Changes a Concrete Patio Estimate in Waco?',
     heroSubtitle:
       'Pricing guidance for patios, finish upgrades, and layout choices that affect your estimate.',
-    seoTitle: 'Concrete Patio Cost Waco TX | SLA Concrete Works LLC',
+    seoTitle: 'Waco Concrete Patio Cost Factors | SLA Concrete Works',
     seoDescription:
-      'Concrete patio cost in Waco, TX. Pricing factors, finish options, and preparation tips for accurate estimates. Updated February 2026.',
+      'Plan a Waco concrete patio estimate around access, grade, drainage, door elevations, finish, cover, and outdoor-kitchen coordination. Reviewed August 2026.',
     summary:
-      'Patio pricing in Waco varies based on size, finish, and site access. Standard concrete often falls in the $6-$12 per square foot range, while stamped or decorative finishes typically run $12-$18 per square foot (updated February 2026).',
+      'Patio pricing depends on measured area, access, demolition, grade, drainage, door elevations, finish, and coordination with covers or outdoor kitchens. SLA is reviewing recent estimate records before publishing a local price range.',
+    lastReviewed: '2026-08-07',
+    reviewedBy: 'SLA Concrete Works editorial review',
+    evidenceNotice:
+      'The earlier generic price range was removed because it was not supported by three recent, anonymized SLA patio scopes with inclusions and exclusions.',
+    notQuote:
+      'This guide helps define the scope. It is not a quote; the final price depends on the measured site and the work included in the written estimate.',
     quickStats: [
-      { label: 'Standard range', value: '$6-$12 / sq ft' },
-      { label: 'Decorative range', value: '$12-$18 / sq ft' },
-      { label: 'Outdoor use', value: 'Heat + sun' },
-      { label: 'Best upgrade', value: 'Stamped border' },
+      { label: 'Start with', value: 'Doors + drainage' },
+      { label: 'Largest variables', value: 'Access + finish' },
+      { label: 'Coordinate', value: 'Cover + kitchen' },
+      { label: 'Current price source', value: 'Written estimate' },
     ],
-    costRanges: [
-      {
-        label: 'Standard patio slab',
-        range: '$6-$12 / sq ft',
-        detail: 'Broom finish or light texture for traction.',
-      },
-      {
-        label: 'Stamped patio',
-        range: '$12-$18 / sq ft',
-        detail: 'Patterns, color blends, and sealed protection.',
-      },
-    ],
+    costRanges: [],
     factors: [
       'Patio size and shape complexity',
       'Finish selection and color blends',
@@ -252,7 +237,7 @@ export const guidePages = [
       {
         question: 'How long before I can use a new patio?',
         answer:
-          'Light foot traffic is usually fine after 24-48 hours. Heavy furniture should wait several days.',
+          'Foot traffic, furniture, and other use should wait for the project-specific opening guidance based on the concrete, weather, cure method, finish, loads, and selected product requirements.',
       },
       {
         question: 'Do patios need control joints?',
@@ -289,6 +274,22 @@ export const guidePages = [
       'General planning answers for homeowners comparing concrete slab, driveway, patio, and pad projects.',
     summary:
       'A small backyard slab may be simple, but concrete work can need extra review when it touches a curb, driveway approach, sidewalk, drainage path, right-of-way, commercial property, utility area, or structural foundation. The safest move is to check the project scope before demolition or forming begins.',
+    lastReviewed: '2026-08-07',
+    reviewedBy: 'SLA Concrete Works editorial review',
+    evidenceNotice:
+      'City of Waco guidance distinguishes private-property flatwork from concrete in the public right-of-way. Project details and rules can change, so confirm the current requirement with the City before work begins.',
+    notQuote:
+      'This page is a planning guide, not a permit determination, engineering review, or legal opinion.',
+    sources: [
+      {
+        label: 'City of Waco: Do I Need a Permit?',
+        href: 'https://www.waco-texas.com/Departments/Development-Services/Inspection-Services/Residential-Construction-Permits/Do-I-Need-a-Permit?lang_update=639186725957951487',
+      },
+      {
+        label: 'City of Waco: Working within the Right-of-Way',
+        href: 'https://www.waco-texas.com/Departments/Engineering/Working-within-the-Right-of-Way',
+      },
+    ],
     quickStats: [
       { label: 'Highest-risk areas', value: 'Curbs, aprons, sidewalks' },
       { label: 'Drainage impact', value: 'Always review' },
@@ -326,7 +327,7 @@ export const guidePages = [
       'Take photos from the street, from each corner of the work area, and from any low spots where water collects.',
       'Note whether the project touches a curb, sidewalk, driveway approach, drainage path, fence, utility area, or structure.',
       'Check HOA, landlord, builder, or property-manager requirements before scheduling the pour.',
-      'Ask the estimator to put in writing whether any part of the job needs a permit before work begins.',
+      'Confirm permit or review requirements with the appropriate city, county, right-of-way, HOA, landlord, or project authority before work begins.',
     ],
     relatedServices: [
       {
@@ -366,7 +367,7 @@ export const guidePages = [
       {
         question: 'Will SLA Concrete Works tell me if my project needs a permit?',
         answer:
-          'Yes. During the estimate we check the things that usually trigger one — right-of-way, drainage, demolition, structural support, and nearby utilities — and tell you plainly whether your job needs a permit before work starts.',
+          'SLA can flag scope questions that may need review, but the appropriate city, county, right-of-way, HOA, landlord, designer, or project authority determines the requirement. Confirm it with that authority before work starts.',
       },
       {
         question: 'Should I pour concrete before checking permit requirements?',

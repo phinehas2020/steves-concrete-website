@@ -1,4 +1,3 @@
-/* global process, Buffer */
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.SUPABASE_URL
@@ -18,6 +17,17 @@ const ALLOWED_IMAGE_MIME_TYPES = new Set([
   'image/gif',
 ])
 const VALID_STATUSES = new Set(['draft', 'published'])
+
+export function applyBlogContentReviewGate(payload = {}) {
+  return {
+    ...payload,
+    status: 'draft',
+    seo_status: 'needs_facts',
+    published_at: null,
+    reviewed_by: null,
+    reviewed_at: null,
+  }
+}
 
 function normalizeBody(body) {
   if (!body) return {}
@@ -616,7 +626,7 @@ export default async function handler(req, res) {
   const rawContent = toTrimmedString(body.content || body.text)
   const providedSlug = toTrimmedString(body.slug)
   const slug = providedSlug || slugify(title)
-  const status = toTrimmedString(body.status || 'published').toLowerCase()
+  const requestedStatus = toTrimmedString(body.status).toLowerCase()
   const excerpt = toTrimmedString(body.excerpt)
   const upsertEnabled = toBoolean(body.upsert, true)
   const appendImagesToContent = toBoolean(body.insertImagesInContent, false)
@@ -653,7 +663,7 @@ export default async function handler(req, res) {
     return
   }
 
-  if (!VALID_STATUSES.has(status)) {
+  if (requestedStatus && !VALID_STATUSES.has(requestedStatus)) {
     res.status(400).json({ error: 'Invalid status. Use "draft" or "published".' })
     return
   }
@@ -715,9 +725,9 @@ export default async function handler(req, res) {
       ? buildContentWithImages(rawContent, processedImages, title)
       : rawContent
 
-    const { data: existingPost, error: existingError } = await supabase
+    const { error: existingError } = await supabase
       .from('blog_posts')
-      .select('id, published_at')
+      .select('id')
       .eq('slug', slug)
       .maybeSingle()
 
@@ -726,30 +736,22 @@ export default async function handler(req, res) {
       return
     }
 
-    const publishedAtInput = parsePublishedAt(body.publishedAt || body.published_at)
-    const publishedAt =
-      status === 'published'
-        ? publishedAtInput || existingPost?.published_at || new Date().toISOString()
-        : null
-
-    const payload = {
+    const payload = applyBlogContentReviewGate({
       title,
       slug,
       excerpt: excerpt || buildExcerpt(content),
       content,
-      status,
       cover_image_url: coverImageUrl || null,
       author_email: authorEmail,
-      published_at: publishedAt,
       updated_at: new Date().toISOString(),
-    }
+    })
 
     const query = upsertEnabled
       ? supabase.from('blog_posts').upsert(payload, { onConflict: 'slug' })
       : supabase.from('blog_posts').insert(payload)
 
     const { data: savedPost, error: saveError } = await query
-      .select('id, title, slug, status, cover_image_url, published_at, updated_at')
+      .select('id, title, slug, status, seo_status, cover_image_url, published_at, updated_at')
       .single()
 
     if (saveError) {

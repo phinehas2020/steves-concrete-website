@@ -257,7 +257,7 @@ export function AdminJobs() {
         const filePath = `jobs/${fileName}`
 
         // Upload file to Supabase Storage
-        const { data: uploadData, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from('jobs')
           .upload(filePath, file, {
             cacheControl: '3600',
@@ -333,7 +333,7 @@ export function AdminJobs() {
     setSelectedImages(new Set())
   }
 
-  const deleteSelectedImages = async (jobId) => {
+  const deleteSelectedImages = async () => {
     if (selectedImages.size === 0) return
 
     const count = selectedImages.size
@@ -360,7 +360,7 @@ export function AdminJobs() {
     }
   }
 
-  const deleteImage = async (imageId, jobId) => {
+  const deleteImage = async (imageId) => {
     if (!confirm('Are you sure you want to delete this image?')) {
       return
     }
@@ -571,7 +571,7 @@ export function AdminJobs() {
                     <>
                       <button
                         type="button"
-                        onClick={() => deleteSelectedImages(editingId)}
+                        onClick={deleteSelectedImages}
                         disabled={uploadingImages}
                         className="inline-flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
@@ -700,7 +700,7 @@ export function AdminJobs() {
                               type="button"
                               onClick={(e) => {
                                 e.stopPropagation()
-                                deleteImage(image.id, editingId)
+                                deleteImage(image.id)
                               }}
                               className="p-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
                               title="Delete"

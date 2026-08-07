@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion as Motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
@@ -61,23 +61,19 @@ export function Gallery() {
         return buildCategoryOptions(jobs)
     }, [jobs])
 
-    useEffect(() => {
-        if (activeCategory !== 'All' && !categoryOptions.includes(activeCategory)) {
-            setActiveCategory('All')
-        }
-    }, [activeCategory, categoryOptions])
+    const effectiveCategory = categoryOptions.includes(activeCategory) ? activeCategory : 'All'
 
     const filteredProjects =
-        activeCategory === 'All'
+        effectiveCategory === 'All'
             ? jobs
-            : jobs.filter((job) => job.category === activeCategory)
+            : jobs.filter((job) => job.category === effectiveCategory)
 
     return (
         <section id="gallery" className="section-padding bg-white texture-concrete relative">
             <div className="container-main relative z-10">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-                    <motion.div
+                    <Motion.div
                         className="max-w-2xl"
                         variants={fadeInUp}
                         initial="hidden"
@@ -101,10 +97,10 @@ export function Gallery() {
                             See All Projects
                             <ArrowUpRight className="size-4" />
                         </Link>
-                    </motion.div>
+                    </Motion.div>
 
                     {/* Filter Tabs - Refined design */}
-                    <motion.div
+                    <Motion.div
                         className="flex flex-wrap gap-2"
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -116,7 +112,7 @@ export function Gallery() {
                                 onClick={() => setActiveCategory(category)}
                                 className={cn(
                                     'px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 border',
-                                    activeCategory === category
+                                    effectiveCategory === category
                                         ? 'bg-stone-900 text-white border-stone-900 shadow-lg shadow-stone-900/20'
                                         : 'bg-white text-stone-500 border-stone-200 hover:border-stone-400 hover:text-stone-900'
                                 )}
@@ -124,7 +120,7 @@ export function Gallery() {
                                 {category}
                             </button>
                         ))}
-                    </motion.div>
+                    </Motion.div>
                 </div>
 
                 {/* Projects Grid */}
@@ -143,13 +139,13 @@ export function Gallery() {
                         No featured projects yet. Check back soon!
                     </div>
                 ) : (
-                    <motion.div
+                    <Motion.div
                         className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
                         layout
                     >
                         <AnimatePresence mode="popLayout">
                             {filteredProjects.map((job, index) => (
-                                <motion.article
+                                <Motion.article
                                     key={job.id}
                                     className="group relative rounded-2xl overflow-hidden bg-stone-100 cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
                                     style={{ position: 'relative' }}
@@ -206,14 +202,14 @@ export function Gallery() {
                                             </div>
                                         </div>
                                     </div>
-                                </motion.article>
+                                </Motion.article>
                             ))}
                         </AnimatePresence>
-                    </motion.div>
+                    </Motion.div>
                 )}
 
                 {/* CTA Box - Modern Industrial Design */}
-                <motion.div
+                <Motion.div
                     className="mt-20 p-8 sm:p-12 bg-stone-950 rounded-[2rem] relative overflow-hidden group"
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -237,7 +233,7 @@ export function Gallery() {
                             Start Your Estimate
                         </a>
                     </div>
-                </motion.div>
+                </Motion.div>
             </div>
         </section>
     )

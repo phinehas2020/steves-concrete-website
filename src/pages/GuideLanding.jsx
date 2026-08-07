@@ -7,6 +7,7 @@ import {
   useSeo,
   SITE_URL,
   DEFAULT_IMAGE,
+  ORGANIZATION_ID,
   buildBreadcrumbs,
   buildFaqPage,
   buildJsonLdGraph,
@@ -16,6 +17,11 @@ import { guidePages } from '../data/guides'
 export function GuideLanding({ page: pageProp, slug: slugProp }) {
   const page = pageProp || guidePages.find((p) => p.slug === slugProp)
   if (!page) return null
+
+  return <GuideLandingPage page={page} />
+}
+
+function GuideLandingPage({ page }) {
   const {
     slug,
     title,
@@ -40,6 +46,11 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
     localTitle = 'Why Waco projects price differently',
     localIntro = 'Central Texas soil and climate influence how concrete is planned and built.',
     faqIntro = 'Quick answers to common pricing questions.',
+    lastReviewed,
+    reviewedBy,
+    evidenceNotice,
+    notQuote,
+    sources = [],
   } = page
 
   const breadcrumbsJsonLd = buildBreadcrumbs([
@@ -48,6 +59,24 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
     { name: title, url: `${SITE_URL}/guides/${slug}` },
   ])
   const faqJsonLd = buildFaqPage(faq)
+  const articleJsonLd = {
+    '@type': 'Article',
+    headline: title,
+    description: seoDescription || summary,
+    dateModified: lastReviewed || undefined,
+    author: {
+      '@type': 'Organization',
+      '@id': ORGANIZATION_ID,
+      name: 'SLA Concrete Works LLC',
+    },
+    publisher: {
+      '@type': 'Organization',
+      '@id': ORGANIZATION_ID,
+      name: 'SLA Concrete Works LLC',
+    },
+    citation: sources.map((source) => source.href),
+    mainEntityOfPage: `${SITE_URL}/guides/${slug}`,
+  }
 
   useSeo({
     title: seoTitle || `${title} | SLA Concrete Works LLC`,
@@ -57,7 +86,8 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
     image: DEFAULT_IMAGE,
     imageAlt: `${title} guide`,
     type: 'article',
-    jsonLd: buildJsonLdGraph(faqJsonLd, breadcrumbsJsonLd),
+    modifiedTime: lastReviewed,
+    jsonLd: buildJsonLdGraph(articleJsonLd, faqJsonLd, breadcrumbsJsonLd),
   })
 
   return (
@@ -77,6 +107,13 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
                 <p className="mt-5 text-lg text-stone-600 text-pretty max-w-2xl">
                   {heroSubtitle}
                 </p>
+                {(lastReviewed || reviewedBy) && (
+                  <p className="mt-4 text-sm text-stone-500">
+                    {lastReviewed && `Last reviewed ${new Date(`${lastReviewed}T12:00:00`).toLocaleDateString()}`}
+                    {lastReviewed && reviewedBy && ' · '}
+                    {reviewedBy && `Review: ${reviewedBy}`}
+                  </p>
+                )}
                 <div className="mt-8 flex flex-col sm:flex-row gap-4">
                   <a
                     href="#pricing"
@@ -108,6 +145,33 @@ export function GuideLanding({ page: pageProp, slug: slugProp }) {
             </div>
           </div>
         </section>
+
+        {(evidenceNotice || notQuote || sources.length > 0) && (
+          <section className="border-y border-stone-200 bg-stone-50">
+            <div className="container-main py-8">
+              <div className="max-w-3xl">
+                <p className="text-xs font-semibold uppercase tracking-wide text-accent-600 mb-2">
+                  Evidence and limits
+                </p>
+                {evidenceNotice && <p className="text-stone-700 text-pretty">{evidenceNotice}</p>}
+                {notQuote && <p className="mt-2 text-sm text-stone-600 text-pretty">{notQuote}</p>}
+                {sources.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                    {sources.map((source) => (
+                      <a
+                        key={source.href}
+                        href={source.href}
+                        className="font-semibold text-accent-600 hover:text-accent-700"
+                      >
+                        {source.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
 
         {costRanges.length > 0 && (
           <section className="section-padding bg-stone-50">

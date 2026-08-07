@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 
+function queryAdmins() {
+  return supabase
+    .from('admin_users')
+    .select('*')
+    .order('created_at', { ascending: false })
+}
+
 export function AdminUsers({ canManage }) {
   const [admins, setAdmins] = useState([])
   const [email, setEmail] = useState('')
@@ -8,10 +15,7 @@ export function AdminUsers({ canManage }) {
   const [message, setMessage] = useState('')
 
   const fetchAdmins = async () => {
-    const { data, error } = await supabase
-      .from('admin_users')
-      .select('*')
-      .order('created_at', { ascending: false })
+    const { data, error } = await queryAdmins()
 
     if (!error) {
       setAdmins(data || [])
@@ -19,7 +23,17 @@ export function AdminUsers({ canManage }) {
   }
 
   useEffect(() => {
-    fetchAdmins()
+    let cancelled = false
+
+    void queryAdmins().then(({ data, error }) => {
+      if (!cancelled && !error) {
+        setAdmins(data || [])
+      }
+    })
+
+    return () => {
+      cancelled = true
+    }
   }, [])
 
   const addAdmin = async (event) => {

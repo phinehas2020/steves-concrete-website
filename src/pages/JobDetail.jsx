@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom'
-import { motion } from 'motion/react'
+import { motion as Motion } from 'motion/react'
 import { ArrowLeft, MapPin, Calendar } from 'lucide-react'
 import { handleImageError } from '../lib/utils'
 import { fetchJobs } from '../data/jobs'
@@ -48,7 +48,8 @@ export function JobDetail() {
   const seo = useMemo(() => {
     const notFound = !loading && (!job || error)
     const resolvedSlug = job?.slug || slug || ''
-    const isIndexableProject = clientProjects.some((project) => project.slug === resolvedSlug)
+    const staticProject = clientProjects.find((project) => project.slug === resolvedSlug)
+    const isIndexableProject = Boolean(staticProject)
     const breadcrumbsJsonLd = buildBreadcrumbs([
       { name: 'Home', url: `${SITE_URL}/` },
       { name: 'Project Gallery', url: `${SITE_URL}/jobs` },
@@ -89,7 +90,7 @@ export function JobDetail() {
       '@id': `${SITE_URL}/jobs/${resolvedSlug}#project`,
       name: job.title,
       description,
-      dateCreated: job.date,
+      dateCreated: job.proofStatus ? undefined : job.date,
       image: (job.images || []).map((item) =>
         item.startsWith('/') ? `${SITE_URL}${item}` : item
       ),
@@ -165,6 +166,11 @@ export function JobDetail() {
   }
   
   const currentImage = getImageSrc(job.images[currentImageIndex] || job.images[0])
+  const currentImageCaption =
+    job.imageCaptions?.[currentImageIndex]?.caption ||
+    (job.proofStatus
+      ? 'Field caption pending source review; no technical detail is inferred from this image.'
+      : job.title)
 
   // Get related jobs (same category, exclude current)
   const relatedJobs = jobs
@@ -179,7 +185,7 @@ export function JobDetail() {
         <section className="relative h-[60vh] min-h-[400px] overflow-hidden">
           <img
             src={currentImage}
-            alt={job.title}
+            alt={currentImageCaption}
             className="absolute inset-0 w-full h-full object-cover object-center"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             loading="eager"
@@ -233,7 +239,7 @@ export function JobDetail() {
           <div className="container-main">
             <div className="max-w-4xl">
               {/* Header */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -249,7 +255,7 @@ export function JobDetail() {
                   </span>
                   <span className="flex items-center gap-2 text-stone-600">
                     <Calendar className="size-4" />
-                    {job.dateFormatted}
+                    {job.proofStatus ? `Gallery record: ${job.dateFormatted}` : job.dateFormatted}
                   </span>
                 </div>
                 <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-stone-900 mb-6">
@@ -258,10 +264,10 @@ export function JobDetail() {
                 <p className="text-xl text-stone-600 leading-relaxed font-light">
                   {job.description}
                 </p>
-              </motion.div>
+              </Motion.div>
 
               {job.highlights?.length > 0 && (
-                <motion.section
+                <Motion.section
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.15 }}
@@ -276,6 +282,28 @@ export function JobDetail() {
                       </li>
                     ))}
                   </ul>
+                  {job.scopeBoundary && (
+                    <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4">
+                      <h3 className="font-semibold text-stone-900">What this project record proves</h3>
+                      <p className="mt-2 text-stone-700 leading-relaxed">{job.scopeBoundary}</p>
+                    </div>
+                  )}
+                  {job.proofNotice && (
+                    <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4">
+                      <h3 className="font-semibold text-stone-900">Project fact-check status</h3>
+                      <p className="mt-2 text-stone-700 leading-relaxed">{job.proofNotice}</p>
+                      {job.proofRequirements?.length > 0 && (
+                        <ul className="mt-4 space-y-2 text-sm text-stone-700">
+                          {job.proofRequirements.map((requirement) => (
+                            <li key={requirement} className="flex gap-3">
+                              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-amber-600" />
+                              <span>{requirement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  )}
                   {job.relatedLinks?.length > 0 && (
                     <div className="mt-6 flex flex-wrap gap-3 border-t border-stone-200 pt-6">
                       {job.relatedLinks.map((link) => (
@@ -289,12 +317,12 @@ export function JobDetail() {
                       ))}
                     </div>
                   )}
-                </motion.section>
+                </Motion.section>
               )}
 
               {/* Image Gallery */}
               {job.images.length > 1 && (
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
@@ -302,31 +330,45 @@ export function JobDetail() {
                 >
                   <h2 className="text-2xl font-bold text-stone-900 mb-6">Project Gallery</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {job.images.map((image, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
-                        className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
-                          currentImageIndex === index
-                            ? 'border-accent-500 ring-2 ring-accent-500/50'
-                            : 'border-transparent hover:border-stone-300'
-                        }`}
-                      >
-                        <img
-                          src={image}
-                          alt={`${job.title} - Image ${index + 1}`}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          onError={handleImageError}
-                        />
-                      </button>
-                    ))}
+                    {job.images.map((image, index) => {
+                      const caption =
+                        job.imageCaptions?.[index]?.caption ||
+                        (job.proofStatus
+                          ? 'Caption pending source review; do not infer project details from this image.'
+                          : `${job.title} image ${index + 1}`)
+
+                      return (
+                        <figure key={image} className="min-w-0">
+                          <button
+                            type="button"
+                            onClick={() => setCurrentImageIndex(index)}
+                            className={`relative aspect-square w-full rounded-lg overflow-hidden border-2 transition-all ${
+                              currentImageIndex === index
+                                ? 'border-accent-500 ring-2 ring-accent-500/50'
+                                : 'border-transparent hover:border-stone-300'
+                            }`}
+                            aria-label={`Show image ${index + 1}: ${caption}`}
+                          >
+                            <img
+                              src={image}
+                              alt={caption}
+                              className="w-full h-full object-cover"
+                              loading="lazy"
+                              onError={handleImageError}
+                            />
+                          </button>
+                          <figcaption className="mt-2 text-xs leading-relaxed text-stone-500">
+                            {caption}
+                          </figcaption>
+                        </figure>
+                      )
+                    })}
                   </div>
-                </motion.div>
+                </Motion.div>
               )}
 
               {/* CTA */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -344,7 +386,7 @@ export function JobDetail() {
                 >
                   Get Free Estimate
                 </a>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>

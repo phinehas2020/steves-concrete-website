@@ -8,6 +8,7 @@
     "build": "vite build && node scripts/prerender-routes.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test:api": "node --test tests/api/*.test.js",
     "test:seo": "node --test scripts/seo-contract.test.mjs",
     "perf:sweep": "node scripts/lighthouse-sweep.mjs",
     "supabase:migrate:hosted": "node scripts/migrate-supabase-project.mjs --use-vercel-source",
@@ -16,6 +17,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.50.2",
     "@vercel/analytics": "^1.6.1",
+    "@vercel/functions": "^3.8.0",
     "marked": "^12.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

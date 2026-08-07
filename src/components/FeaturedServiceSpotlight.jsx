@@ -5,30 +5,30 @@ const featuredServices = [
   {
     slug: 'concrete-resurfacing-waco-tx',
     title: 'Concrete Resurfacing',
-    tag: 'Popular Upgrade',
+    tag: 'Condition Review',
     icon: Layers,
     description:
-      'Refresh worn driveways, patios, and walkways without full replacement. Ideal when the slab is structurally sound but the surface looks tired.',
+      'Start by identifying movement, moisture, drainage, contamination, and surface failure. A named overlay or coating system is considered only after the existing slab and its limits are documented.',
     bullets: [
-      'Overlay and skim systems for faded or pitted surfaces',
-      'Decorative texture and color refresh options',
-      'Lower disruption compared with full tear-out',
+      'Repair-versus-replacement decision written down',
+      'Named preparation, product, thickness, cure, and exclusions required',
+      'Hubbard “resurfacing” record not used as system proof until verified',
     ],
-    cta: 'Explore resurfacing service',
+    cta: 'Review resurfacing limits',
   },
   {
     slug: 'sports-court-coating-waco-tx',
-    title: 'Sports Court Coating',
-    tag: 'Specialty Service',
+    title: 'Sports Court Concrete Review',
+    tag: 'Scope Review',
     icon: Trophy,
     description:
-      'Acrylic coating, crack prep, and game-line striping for pickleball, tennis, and basketball courts built for Texas heat and UV exposure.',
+      'Start with the concrete question, then assign court surfacing, regulation lines, design, equipment, and other trades in writing. SLA is not presented as a coating or striping specialist without project proof.',
     bullets: [
-      'Pickleball, tennis, and basketball court resurfacing',
-      'Traction-focused color coating systems',
-      'Precision line striping for clean play zones',
+      'Concrete-base or slab-repair scope reviewed separately',
+      'Court coating and line layout assigned to a specialist',
+      'Travel and accepted work confirmed before scheduling',
     ],
-    cta: 'Explore court coating service',
+    cta: 'Review court project scope',
   },
 ]
 
@@ -48,10 +48,10 @@ export function FeaturedServiceSpotlight() {
             Featured Services
           </p>
           <h2 className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-balance">
-            Concrete Services Clients Ask For First
+            Concrete Questions to Sort Out First
           </h2>
           <p className="mt-4 text-stone-300 text-lg text-pretty">
-            These are two of our most requested services for restoring worn concrete and resurfacing outdoor courts in Central Texas.
+            Two specialty concrete inquiries, with the limits and handoffs that matter before a quote.
           </p>
         </div>
 

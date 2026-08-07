@@ -4,7 +4,22 @@ import path from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { createClient } from '@supabase/supabase-js'
 
+import { FORMULAIC_BLOG_SLUGS } from '../src/data/indexingControls.js'
+
 const DEFAULT_BATCH_SIZE = 500
+const BLOG_PHOTO_PROMPT_KEY = 'blog_photo_post'
+const BLOG_PHOTO_PROMPT_LABEL = 'Evidence-Based Blog Photo Draft'
+const EVIDENCE_BASED_BLOG_PHOTO_PROMPT = `
+You turn verified field evidence into a concise project-note draft for SLA Concrete Works.
+Use only the supplied job/source packet, Stephen observation, verified facts, and photo captions.
+Let the amount of verified evidence determine the length. Do not target a word count.
+Write in practical, plain language. Prefer a useful field detail or decision over promotional copy.
+Do not add search phrases, calls to action, sales claims, rankings, ratings, or offers.
+Do not infer dimensions, quantities, materials, mix design, finish, location, client identity, code compliance, permits, warranty, schedule, or outcome from a photo.
+If the evidence does not support a detail, omit it. Never fill gaps with a typical concrete-work assumption.
+Do not use bullet points, hashtags, emojis, all caps, or long dashes.
+Output only one concise paragraph with no label or markdown.
+`.trim()
 
 const KNOWN_TABLES = [
   'admin_users',
@@ -88,6 +103,7 @@ const target = createClient(targetUrl, targetServiceRoleKey, { auth: { persistSe
 
 const discoveredTables = await discoverSourceTables(sourceUrl, sourceRestKey)
 const migrationTables = buildMigrationTables(discoveredTables)
+const migrationTableNames = new Set(migrationTables.map((table) => table.name))
 const RESET_ORDER = [...migrationTables].reverse()
 
 console.log(`Source project: ${sourceUrl}`)
@@ -103,6 +119,12 @@ if (!skipSchema) {
 await resetDestinationTables()
 await migratePublicTables()
 
+if (!dryRun) {
+  await verifyMigrationCounts()
+}
+
+await enforcePostCopyAuthenticityGuards()
+
 if (!skipAuth) {
   await migrateAuthUsers()
 } else {
@@ -113,10 +135,6 @@ if (!skipStorage) {
   await migrateStorageBuckets()
 } else {
   console.log('Skipping storage migration.')
-}
-
-if (!dryRun) {
-  await verifyMigrationCounts()
 }
 
 if (!skipSchema) {
@@ -177,6 +195,65 @@ async function migratePublicTables() {
         throw new Error(`Failed inserting into ${table.name}: ${error.message}`)
       }
     }
+  }
+}
+
+async function enforcePostCopyAuthenticityGuards() {
+  const protectsPrompt = migrationTableNames.has('blog_ai_prompt_settings')
+  const protectsPosts = migrationTableNames.has('blog_posts')
+
+  if (!protectsPrompt && !protectsPosts) {
+    return
+  }
+
+  console.log('')
+  console.log('Reapplying authenticity controls after source-row copy...')
+
+  if (dryRun) {
+    if (protectsPrompt) console.log('  would restore the evidence-based blog photo prompt')
+    if (protectsPosts) console.log('  would quarantine the audited blog slugs and restore their canonical')
+    return
+  }
+
+  if (protectsPrompt) {
+    const { error } = await target.from('blog_ai_prompt_settings').upsert(
+      {
+        key: BLOG_PHOTO_PROMPT_KEY,
+        label: BLOG_PHOTO_PROMPT_LABEL,
+        system_prompt: EVIDENCE_BASED_BLOG_PHOTO_PROMPT,
+      },
+      { onConflict: 'key' },
+    )
+
+    if (error) {
+      throw new Error(`Failed restoring the evidence-based blog prompt: ${error.message}`)
+    }
+    console.log('  evidence-based blog photo prompt restored')
+  }
+
+  if (protectsPosts) {
+    const { error: quarantineError } = await target
+      .from('blog_posts')
+      .update({
+        seo_status: 'needs_facts',
+        reviewed_by: null,
+        reviewed_at: null,
+      })
+      .in('slug', FORMULAIC_BLOG_SLUGS)
+
+    if (quarantineError) {
+      throw new Error(`Failed quarantining audited blog posts: ${quarantineError.message}`)
+    }
+
+    const { error: canonicalError } = await target
+      .from('blog_posts')
+      .update({ canonical_slug: 'circle-k-concrete-flatwork-lacy-lakeview-tx' })
+      .eq('slug', 'for-concrete-or-circle-k-lacy-lake-view')
+
+    if (canonicalError) {
+      throw new Error(`Failed restoring the audited blog canonical: ${canonicalError.message}`)
+    }
+    console.log('  audited blog quarantine and canonical restored')
   }
 }
 

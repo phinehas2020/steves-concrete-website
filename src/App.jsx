@@ -2,12 +2,10 @@ import { lazy, Suspense } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { DeferredSection } from './components/DeferredSection'
-import { useGoogleReviews } from './lib/googleReviews'
 const Services = lazy(() => import('./components/Services').then((m) => ({ default: m.Services })))
 const Footer = lazy(() => import('./components/Footer').then((m) => ({ default: m.Footer })))
 import { useSeo, buildJsonLdGraph, SITE_URL, DEFAULT_IMAGE } from './lib/seo'
 import { servicePageLinks } from './data/seoServiceSlugs'
-import { locationLinks } from './data/locationSlugs'
 
 const CostQuickAnswers = lazy(() =>
   import('./components/CostQuickAnswers').then((m) => ({ default: m.CostQuickAnswers })),
@@ -32,8 +30,8 @@ function SectionFallback({ className = 'section-padding bg-white', minHeight = 3
   return <div className={className} style={{ minHeight }} aria-hidden="true" />
 }
 
-function HomeLocalBusinessSchema({ reviewRating = '5.0', reviewCount = 47 } = {}) {
-  const cityNames = ['Waco', ...locationLinks.map((location) => location.city)]
+function HomeLocalBusinessSchema() {
+  const cityNames = ['Waco', 'Temple', 'Hewitt']
 
   return {
     '@type': ['LocalBusiness', 'Contractor'],
@@ -43,16 +41,8 @@ function HomeLocalBusinessSchema({ reviewRating = '5.0', reviewCount = 47 } = {}
     url: SITE_URL,
     image: DEFAULT_IMAGE,
     telephone: '+1-254-230-3102',
-    priceRange: '$$',
     founder: OWNER_PERSON_SCHEMA,
     sameAs: [GOOGLE_BUSINESS_PROFILE_URL],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: reviewRating,
-      reviewCount,
-      bestRating: '5',
-      worstRating: '1',
-    },
     address: {
       '@type': 'PostalAddress',
       streetAddress: '1045 W Elm Mott Ln',
@@ -111,11 +101,12 @@ function ServiceAreas() {
         <div className="max-w-3xl">
           <p className="text-xs uppercase tracking-[0.25em] font-bold text-accent-600 mb-4">Service Areas</p>
           <h2 className="font-display font-black text-3xl sm:text-4xl text-stone-900 text-balance mb-4">
-            Waco Concrete Contractors Serving Nearby Neighborhoods
+            Waco-Based Coverage and Nearby Inquiries
           </h2>
           <p className="text-lg text-stone-600 text-pretty mb-6">
-            From Waco to surrounding communities, we serve homeowners and businesses who need
-            contractors in Waco TX for concrete projects that last through heat, rain, and soil movement.
+            Waco, Temple, and Hewitt have stronger public project support. Requests from the other
+            communities below are reviewed by address, scope, travel, access, and current schedule;
+            their pages state when a local case study is still pending.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
@@ -135,30 +126,17 @@ function ServiceAreas() {
 }
 
 function App() {
-  const homeReviewsData = useGoogleReviews(3)
-  const homeReviewRating =
-    homeReviewsData.status === 'ready' && homeReviewsData.rating
-      ? homeReviewsData.rating.toFixed(1)
-      : '5.0'
-  const homeReviewCount =
-    homeReviewsData.status === 'ready' && homeReviewsData.userRatingCount
-      ? homeReviewsData.userRatingCount
-      : 47
-
   useSeo({
     title: 'Concrete Contractors Waco TX | SLA Concrete Works LLC',
     description:
-      "Waco's 5-star concrete company for driveways, patios, slabs, foundations, and repair. 500+ projects since 2005. Free estimates: (254) 230-3102.",
+      'Owner-run concrete work for Waco-area driveways, patios, slabs, foundations, repairs, and commercial flatwork. Request a written estimate: (254) 230-3102.',
     canonical: `${SITE_URL}/`,
     url: `${SITE_URL}/`,
     type: 'website',
     image: DEFAULT_IMAGE,
     imageAlt: 'SLA Concrete Works LLC - Waco, TX concrete contractor',
     jsonLd: buildJsonLdGraph(
-      HomeLocalBusinessSchema({
-        reviewRating: homeReviewRating,
-        reviewCount: homeReviewCount,
-      }),
+      HomeLocalBusinessSchema(),
     ),
   })
 

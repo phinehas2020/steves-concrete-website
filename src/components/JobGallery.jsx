@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect, useMemo } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion as Motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { cn } from '../lib/utils'
 import { fadeInUp, viewportConfig } from '../lib/animations'
@@ -70,16 +70,12 @@ export function JobGallery() {
     return buildCategoryOptions(jobs)
   }, [jobs])
 
-  useEffect(() => {
-    if (activeCategory !== 'All' && !categoryOptions.includes(activeCategory)) {
-      setActiveCategory('All')
-    }
-  }, [activeCategory, categoryOptions])
+  const effectiveCategory = categoryOptions.includes(activeCategory) ? activeCategory : 'All'
 
   const filteredJobs =
-    activeCategory === 'All'
+    effectiveCategory === 'All'
       ? jobs
-      : jobs.filter((job) => job.category === activeCategory)
+      : jobs.filter((job) => job.category === effectiveCategory)
 
   // Limit to 2 cards on mobile - slice the array directly
   const displayJobs = isMobile ? filteredJobs.slice(0, 2) : filteredJobs
@@ -89,7 +85,7 @@ export function JobGallery() {
       <div className="container-main relative z-10">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-          <motion.div
+          <Motion.div
             className="max-w-2xl"
             variants={fadeInUp}
             initial="hidden"
@@ -106,10 +102,10 @@ export function JobGallery() {
               Every project is a testament to our commitment to durability.
               From expansive commercial slabs to intricate stamped patios.
             </p>
-          </motion.div>
+          </Motion.div>
 
           {/* Filter Tabs */}
-          <motion.div
+          <Motion.div
             className="flex flex-wrap gap-2"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -121,7 +117,7 @@ export function JobGallery() {
                 onClick={() => setActiveCategory(category)}
                 className={cn(
                   'px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 border',
-                  activeCategory === category
+                  effectiveCategory === category
                     ? 'bg-stone-900 text-white border-stone-900 shadow-lg shadow-stone-900/20'
                     : 'bg-white text-stone-500 border-stone-200 hover:border-stone-400 hover:text-stone-900'
                 )}
@@ -129,7 +125,7 @@ export function JobGallery() {
                 {category}
               </button>
             ))}
-          </motion.div>
+          </Motion.div>
         </div>
 
         {/* Projects Grid */}
@@ -147,19 +143,19 @@ export function JobGallery() {
           <div className="text-center py-12">
             <p className="text-stone-500 mb-4">No jobs found.</p>
             <p className="text-sm text-stone-400">
-              {activeCategory === 'All'
+              {effectiveCategory === 'All'
                 ? 'Jobs will appear here once they are added through the admin dashboard.'
-                : `No jobs found in the ${activeCategory} category.`}
+                : `No jobs found in the ${effectiveCategory} category.`}
             </p>
           </div>
         ) : (
-          <motion.div
+          <Motion.div
             className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
             layout
           >
             <AnimatePresence mode="popLayout">
               {displayJobs.map((job, index) => (
-              <motion.article
+              <Motion.article
                 key={job.id}
                 className="group relative rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 aspect-[4/5]"
                 layout
@@ -210,14 +206,14 @@ export function JobGallery() {
                     </div>
                   </div>
                 </div>
-              </motion.article>
+              </Motion.article>
               ))}
             </AnimatePresence>
-          </motion.div>
+          </Motion.div>
         )}
 
         {/* CTA Box */}
-        <motion.div
+        <Motion.div
           className="mt-20 p-8 sm:p-12 bg-stone-950 rounded-[2rem] relative overflow-hidden group"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -241,7 +237,7 @@ export function JobGallery() {
               Start Your Estimate
             </a>
           </div>
-        </motion.div>
+        </Motion.div>
       </div>
     </section>
   )

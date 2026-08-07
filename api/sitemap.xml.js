@@ -7,8 +7,10 @@ import { seoServicePages } from '../src/data/seoServicePages.js'
 import { guidePages } from '../src/data/guides.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
 import { clientProjects } from '../src/data/clientProjects.js'
+import { isRouteSitemapEligible } from '../src/data/indexingControls.js'
 import {
   fetchPublishedBlogPosts,
+  isBlogPostListingEligible,
   mergePublishedBlogPosts,
 } from './_published-blog-posts.js'
 
@@ -146,7 +148,9 @@ export default async function handler(req, res) {
   })
 
   const remoteBlogPosts = await fetchPublishedBlogPosts()
-  const blogPosts = mergePublishedBlogPosts(staticBlogPosts, remoteBlogPosts).map(toBlogSitemapPost)
+  const blogPosts = mergePublishedBlogPosts(staticBlogPosts, remoteBlogPosts)
+    .filter(isBlogPostListingEligible)
+    .map(toBlogSitemapPost)
 
   blogPosts.forEach((post) => {
     urls.push({
@@ -165,9 +169,13 @@ export default async function handler(req, res) {
     })
   })
 
+  const sitemapUrls = urls.filter((entry) =>
+    isRouteSitemapEligible(new URL(entry.loc).pathname),
+  )
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
     `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">` +
-    urls.map((entry) => toUrlEntry(entry)).join('') +
+    sitemapUrls.map((entry) => toUrlEntry(entry)).join('') +
     `</urlset>`
 
   res.setHeader('Content-Type', 'application/xml')

@@ -35,9 +35,26 @@ const planningLinkPool = [
 export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
   const page = pageProp || seoServicePages.find((p) => p.slug === slugProp)
   if (!page) return null
-  const { slug, title, introParagraph, metaTitle, metaDescription, sections, faq = [], heroImage } = page
+
+  return <SeoServiceLandingPage page={page} />
+}
+
+function SeoServiceLandingPage({ page }) {
+  const {
+    slug,
+    title,
+    introParagraph,
+    metaTitle,
+    metaDescription,
+    sections,
+    faq = [],
+    heroImage,
+    evidenceNote,
+    scopeBoundary,
+    showGallery = true,
+  } = page
   const resolvedHeroImage = heroImage || serviceHeroImages[slug]
-  const galleryImages = getServiceGalleryImages(slug, title)
+  const galleryImages = showGallery ? getServiceGalleryImages(slug, title) : []
   const seoImage = resolvedHeroImage?.startsWith('/') ? `${SITE_URL}${resolvedHeroImage}` : resolvedHeroImage
 
   // Rotate around the current page so each page surfaces different neighbors
@@ -147,6 +164,56 @@ export function SeoServiceLanding({ page: pageProp, slug: slugProp }) {
             </div>
           </div>
         </section>
+
+        {scopeBoundary && (
+          <section className="section-padding bg-white">
+            <div className="container-main max-w-5xl">
+              <div className="mb-8 max-w-3xl">
+                <span className="inline-block px-3 py-1 mb-4 rounded-full bg-amber-50 text-amber-800 font-semibold text-sm tracking-wide uppercase border border-amber-200">
+                  Scope Boundary
+                </span>
+                <h2 className="font-display font-bold text-3xl sm:text-4xl text-stone-900 text-balance">
+                  Concrete scope and specialist scope are separate
+                </h2>
+                {evidenceNote && (
+                  <p className="mt-4 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-stone-700 leading-relaxed">
+                    {evidenceNote}
+                  </p>
+                )}
+              </div>
+
+              <div className="grid gap-6 lg:grid-cols-2">
+                <article className="rounded-2xl border border-stone-200 bg-stone-50 p-6 sm:p-8">
+                  <h3 className="font-display font-semibold text-2xl text-stone-900 mb-5">
+                    {scopeBoundary.slaTitle}
+                  </h3>
+                  <ul className="space-y-4 text-stone-700">
+                    {scopeBoundary.slaItems.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span className="mt-2 size-2 shrink-0 rounded-full bg-accent-500" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+
+                <article className="rounded-2xl border border-stone-300 bg-stone-900 p-6 text-white sm:p-8">
+                  <h3 className="font-display font-semibold text-2xl mb-5">
+                    {scopeBoundary.specialistTitle}
+                  </h3>
+                  <ul className="space-y-4 text-stone-200">
+                    {scopeBoundary.specialistItems.map((item) => (
+                      <li key={item} className="flex gap-3">
+                        <span className="mt-2 size-2 shrink-0 rounded-full bg-accent-400" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="section-padding relative">
           {/* Subtle background texture */}

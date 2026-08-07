@@ -5,35 +5,8 @@ import { fadeInUp, viewportConfig } from '../lib/animations'
 import steveHeadshot from '../assets/images/steve-headshot.jpg'
 import { FALLBACK_GOOGLE_REVIEW_URL } from '../lib/googleReviews'
 
-const testimonials = [
-  {
-    quote:
-      'SLA Concrete Works LLC is professional, very conscientious and did the job at a really fair price. The driveway still looks perfect three years later.',
-    author: 'Tim T.',
-    location: 'Sanger Heights, Waco',
-    project: 'Stamped driveway',
-    rating: 5,
-  },
-  {
-    quote:
-      'They transformed our backyard with a beautiful stamped patio. The attention to detail was incredible — they even matched the color to our house trim.',
-    author: 'Sarah M.',
-    location: 'Downtown Temple',
-    project: 'Backyard patio',
-    rating: 5,
-  },
-  {
-    quote:
-      'On time, on budget, and the results exceeded our expectations. Steve explained the whole process and why they do things certain ways. Highly recommend.',
-    author: 'Robert J.',
-    location: 'Hewitt (Waco area)',
-    project: 'Circular driveway',
-    rating: 5,
-  },
-]
-
 const ownerHighlights = [
-  'More than 20 years pouring concrete in Central Texas',
+  'Owner-led scope review and project planning',
   'Knows what black clay soil and bad drainage can do to a slab',
   'Still the one walking jobs and answering questions',
 ]
@@ -62,41 +35,45 @@ export function Testimonials({ reviewsData }) {
         rating: review.rating,
       }))
     : []
-  const visibleTestimonials = hasLiveReviews
-    ? liveTestimonials
-    : testimonials.map((testimonial) => ({
-        key: testimonial.author,
-        ...testimonial,
-        badge: testimonial.project,
-      }))
+  const visibleTestimonials = hasLiveReviews ? liveTestimonials : []
   const hasHiddenReviews = hasLiveReviews && visibleTestimonials.length > 2
   const featuredTestimonials =
     hasHiddenReviews && !showAllReviews ? visibleTestimonials.slice(0, 2) : visibleTestimonials
-  const stats = [
-    {
-      value:
-        hasLiveReviews && reviewsData?.rating
-          ? reviewsData.rating.toFixed(1)
-          : '5.0',
-      label: 'Average rating',
-      detail: hasLiveReviews ? '' : 'Based on verified client feedback',
-    },
-    {
-      value:
-        hasLiveReviews && reviewsData?.userRatingCount
-          ? `${reviewsData.userRatingCount}+`
-          : '47+',
-      label: 'Verified reviews',
-      detail: hasLiveReviews ? '' : 'Homeowners and business owners',
-    },
-    {
-      value: '20+',
-      label: 'Years in business',
-      detail: 'Local experience in Waco and nearby cities',
-    },
-  ]
-  const reviewsLink =
-    reviewsData?.reviewUri || reviewsData?.placeUri || FALLBACK_GOOGLE_REVIEW_URL
+  const stats = hasLiveReviews
+    ? [
+        {
+          value: reviewsData.rating ? reviewsData.rating.toFixed(1) : 'Live',
+          label: 'Current Google rating',
+          detail: 'Loaded from the source shown below',
+        },
+        {
+          value: reviewsData.userRatingCount ? String(reviewsData.userRatingCount) : 'Live',
+          label: 'Current review count',
+          detail: 'Loaded from Google Business Profile',
+        },
+        {
+          value: 'Owner-run',
+          label: 'Direct project oversight',
+          detail: 'Steve reviews the scope and site needs',
+        },
+      ]
+    : [
+        {
+          value: 'Owner-run',
+          label: 'Direct project oversight',
+          detail: 'Steve reviews the scope and site needs',
+        },
+        {
+          value: 'Written',
+          label: 'Clear estimate scope',
+          detail: 'Prep, finish, cleanup, and exclusions',
+        },
+        {
+          value: 'Source-first',
+          label: 'No fallback rating claims',
+          detail: 'Review numbers appear only when the live source loads',
+        },
+      ]
   const leaveReviewLink =
     reviewsData?.writeReviewUri || reviewsData?.reviewUri || reviewsData?.placeUri || FALLBACK_GOOGLE_REVIEW_URL
   const reviewsCtaLabel =

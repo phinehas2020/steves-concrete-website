@@ -106,7 +106,6 @@ export function LinkPreview({ text }) {
     const urls = extractUrls(text)
     
     if (urls.length === 0) {
-      setLoading(false)
       return
     }
 

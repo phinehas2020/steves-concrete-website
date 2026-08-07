@@ -2,10 +2,10 @@ import { Phone, Mail, MapPin, Clock, CheckCircle } from 'lucide-react'
 import { ContactForm } from './ContactForm'
 
 const whatToExpect = [
-    'Response within 4 hours during business hours',
-    'Stephen will call to discuss your project',
-    'Free on-site assessment and measurements',
-    'Detailed written estimate within 48 hours',
+    'Stephen reviews the project details you send',
+    'A call confirms scope, access, and timing',
+    'A site visit is scheduled when measurements are needed',
+    'The written estimate states what is included',
 ]
 
 export function Contact({ sectionId = 'contact' }) {
@@ -21,9 +21,9 @@ export function Contact({ sectionId = 'contact' }) {
                         <h2 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl text-stone-900 text-balance mb-4">
                             Ready for a Free Estimate?
                         </h2>
-                        <p className="text-lg text-stone-600 text-pretty mb-8">
-                            Tell us about your project. We'll review it and get back to you quickly
-                            with honest feedback and a competitive quote.
+                            <p className="text-lg text-stone-600 text-pretty mb-8">
+                                Tell us about your project. We will review the location, scope, access,
+                                and timing, then confirm the next useful step.
                         </p>
 
                         {/* What to expect */}
@@ -54,7 +54,7 @@ export function Contact({ sectionId = 'contact' }) {
                                     <div className="font-semibold text-stone-900 group-hover:text-accent-600 transition-colors">
                                         (254) 230-3102
                                     </div>
-                                    <div className="text-sm text-stone-500">Call or text — we respond quickly</div>
+                                        <div className="text-sm text-stone-500">Call or text — include project details</div>
                                 </div>
                             </a>
 
@@ -80,7 +80,7 @@ export function Contact({ sectionId = 'contact' }) {
                                 <div>
                                     <div className="font-semibold text-stone-900">Service Area</div>
                                     <div className="text-sm text-stone-500">
-                                        Waco, Temple, Killeen & Central Texas — within 50 miles
+                                            Based in Elm Mott — coverage confirmed per project
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +121,7 @@ export function Contact({ sectionId = 'contact' }) {
                                 </div>
                             </div>
                             <p className="mt-4 pt-4 border-t border-stone-800 text-xs text-stone-400">
-                                Emergency repairs available. Call anytime — if we don't answer, we call back within 4 hours.
+                                Call or text during business hours. Photos and rough dimensions help us review the scope.
                             </p>
                         </div>
                     </div>

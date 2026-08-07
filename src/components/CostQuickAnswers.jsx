@@ -4,17 +4,17 @@ import { fadeInUp, viewportConfig } from '../lib/animations'
 const quickAnswers = [
   {
     question: 'How much does a concrete driveway cost in Waco?',
-    answer: 'Standard driveways typically run $6–12/sq ft; stamped $12–18/sq ft.',
+    answer: 'Driveway pricing depends on measured area, removal, base, drainage, thickness, reinforcement, access, finish, and the included scope.',
     href: '/guides/concrete-driveway-cost-waco-tx',
   },
   {
     question: 'How much does a patio cost?',
-    answer: 'Standard patios $6–12/sq ft; stamped or stained $12–18/sq ft.',
+    answer: 'Patio pricing depends on doors and elevations, grade, drainage, access, demolition, layout, finish, and other-trade coordination.',
     href: '/guides/concrete-patio-cost-waco-tx',
   },
   {
     question: 'How much does stamped concrete cost?',
-    answer: 'Typically $12–18 per square foot depending on pattern and color.',
+    answer: 'Stamped pricing depends on the base slab scope plus pattern, color system, borders, release, washing, sealing, access, and maintenance requirements.',
     href: '/guides/stamped-concrete-cost-waco-tx',
   },
   {

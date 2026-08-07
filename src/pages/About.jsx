@@ -10,16 +10,16 @@ export function About() {
   const hasLiveReviews =
     aboutReviewsData.status === 'ready' && aboutReviewsData.reviews.length > 0
   const ratingValue =
-    hasLiveReviews && aboutReviewsData.rating ? aboutReviewsData.rating.toFixed(1) : '5.0'
+    hasLiveReviews && aboutReviewsData.rating ? aboutReviewsData.rating.toFixed(1) : null
   const reviewCount =
     hasLiveReviews && aboutReviewsData.userRatingCount
-      ? `${aboutReviewsData.userRatingCount}+`
-      : '28+'
+      ? String(aboutReviewsData.userRatingCount)
+      : null
 
   useSeo({
     title: 'About SLA Concrete Works | Owner-Run Waco Concrete Contractor',
     description:
-      'Meet Steve Alexander, owner of SLA Concrete Works LLC. 20+ years of Waco concrete experience, 500+ projects, and a 5-star Google rating. Call (254) 230-3102.',
+      'Meet Steve Alexander, owner-operator of SLA Concrete Works LLC, and see how he scopes concrete work around access, drainage, soil, finish, and cure timing.',
     canonical: `${SITE_URL}/about`,
     url: `${SITE_URL}/about`,
     image: DEFAULT_IMAGE,
@@ -58,9 +58,8 @@ export function About() {
                 or access issues before he starts talking numbers.
               </p>
               <p className="mt-4 max-w-3xl text-base text-stone-400 text-pretty leading-relaxed">
-                He has been pouring concrete around Waco for more than 20 years. People tend to like
-                working with him for a simple reason: he is direct, he shows up, and he does not try
-                to sell work the job does not need.
+                His estimates start with the site and the work it actually needs. He looks at access,
+                water, base conditions, intended use, and finish before putting the scope in writing.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -87,8 +86,8 @@ export function About() {
 
             <div className="mt-10 grid gap-4 md:grid-cols-3">
               <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <div className="text-3xl font-display font-bold text-white">20+</div>
-                <div className="mt-1 text-sm font-semibold text-stone-100">Years pouring concrete around Waco</div>
+                <div className="text-3xl font-display font-bold text-white">Local</div>
+                <div className="mt-1 text-sm font-semibold text-stone-100">Waco-area concrete planning</div>
                 <div className="mt-2 text-sm leading-relaxed text-stone-400">
                   Long enough to know where black clay, water, and rushed prep usually cause trouble.
                 </div>
@@ -100,15 +99,25 @@ export function About() {
                   The person giving the estimate is still paying attention when the work gets done.
                 </div>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-                <div className="text-3xl font-display font-bold text-white">{ratingValue}</div>
-                <div className="mt-1 text-sm font-semibold text-stone-100">
-                  Google rating across {reviewCount} reviews
+              {hasLiveReviews && ratingValue && reviewCount ? (
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+                  <div className="text-3xl font-display font-bold text-white">{ratingValue}</div>
+                  <div className="mt-1 text-sm font-semibold text-stone-100">
+                    Current Google rating across {reviewCount} reviews
+                  </div>
+                  <div className="mt-2 text-sm leading-relaxed text-stone-400">
+                    Loaded from the Google Business Profile shown on the reviews page.
+                  </div>
                 </div>
-                <div className="mt-2 text-sm leading-relaxed text-stone-400">
-                  Real feedback from people who hired Steve and left a review afterward.
+              ) : (
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+                  <div className="text-3xl font-display font-bold text-white">Written</div>
+                  <div className="mt-1 text-sm font-semibold text-stone-100">Scope before the pour</div>
+                  <div className="mt-2 text-sm leading-relaxed text-stone-400">
+                    The estimate should state prep, finish, cleanup, exclusions, and next steps.
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </section>

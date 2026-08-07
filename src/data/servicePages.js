@@ -41,16 +41,16 @@ const baseBenefits = [
   'Low-maintenance upkeep with simple sealing schedules',
 ]
 
-export const servicePages = [
+const baseServicePages = [
   {
     slug: 'concrete-contractors',
     title: 'Concrete Contractors',
     heroTitle: 'Waco Concrete Contractors',
     heroSubtitle:
-      'Driveways, patios, slabs, and repairs for homes and businesses around Waco. Owner-run since 2005 — the person who bids your job is the one who pours it.',
+      'Driveways, patios, slabs, and repairs for homes and businesses around Waco, with owner-led scoping and a written estimate.',
     seoTitle: 'Concrete Contractors Waco TX | SLA Concrete Works LLC',
     seoDescription:
-      'Owner-run concrete contractor in Waco since 2005. Driveways, patios, stamped concrete, slabs, and repair — with written estimates that show what is included. (254) 230-3102.',
+      'Owner-run Waco concrete contractor for driveways, patios, stamped concrete, slabs, and repair, with written estimates that show what is included. (254) 230-3102.',
     intro:
       'We pour driveways, patios, slabs, and stamped concrete across Waco and the surrounding towns, and we put every part of the job in writing — demolition, base work, steel, finish, cleanup — so you can compare bids on what is actually included instead of just the bottom number.',
     benefits: baseBenefits,
@@ -71,8 +71,8 @@ export const servicePages = [
         description: 'In McLennan County, black clay movement is a major factor we design around on every project.',
       },
       {
-        title: 'Same-day lead response',
-        description: 'Most leads are reviewed quickly so estimates and site visits move forward without delay.',
+        title: 'Direct scope review',
+        description: 'Project details are reviewed before a site visit or estimate is scheduled.',
       },
     ],
     costFactors: [
@@ -103,7 +103,7 @@ export const servicePages = [
       {
         question: 'What areas do you cover?',
         answer:
-          'Waco and everything around it — Hewitt, Woodway, Robinson, Lorena, McGregor, China Spring, out to Temple and Killeen. If you are within about 50 miles of Waco, call us.',
+          'SLA is based in Elm Mott. Send the project address, scope, dimensions, access, and timing so current coverage, travel, and any practical job minimum can be confirmed before scheduling.',
       },
       {
         question: 'How do you handle heavy summer heat in Waco TX?',
@@ -153,7 +153,7 @@ export const servicePages = [
       'Finishes and border upgrades',
     ],
     timeline:
-      'Walkway-focused jobs often finish in 1-2 days with light use after cure milestones are met.',
+      'Walkway timing depends on demolition, access, base correction, layout, inspections, placement, weather, cure criteria, and reopening requirements.',
     faq: [
       {
         question: 'Do you pour sidewalks from scratch or replace old concrete?',
@@ -287,17 +287,17 @@ export const servicePages = [
       'Finish upgrades like borders or exposed aggregate',
     ],
     timeline:
-      'Most driveway projects take 2-3 days on site, then 7 days before vehicle traffic (full cure at 28 days).',
+      'Driveway timing and vehicle opening depend on removal, base work, size, access, placement sequence, concrete specification, weather, cure method, and project loads.',
     faq: [
       {
         question: 'How much does a concrete driveway cost in Waco?',
         answer:
-          'Standard driveways typically run $6–12 per square foot; stamped or decorative finishes run $12–18 per square foot. A typical two-car driveway (600 sq ft) often lands between $3,600 and $10,800. See our concrete driveway cost guide or call (254) 230-3102 for a free site-specific estimate.',
+          'Driveway pricing depends on measured area, demolition, base correction, drainage, thickness, reinforcement, access, finish, and the exact included scope. The current cost guide explains those factors without publishing an unsupported generic range.',
       },
       {
         question: 'How thick is a residential concrete driveway?',
         answer:
-          'Most residential driveways are poured 4-5 inches thick with reinforcement where needed.',
+          'Thickness and reinforcement should follow actual vehicle loads, support conditions, edge details, plans, and the written project scope rather than one site-wide rule.',
       },
       {
         question: 'Do you remove old driveways in Waco?',
@@ -307,7 +307,7 @@ export const servicePages = [
       {
         question: 'When can I drive on my new driveway?',
         answer:
-          'Plan on 7 days before vehicle traffic and 28 days for full cure strength.',
+          'The project handoff should state the vehicle-opening criteria for the selected concrete, thickness, weather, cure method, and expected loads.',
       },
     ],
   },
@@ -351,12 +351,12 @@ export const servicePages = [
       'Site access and prep requirements',
     ],
     timeline:
-      'Most patios take 1-2 days on site, then 2-3 days before light foot traffic.',
+      'Patio timing depends on removal, base and grade work, access, layout, finish, weather, cure method, selected products, and use restrictions.',
     faq: [
       {
         question: 'How much does a concrete patio cost in Waco?',
         answer:
-          'Standard patios typically run $6–12 per square foot; stamped or stained finishes run $12–18 per square foot. See our patio cost guide or call (254) 230-3102 for a free estimate.',
+          'Patio pricing depends on measured area, door elevations, grade, drainage, access, removal, finish, cover or kitchen coordination, and the exact written scope. The current cost guide explains those factors without an unsupported generic range.',
       },
       {
         question: 'Can you do stamped concrete patios in Waco?',
@@ -419,17 +419,17 @@ export const servicePages = [
       'Sealer choice and maintenance schedule',
     ],
     timeline:
-      'Stamped concrete usually takes 2-3 days on site plus 7 days before vehicle traffic.',
+      'Stamped-concrete timing depends on the base slab, pattern and color system, washing, sealing, weather, cure, access, and the actual use of the surface.',
     faq: [
       {
         question: 'How much does stamped concrete cost in Waco?',
         answer:
-          'Stamped concrete typically runs $12–18 per square foot depending on pattern, color blends, and site prep. See our stamped concrete cost guide or call (254) 230-3102 for a free estimate.',
+          'Stamped pricing depends on the base slab plus preparation, pattern, color system, borders, release, washing, sealing, access, and maintenance requirements. Compare the full written scope rather than a generic range.',
       },
       {
         question: 'How often should stamped concrete be sealed?',
         answer:
-          'Most stamped concrete is resealed every 2-3 years depending on sun exposure and wear.',
+          'Inspection and resealing timing should follow the named sealer, exposure, traffic, cleaning, appearance, traction, and observed wear rather than one fixed interval.',
       },
       {
         question: 'Does stamped concrete get slippery?',
@@ -482,12 +482,12 @@ export const servicePages = [
       'Site access and staging constraints',
     ],
     timeline:
-      'Commercial slabs typically pour in 1 day once forms and rebar are ready.',
+      'Commercial placement timing depends on the approved design, size, access, concrete supply, placement sequence, inspections, weather, finish, and cure requirements.',
     faq: [
       {
         question: 'How much do commercial concrete slabs cost in Waco?',
         answer:
-          'Commercial slab pricing depends on thickness, reinforcement, and finish. Typical ranges run $6–14 per square foot. Call (254) 230-3102 for a free estimate tailored to your project.',
+          'Commercial slab pricing depends on measured quantities, design, excavation, base, thickness, reinforcement, concrete specification, embeds, access, placement sequence, finish, cure, inspections, and handoffs. It requires a project-specific scope.',
       },
       {
         question: 'Do you handle commercial pads and sidewalks?',
@@ -502,7 +502,7 @@ export const servicePages = [
       {
         question: 'Do you provide ADA-compliant finishes?',
         answer:
-          'We can finish surfaces to meet slip and slope requirements when specified.',
+          'SLA can place and finish concrete to approved project documents. The responsible designer or inspector, not this website, determines and verifies accessibility compliance.',
       },
     ],
   },
@@ -545,12 +545,12 @@ export const servicePages = [
       'Access and site conditions',
     ],
     timeline:
-      'Most repairs take 1 day on site with light use after 24-48 hours.',
+      'Repair and reopening timing depends on the failure, removal, support correction, selected repair or replacement system, weather, cure, loads, and manufacturer or designer requirements.',
     faq: [
       {
         question: 'How much does concrete repair cost in Waco?',
         answer:
-          'Repair costs vary by size and cause. Simple crack repairs often start around $200–500; resurfacing runs $3–7 per square foot. Call (254) 230-3102 for a free assessment and quote.',
+          'Repair pricing depends on the cause, movement, affected area, access, removal, base correction, selected repair or replacement system, preparation, finish, and exclusions. A site-specific written scope is required.',
       },
       {
         question: 'When should concrete be repaired vs replaced?',
@@ -608,12 +608,12 @@ export const servicePages = [
       'Stub-outs and embedded items',
     ],
     timeline:
-      'Foundation pours are typically completed in 1 day once forms and steel are ready.',
+      'Foundation placement timing depends on approved plans, inspections, size, concrete supply, access, sequence, weather, finish, cure, and other-trade handoffs.',
     faq: [
       {
         question: 'How much does a concrete foundation or slab cost in Waco?',
         answer:
-          'Foundation and slab pricing depends on size, thickness, and reinforcement. Residential slabs often run $5–10 per square foot. Call (254) 230-3102 for a free estimate.',
+          'Foundation and slab pricing depends on the responsible design, measured quantities, excavation, support, thickness, reinforcement, concrete specification, access, placement, finish, inspections, and trade handoffs.',
       },
       {
         question: 'Do you pour slabs for additions or shops?',
@@ -671,17 +671,17 @@ export const servicePages = [
       'Finish type and access',
     ],
     timeline:
-      'Most slab pours take 1 day on site; cure time before heavy use depends on thickness and mix.',
+      'Slab placement and heavy-use timing depend on design inputs, inspections, size, access, concrete supply, sequence, weather, cure, and expected loads.',
     faq: [
       {
         question: 'How much does a concrete slab cost in Waco?',
         answer:
-          'Residential slabs typically run $5–10 per square foot depending on thickness, reinforcement, and site prep. Call (254) 230-3102 for a free estimate.',
+          'Slab pricing depends on measured quantities, use, design source, excavation, base, thickness, reinforcement, concrete specification, access, finish, cure, inspections, and included handoffs.',
       },
       {
         question: 'What PSI do garage slabs need?',
         answer:
-          'Most residential garage slabs use 3000–4000 PSI. We choose mix based on your use and soil conditions.',
+          'The responsible plans or written scope should identify the project concrete specification from actual use, loads, exposure, support, finish, and design inputs.',
       },
       {
         question: 'Do you pour slabs for detached garages?',
@@ -729,12 +729,12 @@ export const servicePages = [
       'Square footage and access',
     ],
     timeline:
-      'Staining usually takes 1–2 days on site; curing and sealing add a few days before use.',
+      'Stain timing depends on slab condition, preparation, test work, selected stain and sealer, coat sequence, weather, cure, and use restrictions.',
     faq: [
       {
         question: 'How much does stained concrete cost in Waco?',
         answer:
-          'Stained concrete typically runs $5–12 per square foot depending on prep, stain type, and sealing. Call (254) 230-3102 for a free estimate.',
+          'Stained-concrete pricing depends on slab condition, previous coatings, test work, preparation, access, named stain and sealer, color detail, traction treatment, cure, and maintenance handoff.',
       },
       {
         question: 'Acid vs water-based stain — which is better?',
@@ -786,7 +786,7 @@ export const servicePages = [
       },
       {
         title: 'Resealing schedule',
-        description: 'Most outdoor concrete needs resealing every 2–3 years in Central Texas.',
+        description: 'Inspection and recoat timing should follow the named product, exposure, traffic, cleaning, and observed wear.',
       },
       {
         title: 'Stamped concrete care',
@@ -800,17 +800,17 @@ export const servicePages = [
       'Access and obstacles',
     ],
     timeline:
-      'Sealing typically takes 1 day; surfaces need 24–48 hours to cure before use.',
+      'Sealing and reopening timing depend on the surface, preparation, selected product, coats, temperature, moisture, weather, and manufacturer instructions.',
     faq: [
       {
         question: 'How much does concrete sealing cost in Waco?',
         answer:
-          'Sealing typically runs $1–4 per square foot depending on surface type, prep, and sealer choice. Call (254) 230-3102 for a free estimate.',
+          'Sealing pricing depends on surface and prior-product condition, preparation, test work, measured area, access, named product, coverage, coats, traction treatment, cure, and protection requirements.',
       },
       {
         question: 'How often should I reseal my driveway?',
         answer:
-          'Most driveways benefit from resealing every 2–3 years. High-traffic or heavy sun exposure may need more frequent resealing.',
+          'Use the named product guidance plus exposure, traffic, cleaning, appearance, traction, and a compatibility or recoat test to decide when another application is appropriate.',
       },
       {
         question: 'Can you seal stamped concrete?',
@@ -872,7 +872,7 @@ export const servicePages = [
       'Disposal distance and replacement prep',
     ],
     timeline:
-      'Most demolition jobs are completed in 1 day on site, though larger tear-outs or replacement prep can take longer.',
+      'Removal timing depends on slab size and thickness, reinforcement, access, utilities, scanning or locate requirements, equipment, containment, haul-off, disposal, cleanup, and replacement handoff.',
     faq: [
       {
         question: 'How much does concrete demolition cost in Waco?',
@@ -949,7 +949,7 @@ export const servicePages = [
       'Cleanup and disposal needs',
     ],
     timeline:
-      'Most saw cutting is completed the same day, though larger layouts or multiple openings may be staged in phases.',
+      'Saw-cutting timing depends on layout, depth, reinforcement, access, utility or scan requirements, containment, cleanup, and whether a specialty cutting trade is needed.',
     faq: [
       {
         question: 'How much does concrete sawing cost in Waco?',
@@ -959,7 +959,7 @@ export const servicePages = [
       {
         question: 'Can you cut openings for utilities or plumbing?',
         answer:
-          'Yes. We regularly cut concrete for utility access, repairs, and other trade-related openings.',
+          'Utility or plumbing openings require the responsible trade’s layout plus confirmed slab thickness, reinforcement, access, scan or locate responsibility, tool capacity, containment, and written cutting scope.',
       },
       {
         question: 'Do you handle control joints or repair cuts?',
@@ -974,3 +974,266 @@ export const servicePages = [
     ],
   },
 ]
+
+const serviceAuthenticityOverrides = {
+  'concrete-slabs': {
+    heroTitle: 'Concrete Slab Scope Planning in Waco, TX',
+    heroSubtitle:
+      'Define use, loads, design responsibility, base, thickness, reinforcement, finish, and cure requirements before treating a slab as a repeatable service package.',
+    seoTitle: 'Concrete Slab Scope Planning Waco TX | SLA Concrete Works',
+    seoDescription:
+      'Plan a Waco garage, shop, equipment, or utility slab around use, loads, design source, base, thickness, reinforcement, finish, access, and cure.',
+    intro:
+      'A garage slab, shop floor, equipment pad, and utility pad are not interchangeable. SLA can review the concrete scope, but the approved estimate must identify the use, design source, dimensions, support, reinforcement, finish, and handoffs for the actual site.',
+    evidenceNotice:
+      'The current repository does not yet connect this page to one source-reviewed SLA slab case study with exact size, use, loads, base, thickness, reinforcement, concrete tickets, finish, and Stephen’s field decision. Generic shop-foundation photos are not presented as that proof.',
+    proofRequirements: [
+      'A privacy-safe garage, shop, equipment-pad, or utility-pad project identity and date',
+      'Measured dimensions, intended use and loads, and the source of any slab design',
+      'Base, vapor-control requirement, thickness, reinforcement, mix or tickets, joints, and finish',
+      'Access, drainage, cure or opening guidance, trade handoffs, photos, and Stephen’s reviewed field note',
+    ],
+    benefits: [
+      'Use and load assumptions written before slab details are selected',
+      'Base, thickness, reinforcement, joints, finish, and exclusions stated in the estimate',
+      'Designer, engineer, building supplier, owner, and concrete-trade roles separated clearly',
+    ],
+    process: [
+      {
+        title: 'Confirm use and design source',
+        description:
+          'Record the structure or equipment, loads, dimensions, elevations, and who supplies any required design or stamped plans.',
+      },
+      {
+        title: 'Write the supporting scope',
+        description:
+          'State excavation, base, moisture control, thickness, reinforcement, joints, embeds, access, drainage, and exclusions.',
+      },
+      {
+        title: 'Approve placement and handoff',
+        description:
+          'Confirm the project-specified mix, finish, cure restrictions, opening criteria, and next-trade responsibilities before work starts.',
+      },
+    ],
+    finishes: ['Project-specified broom finish', 'Project-specified trowel finish', 'Documented texture', 'Written flooring handoff'],
+    localNotes: [
+      {
+        title: 'Site-specific support',
+        description:
+          'Soil, drainage, fill, excavation, and compaction decisions require actual site and design inputs; this page does not prescribe a universal base.',
+      },
+      {
+        title: 'Load and structure boundary',
+        description:
+          'Vehicle, lift, rack, machine, building, and point loads should come from the owner, supplier, or qualified designer rather than a generic web page.',
+      },
+      {
+        title: 'Moisture and flooring handoff',
+        description:
+          'Any vapor-control, finish-tolerance, moisture-test, or floor-covering requirement belongs in the written project scope.',
+      },
+    ],
+    costFactors: [
+      'Measured footprint, elevations, thickness, and edge conditions',
+      'Excavation, base, drainage, and access',
+      'Reinforcement, embeds, joints, and project-specified concrete',
+      'Finish, cure restrictions, inspections, and other-trade coordination',
+    ],
+    timeline:
+      'The schedule is set only after design inputs, site preparation, access, inspections, placement sequence, weather, cure restrictions, and the next-trade handoff are known.',
+    coverageNote:
+      'Send the project city, use, dimensions, design source, access photos, and target timing. SLA will confirm whether the concrete scope and travel fit before representing the job as accepted work.',
+    faq: [
+      {
+        question: 'Does this page specify one slab thickness or mix for every project?',
+        answer:
+          'No. Thickness, reinforcement, concrete specification, joints, vapor control, and support must follow the actual use, site, plans, and responsible design source.',
+      },
+      {
+        question: 'Does the current gallery prove a source-reviewed SLA slab case study?',
+        answer:
+          'Not yet. A complete public source packet has not been connected to this page, so generic gallery photos are not treated as technical proof.',
+      },
+      {
+        question: 'What should a slab estimate state?',
+        answer:
+          'Use, dimensions, design responsibility, excavation, base, moisture control, thickness, reinforcement, concrete specification, joints, embeds, finish, cure, access, inspections, exclusions, and handoffs.',
+      },
+    ],
+  },
+  'stained-concrete': {
+    heroTitle: 'Stained Concrete Scope Review in Waco, TX',
+    heroSubtitle:
+      'Evaluate the slab, test area, preparation, named stain and sealer, color variation, traction, maintenance, and use restrictions before promising a finish.',
+    seoTitle: 'Stained Concrete Scope Review Waco TX | SLA Concrete Works',
+    seoDescription:
+      'Review a Waco stained-concrete scope around slab condition, test area, preparation, named stain and sealer, color variation, traction, cure, and maintenance.',
+    intro:
+      'Stain results depend on the actual slab and selected product system. A written proposal should record existing coatings or contaminants, preparation, a test area, the named stain and sealer, expected color variation, traction, cure, maintenance, and who performs each step.',
+    evidenceNotice:
+      'No source-reviewed SLA stain project in the current repository documents before-and-after color, preparation, product names, test results, sealer, traction choice, maintenance, and Stephen’s field note. This page is therefore a scope checklist, not a finished-job claim.',
+    proofRequirements: [
+      'A real SLA stain project with privacy-safe location, date, use, area, and before/during/after photos',
+      'Existing slab condition, contaminant or coating review, preparation, and test-area result',
+      'Named stain, color, application method, named sealer, traction choice, cure, and use restrictions',
+      'Maintenance guidance, SLA and other-trade roles, client permission, and Stephen’s reviewed observation',
+    ],
+    benefits: [
+      'Existing slab and prior coating condition reviewed before a product is selected',
+      'Test area, color variation, named stain, sealer, and traction choices written into scope',
+      'Preparation, cure, maintenance, exclusions, and responsible trade made explicit',
+    ],
+    process: [
+      {
+        title: 'Inspect and test',
+        description:
+          'Document slab condition, prior products, contamination, moisture concerns, repairs, and a representative test area before approval.',
+      },
+      {
+        title: 'Name the finish system',
+        description:
+          'Put stain, color, preparation, sealer, traction additive, application steps, and responsible trade in writing.',
+      },
+      {
+        title: 'Set expectations and care',
+        description:
+          'Confirm natural variation, cure and reopening limits, cleaning, maintenance, recoat checks, and exclusions for the selected system.',
+      },
+    ],
+    finishes: ['Named reactive stain after testing', 'Named water-based color system after testing', 'Documented sealer', 'Documented traction treatment'],
+    localNotes: [
+      {
+        title: 'Color is substrate-dependent',
+        description:
+          'Existing pours, repairs, curing products, contamination, and previous coatings can change the result; a website swatch is not a promise.',
+      },
+      {
+        title: 'Preparation is product-specific',
+        description:
+          'Cleaning and surface preparation should follow the selected manufacturer and the observed slab rather than a generic process.',
+      },
+      {
+        title: 'Sealer and traction are separate decisions',
+        description:
+          'Sheen, wet exposure, traffic, cleaning, and maintenance should be reviewed before the sealer and any traction treatment are approved.',
+      },
+    ],
+    costFactors: [
+      'Slab condition, previous coatings, contamination, repairs, and test work',
+      'Preparation method and access',
+      'Named stain, colors, detail work, sealer, and traction treatment',
+      'Cure restrictions, protection, maintenance handoff, and responsible trades',
+    ],
+    timeline:
+      'Timing comes from the observed slab, selected product instructions, preparation, test area, weather, coat sequence, cure, and reopening requirements.',
+    coverageNote:
+      'Send the project location, wide and close photos, current surface history, approximate area, indoor or outdoor use, and desired look. Product and service availability must be confirmed in writing.',
+    faq: [
+      {
+        question: 'Does this page prove an SLA stain system or completed stain case study?',
+        answer:
+          'No. Product names and a complete source-reviewed project have not yet been published, so this page is limited to the questions a proposal should answer.',
+      },
+      {
+        question: 'Can a stain color be guaranteed from a website sample?',
+        answer:
+          'No. Existing concrete and the selected system affect color. A representative test area and written variation expectations should come first.',
+      },
+      {
+        question: 'What should a stained-concrete proposal identify?',
+        answer:
+          'Slab condition, preparation, test area, named stain and sealer, color expectation, traction, coat sequence, cure, use restrictions, maintenance, exclusions, and responsible trade.',
+      },
+    ],
+  },
+  'concrete-sealing': {
+    heroTitle: 'Concrete Sealing Scope Review in Waco, TX',
+    heroSubtitle:
+      'Confirm the surface, previous products, preparation, named sealer, coverage limits, traction, cure, maintenance, and recoat test before application.',
+    seoTitle: 'Concrete Sealing Scope Review Waco TX | SLA Concrete Works',
+    seoDescription:
+      'Review a Waco concrete-sealing scope around surface condition, prior sealer, preparation, named product, coverage, traction, cure, maintenance, and recoat testing.',
+    intro:
+      'Penetrating and film-forming sealers are different systems, and an existing surface may already contain a product that affects compatibility. The estimate should name the sealer, observed condition, preparation, test method, coverage, traction, cure, maintenance, and exclusions.',
+    evidenceNotice:
+      'No source-reviewed SLA sealing case study in the repository currently records the surface, prior product, preparation, named sealer, coverage, traction choice, maintenance interval, and observed result. Universal protection or recoat promises have therefore been removed.',
+    proofRequirements: [
+      'A real SLA sealing project with privacy-safe identity, date, surface use, area, and before/after photos',
+      'Surface condition, moisture or contamination observations, prior-product check, preparation, and test result',
+      'Named sealer, product class, coverage, coats, traction choice, cure, weather limits, and reopening instructions',
+      'Maintenance and recoat-test guidance, exclusions, trade roles, permission, and Stephen’s reviewed observation',
+    ],
+    benefits: [
+      'Existing surface and prior product reviewed before compatibility is assumed',
+      'Named sealer, preparation, coverage, coats, traction, and cure written into scope',
+      'Maintenance, recoat testing, limits, exclusions, and responsible trade made explicit',
+    ],
+    process: [
+      {
+        title: 'Identify the surface and prior product',
+        description:
+          'Record concrete condition, use, moisture or contamination concerns, previous sealer, repairs, and exposure before product selection.',
+      },
+      {
+        title: 'Test and write the system',
+        description:
+          'Confirm preparation, compatibility or test area, named product, coverage, coats, traction treatment, weather limits, and applicator role.',
+      },
+      {
+        title: 'Document cure and maintenance',
+        description:
+          'Use the selected manufacturer instructions for cure, reopening, cleaning, inspections, and future recoat testing.',
+      },
+    ],
+    finishes: ['Named penetrating product after review', 'Named film-forming product after review', 'Documented sheen', 'Documented traction treatment'],
+    localNotes: [
+      {
+        title: 'Compatibility comes first',
+        description:
+          'An unknown existing product can affect adhesion or appearance. The surface history and a test may be needed before a new system is approved.',
+      },
+      {
+        title: 'Traction must be written down',
+        description:
+          'Wet exposure, slope, traffic, sheen, and any traction treatment should be reviewed for the actual use rather than implied by “sealed concrete.”',
+      },
+      {
+        title: 'Maintenance is not one fixed interval',
+        description:
+          'Exposure, traffic, cleaning, product class, and observed wear determine inspection and recoat timing; the selected product guidance controls.',
+      },
+    ],
+    costFactors: [
+      'Surface condition, previous product, contamination, repairs, and preparation',
+      'Measured area, access, masking, protection, and weather window',
+      'Named sealer, coverage, coats, sheen, and traction treatment',
+      'Test work, cure restrictions, maintenance handoff, and exclusions',
+    ],
+    timeline:
+      'Application and reopening timing must follow the selected product, surface condition, preparation, coat sequence, temperature, moisture, and manufacturer instructions.',
+    coverageNote:
+      'Send the project city, surface use, approximate area, wide and close photos, and any known previous products. SLA will confirm whether the sealing scope and selected system fit before quoting.',
+    faq: [
+      {
+        question: 'Does this page recommend one sealer or maintenance interval for every surface?',
+        answer:
+          'No. Surface condition, prior products, exposure, traffic, traction needs, and manufacturer instructions determine the appropriate system and review interval.',
+      },
+      {
+        question: 'Does the current repository prove a complete SLA sealing case study?',
+        answer:
+          'Not yet. A source-reviewed project with named product, preparation, coverage, traction, maintenance, and result has not been published.',
+      },
+      {
+        question: 'What should a sealing proposal identify?',
+        answer:
+          'Surface and prior-product condition, preparation, test, named sealer, coverage and coats, sheen, traction, weather limits, cure, reopening, maintenance, exclusions, and responsible trade.',
+      },
+    ],
+  },
+}
+
+export const servicePages = baseServicePages.map((page) => ({
+  ...page,
+  ...(serviceAuthenticityOverrides[page.slug] || {}),
+}))

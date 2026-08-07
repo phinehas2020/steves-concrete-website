@@ -1,4 +1,3 @@
-/* global process */
 import { createClient } from '@supabase/supabase-js'
 import { generateBlogPostFromPhotoSelection, generateJobListingFromPhotoSelection } from './blog-generate-post.js'
 

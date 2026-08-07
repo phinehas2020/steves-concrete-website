@@ -225,7 +225,7 @@ export function Hero() {
                     <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-stone-800/80 backdrop-blur-sm rounded-full mb-4 sm:mb-6">
                         <span className="size-2 bg-accent-500 rounded-full badge-pulse-dot" />
                         <span className="text-xs sm:text-sm font-medium text-stone-300">
-                            Serving Waco, Temple & McLennan County Since 2005
+                            Serving Waco, Temple & McLennan County
                         </span>
                     </div>
 
@@ -237,7 +237,7 @@ export function Hero() {
                         Concrete Contractors
                         <span className="block text-accent-400">in Waco, TX</span>
                         <span className="block text-lg sm:text-xl font-medium text-stone-400 mt-2">
-                            Owner-Run · Free Estimates · Since 2005
+                            Owner-Run · Free Written Estimates
                         </span>
                     </h1>
 
@@ -303,16 +303,16 @@ export function Hero() {
                     <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-stone-700">
                         <div className="grid grid-cols-3 gap-4 sm:gap-8 md:gap-12">
                             <div className="text-center sm:text-left">
-                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">20+</div>
-                                <div className="text-xs sm:text-sm text-stone-400">Years Experience</div>
+                                <div className="font-display font-bold text-xl sm:text-2xl text-white">Owner-run</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Steve reviews the scope</div>
                             </div>
                             <div className="text-center sm:text-left">
-                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">500+</div>
-                                <div className="text-xs sm:text-sm text-stone-400">Projects Completed</div>
+                                <div className="font-display font-bold text-xl sm:text-2xl text-white">Written</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Prep, finish & cleanup</div>
                             </div>
                             <div className="text-center sm:text-left">
-                                <div className="font-display font-bold text-2xl sm:text-3xl text-white tabular-nums">5.0</div>
-                                <div className="text-xs sm:text-sm text-stone-400">Review Rating</div>
+                                <div className="font-display font-bold text-xl sm:text-2xl text-white">Local</div>
+                                <div className="text-xs sm:text-sm text-stone-400">Soil & drainage planning</div>
                             </div>
                         </div>
                     </div>

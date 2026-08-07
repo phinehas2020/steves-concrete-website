@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { resolveRobotsDirective } from '../data/indexingControls'
 
 const SITE_URL = 'https://www.concretewaco.com'
 const SITE_NAME = 'SLA Concrete Works LLC'
@@ -9,10 +10,10 @@ const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`
 const DEFAULT_SEO = {
   title: 'Concrete Contractors Waco TX | SLA Concrete Works LLC',
   description:
-    "Waco's 5-star concrete company for driveways, patios, slabs, foundations, and repair. 500+ projects since 2005. Free estimates: (254) 230-3102.",
+    'Owner-run Waco concrete contractor for driveways, patios, slabs, foundations, repair, and commercial flatwork. Free estimates: (254) 230-3102.',
   canonical: SITE_URL + '/',
   image: DEFAULT_IMAGE,
-  imageAlt: "SLA Concrete Works LLC - Waco's Trusted Concrete Contractor",
+  imageAlt: 'SLA Concrete Works LLC concrete services in Waco, Texas',
   type: 'website',
   robots: 'index, follow',
   twitterCard: 'summary_large_image',
@@ -155,11 +156,13 @@ export function setSeo(overrides = {}) {
   const meta = { ...DEFAULT_SEO, ...overrides }
   const canonical = normalizeCanonical(toAbsoluteUrl(meta.canonical))
   const resolvedUrl = normalizeCanonical(toAbsoluteUrl(overrides.url || canonical))
+  const pathname = typeof window === 'undefined' ? new URL(canonical).pathname : window.location.pathname
+  const robots = resolveRobotsDirective(pathname, meta.robots, meta.indexingRecord)
 
   document.title = meta.title
 
   upsertMeta({ name: 'description', content: meta.description })
-  upsertMeta({ name: 'robots', content: meta.robots })
+  upsertMeta({ name: 'robots', content: robots })
 
   upsertMeta({ property: 'og:title', content: meta.title })
   upsertMeta({ property: 'og:description', content: meta.description })
