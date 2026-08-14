@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender-routes.mjs",
+    "build": "node scripts/verify-supabase-build-target.mjs && vite build && node scripts/prerender-routes.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "test:api": "node --test tests/api/*.test.js",

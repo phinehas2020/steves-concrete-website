@@ -86,11 +86,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Finished interior and covered exterior concrete at the Chappell Hill barndominium',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/4a17b835-2331-491e-b807-10f7a79ccfc8-xwyhp2.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/4a17b835-2331-491e-b807-10f7a79ccfc8-xwyhp2.jpg',
       },
       {
         alt: 'Final trowel-pass pattern on the Chappell Hill interior slab',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/3a47fdff-b4ec-44b5-8c25-5a3eac46e445-ftuaxw.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/3a47fdff-b4ec-44b5-8c25-5a3eac46e445-ftuaxw.jpg',
       },
     ],
     projectSeriesId: 'chappell-hill-barndominium-slab',
@@ -133,11 +133,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Finished surface and perimeter of the 9,600-square-foot Burnet shop slab',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/38b03cc4-1101-4f3c-bed9-c048b691f1be-8hxbk0.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/38b03cc4-1101-4f3c-bed9-c048b691f1be-8hxbk0.jpg',
       },
       {
         alt: 'Visible finished field and joint lines on the Burnet shop foundation',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/4d306076-19e7-4ecf-a0a4-11ac9198e927-11kem42.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/4d306076-19e7-4ecf-a0a4-11ac9198e927-11kem42.jpg',
       },
     ],
     projectSeriesId: 'burnet-9600-sf-shop-slab',
@@ -180,11 +180,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Crew floating fresh concrete in the Circle K apron and drive area',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/46c4b588-88df-4763-a45c-cb2740537b37-1w2owle.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/46c4b588-88df-4763-a45c-cb2740537b37-1w2owle.jpg',
       },
       {
         alt: 'Circle K fuel-site flatwork beside active paving equipment in Lacy Lakeview',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/a43f360c-8c37-4e38-9619-0409f1c9eda9-1n9idyd.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/a43f360c-8c37-4e38-9619-0409f1c9eda9-1n9idyd.jpg',
       },
     ],
     projectSeriesId: 'circle-k-lacy-lakeview-flatwork',
@@ -227,11 +227,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Aerial view of the formed 9,600-square-foot Burnet shop foundation before placement',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/6faae80c-d30e-4944-8bd4-74cc5eaff052-6t3zf6.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/6faae80c-d30e-4944-8bd4-74cc5eaff052-6t3zf6.jpg',
       },
       {
         alt: 'Nine-panel pre-pour layout across the Burnet shop slab footprint',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/060587a7-e7eb-4809-b9d9-30c4621f3b34-29l53t.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/060587a7-e7eb-4809-b9d9-30c4621f3b34-29l53t.jpg',
       },
     ],
     projectSeriesId: 'burnet-9600-sf-shop-slab',
@@ -274,11 +274,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Walk-behind power trowel finishing the 2,500-square-foot Mount Calm shop slab',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/62863c29-7af6-48b1-b3a7-21ec9c69edff-1j736zw.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/62863c29-7af6-48b1-b3a7-21ec9c69edff-1j736zw.jpg',
       },
       {
         alt: 'Hand finishing along the formed perimeter of the Mount Calm shop foundation',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/1e6c0fb6-2325-4047-86be-363e94100c85-uiu8fa.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/1e6c0fb6-2325-4047-86be-363e94100c85-uiu8fa.jpg',
       },
     ],
     projectSeriesId: 'mount-calm-shop-foundation',
@@ -321,11 +321,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Concrete RV pads beneath metal covers with curved curb forms at Magnolia RV',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/640968e3-2023-493b-b30e-23593097b905-1xp15zi.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/640968e3-2023-493b-b30e-23593097b905-1xp15zi.jpg',
       },
       {
         alt: 'Magnolia RV pad layout around covered bays, open grade, and utilities',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/1a1af200-efb3-4665-a5fc-391c72edd749-9rfa26.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/1a1af200-efb3-4665-a5fc-391c72edd749-9rfa26.jpg',
       },
     ],
     projectSeriesId: 'magnolia-rv-concrete-pads',
@@ -368,11 +368,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Concrete placed from a truck chute into City of Waco sidewalk forms',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/bd3fce5d-158e-4f58-a3a1-bef64ddf444a-14hw1sc.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/bd3fce5d-158e-4f58-a3a1-bef64ddf444a-14hw1sc.jpg',
       },
       {
         alt: 'Crew distributing and striking fresh concrete on the Waco sidewalk',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/c9e6bda2-ce77-42cc-b1f1-281da2f66c1d-nld0uc.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/c9e6bda2-ce77-42cc-b1f1-281da2f66c1d-nld0uc.jpg',
       },
     ],
     projectSeriesId: 'city-of-waco-sidewalk',
@@ -415,11 +415,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Power-trowel finishing on the unidentified Hewitt concrete slab',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/570e0b01-242a-4f49-8eab-24604ba9a5b4-1qy2vjm.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/570e0b01-242a-4f49-8eab-24604ba9a5b4-1qy2vjm.jpg',
       },
       {
         alt: 'Forms and perimeter finishing in the Hewitt slab photo record',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/e66f16f4-3832-4a34-b319-0f6ed706d1ca-1l1ibq4.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/e66f16f4-3832-4a34-b319-0f6ed706d1ca-1l1ibq4.jpg',
       },
     ],
     projectSeriesId: 'hewitt-slab-pour',
@@ -462,11 +462,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Straight pedestrian walkway with visible joints at Cameron Park Zoo',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/d80ac1cf-acab-4fbe-bf0c-82e055789599-ixyh77.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/d80ac1cf-acab-4fbe-bf0c-82e055789599-ixyh77.jpg',
       },
       {
         alt: 'Finished walkway edges beside posts and landscaping at Cameron Park Zoo',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/f11839a7-ab95-401b-9ddb-1074a8708a2e-hkw141.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/f11839a7-ab95-401b-9ddb-1074a8708a2e-hkw141.jpg',
       },
     ],
     projectSeriesId: 'cameron-park-zoo-walkway',
@@ -509,7 +509,7 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Finished parking-area concrete with curb lines and protected bollards at Melody Grove',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-04/6087acf7-d92f-4bfe-9e5e-37b58e531594-1ath4dh.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-04/6087acf7-d92f-4bfe-9e5e-37b58e531594-1ath4dh.jpg',
       },
     ],
     projectSeriesId: 'melody-grove-concrete',
@@ -552,11 +552,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Finished 1,600-square-foot concrete renewal beneath the Hubbard shop carport',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/2bcefc4d-7b57-4765-bf85-55cfbd1f2df9-q340ee.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/2bcefc4d-7b57-4765-bf85-55cfbd1f2df9-q340ee.jpg',
       },
       {
         alt: 'Renewed concrete surface beside the Hubbard shop roll-up door',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/d2ded9c5-bc50-43b2-8c04-5b3def5de499-q5mjgj.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/d2ded9c5-bc50-43b2-8c04-5b3def5de499-q5mjgj.jpg',
       },
     ],
     projectSeriesId: 'hubbard-concrete-renewal',
@@ -644,7 +644,7 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Fresh Georgetown shop foundation with troweled surface and braced perimeter forms',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/7d3b1d9f-4feb-497b-b62f-2ed1928db297-1in5ayo.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/7d3b1d9f-4feb-497b-b62f-2ed1928db297-1in5ayo.jpg',
       },
     ],
     projectSeriesId: 'georgetown-shop-and-retaining-wall',
@@ -687,11 +687,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Straight retaining-wall footing trenches and layout stakes at the Riesel-area site',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b4bf0102-6288-49e7-b454-0524aeeec62e-fon6x8.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b4bf0102-6288-49e7-b454-0524aeeec62e-fon6x8.jpg',
       },
       {
         alt: 'Concrete retaining-wall section later in the Riesel-area project sequence',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b6e9111a-308d-4039-a871-d2ab3bbcc3eb-a94p0o.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b6e9111a-308d-4039-a871-d2ab3bbcc3eb-a94p0o.jpg',
       },
     ],
     projectSeriesId: 'riesel-retaining-wall',
@@ -734,11 +734,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Ready-mix delivery and active RV-pad placement at Magnolia RV',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/7981efb0-ad70-4128-8be8-41b3d323127e-1756zlp.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/7981efb0-ad70-4128-8be8-41b3d323127e-1756zlp.jpg',
       },
       {
         alt: 'Hand and bull-float work inside a formed Magnolia RV pad',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/0cbe23a4-c406-4df5-99b0-dd8a2e59295b-r61c0e.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/0cbe23a4-c406-4df5-99b0-dd8a2e59295b-r61c0e.jpg',
       },
     ],
     projectSeriesId: 'magnolia-rv-concrete-pads',
@@ -781,11 +781,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Concrete drainage-channel work along the narrow Temple fence-line corridor',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/10bf6f17-bb3c-4505-adaa-8a16fc30e5cd-wir26n.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/10bf6f17-bb3c-4505-adaa-8a16fc30e5cd-wir26n.jpg',
       },
       {
         alt: 'Forms and adjacent reinforcement in the 400-foot Temple drainage project',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/392fac0d-4c5f-49f7-a09d-7575eba39cba-16m603e.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/392fac0d-4c5f-49f7-a09d-7575eba39cba-16m603e.jpg',
       },
     ],
     projectSeriesId: 'temple-drainage-channel',
@@ -828,11 +828,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Finished China Spring RV pad with a smooth field and straight perimeter',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/2e1939ae-4e95-4360-83bf-e85e8224c6ef-bkvl2l.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/2e1939ae-4e95-4360-83bf-e85e8224c6ef-bkvl2l.jpg',
       },
       {
         alt: 'Hand-finished concrete edge meeting the surrounding gravel at the RV pad',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/cad3e513-acc5-497f-bb53-7e1fe59db827-1kbba8i.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/cad3e513-acc5-497f-bb53-7e1fe59db827-1kbba8i.jpg',
       },
     ],
     projectSeriesId: 'china-spring-rv-pad',
@@ -875,11 +875,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Finished troweled Magnolia RV pad beside the fence and outbuilding',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/d0d1daee-67d9-4a0f-8347-c5d3252c088d-19drx9u.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/d0d1daee-67d9-4a0f-8347-c5d3252c088d-19drx9u.jpg',
       },
       {
         alt: 'Perimeter and surface condition in the Magnolia RV completion record',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/09c8f595-ab3f-4879-9d3b-8bd1addaaf39-14b9567.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/09c8f595-ab3f-4879-9d3b-8bd1addaaf39-14b9567.jpg',
       },
     ],
     projectSeriesId: 'magnolia-rv-concrete-pads',
@@ -922,11 +922,11 @@ export const repairedBlogPosts = [
     photos: [
       {
         alt: 'Wood forms, aggregate base, and reinforcement for accessible parking at Melody Grove',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/410ab6b1-7da4-47ef-8cb6-f67dc461dfdd-1o2idy1.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/410ab6b1-7da4-47ef-8cb6-f67dc461dfdd-1o2idy1.jpg',
       },
       {
         alt: 'Defined corners and staged prep work in the Melody Grove accessible-parking area',
-        url: 'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/83e78be1-2251-445c-a2b6-017cb606b889-1komtwo.jpg',
+        url: 'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/83e78be1-2251-445c-a2b6-017cb606b889-1komtwo.jpg',
       },
     ],
     projectSeriesId: 'melody-grove-concrete',
