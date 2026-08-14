@@ -18,17 +18,17 @@ const featuredServices = [
   },
   {
     slug: 'sports-court-coating-waco-tx',
-    title: 'Sports Court Concrete Base Planning',
-    tag: 'Project Planning',
+    title: 'Pickleball Court Concrete',
+    tag: 'New Courts & Slab Work',
     icon: Trophy,
     description:
-      'Plan a new court base or evaluate an existing slab around access, drainage, concrete scope, and the handoff to the court designer or surface specialist.',
+      'SLA builds concrete bases for new Waco-area pickleball courts and evaluates existing slabs for concrete repair or replacement before the playing-surface handoff.',
     bullets: [
-      'New-base and repair-versus-replacement decision guides',
-      'Seven-item estimate-readiness checklist',
-      'Concrete work and court-specialist handoff defined separately',
+      'New pickleball-court concrete bases',
+      'Existing court slab repair or replacement review',
+      'Concrete scope and surface-specialist handoff defined separately',
     ],
-    cta: 'Plan a court base',
+    cta: 'Get a court estimate',
   },
 ]
 

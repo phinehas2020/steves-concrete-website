@@ -351,7 +351,7 @@ const routeMeta = [
     description: service.metaDescription,
     canonical: `${SITE_URL}/${service.slug}`,
     h1: service.title,
-    schemaKind: service.scopeBoundary ? 'static' : 'service',
+    schemaKind: service.schemaKind || (service.scopeBoundary ? 'static' : 'service'),
     schemaName: service.title,
     schemaServiceType: service.title,
     schemaDescription: service.metaDescription || service.cardSummary || service.introParagraph,

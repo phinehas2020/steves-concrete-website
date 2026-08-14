@@ -212,6 +212,9 @@ test('sports planning routes have distinct indexable purposes and decision guide
   assert.ok(waco.scopeBoundary?.specialistItems?.length >= 3)
   assert.ok(waco.planningChecklist?.length >= 5)
   assert.ok(waco.officialResources?.length >= 2)
+  assert.equal(waco.schemaKind, 'service')
+  assert.match(waco.title, /Pickleball Court Concrete/i)
+  assert.match(waco.introParagraph, /builds the concrete base for new pickleball courts/i)
 
   const records = [
     ...sportsCourtAreaPages.map((page) => ({

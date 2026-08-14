@@ -5,7 +5,7 @@ import { servicePageLinks } from '../data/seoServicePages'
 const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/#services' },
-    { label: 'Court Base Planning', href: '/sports-court-coating-waco-tx' },
+    { label: 'Pickleball Court Concrete', href: '/sports-court-coating-waco-tx' },
     { label: 'Gallery', href: '/jobs' },
     { label: 'About', href: '/about' },
     { label: 'FAQ', href: '/#faq' },
@@ -105,7 +105,7 @@ export function Footer() {
                                     </a>
                                 </li>
                             ))}
-                            <li><a href="/sports-court-coating-waco-tx" className="hover:text-white transition-colors">Sports Court Base Planning</a></li>
+                            <li><a href="/sports-court-coating-waco-tx" className="hover:text-white transition-colors">Pickleball Court Concrete</a></li>
                         </ul>
                     </div>
 

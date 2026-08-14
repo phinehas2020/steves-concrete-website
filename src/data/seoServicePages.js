@@ -72,26 +72,27 @@ const baseSeoServicePages = [
   },
   {
     slug: 'sports-court-coating-waco-tx',
-    title: 'Sports Court Concrete Base Planning in Waco, TX',
+    title: 'Pickleball Court Concrete Construction in Waco, TX',
     indexable: true,
     evidenceStatus: 'indexable_planning_resource',
     pagePurpose: 'waco_concrete_base_feasibility_scope_and_partner_coordination',
+    schemaKind: 'service',
     showGallery: false,
-    pageBadge: 'Waco concrete-base planning',
-    ctaLabel: 'Plan My Court Base',
+    pageBadge: 'Waco pickleball-court concrete',
+    ctaLabel: 'Get a Pickleball Court Estimate',
     cardSummary:
-      'Plan a new court base or evaluate an existing slab around access, drainage, concrete scope, and the handoff to a qualified court-surface specialist.',
-    metaTitle: 'Sports Court Concrete Base Planning in Waco, TX | SLA',
+      'SLA builds new concrete bases for pickleball courts and evaluates existing slabs for repair or replacement, with the court-surface handoff spelled out.',
+    metaTitle: 'Pickleball Court Contractor Waco TX | Concrete Construction',
     metaDescription:
-      'Plan a Waco sports-court concrete base or slab repair with a clear site checklist, concrete scope, drainage decisions, and court-surface specialist handoff.',
+      'Waco pickleball court concrete contractor for new bases, slab repair and replacement. Get a site-specific estimate from SLA Concrete Works: (254) 230-3102.',
     introParagraph:
-      'A sports court needs more than a colored finish. SLA helps Waco owners organize the concrete-base decision: site access, grade, drainage, base preparation, slab work, repair or replacement, and the handoff to the court designer or surface specialist who controls the playing-system requirements.',
+      'SLA Concrete Works builds the concrete base for new pickleball courts in the Waco area and evaluates existing court slabs for concrete repair or replacement. We plan the access, grade, drainage, base preparation, reinforcement, placement, joints, finish, and cure requirements that belong in the accepted concrete scope, then coordinate the handoff to the court designer or surface specialist for the playing surface, colors, and game lines.',
     scopeBoundary: {
-      slaTitle: 'Concrete-base scope SLA can evaluate',
+      slaTitle: 'Pickleball-court concrete SLA can quote and build',
       slaItems: [
         'Site access, work limits, existing-slab condition, grade, and drainage feasibility',
         'Accepted site preparation, base, forming, reinforcement, placement, joints, slope, concrete finish, and cure responsibilities',
-        'Defined concrete repair, partial replacement, full replacement, or new-base work after the appropriate site review',
+        'Accepted concrete repair, partial replacement, full replacement, or new pickleball-court base construction after the appropriate site review',
       ],
       specialistTitle: 'Court specialist and project-team scope',
       specialistItems: [
@@ -101,12 +102,12 @@ const baseSeoServicePages = [
       ],
     },
     decisionGuide: {
-      title: 'Which concrete conversation do you need?',
+      title: 'What kind of pickleball-court project do you have?',
       intro:
         'Pick the starting condition below. It determines what SLA needs to see and when the court-surface specialist should enter the process.',
       items: [
         {
-          title: 'New court base',
+          title: 'New pickleball court concrete base',
           description:
             'Start with the address, intended sport, approximate footprint, survey or layout if available, access, grade, drainage path, and the surface specialist’s concrete requirements.',
         },
@@ -123,7 +124,7 @@ const baseSeoServicePages = [
       ],
     },
     planningChecklist: [
-      'Waco-area address, owner contact, intended sport, and expected use',
+      'Waco-area address, owner contact, pickleball-court use, and expected level of play',
       'Approximate outside dimensions plus a sketch, survey, aerial, or site plan',
       'Photos of the work area, truck route, gates, overhead conflicts, staging, drainage, and existing concrete',
       'New construction, repair, partial replacement, full replacement, or condition still unknown',
@@ -154,14 +155,14 @@ const baseSeoServicePages = [
     ],
     sections: [
       {
-        heading: 'Start with use, layout, and the project team',
+        heading: 'Start a Waco pickleball court with use, layout, and the project team',
         paragraphs: [
-          'A backyard practice area, private pickleball court, school play court, and shared commercial facility can require very different dimensions, drainage, access, equipment, accessibility, and documentation. Tell us the intended sport, level of use, rough footprint, and who will define the playing layout before concrete dimensions are treated as final.',
+          'A backyard pickleball court, school play court, neighborhood amenity, and shared commercial facility can require very different dimensions, drainage, access, equipment, accessibility, and documentation. Tell us the intended use, level of play, rough footprint, and who will define the playing layout before concrete dimensions are treated as final.',
           'The court designer or surface specialist should supply the requirements that affect the base. SLA turns the accepted concrete portion into a written scope. The owner or project manager assigns design, permits, fencing, lighting, equipment, accessibility, coating, and other non-concrete work to the appropriate parties.',
         ],
       },
       {
-        heading: 'New concrete bases begin with access, grade, and drainage',
+        heading: 'New pickleball court concrete begins with access, grade, and drainage',
         paragraphs: [
           'Before pricing a new base, show how trucks and equipment reach the work area, where materials and spoils can stage, what must stay protected, and where water will go after it leaves the slab. Tight gates, overhead obstacles, soft routes, long pump reaches, demolition, and occupied facilities all affect sequence and cost.',
           'Grade and drainage need to work with the court system, adjacent property, and surrounding improvements. The controlling plans or specialist requirements should establish the footprint, slope, finish, joint approach, cure, and other acceptance criteria. SLA’s proposal then states the concrete work it accepts and the information supplied by others.',
@@ -189,7 +190,7 @@ const baseSeoServicePages = [
         ],
       },
       {
-        heading: 'Use one site packet to start the Waco estimate review',
+        heading: 'Use one site packet to get a Waco pickleball court estimate',
         paragraphs: [
           'Send the address, intended sport, approximate footprint, new-versus-existing condition, target timing, a site sketch or aerial, and photos of the work area, access route, drainage, existing defects, and nearby improvements. Include any survey, plans, engineering, or court-surface documents already available.',
           'SLA can use that packet to identify whether the next step is a feasibility call, site review, missing design input, concrete repair or replacement discussion, or a proposal for a defined concrete base. You get a useful next decision instead of a generic square-foot number disconnected from the site.',
@@ -198,9 +199,9 @@ const baseSeoServicePages = [
     ],
     faq: [
       {
-        question: 'Can SLA plan or quote the concrete base for a Waco sports court?',
+        question: 'Does SLA build pickleball courts in Waco, TX?',
         answer:
-          'Yes, SLA can review a proposed new base, repair, or replacement and define the concrete work it is willing to quote. Send the site packet first so access, grade, drainage, slab requirements, and the surface-specialist handoff can be addressed in the proposal.',
+          'Yes. SLA builds the concrete base for new Waco-area pickleball courts and can evaluate existing slabs for repair or replacement. Our written proposal defines the accepted concrete work; a qualified court-surface specialist handles the playing-surface system, colors, and game lines unless the proposal explicitly says otherwise.',
       },
       {
         question: 'Who handles sports coating and game-line striping?',
@@ -215,7 +216,7 @@ const baseSeoServicePages = [
       {
         question: 'What should I send for a Waco court-base estimate?',
         answer:
-          'Send the address, sport and use, approximate footprint, site or slab photos, access route, drainage concerns, target timing, new-versus-existing condition, and any survey, plans, engineering, or surface-system requirements. Mark problem areas and dimensions directly on the photos when helpful.',
+          'Send the address, pickleball-court use, approximate footprint, site or slab photos, access route, drainage concerns, target timing, new-versus-existing condition, and any survey, plans, engineering, or surface-system requirements. Mark problem areas and dimensions directly on the photos when helpful.',
       },
       {
         question: 'Who confirms permits and accessibility requirements?',
