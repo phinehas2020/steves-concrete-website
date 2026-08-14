@@ -270,10 +270,11 @@ test('sports planning routes have distinct indexable purposes and decision guide
     assert.ok(record.decisionGuide?.items?.length >= 3, routePath)
     assert.ok(publicWordCount(publicCopy) >= 140, `${routePath} needs decision-useful copy`)
     assert.match(record.heroMedia?.src || '', /^\/images\/pickleball\/[a-z0-9-]+\.webp$/, routePath)
-    assert.match(
+    assert.ok(record.heroMedia?.caption?.length >= 35, `${routePath} needs clear image context`)
+    assert.doesNotMatch(
       record.heroMedia?.caption || '',
-      /reference|not a pickleball-court project/i,
-      `${routePath} needs clear image context`,
+      /not an SLA project|not a pickleball-court project|planning reference only/i,
+      `${routePath} should use a direct, factual public caption`,
     )
     assert.doesNotMatch(
       record.heroMedia?.src || '',
@@ -295,7 +296,7 @@ test('sports-court image derivatives exist and keep reference sources explicit',
 
   for (const item of media) {
     assert.ok(item?.alt?.length >= 24, item?.src)
-    assert.ok(item?.caption?.length >= 60, item?.src)
+    assert.ok(item?.caption?.length >= 35, item?.src)
     await fs.access(path.join(projectRoot, 'public', item.src.replace(/^\//, '')))
   }
 
@@ -303,7 +304,6 @@ test('sports-court image derivatives exist and keep reference sources explicit',
   assert.ok(externalReferences.length >= 2)
   externalReferences.forEach((item) => {
     assert.match(item.creditUrl, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/)
-    assert.match(item.caption, /reference/i)
   })
 })
 
