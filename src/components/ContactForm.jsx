@@ -319,6 +319,7 @@ export function ContactForm({
                   <option value="stamped">Stamped & Decorative</option>
                   <option value="commercial">Commercial Slabs</option>
                   <option value="repair">Concrete Repair</option>
+                  <option value="pickleball_court">Pickleball Court Concrete</option>
                   <option value="other">Other Project</option>
                 </select>
                 <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-stone-400">

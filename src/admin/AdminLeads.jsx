@@ -36,6 +36,7 @@ const serviceLabels = {
   stamped: 'Stamped & Decorative',
   commercial: 'Commercial Slabs',
   repair: 'Concrete Repair',
+  pickleball_court: 'Pickleball Court Concrete',
   other: 'Other Project',
 }
 
