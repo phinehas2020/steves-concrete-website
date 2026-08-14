@@ -4,7 +4,7 @@ export const sportsCourtImages = {
     alt: 'Aerial view of six finished outdoor pickleball courts with players',
     title: 'Finished-court reference',
     caption:
-      'Representative finished pickleball courts in La Crosse, Wisconsin. Planning reference only; not an SLA project.',
+      'Finished pickleball courts shown as a project-planning reference.',
     creditLabel: 'CC0 photo by Wikideas1 via Wikimedia Commons',
     creditUrl:
       'https://commons.wikimedia.org/wiki/File:Pickleball_court_in_La_Crosse,_Wisconsin_01.jpg',
@@ -16,7 +16,7 @@ export const sportsCourtImages = {
     alt: 'Graded pickleball-court construction site with survey stakes and standing water',
     title: 'Drainage and site-prep reference',
     caption:
-      'A documented pickleball-court site under construction at Redstone Arsenal. Planning reference only; not an SLA project.',
+      'A pickleball-court site under construction, shown as a drainage and site-prep reference.',
     creditLabel: 'Public-domain photo by Eric Schultz via Wikimedia Commons',
     creditUrl:
       'https://commons.wikimedia.org/wiki/File:RR_Pickleball_Court_011624_01.jpg',

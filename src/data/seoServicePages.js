@@ -84,7 +84,7 @@ const baseSeoServicePages = [
     imageStory: {
       title: 'From site conditions to a finished playing surface',
       intro:
-        'These images separate the work clearly: SLA handles the accepted concrete scope, while a court specialist handles the playing-surface system. Reference photos are labeled and are not presented as SLA projects.',
+        'These images separate the work clearly: SLA handles the accepted concrete scope, while a court specialist handles the playing-surface system.',
       items: [
         sportsCourtImages.courtSitePrepReference,
         sportsCourtImages.wacoConcretePlacement,

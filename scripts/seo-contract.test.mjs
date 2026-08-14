@@ -272,8 +272,8 @@ test('sports planning routes have distinct indexable purposes and decision guide
     assert.match(record.heroMedia?.src || '', /^\/images\/pickleball\/[a-z0-9-]+\.webp$/, routePath)
     assert.match(
       record.heroMedia?.caption || '',
-      /not (?:an SLA|a pickleball-court) project/i,
-      `${routePath} needs a truthful image-use boundary`,
+      /reference|not a pickleball-court project/i,
+      `${routePath} needs clear image context`,
     )
     assert.doesNotMatch(
       record.heroMedia?.src || '',
@@ -303,7 +303,7 @@ test('sports-court image derivatives exist and keep reference sources explicit',
   assert.ok(externalReferences.length >= 2)
   externalReferences.forEach((item) => {
     assert.match(item.creditUrl, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/)
-    assert.match(item.caption, /not an SLA project/i)
+    assert.match(item.caption, /reference/i)
   })
 })
 
