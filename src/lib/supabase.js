@@ -9,11 +9,13 @@ const supabaseUrl = trimEnvValue(import.meta.env.VITE_SUPABASE_URL)
 const supabasePublishableKey = trimEnvValue(
   import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY
 )
+const supabaseSchema = trimEnvValue(import.meta.env.VITE_SUPABASE_DB_SCHEMA) || 'public'
 
 let supabaseClient
 
 if (supabaseUrl && supabasePublishableKey) {
   supabaseClient = createClient(supabaseUrl, supabasePublishableKey, {
+    db: { schema: supabaseSchema },
     auth: {
       persistSession: true,
       autoRefreshToken: true,

@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const blogApiKey = process.env.N8N_BLOG_API_KEY || process.env.BLOG_API_KEY
-const blogImageBucket = process.env.BLOG_IMAGES_BUCKET || 'blog-images'
+const blogImageBucket = process.env.BLOG_IMAGES_BUCKET || 'steves-concrete-blog-images'
 const mirrorIcloudUrls = toBoolean(process.env.BLOG_MIRROR_ICLOUD_URLS ?? 'true', true)
 const mirrorAllRemoteImages = toBoolean(process.env.BLOG_MIRROR_REMOTE_IMAGES ?? 'false', false)
 
@@ -685,6 +685,7 @@ export default async function handler(req, res) {
   }
 
   const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
+    db: { schema: process.env.SUPABASE_DB_SCHEMA || 'public' },
     auth: { persistSession: false },
   })
 

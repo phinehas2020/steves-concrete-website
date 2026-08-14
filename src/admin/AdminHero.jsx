@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Trash2, Upload, ArrowUp, ArrowDown, X, CheckSquare, Square } from 'lucide-react'
+import { HERO_IMAGES_BUCKET } from '../lib/storageBuckets'
 
 export function AdminHero() {
   const [heroImages, setHeroImages] = useState([])
@@ -97,7 +98,7 @@ export function AdminHero() {
 
         // Upload file to Supabase Storage
         const { error: uploadError } = await supabase.storage
-          .from('hero-images')
+          .from(HERO_IMAGES_BUCKET)
           .upload(filePath, file, {
             cacheControl: '3600',
             upsert: false
@@ -110,7 +111,7 @@ export function AdminHero() {
 
         // Get public URL from Supabase Storage
         const { data: urlData } = supabase.storage
-          .from('hero-images')
+          .from(HERO_IMAGES_BUCKET)
           .getPublicUrl(filePath)
 
         const imageUrl = urlData.publicUrl
@@ -125,7 +126,7 @@ export function AdminHero() {
 
         if (insertError) {
           // If insert fails, try to clean up the uploaded file
-          await supabase.storage.from('hero-images').remove([filePath])
+          await supabase.storage.from(HERO_IMAGES_BUCKET).remove([filePath])
           throw insertError
         }
 
@@ -191,11 +192,11 @@ export function AdminHero() {
       const filePaths = imagesToDelete.map((img) => {
         // Extract file path from URL
         const url = new URL(img.image_url)
-        return url.pathname.replace('/storage/v1/object/public/hero-images/', '')
+        return url.pathname.replace(`/storage/v1/object/public/${HERO_IMAGES_BUCKET}/`, '')
       })
 
       if (filePaths.length > 0) {
-        await supabase.storage.from('hero-images').remove(filePaths)
+        await supabase.storage.from(HERO_IMAGES_BUCKET).remove(filePaths)
       }
 
       await fetchHeroImages()
@@ -501,7 +502,7 @@ export function AdminHero() {
                         try {
                           // Get image URL to delete from storage
                           const url = new URL(image.image_url)
-                          const filePath = url.pathname.replace('/storage/v1/object/public/hero-images/', '')
+                          const filePath = url.pathname.replace(`/storage/v1/object/public/${HERO_IMAGES_BUCKET}/`, '')
                           
                           // Delete from database
                           const { error: deleteError } = await supabase
@@ -512,7 +513,7 @@ export function AdminHero() {
                           if (deleteError) throw deleteError
 
                           // Delete from storage
-                          await supabase.storage.from('hero-images').remove([filePath])
+                          await supabase.storage.from(HERO_IMAGES_BUCKET).remove([filePath])
 
                           await fetchHeroImages()
                           setMessage('Image deleted successfully!')

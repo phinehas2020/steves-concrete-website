@@ -4,7 +4,7 @@ const supabaseUrl = process.env.SUPABASE_URL
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 const MAX_GUIDS_PER_REQUEST = 150
 const MAX_SYNC_PHOTOS = Number.parseInt(process.env.ICLOUD_SYNC_MAX_PHOTOS || '120', 10)
-const BLOG_IMAGE_BUCKET = process.env.BLOG_IMAGES_BUCKET || 'blog-images'
+const BLOG_IMAGE_BUCKET = process.env.BLOG_IMAGES_BUCKET || 'steves-concrete-blog-images'
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024
 const ALLOWED_IMAGE_MIME_TYPES = new Set([
   'image/jpeg',
@@ -1280,6 +1280,7 @@ export default async function handler(req, res) {
   }
 
   const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
+    db: { schema: process.env.SUPABASE_DB_SCHEMA || 'public' },
     auth: { persistSession: false },
   })
 

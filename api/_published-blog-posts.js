@@ -83,6 +83,7 @@ export async function fetchPublishedBlogPosts({
   }
 
   const supabase = createClient(supabaseUrl, supabaseKey, {
+    db: { schema: process.env.SUPABASE_DB_SCHEMA || 'public' },
     auth: {
       persistSession: false,
       autoRefreshToken: false,

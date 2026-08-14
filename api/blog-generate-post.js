@@ -1254,6 +1254,7 @@ export default async function handler(req, res) {
   }
 
   const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
+    db: { schema: process.env.SUPABASE_DB_SCHEMA || 'public' },
     auth: { persistSession: false },
   })
 

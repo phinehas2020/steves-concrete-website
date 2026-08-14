@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { Trash2, Plus, Upload, X, ArrowUp, ArrowDown, CheckSquare, Square } from 'lucide-react'
 import { DEFAULT_JOB_CATEGORIES } from '../data/jobs'
+import { JOBS_BUCKET } from '../lib/storageBuckets'
 
 const emptyJob = {
   title: '',
@@ -163,7 +164,7 @@ export function AdminJobs() {
     try {
       if (isEditing) {
         const { error } = await supabase
-          .from('jobs')
+          .from(JOBS_BUCKET)
           .update({
             title: formData.title.trim(),
             slug: formData.slug.trim(),
@@ -258,7 +259,7 @@ export function AdminJobs() {
 
         // Upload file to Supabase Storage
         const { error: uploadError } = await supabase.storage
-          .from('jobs')
+          .from(JOBS_BUCKET)
           .upload(filePath, file, {
             cacheControl: '3600',
             upsert: false
@@ -286,7 +287,7 @@ export function AdminJobs() {
 
         if (insertError) {
           // If insert fails, try to clean up the uploaded file
-          await supabase.storage.from('jobs').remove([filePath])
+          await supabase.storage.from(JOBS_BUCKET).remove([filePath])
           throw insertError
         }
 

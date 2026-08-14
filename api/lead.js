@@ -451,7 +451,9 @@ export default async function handler(req, res) {
     return
   }
 
-  const supabase = createClient(supabaseUrl, supabaseServiceRoleKey)
+  const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
+    db: { schema: process.env.SUPABASE_DB_SCHEMA || 'public' },
+  })
 
   const rateLimit = await runRateLimitChecks(supabase, lead)
   if (rateLimit.blocked) {

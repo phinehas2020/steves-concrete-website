@@ -55,6 +55,9 @@ const requestedTableSet = requestedTables.length ? new Set(requestedTables) : nu
 loadDotEnv(path.resolve('.env'))
 
 const batchSize = parsePositiveInt(process.env.MIGRATION_BATCH_SIZE, DEFAULT_BATCH_SIZE)
+const sourceSchema = firstEnvValue('SOURCE_SUPABASE_DB_SCHEMA') || 'public'
+const targetSchema = firstEnvValue('TARGET_SUPABASE_DB_SCHEMA') || 'public'
+const targetStorageBucketPrefix = firstEnvValue('TARGET_STORAGE_BUCKET_PREFIX') || ''
 
 let sourceUrl = firstEnvValue('SOURCE_SUPABASE_URL', 'SUPABASE_URL')
 let sourceServiceRoleKey = firstEnvValue('SOURCE_SUPABASE_SERVICE_ROLE_KEY', 'SUPABASE_SERVICE_ROLE_KEY')
@@ -102,8 +105,14 @@ if (!sourceUrl || !sourceServiceRoleKey) {
   )
 }
 
-const source = createClient(sourceUrl, sourceServiceRoleKey, { auth: { persistSession: false } })
-const target = createClient(targetUrl, targetServiceRoleKey, { auth: { persistSession: false } })
+const source = createClient(sourceUrl, sourceServiceRoleKey, {
+  db: { schema: sourceSchema },
+  auth: { persistSession: false },
+})
+const target = createClient(targetUrl, targetServiceRoleKey, {
+  db: { schema: targetSchema },
+  auth: { persistSession: false },
+})
 
 const discoveredTables = await discoverSourceTables(sourceUrl, sourceRestKey)
 const migrationTables = buildMigrationTables(discoveredTables)
@@ -112,6 +121,7 @@ const RESET_ORDER = [...migrationTables].reverse()
 
 console.log(`Source project: ${sourceUrl}`)
 console.log(`Target project: ${targetUrl}`)
+console.log(`Schemas: ${sourceSchema} -> ${targetSchema}`)
 console.log(`Mode: ${dryRun ? 'dry-run' : 'write'}`)
 
 if (!skipSchema) {
@@ -155,7 +165,7 @@ if (!skipSchema) {
 
 async function resetDestinationTables() {
   console.log('')
-  console.log('Resetting destination public tables for line-for-line copy...')
+  console.log(`Resetting destination ${targetSchema} tables for line-for-line copy...`)
 
   for (const table of RESET_ORDER) {
     const existingCount = await countRows(target, table.name)
@@ -175,7 +185,7 @@ async function resetDestinationTables() {
 
 async function migratePublicTables() {
   console.log('')
-  console.log('Copying public tables...')
+  console.log(`Copying ${sourceSchema} tables into ${targetSchema}...`)
 
   for (const table of migrationTables) {
     const sourceRows = await fetchAllRows(source, table)
@@ -358,11 +368,12 @@ async function migrateStorageBuckets() {
   }
 
   for (const bucket of effectiveBuckets) {
-    console.log(`  bucket ${bucket.id}`)
+    const targetBucketId = getTargetBucketId(bucket.id)
+    console.log(`  bucket ${bucket.id} -> ${targetBucketId}`)
 
     if (!dryRun) {
-      await ensureTargetBucket(bucket, targetBucketById.get(bucket.id))
-      const { error: emptyError } = await target.storage.emptyBucket(bucket.id)
+      await ensureTargetBucket(bucket, targetBucketId, targetBucketById.get(targetBucketId))
+      const { error: emptyError } = await target.storage.emptyBucket(targetBucketId)
       if (emptyError) {
         throw new Error(`Failed emptying target bucket ${bucket.id}: ${emptyError.message}`)
       }
@@ -382,7 +393,7 @@ async function migrateStorageBuckets() {
       }
 
       const arrayBuffer = await downloaded.arrayBuffer()
-      const { error: uploadError } = await target.storage.from(bucket.id).upload(objectPath, arrayBuffer, {
+      const { error: uploadError } = await target.storage.from(targetBucketId).upload(objectPath, arrayBuffer, {
         upsert: true,
         contentType: downloaded.type || undefined,
       })
@@ -394,7 +405,7 @@ async function migrateStorageBuckets() {
   }
 }
 
-async function ensureTargetBucket(sourceBucket, existingTargetBucket) {
+async function ensureTargetBucket(sourceBucket, targetBucketId, existingTargetBucket) {
   const bucketOptions = {
     public: Boolean(sourceBucket.public),
     fileSizeLimit: sourceBucket.file_size_limit ?? undefined,
@@ -402,14 +413,14 @@ async function ensureTargetBucket(sourceBucket, existingTargetBucket) {
   }
 
   if (!existingTargetBucket) {
-    const { error } = await target.storage.createBucket(sourceBucket.id, bucketOptions)
+    const { error } = await target.storage.createBucket(targetBucketId, bucketOptions)
     if (error) {
       throw new Error(`Failed creating target bucket ${sourceBucket.id}: ${error.message}`)
     }
     return
   }
 
-  const { error } = await target.storage.updateBucket(sourceBucket.id, bucketOptions)
+  const { error } = await target.storage.updateBucket(targetBucketId, bucketOptions)
   if (error) {
     throw new Error(`Failed updating target bucket ${sourceBucket.id}: ${error.message}`)
   }
@@ -430,6 +441,11 @@ async function verifyMigrationCounts() {
 }
 
 async function pushSchemaToTarget() {
+  if (targetSchema !== 'public') {
+    throw new Error(
+      `Refusing to push the repo's public-schema migration history into shared schema ${targetSchema}. Apply supabase/shared-sites/steves_concrete.sql once, then rerun with --skip-schema.`,
+    )
+  }
   if (!targetDatabaseUrl) {
     console.log('')
     console.log('Skipping schema sync step: TARGET_SUPABASE_DB_URL is not set.')
@@ -708,7 +724,13 @@ function filterBuckets(sourceBuckets) {
 
 function rewriteSourceOrigin(value, source, target) {
   if (typeof value === 'string') {
-    return value.split(source).join(target)
+    let rewritten = value.split(source).join(target)
+    for (const bucketId of ['jobs', 'hero-images', 'blog-images']) {
+      rewritten = rewritten
+        .split(`/storage/v1/object/public/${bucketId}/`)
+        .join(`/storage/v1/object/public/${getTargetBucketId(bucketId)}/`)
+    }
+    return rewritten
   }
 
   if (Array.isArray(value)) {
@@ -722,6 +744,12 @@ function rewriteSourceOrigin(value, source, target) {
   }
 
   return value
+}
+
+function getTargetBucketId(sourceBucketId) {
+  return targetStorageBucketPrefix
+    ? `${targetStorageBucketPrefix}-${sourceBucketId}`
+    : sourceBucketId
 }
 
 function loadDotEnv(filePath) {
