@@ -215,6 +215,7 @@ test('sports planning routes have distinct indexable purposes and decision guide
   assert.equal(waco.schemaKind, 'service')
   assert.match(waco.title, /Pickleball Court Concrete/i)
   assert.match(waco.introParagraph, /builds the concrete base for new pickleball courts/i)
+  assert.ok(waco.imageStory?.items?.length >= 2)
 
   const records = [
     ...sportsCourtAreaPages.map((page) => ({
@@ -245,6 +246,7 @@ test('sports planning routes have distinct indexable purposes and decision guide
   ]
 
   assert.equal(records.length, 4)
+  assert.equal(new Set(records.map(({ record }) => record.heroMedia?.src)).size, 4)
   assert.equal(new Set(records.map(({ record }) => record.pagePurpose)).size, 4)
   assert.equal(
     new Set(
@@ -267,6 +269,41 @@ test('sports planning routes have distinct indexable purposes and decision guide
     assert.ok(record.decisionGuide?.intro, routePath)
     assert.ok(record.decisionGuide?.items?.length >= 3, routePath)
     assert.ok(publicWordCount(publicCopy) >= 140, `${routePath} needs decision-useful copy`)
+    assert.match(record.heroMedia?.src || '', /^\/images\/pickleball\/[a-z0-9-]+\.webp$/, routePath)
+    assert.match(
+      record.heroMedia?.caption || '',
+      /not (?:an SLA|a pickleball-court) project/i,
+      `${routePath} needs a truthful image-use boundary`,
+    )
+    assert.doesNotMatch(
+      record.heroMedia?.src || '',
+      /2026-client-sports-court|seo-images\/sports-court-coating/i,
+      `${routePath} must not use decorative play-area or synthetic-looking court imagery`,
+    )
+  })
+})
+
+test('sports-court image derivatives exist and keep reference sources explicit', async () => {
+  const waco = seoServicePages.find(
+    (page) => page.slug === 'sports-court-coating-waco-tx',
+  )
+  const media = [
+    ...sportsCourtAreaPages.map((page) => page.heroMedia),
+    waco.heroMedia,
+    ...(waco.imageStory?.items || []),
+  ]
+
+  for (const item of media) {
+    assert.ok(item?.alt?.length >= 24, item?.src)
+    assert.ok(item?.caption?.length >= 60, item?.src)
+    await fs.access(path.join(projectRoot, 'public', item.src.replace(/^\//, '')))
+  }
+
+  const externalReferences = media.filter((item) => item.creditUrl)
+  assert.ok(externalReferences.length >= 2)
+  externalReferences.forEach((item) => {
+    assert.match(item.creditUrl, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/)
+    assert.match(item.caption, /not an SLA project/i)
   })
 })
 

@@ -49,6 +49,8 @@ function SeoServiceLandingPage({ page }) {
     sections,
     faq = [],
     heroImage,
+    heroMedia,
+    imageStory,
     evidenceNote,
     scopeBoundary,
     showGallery = true,
@@ -58,7 +60,7 @@ function SeoServiceLandingPage({ page }) {
     planningChecklist = [],
     officialResources = [],
   } = page
-  const resolvedHeroImage = heroImage || serviceHeroImages[slug]
+  const resolvedHeroImage = heroMedia?.src || heroImage || serviceHeroImages[slug]
   const galleryImages = showGallery ? getServiceGalleryImages(slug, title) : []
   const seoImage = resolvedHeroImage?.startsWith('/') ? `${SITE_URL}${resolvedHeroImage}` : resolvedHeroImage
 
@@ -113,7 +115,7 @@ function SeoServiceLandingPage({ page }) {
     canonical: `${SITE_URL}/${slug}`,
     url: `${SITE_URL}/${slug}`,
     image: seoImage || DEFAULT_IMAGE,
-    imageAlt: `${title} in Waco, Texas`,
+    imageAlt: heroMedia?.alt || `${title} in Waco, Texas`,
     type: 'website',
     jsonLd: buildJsonLdGraph(serviceJsonLd, faqJsonLd, breadcrumbsJsonLd),
   })
@@ -152,19 +154,36 @@ function SeoServiceLandingPage({ page }) {
               </div>
 
               {resolvedHeroImage && (
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-                  <img
-                    src={resolvedHeroImage}
-                    alt={title}
-                    width="640"
-                    height="640"
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl"></div>
-                </div>
+                <figure>
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl">
+                    <img
+                      src={resolvedHeroImage}
+                      alt={heroMedia?.alt || title}
+                      width={heroMedia?.width || 640}
+                      height={heroMedia?.height || 640}
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+                  </div>
+                  {heroMedia?.caption && (
+                    <figcaption className="mt-3 text-sm leading-relaxed text-stone-400">
+                      {heroMedia.caption}{' '}
+                      {heroMedia.creditUrl && (
+                        <a
+                          href={heroMedia.creditUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-semibold text-stone-300 underline decoration-stone-600 underline-offset-4 hover:text-white"
+                        >
+                          {heroMedia.creditLabel}
+                        </a>
+                      )}
+                    </figcaption>
+                  )}
+                </figure>
               )}
             </div>
           </div>
@@ -215,6 +234,57 @@ function SeoServiceLandingPage({ page }) {
                     ))}
                   </ul>
                 </article>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {imageStory?.items?.length > 0 && (
+          <section className="section-padding border-y border-stone-200 bg-stone-50">
+            <div className="container-main">
+              <div className="mb-8 max-w-3xl">
+                <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-wide text-accent-600">
+                  Visual Planning Guide
+                </span>
+                <h2 className="font-display text-3xl font-bold text-stone-900 text-balance sm:text-4xl">
+                  {imageStory.title}
+                </h2>
+                {imageStory.intro && (
+                  <p className="mt-4 text-lg text-stone-600 text-pretty">{imageStory.intro}</p>
+                )}
+              </div>
+              <div className="grid gap-6 md:grid-cols-2">
+                {imageStory.items.map((media) => (
+                  <figure key={media.src} className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+                    <div className="aspect-[4/3] overflow-hidden bg-stone-100">
+                      <img
+                        src={media.src}
+                        alt={media.alt}
+                        width={media.width || 800}
+                        height={media.height || 600}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <figcaption className="p-5 text-sm leading-relaxed text-stone-600">
+                      <span className="mb-2 block font-display text-lg font-semibold text-stone-900">
+                        {media.title}
+                      </span>
+                      {media.caption}{' '}
+                      {media.creditUrl && (
+                        <a
+                          href={media.creditUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-semibold text-accent-700 underline decoration-accent-200 underline-offset-4 hover:text-accent-900"
+                        >
+                          {media.creditLabel}
+                        </a>
+                      )}
+                    </figcaption>
+                  </figure>
+                ))}
               </div>
             </div>
           </section>

@@ -350,6 +350,8 @@ const routeMeta = [
     title: service.metaTitle || `${service.title} | ${SITE_NAME}`,
     description: service.metaDescription,
     canonical: `${SITE_URL}/${service.slug}`,
+    image: absoluteProjectImage(service.heroMedia?.src || service.heroImage),
+    imageAlt: service.heroMedia?.alt || `${service.title} in Waco, Texas`,
     h1: service.title,
     schemaKind: service.schemaKind || (service.scopeBoundary ? 'static' : 'service'),
     schemaName: service.title,
@@ -387,6 +389,8 @@ const routeMeta = [
     title: area.seoTitle || `${area.heroTitle} | ${SITE_NAME}`,
     description: area.seoDescription,
     canonical: `${SITE_URL}/sports-court-coating/${area.slug}`,
+    image: absoluteProjectImage(area.heroMedia?.src),
+    imageAlt: area.heroMedia?.alt || `Sports-court concrete-base planning for ${area.areaName}`,
     h1: area.heroTitle,
     schemaKind: 'static',
     schemaName: area.heroTitle,
@@ -634,7 +638,13 @@ function renderImageGrid(images) {
           image.alt,
         )}" loading="lazy" width="480" height="360" style="display:block;width:100%;aspect-ratio:4/3;object-fit:cover;"><figcaption style="padding:10px 12px;color:#57534e;font-size:0.92rem;"><strong style="display:block;color:#1c1917;">${escapeHtml(
           image.title,
-        )}</strong>${escapeHtml(image.location || '')}</figcaption></figure>`,
+        )}</strong>${escapeHtml(image.caption || image.location || '')}${
+          image.creditUrl
+            ? ` <a href="${escapeHtml(image.creditUrl)}" rel="noreferrer" style="color:#c2410c;font-weight:600;">${escapeHtml(
+                image.creditLabel || 'Photo source',
+              )}</a>`
+            : ''
+        }</figcaption></figure>`,
     )
     .join('')}</div>`
 }
@@ -897,6 +907,15 @@ function renderSeoServiceContent(service) {
     : []
   const galleryImages =
     service.showGallery === false ? [] : getServiceGalleryImages(service.slug, service.title)
+  const imageStorySections = service.imageStory?.items?.length
+    ? [
+        {
+          title: service.imageStory.title,
+          paragraphs: service.imageStory.intro ? [service.imageStory.intro] : [],
+          images: service.imageStory.items,
+        },
+      ]
+    : []
   const boundarySections = service.scopeBoundary
     ? [
         {
@@ -959,6 +978,7 @@ function renderSeoServiceContent(service) {
             },
           ]
         : []),
+      ...imageStorySections,
       ...decisionGuideSections,
       ...planningChecklistSections,
       ...boundarySections,
@@ -1090,6 +1110,14 @@ function renderSportsCourtAreaContent(area) {
       { href: PHONE_HREF, label: `Call ${PHONE_DISPLAY}` },
     ],
     sections: [
+      ...(area.heroMedia
+        ? [
+            {
+              title: area.heroMedia.title || `${area.areaName} project image context`,
+              images: [area.heroMedia],
+            },
+          ]
+        : []),
       {
         title: area.scopeTitle || `Trade boundaries for a ${area.areaName} court inquiry`,
         paragraphs: area.scopeIntro ? [area.scopeIntro] : [],

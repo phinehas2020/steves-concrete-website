@@ -1,3 +1,5 @@
+import { sportsCourtImages } from './sportsCourtImages.js'
+
 const baseSeoServicePages = [
   {
     slug: 'concrete-resurfacing-waco-tx',
@@ -78,6 +80,16 @@ const baseSeoServicePages = [
     pagePurpose: 'waco_concrete_base_feasibility_scope_and_partner_coordination',
     schemaKind: 'service',
     showGallery: false,
+    heroMedia: sportsCourtImages.finishedCourtReference,
+    imageStory: {
+      title: 'From site conditions to a finished playing surface',
+      intro:
+        'These images separate the work clearly: SLA handles the accepted concrete scope, while a court specialist handles the playing-surface system. Reference photos are labeled and are not presented as SLA projects.',
+      items: [
+        sportsCourtImages.courtSitePrepReference,
+        sportsCourtImages.wacoConcretePlacement,
+      ],
+    },
     pageBadge: 'Waco pickleball-court concrete',
     ctaLabel: 'Get a Pickleball Court Estimate',
     cardSummary:

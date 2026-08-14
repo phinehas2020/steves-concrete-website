@@ -1,3 +1,5 @@
+import { sportsCourtImages } from './sportsCourtImages.js'
+
 const concreteAndSpecialistScopes = [
   {
     title: 'Concrete-base planning and construction',
@@ -65,6 +67,7 @@ export const sportsCourtAreaPages = [
     evidenceStatus: 'indexable_planning_resource',
     pagePurpose: 'texas_coverage_logistics_and_travel_decision_guide',
     badge: 'Texas coverage & logistics guide',
+    heroMedia: sportsCourtImages.wacoConcretePlacement,
     heroTitle: 'Texas Sports-Court Concrete Planning & Travel Review',
     heroSubtitle:
       'Use this guide to decide whether a Waco-based concrete crew, a local concrete contractor, and a separate court-surface specialist make sense for your site.',
@@ -170,6 +173,7 @@ export const sportsCourtAreaPages = [
     evidenceStatus: 'indexable_planning_resource',
     pagePurpose: 'dallas_urban_access_mobilization_and_permit_readiness',
     badge: 'Dallas site-readiness guide',
+    heroMedia: sportsCourtImages.courtSitePrepReference,
     heroTitle: 'Dallas Sports-Court Concrete Base Planning',
     heroSubtitle:
       'Turn a Dallas court concept into a bid-ready concrete package by resolving access, staging, design, drainage, permits, and the surface-specialist handoff before mobilization.',
@@ -306,6 +310,7 @@ export const sportsCourtAreaPages = [
     evidenceStatus: 'indexable_planning_resource',
     pagePurpose: 'fort_worth_existing_slab_repair_replacement_and_drainage_planning',
     badge: 'Fort Worth slab decision guide',
+    heroMedia: sportsCourtImages.hewittSlabFinishing,
     heroTitle: 'Fort Worth Court Slab Evaluation & Concrete-Base Planning',
     heroSubtitle:
       'Decide whether an existing slab needs repair, replacement, drainage correction, or specialist testing—and organize a buildable plan for new concrete when replacement is the better path.',

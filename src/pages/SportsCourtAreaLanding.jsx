@@ -27,6 +27,7 @@ function SportsCourtAreaLandingPage({ page }) {
     areaName,
     heroTitle,
     heroSubtitle,
+    heroMedia,
     intro,
     badge,
     seoTitle,
@@ -49,6 +50,7 @@ function SportsCourtAreaLandingPage({ page }) {
   } = page
 
   const canonicalUrl = `${SITE_URL}/sports-court-coating/${slug}`
+  const seoImage = heroMedia?.src?.startsWith('/') ? `${SITE_URL}${heroMedia.src}` : heroMedia?.src
 
   const webPageJsonLd = {
     '@type': 'WebPage',
@@ -79,8 +81,8 @@ function SportsCourtAreaLandingPage({ page }) {
       `Plan a sports-court concrete base, specialist handoff, and estimate review for ${areaName}.`,
     canonical: canonicalUrl,
     url: canonicalUrl,
-    image: DEFAULT_IMAGE,
-    imageAlt: `Sports-court concrete-base planning for ${areaName}`,
+    image: seoImage || DEFAULT_IMAGE,
+    imageAlt: heroMedia?.alt || `Sports-court concrete-base planning for ${areaName}`,
     type: 'website',
     jsonLd: buildJsonLdGraph(webPageJsonLd, faqJsonLd, breadcrumbsJsonLd),
   })
@@ -91,34 +93,66 @@ function SportsCourtAreaLandingPage({ page }) {
       <main className="flex-1 pt-20 sm:pt-24">
         <section className="relative overflow-hidden bg-stone-900 texture-grain-dark">
           <div className="container-main py-16 sm:py-20 md:py-24">
-            <div className="max-w-3xl">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
-                {badge || 'Waco-based project availability'}
-              </span>
-              <h1
-                className="mt-5 font-display font-bold text-white text-balance leading-tight"
-                style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4rem)' }}
-              >
-                {heroTitle}
-              </h1>
-              <p className="mt-5 text-lg text-stone-300 text-pretty max-w-2xl">
-                {heroSubtitle}
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
+            <div className={`grid gap-12 lg:items-center ${heroMedia ? 'lg:grid-cols-2' : ''}`}>
+              <div className="max-w-3xl">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-800/80 text-stone-200 text-xs font-semibold uppercase tracking-wide">
+                  {badge || 'Waco-based project availability'}
+                </span>
+                <h1
+                  className="mt-5 font-display font-bold text-white text-balance leading-tight"
+                  style={{ fontSize: 'clamp(2.25rem, 1.5rem + 4vw, 4rem)' }}
                 >
-                  Send Project Details
-                </a>
-                <a
-                  href="tel:254-230-3102"
-                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-stone-600 text-white font-semibold rounded-lg hover:bg-stone-800 hover:border-stone-500 transition-colors duration-150 min-h-[52px]"
-                >
-                  Call (254) 230-3102
-                </a>
+                  {heroTitle}
+                </h1>
+                <p className="mt-5 text-lg text-stone-300 text-pretty max-w-2xl">
+                  {heroSubtitle}
+                </p>
+                <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[52px]"
+                  >
+                    Send Project Details
+                  </a>
+                  <a
+                    href="tel:254-230-3102"
+                    className="inline-flex items-center justify-center px-8 py-4 border-2 border-stone-600 text-white font-semibold rounded-lg hover:bg-stone-800 hover:border-stone-500 transition-colors duration-150 min-h-[52px]"
+                  >
+                    Call (254) 230-3102
+                  </a>
+                </div>
+                <p className="mt-6 text-sm text-stone-400">{intro}</p>
               </div>
-              <p className="mt-6 text-sm text-stone-400">{intro}</p>
+
+              {heroMedia && (
+                <figure>
+                  <div className="aspect-[4/3] overflow-hidden rounded-2xl bg-stone-800 shadow-2xl ring-1 ring-white/10">
+                    <img
+                      src={heroMedia.src}
+                      alt={heroMedia.alt}
+                      width={heroMedia.width || 800}
+                      height={heroMedia.height || 600}
+                      loading="eager"
+                      fetchPriority="high"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <figcaption className="mt-3 text-sm leading-relaxed text-stone-400">
+                    {heroMedia.caption}{' '}
+                    {heroMedia.creditUrl && (
+                      <a
+                        href={heroMedia.creditUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-stone-300 underline decoration-stone-600 underline-offset-4 hover:text-white"
+                      >
+                        {heroMedia.creditLabel}
+                      </a>
+                    )}
+                  </figcaption>
+                </figure>
+              )}
             </div>
           </div>
         </section>
