@@ -6,6 +6,8 @@
 | 2026-04-01 | self | `motion` from `motion/react` was flagged as unused by ESLint in this repo even though the JSX used it. | Alias it as `Motion` and use `Motion.div` / `Motion.article` so the linter recognizes the references cleanly. |
 | 2026-04-01 | self | Used `mktemp` with a macOS-incompatible suffix template while converting Steve's HEIC photo for inspection. | On this machine, create a plain temp path or explicit output filename before running `sips`. |
 | 2026-04-01 | self | Dropped live Google review author/meta text directly into a flex row on the reviews page, which would have laid out the name and metadata side-by-side instead of stacked. | Wrap live review author name and metadata in an inner column div before rendering the optional avatar beside them. |
+| 2026-08-17 | self | Assumed `curl` was available for live SEO checks, but this Codex worktree shell does not expose it. | Use the browser/web fetch path or the bundled Node runtime for live HTTP verification in this environment. |
+| 2026-08-17 | environment | The clean Codex worktree had no `node_modules`, so SEO tests stopped at module resolution before running assertions. | Run the locked `npm ci` setup before treating verifier output as a code failure. |
 
 ## User Preferences
 - When the user explicitly asks for subagents, split the work into clearly owned parallel tasks instead of doing everything serially.

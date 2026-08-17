@@ -47,10 +47,10 @@ For the broader planning sequence, the site team should also resolve subgrade, b
 
 ## Photos from this project phase
 
-![Finished interior and covered exterior concrete at the Chappell Hill barndominium](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/4a17b835-2331-491e-b807-10f7a79ccfc8-xwyhp2.jpg)
+![Finished interior and covered exterior concrete at the Chappell Hill barndominium](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/4a17b835-2331-491e-b807-10f7a79ccfc8-xwyhp2.jpg)
 
-![Final trowel-pass pattern on the Chappell Hill interior slab](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/3a47fdff-b4ec-44b5-8c25-5a3eac46e445-ftuaxw.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/4a17b835-2331-491e-b807-10f7a79ccfc8-xwyhp2.jpg',
+![Final trowel-pass pattern on the Chappell Hill interior slab](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/3a47fdff-b4ec-44b5-8c25-5a3eac46e445-ftuaxw.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/4a17b835-2331-491e-b807-10f7a79ccfc8-xwyhp2.jpg',
     '2026-04-03T14:36:05.815+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-04-03T14:36:05.815+00:00'::timestamptz,
@@ -90,10 +90,10 @@ Together the pages answer different questions: what had to be ready, what the pl
 
 ## Photos from this project phase
 
-![Finished surface and perimeter of the 9,600-square-foot Burnet shop slab](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/38b03cc4-1101-4f3c-bed9-c048b691f1be-8hxbk0.jpg)
+![Finished surface and perimeter of the 9,600-square-foot Burnet shop slab](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/38b03cc4-1101-4f3c-bed9-c048b691f1be-8hxbk0.jpg)
 
-![Visible finished field and joint lines on the Burnet shop foundation](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/4d306076-19e7-4ecf-a0a4-11ac9198e927-11kem42.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/38b03cc4-1101-4f3c-bed9-c048b691f1be-8hxbk0.jpg',
+![Visible finished field and joint lines on the Burnet shop foundation](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/4d306076-19e7-4ecf-a0a4-11ac9198e927-11kem42.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/38b03cc4-1101-4f3c-bed9-c048b691f1be-8hxbk0.jpg',
     '2026-04-02T17:11:24.075+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-04-02T17:11:24.075+00:00'::timestamptz,
@@ -133,10 +133,10 @@ When comparing a similar commercial bid, ask which party owns base preparation, 
 
 ## Photos from this project phase
 
-![Crew floating fresh concrete in the Circle K apron and drive area](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/46c4b588-88df-4763-a45c-cb2740537b37-1w2owle.jpg)
+![Crew floating fresh concrete in the Circle K apron and drive area](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/46c4b588-88df-4763-a45c-cb2740537b37-1w2owle.jpg)
 
-![Circle K fuel-site flatwork beside active paving equipment in Lacy Lakeview](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/a43f360c-8c37-4e38-9619-0409f1c9eda9-1n9idyd.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/46c4b588-88df-4763-a45c-cb2740537b37-1w2owle.jpg',
+![Circle K fuel-site flatwork beside active paving equipment in Lacy Lakeview](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/a43f360c-8c37-4e38-9619-0409f1c9eda9-1n9idyd.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-04-01/46c4b588-88df-4763-a45c-cb2740537b37-1w2owle.jpg',
     '2026-04-02T17:10:42.663+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-04-02T17:10:42.663+00:00'::timestamptz,
@@ -176,10 +176,10 @@ Continue with the [Burnet finish and handoff note](/blog/finished-the-burnet-sho
 
 ## Photos from this project phase
 
-![Aerial view of the formed 9,600-square-foot Burnet shop foundation before placement](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/6faae80c-d30e-4944-8bd4-74cc5eaff052-6t3zf6.jpg)
+![Aerial view of the formed 9,600-square-foot Burnet shop foundation before placement](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/6faae80c-d30e-4944-8bd4-74cc5eaff052-6t3zf6.jpg)
 
-![Nine-panel pre-pour layout across the Burnet shop slab footprint](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/060587a7-e7eb-4809-b9d9-30c4621f3b34-29l53t.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/6faae80c-d30e-4944-8bd4-74cc5eaff052-6t3zf6.jpg',
+![Nine-panel pre-pour layout across the Burnet shop slab footprint](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/060587a7-e7eb-4809-b9d9-30c4621f3b34-29l53t.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/6faae80c-d30e-4944-8bd4-74cc5eaff052-6t3zf6.jpg',
     '2026-04-01T21:15:59.967+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-04-01T21:15:59.967+00:00'::timestamptz,
@@ -219,10 +219,10 @@ The related [Mount Calm preparation note](/blog/mount-calm-tx-shop-foundation-co
 
 ## Photos from this project phase
 
-![Walk-behind power trowel finishing the 2,500-square-foot Mount Calm shop slab](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/62863c29-7af6-48b1-b3a7-21ec9c69edff-1j736zw.jpg)
+![Walk-behind power trowel finishing the 2,500-square-foot Mount Calm shop slab](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/62863c29-7af6-48b1-b3a7-21ec9c69edff-1j736zw.jpg)
 
-![Hand finishing along the formed perimeter of the Mount Calm shop foundation](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/1e6c0fb6-2325-4047-86be-363e94100c85-uiu8fa.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/62863c29-7af6-48b1-b3a7-21ec9c69edff-1j736zw.jpg',
+![Hand finishing along the formed perimeter of the Mount Calm shop foundation](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/1e6c0fb6-2325-4047-86be-363e94100c85-uiu8fa.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-30/62863c29-7af6-48b1-b3a7-21ec9c69edff-1j736zw.jpg',
     '2026-04-01T21:15:31.464+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-04-01T21:15:31.464+00:00'::timestamptz,
@@ -262,10 +262,10 @@ For a comparable covered-parking project, build one site packet showing every ba
 
 ## Photos from this project phase
 
-![Concrete RV pads beneath metal covers with curved curb forms at Magnolia RV](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/640968e3-2023-493b-b30e-23593097b905-1xp15zi.jpg)
+![Concrete RV pads beneath metal covers with curved curb forms at Magnolia RV](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/640968e3-2023-493b-b30e-23593097b905-1xp15zi.jpg)
 
-![Magnolia RV pad layout around covered bays, open grade, and utilities](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/1a1af200-efb3-4665-a5fc-391c72edd749-9rfa26.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/640968e3-2023-493b-b30e-23593097b905-1xp15zi.jpg',
+![Magnolia RV pad layout around covered bays, open grade, and utilities](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/1a1af200-efb3-4665-a5fc-391c72edd749-9rfa26.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-19/640968e3-2023-493b-b30e-23593097b905-1xp15zi.jpg',
     '2026-03-24T14:23:23.443+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-03-24T14:23:23.443+00:00'::timestamptz,
@@ -305,10 +305,10 @@ When comparing a public-sidewalk proposal, look for demolition or excavation, ba
 
 ## Photos from this project phase
 
-![Concrete placed from a truck chute into City of Waco sidewalk forms](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/bd3fce5d-158e-4f58-a3a1-bef64ddf444a-14hw1sc.jpg)
+![Concrete placed from a truck chute into City of Waco sidewalk forms](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/bd3fce5d-158e-4f58-a3a1-bef64ddf444a-14hw1sc.jpg)
 
-![Crew distributing and striking fresh concrete on the Waco sidewalk](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/c9e6bda2-ce77-42cc-b1f1-281da2f66c1d-nld0uc.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/bd3fce5d-158e-4f58-a3a1-bef64ddf444a-14hw1sc.jpg',
+![Crew distributing and striking fresh concrete on the Waco sidewalk](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/c9e6bda2-ce77-42cc-b1f1-281da2f66c1d-nld0uc.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/bd3fce5d-158e-4f58-a3a1-bef64ddf444a-14hw1sc.jpg',
     '2026-03-16T23:03:11.002+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-03-16T23:03:11.002+00:00'::timestamptz,
@@ -348,10 +348,10 @@ The [full Hewitt slab article](/blog/hewitt-tx-concrete-slab-pour-near-waco) sup
 
 ## Photos from this project phase
 
-![Power-trowel finishing on the unidentified Hewitt concrete slab](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/570e0b01-242a-4f49-8eab-24604ba9a5b4-1qy2vjm.jpg)
+![Power-trowel finishing on the unidentified Hewitt concrete slab](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/570e0b01-242a-4f49-8eab-24604ba9a5b4-1qy2vjm.jpg)
 
-![Forms and perimeter finishing in the Hewitt slab photo record](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/e66f16f4-3832-4a34-b319-0f6ed706d1ca-1l1ibq4.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/570e0b01-242a-4f49-8eab-24604ba9a5b4-1qy2vjm.jpg',
+![Forms and perimeter finishing in the Hewitt slab photo record](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/e66f16f4-3832-4a34-b319-0f6ed706d1ca-1l1ibq4.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/570e0b01-242a-4f49-8eab-24604ba9a5b4-1qy2vjm.jpg',
     '2026-03-13T15:15:00.348+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-03-13T15:15:00.348+00:00'::timestamptz,
@@ -391,10 +391,10 @@ For a similar public walkway bid, ask for lineal or square-foot limits, removal,
 
 ## Photos from this project phase
 
-![Straight pedestrian walkway with visible joints at Cameron Park Zoo](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/d80ac1cf-acab-4fbe-bf0c-82e055789599-ixyh77.jpg)
+![Straight pedestrian walkway with visible joints at Cameron Park Zoo](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/d80ac1cf-acab-4fbe-bf0c-82e055789599-ixyh77.jpg)
 
-![Finished walkway edges beside posts and landscaping at Cameron Park Zoo](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/f11839a7-ab95-401b-9ddb-1074a8708a2e-hkw141.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/d80ac1cf-acab-4fbe-bf0c-82e055789599-ixyh77.jpg',
+![Finished walkway edges beside posts and landscaping at Cameron Park Zoo](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/f11839a7-ab95-401b-9ddb-1074a8708a2e-hkw141.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-05/d80ac1cf-acab-4fbe-bf0c-82e055789599-ixyh77.jpg',
     '2026-03-08T16:11:49.169+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-03-08T16:11:49.169+00:00'::timestamptz,
@@ -434,8 +434,8 @@ A useful commercial proposal separates base, reinforcement, paving panels, curbs
 
 ## Photos from this project phase
 
-![Finished parking-area concrete with curb lines and protected bollards at Melody Grove](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-04/6087acf7-d92f-4bfe-9e5e-37b58e531594-1ath4dh.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-04/6087acf7-d92f-4bfe-9e5e-37b58e531594-1ath4dh.jpg',
+![Finished parking-area concrete with curb lines and protected bollards at Melody Grove](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-04/6087acf7-d92f-4bfe-9e5e-37b58e531594-1ath4dh.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-03-04/6087acf7-d92f-4bfe-9e5e-37b58e531594-1ath4dh.jpg',
     '2026-03-05T16:49:23.609+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-03-05T16:49:23.609+00:00'::timestamptz,
@@ -475,10 +475,10 @@ Owners reviewing a similar scope should ask each bidder to name what remains, wh
 
 ## Photos from this project phase
 
-![Finished 1,600-square-foot concrete renewal beneath the Hubbard shop carport](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/2bcefc4d-7b57-4765-bf85-55cfbd1f2df9-q340ee.jpg)
+![Finished 1,600-square-foot concrete renewal beneath the Hubbard shop carport](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/2bcefc4d-7b57-4765-bf85-55cfbd1f2df9-q340ee.jpg)
 
-![Renewed concrete surface beside the Hubbard shop roll-up door](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/d2ded9c5-bc50-43b2-8c04-5b3def5de499-q5mjgj.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/2bcefc4d-7b57-4765-bf85-55cfbd1f2df9-q340ee.jpg',
+![Renewed concrete surface beside the Hubbard shop roll-up door](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/d2ded9c5-bc50-43b2-8c04-5b3def5de499-q5mjgj.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-27/2bcefc4d-7b57-4765-bf85-55cfbd1f2df9-q340ee.jpg',
     '2026-03-02T03:35:43.164+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-03-02T03:35:43.164+00:00'::timestamptz,
@@ -561,8 +561,8 @@ For a similar shop proposal, compare base and grade, forms, reinforcement, vapor
 
 ## Photos from this project phase
 
-![Fresh Georgetown shop foundation with troweled surface and braced perimeter forms](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/7d3b1d9f-4feb-497b-b62f-2ed1928db297-1in5ayo.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/7d3b1d9f-4feb-497b-b62f-2ed1928db297-1in5ayo.jpg',
+![Fresh Georgetown shop foundation with troweled surface and braced perimeter forms](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/7d3b1d9f-4feb-497b-b62f-2ed1928db297-1in5ayo.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/7d3b1d9f-4feb-497b-b62f-2ed1928db297-1in5ayo.jpg',
     '2026-02-22T23:38:54.600+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-02-22T23:38:54.600+00:00'::timestamptz,
@@ -602,10 +602,10 @@ During closeout, photograph wall faces, tops, ends, joints, penetrations, adjace
 
 ## Photos from this project phase
 
-![Straight retaining-wall footing trenches and layout stakes at the Riesel-area site](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b4bf0102-6288-49e7-b454-0524aeeec62e-fon6x8.jpg)
+![Straight retaining-wall footing trenches and layout stakes at the Riesel-area site](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b4bf0102-6288-49e7-b454-0524aeeec62e-fon6x8.jpg)
 
-![Concrete retaining-wall section later in the Riesel-area project sequence](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b6e9111a-308d-4039-a871-d2ab3bbcc3eb-a94p0o.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b4bf0102-6288-49e7-b454-0524aeeec62e-fon6x8.jpg',
+![Concrete retaining-wall section later in the Riesel-area project sequence](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b6e9111a-308d-4039-a871-d2ab3bbcc3eb-a94p0o.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-13/b4bf0102-6288-49e7-b454-0524aeeec62e-fon6x8.jpg',
     '2026-02-21T20:01:03.414+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-02-21T20:01:03.414+00:00'::timestamptz,
@@ -645,10 +645,10 @@ The pages now function as a real sequence: layout and interfaces, placement-day 
 
 ## Photos from this project phase
 
-![Ready-mix delivery and active RV-pad placement at Magnolia RV](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/7981efb0-ad70-4128-8be8-41b3d323127e-1756zlp.jpg)
+![Ready-mix delivery and active RV-pad placement at Magnolia RV](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/7981efb0-ad70-4128-8be8-41b3d323127e-1756zlp.jpg)
 
-![Hand and bull-float work inside a formed Magnolia RV pad](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/0cbe23a4-c406-4df5-99b0-dd8a2e59295b-r61c0e.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/7981efb0-ad70-4128-8be8-41b3d323127e-1756zlp.jpg',
+![Hand and bull-float work inside a formed Magnolia RV pad](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/0cbe23a4-c406-4df5-99b0-dd8a2e59295b-r61c0e.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/7981efb0-ad70-4128-8be8-41b3d323127e-1756zlp.jpg',
     '2026-02-21T00:49:52.291+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-02-21T00:49:52.291+00:00'::timestamptz,
@@ -688,10 +688,10 @@ When comparing a similar scope, ask for surveyed or designed elevations, channel
 
 ## Photos from this project phase
 
-![Concrete drainage-channel work along the narrow Temple fence-line corridor](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/10bf6f17-bb3c-4505-adaa-8a16fc30e5cd-wir26n.jpg)
+![Concrete drainage-channel work along the narrow Temple fence-line corridor](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/10bf6f17-bb3c-4505-adaa-8a16fc30e5cd-wir26n.jpg)
 
-![Forms and adjacent reinforcement in the 400-foot Temple drainage project](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/392fac0d-4c5f-49f7-a09d-7575eba39cba-16m603e.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/10bf6f17-bb3c-4505-adaa-8a16fc30e5cd-wir26n.jpg',
+![Forms and adjacent reinforcement in the 400-foot Temple drainage project](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/392fac0d-4c5f-49f7-a09d-7575eba39cba-16m603e.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/10bf6f17-bb3c-4505-adaa-8a16fc30e5cd-wir26n.jpg',
     '2026-02-21T00:34:13.156+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-02-21T00:34:13.156+00:00'::timestamptz,
@@ -731,10 +731,10 @@ For a comparable estimate, provide the RV or trailer use, dimensions, approach a
 
 ## Photos from this project phase
 
-![Finished China Spring RV pad with a smooth field and straight perimeter](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/2e1939ae-4e95-4360-83bf-e85e8224c6ef-bkvl2l.jpg)
+![Finished China Spring RV pad with a smooth field and straight perimeter](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/2e1939ae-4e95-4360-83bf-e85e8224c6ef-bkvl2l.jpg)
 
-![Hand-finished concrete edge meeting the surrounding gravel at the RV pad](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/cad3e513-acc5-497f-bb53-7e1fe59db827-1kbba8i.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/2e1939ae-4e95-4360-83bf-e85e8224c6ef-bkvl2l.jpg',
+![Hand-finished concrete edge meeting the surrounding gravel at the RV pad](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/cad3e513-acc5-497f-bb53-7e1fe59db827-1kbba8i.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/2e1939ae-4e95-4360-83bf-e85e8224c6ef-bkvl2l.jpg',
     '2026-02-21T00:33:55.170+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-02-21T00:33:55.170+00:00'::timestamptz,
@@ -774,10 +774,10 @@ Those pages now separate three real user questions: how the pads fit the covered
 
 ## Photos from this project phase
 
-![Finished troweled Magnolia RV pad beside the fence and outbuilding](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/d0d1daee-67d9-4a0f-8347-c5d3252c088d-19drx9u.jpg)
+![Finished troweled Magnolia RV pad beside the fence and outbuilding](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/d0d1daee-67d9-4a0f-8347-c5d3252c088d-19drx9u.jpg)
 
-![Perimeter and surface condition in the Magnolia RV completion record](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/09c8f595-ab3f-4879-9d3b-8bd1addaaf39-14b9567.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/d0d1daee-67d9-4a0f-8347-c5d3252c088d-19drx9u.jpg',
+![Perimeter and surface condition in the Magnolia RV completion record](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/09c8f595-ab3f-4879-9d3b-8bd1addaaf39-14b9567.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-18/d0d1daee-67d9-4a0f-8347-c5d3252c088d-19drx9u.jpg',
     '2026-02-21T00:33:53.463+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-02-21T00:33:53.463+00:00'::timestamptz,
@@ -817,10 +817,10 @@ A comparable proposal should separate demolition or excavation, base, forms, rei
 
 ## Photos from this project phase
 
-![Wood forms, aggregate base, and reinforcement for accessible parking at Melody Grove](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/410ab6b1-7da4-47ef-8cb6-f67dc461dfdd-1o2idy1.jpg)
+![Wood forms, aggregate base, and reinforcement for accessible parking at Melody Grove](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/410ab6b1-7da4-47ef-8cb6-f67dc461dfdd-1o2idy1.jpg)
 
-![Defined corners and staged prep work in the Melody Grove accessible-parking area](https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/83e78be1-2251-445c-a2b6-017cb606b889-1komtwo.jpg)',
-    'https://auyombraozsdfckobnzx.supabase.co/storage/v1/object/public/blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/410ab6b1-7da4-47ef-8cb6-f67dc461dfdd-1o2idy1.jpg',
+![Defined corners and staged prep work in the Melody Grove accessible-parking area](https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/83e78be1-2251-445c-a2b6-017cb606b889-1komtwo.jpg)',
+    'https://zcbhkptxbhtshpxdpnja.supabase.co/storage/v1/object/public/steves-concrete-blog-images/icloud-sync/3e9943e8-1cfc-4740-be89-6037add51b69/2026-02-20/410ab6b1-7da4-47ef-8cb6-f67dc461dfdd-1o2idy1.jpg',
     '2026-02-21T00:33:30.546+00:00'::timestamptz,
     '2026-08-07T18:00:00.000Z'::timestamptz,
     '2026-02-21T00:33:30.546+00:00'::timestamptz,

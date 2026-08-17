@@ -11,9 +11,21 @@ export function DeferredSection({
   const containerRef = useRef(null)
   const [shouldRender, setShouldRender] = useState(() => {
     if (typeof window === 'undefined') return false
-    if (eager || anchorId) return true
+    if (eager) return true
+    if (anchorId && window.location.hash === `#${anchorId}`) return true
     return typeof IntersectionObserver === 'undefined'
   })
+
+  useEffect(() => {
+    if (!anchorId || shouldRender) return undefined
+
+    const renderMatchingHash = () => {
+      if (window.location.hash === `#${anchorId}`) setShouldRender(true)
+    }
+
+    window.addEventListener('hashchange', renderMatchingHash)
+    return () => window.removeEventListener('hashchange', renderMatchingHash)
+  }, [anchorId, shouldRender])
 
   useEffect(() => {
     if (shouldRender) return undefined
@@ -45,7 +57,8 @@ export function DeferredSection({
     : undefined
 
   // Keep anchor ownership on this stable wrapper so the target exists before
-  // lazy children load and its top edge does not move when they mount.
+  // lazy children load. A matching direct hash renders immediately; ordinary
+  // visits wait until the wrapper approaches the viewport.
   return (
     <div
       ref={containerRef}

@@ -148,7 +148,7 @@ function App() {
           <Hero />
         </div>
         <div className="order-2 md:order-none">
-          <DeferredSection anchorId="services" rootMargin="420px 0px" minHeight={480}>
+          <DeferredSection anchorId="services" rootMargin="0px 0px -20% 0px" minHeight={480}>
             <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={480} />}>
               <Services sectionId={null} />
             </Suspense>
@@ -158,21 +158,21 @@ function App() {
           <ServiceAreas />
         </div>
         <div className="order-4 md:order-none">
-          <DeferredSection rootMargin="420px 0px" minHeight={360} eager>
+          <DeferredSection rootMargin="320px 0px" minHeight={360}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-50" minHeight={360} />}>
               <CostQuickAnswers />
             </Suspense>
           </DeferredSection>
         </div>
         <div className="order-5 md:order-none">
-          <DeferredSection rootMargin="420px 0px" minHeight={420} eager>
+          <DeferredSection rootMargin="320px 0px" minHeight={420}>
             <Suspense fallback={<SectionFallback className="section-padding bg-stone-100" minHeight={420} />}>
               <BlogActivityStrip />
             </Suspense>
           </DeferredSection>
         </div>
         <div className="order-6 md:order-none">
-          <DeferredSection rootMargin="520px 0px" minHeight={900} eager>
+          <DeferredSection rootMargin="360px 0px" minHeight={900}>
             <Suspense fallback={<SectionFallback className="section-padding bg-white" minHeight={900} />}>
               <Gallery />
             </Suspense>

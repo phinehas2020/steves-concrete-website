@@ -9,6 +9,7 @@ import { staticBlogPosts } from '../data/staticBlogPosts'
 import { getBlogSeoTitle } from '../data/blogSeoTitles'
 import { getPublicBlogEditorialMeta } from '../data/blogEditorial'
 import { getRouteIndexingState } from '../data/indexingControls'
+import { getRelatedBlogPosts } from '../data/blogRelatedPosts'
 import {
   useSeo,
   SITE_URL,
@@ -287,6 +288,13 @@ export function BlogPost() {
   const reviewedDate = formatEditorialDate(editorial.reviewedAt)
   const indexingState = getRouteIndexingState(`/blog/${slug}`, post || {})
   const isPendingArchive = Boolean(post && !indexingState.indexable)
+  const relatedPosts = useMemo(() => {
+    if (!post || isPendingArchive) return []
+    const discoverablePosts = staticBlogPosts.filter(
+      (candidate) => getRouteIndexingState(`/blog/${candidate.slug}`, candidate).indexable,
+    )
+    return getRelatedBlogPosts(post, discoverablePosts)
+  }, [post, isPendingArchive])
 
   return (
     <div className="min-h-dvh flex flex-col bg-white">
@@ -398,6 +406,30 @@ export function BlogPost() {
                     className="blog-content"
                     dangerouslySetInnerHTML={{ __html: contentHtml }}
                   />
+                  {relatedPosts.length > 0 && (
+                    <section className="mt-12 border-t border-stone-200 pt-8" aria-labelledby="related-project-notes">
+                      <p className="text-xs uppercase tracking-wide text-accent-600 font-semibold mb-2">
+                        Keep planning
+                      </p>
+                      <h2 id="related-project-notes" className="font-display font-semibold text-2xl text-stone-900 mb-5">
+                        Related project notes and guides
+                      </h2>
+                      <div className="grid gap-4 sm:grid-cols-3">
+                        {relatedPosts.map((relatedPost) => (
+                          <a
+                            key={relatedPost.slug}
+                            href={`/blog/${relatedPost.slug}`}
+                            className="rounded-xl border border-stone-200 bg-stone-50 p-4 text-stone-900 hover:border-accent-300 hover:bg-white transition-colors"
+                          >
+                            <span className="font-semibold leading-snug">{relatedPost.title}</span>
+                            <span className="mt-2 block text-sm text-stone-600 line-clamp-3">
+                              {relatedPost.excerpt || 'Read the related concrete project note.'}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    </section>
+                  )}
                 </div>
                 <div className="mt-10 border-t border-stone-200 pt-6">
                   <button

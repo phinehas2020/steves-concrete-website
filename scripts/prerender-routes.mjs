@@ -11,6 +11,7 @@ import { clientProjects, getServiceGalleryImages } from '../src/data/clientProje
 import { guidePages as guidePageData } from '../src/data/guides.js'
 import { sportsCourtAreaPages as sportsCourtAreaPageData } from '../src/data/sportsCourtAreaPages.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
+import { getRelatedBlogPosts } from '../src/data/blogRelatedPosts.js'
 import { getBlogSeoTitle } from '../src/data/blogSeoTitles.js'
 import { getPublicBlogEditorialMeta } from '../src/data/blogEditorial.js'
 import {
@@ -1712,6 +1713,12 @@ function renderBlogEditorialDetails(post) {
 }
 
 function renderStaticBlogPostContent(post) {
+  const relatedBlogLinks = getRelatedBlogPosts(post, publishedBlogPosts).map((relatedPost) => ({
+    label: relatedPost.title,
+    href: `/blog/${relatedPost.slug}`,
+    description: relatedPost.excerpt || 'Read the related concrete project note.',
+  }))
+
   return `<main data-prerender-content="true" style="max-width:860px;margin:0 auto;padding:96px 20px 64px;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.65;background:#fafaf9;color:#1c1917;"><p style="margin:0 0 8px;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:#ea580c;font-weight:700;">Concrete Blog</p><h1 style="margin:0 0 14px;font-size:clamp(2rem,3.5vw,3rem);line-height:1.15;color:#1c1917;">${escapeHtml(
     post.title,
   )}</h1><p style="margin:0 0 20px;color:#44403c;font-size:1.05rem;">${escapeHtml(
@@ -1721,6 +1728,9 @@ function renderStaticBlogPostContent(post) {
   )}<article style="background:#fff;border:1px solid #e7e5e4;border-radius:16px;padding:24px;">${renderSimpleMarkdown(
     post.content,
   )}</article>${renderSection({
+    title: 'Related project notes and guides',
+    links: relatedBlogLinks,
+  })}${renderSection({
     title: 'Keep planning your concrete project',
     links: [
       { label: 'Request a free estimate', href: '/#contact' },

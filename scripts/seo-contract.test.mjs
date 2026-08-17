@@ -24,6 +24,7 @@ import { servicePages } from '../src/data/servicePages.js'
 import { sportsCourtAreaPages } from '../src/data/sportsCourtAreaPages.js'
 import { repairedBlogPosts } from '../src/data/repairedBlogPosts.js'
 import { staticBlogPosts } from '../src/data/staticBlogPosts.js'
+import { getRelatedBlogPosts } from '../src/data/blogRelatedPosts.js'
 import {
   REPAIRED_BLOG_SLUGS,
   getRouteIndexingState,
@@ -200,6 +201,35 @@ test('repaired blog posts are useful source-managed articles, not hollow unblock
     assert.ok(hasMedia || hasSourceRecord, `${post.slug} needs media or a public source record`)
     assert.doesNotMatch(post.content, retiredBoilerplate, post.slug)
     assert.doesNotMatch(post.excerpt, retiredBoilerplate, post.slug)
+  })
+})
+
+test('source-managed blog posts form a relevant internal-link network', () => {
+  const discoverablePosts = staticBlogPosts.filter((post) =>
+    isRoutePubliclyDiscoverable(`/blog/${post.slug}`, post),
+  )
+  const incomingLinkCounts = new Map(discoverablePosts.map((post) => [post.slug, 0]))
+
+  discoverablePosts.forEach((post) => {
+    const relatedPosts = getRelatedBlogPosts(post, discoverablePosts)
+    assert.equal(relatedPosts.length, 3, post.slug)
+    assert.equal(new Set(relatedPosts.map((relatedPost) => relatedPost.slug)).size, 3, post.slug)
+    relatedPosts.forEach((relatedPost) => {
+      assert.notEqual(relatedPost.slug, post.slug)
+      assert.equal(
+        isRoutePubliclyDiscoverable(`/blog/${relatedPost.slug}`, relatedPost),
+        true,
+        relatedPost.slug,
+      )
+      incomingLinkCounts.set(
+        relatedPost.slug,
+        (incomingLinkCounts.get(relatedPost.slug) || 0) + 1,
+      )
+    })
+  })
+
+  incomingLinkCounts.forEach((count, slug) => {
+    assert.ok(count >= 2, `${slug} needs at least two peer-article incoming links`)
   })
 })
 
