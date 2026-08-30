@@ -55,7 +55,7 @@ export function AdminUsers({ canManage }) {
       return
     }
 
-    setMessage('Admin added.')
+    setMessage('Admin added. They can now request a sign-in link.')
     setEmail('')
     setRole('admin')
     fetchAdmins()

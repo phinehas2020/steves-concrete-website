@@ -56,7 +56,8 @@ create table if not exists steves_concrete.admin_users (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
   email text not null unique,
-  role text not null default 'admin'
+  role text not null default 'admin',
+  user_id uuid unique references auth.users(id) on delete cascade
 );
 
 create table if not exists steves_concrete.blog_posts (
@@ -301,12 +302,12 @@ returns boolean
 language sql
 stable
 security definer
-set search_path = steves_concrete
+set search_path = ''
 as $$
   select exists (
     select 1
     from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
+    where user_id = (select auth.uid())
   );
 $$;
 
@@ -315,15 +316,50 @@ returns boolean
 language sql
 stable
 security definer
-set search_path = steves_concrete
+set search_path = ''
 as $$
   select exists (
     select 1
     from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
+    where user_id = (select auth.uid())
       and role = 'super_admin'
   );
 $$;
+
+create or replace function steves_concrete.claim_admin_membership()
+returns boolean
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_user_id uuid := (select auth.uid());
+  v_email text := lower(trim(coalesce(auth.jwt() ->> 'email', '')));
+begin
+  if v_user_id is null or v_email = '' then
+    return false;
+  end if;
+
+  update steves_concrete.admin_users
+  set user_id = v_user_id
+  where user_id is null
+    and lower(email) = v_email;
+
+  return exists (
+    select 1
+    from steves_concrete.admin_users
+    where user_id = v_user_id
+      and lower(email) = v_email
+  );
+end;
+$$;
+
+revoke all on function steves_concrete.is_admin() from public, anon;
+revoke all on function steves_concrete.is_super_admin() from public, anon;
+revoke all on function steves_concrete.claim_admin_membership() from public, anon;
+grant execute on function steves_concrete.is_admin() to authenticated, service_role;
+grant execute on function steves_concrete.is_super_admin() to authenticated, service_role;
+grant execute on function steves_concrete.claim_admin_membership() to authenticated, service_role;
 
 alter table steves_concrete.leads enable row level security;
 alter table steves_concrete.admin_users enable row level security;
@@ -588,10 +624,7 @@ on storage.objects for insert
 to authenticated
 with check (
   bucket_id = 'steves-concrete-jobs' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop policy if exists "Admins can update job images" on storage.objects;
@@ -600,10 +633,7 @@ on storage.objects for update
 to authenticated
 using (
   bucket_id = 'steves-concrete-jobs' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop policy if exists "Admins can delete job images" on storage.objects;
@@ -612,10 +642,7 @@ on storage.objects for delete
 to authenticated
 using (
   bucket_id = 'steves-concrete-jobs' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop policy if exists "Public can view hero images" on storage.objects;
@@ -629,10 +656,7 @@ on storage.objects for insert
 to authenticated
 with check (
   bucket_id = 'steves-concrete-hero-images' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop policy if exists "Admins can update hero images" on storage.objects;
@@ -641,10 +665,7 @@ on storage.objects for update
 to authenticated
 using (
   bucket_id = 'steves-concrete-hero-images' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop policy if exists "Admins can delete hero images" on storage.objects;
@@ -653,10 +674,7 @@ on storage.objects for delete
 to authenticated
 using (
   bucket_id = 'steves-concrete-hero-images' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop policy if exists "Public can view blog images" on storage.objects;
@@ -670,10 +688,7 @@ on storage.objects for insert
 to authenticated
 with check (
   bucket_id = 'steves-concrete-blog-images' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop policy if exists "Admins can update blog images" on storage.objects;
@@ -682,10 +697,7 @@ on storage.objects for update
 to authenticated
 using (
   bucket_id = 'steves-concrete-blog-images' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop policy if exists "Admins can delete blog images" on storage.objects;
@@ -694,10 +706,7 @@ on storage.objects for delete
 to authenticated
 using (
   bucket_id = 'steves-concrete-blog-images' and
-  (select exists (
-    select 1 from steves_concrete.admin_users
-    where email = (auth.jwt() ->> 'email')
-  ))
+  (select steves_concrete.is_admin())
 );
 
 drop trigger if exists update_jobs_updated_at on steves_concrete.jobs;
@@ -737,4 +746,3 @@ grant execute on all functions in schema steves_concrete to anon, authenticated,
 alter default privileges in schema steves_concrete grant select, insert, update, delete on tables to anon, authenticated, service_role;
 alter default privileges in schema steves_concrete grant usage, select on sequences to anon, authenticated, service_role;
 alter default privileges in schema steves_concrete grant execute on functions to anon, authenticated, service_role;
-

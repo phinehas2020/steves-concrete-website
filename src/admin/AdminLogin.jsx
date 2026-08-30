@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
+
+const MAGIC_LINK_COOLDOWN_SECONDS = 60
 
 export function AdminLogin() {
   const [email, setEmail] = useState('')
@@ -7,6 +9,17 @@ export function AdminLogin() {
   const [loginMethod, setLoginMethod] = useState('password') // 'password' or 'magic'
   const [status, setStatus] = useState('idle')
   const [message, setMessage] = useState('')
+  const [magicLinkCooldown, setMagicLinkCooldown] = useState(0)
+
+  useEffect(() => {
+    if (magicLinkCooldown <= 0) return undefined
+
+    const timer = window.setTimeout(() => {
+      setMagicLinkCooldown((seconds) => Math.max(0, seconds - 1))
+    }, 1000)
+
+    return () => window.clearTimeout(timer)
+  }, [magicLinkCooldown])
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -14,56 +27,54 @@ export function AdminLogin() {
     setMessage('')
 
     if (loginMethod === 'password') {
-      console.log('Attempting password login for:', email)
-      console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL)
-      
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
-      
-      console.log('Auth response:', { data, error })
-      console.log('Full error details:', error ? JSON.stringify(error, null, 2) : 'No error')
 
       if (error) {
         setStatus('error')
-        console.error('Login error:', error)
-        console.error('Error code:', error.status)
-        console.error('Error message:', error.message)
         setMessage(error.message || 'Invalid email or password.')
         return
       }
 
       // Success - wait a moment for session to persist, then reload
-      console.log('Login successful!', data.user?.email)
-      console.log('Session data:', data.session)
-      
-      // Wait for session to be saved, then reload
       setTimeout(() => {
         window.location.reload()
       }, 500)
     } else {
-      // Magic link login - use current origin so it works with any domain (Vercel URL or custom domain)
-      const { data, error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: `${window.location.origin}/admin`,
-        },
-      })
-      
-      console.log('Auth response:', { data, error })
-
-      if (error) {
-        setStatus('error')
-        console.error('Login error:', error)
-        setMessage(error.message || 'Unable to send login link. Please try again.')
+      if (magicLinkCooldown > 0) {
+        setStatus('idle')
+        setMessage(`Please wait ${magicLinkCooldown}s before requesting another link.`)
         return
       }
 
-      setStatus('sent')
-      setMessage('Check your inbox for a secure login link.')
+      try {
+        const response = await fetch('/api/admin-auth-request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        })
+
+        const payload = await response.json().catch(() => ({}))
+
+        if (!response.ok) {
+          setStatus('error')
+          setMessage(payload.message || 'Unable to request a login link. Please try again.')
+          return
+        }
+
+        setMagicLinkCooldown(MAGIC_LINK_COOLDOWN_SECONDS)
+        setStatus('sent')
+        setMessage(payload.message || 'If this email is authorized, you will receive a sign-in link.')
+      } catch {
+        setStatus('error')
+        setMessage('Unable to request a login link. Please try again.')
+      }
     }
   }
+
+  const isMagicLinkCoolingDown = loginMethod === 'magic' && magicLinkCooldown > 0
 
   return (
     <div className="min-h-dvh flex items-center justify-center bg-stone-50 px-4">
@@ -143,10 +154,12 @@ export function AdminLogin() {
 
           <button
             type="submit"
-            disabled={status === 'loading'}
+            disabled={status === 'loading' || isMagicLinkCoolingDown}
             className="w-full inline-flex items-center justify-center px-4 py-3 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors duration-150 min-h-[48px]"
           >
-            {status === 'loading' 
+            {isMagicLinkCoolingDown
+              ? `Wait ${magicLinkCooldown}s`
+              : status === 'loading'
               ? (loginMethod === 'password' ? 'Logging in…' : 'Sending…')
               : (loginMethod === 'password' ? 'Log In' : 'Send Login Link')}
           </button>

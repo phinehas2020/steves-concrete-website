@@ -32,6 +32,7 @@ if (supabaseUrl && supabasePublishableKey) {
   
   // Create a mock client that prevents crashes but logs errors on usage
   supabaseClient = {
+    rpc: () => Promise.resolve({ data: false, error: 'Supabase not configured' }),
     from: () => ({
       select: () => Promise.resolve({ data: [], error: 'Supabase not configured' }),
       insert: () => Promise.resolve({ data: null, error: 'Supabase not configured' }),

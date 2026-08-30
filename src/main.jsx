@@ -17,6 +17,9 @@ import { guideSlugs } from './data/guideSlugs'
 import { sportsCourtAreaSlugs } from './data/sportsCourtAreaSlugs'
 
 const AdminApp = lazy(() => import('./admin/AdminApp').then((m) => ({ default: m.AdminApp })))
+const AdminAuthConfirm = lazy(() =>
+  import('./admin/AdminAuthConfirm').then((m) => ({ default: m.AdminAuthConfirm })),
+)
 const BlogIndex = lazy(() => import('./pages/BlogIndex').then((m) => ({ default: m.BlogIndex })))
 const BlogPost = lazy(() => import('./pages/BlogPost').then((m) => ({ default: m.BlogPost })))
 const TermsAndConditions = lazy(() =>
@@ -60,6 +63,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/jobs/:slug" element={<JobDetail />} />
           <Route path="/guides" element={<GuidesIndex />} />
           <Route path="/about" element={<About />} />
+          <Route path="/admin/confirm" element={<AdminAuthConfirm />} />
           <Route path="/admin/*" element={<AdminApp />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditions />} />

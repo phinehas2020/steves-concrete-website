@@ -40,16 +40,14 @@ export function AdminApp() {
     let isMounted = true
 
     // Check for existing session
-    supabase.auth.getSession().then(({ data, error }) => {
+    supabase.auth.getSession().then(({ data }) => {
       if (!isMounted) return
-      console.log('Session check:', { session: data.session, error })
       setSession(data.session)
       setAuthChecked(true)
     })
 
     // Listen for auth state changes
-    const { data: listener } = supabase.auth.onAuthStateChange((event, newSession) => {
-      console.log('Auth state changed:', event, newSession?.user?.email)
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
       if (!isMounted) return
       setSession(newSession)
       setAuthChecked(true)
@@ -65,17 +63,34 @@ export function AdminApp() {
     let isMounted = true
 
     const fetchAdminProfile = async () => {
-      if (!session?.user?.email) return
+      if (!session?.user?.id) return
       setProfileChecked(false)
+
+      const { error: claimError } = await supabase.rpc('claim_admin_membership')
+      if (claimError) {
+        if (!isMounted) return
+        setAccessError('Admin access could not be checked. Please try again.')
+        setAdminProfile(null)
+        setProfileChecked(true)
+        return
+      }
+
       const { data, error } = await supabase
         .from('admin_users')
         .select('*')
-        .eq('email', session.user.email)
-        .single()
+        .eq('user_id', session.user.id)
+        .maybeSingle()
 
       if (!isMounted) return
 
-      if (error || !data) {
+      if (error) {
+        setAccessError('Admin access could not be checked. Please try again.')
+        setAdminProfile(null)
+        setProfileChecked(true)
+        return
+      }
+
+      if (!data) {
         setAccessError('Access denied. You are not an admin.')
         setAdminProfile(null)
         setProfileChecked(true)
@@ -114,21 +129,34 @@ export function AdminApp() {
     )
   }
 
+  const accessCheckFailed = accessError.startsWith('Admin access')
+
   if (accessError) {
     return (
       <div className="min-h-dvh flex items-center justify-center bg-stone-50 px-4">
         <div className="bg-white border border-stone-200 rounded-2xl p-8 max-w-md text-center">
           <h1 className="font-display font-bold text-2xl text-stone-900 mb-2">
-            Access Denied
+            {accessCheckFailed ? 'Admin Access Unavailable' : 'Access Denied'}
           </h1>
           <p className="text-stone-600 text-pretty mb-6">{accessError}</p>
-          <button
-            type="button"
-            onClick={() => supabase.auth.signOut()}
-            className="inline-flex items-center justify-center px-4 py-2.5 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors"
-          >
-            Sign Out
-          </button>
+          <div className="flex justify-center gap-3">
+            {accessCheckFailed && (
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="inline-flex items-center justify-center px-4 py-2.5 border border-stone-300 text-stone-800 font-semibold rounded-lg hover:bg-stone-100 transition-colors"
+              >
+                Try Again
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => void supabase.auth.signOut({ scope: 'local' })}
+              className="inline-flex items-center justify-center px-4 py-2.5 bg-accent-500 text-white font-semibold rounded-lg hover:bg-accent-600 transition-colors"
+            >
+              Sign Out
+            </button>
+          </div>
         </div>
       </div>
     )
@@ -149,7 +177,7 @@ export function AdminApp() {
               <span className="text-sm text-stone-600">{session.user.email}</span>
               <button
                 type="button"
-                onClick={() => supabase.auth.signOut()}
+                onClick={() => void supabase.auth.signOut({ scope: 'local' })}
                 className="text-sm font-semibold text-accent-600 hover:text-accent-700"
               >
                 Sign out
