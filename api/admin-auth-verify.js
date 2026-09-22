@@ -112,7 +112,7 @@ export function createAdminAuthVerifyHandler({
       const redirectTo = new URL(ADMIN_REDIRECT)
       redirectTo.searchParams.set('auth_intent', intentId)
       const supabaseVerify = new URL(SUPABASE_VERIFY_PATH, SUPABASE_ORIGIN)
-      supabaseVerify.searchParams.set('token_hash', tokenHash)
+      supabaseVerify.searchParams.set('token', tokenHash)
       supabaseVerify.searchParams.set('type', type)
       supabaseVerify.searchParams.set('redirect_to', redirectTo.toString())
 

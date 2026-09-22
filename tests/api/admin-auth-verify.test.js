@@ -97,7 +97,8 @@ test('redirects only a validated intent to the exact shared Supabase verifier', 
   const location = new URL(res.headers.Location)
   assert.equal(location.origin, SUPABASE_ORIGIN)
   assert.equal(location.pathname, '/auth/v1/verify')
-  assert.equal(location.searchParams.get('token_hash'), TOKEN_HASH)
+  assert.equal(location.searchParams.get('token'), TOKEN_HASH)
+  assert.equal(location.searchParams.has('token_hash'), false)
   assert.equal(location.searchParams.get('type'), 'magiclink')
   assert.equal(
     location.searchParams.get('redirect_to'),
