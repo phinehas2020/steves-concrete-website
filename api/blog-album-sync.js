@@ -77,9 +77,9 @@ function parseAlbumToken(value) {
   const raw = toTrimmedString(value)
   if (!raw) return ''
   if (raw.includes('#')) return raw.split('#').pop().trim()
-  const pathMatch = raw.match(/sharedalbum\/(?:#)?([a-z0-9]+)/i)
+  const pathMatch = raw.match(/sharedalbum\/(?:#)?([a-z0-9_-]+)/i)
   if (pathMatch?.[1]) return pathMatch[1].trim()
-  if (/^[a-z0-9]+$/i.test(raw)) return raw
+  if (/^[a-z0-9_-]+$/i.test(raw)) return raw
   return ''
 }
 
